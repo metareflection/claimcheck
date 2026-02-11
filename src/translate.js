@@ -13,19 +13,20 @@ import { TRANSLATE_PROMPT } from './prompts.js';
 export async function translateClaims(items, domain, opts = {}) {
   if (items.length === 0) return [];
 
-  const results = [];
   const batchSize = 10;
-
+  const batches = [];
   for (let i = 0; i < items.length; i += batchSize) {
-    const batch = items.slice(i, i + batchSize);
-    if (opts.verbose) {
-      console.error(`[translate] batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(items.length / batchSize)}`);
-    }
-    const translated = await translateBatch(batch, domain, opts);
-    results.push(...translated);
+    batches.push(items.slice(i, i + batchSize));
   }
 
-  return results;
+  console.error(`[translate] ${batches.length} batches of ${batchSize} (parallel)`);
+
+  // Run all batches in parallel
+  const batchResults = await Promise.all(
+    batches.map(batch => translateBatch(batch, domain, opts))
+  );
+
+  return batchResults.flat();
 }
 
 async function translateBatch(items, domain, opts) {
