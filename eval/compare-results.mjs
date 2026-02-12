@@ -24,72 +24,72 @@ async function loadResults(path) {
 }
 
 function extractMetrics(evalData) {
-  const results = evalData.results ?? evalData;
-  const table = results.table ?? results;
-  const heads = table.head?.prompts ?? [];
-  const bodies = table.body ?? [];
+  const inner = evalData.results ?? evalData;
+  const rows = inner.results ?? [];
 
-  const providers = heads.map((h) => h.label || h.provider || h.id);
+  // Discover providers and test names in order
+  const providerOrder = [];
+  const providerMap = new Map();
 
-  const metrics = providers.map(() => ({
-    tests: 0,
-    passed: 0,
-    failed: 0,
-    totalMs: [],
-    translateMs: [],
-    compareMs: [],
-    inputTokens: [],
-    outputTokens: [],
-    coverageScores: [],
-    translationScores: [],
-    perTest: [],
-  }));
-
-  for (const row of bodies) {
-    const outputs = row.outputs ?? [];
-    const testDesc = row.description ?? row.test?.description ?? '';
-    for (let i = 0; i < outputs.length; i++) {
-      if (i >= metrics.length) break;
-      const out = outputs[i];
-      const m = metrics[i];
-
-      m.tests++;
-      if (out.pass) m.passed++;
-      else m.failed++;
-
-      const named = out.namedScores ?? {};
-      if (named.totalMs != null) m.totalMs.push(named.totalMs);
-      if (named.translateMs != null) m.translateMs.push(named.translateMs);
-      if (named.compareMs != null) m.compareMs.push(named.compareMs);
-      if (named.inputTokens != null) m.inputTokens.push(named.inputTokens);
-      if (named.outputTokens != null) m.outputTokens.push(named.outputTokens);
-
-      const gradingResult = out.gradingResult ?? {};
-      const components = gradingResult.componentResults ?? [];
-      let covScore = null;
-      let transScore = null;
-      for (const c of components) {
-        const assertion = c.assertion?.value ?? '';
-        if (assertion.includes('coverage-correctness')) {
-          covScore = c.score ?? 0;
-          m.coverageScores.push(covScore);
-        } else if (assertion.includes('translation-quality')) {
-          transScore = c.score ?? 0;
-          m.translationScores.push(transScore);
-        }
-      }
-
-      m.perTest.push({
-        test: testDesc,
-        pass: out.pass,
-        coverage: covScore,
-        translation: transScore,
-        totalMs: named.totalMs ?? null,
-        inputTokens: named.inputTokens ?? null,
-        outputTokens: named.outputTokens ?? null,
+  for (const r of rows) {
+    const label = r.provider?.label || r.provider?.id || 'unknown';
+    if (!providerMap.has(label)) {
+      providerMap.set(label, {
+        tests: 0,
+        passed: 0,
+        failed: 0,
+        totalMs: [],
+        translateMs: [],
+        compareMs: [],
+        inputTokens: [],
+        outputTokens: [],
+        coverageScores: [],
+        translationScores: [],
+        perTest: [],
       });
+      providerOrder.push(label);
     }
+
+    const m = providerMap.get(label);
+    m.tests++;
+    if (r.success) m.passed++;
+    else m.failed++;
+
+    const named = r.namedScores ?? {};
+    if (named.totalMs != null) m.totalMs.push(named.totalMs);
+    if (named.translateMs != null) m.translateMs.push(named.translateMs);
+    if (named.compareMs != null) m.compareMs.push(named.compareMs);
+    if (named.inputTokens != null) m.inputTokens.push(named.inputTokens);
+    if (named.outputTokens != null) m.outputTokens.push(named.outputTokens);
+
+    const components = r.gradingResult?.componentResults ?? [];
+    let covScore = null;
+    let transScore = null;
+    for (const c of components) {
+      const reason = c.reason ?? '';
+      if (reason.startsWith('Coverage correctness')) {
+        covScore = c.score ?? 0;
+        m.coverageScores.push(covScore);
+      } else if (reason.startsWith('Translation quality')) {
+        transScore = c.score ?? 0;
+        m.translationScores.push(transScore);
+      }
+    }
+
+    const testDesc = r.vars?.projectName ?? r.testCase?.description ?? '';
+    m.perTest.push({
+      test: testDesc,
+      pass: r.success,
+      coverage: covScore,
+      translation: transScore,
+      totalMs: named.totalMs ?? null,
+      inputTokens: named.inputTokens ?? null,
+      outputTokens: named.outputTokens ?? null,
+    });
   }
+
+  const providers = providerOrder;
+  const metrics = providers.map((p) => providerMap.get(p));
 
   return { providers, metrics };
 }
