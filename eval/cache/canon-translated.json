@@ -1,15 +1,36 @@
 [
   {
-    "id": "pred:CanonDomain.Inv:0",
+    "id": "pred:Canon.Inv:0",
     "kind": "invariant-conjunct",
-    "formalText": "C.Inv(m)",
+    "formalText": "AllConstraintsValid(m.constraints, m.nodes)",
     "context": {
       "predicateName": "Inv",
-      "module": "CanonDomain",
-      "fullBody": "C.Inv(m)",
-      "line": 19
+      "module": "Canon",
+      "fullBody": "AllConstraintsValid(m.constraints, m.nodes) && AllEdgesValid(m.edges, m.nodes)",
+      "line": 58,
+      "resolvedFrom": {
+        "module": "CanonDomain",
+        "name": "Inv"
+      }
     },
-    "naturalLanguage": "The invariant holds for state m.",
+    "naturalLanguage": "All constraints in the model are valid with respect to the nodes.",
+    "confidence": 0.95
+  },
+  {
+    "id": "pred:Canon.Inv:1",
+    "kind": "invariant-conjunct",
+    "formalText": "AllEdgesValid(m.edges, m.nodes)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "Canon",
+      "fullBody": "AllConstraintsValid(m.constraints, m.nodes) && AllEdgesValid(m.edges, m.nodes)",
+      "line": 58,
+      "resolvedFrom": {
+        "module": "CanonDomain",
+        "name": "Inv"
+      }
+    },
+    "naturalLanguage": "All edges in the model are valid with respect to the nodes.",
     "confidence": 0.95
   },
   {
@@ -27,7 +48,7 @@
       ],
       "line": 56
     },
-    "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the state resulting from adding a node with identifier id and coordinates x and y to m.",
+    "naturalLanguage": "The model invariant holds after adding a node with the given identifier and coordinates to a model that initially satisfies the invariant.",
     "confidence": 0.92
   },
   {
@@ -45,7 +66,7 @@
       ],
       "line": 71
     },
-    "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the state resulting from moving the node with identifier id to new coordinates newX and newY in m.",
+    "naturalLanguage": "The model invariant holds after moving a node to new coordinates in a model that initially satisfies the invariant.",
     "confidence": 0.92
   },
   {
@@ -62,7 +83,7 @@
       ],
       "line": 82
     },
-    "naturalLanguage": "The invariant holds for the initial state.",
+    "naturalLanguage": "The initial state satisfies the model invariant.",
     "confidence": 0.95
   },
   {
@@ -80,8 +101,8 @@
       ],
       "line": 87
     },
-    "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the normalized result of applying action a to m.",
-    "confidence": 0.93
+    "naturalLanguage": "The model invariant holds after applying an action to a model that satisfies the invariant and then normalizing the result.",
+    "confidence": 0.9
   },
   {
     "id": "fn:CanonDomain.Apply:requires:0",
@@ -92,7 +113,7 @@
       "module": "CanonDomain",
       "line": 27
     },
-    "naturalLanguage": "The function Apply requires that the invariant holds for the input state m.",
-    "confidence": 0.94
+    "naturalLanguage": "The model must satisfy the invariant for the Apply function to be called.",
+    "confidence": 0.93
   }
 ]

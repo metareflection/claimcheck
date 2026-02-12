@@ -1,15 +1,121 @@
 [
   {
-    "id": "pred:ColorWheelDomain.Inv:0",
+    "id": "pred:ColorWheelSpec.Inv:0",
     "kind": "invariant-conjunct",
-    "formalText": "CWSpec.Inv(m)",
+    "formalText": "ValidBaseHue(m.baseHue)",
     "context": {
       "predicateName": "Inv",
-      "module": "ColorWheelDomain",
-      "fullBody": "CWSpec.Inv(m)",
-      "line": 12
+      "module": "ColorWheelSpec",
+      "fullBody": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "line": 208,
+      "resolvedFrom": {
+        "module": "ColorWheelDomain",
+        "name": "Inv"
+      }
     },
-    "naturalLanguage": "The colorwheel specification invariant holds for the given machine state.",
+    "naturalLanguage": "The base hue of the model is valid.",
+    "confidence": 0.95
+  },
+  {
+    "id": "pred:ColorWheelSpec.Inv:1",
+    "kind": "invariant-conjunct",
+    "formalText": "|m.colors| == 5",
+    "context": {
+      "predicateName": "Inv",
+      "module": "ColorWheelSpec",
+      "fullBody": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "line": 208,
+      "resolvedFrom": {
+        "module": "ColorWheelDomain",
+        "name": "Inv"
+      }
+    },
+    "naturalLanguage": "The model contains exactly five colors.",
+    "confidence": 0.99
+  },
+  {
+    "id": "pred:ColorWheelSpec.Inv:2",
+    "kind": "invariant-conjunct",
+    "formalText": "forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])",
+    "context": {
+      "predicateName": "Inv",
+      "module": "ColorWheelSpec",
+      "fullBody": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "line": 208,
+      "resolvedFrom": {
+        "module": "ColorWheelDomain",
+        "name": "Inv"
+      }
+    },
+    "naturalLanguage": "For every integer index between 0 and 4 inclusive, the color at that index in the model is valid.",
+    "confidence": 0.95
+  },
+  {
+    "id": "pred:ColorWheelSpec.Inv:3",
+    "kind": "invariant-conjunct",
+    "formalText": "0 <= m.contrastPair.0 < 5",
+    "context": {
+      "predicateName": "Inv",
+      "module": "ColorWheelSpec",
+      "fullBody": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "line": 208,
+      "resolvedFrom": {
+        "module": "ColorWheelDomain",
+        "name": "Inv"
+      }
+    },
+    "naturalLanguage": "The first element of the contrast pair is an index between 0 and 4 inclusive.",
+    "confidence": 0.95
+  },
+  {
+    "id": "pred:ColorWheelSpec.Inv:4",
+    "kind": "invariant-conjunct",
+    "formalText": "0 <= m.contrastPair.1 < 5",
+    "context": {
+      "predicateName": "Inv",
+      "module": "ColorWheelSpec",
+      "fullBody": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "line": 208,
+      "resolvedFrom": {
+        "module": "ColorWheelDomain",
+        "name": "Inv"
+      }
+    },
+    "naturalLanguage": "The second element of the contrast pair is an index between 0 and 4 inclusive.",
+    "confidence": 0.95
+  },
+  {
+    "id": "pred:ColorWheelSpec.Inv:5",
+    "kind": "invariant-conjunct",
+    "formalText": "m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "ColorWheelSpec",
+      "fullBody": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "line": 208,
+      "resolvedFrom": {
+        "module": "ColorWheelDomain",
+        "name": "Inv"
+      }
+    },
+    "naturalLanguage": "If the mood is not set to Custom, then every color in the model satisfies the mood requirement.",
+    "confidence": 0.93
+  },
+  {
+    "id": "pred:ColorWheelSpec.Inv:6",
+    "kind": "invariant-conjunct",
+    "formalText": "HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "ColorWheelSpec",
+      "fullBody": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "line": 208,
+      "resolvedFrom": {
+        "module": "ColorWheelDomain",
+        "name": "Inv"
+      }
+    },
+    "naturalLanguage": "The hues of the colors in the model are consistent with the base hue and harmony type.",
     "confidence": 0.9
   },
   {
@@ -26,8 +132,8 @@
       ],
       "line": 28
     },
-    "naturalLanguage": "The colorwheel specification invariant is satisfied by the initial state.",
-    "confidence": 0.92
+    "naturalLanguage": "The initial state satisfies all model invariants.",
+    "confidence": 0.96
   },
   {
     "id": "lemma:ColorWheelDomain.StepPreservesInv:ensures:0",
@@ -44,8 +150,8 @@
       ],
       "line": 34
     },
-    "naturalLanguage": "If the specification invariant holds for a given state, then applying an action to that state and normalizing the result preserves the specification invariant.",
-    "confidence": 0.88
+    "naturalLanguage": "After applying an action to a valid model state and normalizing the result, the resulting state satisfies all model invariants.",
+    "confidence": 0.92
   },
   {
     "id": "fn:ColorWheelDomain.Apply:requires:0",
@@ -56,7 +162,7 @@
       "module": "ColorWheelDomain",
       "line": 20
     },
-    "naturalLanguage": "The Apply function requires that the specification invariant holds for the input machine state.",
-    "confidence": 0.91
+    "naturalLanguage": "The Apply function requires that the model state satisfies all invariants.",
+    "confidence": 0.95
   }
 ]

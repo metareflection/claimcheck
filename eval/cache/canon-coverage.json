@@ -1,58 +1,58 @@
 {
-  "proved": [],
+  "proved": [
+    {
+      "claimId": "pred:Canon.Inv:0",
+      "naturalLanguage": "All constraints in the model are valid with respect to the nodes.",
+      "matchedRequirement": "All constraint targets reference existing nodes",
+      "explanation": "This claim directly ensures that constraints are valid with respect to nodes, which means constraint targets must reference existing nodes."
+    },
+    {
+      "claimId": "pred:Canon.Inv:1",
+      "naturalLanguage": "All edges in the model are valid with respect to the nodes.",
+      "matchedRequirement": "All edge endpoints reference existing nodes",
+      "explanation": "This claim directly ensures that edges are valid with respect to nodes, which means edge endpoints must reference existing nodes."
+    }
+  ],
   "missing": [
     {
-      "requirement": "All constraint targets reference existing nodes",
-      "explanation": "None of the proved claims directly establish this property. The invariant claims are too abstract (they don't specify what the invariant actually enforces), and the preservation lemmas only show the invariant is maintained, not what it contains."
-    },
-    {
-      "requirement": "All edge endpoints reference existing nodes",
-      "explanation": "None of the proved claims directly establish this property. While the invariant might enforce this, the abstract claims about 'Inv(m)' don't tell us what properties are actually guaranteed."
-    },
-    {
       "requirement": "Adding a node with an existing ID is a no-op",
-      "explanation": "The proved claim about AddNodeImpl only shows invariant preservation, not the specific behavior when adding a duplicate node ID. This behavioral requirement is not addressed."
+      "explanation": "While there is a proof that AddNodeImpl preserves the invariant, there is no explicit proof that adding a node with an existing ID has no effect (is a no-op). The preservation of invariant doesn't guarantee this specific behavior."
     },
     {
       "requirement": "Removing a node cleans up related constraints and edges",
-      "explanation": "There are no proved claims about removing nodes at all. The proved claims only cover AddNode and MoveNode operations."
+      "explanation": "There are no proofs related to removing nodes at all. The proved claims only cover adding nodes and moving nodes, but not node removal operations."
     },
     {
       "requirement": "The constraint ID allocator is always fresh",
-      "explanation": "None of the proved claims address constraint ID allocation or freshness properties. The claims focus on node operations and general invariant preservation."
+      "explanation": "There are no proofs about constraint ID allocation or freshness guarantees. This requirement is completely unaddressed by the proved claims."
     }
   ],
   "unexpected": [
     {
-      "claimId": "pred:CanonDomain.Inv:0",
-      "naturalLanguage": "The invariant holds for state m.",
-      "explanation": "This is a predicate definition, not a substantive property. It doesn't match any specific user requirement because it doesn't specify what the invariant actually enforces."
-    },
-    {
       "claimId": "lemma:CanonDomain.AddNodeImplPreservesInv:ensures:0",
-      "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the state resulting from adding a node with identifier id and coordinates x and y to m.",
-      "explanation": "This is an invariant preservation lemma, which is important for verification infrastructure but doesn't directly correspond to any of the specific behavioral or structural requirements listed by the user."
+      "naturalLanguage": "The model invariant holds after adding a node with the given identifier and coordinates to a model that initially satisfies the invariant.",
+      "explanation": "This is an invariant preservation property for adding nodes, but it doesn't directly match any stated requirement. It ensures safety but doesn't address the specific behavioral requirement about duplicate IDs being a no-op."
     },
     {
       "claimId": "lemma:CanonDomain.MoveNodeImplPreservesInv:ensures:0",
-      "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the state resulting from moving the node with identifier id to new coordinates newX and newY in m.",
-      "explanation": "This is an invariant preservation lemma for MoveNode operation. While useful for verification, it doesn't match any of the user's specific requirements about referential integrity, duplicate handling, or ID allocation."
+      "naturalLanguage": "The model invariant holds after moving a node to new coordinates in a model that initially satisfies the invariant.",
+      "explanation": "This is an invariant preservation property for moving nodes, which is not mentioned in any of the user requirements."
     },
     {
       "claimId": "lemma:CanonDomain.InitSatisfiesInv:ensures:0",
-      "naturalLanguage": "The invariant holds for the initial state.",
-      "explanation": "This establishes that the initial state satisfies the invariant, which is a standard verification property but doesn't correspond to any of the user's stated requirements."
+      "naturalLanguage": "The initial state satisfies the model invariant.",
+      "explanation": "This proves that initialization satisfies the invariant, but there is no requirement about initialization or initial state properties."
     },
     {
       "claimId": "lemma:CanonDomain.StepPreservesInv:ensures:0",
-      "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the normalized result of applying action a to m.",
-      "explanation": "This is a general step preservation lemma for all actions. While foundational for verification, it doesn't directly address any of the specific requirements about node references, duplicate handling, or ID freshness."
+      "naturalLanguage": "The model invariant holds after applying an action to a model that satisfies the invariant and then normalizing the result.",
+      "explanation": "This is a general invariant preservation property for all actions, but it doesn't match any specific user requirement. It's a proof engineering artifact rather than a stated requirement."
     },
     {
       "claimId": "fn:CanonDomain.Apply:requires:0",
-      "naturalLanguage": "The function Apply requires that the invariant holds for the input state m.",
-      "explanation": "This is a precondition for the Apply function, establishing that operations require valid states. This is verification infrastructure but doesn't match any user requirement."
+      "naturalLanguage": "The model must satisfy the invariant for the Apply function to be called.",
+      "explanation": "This is a precondition for the Apply function, which is a proof engineering detail rather than a user requirement."
     }
   ],
-  "summary": "There is a complete coverage gap between the proved claims and user requirements. All proved claims are about invariant preservation and verification infrastructure (initialization, step functions, preconditions), while all user requirements are about specific structural properties (referential integrity, duplicate handling, cleanup behavior, ID freshness). The abstract notion of 'invariant' in the proofs doesn't reveal whether it actually enforces any of the required properties."
+  "summary": "Coverage is partial. Only 2 out of 5 user requirements are formally proved (constraint and edge validity). Critical requirements about node ID uniqueness handling, node removal cleanup, and constraint ID freshness are completely missing. Most proved claims are invariant preservation lemmas that don't directly correspond to stated requirements."
 }

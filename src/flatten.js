@@ -1,6 +1,53 @@
 /**
+ * Detect if a conjunct is a simple predicate call like "Alias.Name(args)".
+ * Returns the predicate name or null.
+ */
+const PRED_CALL_RE = /^([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\.([A-Za-z_]\w*)\(.*\)$/;
+
+function parsePredicateCall(text) {
+  const m = PRED_CALL_RE.exec(text.trim());
+  return m ? { alias: m[1], name: m[2] } : null;
+}
+
+/**
+ * Resolve wrapper predicates that delegate to another module's predicate.
+ * e.g. ColorWheelDomain.Inv has conjunct "CWSpec.Inv(m)" — resolve to
+ * ColorWheelSpec.Inv's actual conjuncts.
+ *
+ * Returns the resolved conjuncts and the source predicate they came from,
+ * or the original conjuncts if no resolution is needed.
+ */
+function resolveConjuncts(conjuncts, pred, allPredicates) {
+  // Only resolve single-conjunct wrappers that are pure predicate calls
+  if (conjuncts.length !== 1) return { conjuncts, source: pred };
+  const call = parsePredicateCall(conjuncts[0]);
+  if (!call) return { conjuncts, source: pred };
+
+  // Find the target predicate by name — pick the one with real conjuncts
+  // (not another wrapper, and not in the same module)
+  const candidates = allPredicates.filter(p =>
+    p.name === call.name &&
+    p.module !== pred.module &&
+    p.conjuncts &&
+    p.conjuncts.length > 0,
+  );
+
+  // Among candidates, prefer one whose conjuncts aren't themselves wrapper calls
+  const resolved = candidates.find(p =>
+    p.conjuncts.length > 1 || !parsePredicateCall(p.conjuncts[0]),
+  );
+
+  if (resolved) {
+    return { conjuncts: resolved.conjuncts, source: resolved };
+  }
+
+  return { conjuncts, source: pred };
+}
+
+/**
  * Flatten claims JSON into individual translatable items.
  * Filters to domain-specific modules (skips kernel duplicates).
+ * Resolves wrapper predicates that delegate to spec-module predicates.
  *
  * @param {object} claims - parsed claims JSON from dafny2js --claims
  * @param {string} [domainModule] - if provided, only include items from this module
@@ -8,22 +55,28 @@
  */
 export function flattenClaims(claims, domainModule) {
   const items = [];
+  const allPredicates = claims.predicates ?? [];
 
-  for (const pred of claims.predicates ?? []) {
+  for (const pred of allPredicates) {
     if (domainModule && pred.module !== domainModule) continue;
     if (!pred.body && !pred.conjuncts) continue;
 
-    const conjuncts = pred.conjuncts ?? (pred.body ? [pred.body] : []);
+    const rawConjuncts = pred.conjuncts ?? (pred.body ? [pred.body] : []);
+    const { conjuncts, source } = resolveConjuncts(rawConjuncts, pred, allPredicates);
+
     for (let i = 0; i < conjuncts.length; i++) {
       items.push({
-        id: `pred:${pred.module}.${pred.name}:${i}`,
+        id: `pred:${source.module}.${source.name}:${i}`,
         kind: 'invariant-conjunct',
         formalText: conjuncts[i],
         context: {
-          predicateName: pred.name,
-          module: pred.module,
-          fullBody: pred.body,
-          line: pred.line,
+          predicateName: source.name,
+          module: source.module,
+          fullBody: source.body,
+          line: source.line,
+          resolvedFrom: source.module !== pred.module
+            ? { module: pred.module, name: pred.name }
+            : undefined,
         },
       });
     }
