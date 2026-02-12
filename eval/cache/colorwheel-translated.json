@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pred:ColorWheelDomain.Inv:0",
+    "kind": "invariant-conjunct",
+    "formalText": "CWSpec.Inv(m)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "ColorWheelDomain",
+      "fullBody": "CWSpec.Inv(m)",
+      "line": 12
+    },
+    "naturalLanguage": "The colorwheel specification invariant holds for the given machine state.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:ColorWheelDomain.InitSatisfiesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Init())",
+    "context": {
+      "lemmaName": "InitSatisfiesInv",
+      "module": "ColorWheelDomain",
+      "requires": [],
+      "allEnsures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 28
+    },
+    "naturalLanguage": "The colorwheel specification invariant is satisfied by the initial state.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:ColorWheelDomain.StepPreservesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Normalize(Apply(m, a)))",
+    "context": {
+      "lemmaName": "StepPreservesInv",
+      "module": "ColorWheelDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "allEnsures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 34
+    },
+    "naturalLanguage": "If the specification invariant holds for a given state, then applying an action to that state and normalizing the result preserves the specification invariant.",
+    "confidence": 0.88
+  },
+  {
+    "id": "fn:ColorWheelDomain.Apply:requires:0",
+    "kind": "function-precondition",
+    "formalText": "Inv(m)",
+    "context": {
+      "functionName": "Apply",
+      "module": "ColorWheelDomain",
+      "line": 20
+    },
+    "naturalLanguage": "The Apply function requires that the specification invariant holds for the input machine state.",
+    "confidence": 0.91
+  }
+]

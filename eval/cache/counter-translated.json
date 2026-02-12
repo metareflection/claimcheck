@@ -1,0 +1,63 @@
+[
+  {
+    "id": "pred:CounterDomain.Inv:0",
+    "kind": "invariant-conjunct",
+    "formalText": "m >= 0",
+    "context": {
+      "predicateName": "Inv",
+      "module": "CounterDomain",
+      "fullBody": "m >= 0",
+      "line": 8
+    },
+    "naturalLanguage": "The counter value is greater than or equal to zero.",
+    "confidence": 0.98
+  },
+  {
+    "id": "lemma:CounterDomain.InitSatisfiesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Init())",
+    "context": {
+      "lemmaName": "InitSatisfiesInv",
+      "module": "CounterDomain",
+      "requires": [],
+      "allEnsures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 26
+    },
+    "naturalLanguage": "The initial counter state satisfies the invariant.",
+    "confidence": 0.97
+  },
+  {
+    "id": "lemma:CounterDomain.StepPreservesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Normalize(Apply(m, a)))",
+    "context": {
+      "lemmaName": "StepPreservesInv",
+      "module": "CounterDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "allEnsures": [
+        "Inv(Normalize(Apply(m, a)))",
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 31
+    },
+    "naturalLanguage": "If a counter state satisfies the invariant, then applying an action to it and normalizing the result produces a state that satisfies the invariant.",
+    "confidence": 0.96
+  },
+  {
+    "id": "fn:CounterDomain.Apply:requires:0",
+    "kind": "function-precondition",
+    "formalText": "Inv(m)",
+    "context": {
+      "functionName": "Apply",
+      "module": "CounterDomain",
+      "line": 16
+    },
+    "naturalLanguage": "The counter state must satisfy the invariant before an action can be applied to it.",
+    "confidence": 0.97
+  }
+]

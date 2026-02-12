@@ -1,0 +1,98 @@
+[
+  {
+    "id": "pred:CanonDomain.Inv:0",
+    "kind": "invariant-conjunct",
+    "formalText": "C.Inv(m)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "CanonDomain",
+      "fullBody": "C.Inv(m)",
+      "line": 19
+    },
+    "naturalLanguage": "The invariant holds for state m.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:CanonDomain.AddNodeImplPreservesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "C.Inv(AddNodeImpl(m, id, x, y))",
+    "context": {
+      "lemmaName": "AddNodeImplPreservesInv",
+      "module": "CanonDomain",
+      "requires": [
+        "C.Inv(m)"
+      ],
+      "allEnsures": [
+        "C.Inv(AddNodeImpl(m, id, x, y))"
+      ],
+      "line": 56
+    },
+    "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the state resulting from adding a node with identifier id and coordinates x and y to m.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:CanonDomain.MoveNodeImplPreservesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "C.Inv(MoveNodeImpl(m, id, newX, newY))",
+    "context": {
+      "lemmaName": "MoveNodeImplPreservesInv",
+      "module": "CanonDomain",
+      "requires": [
+        "C.Inv(m)"
+      ],
+      "allEnsures": [
+        "C.Inv(MoveNodeImpl(m, id, newX, newY))"
+      ],
+      "line": 71
+    },
+    "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the state resulting from moving the node with identifier id to new coordinates newX and newY in m.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:CanonDomain.InitSatisfiesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Init())",
+    "context": {
+      "lemmaName": "InitSatisfiesInv",
+      "module": "CanonDomain",
+      "requires": [],
+      "allEnsures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 82
+    },
+    "naturalLanguage": "The invariant holds for the initial state.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:CanonDomain.StepPreservesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Normalize(Apply(m, a)))",
+    "context": {
+      "lemmaName": "StepPreservesInv",
+      "module": "CanonDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "allEnsures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 87
+    },
+    "naturalLanguage": "If the invariant holds for state m, then the invariant holds for the normalized result of applying action a to m.",
+    "confidence": 0.93
+  },
+  {
+    "id": "fn:CanonDomain.Apply:requires:0",
+    "kind": "function-precondition",
+    "formalText": "Inv(m)",
+    "context": {
+      "functionName": "Apply",
+      "module": "CanonDomain",
+      "line": 27
+    },
+    "naturalLanguage": "The function Apply requires that the invariant holds for the input state m.",
+    "confidence": 0.94
+  }
+]

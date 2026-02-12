@@ -1,0 +1,29 @@
+project: colorwheel
+module: ColorWheelDomain
+
+# ColorWheelDomain has only 4 flattened claims, all wrapping CWSpec.Inv(m).
+# The compare step correctly identifies that the opaque invariant wrapper
+# does not provide enough detail to match individual requirements.
+# All 6 requirements are classified as missing, and all 4 claims as unexpected.
+
+proved: []
+
+missing:
+  - requirementIndex: 1
+    requirementText: "base hue"
+  - requirementIndex: 2
+    requirementText: "exactly 5 colors"
+  - requirementIndex: 3
+    requirementText: "valid saturation and lightness"
+  - requirementIndex: 4
+    requirementText: "Contrast pair indices"
+  - requirementIndex: 5
+    requirementText: "mood"
+  - requirementIndex: 6
+    requirementText: "harmony pattern"
+
+unexpected:
+  - claimId: "pred:ColorWheelDomain.Inv:0"
+  - claimId: "lemma:ColorWheelDomain.InitSatisfiesInv:ensures:0"
+  - claimId: "lemma:ColorWheelDomain.StepPreservesInv:ensures:0"
+  - claimId: "fn:ColorWheelDomain.Apply:requires:0"

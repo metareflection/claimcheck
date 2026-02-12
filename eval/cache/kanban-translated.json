@@ -1,0 +1,1510 @@
+[
+  {
+    "id": "pred:KanbanDomain.NoDupSeq:0",
+    "kind": "invariant-conjunct",
+    "formalText": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+    "context": {
+      "predicateName": "NoDupSeq",
+      "module": "KanbanDomain",
+      "fullBody": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "line": 49
+    },
+    "naturalLanguage": "For all pairs of indices i and j, if i and j are valid indices in the sequence s with i strictly less than j, then the element at index i is not equal to the element at index j.",
+    "confidence": 0.95
+  },
+  {
+    "id": "pred:KanbanDomain.OccursInLanes:0",
+    "kind": "invariant-conjunct",
+    "formalText": "exists i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| && exists j: int {:trigger Lane(m.lanes, m.cols[i])[j]} :: 0 <= j < |Lane(m.lanes, m.cols[i])| && Lane(m.lanes, m.cols[i])[j] == id",
+    "context": {
+      "predicateName": "OccursInLanes",
+      "module": "KanbanDomain",
+      "fullBody": "exists i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| && exists j: int {:trigger Lane(m.lanes, m.cols[i])[j]} :: 0 <= j < |Lane(m.lanes, m.cols[i])| && Lane(m.lanes, m.cols[i])[j] == id",
+      "line": 98
+    },
+    "naturalLanguage": "There exists a column in the kanban board such that there exists a card with the given identifier in the lane corresponding to that column.",
+    "confidence": 0.9
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:0",
+    "kind": "invariant-conjunct",
+    "formalText": "NoDupSeq(m.cols)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "The sequence of columns in the kanban board contains no duplicate elements.",
+    "confidence": 0.98
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:1",
+    "kind": "invariant-conjunct",
+    "formalText": "forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "For all indices in the column sequence, the column at that index exists as a key in both the lanes mapping and the work-in-progress limit mapping.",
+    "confidence": 0.92
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:2",
+    "kind": "invariant-conjunct",
+    "formalText": "forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "If a column name appears in the lanes mapping, then it must also appear in the columns sequence.",
+    "confidence": 0.93
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:3",
+    "kind": "invariant-conjunct",
+    "formalText": "forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "If a column name appears in the work-in-progress limit mapping, then it must also appear in the columns sequence.",
+    "confidence": 0.93
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:4",
+    "kind": "invariant-conjunct",
+    "formalText": "NoDupSeq(AllIds(m))",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "The sequence of all card identifiers in the kanban board contains no duplicate elements.",
+    "confidence": 0.95
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:5",
+    "kind": "invariant-conjunct",
+    "formalText": "forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "A card identifier belongs to the set of cards in the kanban board if and only if that identifier occurs in the lanes of the board.",
+    "confidence": 0.92
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:6",
+    "kind": "invariant-conjunct",
+    "formalText": "forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "For all valid column indices, the number of cards in the lane corresponding to that column does not exceed the work-in-progress limit for that column.",
+    "confidence": 0.94
+  },
+  {
+    "id": "pred:KanbanDomain.Inv:7",
+    "kind": "invariant-conjunct",
+    "formalText": "forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+    "context": {
+      "predicateName": "Inv",
+      "module": "KanbanDomain",
+      "fullBody": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "line": 106
+    },
+    "naturalLanguage": "Every card identifier in the set of cards is strictly less than the next available card identifier.",
+    "confidence": 0.96
+  },
+  {
+    "id": "lemma:KanbanDomain.InitSatisfiesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Init())",
+    "context": {
+      "lemmaName": "InitSatisfiesInv",
+      "module": "KanbanDomain",
+      "requires": [],
+      "allEnsures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 220
+    },
+    "naturalLanguage": "The initial state satisfies the invariant.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.StepPreservesInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "Inv(Normalize(Apply(m, a)))",
+    "context": {
+      "lemmaName": "StepPreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "allEnsures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 237
+    },
+    "naturalLanguage": "If a state satisfies the invariant, then after applying an action and normalizing the result, the resulting state satisfies the invariant.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveFirstNoDupContains:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(RemoveFirst(s, x), y) <==> SeqContains(s, y) && y != x",
+    "context": {
+      "lemmaName": "RemoveFirstNoDupContains",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "allEnsures": [
+        "SeqContains(RemoveFirst(s, x), y) <==> SeqContains(s, y) && y != x"
+      ],
+      "line": 497
+    },
+    "naturalLanguage": "For a sequence with no duplicate elements, an element is contained in the sequence with the first occurrence of a value removed if and only if the element is contained in the original sequence and the element is not equal to the removed value.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveFirstPreservesNoDup:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(RemoveFirst(s, x))",
+    "context": {
+      "lemmaName": "RemoveFirstPreservesNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(RemoveFirst(s, x))"
+      ],
+      "line": 548
+    },
+    "naturalLanguage": "Removing the first occurrence of an element from a sequence with no duplicates produces a sequence with no duplicates.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveFirstIndex:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "RemoveFirst(s, x)[i] != RemoveFirst(s, x)[j]",
+    "context": {
+      "lemmaName": "RemoveFirstIndex",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "i < j < |RemoveFirst(s, x)|"
+      ],
+      "allEnsures": [
+        "RemoveFirst(s, x)[i] != RemoveFirst(s, x)[j]"
+      ],
+      "line": 560
+    },
+    "naturalLanguage": "For a sequence with no duplicates, the elements at positions i and j in the sequence with the first occurrence of a value removed are not equal, given that i and j are both valid distinct positions in the result.",
+    "confidence": 0.88
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveFirstInOriginal:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(s, y)",
+    "context": {
+      "lemmaName": "RemoveFirstInOriginal",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "SeqContains(RemoveFirst(s, x), y)"
+      ],
+      "allEnsures": [
+        "SeqContains(s, y)"
+      ],
+      "line": 591
+    },
+    "naturalLanguage": "If an element is contained in the sequence with the first occurrence of a value removed, then that element is contained in the original sequence.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveFirstLength:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(s, x) ==> |RemoveFirst(s, x)| == |s| - 1",
+    "context": {
+      "lemmaName": "RemoveFirstLength",
+      "module": "KanbanDomain",
+      "requires": [],
+      "allEnsures": [
+        "SeqContains(s, x) ==> |RemoveFirst(s, x)| == |s| - 1",
+        "!SeqContains(s, x) ==> RemoveFirst(s, x) == s"
+      ],
+      "line": 599
+    },
+    "naturalLanguage": "If an element is contained in a sequence, then the length of the sequence with the first occurrence of that element removed equals the length of the original sequence minus one.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveFirstLength:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "!SeqContains(s, x) ==> RemoveFirst(s, x) == s",
+    "context": {
+      "lemmaName": "RemoveFirstLength",
+      "module": "KanbanDomain",
+      "requires": [],
+      "allEnsures": [
+        "SeqContains(s, x) ==> |RemoveFirst(s, x)| == |s| - 1",
+        "!SeqContains(s, x) ==> RemoveFirst(s, x) == s"
+      ],
+      "line": 599
+    },
+    "naturalLanguage": "If an element is not contained in a sequence, then removing the first occurrence of that element from the sequence produces the original sequence.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.InsertAtContains:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(InsertAt(s, i, x), y) <==> SeqContains(s, y) || y == x",
+    "context": {
+      "lemmaName": "InsertAtContains",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "allEnsures": [
+        "SeqContains(InsertAt(s, i, x), y) <==> SeqContains(s, y) || y == x"
+      ],
+      "line": 628
+    },
+    "naturalLanguage": "An element is contained in a sequence with a new element inserted at position i if and only if the element is contained in the original sequence or the element is equal to the inserted element.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.InsertAtPreservesNoDup:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(InsertAt(s, i, x))",
+    "context": {
+      "lemmaName": "InsertAtPreservesNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|",
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(InsertAt(s, i, x))"
+      ],
+      "line": 670
+    },
+    "naturalLanguage": "Inserting an element that is not contained in a sequence at position i into a sequence with no duplicates produces a sequence with no duplicates.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.InsertAtLength:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "|InsertAt(s, i, x)| == |s| + 1",
+    "context": {
+      "lemmaName": "InsertAtLength",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "allEnsures": [
+        "|InsertAt(s, i, x)| == |s| + 1"
+      ],
+      "line": 706
+    },
+    "naturalLanguage": "When a value is inserted at index i in a sequence s, the length of the resulting sequence is one more than the length of the original sequence.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveInsertPreservesNoDup:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(InsertAt(RemoveFirst(s, x), k, x))",
+    "context": {
+      "lemmaName": "RemoveInsertPreservesNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "SeqContains(s, x)",
+        "k <= |RemoveFirst(s, x)|"
+      ],
+      "allEnsures": [
+        "NoDupSeq(InsertAt(RemoveFirst(s, x), k, x))"
+      ],
+      "line": 712
+    },
+    "naturalLanguage": "After removing the first occurrence of x from sequence s and reinserting it at index k, the resulting sequence contains no duplicate elements.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.RemoveInsertContents:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(InsertAt(RemoveFirst(s, x), k, x), y) <==> SeqContains(s, y)",
+    "context": {
+      "lemmaName": "RemoveInsertContents",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "SeqContains(s, x)",
+        "k <= |RemoveFirst(s, x)|"
+      ],
+      "allEnsures": [
+        "SeqContains(InsertAt(RemoveFirst(s, x), k, x), y) <==> SeqContains(s, y)"
+      ],
+      "line": 726
+    },
+    "naturalLanguage": "A sequence contains element y if and only if y is still contained in that sequence after removing the first occurrence of x from it and reinserting x at index k.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsSameColReorder:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]))",
+    "context": {
+      "lemmaName": "FlattenColsSameColReorder",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "col in lanes",
+        "SeqContains(Lane(lanes, col), id)",
+        "k <= |RemoveFirst(Lane(lanes, col), id)|",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 738
+    },
+    "naturalLanguage": "When a single item is removed from one lane in a kanban board and reinserted at a different position within that same lane, the flattened sequence of all tasks across all columns contains no duplicate elements.",
+    "confidence": 0.85
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsSameColReorder:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)",
+    "context": {
+      "lemmaName": "FlattenColsSameColReorder",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "col in lanes",
+        "SeqContains(Lane(lanes, col), id)",
+        "k <= |RemoveFirst(Lane(lanes, col), id)|",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 738
+    },
+    "naturalLanguage": "For any natural number y, y is contained in the flattened sequence of a kanban board after reordering one lane if and only if y was contained in the flattened sequence before the reordering.",
+    "confidence": 0.88
+  },
+  {
+    "id": "lemma:KanbanDomain.LaneNoDupFromFlattened:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(Lane(lanes, col))",
+    "context": {
+      "lemmaName": "LaneNoDupFromFlattened",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "allEnsures": [
+        "NoDupSeq(Lane(lanes, col))"
+      ],
+      "line": 771
+    },
+    "naturalLanguage": "The lane corresponding to a given column contains no duplicate elements whenever the flattened sequence of all columns contains no duplicates.",
+    "confidence": 0.93
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsUpdateOneLane:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes'))",
+    "context": {
+      "lemmaName": "FlattenColsUpdateOneLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != col ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, col), y)} {:trigger SeqContains(Lane(lanes', col), y)} :: SeqContains(Lane(lanes', col), y) <==> SeqContains(Lane(lanes, col), y)",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "NoDupSeq(Lane(lanes', col))"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 786
+    },
+    "naturalLanguage": "When one lane in a kanban board is updated while all other lanes remain unchanged, the flattened sequence of all tasks across all columns contains no duplicate elements.",
+    "confidence": 0.89
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsUpdateOneLane:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)",
+    "context": {
+      "lemmaName": "FlattenColsUpdateOneLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != col ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, col), y)} {:trigger SeqContains(Lane(lanes', col), y)} :: SeqContains(Lane(lanes', col), y) <==> SeqContains(Lane(lanes, col), y)",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "NoDupSeq(Lane(lanes', col))"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 786
+    },
+    "naturalLanguage": "For any natural number y, y is contained in the flattened sequence of a kanban board after updating one lane if and only if y was contained in the flattened sequence before the update.",
+    "confidence": 0.91
+  },
+  {
+    "id": "lemma:KanbanDomain.ConcatNoDupDisjoint:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(a + b)",
+    "context": {
+      "lemmaName": "ConcatNoDupDisjoint",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a)",
+        "NoDupSeq(b)",
+        "forall x: T {:trigger SeqContains<T>(b, x)} {:trigger SeqContains(a, x)} :: SeqContains(a, x) ==> !SeqContains(b, x)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(a + b)"
+      ],
+      "line": 846
+    },
+    "naturalLanguage": "The concatenation of two sequences with no duplicate elements and no common elements also contains no duplicate elements.",
+    "confidence": 0.96
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsCrossColMove:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]))",
+    "context": {
+      "lemmaName": "FlattenColsCrossColMove",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "src in lanes && toCol in lanes",
+        "SeqContains(Lane(lanes, src), id)",
+        "k <= |Lane(lanes, toCol)|",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 873
+    },
+    "naturalLanguage": "When a task is removed from one column and inserted into a different column in a kanban board, the flattened sequence of all tasks across all columns contains no duplicate elements.",
+    "confidence": 0.87
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsCrossColMove:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)",
+    "context": {
+      "lemmaName": "FlattenColsCrossColMove",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "src in lanes && toCol in lanes",
+        "SeqContains(Lane(lanes, src), id)",
+        "k <= |Lane(lanes, toCol)|",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 873
+    },
+    "naturalLanguage": "For any element, that element is contained in the flattened sequence after moving an item from one column to another if and only if it was contained in the flattened sequence before the move.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.FlatColsUnique:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "!SeqContains(Lane(lanes, col2), id)",
+    "context": {
+      "lemmaName": "FlatColsUnique",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col1 in cols && col2 in cols",
+        "col1 != col2",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, col1), id)"
+      ],
+      "allEnsures": [
+        "!SeqContains(Lane(lanes, col2), id)"
+      ],
+      "line": 927
+    },
+    "naturalLanguage": "The item does not appear in column two.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.FlatColsPositions:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "false",
+    "context": {
+      "lemmaName": "FlatColsPositions",
+      "module": "KanbanDomain",
+      "requires": [
+        "c1 < |cols| && c2 < |cols| && c1 != c2",
+        "i1 < |Lane(lanes, cols[c1])| && i2 < |Lane(lanes, cols[c2])|",
+        "Lane(lanes, cols[c1])[i1] == Lane(lanes, cols[c2])[i2]",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "allEnsures": [
+        "false"
+      ],
+      "line": 953
+    },
+    "naturalLanguage": "A contradiction is derived, meaning it is impossible for the same item to appear at different positions in two different columns when the flattened sequence has no duplicates.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:KanbanDomain.FlatColsPositionValid:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FlatColsPosition(cols, lanes, c, i) < |FlattenCols(cols, lanes)|",
+    "context": {
+      "lemmaName": "FlatColsPositionValid",
+      "module": "KanbanDomain",
+      "requires": [
+        "c < |cols|",
+        "i < |Lane(lanes, cols[c])|"
+      ],
+      "allEnsures": [
+        "FlatColsPosition(cols, lanes, c, i) < |FlattenCols(cols, lanes)|",
+        "FlattenCols(cols, lanes)[FlatColsPosition(cols, lanes, c, i)] == Lane(lanes, cols[c])[i]"
+      ],
+      "line": 978
+    },
+    "naturalLanguage": "The position of an item at a given index within a column is strictly less than the total length of the flattened sequence.",
+    "confidence": 0.93
+  },
+  {
+    "id": "lemma:KanbanDomain.FlatColsPositionValid:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "FlattenCols(cols, lanes)[FlatColsPosition(cols, lanes, c, i)] == Lane(lanes, cols[c])[i]",
+    "context": {
+      "lemmaName": "FlatColsPositionValid",
+      "module": "KanbanDomain",
+      "requires": [
+        "c < |cols|",
+        "i < |Lane(lanes, cols[c])|"
+      ],
+      "allEnsures": [
+        "FlatColsPosition(cols, lanes, c, i) < |FlattenCols(cols, lanes)|",
+        "FlattenCols(cols, lanes)[FlatColsPosition(cols, lanes, c, i)] == Lane(lanes, cols[c])[i]"
+      ],
+      "line": 978
+    },
+    "naturalLanguage": "The element at the computed position in the flattened sequence equals the element at the given index within the specified column.",
+    "confidence": 0.93
+  },
+  {
+    "id": "lemma:KanbanDomain.FlatColsPositionOrder:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FlatColsPosition(cols, lanes, c1, i1) < FlatColsPosition(cols, lanes, c2, i2)",
+    "context": {
+      "lemmaName": "FlatColsPositionOrder",
+      "module": "KanbanDomain",
+      "requires": [
+        "c1 < c2 < |cols|",
+        "i1 < |Lane(lanes, cols[c1])|",
+        "i2 < |Lane(lanes, cols[c2])|"
+      ],
+      "allEnsures": [
+        "FlatColsPosition(cols, lanes, c1, i1) < FlatColsPosition(cols, lanes, c2, i2)"
+      ],
+      "line": 993
+    },
+    "naturalLanguage": "The position of an item in the first column is strictly less than the position of an item in a later column.",
+    "confidence": 0.91
+  },
+  {
+    "id": "lemma:KanbanDomain.FlatColsPositionNonNeg:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FlatColsPosition(cols, lanes, c, i) >= 0",
+    "context": {
+      "lemmaName": "FlatColsPositionNonNeg",
+      "module": "KanbanDomain",
+      "requires": [
+        "c < |cols|",
+        "i < |Lane(lanes, cols[c])|"
+      ],
+      "allEnsures": [
+        "FlatColsPosition(cols, lanes, c, i) >= 0"
+      ],
+      "line": 1009
+    },
+    "naturalLanguage": "The position of an item at a given index within a column is non-negative.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsTwoLaneUpdate:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes'))",
+    "context": {
+      "lemmaName": "FlattenColsTwoLaneUpdate",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "src in lanes && toCol in lanes",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "!SeqContains(Lane(lanes, toCol), id)",
+        "NoDupSeq(Lane(lanes, src))",
+        "NoDupSeq(Lane(lanes, toCol))",
+        "NoDupSeq(Lane(lanes', src))",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 1015
+    },
+    "naturalLanguage": "The flattened sequence after updating two lanes has no duplicate elements.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsTwoLaneUpdate:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)",
+    "context": {
+      "lemmaName": "FlattenColsTwoLaneUpdate",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "src in lanes && toCol in lanes",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "!SeqContains(Lane(lanes, toCol), id)",
+        "NoDupSeq(Lane(lanes, src))",
+        "NoDupSeq(Lane(lanes, toCol))",
+        "NoDupSeq(Lane(lanes', src))",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 1015
+    },
+    "naturalLanguage": "For any element, that element is contained in the flattened sequence after updating two lanes if and only if it was contained in the flattened sequence before the update.",
+    "confidence": 0.93
+  },
+  {
+    "id": "lemma:KanbanDomain.FindColumnOfFound:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FindColumnOf(cols, lanes, id) in cols",
+    "context": {
+      "lemmaName": "FindColumnOfFound",
+      "module": "KanbanDomain",
+      "requires": [
+        "exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)"
+      ],
+      "allEnsures": [
+        "FindColumnOf(cols, lanes, id) in cols",
+        "SeqContains(Lane(lanes, FindColumnOf(cols, lanes, id)), id)"
+      ],
+      "line": 1037
+    },
+    "naturalLanguage": "The column found as containing the item is one of the valid columns.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.FindColumnOfFound:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(Lane(lanes, FindColumnOf(cols, lanes, id)), id)",
+    "context": {
+      "lemmaName": "FindColumnOfFound",
+      "module": "KanbanDomain",
+      "requires": [
+        "exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)"
+      ],
+      "allEnsures": [
+        "FindColumnOf(cols, lanes, id) in cols",
+        "SeqContains(Lane(lanes, FindColumnOf(cols, lanes, id)), id)"
+      ],
+      "line": 1037
+    },
+    "naturalLanguage": "The identifier can be found in the lane corresponding to the column returned by finding which column contains the identifier.",
+    "confidence": 0.88
+  },
+  {
+    "id": "lemma:KanbanDomain.FindColumnOfInv:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FindColumnOf(m.cols, m.lanes, id) in m.cols",
+    "context": {
+      "lemmaName": "FindColumnOfInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards"
+      ],
+      "allEnsures": [
+        "FindColumnOf(m.cols, m.lanes, id) in m.cols",
+        "SeqContains(Lane(m.lanes, FindColumnOf(m.cols, m.lanes, id)), id)"
+      ],
+      "line": 1066
+    },
+    "naturalLanguage": "The column found for the given identifier is an element of the columns collection.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.FindColumnOfInv:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(Lane(m.lanes, FindColumnOf(m.cols, m.lanes, id)), id)",
+    "context": {
+      "lemmaName": "FindColumnOfInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards"
+      ],
+      "allEnsures": [
+        "FindColumnOf(m.cols, m.lanes, id) in m.cols",
+        "SeqContains(Lane(m.lanes, FindColumnOf(m.cols, m.lanes, id)), id)"
+      ],
+      "line": 1066
+    },
+    "naturalLanguage": "The identifier can be found in the lane corresponding to the column found for that identifier, when the state is valid and the identifier belongs to the cards in the state.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:KanbanDomain.OccursInLanesEquivSeqContains:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "OccursInLanes(m, id) <==> exists i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| && SeqContains(Lane(m.lanes, m.cols[i]), id)",
+    "context": {
+      "lemmaName": "OccursInLanesEquivSeqContains",
+      "module": "KanbanDomain",
+      "requires": [],
+      "allEnsures": [
+        "OccursInLanes(m, id) <==> exists i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| && SeqContains(Lane(m.lanes, m.cols[i]), id)"
+      ],
+      "line": 1080
+    },
+    "naturalLanguage": "An identifier occurs in the lanes of the state if and only if there exists a column index within the state's columns such that the identifier appears in the lane corresponding to that column.",
+    "confidence": 0.91
+  },
+  {
+    "id": "lemma:KanbanDomain.OccursInLanesEquivSeqContainsLanes:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "(exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)) <==> SeqContains(FlattenCols(cols, lanes), id)",
+    "context": {
+      "lemmaName": "OccursInLanesEquivSeqContainsLanes",
+      "module": "KanbanDomain",
+      "requires": [],
+      "allEnsures": [
+        "(exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)) <==> SeqContains(FlattenCols(cols, lanes), id)"
+      ],
+      "line": 1096
+    },
+    "naturalLanguage": "An identifier exists in some column's lane if and only if that identifier appears in the flattened sequence of all cards across all columns.",
+    "confidence": 0.89
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsSingleLaneAdd:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes'))",
+    "context": {
+      "lemmaName": "FlattenColsSingleLaneAdd",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "toCol in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "!SeqContains(FlattenCols(cols, lanes), id)",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) || y == id"
+      ],
+      "line": 1103
+    },
+    "naturalLanguage": "The flattened sequence of cards across all columns in the updated lanes configuration contains no duplicates.",
+    "confidence": 0.87
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsSingleLaneAdd:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) || y == id",
+    "context": {
+      "lemmaName": "FlattenColsSingleLaneAdd",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "toCol in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "!SeqContains(FlattenCols(cols, lanes), id)",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) || y == id"
+      ],
+      "line": 1103
+    },
+    "naturalLanguage": "For every identifier, it appears in the flattened sequence of the updated lanes if and only if it appeared in the flattened sequence of the original lanes or it is the newly added identifier.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsSingleLaneRemove:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes'))",
+    "context": {
+      "lemmaName": "FlattenColsSingleLaneRemove",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "NoDupSeq(Lane(lanes', src))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) && y != id"
+      ],
+      "line": 1169
+    },
+    "naturalLanguage": "The flattened sequence of cards across all columns in the updated lanes configuration contains no duplicates.",
+    "confidence": 0.87
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsSingleLaneRemove:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) && y != id",
+    "context": {
+      "lemmaName": "FlattenColsSingleLaneRemove",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "NoDupSeq(Lane(lanes', src))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) && y != id"
+      ],
+      "line": 1169
+    },
+    "naturalLanguage": "For every identifier, it appears in the flattened sequence of the updated lanes if and only if it appeared in the original lanes and it is not the identifier being removed.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:KanbanDomain.FlatColsUniqueInLane:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "forall c: ColId {:trigger Lane(lanes, c)} {:trigger c in cols} :: c in cols && c != col ==> !SeqContains(Lane(lanes, c), id)",
+    "context": {
+      "lemmaName": "FlatColsUniqueInLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, col), id)"
+      ],
+      "allEnsures": [
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger c in cols} :: c in cols && c != col ==> !SeqContains(Lane(lanes, c), id)"
+      ],
+      "line": 1237
+    },
+    "naturalLanguage": "For every column, if the column is in the set of all columns and is not the specified column, then the identifier does not appear in that column's lane.",
+    "confidence": 0.89
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsTwoLaneUpdateHelper:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes'))",
+    "context": {
+      "lemmaName": "FlattenColsTwoLaneUpdateHelper",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "!SeqContains(Lane(lanes, toCol), id)",
+        "NoDupSeq(Lane(lanes', src))",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 1253
+    },
+    "naturalLanguage": "The flattened sequence of all columns after updating the lanes has no duplicate elements.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsTwoLaneUpdateHelper:ensures:1",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)",
+    "context": {
+      "lemmaName": "FlattenColsTwoLaneUpdateHelper",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "!SeqContains(Lane(lanes, toCol), id)",
+        "NoDupSeq(Lane(lanes', src))",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 1253
+    },
+    "naturalLanguage": "For every natural number, that number is contained in the flattened sequence of columns with the updated lanes if and only if it is contained in the flattened sequence of columns with the original lanes.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:KanbanDomain.SeqContainsWitness:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(s, x)",
+    "context": {
+      "lemmaName": "SeqContainsWitness",
+      "module": "KanbanDomain",
+      "requires": [
+        "idx < |s|",
+        "s[idx] == x"
+      ],
+      "allEnsures": [
+        "SeqContains(s, x)"
+      ],
+      "line": 1407
+    },
+    "naturalLanguage": "The element x is contained in the sequence s.",
+    "confidence": 0.98
+  },
+  {
+    "id": "lemma:KanbanDomain.OccursInLanesWitness:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "OccursInLanes(m, id)",
+    "context": {
+      "lemmaName": "OccursInLanesWitness",
+      "module": "KanbanDomain",
+      "requires": [
+        "colIdx < |m.cols|",
+        "posIdx < |Lane(m.lanes, m.cols[colIdx])|",
+        "Lane(m.lanes, m.cols[colIdx])[posIdx] == id"
+      ],
+      "allEnsures": [
+        "OccursInLanes(m, id)"
+      ],
+      "line": 1414
+    },
+    "naturalLanguage": "The identifier id appears in some lane within the kanban board state m.",
+    "confidence": 0.88
+  },
+  {
+    "id": "lemma:KanbanDomain.AllIdsContains:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(FlattenCols(cols, lanes), id) <==> exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)",
+    "context": {
+      "lemmaName": "AllIdsContains",
+      "module": "KanbanDomain",
+      "requires": [],
+      "allEnsures": [
+        "SeqContains(FlattenCols(cols, lanes), id) <==> exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)"
+      ],
+      "line": 1422
+    },
+    "naturalLanguage": "An identifier appears in the flattened sequence of all columns with their lanes if and only if it appears in the lane of some column in the column list.",
+    "confidence": 0.91
+  },
+  {
+    "id": "lemma:KanbanDomain.SeqContainsMeansInSeq:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "exists k: int {:trigger s[k]} :: 0 <= k < |s| && s[k] == x",
+    "context": {
+      "lemmaName": "SeqContainsMeansInSeq",
+      "module": "KanbanDomain",
+      "requires": [
+        "SeqContains(s, x)"
+      ],
+      "allEnsures": [
+        "exists k: int {:trigger s[k]} :: 0 <= k < |s| && s[k] == x"
+      ],
+      "line": 1452
+    },
+    "naturalLanguage": "There exists a valid index in the sequence s where the element at that index equals x.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.ConcatContains:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "SeqContains(a + b, x) <==> SeqContains(a, x) || SeqContains(b, x)",
+    "context": {
+      "lemmaName": "ConcatContains",
+      "module": "KanbanDomain",
+      "requires": [],
+      "allEnsures": [
+        "SeqContains(a + b, x) <==> SeqContains(a, x) || SeqContains(b, x)"
+      ],
+      "line": 1459
+    },
+    "naturalLanguage": "An element is contained in the concatenation of two sequences if and only if it is contained in the first sequence or the second sequence.",
+    "confidence": 0.93
+  },
+  {
+    "id": "lemma:KanbanDomain.NoDupSeqNotInTail:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "forall c: T {:trigger c in s[1..]} :: c in s[1..] ==> c != x",
+    "context": {
+      "lemmaName": "NoDupSeqNotInTail",
+      "module": "KanbanDomain",
+      "requires": [
+        "|s| > 0",
+        "NoDupSeq(s)",
+        "s[0] == x"
+      ],
+      "allEnsures": [
+        "forall c: T {:trigger c in s[1..]} :: c in s[1..] ==> c != x"
+      ],
+      "line": 1481
+    },
+    "naturalLanguage": "Every element in the tail of the sequence (excluding the first element) is not equal to x.",
+    "confidence": 0.91
+  },
+  {
+    "id": "lemma:KanbanDomain.NoDupSeqAppend:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(s + [x])",
+    "context": {
+      "lemmaName": "NoDupSeqAppend",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(s + [x])"
+      ],
+      "line": 1500
+    },
+    "naturalLanguage": "The sequence formed by appending x to sequence s has no duplicate elements.",
+    "confidence": 0.96
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsUpdateLane:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "forall c: ColId {:trigger Lane(lanes, c)} {:trigger c in cols} :: c in cols && c != col ==> Lane(lanes[col := newLane], c) == Lane(lanes, c)",
+    "context": {
+      "lemmaName": "FlattenColsUpdateLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "col in cols"
+      ],
+      "allEnsures": [
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger c in cols} :: c in cols && c != col ==> Lane(lanes[col := newLane], c) == Lane(lanes, c)"
+      ],
+      "line": 1525
+    },
+    "naturalLanguage": "For every column that is in the columns list and is different from the specified column, the lane of that column in the updated lanes mapping equals the lane of that column in the original lanes mapping.",
+    "confidence": 0.89
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsAppendToLane:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]))",
+    "context": {
+      "lemmaName": "FlattenColsAppendToLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "col in cols",
+        "NoDupSeq(cols)",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "!SeqContains(FlattenCols(cols, lanes), x)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]))"
+      ],
+      "line": 1531
+    },
+    "naturalLanguage": "The sequence resulting from flattening the columns after appending an element to one lane contains no duplicates.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsAppendToLaneHelper:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]))",
+    "context": {
+      "lemmaName": "FlattenColsAppendToLaneHelper",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "col in cols",
+        "NoDupSeq(cols)",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "!SeqContains(FlattenCols(cols, lanes), x)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]))"
+      ],
+      "line": 1543
+    },
+    "naturalLanguage": "The sequence resulting from flattening the columns after appending an element to one lane contains no duplicates.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.ConcatDisjoint:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "forall x: T {:trigger SeqContains<T>(b, x)} {:trigger SeqContains(a, x)} :: SeqContains(a, x) ==> !SeqContains(b, x)",
+    "context": {
+      "lemmaName": "ConcatDisjoint",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)"
+      ],
+      "allEnsures": [
+        "forall x: T {:trigger SeqContains<T>(b, x)} {:trigger SeqContains(a, x)} :: SeqContains(a, x) ==> !SeqContains(b, x)"
+      ],
+      "line": 1601
+    },
+    "naturalLanguage": "For all elements, if the element appears in sequence a, then it does not appear in sequence b.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.ConcatNoDupFreshSubset:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(a + b')",
+    "context": {
+      "lemmaName": "ConcatNoDupFreshSubset",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)",
+        "NoDupSeq(b')",
+        "!SeqContains(a, x)",
+        "forall y: T {:trigger SeqContains(b, y)} {:trigger SeqContains(b', y)} :: SeqContains(b', y) <==> SeqContains(b, y) || y == x"
+      ],
+      "allEnsures": [
+        "NoDupSeq(a + b')"
+      ],
+      "line": 1620
+    },
+    "naturalLanguage": "The concatenation of sequence a with sequence b' contains no duplicates.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsUnchanged:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FlattenCols(cols, lanes') == FlattenCols(cols, lanes)",
+    "context": {
+      "lemmaName": "FlattenColsUnchanged",
+      "module": "KanbanDomain",
+      "requires": [
+        "forall c: seq<char> {:trigger c in cols} :: c in cols ==> c != col",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols ==> Lane(lanes', c) == Lane(lanes, c)"
+      ],
+      "allEnsures": [
+        "FlattenCols(cols, lanes') == FlattenCols(cols, lanes)"
+      ],
+      "line": 1658
+    },
+    "naturalLanguage": "Flattening the columns with the updated lanes produces the same result as flattening the columns with the original lanes.",
+    "confidence": 0.93
+  },
+  {
+    "id": "lemma:KanbanDomain.ConcatNoDup:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(a) && NoDupSeq(b)",
+    "context": {
+      "lemmaName": "ConcatNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(a) && NoDupSeq(b)"
+      ],
+      "line": 1670
+    },
+    "naturalLanguage": "Both sequence a and sequence b individually contain no duplicates.",
+    "confidence": 0.96
+  },
+  {
+    "id": "lemma:KanbanDomain.NoDupSeqInsert:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(a + [x] + b)",
+    "context": {
+      "lemmaName": "NoDupSeqInsert",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)",
+        "!SeqContains(a, x)",
+        "!SeqContains(b, x)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(a + [x] + b)"
+      ],
+      "line": 1688
+    },
+    "naturalLanguage": "The concatenation of sequence a, a sequence containing only x, and sequence b contains no duplicates.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsAppendContent:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]), y) <==> SeqContains(FlattenCols(cols, lanes), y) || y == x",
+    "context": {
+      "lemmaName": "FlattenColsAppendContent",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in cols",
+        "col in lanes"
+      ],
+      "allEnsures": [
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]), y) <==> SeqContains(FlattenCols(cols, lanes), y) || y == x"
+      ],
+      "line": 1731
+    },
+    "naturalLanguage": "For all elements, an element appears in the flattened columns after appending to the lane if and only if it either appeared in the original flattened columns or it is the newly appended element.",
+    "confidence": 0.91
+  },
+  {
+    "id": "lemma:KanbanDomain.ColInColsWitness:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && cols[i] == col",
+    "context": {
+      "lemmaName": "ColInColsWitness",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in cols"
+      ],
+      "allEnsures": [
+        "exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && cols[i] == col"
+      ],
+      "line": 1771
+    },
+    "naturalLanguage": "There exists an index in the columns sequence such that the element at that index equals the given column.",
+    "confidence": 0.94
+  },
+  {
+    "id": "lemma:KanbanDomain.ConcatNoDupWithFreshAppend:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(a + (b + [x]))",
+    "context": {
+      "lemmaName": "ConcatNoDupWithFreshAppend",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)",
+        "!SeqContains(a, x)",
+        "!SeqContains(b, x)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(a + (b + [x]))"
+      ],
+      "line": 1778
+    },
+    "naturalLanguage": "The concatenation of sequence a with the concatenation of sequence b and a sequence containing only x contains no duplicates.",
+    "confidence": 0.93
+  },
+  {
+    "id": "lemma:KanbanDomain.NoDupSeqAppendFresh:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "NoDupSeq(s + [x])",
+    "context": {
+      "lemmaName": "NoDupSeqAppendFresh",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "!(x in s)"
+      ],
+      "allEnsures": [
+        "NoDupSeq(s + [x])"
+      ],
+      "line": 1789
+    },
+    "naturalLanguage": "A sequence containing all elements from sequence s followed by element x has no duplicate elements.",
+    "confidence": 0.95
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsAppendEmpty:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FlattenCols(cols + [col], lanes) == FlattenCols(cols, lanes)",
+    "context": {
+      "lemmaName": "FlattenColsAppendEmpty",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "Lane(lanes, col) == []"
+      ],
+      "allEnsures": [
+        "FlattenCols(cols + [col], lanes) == FlattenCols(cols, lanes)"
+      ],
+      "line": 1803
+    },
+    "naturalLanguage": "Flattening the result of appending an empty column to a list of columns yields the same result as flattening the original list of columns.",
+    "confidence": 0.92
+  },
+  {
+    "id": "lemma:KanbanDomain.FlattenColsSameLanes:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "FlattenCols(cols, lanes1) == FlattenCols(cols, lanes2)",
+    "context": {
+      "lemmaName": "FlattenColsSameLanes",
+      "module": "KanbanDomain",
+      "requires": [
+        "forall c: ColId {:trigger Lane(lanes2, c)} {:trigger Lane(lanes1, c)} {:trigger c in cols} :: c in cols ==> Lane(lanes1, c) == Lane(lanes2, c)"
+      ],
+      "allEnsures": [
+        "FlattenCols(cols, lanes1) == FlattenCols(cols, lanes2)"
+      ],
+      "line": 1820
+    },
+    "naturalLanguage": "If two lane configurations contain identical lanes for every column in a given list of columns, then flattening that list of columns yields the same result regardless of which lane configuration is used.",
+    "confidence": 0.9
+  },
+  {
+    "id": "lemma:KanbanDomain.FreshIdNotInAllIds:ensures:0",
+    "kind": "lemma-ensures",
+    "formalText": "!SeqContains(AllIds(m), freshId)",
+    "context": {
+      "lemmaName": "FreshIdNotInAllIds",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "freshId >= m.nextId"
+      ],
+      "allEnsures": [
+        "!SeqContains(AllIds(m), freshId)"
+      ],
+      "line": 1832
+    },
+    "naturalLanguage": "A fresh identifier that is greater than or equal to the next available identifier counter in a valid kanban system does not appear in the sequence of all identifiers in the system.",
+    "confidence": 0.88
+  },
+  {
+    "id": "fn:KanbanDomain.ClampPos:requires:0",
+    "kind": "function-precondition",
+    "formalText": "n >= 0",
+    "context": {
+      "functionName": "ClampPos",
+      "module": "KanbanDomain",
+      "line": 54
+    },
+    "naturalLanguage": "The input parameter n is non-negative.",
+    "confidence": 0.98
+  },
+  {
+    "id": "fn:KanbanDomain.InsertAt:requires:0",
+    "kind": "function-precondition",
+    "formalText": "i <= |s|",
+    "context": {
+      "functionName": "InsertAt",
+      "module": "KanbanDomain",
+      "line": 69
+    },
+    "naturalLanguage": "The insertion index i is less than or equal to the length of sequence s.",
+    "confidence": 0.97
+  },
+  {
+    "id": "fn:KanbanDomain.FlatColsPosition:requires:0",
+    "kind": "function-precondition",
+    "formalText": "c < |cols|",
+    "context": {
+      "functionName": "FlatColsPosition",
+      "module": "KanbanDomain",
+      "line": 75
+    },
+    "naturalLanguage": "The column index c is strictly less than the number of columns.",
+    "confidence": 0.97
+  },
+  {
+    "id": "fn:KanbanDomain.FlatColsPosition:requires:1",
+    "kind": "function-precondition",
+    "formalText": "i < |Lane(lanes, cols[c])|",
+    "context": {
+      "functionName": "FlatColsPosition",
+      "module": "KanbanDomain",
+      "line": 75
+    },
+    "naturalLanguage": "The position index i is strictly less than the length of the lane at the given column.",
+    "confidence": 0.96
+  },
+  {
+    "id": "fn:KanbanDomain.Apply:requires:0",
+    "kind": "function-precondition",
+    "formalText": "Inv(m)",
+    "context": {
+      "functionName": "Apply",
+      "module": "KanbanDomain",
+      "line": 147
+    },
+    "naturalLanguage": "The kanban system m is in a valid state satisfying all system invariants.",
+    "confidence": 0.96
+  }
+]

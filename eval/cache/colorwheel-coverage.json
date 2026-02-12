@@ -1,0 +1,52 @@
+{
+  "proved": [],
+  "missing": [
+    {
+      "requirement": "The base hue is always in valid range",
+      "explanation": "None of the proved claims specifically state that the base hue value is within a valid range (e.g., 0-360 degrees). The general invariant predicate might contain this, but without a specific claim about base hue validity, we cannot confirm coverage."
+    },
+    {
+      "requirement": "There are always exactly 5 colors in the palette",
+      "explanation": "No proved claim explicitly states that the palette contains exactly 5 colors. While this might be part of the specification invariant CWSpec.Inv(m), there is no specific claim that documents this property."
+    },
+    {
+      "requirement": "Every color has valid saturation and lightness values",
+      "explanation": "No proved claim explicitly states that saturation and lightness values are within valid ranges (typically 0-100%). This property might be part of the specification invariant, but it is not explicitly documented as a separate claim."
+    },
+    {
+      "requirement": "Contrast pair indices are valid (between 0 and 4)",
+      "explanation": "No proved claim specifically addresses the validity of contrast pair indices. While this could be part of the specification invariant, there is no explicit claim documenting this constraint."
+    },
+    {
+      "requirement": "When a mood is set (not Custom), all colors satisfy the mood constraints",
+      "explanation": "No proved claim explicitly addresses mood constraints or the relationship between mood settings and color properties. This requirement has no corresponding formal proof claim."
+    },
+    {
+      "requirement": "Hues follow the selected harmony pattern",
+      "explanation": "No proved claim explicitly states that the hues in the palette follow the selected harmony pattern (e.g., complementary, triadic, analogous). This requirement is not covered by any of the documented proofs."
+    }
+  ],
+  "unexpected": [
+    {
+      "claimId": "pred:ColorWheelDomain.Inv:0",
+      "naturalLanguage": "The colorwheel specification invariant holds for the given machine state.",
+      "explanation": "This is a general invariant predicate definition that likely encapsulates multiple properties, but it does not correspond to any specific user requirement. It's a meta-level claim about the invariant itself rather than stating what specific properties the invariant guarantees."
+    },
+    {
+      "claimId": "lemma:ColorWheelDomain.InitSatisfiesInv:ensures:0",
+      "naturalLanguage": "The colorwheel specification invariant is satisfied by the initial state.",
+      "explanation": "This proves that the initial state satisfies the invariant, but no user requirement specifically asks about properties of the initial state. It's a standard proof obligation for state machine verification but doesn't match any stated requirement."
+    },
+    {
+      "claimId": "lemma:ColorWheelDomain.StepPreservesInv:ensures:0",
+      "naturalLanguage": "If the specification invariant holds for a given state, then applying an action to that state and normalizing the result preserves the specification invariant.",
+      "explanation": "This is an inductive proof step showing invariant preservation across state transitions. While crucial for verification, no user requirement explicitly asks for proof of invariant preservation. It's a proof technique rather than a domain property requirement."
+    },
+    {
+      "claimId": "fn:ColorWheelDomain.Apply:requires:0",
+      "naturalLanguage": "The Apply function requires that the specification invariant holds for the input machine state.",
+      "explanation": "This is a precondition for a function, stating what must be true before applying an action. No user requirement asks about preconditions of functions. This is an implementation detail of the verification framework."
+    }
+  ],
+  "summary": "The formal verification establishes a general invariant framework (initialization, preservation, and application preconditions) but does not provide explicit proofs for any of the six specific user requirements about colorwheel properties (hue ranges, palette size, color value validity, contrast indices, mood constraints, and harmony patterns). All proved claims are structural verification obligations rather than domain-specific property proofs, resulting in zero coverage of the stated requirements."
+}

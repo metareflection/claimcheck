@@ -1,0 +1,40 @@
+{
+  "proved": [
+    {
+      "claimId": "pred:CounterDomain.Inv:0",
+      "naturalLanguage": "The counter value is greater than or equal to zero.",
+      "matchedRequirement": "The counter value is always non-negative",
+      "explanation": "This claim directly states that the counter m >= 0, which is semantically equivalent to being non-negative. This is the invariant definition that establishes non-negativity."
+    },
+    {
+      "claimId": "lemma:CounterDomain.InitSatisfiesInv:ensures:0",
+      "naturalLanguage": "The initial counter state satisfies the invariant.",
+      "matchedRequirement": "The initial state satisfies the invariant",
+      "explanation": "This claim explicitly proves that Init() satisfies Inv, which directly matches the requirement that the initial state satisfies the invariant."
+    },
+    {
+      "claimId": "lemma:CounterDomain.StepPreservesInv:ensures:0",
+      "naturalLanguage": "If a counter state satisfies the invariant, then applying an action to it and normalizing the result produces a state that satisfies the invariant.",
+      "matchedRequirement": "Every action preserves the invariant after normalization",
+      "explanation": "This claim proves that for any action a, if m satisfies Inv, then Normalize(Apply(m, a)) also satisfies Inv. This is exactly invariant preservation after normalization."
+    }
+  ],
+  "missing": [
+    {
+      "requirement": "Decrementing at zero keeps the counter at zero",
+      "explanation": "There is no specific proof claim about the behavior of decrement when the counter is at zero. While the invariant preservation might imply this indirectly, there is no explicit formal proof stating that decrementing at zero results in zero."
+    },
+    {
+      "requirement": "The counter never exceeds 100",
+      "explanation": "There is no proof claim about an upper bound on the counter value. The invariant only establishes a lower bound (non-negativity), but no formal proof addresses the upper limit of 100."
+    }
+  ],
+  "unexpected": [
+    {
+      "claimId": "fn:CounterDomain.Apply:requires:0",
+      "naturalLanguage": "The counter state must satisfy the invariant before an action can be applied to it.",
+      "explanation": "This is a precondition requirement for the Apply function, not a proof of a user requirement. It's a technical constraint needed for the implementation but doesn't correspond to any of the five stated user requirements about counter behavior or properties."
+    }
+  ],
+  "summary": "The formal verification covers 3 out of 5 user requirements well, proving non-negativity, initial state correctness, and invariant preservation. However, two critical requirements are missing: the specific behavior of decrement-at-zero and the upper bound constraint of 100. One technical precondition claim exists that doesn't match any user requirement."
+}

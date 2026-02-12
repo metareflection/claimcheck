@@ -1,0 +1,29 @@
+project: canon
+module: CanonDomain
+
+# CanonDomain has 6 flattened claims wrapping an opaque C.Inv(m).
+# The compare step correctly identifies that the invariant wrappers and
+# preservation lemmas don't reveal enough detail to match specific requirements.
+# All requirements are missing; all claims are unexpected.
+
+proved: []
+
+missing:
+  - requirementIndex: 1
+    requirementText: "constraint targets reference existing nodes"
+  - requirementIndex: 2
+    requirementText: "edge endpoints reference existing nodes"
+  - requirementIndex: 3
+    requirementText: "Adding a node with an existing ID"
+  - requirementIndex: 4
+    requirementText: "Removing a node cleans up"
+  - requirementIndex: 5
+    requirementText: "constraint ID allocator"
+
+unexpected:
+  - claimId: "pred:CanonDomain.Inv:0"
+  - claimId: "lemma:CanonDomain.AddNodeImplPreservesInv:ensures:0"
+  - claimId: "lemma:CanonDomain.MoveNodeImplPreservesInv:ensures:0"
+  - claimId: "lemma:CanonDomain.InitSatisfiesInv:ensures:0"
+  - claimId: "lemma:CanonDomain.StepPreservesInv:ensures:0"
+  - claimId: "fn:CanonDomain.Apply:requires:0"
