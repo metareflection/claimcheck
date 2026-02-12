@@ -1,0 +1,74 @@
+description: "A/B model comparison for claimcheck pipeline"
+
+prompts:
+  - file://prompts/pipeline-input.txt
+
+providers:
+  - id: file://providers/claimcheck-pipeline.mjs
+    label: haiku→sonnet (default)
+    config:
+      translateModel: claude-haiku-4-5-20251001
+      compareModel: claude-sonnet-4-5-20250929
+
+  - id: file://providers/claimcheck-pipeline.mjs
+    label: sonnet→sonnet
+    config:
+      translateModel: claude-sonnet-4-5-20250929
+      compareModel: claude-sonnet-4-5-20250929
+
+  - id: file://providers/claimcheck-pipeline.mjs
+    label: haiku→haiku
+    config:
+      translateModel: claude-haiku-4-5-20251001
+      compareModel: claude-haiku-4-5-20251001
+
+tests:
+  - description: "counter"
+    vars:
+      projectName: counter
+      moduleName: CounterDomain
+    assert:
+      - type: javascript
+        value: file://assertions/coverage-correctness.mjs
+      - type: javascript
+        value: file://assertions/translation-quality.mjs
+
+  - description: "kanban"
+    vars:
+      projectName: kanban
+      moduleName: KanbanDomain
+    assert:
+      - type: javascript
+        value: file://assertions/coverage-correctness.mjs
+      - type: javascript
+        value: file://assertions/translation-quality.mjs
+
+  - description: "colorwheel"
+    vars:
+      projectName: colorwheel
+      moduleName: ColorWheelDomain
+    assert:
+      - type: javascript
+        value: file://assertions/coverage-correctness.mjs
+      - type: javascript
+        value: file://assertions/translation-quality.mjs
+
+  - description: "canon"
+    vars:
+      projectName: canon
+      moduleName: CanonDomain
+    assert:
+      - type: javascript
+        value: file://assertions/coverage-correctness.mjs
+      - type: javascript
+        value: file://assertions/translation-quality.mjs
+
+  - description: "delegation-auth"
+    vars:
+      projectName: delegation-auth
+      moduleName: DelegationAuthDomain
+    assert:
+      - type: javascript
+        value: file://assertions/coverage-correctness.mjs
+      - type: javascript
+        value: file://assertions/translation-quality.mjs

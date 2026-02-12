@@ -9,6 +9,7 @@
   "scripts": {
     "eval": "npx promptfoo eval -c eval/promptfooconfig.yaml",
     "eval:cached": "CLAIMCHECK_EVAL_CACHED=1 npx promptfoo eval -c eval/promptfooconfig.yaml",
+    "eval:ab": "npx promptfoo eval -c eval/promptfoo-ab.yaml",
     "eval:view": "npx promptfoo view"
   },
   "dependencies": {

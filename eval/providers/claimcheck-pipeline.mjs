@@ -71,22 +71,42 @@ export default class ClaimcheckPipelineProvider {
         flattenedCount: 0,
         translated: [],
         coverage: { proved: [], missing: [], unexpected: [], summary: 'No claims found' },
+        timing: {},
       };
     }
 
     const { translateClaims } = await import('../../src/translate.js');
-    const translateModel = this.config.translateModel ?? undefined;
+    const translateModel = this.config.translateModel ?? 'claude-haiku-4-5-20251001';
+    const t0 = Date.now();
     const translated = await translateClaims(items, projectName, {
       model: translateModel,
     });
+    const translateMs = Date.now() - t0;
 
     const { compareClaims } = await import('../../src/compare.js');
-    const compareModel = this.config.compareModel ?? undefined;
+    const compareModel = this.config.compareModel ?? 'claude-sonnet-4-5-20250929';
+    const t1 = Date.now();
     const coverage = await compareClaims(translated, requirementsText, projectName, {
       model: compareModel,
     });
+    const compareMs = Date.now() - t1;
 
-    return { flattenedCount, translated, coverage };
+    const { getTokenUsage } = await import('../../src/api.js');
+    const tokens = getTokenUsage();
+
+    return {
+      flattenedCount,
+      translated,
+      coverage,
+      timing: {
+        translateMs,
+        compareMs,
+        totalMs: translateMs + compareMs,
+        translateModel,
+        compareModel,
+        tokens,
+      },
+    };
   }
 
   async loadCached(projectName) {
