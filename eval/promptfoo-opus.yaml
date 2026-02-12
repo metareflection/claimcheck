@@ -1,5 +1,7 @@
 description: "Opus model comparison for claimcheck pipeline"
 
+outputPath: results/opus-latest.json
+
 prompts:
   - file://prompts/pipeline-input.txt
 
@@ -20,6 +22,12 @@ providers:
     label: sonnet→opus
     config:
       translateModel: claude-sonnet-4-5-20250929
+      compareModel: claude-opus-4-6
+
+  - id: file://providers/claimcheck-pipeline.mjs
+    label: opus→opus
+    config:
+      translateModel: claude-opus-4-6
       compareModel: claude-opus-4-6
 
 tests:

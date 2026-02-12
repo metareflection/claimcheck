@@ -1,5 +1,7 @@
 description: "Claimcheck pipeline end-to-end evaluation"
 
+outputPath: results/default-latest.json
+
 prompts:
   - file://prompts/pipeline-input.txt
 

@@ -1,5 +1,7 @@
 description: "A/B model comparison for claimcheck pipeline"
 
+outputPath: results/ab-latest.json
+
 prompts:
   - file://prompts/pipeline-input.txt
 
