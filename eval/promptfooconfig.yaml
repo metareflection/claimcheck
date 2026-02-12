@@ -25,6 +25,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "kanban — medium domain with WIP limits and card tracking"
     vars:
@@ -35,6 +37,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "colorwheel — color palette with mood/harmony constraints"
     vars:
@@ -45,6 +49,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "canon — graph layout with constraints and edges"
     vars:
@@ -55,6 +61,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "delegation-auth — capability-based auth with delegation chains"
     vars:
@@ -65,3 +73,5 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs

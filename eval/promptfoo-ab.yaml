@@ -32,6 +32,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "kanban"
     vars:
@@ -42,6 +44,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "colorwheel"
     vars:
@@ -52,6 +56,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "canon"
     vars:
@@ -62,6 +68,8 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
 
   - description: "delegation-auth"
     vars:
@@ -72,3 +80,5 @@ tests:
         value: file://assertions/coverage-correctness.mjs
       - type: javascript
         value: file://assertions/translation-quality.mjs
+      - type: javascript
+        value: file://assertions/performance.mjs
