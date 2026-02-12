@@ -16,7 +16,12 @@ async function loadResults(path) {
   if (path) {
     return JSON.parse(await readFile(path, 'utf-8'));
   }
-  const raw = execSync('npx promptfoo show eval --json', {
+  const latestId = execSync('npx promptfoo list evals --ids-only -n 1', {
+    encoding: 'utf-8',
+    stdio: ['pipe', 'pipe', 'pipe'],
+  }).trim();
+  if (!latestId) throw new Error('No evals found. Run an eval first.');
+  const raw = execSync(`npx promptfoo export eval ${latestId}`, {
     encoding: 'utf-8',
     stdio: ['pipe', 'pipe', 'pipe'],
   });
