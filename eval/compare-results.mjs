@@ -10,13 +10,12 @@
  */
 
 import { execSync } from 'node:child_process';
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 async function loadResults(path) {
   if (path) {
     return JSON.parse(await readFile(path, 'utf-8'));
   }
-  // Fetch latest eval from promptfoo
   const raw = execSync('npx promptfoo show eval --json', {
     encoding: 'utf-8',
     stdio: ['pipe', 'pipe', 'pipe'],
@@ -30,10 +29,8 @@ function extractMetrics(evalData) {
   const heads = table.head?.prompts ?? [];
   const bodies = table.body ?? [];
 
-  // Map provider labels
   const providers = heads.map((h) => h.label || h.provider || h.id);
 
-  // Per-provider aggregated metrics
   const metrics = providers.map(() => ({
     tests: 0,
     passed: 0,
@@ -45,10 +42,12 @@ function extractMetrics(evalData) {
     outputTokens: [],
     coverageScores: [],
     translationScores: [],
+    perTest: [],
   }));
 
   for (const row of bodies) {
     const outputs = row.outputs ?? [];
+    const testDesc = row.description ?? row.test?.description ?? '';
     for (let i = 0; i < outputs.length; i++) {
       if (i >= metrics.length) break;
       const out = outputs[i];
@@ -58,7 +57,6 @@ function extractMetrics(evalData) {
       if (out.pass) m.passed++;
       else m.failed++;
 
-      // Extract namedScores from assertions
       const named = out.namedScores ?? {};
       if (named.totalMs != null) m.totalMs.push(named.totalMs);
       if (named.translateMs != null) m.translateMs.push(named.translateMs);
@@ -66,17 +64,30 @@ function extractMetrics(evalData) {
       if (named.inputTokens != null) m.inputTokens.push(named.inputTokens);
       if (named.outputTokens != null) m.outputTokens.push(named.outputTokens);
 
-      // Extract individual assertion scores
       const gradingResult = out.gradingResult ?? {};
       const components = gradingResult.componentResults ?? [];
+      let covScore = null;
+      let transScore = null;
       for (const c of components) {
         const assertion = c.assertion?.value ?? '';
         if (assertion.includes('coverage-correctness')) {
-          m.coverageScores.push(c.score ?? 0);
+          covScore = c.score ?? 0;
+          m.coverageScores.push(covScore);
         } else if (assertion.includes('translation-quality')) {
-          m.translationScores.push(c.score ?? 0);
+          transScore = c.score ?? 0;
+          m.translationScores.push(transScore);
         }
       }
+
+      m.perTest.push({
+        test: testDesc,
+        pass: out.pass,
+        coverage: covScore,
+        translation: transScore,
+        totalMs: named.totalMs ?? null,
+        inputTokens: named.inputTokens ?? null,
+        outputTokens: named.outputTokens ?? null,
+      });
     }
   }
 
@@ -84,7 +95,7 @@ function extractMetrics(evalData) {
 }
 
 function avg(arr) {
-  if (arr.length === 0) return 0;
+  if (arr.length === 0) return null;
   return arr.reduce((a, b) => a + b, 0) / arr.length;
 }
 
@@ -92,112 +103,168 @@ function sum(arr) {
   return arr.reduce((a, b) => a + b, 0);
 }
 
-function fmt(n, decimals = 0) {
-  return n.toFixed(decimals);
+function num(n, decimals = 0) {
+  if (n == null) return '-';
+  return Number(n).toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
 }
 
-function printComparison(providers, metrics) {
+function pct(n) {
+  if (n == null) return '-';
+  return (n * 100).toFixed(0) + '%';
+}
+
+function bestIdx(values, mode = 'max') {
+  let best = null;
+  let bestI = -1;
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] == null) continue;
+    if (best == null || (mode === 'max' ? values[i] > best : values[i] < best)) {
+      best = values[i];
+      bestI = i;
+    }
+  }
+  return bestI;
+}
+
+function printMarkdownTable(providers, metrics) {
   const cols = providers.map((p, i) => ({ label: p, m: metrics[i] }));
+  const n = cols.length;
 
-  const sep = '-'.repeat(80);
+  const md = (s) => console.log(s);
 
-  console.log('\n' + sep);
-  console.log('  EVAL COMPARISON');
-  console.log(sep);
+  // --- Summary table ---
+  md('');
+  md('## Model Comparison Summary');
+  md('');
 
-  // Header
-  const labelWidth = 22;
-  const colWidth = 18;
-  const header =
-    ''.padEnd(labelWidth) + cols.map((c) => c.label.padStart(colWidth)).join('');
-  console.log(header);
-  console.log(sep);
+  const hdr = ['Metric', ...cols.map((c) => c.label)];
+  md('| ' + hdr.join(' | ') + ' |');
+  md('| ' + hdr.map(() => '---').join(' | ') + ' |');
 
-  const row = (label, values) => {
-    const cells = values.map((v) => v.padStart(colWidth)).join('');
-    console.log(label.padEnd(labelWidth) + cells);
+  const summaryRow = (label, values, highlight = 'max') => {
+    const best = bestIdx(values, highlight);
+    const cells = values.map((v, i) => {
+      const s = typeof v === 'string' ? v : v;
+      return i === best ? `**${s}**` : s;
+    });
+    md('| ' + [label, ...cells].join(' | ') + ' |');
   };
 
-  // Quality
-  console.log('  QUALITY');
-  row(
-    '  Pass rate',
+  summaryRow(
+    'Pass rate',
     cols.map((c) => `${c.m.passed}/${c.m.tests}`),
+    'max',
   );
-  row(
-    '  Coverage avg',
-    cols.map((c) => fmt(avg(c.m.coverageScores), 2)),
+  summaryRow(
+    'Coverage (avg)',
+    cols.map((c) => pct(avg(c.m.coverageScores))),
+    'max',
   );
-  row(
-    '  Translation avg',
-    cols.map((c) => fmt(avg(c.m.translationScores), 2)),
+  summaryRow(
+    'Translation (avg)',
+    cols.map((c) => pct(avg(c.m.translationScores))),
+    'max',
   );
-
-  console.log('');
-  console.log('  LATENCY (ms)');
-  row(
-    '  Translate avg',
-    cols.map((c) => fmt(avg(c.m.translateMs))),
+  summaryRow(
+    'Latency (avg ms)',
+    cols.map((c) => num(avg(c.m.totalMs))),
+    'min',
   );
-  row(
-    '  Compare avg',
-    cols.map((c) => fmt(avg(c.m.compareMs))),
+  summaryRow(
+    'Translate (avg ms)',
+    cols.map((c) => num(avg(c.m.translateMs))),
+    'min',
   );
-  row(
-    '  Total avg',
-    cols.map((c) => fmt(avg(c.m.totalMs))),
+  summaryRow(
+    'Compare (avg ms)',
+    cols.map((c) => num(avg(c.m.compareMs))),
+    'min',
   );
-  row(
-    '  Total sum',
-    cols.map((c) => fmt(sum(c.m.totalMs))),
+  summaryRow(
+    'Input tokens (total)',
+    cols.map((c) => num(sum(c.m.inputTokens))),
+    'min',
   );
-
-  console.log('');
-  console.log('  TOKENS');
-  row(
-    '  Input total',
-    cols.map((c) => fmt(sum(c.m.inputTokens))),
-  );
-  row(
-    '  Output total',
-    cols.map((c) => fmt(sum(c.m.outputTokens))),
-  );
-  row(
-    '  Input avg/test',
-    cols.map((c) => fmt(avg(c.m.inputTokens))),
-  );
-  row(
-    '  Output avg/test',
-    cols.map((c) => fmt(avg(c.m.outputTokens))),
+  summaryRow(
+    'Output tokens (total)',
+    cols.map((c) => num(sum(c.m.outputTokens))),
+    'min',
   );
 
-  console.log(sep);
+  // --- Per-test breakdown ---
+  md('');
+  md('## Per-Test Breakdown');
+  md('');
 
-  // Winner summary
-  console.log('\n  WINNERS');
-  const best = (label, fn) => {
-    const values = cols.map((c, i) => ({ label: c.label, val: fn(c.m), i }));
-    const winner = values.reduce((a, b) => (a.val > b.val ? a : b));
-    console.log(`  ${label.padEnd(20)} ${winner.label} (${fmt(winner.val, 2)})`);
-  };
-  const lowest = (label, fn) => {
-    const values = cols.map((c) => ({ label: c.label, val: fn(c.m) }));
-    const filtered = values.filter((v) => v.val > 0);
-    if (filtered.length === 0) return;
-    const winner = filtered.reduce((a, b) => (a.val < b.val ? a : b));
-    console.log(`  ${label.padEnd(20)} ${winner.label} (${fmt(winner.val, 0)})`);
-  };
+  const testNames = cols[0].m.perTest.map((t) => t.test);
 
-  best('Quality (coverage)', (m) => avg(m.coverageScores));
-  best('Quality (translate)', (m) => avg(m.translationScores));
-  lowest('Fastest (avg ms)', (m) => avg(m.totalMs));
-  lowest('Cheapest (tokens)', (m) => sum(m.inputTokens) + sum(m.outputTokens));
+  for (const testName of testNames) {
+    md(`### ${testName}`);
+    md('');
+    const hdr2 = ['', ...cols.map((c) => c.label)];
+    md('| ' + hdr2.join(' | ') + ' |');
+    md('| ' + hdr2.map(() => '---').join(' | ') + ' |');
 
-  console.log('');
+    const testData = cols.map((c) => c.m.perTest.find((t) => t.test === testName));
+
+    const passValues = testData.map((t) => (t?.pass ? 'PASS' : 'FAIL'));
+    md('| Result | ' + passValues.map((v) => (v === 'PASS' ? '**PASS**' : 'FAIL')).join(' | ') + ' |');
+
+    const covValues = testData.map((t) => t?.coverage);
+    summaryRow('Coverage', covValues.map((v) => pct(v)), 'max');
+
+    const transValues = testData.map((t) => t?.translation);
+    summaryRow('Translation', transValues.map((v) => pct(v)), 'max');
+
+    const latValues = testData.map((t) => t?.totalMs);
+    summaryRow('Latency (ms)', latValues.map((v) => num(v)), 'min');
+
+    const tokValues = testData.map((t) =>
+      t?.inputTokens != null ? (t.inputTokens + (t.outputTokens ?? 0)) : null,
+    );
+    summaryRow('Tokens', tokValues.map((v) => num(v)), 'min');
+
+    md('');
+  }
+
+  // --- Winners ---
+  md('## Winners');
+  md('');
+
+  const categories = [
+    ['Best coverage', (m) => avg(m.coverageScores), 'max', pct],
+    ['Best translation', (m) => avg(m.translationScores), 'max', pct],
+    ['Fastest', (m) => avg(m.totalMs), 'min', (v) => num(v) + 'ms'],
+    ['Cheapest', (m) => sum(m.inputTokens) + sum(m.outputTokens), 'min', (v) => num(v) + ' tokens'],
+  ];
+
+  for (const [label, fn, mode, formatter] of categories) {
+    const values = cols.map((c) => fn(c.m));
+    const i = bestIdx(values, mode);
+    if (i >= 0) {
+      md(`- **${label}**: ${cols[i].label} (${formatter(values[i])})`);
+    }
+  }
+
+  md('');
 }
 
 // Main
 const filePath = process.argv[2] ?? null;
+const outPath = process.argv[3] ?? 'results/comparison.md';
 const evalData = await loadResults(filePath);
 const { providers, metrics } = extractMetrics(evalData);
-printComparison(providers, metrics);
+
+// Capture output to both stdout and file
+const lines = [];
+const origLog = console.log;
+console.log = (s) => { lines.push(s); origLog(s); };
+
+printMarkdownTable(providers, metrics);
+
+console.log = origLog;
+await writeFile(outPath, lines.join('\n') + '\n');
+console.log(`Written to ${outPath}`);
