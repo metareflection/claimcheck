@@ -1,45 +1,69 @@
 # Gotchas
 
-## Sentinel ensures mismatch (false positives)
+## Lemma sentinels have the ensures backwards
 
 **Status:** Open
 
-Sentinel proofs copy the `ensures` clause from the matched claim's original lemma, not from the requirement. This means a sentinel can verify successfully while proving something completely different from what the requirement asks.
+Predicate sentinels and lemma sentinels use different patterns, but only the predicate pattern is correct.
 
-### Example
+### Predicate sentinels: correct (general → specific)
 
-Requirement: "Granting a capability to a non-existent subject is a no-op"
-
-The match step suggests `StepPreservesInv` as a candidate. The sentinel builds:
+When a requirement matches an invariant conjunct, the sentinel derives the specific property from the general invariant:
 
 ```dafny
+// "The counter is always non-negative" matches Inv conjunct m >= 0
+lemma Sentinel_pred_Inv_0(m: D.Model)
+  requires D.Inv(m)       // general
+  ensures m >= 0           // specific — this IS the requirement
+{}
+```
+
+The `ensures` is the claim content, which directly expresses the requirement. Dafny checks `Inv(m) ⟹ m >= 0`. This is sound.
+
+### Lemma sentinels: backwards (just replays the lemma)
+
+When a requirement matches a lemma, the sentinel copies the lemma's own postcondition into `ensures` and calls the lemma in the body:
+
+```dafny
+// "Granting to a non-existent subject is a no-op" matches StepPreservesInv
 lemma Sentinel_StepPreservesInv(m: D.Model, a: D.Action)
   requires D.Inv(m)
-  ensures D.Inv(Normalize(Apply(m, a)))   // ← from the original lemma
+  ensures D.Inv(Normalize(Apply(m, a)))   // ← the lemma's ensures, NOT the requirement
 {
   D.StepPreservesInv(m, a);
 }
 ```
 
-Dafny accepts this — but it proved invariant preservation, not that the operation is a no-op (`Apply(m, a) == m`). The requirement wanted idempotence; the sentinel verified a completely unrelated property.
+This just re-proves the lemma. It says nothing about the requirement (which needs `Apply(m, Grant(s, c)) == m` when `s !in m.subjects`).
+
+### What it should do
+
+The same general → specific pattern as predicates. The `ensures` should express the **requirement**, and the matched lemma should be used in the **body** as a proof hint:
+
+```dafny
+lemma Sentinel_GrantToNonExistentIsNoOp(m: D.Model, s: Subject, c: Capability)
+  requires D.Inv(m)
+  requires s !in m.subjects
+  ensures D.Apply(m, D.Grant(s, c)) == m    // ← the requirement
+{
+  D.StepPreservesInv(m, D.Grant(s, c));     // ← lemma as proof hint
+}
+```
+
+Now Dafny checks whether StepPreservesInv actually helps prove the requirement — and if the match was wrong, the sentinel fails, which is the correct outcome.
 
 ### Where it shows up
 
-In the delegation-auth test, three distinct no-op requirements all "pass" via the same `StepPreservesInv` sentinel. In canon, "adding a node with an existing ID is a no-op" passes via `AddNodeImplPreservesInv`.
+- **delegation-auth:** Three no-op requirements all "proved" by the same `StepPreservesInv` sentinel (both Sonnet and Opus).
+- **kanban (Opus):** "Moving a card preserves total card count" proved via `StepPreservesInv`. "Adding a card to a full column is a no-op" proved via the WIP limit predicate.
+- **colorwheel (Opus):** Four of six requirements matched to `InitSatisfiesInv` — proving `Inv(Init())` instead of the actual properties in arbitrary states.
+- **canon (Opus):** Two requirements matched to `InitSatisfiesInv`.
 
-### Why it happens
+Opus is more aggressive at matching requirements to broad lemmas, making the problem worse — but the root cause is the sentinel construction, not the model.
 
-The pipeline has two sources of semantics:
-1. The **match step** (LLM) decides which claim is related to a requirement
-2. The **sentinel** (mechanical) copies the matched claim's ensures clause
+### Fix
 
-Neither step checks whether the claim's ensures clause actually *expresses* the requirement. The match step only checks NL similarity ("is this claim related?"), and the sentinel only checks Dafny validity ("does this lemma verify?"). The gap between "related" and "equivalent" is where false positives live.
-
-### Possible fixes
-
-- **Requirement-derived ensures:** Have the sentinel's ensures clause come from formalizing the requirement (LLM step), with the matched claim used only for the proof body. This turns the sentinel into a bridge: requirement semantics in the ensures, claim proof in the body.
-- **Two-phase sentinel:** First verify the sentinel (confirms the claim is valid), then verify that the claim's ensures implies the requirement's ensures. Second check catches semantic mismatches.
-- **Confidence gating:** Only use sentinels for predicate claims (where the ensures is an invariant conjunct and the semantic match is tight). Fall back to direct/LLM-guided for lemma claims where the ensures may not align.
+The lemma sentinel's `ensures` must come from formalizing the requirement (needs an LLM call), not from the matched lemma. The matched lemma moves to the proof body as a hint. This makes lemma sentinels no longer zero-LLM-cost, but they remain cheaper than the full direct/retry path because the proof body is mechanical.
 
 ## LLM sometimes omits required schema fields
 
