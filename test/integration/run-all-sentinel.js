@@ -34,12 +34,21 @@ const REQS_DIR = resolve(import.meta.dirname, 'reqs');
 const OUTPUT_DIR = resolve(import.meta.dirname, 'output');
 
 const args = process.argv.slice(2);
-const projectFilter = args.find(a => !a.startsWith('--'));
 const noVerify = args.includes('--no-verify');
 const jsonOutput = args.includes('--json');
 const verbose = args.includes('--verbose') || args.includes('-v');
 const modelIdx = args.findIndex(a => a === '--model');
 const model = modelIdx !== -1 ? args[modelIdx + 1] : undefined;
+
+// Positional project filter: skip flag values (--flag) and their arguments (--model X)
+const flagsWithValue = new Set(['--model']);
+let projectFilter;
+for (let i = 0; i < args.length; i++) {
+  if (flagsWithValue.has(args[i])) { i++; continue; }
+  if (args[i].startsWith('--')) continue;
+  projectFilter = args[i];
+  break;
+}
 
 async function fileExists(path) {
   try { await access(path); return true; } catch { return false; }
