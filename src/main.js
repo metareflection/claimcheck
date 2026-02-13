@@ -24,6 +24,7 @@ Options:
   --extract                   Run dafny2js --claims first (requires --dafny2js)
   --dafny2js <path>           Path to dafny2js project directory
   --json                      Output JSON instead of markdown
+  --model <id>                Model for all LLM steps (overrides per-step defaults)
   -v, --verbose               Verbose API logging
   -h, --help                  Show this help`);
 }
@@ -41,6 +42,7 @@ export async function main(argv) {
       retries:      { type: 'string', default: '3' },
       extract:      { type: 'boolean', default: false },
       'dafny2js':   { type: 'string' },
+      model:        { type: 'string' },
       json:         { type: 'boolean', default: false },
       verbose:      { type: 'boolean', short: 'v', default: false },
       help:         { type: 'boolean', short: 'h', default: false },
@@ -57,6 +59,7 @@ export async function main(argv) {
   const opts = {
     verbose: values.verbose,
     retries: parseInt(values.retries ?? '3', 10),
+    ...(values.model ? { model: values.model } : {}),
   };
 
   // --- Step 0: Resolve inputs ---

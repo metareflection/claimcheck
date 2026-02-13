@@ -16,6 +16,7 @@
  *   node test/integration/run-all-sentinel.js counter          # specific project
  *   node test/integration/run-all-sentinel.js --no-verify      # match only, skip dafny
  *   node test/integration/run-all-sentinel.js --json           # JSON output
+ *   node test/integration/run-all-sentinel.js --model claude-opus-4-6  # override model
  */
 
 import { readFile, access, mkdir, rename } from 'node:fs/promises';
@@ -37,6 +38,8 @@ const projectFilter = args.find(a => !a.startsWith('--'));
 const noVerify = args.includes('--no-verify');
 const jsonOutput = args.includes('--json');
 const verbose = args.includes('--verbose') || args.includes('-v');
+const modelIdx = args.findIndex(a => a === '--model');
+const model = modelIdx !== -1 ? args[modelIdx + 1] : undefined;
 
 async function fileExists(path) {
   try { await access(path); return true; } catch { return false; }
@@ -57,7 +60,7 @@ async function runProject(project) {
 
   const claims = JSON.parse(await readFile(claimsPath, 'utf-8'));
   const requirementsText = await readFile(reqsPath, 'utf-8');
-  const opts = { verbose, retries: 3 };
+  const opts = { verbose, retries: 3, ...(model ? { model } : {}) };
 
   // Flatten
   const items = flattenClaims(claims, project.module);
