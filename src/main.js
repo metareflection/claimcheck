@@ -19,6 +19,9 @@ Options:
   --json                      Output JSON instead of markdown
   --model <id>                Model for all LLM steps (default: claude-sonnet-4-5-20250929)
   --erase                     Erase lemma proof bodies before showing source to LLM
+  --no-roundtrip              Skip round-trip verification check
+  --informalize-model <id>    Model for informalization (default: claude-haiku-4-5-20251001)
+  --compare-model <id>        Model for round-trip comparison (default: claude-sonnet-4-5-20250929)
   -v, --verbose               Verbose API logging
   -h, --help                  Show this help`);
 }
@@ -50,11 +53,14 @@ export async function main(argv) {
       module:       { type: 'string' },
       domain:       { type: 'string', short: 'd' },
       output:       { type: 'string', short: 'o' },
-      model:        { type: 'string' },
-      erase:        { type: 'boolean', default: false },
-      json:         { type: 'boolean', default: false },
-      verbose:      { type: 'boolean', short: 'v', default: false },
-      help:         { type: 'boolean', short: 'h', default: false },
+      model:              { type: 'string' },
+      erase:              { type: 'boolean', default: false },
+      'no-roundtrip':     { type: 'boolean', default: false },
+      'informalize-model': { type: 'string' },
+      'compare-model':    { type: 'string' },
+      json:               { type: 'boolean', default: false },
+      verbose:            { type: 'boolean', short: 'v', default: false },
+      help:               { type: 'boolean', short: 'h', default: false },
     },
     allowPositionals: false,
     strict: false,
@@ -86,6 +92,9 @@ export async function main(argv) {
   const opts = {
     verbose: values.verbose,
     ...(values.model ? { model: values.model } : {}),
+    ...(values['no-roundtrip'] ? { skipRoundtrip: true } : {}),
+    ...(values['informalize-model'] ? { informalizeModel: values['informalize-model'] } : {}),
+    ...(values['compare-model'] ? { compareModel: values['compare-model'] } : {}),
   };
 
   // --- Read inputs ---

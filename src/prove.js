@@ -7,6 +7,7 @@ import {
   PROOF_RETRY_PROMPT,
 } from './prompts.js';
 import { verify, resolve } from './verify.js';
+import { roundtripCheck, roundtripReformalize } from './roundtrip.js';
 
 /**
  * Two-phase pipeline: separate formalization from proofs.
@@ -84,6 +85,103 @@ export async function proveAll(requirements, domainSource, erasedSource, domainD
     } else {
       resolved = passed;
     }
+  }
+
+  // Step 3.5: Round-trip check (informalize → compare → re-formalize on mismatch)
+  if (!opts.skipRoundtrip && resolved.length > 0) {
+    console.error(`\n[roundtrip] Running round-trip check on ${resolved.length} lemma(s)...`);
+
+    const rtResult = await roundtripCheck(resolved, requirements, domain, opts);
+    let rtPassed = rtResult.passed;
+    let rtFailed = rtResult.failed;
+
+    // One retry: re-formalize failed lemmas with discrepancy feedback
+    if (rtFailed.length > 0) {
+      console.error(`[roundtrip] Re-formalizing ${rtFailed.length} failed lemma(s)...`);
+
+      const reformalized = await roundtripReformalize(rtFailed, requirements, erasedSource, domain, opts);
+
+      // Re-resolve reformalized lemmas
+      const { passed: reResPassed, failed: reResFailed } =
+        await resolveIndividually(reformalized, domainDfyPath, domainModule, opts);
+
+      console.error(`[roundtrip] After re-formalize: ${reResPassed.length} resolved, ${reResFailed.length} failed resolve`);
+
+      // Re-run round-trip check on successfully resolved reformalized lemmas
+      if (reResPassed.length > 0) {
+        const rtResult2 = await roundtripCheck(reResPassed, requirements, domain, opts);
+        rtPassed = [...rtPassed, ...rtResult2.passed];
+
+        // Still failing round-trip → obligation
+        for (const f of rtResult2.failed) {
+          console.error(`[roundtrip] Req ${f.index} still fails round-trip — obligation`);
+          results[f.index] = {
+            requirement: requirements[f.index],
+            status: 'gap',
+            strategy: 'roundtrip-fail',
+            lemmaName: f.lemmaName,
+            dafnyCode: f.dafnyCode,
+            reasoning: f.reasoning,
+            error: `Round-trip mismatch: ${f.discrepancy}`,
+            discrepancy: f.discrepancy,
+            weakeningType: f.weakeningType,
+            attempts: 2,
+            strategiesTried: [
+              { strategy: 'formalize', success: true, code: rtFailed.find(rf => rf.index === f.index)?.dafnyCode },
+              { strategy: 'roundtrip-reformalize', success: false, code: f.dafnyCode },
+            ],
+          };
+        }
+      }
+
+      // Lemmas that failed re-resolution → obligation
+      for (const f of reResFailed) {
+        console.error(`[roundtrip] Req ${f.index} failed re-resolution — obligation`);
+        results[f.index] = {
+          requirement: requirements[f.index],
+          status: 'gap',
+          strategy: 'roundtrip-fail',
+          lemmaName: f.lemmaName,
+          dafnyCode: f.dafnyCode,
+          reasoning: f.reasoning,
+          error: `Round-trip re-formalization failed resolve: ${f.resolveError}`,
+          discrepancy: rtFailed.find(rf => rf.index === f.index)?.discrepancy,
+          weakeningType: rtFailed.find(rf => rf.index === f.index)?.weakeningType,
+          attempts: 2,
+          strategiesTried: [
+            { strategy: 'formalize', success: true, code: rtFailed.find(rf => rf.index === f.index)?.dafnyCode },
+            { strategy: 'roundtrip-reformalize', success: false, code: f.dafnyCode },
+          ],
+        };
+      }
+
+      // Lemmas that didn't even get reformalized (LLM missed them) → obligation
+      const reformalizedIndices = new Set(reformalized.map(r => r.index));
+      for (const f of rtFailed) {
+        if (!reformalizedIndices.has(f.index) && results[f.index] === null) {
+          console.error(`[roundtrip] Req ${f.index} not re-formalized — obligation`);
+          results[f.index] = {
+            requirement: requirements[f.index],
+            status: 'gap',
+            strategy: 'roundtrip-fail',
+            lemmaName: f.lemmaName,
+            dafnyCode: f.dafnyCode,
+            reasoning: f.reasoning,
+            error: `Round-trip mismatch: ${f.discrepancy}`,
+            discrepancy: f.discrepancy,
+            weakeningType: f.weakeningType,
+            attempts: 1,
+            strategiesTried: [
+              { strategy: 'formalize', success: true, code: f.dafnyCode },
+            ],
+          };
+        }
+      }
+    }
+
+    // Replace resolved with only round-trip-passed lemmas
+    resolved = rtPassed;
+    console.error(`[roundtrip] ${resolved.length} lemma(s) passed round-trip, proceeding to verify`);
   }
 
   // Step 4: Verify empty bodies (batch first, then individual on failure)

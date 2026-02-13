@@ -24,6 +24,8 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
   const direct = proved.filter((r) => r.strategy === 'direct').length;
   const proof = proved.filter((r) => r.strategy === 'proof').length;
   const proofRetry = proved.filter((r) => r.strategy === 'proof-retry').length;
+  const roundtripFail = realGaps.filter((r) => r.strategy === 'roundtrip-fail').length;
+  const otherGaps = realGaps.length - roundtripFail;
   const covered = proved.length + correctGaps.length;
 
   lines.push(`- **Requirements covered:** ${covered}/${proveResults.length}`);
@@ -34,7 +36,11 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
     if (proofRetry > 0) lines.push(`    - via proof retry: ${proofRetry}`);
   }
   if (correctGaps.length > 0) lines.push(`  - correct gaps (intentionally unprovable): ${correctGaps.length}`);
-  if (realGaps.length > 0) lines.push(`- **Obligations (could not be verified):** ${realGaps.length}`);
+  if (realGaps.length > 0) {
+    lines.push(`- **Obligations (could not be verified):** ${realGaps.length}`);
+    if (roundtripFail > 0) lines.push(`  - round-trip mismatch: ${roundtripFail}`);
+    if (otherGaps > 0) lines.push(`  - proof failure: ${otherGaps}`);
+  }
   lines.push('');
 
   // --- Proved requirements ---
@@ -82,6 +88,10 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
       if (r.strategiesTried) {
         const trail = r.strategiesTried.map((s) => `${s.strategy}${s.success ? '✓' : '✗'}`).join(' → ');
         lines.push(`- Strategies: ${trail}`);
+      }
+      if (r.strategy === 'roundtrip-fail') {
+        if (r.discrepancy) lines.push(`- Discrepancy: ${r.discrepancy}`);
+        if (r.weakeningType && r.weakeningType !== 'none') lines.push(`- Weakening: ${r.weakeningType}`);
       }
       if (r.reasoning) {
         lines.push(`- Reasoning: ${r.reasoning}`);
