@@ -16,6 +16,12 @@ const execFileAsync = promisify(execFile);
  * @returns {Promise<{ success: boolean, error: string|null, output: string }>}
  */
 export async function verify(dafnyCode, domainDfyPath, domainModule, opts = {}) {
+  // Reject unsound constructs before running Dafny
+  const unsound = checkUnsound(dafnyCode);
+  if (unsound) {
+    return { success: false, error: unsound, output: '' };
+  }
+
   const tmpDir = await mkdtemp(join(tmpdir(), 'claimcheck-'));
   const tmpFile = join(tmpDir, 'verify.dfy');
 
@@ -38,7 +44,6 @@ module VerifyRequirement {
   try {
     const { stdout, stderr } = await execFileAsync('dafny', [
       'verify',
-      '--allow-warnings',
       tmpFile,
     ], { timeout: 120_000 });
 
@@ -52,4 +57,18 @@ module VerifyRequirement {
   } finally {
     try { await unlink(tmpFile); } catch {}
   }
+}
+
+/**
+ * Check for unsound Dafny constructs that would make a proof vacuous.
+ * Returns an error message if found, null if clean.
+ */
+function checkUnsound(code) {
+  if (/^\s*assume\b/m.test(code)) {
+    return 'Rejected: lemma contains an assume statement';
+  }
+  if (/\{:axiom\}/.test(code)) {
+    return 'Rejected: lemma contains an {:axiom} attribute';
+  }
+  return null;
 }
