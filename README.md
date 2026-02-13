@@ -8,13 +8,13 @@ For each requirement, claimcheck formalizes a Dafny lemma and asks the theorem p
 
 ```
 for each requirement:
-    1. Formalize   LLM writes a Dafny lemma from the requirement + domain source
-    2. Verify      Dafny checks it
+    1. Formalize   LLM writes a Dafny lemma from the requirement + erased domain source
+    2. Verify      Dafny checks it (with soundness checks)
     3. If failed:  LLM retries once with the Dafny error
     4. If failed:  emit as obligation
 ```
 
-No claims extraction. No NL translation. No matching. The LLM reads the source directly.
+The LLM sees the domain source with lemma proof bodies erased and marked `{:axiom}` — all types, functions, predicates, and lemma signatures preserved, proof noise stripped. Generated lemmas are rejected if they contain `assume` or `{:axiom}` (soundness checks).
 
 ## Usage
 
