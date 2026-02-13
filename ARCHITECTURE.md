@@ -1,195 +1,191 @@
-# Architecture: Claimcheck
+# New Architecture: Claimcheck v2
 
-Claimcheck answers the question: **does a formally verified Dafny specification cover a set of informal user requirements?**
+Claimcheck answers: **does a formally verified Dafny specification cover a set of informal user requirements?**
 
-It does this by turning each requirement into a Dafny lemma and asking the theorem prover to verify it. The prover is the judge, not the LLM.
-
----
-
-## The Domain Model
-
-Claimcheck assumes the codebase follows the dafny-replay pattern:
-
-- A `datatype Model` representing application state
-- A predicate `Inv(m: Model)` — a conjunction of clauses characterizing all valid states
-- A function `Apply(m: Model, a: Action): Model` defining state transitions
-- A function `Normalize(m: Model): Model` clamping results back into valid range
-- A lemma `InitSatisfiesInv()` proving the initial state is valid
-- A lemma `StepPreservesInv(m, a)` proving every transition preserves the invariant
-
-The invariant is the central specification. It holds for initial states, is preserved by all transitions, and implies many facts about the representation. Any reachable state satisfies `Inv`.
+For each requirement, it formalizes a Dafny lemma and asks the theorem prover to verify it. Two attempts, then an obligation.
 
 ---
 
-## Two Kinds of Requirements
+## Input
 
-### Inv-consequence ("what's true of valid states")
+- **Requirements**: a list of informal statements (markdown, one per line or bullet)
+- **Domain source**: the `.dfy` file containing Model, Inv, Apply, Normalize, etc.
 
-Most requirements are properties of a single state:
-
-- "The counter is always non-negative"
-- "Column names are unique"
-- "All edge endpoints reference existing nodes"
-- "The card allocator is always fresh"
-
-These become lemmas of the form:
-
-```dafny
-lemma Req(m: D.Model)
-  requires D.Inv(m)
-  ensures P(m)
-{}
-```
-
-The invariant is rich. `P(m)` might be a direct conjunct of `Inv`, or it might be an arbitrary logical consequence — the prover handles both. Many of these verify with an empty body because Dafny unfolds the invariant definition automatically.
-
-### Anything else ("behavioral, transitional, relational")
-
-Some requirements are about what actions do, not just what's true of states:
-
-- "Decrementing at zero keeps the counter at zero"
-- "Granting a capability to a non-existent subject is a no-op"
-- "Every action preserves the invariant after normalization"
-- "Moving a card preserves the total number of cards"
-
-These become lemmas with richer signatures:
-
-```dafny
-lemma Req(m: D.Model, ...)
-  requires D.Inv(m)
-  requires <additional preconditions>
-  ensures <property involving Apply, Normalize, etc.>
-{
-  // may need proof body: lemma calls, asserts
-}
-```
-
-The invariant still provides the precondition, but the `ensures` involves function behavior, post-states, or relationships between states. These often need proof hints — calls to existing lemmas like `StepPreservesInv` or domain-specific helpers like `FlatColsUnique`.
+No claims extraction. No NL translation. No matching. The LLM reads the source directly.
 
 ---
 
 ## Pipeline
 
 ```
-Requirements (NL)          Dafny Domain
-       |                        |
-       |                   [ Extract ]  dafny2js --claims
-       |                        |
-       |                   [ Flatten ]  split predicates into conjuncts,
-       |                        |       lemmas into ensures clauses
-       |                        |
-       |                   [ Translate ] Dafny -> NL (Haiku, batched)
-       |                        |
-       +------------+-----------+
-                    |
-              [   Match   ]  NL similarity -> candidate hints (Sonnet)
-                    |
-                    |  { requirement, candidates[] }
-                    |
-              [   Prove   ]  for every requirement:
-                    |          1. collect hints from candidates
-                    |          2. LLM formalizes ensures from requirement
-                    |          3. Dafny verifies
-                    |          4. retry with error feedback if needed
-                    |
-              [ Obligations ] unproved requirements -> obligations.dfy
-                    |
-              [  Report   ]  markdown or JSON coverage report
+for each requirement:
+    1. Formalize   LLM writes a Dafny lemma from the requirement + domain source
+    2. Verify      Dafny checks it
+    3. If failed:  LLM retries once with the Dafny error
+    4. If failed:  emit as obligation
 ```
 
-### Step 1: Extract + Flatten
+That's it. Two LLM calls and two Dafny calls, max. Per requirement.
 
-`dafny2js --claims` extracts predicates, lemmas, functions, and axioms from the Dafny source. Flatten decomposes these into individual items:
+### Formalize
 
-- Predicate conjuncts: `Inv(m)` is split into its AND-ed clauses, each becoming a `pred:Module.Inv:N` item
-- Lemma ensures: each `ensures` clause becomes a `lemma:Module.Name:ensures:N` item
-- Function contracts: `requires` and `ensures` become separate items
+The LLM receives:
+- the full domain source code
+- the requirement text
 
-### Step 2: Translate
+It writes a lemma:
 
-Each formal item is translated to natural language by Haiku (batched, cheap). This enables NL matching against requirements.
+```dafny
+lemma Req_CounterNonNegative(m: D.Model)
+  requires D.Inv(m)
+  ensures m >= 0
+{}
+```
 
-### Step 3: Match
+The `ensures` expresses the requirement. The `requires` includes `Inv(m)` for state properties, plus any additional preconditions for behavioral properties. The body is empty if possible, or calls existing domain lemmas as proof steps.
 
-Sonnet compares translated claims against requirements and produces candidate hints — not verdicts. Each requirement gets a ranked list of claims that might be related, with confidence scores and explanations.
+### Verify
 
-The match step is deliberately permissive: it's better to suggest a wrong match (the prover will reject it) than to miss a correct one.
+The lemma is wrapped in a module that imports the domain:
 
-### Step 4: Prove
+```dafny
+include "path/to/Domain.dfy"
+module VerifyRequirement {
+  import opened D = DomainModule
+  <lemma>
+}
+```
 
-For each requirement, the prover:
+Dafny verifies it. Success → proved. Failure → one retry.
 
-1. **Collects hints** from matched candidates. Invariant conjuncts, proved lemmas, and function contracts are formatted as text descriptions for the LLM.
+### Retry
 
-2. **Formalizes** the requirement. The LLM writes a Dafny lemma where:
-   - The `ensures` expresses the requirement (not a hint's formal text)
-   - The `requires` includes `Inv(m)` for state properties
-   - The body is empty if possible, or uses hint lemmas as proof steps
+The LLM receives the failed lemma and the Dafny error. It fixes types, adds proof hints, or restructures. One chance.
 
-3. **Verifies** via Dafny. The lemma is wrapped in a module that imports the domain and compiled.
+### Obligation
 
-4. **Retries** on failure. The Dafny error is fed back to the LLM, which fixes types, adds proof hints, or restructures the lemma. Up to 3 retries.
+If both attempts fail, the requirement becomes an obligation — a commented Dafny lemma with the error and best attempt. Obligations are the interface to more powerful systems:
 
-The strategy trail is recorded: `direct` (first attempt works) -> `llm-guided` (first retry works) -> `retry` (subsequent retries).
+- A stronger model (Opus)
+- A dedicated proof agent with longer context
+- Manual human guidance
+- A sentinel library (per PROPOSAL.md) that provides reusable proof building blocks
 
-### Step 5: Obligations
-
-Requirements that fail all attempts become obligations — commented Dafny lemmas written to `obligations.dfy` with the last error and best attempt. These are starting points for manual proof, not dead ends.
-
-### Step 6: Report
-
-Markdown or JSON output showing:
-- Which requirements were formally verified (with strategy and code)
-- Which became obligations (with failure details)
-- Which proved claims don't match any requirement (unexpected)
+Obligations are starting points, not dead ends.
 
 ---
 
-## Hints, Not Sentinels
+## Output
 
-Matched claims are never used as the `ensures` clause. They are **context** for the LLM:
+For each requirement:
+- **proved**: the verified Dafny lemma + reasoning
+- **obligation**: the best attempt + Dafny error + what seems to be missing
 
-- **Invariant conjuncts** tell the LLM what `Inv(m)` contains, helping it write `P(m)` correctly
-- **Proved lemmas** can be called in the proof body (e.g., `D.StepPreservesInv(m, a)`)
-- **Function contracts** provide context about preconditions and postconditions
+The report shows:
+- Which requirements are formally verified (with the lemma code)
+- Which are obligations (with the failure details)
 
-This avoids a class of false positives where a matched claim is confirmed (trivially true as an invariant conjunct or tautologically re-proved as a lemma) without actually proving the requirement.
-
-The `ensures` always comes from formalizing the requirement. Dafny checks whether it actually follows.
-
----
-
-## What's Not Here Yet
-
-Per PROPOSAL.md, the full vision includes:
-
-**Classification.** The system should decide whether a requirement is Inv-consequence or Anything and route accordingly. Currently all requirements go through the same formalization path.
-
-**Richer hint retrieval.** Beyond NL-matched candidates, the system should retrieve helper lemmas by symbol overlap, goal head-shape, and arity matching. Currently hints come only from the match step.
-
-**Sentinel library.** A curated layer of reusable `Inv(m) ==> DerivedFact(m)` lemmas that requirement proofs call instead of unfolding internals. Currently the domain's own helper lemmas serve this role informally.
-
-**Productive gap reports.** When a proof fails, the system should propose what helper theorem is missing — growing the sentinel layer. Currently gaps just report the Dafny error.
-
-**Autoformalization + informalization loop.** Bidirectional alignment between informal requirement text and formal lemma statements, supporting review by non-experts and traceability.
+No "unexpected proofs" section — that requires knowing what the spec contains independently, which is a separate analysis.
 
 ---
 
-## Module Map
+## What This Eliminates
 
+From the current pipeline:
+
+| Removed | Why |
+|---------|-----|
+| dafny2js --claims | LLM reads source directly |
+| flatten.js | No claims to flatten |
+| translate.js | No claims to translate |
+| match.js | No NL matching needed |
+| sentinel.js | No hint construction needed |
+| extract.js | No extraction step |
+
+What remains:
+
+| Kept | Purpose |
+|------|---------|
+| main.js | CLI + orchestration (simplified) |
+| prove.js | formalize → verify → retry → obligation |
+| verify.js | wrap lemma in module, run Dafny |
+| obligations.js | generate obligations.dfy |
+| report.js | markdown/JSON output (simplified) |
+| prompts.js | formalize + retry prompts (simplified) |
+| schemas.js | formalize tool schema |
+| api.js | Anthropic API wrapper |
+
+---
+
+## The Formalize Prompt
+
+The prompt gives the LLM everything it needs:
+
+1. The full domain source code (Inv definition, Apply, Normalize, all helper lemmas)
+2. The requirement text
+3. Instructions: write `ensures` from the requirement, try empty body first, call existing lemmas if needed
+
+The domain source IS the context. The LLM can see every invariant conjunct, every helper lemma, every function contract. No need to extract and reformat this information.
+
+---
+
+## Two Kinds of Requirements (Still Relevant)
+
+The classification from PROPOSAL.md still applies, but the LLM handles it implicitly:
+
+**Inv-consequence** ("the counter is always non-negative"):
+```dafny
+lemma Req(m: D.Model)
+  requires D.Inv(m)
+  ensures m >= 0
+{}  // empty body — Dafny unfolds Inv
 ```
-src/
-  main.js        CLI entry + pipeline orchestration
-  extract.js     run dafny2js --claims
-  flatten.js     claims JSON -> individual items (conjuncts, ensures, contracts)
-  translate.js   formal items -> NL (Haiku, batched)
-  match.js       NL similarity -> candidate hints (Sonnet)
-  sentinel.js    build hint text from matched claims
-  prove.js       formalize + verify + retry loop
-  verify.js      write temp Dafny module, run dafny verify
-  obligations.js generate obligations.dfy for gaps
-  report.js      markdown/JSON output
-  prompts.js     all LLM prompt templates
-  schemas.js     tool-use schemas for structured LLM responses
-  api.js         Anthropic API wrapper + token tracking
+
+**Anything** ("decrementing at zero is a no-op"):
+```dafny
+lemma Req(m: D.Model)
+  requires D.Inv(m)
+  requires m == 0
+  ensures D.Normalize(D.Apply(m, D.Dec)) == 0
+{}  // empty body — Dafny unfolds Apply + Normalize
 ```
+
+**Anything with proof** ("every action preserves the invariant"):
+```dafny
+lemma Req(m: D.Model, a: D.Action)
+  requires D.Inv(m)
+  ensures D.Inv(D.Normalize(D.Apply(m, a)))
+{
+  D.StepPreservesInv(m, a);  // calls existing lemma
+}
+```
+
+The LLM figures out which shape to use from the requirement text and the source code.
+
+---
+
+## Growth Path
+
+This minimal pipeline is the foundation. Future additions layer on top:
+
+**Obligation solver**: A more powerful agent (Opus, longer context, multi-turn) that takes obligations and tries harder — exploring the domain source, trying multiple proof strategies, proposing new helper lemmas.
+
+**Coverage analysis**: A separate pass that extracts claims and identifies what the spec proves beyond the stated requirements ("unexpected proofs"). Useful but orthogonal to requirement verification.
+
+**Batch mode**: Prove all requirements in parallel. Each is independent.
+
+---
+
+## Implementation Effort
+
+This is a simplification of the existing codebase, not a rewrite:
+
+- `main.js`: remove extract/flatten/translate/match steps, parse requirements directly
+- `prove.js`: remove hint collection, simplify to formalize → verify → retry → obligation
+- `prompts.js`: keep FORMALIZE_PROMPT and RETRY_PROMPT, remove TRANSLATE/MATCH/COMPARE prompts
+- `report.js`: remove sentinel/match-related output
+- `verify.js`: unchanged
+- `obligations.js`: unchanged
+- `schemas.js`: keep FORMALIZE_TOOL, remove others
+- `api.js`: unchanged
+- Delete: `flatten.js`, `translate.js`, `match.js`, `sentinel.js`, `extract.js`, `compare.js`
