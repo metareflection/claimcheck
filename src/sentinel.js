@@ -1,6 +1,9 @@
 /**
  * Sentinel proof construction — build Dafny lemmas that formally confirm
- * NL-matched claims by calling existing lemmas or testing invariant implication.
+ * NL-matched claims by testing invariant implication (predicate/function claims).
+ *
+ * Lemma claims are NOT handled as sentinels — they are passed as proof hints
+ * to the formalize step instead. See buildLemmaHintText().
  */
 
 const BUILTIN_TYPES = new Set([
@@ -27,9 +30,9 @@ export function extractLemmaSignatures(source) {
 /**
  * Build sentinel Dafny code for a matched claim.
  *
- * - Lemma claims: re-prove the ensures by calling the matched lemma
  * - Predicate claims: test that Inv(m) implies the conjunct (empty body)
  * - Function contract claims: assert the contract holds (empty body)
+ * - Lemma claims: returns null (handled via hint-guided formalization)
  *
  * @param {object} candidate - { claimId, confidence, explanation }
  * @param {object} claim - full flattened claim item
@@ -40,7 +43,7 @@ export function buildSentinelCode(candidate, claim, signatures) {
   const { claimId } = candidate;
 
   if (claimId.startsWith('lemma:')) {
-    return buildLemmaSentinel(claimId, claim, signatures);
+    return null;
   }
 
   if (claimId.startsWith('pred:')) {
@@ -54,33 +57,29 @@ export function buildSentinelCode(candidate, claim, signatures) {
   return null;
 }
 
-// ── Lemma sentinel: call the matched lemma as proof ─────────────────────
-
-function buildLemmaSentinel(claimId, claim, signatures) {
-  const parsed = parseLemmaName(claimId);
+/**
+ * Build a text description of a matched lemma for use as a proof hint
+ * in the formalize prompt. No Dafny code generation — just context for the LLM.
+ *
+ * @param {object} candidate - { claimId, confidence, explanation }
+ * @param {object} claim - full flattened claim item
+ * @param {Map<string,{ params: string }>} signatures - from extractLemmaSignatures
+ * @returns {{ lemmaName: string, hint: string } | null}
+ */
+export function buildLemmaHintText(candidate, claim, signatures) {
+  const parsed = parseLemmaName(candidate.claimId);
   if (!parsed) return null;
 
   const sig = signatures.get(parsed.lemmaName);
   if (!sig) return null;
 
   const dParams = requalifyParams(sig.params);
-  const argList = extractArgNames(sig.params);
+  const ensures = claim.formalText;
 
-  const requires = (claim.context.requires ?? [])
-    .map((r) => `  requires D.${r}`)
-    .join('\n');
-
-  const ensures = `  ensures D.${claim.formalText}`;
-  const name = `Sentinel_${parsed.lemmaName}`;
-
-  const reqSection = requires ? `\n${requires}` : '';
-  const code = `lemma ${name}${dParams}${reqSection}
-${ensures}
-{
-  D.${parsed.lemmaName}(${argList});
-}`;
-
-  return { name, code };
+  return {
+    lemmaName: parsed.lemmaName,
+    hint: `\`${parsed.lemmaName}${dParams}\` ensures \`D.${ensures}\``,
+  };
 }
 
 // ── Predicate sentinel: test that Inv implies the conjunct ──────────────

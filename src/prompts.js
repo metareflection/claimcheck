@@ -99,11 +99,34 @@ Call the record_matches tool with your analysis.`;
 
 /**
  * Build the prompt for formalizing a requirement as a Dafny lemma.
+ *
+ * @param {string} domain - domain display name
+ * @param {string} requirement - the requirement text
+ * @param {string} domainSource - full Dafny source code
+ * @param {object[]} claimsIndex - flattened claim items
+ * @param {object[]} [lemmaHints] - matched lemma hints from buildLemmaHintText
  */
-export function FORMALIZE_PROMPT(domain, requirement, domainSource, claimsIndex) {
+export function FORMALIZE_PROMPT(domain, requirement, domainSource, claimsIndex, lemmaHints) {
   const claimsSummary = claimsIndex
     .map((item) => `- [${item.kind}] ${item.formalText} (${item.context.module})`)
     .join('\n');
+
+  let hintsSection = '';
+  if (lemmaHints && lemmaHints.length > 0) {
+    const hintsList = lemmaHints.map((h) => `- ${h.hint}`).join('\n');
+    hintsSection = `
+
+## Matched Lemma Hints
+
+The following proved lemmas may help prove this requirement. Consider calling them in the proof body:
+
+${hintsList}
+`;
+  }
+
+  const hintGuideline = lemmaHints && lemmaHints.length > 0
+    ? '\n- If a matched lemma hint is provided, try calling it in the body. But the `ensures` must express the REQUIREMENT, not the hint lemma\'s postcondition.'
+    : '';
 
   return `You are writing a Dafny verification lemma to formally express a user requirement for the "${domain}" domain.
 
@@ -116,7 +139,7 @@ ${domainSource}
 ## Existing Claims (for reference)
 
 ${claimsSummary}
-
+${hintsSection}
 ## Requirement to Formalize
 
 "${requirement}"
@@ -131,7 +154,7 @@ Guidelines:
 - Try an empty body \`{}\` first — many properties follow directly from definitions
 - If a proof hint is needed, keep it minimal (one or two assert statements)
 - Do NOT use \`assume\` — the point is to verify, not assume
-- Use descriptive parameter names
+- Use descriptive parameter names${hintGuideline}
 
 Call the record_formalization tool with your lemma.`;
 }

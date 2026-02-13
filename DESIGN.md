@@ -41,22 +41,7 @@ Requirements (NL)          Dafny Domain
 
 ## Sentinel Proofs
 
-A sentinel proof is a Dafny lemma constructed mechanically from a matched claim. No LLM is needed for the proof body — just a Dafny verification call.
-
-### Lemma claims — call the matched lemma
-
-If requirement "every action preserves the invariant" matches `StepPreservesInv`:
-
-```dafny
-lemma Sentinel_StepPreservesInv(m: D.Model, a: D.Action)
-  requires D.Inv(m)
-  ensures D.Inv(D.Normalize(D.Apply(m, a)))
-{
-  D.StepPreservesInv(m, a);  // just call it
-}
-```
-
-The `ensures` and `requires` come from the claims JSON. The parameter types come from regex-extracting the lemma signature from the Dafny source. The proof body is mechanical.
+A sentinel proof is a Dafny lemma constructed mechanically from a matched claim. No LLM is needed for the proof body — just a Dafny verification call. Sentinels are only used for **predicate** and **function** claims.
 
 ### Predicate claims — test implication
 
@@ -80,16 +65,32 @@ lemma Sentinel_Apply_requires_0(m: D.Model)
 {}
 ```
 
+### Lemma claims — hint-guided formalization
+
+Lemma matches (e.g. `StepPreservesInv`) are NOT handled as sentinels. A naive sentinel that copies the lemma's postcondition into `ensures` and calls the lemma in the body just re-proves the lemma — it doesn't check whether the lemma actually implies the requirement. This causes false positives.
+
+Instead, matched lemmas are passed as **proof hints** to the formalize step. The LLM writes the `ensures` from the requirement (correct semantics) and may use the matched lemma in the proof body (proof guidance). Dafny then checks whether the lemma actually helps prove the requirement.
+
+```
+Requirement: "every action preserves the invariant"
+Hint: StepPreservesInv(m: D.Model, a: D.Action) ensures D.Inv(D.Normalize(D.Apply(m, a)))
+
+→ LLM writes ensures from the requirement, calls hint lemma in body
+→ Dafny verifies the ensures actually follows
+```
+
 ## Strategy Escalation
 
 For each requirement, strategies are tried cheapest-first:
 
 | Strategy | LLM calls | Dafny calls | When it works |
 |----------|-----------|-------------|---------------|
-| Sentinel | 0 | 1 per candidate | Match step found a correct candidate |
-| Direct | 1 (formalize) | 1 | Property follows from definitions |
+| Sentinel | 0 | 1 per candidate | Predicate/fn match found a correct candidate |
+| Direct | 1 (formalize) | 1 | Property follows from definitions (may include lemma hints) |
 | LLM-guided | 1 (formalize) | 1 | Needs proof hints |
 | Retry | 1 per retry | 1 per retry | First attempt had wrong types/hints |
+
+Matched lemma candidates that don't produce sentinels are collected as hints and passed to the formalize step. The LLM can use them in the proof body while writing the `ensures` from the requirement.
 
 Stops on first success. The result records which strategy succeeded and what was tried.
 

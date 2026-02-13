@@ -2,7 +2,7 @@ import { callWithTool } from './api.js';
 import { FORMALIZE_TOOL } from './schemas.js';
 import { FORMALIZE_PROMPT, RETRY_PROMPT } from './prompts.js';
 import { verify } from './verify.js';
-import { extractLemmaSignatures, buildSentinelCode } from './sentinel.js';
+import { extractLemmaSignatures, buildSentinelCode, buildLemmaHintText } from './sentinel.js';
 
 /**
  * For every requirement, attempt formal verification via strategy escalation:
@@ -46,13 +46,26 @@ async function proveRequirement(
   const { requirement, candidates } = entry;
   const strategiesTried = [];
 
-  // ── Strategy 1: Sentinel proofs (one per candidate, highest confidence first) ──
+  // ── Strategy 1: Sentinel proofs (pred/fn candidates) + collect lemma hints ──
+
+  const lemmaHints = [];
 
   for (const candidate of (candidates ?? [])) {
     const claim = claimsById.get(candidate.claimId);
     if (!claim) continue;
 
     const sentinel = buildSentinelCode(candidate, claim, signatures);
+
+    // Lemma candidates become hints for the formalize step
+    if (!sentinel && candidate.claimId.startsWith('lemma:')) {
+      const hint = buildLemmaHintText(candidate, claim, signatures);
+      if (hint) {
+        console.error(`[prove] Lemma hint for "${requirement}": ${hint.lemmaName}`);
+        lemmaHints.push(hint);
+      }
+      continue;
+    }
+
     if (!sentinel) continue;
 
     console.error(`[prove] Sentinel for "${requirement}" via ${candidate.claimId}`);
@@ -83,8 +96,9 @@ async function proveRequirement(
 
   // ── Strategy 2: Direct proof (LLM writes ensures, empty body) ──
 
-  console.error(`[prove] Direct proof for "${requirement}"`);
-  let attempt = await formalize(requirement, domainSource, allClaims, domain, opts);
+  const hints = lemmaHints.length > 0 ? lemmaHints : undefined;
+  console.error(`[prove] Direct proof for "${requirement}"${hints ? ` (with ${hints.length} lemma hint(s))` : ''}`);
+  let attempt = await formalize(requirement, domainSource, allClaims, domain, hints, opts);
   let result = await verify(attempt.dafnyCode, domainDfyPath, domainModule, opts);
 
   strategiesTried.push({
@@ -153,9 +167,9 @@ async function proveRequirement(
   };
 }
 
-async function formalize(requirement, domainSource, claimsIndex, domain, opts) {
+async function formalize(requirement, domainSource, claimsIndex, domain, lemmaHints, opts) {
   const model = opts.model ?? 'claude-sonnet-4-5-20250929';
-  const prompt = FORMALIZE_PROMPT(domain, requirement, domainSource, claimsIndex);
+  const prompt = FORMALIZE_PROMPT(domain, requirement, domainSource, claimsIndex, lemmaHints);
 
   const response = await callWithTool({
     model,
