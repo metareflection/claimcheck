@@ -40,12 +40,16 @@ export function generateObligations(gapResults, domainDfyPath, domainModule, out
       lines.push(`  //   ${shortError}`);
     }
     lines.push(`  //`);
-    lines.push(`  // Best attempt:`);
-    for (const codeLine of gap.dafnyCode.split('\n')) {
-      lines.push(`  // ${codeLine}`);
+    if (gap.dafnyCode) {
+      lines.push(`  // Best attempt:`);
+      for (const codeLine of gap.dafnyCode.split('\n')) {
+        lines.push(`  // ${codeLine}`);
+      }
+      lines.push(``);
+      lines.push(`  ${gap.dafnyCode}`);
+    } else {
+      lines.push(`  // No lemma was produced for this requirement`);
     }
-    lines.push(``);
-    lines.push(`  ${gap.dafnyCode}`);
     lines.push(``);
   }
 
