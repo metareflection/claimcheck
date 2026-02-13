@@ -1,0 +1,7 @@
+[
+  { "requirement": "All constraint targets reference existing nodes", "lemmaName": "ConstraintTargetsExist" },
+  { "requirement": "All edge endpoints reference existing nodes", "lemmaName": "EdgeEndpointsExist" },
+  { "requirement": "Adding a node with an existing ID is a no-op", "lemmaName": "AddExistingNodeIsNoop" },
+  { "requirement": "Removing a node cleans up related constraints and edges", "lemmaName": "RemoveNodeCleansUp" },
+  { "requirement": "The constraint ID allocator is always fresh", "lemmaName": "ConstraintIdAlwaysFresh" }
+]

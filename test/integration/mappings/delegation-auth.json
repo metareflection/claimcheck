@@ -1,0 +1,8 @@
+[
+  { "requirement": "All granted capabilities reference existing subjects", "lemmaName": "GrantSubjectsExist" },
+  { "requirement": "Delegation endpoints (from, to) must be existing subjects", "lemmaName": "DelegationEndpointsExist" },
+  { "requirement": "Edge IDs are always less than the next allocator (freshness)", "lemmaName": "EdgeIdsFresh" },
+  { "requirement": "Granting a capability to a non-existent subject is a no-op", "lemmaName": "GrantNonExistentIsNoop" },
+  { "requirement": "Delegating between non-existent subjects is a no-op", "lemmaName": "DelegateNonExistentIsNoop" },
+  { "requirement": "Revoking a non-existent delegation is a no-op", "lemmaName": "RevokeNonExistentIsNoop" }
+]

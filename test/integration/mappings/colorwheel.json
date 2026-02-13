@@ -1,0 +1,8 @@
+[
+  { "requirement": "The base hue is always in valid range", "lemmaName": "BaseHueInRange" },
+  { "requirement": "There are always exactly 5 colors in the palette", "lemmaName": "AlwaysFiveColors" },
+  { "requirement": "Every color has valid saturation and lightness values", "lemmaName": "AllColorsValid" },
+  { "requirement": "Contrast pair indices are valid (between 0 and 4)", "lemmaName": "ContrastPairIndicesValid" },
+  { "requirement": "When a mood is set (not Custom), all colors satisfy the mood constraints", "lemmaName": "MoodConstraintsSatisfied" },
+  { "requirement": "Hues follow the selected harmony pattern", "lemmaName": "HuesFollowHarmony" }
+]

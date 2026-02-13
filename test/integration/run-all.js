@@ -16,6 +16,7 @@ import { PROJECTS, DAFNY_REPLAY } from './projects.js';
 
 const REQS_DIR = resolve(import.meta.dirname, 'reqs');
 const MAPPINGS_DIR = resolve(import.meta.dirname, 'mappings');
+const CLAIMS_DIR = resolve(import.meta.dirname, 'claims');
 const OUTPUT_DIR = resolve(import.meta.dirname, 'output');
 
 const args = process.argv.slice(2);
@@ -45,7 +46,7 @@ async function run() {
   for (const project of projects) {
     const reqsPath = join(REQS_DIR, `${project.name}.md`);
     const mappingPath = join(MAPPINGS_DIR, `${project.name}.json`);
-    const dfyPath = join(DAFNY_REPLAY, project.entry);
+    const claimsPath = join(CLAIMS_DIR, `${project.name}.dfy`);
 
     if (!await fileExists(reqsPath)) {
       console.error(`\n=== ${project.name} [skip] no requirements file ===`);
@@ -55,8 +56,8 @@ async function run() {
       console.error(`\n=== ${project.name} [skip] no mapping file ===`);
       continue;
     }
-    if (!await fileExists(dfyPath)) {
-      console.error(`\n=== ${project.name} [skip] no .dfy file at ${dfyPath} ===`);
+    if (!await fileExists(claimsPath)) {
+      console.error(`\n=== ${project.name} [skip] no claims file ===`);
       continue;
     }
 
@@ -67,7 +68,7 @@ async function run() {
     await main([
       '-r', reqsPath,
       '-m', mappingPath,
-      '--dfy', dfyPath,
+      '--dfy', claimsPath,
       '--module', project.module,
       '-d', project.name,
       '-o', OUTPUT_DIR,

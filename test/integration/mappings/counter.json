@@ -1,0 +1,6 @@
+[
+  { "requirement": "The counter value is always non-negative", "lemmaName": "CounterNonNegative" },
+  { "requirement": "The initial state satisfies the invariant", "lemmaName": "InitSatisfiesInvariant" },
+  { "requirement": "Every action preserves the invariant after normalization", "lemmaName": "StepPreservesInvariant" },
+  { "requirement": "Decrementing at zero keeps the counter at zero", "lemmaName": "DecAtZeroKeepsZero" }
+]
