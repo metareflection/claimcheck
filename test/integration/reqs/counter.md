@@ -4,4 +4,4 @@
 2. The initial state satisfies the invariant
 3. Every action preserves the invariant after normalization
 4. Decrementing at zero keeps the counter at zero
-5. The counter never exceeds 100
+5. The counter never exceeds 100 [gap]

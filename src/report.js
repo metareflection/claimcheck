@@ -14,6 +14,8 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
 
   const proved = proveResults.filter((r) => r.status === 'proved');
   const gaps = proveResults.filter((r) => r.status === 'gap');
+  const correctGaps = gaps.filter((r) => r.correctGap);
+  const realGaps = gaps.filter((r) => !r.correctGap);
 
   // --- Summary ---
 
@@ -22,12 +24,17 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
   const direct = proved.filter((r) => r.strategy === 'direct').length;
   const proof = proved.filter((r) => r.strategy === 'proof').length;
   const proofRetry = proved.filter((r) => r.strategy === 'proof-retry').length;
+  const covered = proved.length + correctGaps.length;
 
-  lines.push(`- **Requirements formally verified:** ${proved.length}/${proveResults.length}`);
-  if (direct > 0) lines.push(`  - via empty body (direct): ${direct}`);
-  if (proof > 0) lines.push(`  - via proof: ${proof}`);
-  if (proofRetry > 0) lines.push(`  - via proof retry: ${proofRetry}`);
-  lines.push(`- **Obligations (could not be verified):** ${gaps.length}`);
+  lines.push(`- **Requirements covered:** ${covered}/${proveResults.length}`);
+  if (proved.length > 0) {
+    lines.push(`  - formally verified: ${proved.length}`);
+    if (direct > 0) lines.push(`    - via empty body (direct): ${direct}`);
+    if (proof > 0) lines.push(`    - via proof: ${proof}`);
+    if (proofRetry > 0) lines.push(`    - via proof retry: ${proofRetry}`);
+  }
+  if (correctGaps.length > 0) lines.push(`  - correct gaps (intentionally unprovable): ${correctGaps.length}`);
+  if (realGaps.length > 0) lines.push(`- **Obligations (could not be verified):** ${realGaps.length}`);
   lines.push('');
 
   // --- Proved requirements ---
@@ -48,14 +55,28 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
     }
   }
 
+  // --- Correct Gaps ---
+
+  if (correctGaps.length > 0) {
+    lines.push(`## Correct Gaps\n`);
+    lines.push(`These requirements are intentionally unprovable — the domain does not guarantee them.\n`);
+    for (const r of correctGaps) {
+      lines.push(`**${r.requirement}**`);
+      if (r.reasoning) {
+        lines.push(`- Reasoning: ${r.reasoning}`);
+      }
+      lines.push('');
+    }
+  }
+
   // --- Obligations ---
 
-  if (gaps.length > 0) {
+  if (realGaps.length > 0) {
     lines.push(`## Obligations\n`);
     if (obligationsPath) {
       lines.push(`These requirements could not be automatically verified. See \`${obligationsPath}\` for the obligation lemmas.\n`);
     }
-    for (const r of gaps) {
+    for (const r of realGaps) {
       lines.push(`**${r.requirement}**`);
       lines.push(`- Failed after ${r.attempts} attempt(s)`);
       if (r.strategiesTried) {

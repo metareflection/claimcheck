@@ -26,12 +26,19 @@ Options:
 /**
  * Parse requirements from markdown text.
  * Extracts numbered items (1. ...), bullets (- ..., * ...), or plain non-empty lines.
+ * A trailing [gap] annotation marks a requirement as a correct gap (intentionally unprovable).
+ *
+ * @returns {{ text: string, gap: boolean }[]}
  */
 function parseRequirements(text) {
   return text
     .split('\n')
     .map((line) => line.replace(/^[\s]*(?:\d+\.|[-*])\s*/, '').trim())
-    .filter((line) => line.length > 0 && !line.startsWith('#'));
+    .filter((line) => line.length > 0 && !line.startsWith('#'))
+    .map((line) => {
+      const gap = /\s*\[gap\]\s*$/i.test(line);
+      return { text: line.replace(/\s*\[gap\]\s*$/i, '').trim(), gap };
+    });
 }
 
 export async function main(argv) {
@@ -84,7 +91,9 @@ export async function main(argv) {
   // --- Read inputs ---
 
   const requirementsText = await readFile(resolve(values.requirements), 'utf-8');
-  const requirements = parseRequirements(requirementsText);
+  const parsed = parseRequirements(requirementsText);
+  const requirements = parsed.map((r) => r.text);
+  const gapFlags = parsed.map((r) => r.gap);
   const domainDfyPath = resolve(values.dfy);
   const domainSourceRaw = await readFile(domainDfyPath, 'utf-8');
   const erasedSource = eraseLemmaBodies(domainSourceRaw);
@@ -94,8 +103,8 @@ export async function main(argv) {
   const outputDir = resolve(values.output ?? '.');
 
   console.error(`[claimcheck] ${requirements.length} requirement(s)`);
-  for (const r of requirements) {
-    console.error(`  - ${r}`);
+  for (let i = 0; i < requirements.length; i++) {
+    console.error(`  - ${requirements[i]}${gapFlags[i] ? ' [gap]' : ''}`);
   }
 
   // --- Prove ---
@@ -105,15 +114,22 @@ export async function main(argv) {
     requirements, domainSource, erasedSource, domainDfyPath, domainModule, domain, opts,
   );
 
+  // Stamp correctGap annotation on results
+  for (let i = 0; i < proveResults.length; i++) {
+    if (gapFlags[i]) proveResults[i].correctGap = true;
+  }
+
   const proved = proveResults.filter((r) => r.status === 'proved');
   const gaps = proveResults.filter((r) => r.status === 'gap');
-  console.error(`[claimcheck] Proved: ${proved.length}, Obligations: ${gaps.length}`);
+  const correctGaps = gaps.filter((r) => r.correctGap);
+  const realGaps = gaps.filter((r) => !r.correctGap);
+  console.error(`[claimcheck] Proved: ${proved.length}, Correct gaps: ${correctGaps.length}, Obligations: ${realGaps.length}`);
 
   // --- Generate obligations ---
 
   let obligationsPath = null;
-  if (gaps.length > 0) {
-    const content = generateObligations(gaps, domainDfyPath, domainModule, outputDir);
+  if (realGaps.length > 0) {
+    const content = generateObligations(realGaps, domainDfyPath, domainModule, outputDir);
     if (content) {
       obligationsPath = await writeObligations(content, outputDir);
       console.error(`[claimcheck] Wrote ${obligationsPath}`);
