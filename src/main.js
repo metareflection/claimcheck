@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import { proveAll } from './prove.js';
 import { generateObligations, writeObligations } from './obligations.js';
 import { renderReport, renderJson } from './report.js';
+import { eraseLemmaBodies } from './erase.js';
 
 function printUsage() {
   console.error(`Usage: claimcheck [options]
@@ -83,7 +84,8 @@ export async function main(argv) {
   const requirementsText = await readFile(resolve(values.requirements), 'utf-8');
   const requirements = parseRequirements(requirementsText);
   const domainDfyPath = resolve(values.dfy);
-  const domainSource = await readFile(domainDfyPath, 'utf-8');
+  const domainSourceRaw = await readFile(domainDfyPath, 'utf-8');
+  const domainSource = eraseLemmaBodies(domainSourceRaw);
   const domainModule = values.module;
   const domain = values.domain ?? domainModule;
   const outputDir = resolve(values.output ?? '.');
