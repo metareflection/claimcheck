@@ -18,6 +18,7 @@ Options:
   -o, --output <dir>          Output directory (default: current dir)
   --json                      Output JSON instead of markdown
   --model <id>                Model for all LLM steps (default: claude-sonnet-4-5-20250929)
+  --erase                     Erase lemma proof bodies before showing source to LLM
   -v, --verbose               Verbose API logging
   -h, --help                  Show this help`);
 }
@@ -43,6 +44,7 @@ export async function main(argv) {
       domain:       { type: 'string', short: 'd' },
       output:       { type: 'string', short: 'o' },
       model:        { type: 'string' },
+      erase:        { type: 'boolean', default: false },
       json:         { type: 'boolean', default: false },
       verbose:      { type: 'boolean', short: 'v', default: false },
       help:         { type: 'boolean', short: 'h', default: false },
@@ -85,7 +87,7 @@ export async function main(argv) {
   const requirements = parseRequirements(requirementsText);
   const domainDfyPath = resolve(values.dfy);
   const domainSourceRaw = await readFile(domainDfyPath, 'utf-8');
-  const domainSource = eraseLemmaBodies(domainSourceRaw);
+  const domainSource = values.erase ? eraseLemmaBodies(domainSourceRaw) : domainSourceRaw;
   const domainModule = values.module;
   const domain = values.domain ?? domainModule;
   const outputDir = resolve(values.output ?? '.');
