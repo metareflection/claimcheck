@@ -110,8 +110,10 @@ export async function main(argv) {
 
   console.error(`[claimcheck] Matching claims to requirements...`);
   const matchResult = await matchClaims(translated, requirementsText, domain, opts);
+  matchResult.matches ??= [];
+  matchResult.unexpected ??= [];
 
-  const withCandidates = matchResult.matches.filter((m) => m.candidates.length > 0).length;
+  const withCandidates = matchResult.matches.filter((m) => (m.candidates?.length ?? 0) > 0).length;
   console.error(`[claimcheck] ${matchResult.matches.length} requirements (${withCandidates} with candidates), ${matchResult.unexpected.length} unexpected claims`);
 
   // --- Step 4: Prove ALL requirements (if --dfy provided) ---

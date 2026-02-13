@@ -75,7 +75,9 @@ async function runProject(project) {
   // Match (candidate hints, not verdicts)
   console.error(`  matching...`);
   const matchResult = await matchClaims(translated, requirementsText, project.name, opts);
-  const withCandidates = matchResult.matches.filter(m => m.candidates.length > 0).length;
+  matchResult.matches ??= [];
+  matchResult.unexpected ??= [];
+  const withCandidates = matchResult.matches.filter(m => (m.candidates?.length ?? 0) > 0).length;
   console.error(`  ${matchResult.matches.length} requirements (${withCandidates} with candidates), ${matchResult.unexpected.length} unexpected`);
 
   // Prove all requirements via strategy escalation
