@@ -45,7 +45,7 @@ module VerifyRequirement {
     const { stdout, stderr } = await execFileAsync('dafny', [
       'verify',
       tmpFile,
-    ], { timeout: 120_000 });
+    ], { timeout: 10_000 });
 
     const output = stdout + stderr;
     const success = output.includes('0 errors');
@@ -98,7 +98,7 @@ module VerifyRequirement {
     const { stdout, stderr } = await execFileAsync('dafny', [
       'resolve',
       tmpFile,
-    ], { timeout: 60_000 });
+    ], { timeout: 10_000 });
 
     const output = stdout + stderr;
     // dafny resolve exits 0 on success ("did not attempt verification")
