@@ -22,7 +22,7 @@ Someone else (Claude Code, a human, any agent) writes the lemmas and claims "req
    ]
    ```
 
-3. **Domain source** — the `.dfy` file containing Model, Inv, Apply, lemmas, etc.
+3. **Claims source** — a `.dfy` file containing the requirement-level lemmas. Typically a separate file that `include`s the domain and defines `Inv(m) ==> X` style lemmas in its own module. The domain file itself usually only has structural lemmas (`InitSatisfiesInv`, `StepPreservesInv`); the claims file adds lemmas that connect the invariant to specific requirements.
 
 ---
 
@@ -127,3 +127,33 @@ When `--verify` is used, lemmas are rejected before Dafny verification if they c
 | prompts.js | LLM prompts (informalize, compare) |
 | schemas.js | tool schemas for structured LLM output |
 | api.js | Anthropic API wrapper |
+
+---
+
+## Open Issues
+
+### Inherited contracts from module refinement
+
+Domain lemmas like `StepPreservesInv` often inherit `requires Inv(m)` from an abstract module (e.g. the Replay kernel) via Dafny module refinement. The source text doesn't show the inherited precondition. When claimcheck extracts the lemma, the informalizer sees no `requires` clause and reads it as "holds for any model" rather than "preserves the invariant" — a correct reading of the literal text, but wrong about the actual contract.
+
+**Workaround**: the claims file should state the complete contract explicitly, including inherited preconditions. The claims file is an assertion by the author about what the lemma means, not a copy of the source.
+
+**Proper fix**: resolve the full contract by parsing the abstract module's specs, or by asking Dafny to emit resolved signatures. Neither is implemented.
+
+### Informalizer lacks domain context
+
+The informalize step (haiku) sees only the lemma code, not the domain source. When `Model` is a type alias (e.g. `type Model = int` in the counter domain), the informalizer doesn't know this. A lemma `ensures m >= 0` gets back-translated as "the model is non-negative" rather than "the counter value is non-negative," causing a false-positive dispute.
+
+**Possible fix**: pass type definitions (datatypes, type aliases, predicates) to the informalize prompt as read-only context. This gives the LLM enough to understand what `Model`, `Inv`, etc. mean without seeing the original requirements (which must stay hidden for the round-trip to work). Tradeoff: more tokens, risk of leaking intent through naming.
+
+### No coverage gap detection
+
+Claimcheck only audits mappings that exist. If a requirement has no mapping entry, it's silently ignored. There's no report of "these requirements have no lemma covering them."
+
+**Fix**: compare the mapping's requirement list against the full requirements file and report unmapped requirements.
+
+### `--verify` with claims files
+
+When `--dfy` points at a claims file (not the domain file), `verify.js` wraps the extracted lemma in a new module that `include`s the claims file and `import`s the domain module. This double-wrapping (claims module imports domain, verify module also imports domain) may cause Dafny resolution issues depending on module structure.
+
+**Status**: not tested end-to-end. The `--verify` flag is opt-in.
