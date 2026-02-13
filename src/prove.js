@@ -36,8 +36,36 @@ export async function proveAll(requirements, domainSource, erasedSource, domainD
   // Step 1: LLM produces all signatures at once
   let lemmas = await batchFormalize(requirements, erasedSource, domain, opts);
 
-  // Step 2: Index lemmas by requirement
-  const indexed = indexLemmas(lemmas, requirements);
+  // Step 2: Index lemmas by requirement (and retry any the LLM missed)
+  let { indexed, missing } = indexLemmas(lemmas, requirements);
+
+  if (missing.length > 0) {
+    console.error(`[phase1] LLM missed ${missing.length} requirement(s), retrying...`);
+    const missingReqs = missing.map((i) => requirements[i]);
+    const retryLemmas = await batchFormalize(missingReqs, erasedSource, domain, opts);
+
+    // Remap indices: the retry call used a subset, so requirementIndex 0 in the
+    // response corresponds to missing[0] in the original requirements array
+    for (const lemma of retryLemmas) {
+      const retryIdx = lemma.requirementIndex;
+      if (retryIdx >= 0 && retryIdx < missing.length) {
+        const originalIdx = missing[retryIdx];
+        indexed.push({
+          index: originalIdx,
+          lemmaName: lemma.lemmaName,
+          dafnyCode: lemma.dafnyCode,
+          reasoning: lemma.reasoning,
+        });
+      }
+    }
+
+    const stillMissing = missing.filter((i) => !indexed.find((l) => l.index === i));
+    if (stillMissing.length > 0) {
+      console.error(`[phase1] Still missing after retry: ${stillMissing.join(', ')}`);
+    } else {
+      console.error(`[phase1] All missing requirements covered on retry`);
+    }
+  }
 
   // Step 3: Batch resolve (typecheck all signatures together)
   const allCode = indexed.map((l) => l.dafnyCode).join('\n\n');
@@ -362,14 +390,16 @@ function indexLemmas(lemmas, requirements) {
     }
   }
 
-  // Fill gaps — if LLM missed a requirement, note it
+  // Detect gaps — which requirements did the LLM miss?
+  const missing = [];
   for (let i = 0; i < requirements.length; i++) {
     if (!indexed.find((l) => l.index === i)) {
       console.error(`[phase1] Warning: no lemma for requirement ${i}`);
+      missing.push(i);
     }
   }
 
-  return indexed;
+  return { indexed, missing };
 }
 
 async function resolveIndividually(lemmas, domainDfyPath, domainModule, opts) {
