@@ -1,4 +1,4 @@
-# Design: Sentinel Proof Pipeline
+# Design: Claim Check Pipeline
 
 ## Problem
 
@@ -8,7 +8,9 @@ The naive approach — translate Dafny to natural language, then ask an LLM "do 
 
 ## Key Insight
 
-If the NL match says "requirement R is equivalent to lemma L", we should be able to write a **sentinel proof** — a trivial Dafny lemma whose body just calls L. If Dafny accepts it, the match is mathematically confirmed. The theorem prover becomes the judge, not the LLM.
+The theorem prover should be the judge, not the LLM. For every requirement, we formalize it as a Dafny lemma (`requires Inv(m); ensures P(m)`) and ask Dafny to verify it. If Dafny accepts, the requirement is formally covered.
+
+The invariant `Inv(m)` is the central specification — it characterizes all valid states. Any state property follows from the invariant, and Dafny can check arbitrary consequences. Matched claims (invariant conjuncts, proved lemmas, function contracts) serve as **hints** to guide the LLM in writing the proof, but never as the `ensures` clause itself.
 
 ## Architecture
 
@@ -31,7 +33,7 @@ Requirements (NL)          Dafny Domain
                     │ { matches[], unexpected[] }
               ┌─────┴─────┐
               │ Prove ALL │ for every requirement:
-              │           │   sentinel → direct → LLM → retry
+              │           │   direct → LLM-guided → retry
               └─────┬─────┘
                     │ results[] with status + strategy
               ┌─────┴──────┐
@@ -39,45 +41,69 @@ Requirements (NL)          Dafny Domain
               └────────────┘
 ```
 
-## Sentinel Proofs
+## Invariant as Specification
 
-A sentinel proof is a Dafny lemma constructed mechanically from a matched claim. No LLM is needed for the proof body — just a Dafny verification call. Sentinels are only used for **predicate** and **function** claims.
+The domain invariant `Inv(m)` is a conjunction of clauses that characterizes all valid states. It can answer two kinds of questions:
 
-### Predicate claims — test implication
-
-If requirement "counter is non-negative" matches invariant conjunct `m >= 0`:
+**State properties** ("what's true of valid states"): Any property P that follows from the invariant — whether it's a direct conjunct or an arbitrary logical consequence — can be checked with:
 
 ```dafny
-lemma Sentinel_Inv_0(m: D.Model)
+lemma PropertyHolds(m: D.Model)
   requires D.Inv(m)
-  ensures m >= 0
-{}  // Dafny expands Inv(m) and sees m >= 0
+  ensures P(m)
+{}  // Dafny unfolds Inv(m) and checks P(m)
 ```
 
-This tests `Inv(m) ⟹ m >= 0` — a direct implication check. Empty body, Dafny resolves it by expanding the predicate definition.
+Many requirements are state properties. The invariant conjuncts (surfaced by dafny2js) give the LLM context about what the invariant contains, helping it write `P(m)` correctly.
 
-### Function contracts — assert the contract
+**Behavioral properties** ("what a specific action does"): Properties like "decrementing at zero is a no-op" require reasoning about `Apply`. The invariant provides the precondition (`requires Inv(m)`), but the `ensures` involves function behavior:
 
 ```dafny
-lemma Sentinel_Apply_requires_0(m: D.Model)
+lemma DecrementAtZeroIsNoOp(m: D.Model)
   requires D.Inv(m)
-  ensures D.Inv(m)
-{}
+  requires m == 0
+  ensures D.Normalize(D.Apply(m, D.Dec)) == 0
+{}  // Dafny unfolds Apply and Normalize
 ```
 
-### Lemma claims — hint-guided formalization
+**Preservation** ("invariant survives transitions"): Proved by lemmas like `StepPreservesInv`. These lemmas are passed as hints — the LLM can call them in the proof body.
 
-Lemma matches (e.g. `StepPreservesInv`) are NOT handled as sentinels. A naive sentinel that copies the lemma's postcondition into `ensures` and calls the lemma in the body just re-proves the lemma — it doesn't check whether the lemma actually implies the requirement. This causes false positives.
+## Hint-Guided Formalization
 
-Instead, matched lemmas are passed as **proof hints** to the formalize step. The LLM writes the `ensures` from the requirement (correct semantics) and may use the matched lemma in the proof body (proof guidance). Dafny then checks whether the lemma actually helps prove the requirement.
+All matched claims become **hints** for the formalize step:
+
+- **Invariant conjuncts**: Tell the LLM what the invariant contains (e.g., `m >= 0` is a conjunct)
+- **Proved lemmas**: Can be called in the proof body (e.g., `D.StepPreservesInv(m, a)`)
+- **Function contracts**: Provide context about preconditions and postconditions
+
+The LLM always writes the `ensures` from the requirement. Dafny verifies that it actually follows.
+
+```
+Requirement: "the counter is always non-negative"
+Hint: Invariant conjunct: `m >= 0`
+
+→ LLM writes: requires D.Inv(m); ensures m >= 0
+→ Dafny verifies: ✓ (m >= 0 is a conjunct of Inv)
+```
 
 ```
 Requirement: "every action preserves the invariant"
-Hint: StepPreservesInv(m: D.Model, a: D.Action) ensures D.Inv(D.Normalize(D.Apply(m, a)))
+Hint: Proved lemma: `StepPreservesInv(m: D.Model, a: D.Action)` ensures `D.Inv(D.Normalize(D.Apply(m, a)))`
 
-→ LLM writes ensures from the requirement, calls hint lemma in body
-→ Dafny verifies the ensures actually follows
+→ LLM writes: requires D.Inv(m); ensures D.Inv(D.Normalize(D.Apply(m, a)))
+→ LLM calls D.StepPreservesInv(m, a) in body
+→ Dafny verifies: ✓
 ```
+
+```
+Requirement: "granting to a non-existent subject is a no-op"
+Hint: Invariant conjunct: `forall sc in m.grants :: sc.0 in m.subjects`
+
+→ LLM writes: requires D.Inv(m); requires subj !in m.subjects; ensures D.Apply(m, D.Grant(subj, cap)) == m
+→ Dafny verifies by unfolding Apply: ✓ or ✗
+```
+
+The third example shows why hints must not be the `ensures`: the conjunct ("grants reference existing subjects") is a state property, but the requirement ("granting is a no-op") is behavioral. The `ensures` must come from the requirement.
 
 ## Strategy Escalation
 
@@ -85,12 +111,11 @@ For each requirement, strategies are tried cheapest-first:
 
 | Strategy | LLM calls | Dafny calls | When it works |
 |----------|-----------|-------------|---------------|
-| Sentinel | 0 | 1 per candidate | Predicate/fn match found a correct candidate |
-| Direct | 1 (formalize) | 1 | Property follows from definitions (may include lemma hints) |
-| LLM-guided | 1 (formalize) | 1 | Needs proof hints |
+| Direct | 1 (formalize) | 1 | Property follows from definitions |
+| LLM-guided | 1 (retry) | 1 | Needs proof body or different approach |
 | Retry | 1 per retry | 1 per retry | First attempt had wrong types/hints |
 
-Matched lemma candidates that don't produce sentinels are collected as hints and passed to the formalize step. The LLM can use them in the proof body while writing the `ensures` from the requirement.
+Matched claims are collected as hints and passed to the formalize step. The LLM uses them for context and proof guidance.
 
 Stops on first success. The result records which strategy succeeded and what was tried.
 
@@ -122,8 +147,8 @@ src/
 ├── flatten.js     dafny2js JSON → individual claim items
 ├── translate.js   formal claims → natural language (Haiku, batched)
 ├── match.js       NL similarity → candidate hints (Sonnet)
-├── sentinel.js    construct sentinel proofs from matched claims
-├── prove.js       strategy escalation: sentinel → direct → LLM → retry
+├── sentinel.js    build hint text from matched claims for formalize prompt
+├── prove.js       strategy escalation: direct → LLM-guided → retry
 ├── verify.js      run Dafny on generated lemmas
 ├── obligations.js generate obligations.dfy for gaps
 ├── report.js      markdown/JSON output + legacy coverage adapter

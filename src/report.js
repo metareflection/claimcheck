@@ -21,12 +21,10 @@ export function renderReport(matchResult, domain, proveResults = null, obligatio
   lines.push(`## Summary\n`);
 
   if (proveResults) {
-    const sentinels = proved.filter((r) => r.strategy === 'sentinel').length;
     const direct = proved.filter((r) => r.strategy === 'direct').length;
     const llm = proved.filter((r) => r.strategy === 'llm-guided' || r.strategy === 'retry').length;
 
     lines.push(`- **Requirements formally verified:** ${proved.length}/${proveResults.length}`);
-    if (sentinels > 0) lines.push(`  - via sentinel proof: ${sentinels}`);
     if (direct > 0) lines.push(`  - via direct proof: ${direct}`);
     if (llm > 0) lines.push(`  - via LLM-guided proof: ${llm}`);
     lines.push(`- **Obligations (could not be verified):** ${gaps.length}`);

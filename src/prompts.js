@@ -104,29 +104,25 @@ Call the record_matches tool with your analysis.`;
  * @param {string} requirement - the requirement text
  * @param {string} domainSource - full Dafny source code
  * @param {object[]} claimsIndex - flattened claim items
- * @param {object[]} [lemmaHints] - matched lemma hints from buildLemmaHintText
+ * @param {object[]} [hints] - matched claim hints from buildHintText
  */
-export function FORMALIZE_PROMPT(domain, requirement, domainSource, claimsIndex, lemmaHints) {
+export function FORMALIZE_PROMPT(domain, requirement, domainSource, claimsIndex, hints) {
   const claimsSummary = claimsIndex
     .map((item) => `- [${item.kind}] ${item.formalText} (${item.context.module})`)
     .join('\n');
 
   let hintsSection = '';
-  if (lemmaHints && lemmaHints.length > 0) {
-    const hintsList = lemmaHints.map((h) => `- ${h.hint}`).join('\n');
+  if (hints && hints.length > 0) {
+    const hintsList = hints.map((h) => `- ${h.hint}`).join('\n');
     hintsSection = `
 
-## Matched Lemma Hints
+## Matched Claim Hints
 
-The following proved lemmas may help prove this requirement. Consider calling them in the proof body:
+The NL-matching step identified these existing claims as potentially related to this requirement. Use them as context — they may help you write the proof, but they are NOT the requirement itself.
 
 ${hintsList}
 `;
   }
-
-  const hintGuideline = lemmaHints && lemmaHints.length > 0
-    ? '\n- If a matched lemma hint is provided, try calling it in the body. But the `ensures` must express the REQUIREMENT, not the hint lemma\'s postcondition.'
-    : '';
 
   return `You are writing a Dafny verification lemma to formally express a user requirement for the "${domain}" domain.
 
@@ -149,12 +145,14 @@ ${hintsSection}
 Write a Dafny lemma that expresses this requirement. The lemma will be placed in a module that imports the domain module as \`D\`, so reference types and functions as \`D.Model\`, \`D.Inv\`, \`D.Init\`, \`D.Apply\`, \`D.Normalize\`, \`D.Action\`, etc.
 
 Guidelines:
+- The \`ensures\` clause must express the REQUIREMENT — what the user asked for — not a matched hint's formal text
 - The lemma should have \`requires D.Inv(m)\` if it's about properties of valid states
-- The \`ensures\` clause should express the requirement precisely
-- Try an empty body \`{}\` first — many properties follow directly from definitions
-- If a proof hint is needed, keep it minimal (one or two assert statements)
+- Try an empty body \`{}\` first — many properties follow directly from the invariant definition
+- If a matched lemma hint is provided, consider calling it in the body as a proof step
+- If a matched invariant conjunct is provided, note that \`Inv(m)\` implies it — but the \`ensures\` should still express the requirement, which may be broader or different
+- If a proof hint is needed, keep it minimal (one or two assert statements or lemma calls)
 - Do NOT use \`assume\` — the point is to verify, not assume
-- Use descriptive parameter names${hintGuideline}
+- Use descriptive parameter names
 
 Call the record_formalization tool with your lemma.`;
 }

@@ -141,8 +141,9 @@ export async function main(argv) {
 
     const proved = proveResults.filter((r) => r.status === 'proved');
     const gaps = proveResults.filter((r) => r.status === 'gap');
-    const sentinels = proved.filter((r) => r.strategy === 'sentinel').length;
-    console.error(`[claimcheck] Proved: ${proved.length} (${sentinels} via sentinel), Gaps: ${gaps.length}`);
+    const directCount = proved.filter((r) => r.strategy === 'direct').length;
+    const llmCount = proved.filter((r) => r.strategy === 'llm-guided' || r.strategy === 'retry').length;
+    console.error(`[claimcheck] Proved: ${proved.length} (${directCount} direct, ${llmCount} llm-guided), Gaps: ${gaps.length}`);
   } else {
     console.error(`\n[claimcheck] Use --dfy to enable formal verification of all requirements.`);
   }

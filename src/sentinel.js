@@ -1,9 +1,11 @@
 /**
- * Sentinel proof construction — build Dafny lemmas that formally confirm
- * NL-matched claims by testing invariant implication (predicate/function claims).
+ * Claim hints — build text descriptions of matched claims for the formalize prompt.
  *
- * Lemma claims are NOT handled as sentinels — they are passed as proof hints
- * to the formalize step instead. See buildLemmaHintText().
+ * All matched claims (predicate conjuncts, lemma postconditions, function contracts)
+ * are passed as hints to the LLM. The LLM writes `ensures P(m)` from the requirement
+ * and uses the hints for context. Dafny checks whether P(m) actually follows.
+ *
+ * No Dafny code is generated here — just context for the LLM.
  */
 
 const BUILTIN_TYPES = new Set([
@@ -28,84 +30,65 @@ export function extractLemmaSignatures(source) {
 }
 
 /**
- * Build sentinel Dafny code for a matched claim.
- *
- * - Predicate claims: test that Inv(m) implies the conjunct (empty body)
- * - Function contract claims: assert the contract holds (empty body)
- * - Lemma claims: returns null (handled via hint-guided formalization)
+ * Build a text hint from a matched claim for use in the formalize prompt.
  *
  * @param {object} candidate - { claimId, confidence, explanation }
  * @param {object} claim - full flattened claim item
  * @param {Map<string,{ params: string }>} signatures - from extractLemmaSignatures
- * @returns {{ name: string, code: string } | null}
+ * @returns {{ kind: string, hint: string } | null}
  */
-export function buildSentinelCode(candidate, claim, signatures) {
+export function buildHintText(candidate, claim, signatures) {
   const { claimId } = candidate;
 
   if (claimId.startsWith('lemma:')) {
-    return null;
+    return buildLemmaHint(claimId, claim, signatures);
   }
 
   if (claimId.startsWith('pred:')) {
-    return buildPredicateSentinel(claimId, claim);
+    return buildPredicateHint(claimId, claim);
   }
 
   if (claimId.startsWith('fn:')) {
-    return buildFunctionSentinel(claimId, claim);
+    return buildFunctionHint(claimId, claim);
   }
 
   return null;
 }
 
-/**
- * Build a text description of a matched lemma for use as a proof hint
- * in the formalize prompt. No Dafny code generation — just context for the LLM.
- *
- * @param {object} candidate - { claimId, confidence, explanation }
- * @param {object} claim - full flattened claim item
- * @param {Map<string,{ params: string }>} signatures - from extractLemmaSignatures
- * @returns {{ lemmaName: string, hint: string } | null}
- */
-export function buildLemmaHintText(candidate, claim, signatures) {
-  const parsed = parseLemmaName(candidate.claimId);
+// ── Predicate hint: invariant conjunct ──────────────────────────────────
+
+function buildPredicateHint(claimId, claim) {
+  return {
+    kind: 'invariant conjunct',
+    hint: `Invariant conjunct: \`${claim.formalText}\``,
+  };
+}
+
+// ── Function contract hint ──────────────────────────────────────────────
+
+function buildFunctionHint(claimId, claim) {
+  const fnName = claimId.replace(/^fn:/, '').replace(/:(requires|ensures):\d+$/, '');
+  return {
+    kind: 'function contract',
+    hint: `Function contract (\`${fnName}\`): \`${claim.formalText}\``,
+  };
+}
+
+// ── Lemma hint: signature + ensures ─────────────────────────────────────
+
+function buildLemmaHint(claimId, claim, signatures) {
+  const parsed = parseLemmaName(claimId);
   if (!parsed) return null;
 
   const sig = signatures.get(parsed.lemmaName);
   if (!sig) return null;
 
   const dParams = requalifyParams(sig.params);
-  const ensures = claim.formalText;
 
   return {
-    lemmaName: parsed.lemmaName,
-    hint: `\`${parsed.lemmaName}${dParams}\` ensures \`D.${ensures}\``,
+    kind: 'proved lemma',
+    hint: `Proved lemma: \`${parsed.lemmaName}${dParams}\` ensures \`D.${claim.formalText}\``,
   };
-}
-
-// ── Predicate sentinel: test that Inv implies the conjunct ──────────────
-
-function buildPredicateSentinel(claimId, claim) {
-  const name = sanitizeName(`Sentinel_${claimId}`);
-
-  const code = `lemma ${name}(m: D.Model)
-  requires D.Inv(m)
-  ensures ${claim.formalText}
-{}`;
-
-  return { name, code };
-}
-
-// ── Function contract sentinel: assert the contract holds ───────────────
-
-function buildFunctionSentinel(claimId, claim) {
-  const name = sanitizeName(`Sentinel_${claimId}`);
-
-  const code = `lemma ${name}(m: D.Model)
-  requires D.Inv(m)
-  ensures ${claim.formalText}
-{}`;
-
-  return { name, code };
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────
@@ -124,16 +107,4 @@ function requalifyParams(paramStr) {
     if (BUILTIN_TYPES.has(typeName)) return full;
     return `: D.${typeName}`;
   });
-}
-
-function extractArgNames(paramStr) {
-  // "(m: Model, a: Action)" → "m, a"
-  const inner = paramStr.slice(1, -1);
-  if (!inner.trim()) return '';
-  return inner.split(',').map((p) => p.split(':')[0].trim()).join(', ');
-}
-
-function sanitizeName(s) {
-  // Turn claim IDs like "pred:Mod.Inv:0" into valid Dafny identifiers
-  return s.replace(/[:.]/g, '_');
 }

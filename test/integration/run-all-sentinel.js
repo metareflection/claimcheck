@@ -111,8 +111,9 @@ async function runProject(project) {
 
     const proved = proveResults.filter(r => r.status === 'proved');
     const gaps = proveResults.filter(r => r.status === 'gap');
-    const sentinels = proved.filter(r => r.strategy === 'sentinel').length;
-    console.error(`  proved=${proved.length} (${sentinels} sentinel), gaps=${gaps.length}`);
+    const direct = proved.filter(r => r.strategy === 'direct').length;
+    const llmGuided = proved.filter(r => r.strategy === 'llm-guided' || r.strategy === 'retry').length;
+    console.error(`  proved=${proved.length} (${direct} direct, ${llmGuided} llm-guided), gaps=${gaps.length}`);
   }
 
   // Generate obligations
