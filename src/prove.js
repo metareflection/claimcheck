@@ -211,6 +211,23 @@ export async function proveAll(requirements, domainSource, erasedSource, domainD
     };
   }
 
+  // Fill any requirements the LLM missed entirely
+  for (let i = 0; i < requirements.length; i++) {
+    if (results[i] === null) {
+      console.error(`[prove] Requirement ${i} was never processed — obligation`);
+      results[i] = {
+        requirement: requirements[i],
+        status: 'gap',
+        lemmaName: null,
+        dafnyCode: null,
+        reasoning: 'Requirement was not covered by batch formalization',
+        error: 'No lemma produced for this requirement',
+        attempts: 0,
+        strategiesTried: [],
+      };
+    }
+  }
+
   return results;
 }
 

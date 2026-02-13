@@ -101,9 +101,9 @@ module VerifyRequirement {
     ], { timeout: 60_000 });
 
     const output = stdout + stderr;
-    const success = output.includes('0 errors');
-
-    return { success, error: success ? null : output, output };
+    // dafny resolve exits 0 on success ("did not attempt verification")
+    // and non-zero on failure (caught below)
+    return { success: true, error: null, output };
   } catch (err) {
     const output = (err.stdout ?? '') + (err.stderr ?? '');
     return { success: false, error: output || err.message, output };
