@@ -29,6 +29,10 @@ export function generateObligations(gapResults, domainDfyPath, domainModule, out
   for (const gap of gapResults) {
     lines.push(`  // Requirement: "${gap.requirement}"`);
     lines.push(`  // Status: unproven after ${gap.attempts} attempt(s)`);
+    if (gap.strategiesTried) {
+      const trail = gap.strategiesTried.map((s) => `${s.strategy}${s.success ? '✓' : '✗'}`).join(' → ');
+      lines.push(`  // Strategies: ${trail}`);
+    }
     lines.push(`  // Reasoning: ${gap.reasoning}`);
     if (gap.error) {
       const shortError = gap.error.split('\n').slice(0, 3).join('\n  //   ');

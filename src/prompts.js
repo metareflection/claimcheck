@@ -62,6 +62,42 @@ Call the record_coverage tool with your analysis.`;
 }
 
 /**
+ * Build the prompt for the match step — candidate hints, not verdicts.
+ */
+export function MATCH_PROMPT(domain, translatedItems, requirementsText) {
+  const claimsSection = translatedItems
+    .map((item) => `- [${item.id}] "${item.naturalLanguage}" (formal: \`${item.formalText}\`)`)
+    .join('\n');
+
+  return `You are identifying potential matches between formal verification claims and user requirements for the "${domain}" domain.
+
+## Proved Claims (translated to natural language)
+These properties have been FORMALLY PROVED in Dafny:
+
+${claimsSection}
+
+## User Requirements
+These are the properties the user EXPECTS to be proved:
+
+${requirementsText}
+
+## Your Task
+
+For each requirement, identify which formal claims (if any) might be semantically related. These are CANDIDATE matches — a formal verification step will confirm or reject each one. Err on the side of inclusion: it is better to suggest a match that turns out wrong than to miss a genuine match.
+
+For each candidate, provide:
+- The claim ID (exact, from the list above)
+- A confidence score (0.0 to 1.0) — how likely this claim covers the requirement
+- A brief explanation of the semantic relationship
+
+Also identify claims that don't appear to match any requirement (unexpected).
+
+Requirements with no plausible candidate should have an empty candidates array.
+
+Call the record_matches tool with your analysis.`;
+}
+
+/**
  * Build the prompt for formalizing a requirement as a Dafny lemma.
  */
 export function FORMALIZE_PROMPT(domain, requirement, domainSource, claimsIndex) {

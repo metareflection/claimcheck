@@ -4,7 +4,7 @@ import { resolve, dirname } from 'node:path';
 
 import { flattenClaims } from './flatten.js';
 import { translateClaims } from './translate.js';
-import { compareClaims } from './compare.js';
+import { matchClaims } from './match.js';
 import { proveAll } from './prove.js';
 import { generateObligations, writeObligations } from './obligations.js';
 import { renderReport, renderJson } from './report.js';
@@ -30,7 +30,7 @@ Options:
 
 export async function main(argv) {
   const { values } = parseArgs({
-    args: argv,
+    args: argv.filter((a) => a !== ''),
     options: {
       claims:       { type: 'string', short: 'c' },
       requirements: { type: 'string', short: 'r' },
@@ -106,44 +106,46 @@ export async function main(argv) {
   console.error(`[claimcheck] Translating ${items.length} claims...`);
   const translated = await translateClaims(items, domain, opts);
 
-  // --- Step 3: Compare ---
+  // --- Step 3: Match (candidate hints for formal verification) ---
 
-  console.error(`[claimcheck] Comparing against requirements...`);
-  const coverage = await compareClaims(translated, requirementsText, domain, opts);
+  console.error(`[claimcheck] Matching claims to requirements...`);
+  const matchResult = await matchClaims(translated, requirementsText, domain, opts);
 
-  console.error(`[claimcheck] Proved: ${coverage.proved.length}, Missing: ${coverage.missing.length}, Unexpected: ${coverage.unexpected.length}`);
+  const withCandidates = matchResult.matches.filter((m) => m.candidates.length > 0).length;
+  console.error(`[claimcheck] ${matchResult.matches.length} requirements (${withCandidates} with candidates), ${matchResult.unexpected.length} unexpected claims`);
 
-  // --- Step 4: Prove missing (if --dfy provided) ---
+  // --- Step 4: Prove ALL requirements (if --dfy provided) ---
 
   let proveResults = null;
 
-  if (values.dfy && coverage.missing.length > 0) {
+  if (values.dfy) {
     const domainDfyPath = resolve(values.dfy);
     const domainSource = await readFile(domainDfyPath, 'utf-8');
     const domainModule = values.module ?? domain;
 
-    console.error(`\n[claimcheck] Attempting to prove ${coverage.missing.length} missing requirement(s)...`);
+    console.error(`\n[claimcheck] Proving ${matchResult.matches.length} requirement(s)...`);
     proveResults = await proveAll(
-      coverage.missing,
+      matchResult.matches,
+      translated,
       domainSource,
       domainDfyPath,
       domainModule,
-      items,
       domain,
       opts,
     );
 
-    const proved = proveResults.filter(r => r.status === 'proved').length;
-    const gaps = proveResults.filter(r => r.status === 'gap').length;
-    console.error(`[claimcheck] Proved: ${proved}, Gaps: ${gaps}`);
-  } else if (coverage.missing.length > 0 && !values.dfy) {
-    console.error(`\n[claimcheck] ${coverage.missing.length} missing requirement(s). Use --dfy to attempt verification.`);
+    const proved = proveResults.filter((r) => r.status === 'proved');
+    const gaps = proveResults.filter((r) => r.status === 'gap');
+    const sentinels = proved.filter((r) => r.strategy === 'sentinel').length;
+    console.error(`[claimcheck] Proved: ${proved.length} (${sentinels} via sentinel), Gaps: ${gaps.length}`);
+  } else {
+    console.error(`\n[claimcheck] Use --dfy to enable formal verification of all requirements.`);
   }
 
   // --- Step 5: Generate obligations ---
 
   let obligationsPath = null;
-  const gaps = proveResults?.filter(r => r.status === 'gap') ?? [];
+  const gaps = proveResults?.filter((r) => r.status === 'gap') ?? [];
 
   if (gaps.length > 0 && values.dfy) {
     const content = generateObligations(gaps, resolve(values.dfy), values.module ?? domain, outputDir);
@@ -156,9 +158,9 @@ export async function main(argv) {
   // --- Step 6: Report ---
 
   if (values.json) {
-    console.log(renderJson(coverage, domain, proveResults, obligationsPath));
+    console.log(renderJson(matchResult, domain, proveResults, obligationsPath));
   } else {
-    const report = renderReport(coverage, domain, proveResults, obligationsPath);
+    const report = renderReport(matchResult, domain, proveResults, obligationsPath);
     console.log(report);
   }
 }

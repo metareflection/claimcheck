@@ -22,7 +22,7 @@ export async function verify(dafnyCode, domainDfyPath, domainModule, opts = {}) 
   const fileContent = `include "${domainDfyPath}"
 
 module VerifyRequirement {
-  import D = ${domainModule}
+  import opened D = ${domainModule}
 
   ${dafnyCode}
 }
