@@ -11,7 +11,7 @@
  * @param {number} start - position of opening '{'
  * @returns {number} position of matching '}', or -1
  */
-function findMatchingBrace(src, start) {
+export function findMatchingBrace(src, start) {
   let depth = 0;
   let i = start;
   let inString = false;

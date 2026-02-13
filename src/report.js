@@ -1,58 +1,41 @@
 import { getTokenUsage } from './api.js';
 
 /**
- * Render a coverage report as markdown.
+ * Render an audit report as markdown.
  *
  * @param {string} domain
- * @param {object[]} proveResults - from prove step
- * @param {string|null} obligationsPath - path to obligations.dfy if generated
+ * @param {object[]} auditResults - from audit step
  * @returns {string}
  */
-export function renderReport(domain, proveResults, obligationsPath = null) {
+export function renderReport(domain, auditResults) {
   const lines = [];
-  lines.push(`# Coverage Report: ${domain}\n`);
+  lines.push(`# Audit Report: ${domain}\n`);
 
-  const proved = proveResults.filter((r) => r.status === 'proved');
-  const gaps = proveResults.filter((r) => r.status === 'gap');
-  const correctGaps = gaps.filter((r) => r.correctGap);
-  const realGaps = gaps.filter((r) => !r.correctGap);
+  const confirmed = auditResults.filter((r) => r.status === 'confirmed');
+  const disputed = auditResults.filter((r) => r.status === 'disputed');
+  const errors = auditResults.filter((r) => r.status === 'error');
+  const verifyFailed = auditResults.filter((r) => r.status === 'verify-failed');
 
   // --- Summary ---
 
   lines.push(`## Summary\n`);
-
-  const direct = proved.filter((r) => r.strategy === 'direct').length;
-  const proof = proved.filter((r) => r.strategy === 'proof').length;
-  const proofRetry = proved.filter((r) => r.strategy === 'proof-retry').length;
-  const roundtripFail = realGaps.filter((r) => r.strategy === 'roundtrip-fail').length;
-  const otherGaps = realGaps.length - roundtripFail;
-  const covered = proved.length + correctGaps.length;
-
-  lines.push(`- **Requirements covered:** ${covered}/${proveResults.length}`);
-  if (proved.length > 0) {
-    lines.push(`  - formally verified: ${proved.length}`);
-    if (direct > 0) lines.push(`    - via empty body (direct): ${direct}`);
-    if (proof > 0) lines.push(`    - via proof: ${proof}`);
-    if (proofRetry > 0) lines.push(`    - via proof retry: ${proofRetry}`);
-  }
-  if (correctGaps.length > 0) lines.push(`  - correct gaps (intentionally unprovable): ${correctGaps.length}`);
-  if (realGaps.length > 0) {
-    lines.push(`- **Obligations (could not be verified):** ${realGaps.length}`);
-    if (roundtripFail > 0) lines.push(`  - round-trip mismatch: ${roundtripFail}`);
-    if (otherGaps > 0) lines.push(`  - proof failure: ${otherGaps}`);
-  }
+  lines.push(`- **Mappings audited:** ${auditResults.length}`);
+  lines.push(`- **Confirmed:** ${confirmed.length}`);
+  if (disputed.length > 0) lines.push(`- **Disputed:** ${disputed.length}`);
+  if (verifyFailed.length > 0) lines.push(`- **Verification failed:** ${verifyFailed.length}`);
+  if (errors.length > 0) lines.push(`- **Errors:** ${errors.length}`);
   lines.push('');
 
-  // --- Proved requirements ---
+  // --- Confirmed mappings ---
 
-  if (proved.length > 0) {
-    lines.push(`## Formally Verified Requirements\n`);
+  if (confirmed.length > 0) {
+    lines.push(`## Confirmed Mappings\n`);
 
-    for (const r of proved) {
+    for (const r of confirmed) {
       lines.push(`**${r.requirement}**`);
-      lines.push(`- Strategy: ${r.strategy}`);
-      if (r.reasoning) {
-        lines.push(`- ${r.reasoning}`);
+      lines.push(`- Lemma: \`${r.lemmaName}\``);
+      if (r.informalization) {
+        lines.push(`- Back-translation: ${r.informalization.naturalLanguage}`);
       }
       lines.push('```dafny');
       lines.push(r.dafnyCode);
@@ -61,41 +44,54 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
     }
   }
 
-  // --- Correct Gaps ---
+  // --- Disputed mappings ---
 
-  if (correctGaps.length > 0) {
-    lines.push(`## Correct Gaps\n`);
-    lines.push(`These requirements are intentionally unprovable — the domain does not guarantee them.\n`);
-    for (const r of correctGaps) {
+  if (disputed.length > 0) {
+    lines.push(`## Disputed Mappings\n`);
+
+    for (const r of disputed) {
       lines.push(`**${r.requirement}**`);
-      if (r.reasoning) {
-        lines.push(`- Reasoning: ${r.reasoning}`);
+      lines.push(`- Lemma: \`${r.lemmaName}\``);
+      if (r.discrepancy) lines.push(`- Discrepancy: ${r.discrepancy}`);
+      if (r.weakeningType && r.weakeningType !== 'none') lines.push(`- Weakening: ${r.weakeningType}`);
+      if (r.informalization) {
+        lines.push(`- Back-translation: ${r.informalization.naturalLanguage}`);
+      }
+      lines.push('```dafny');
+      lines.push(r.dafnyCode);
+      lines.push('```');
+      lines.push('');
+    }
+  }
+
+  // --- Verification failures ---
+
+  if (verifyFailed.length > 0) {
+    lines.push(`## Verification Failures\n`);
+    lines.push(`These lemmas failed Dafny verification — they may not actually be proved.\n`);
+
+    for (const r of verifyFailed) {
+      lines.push(`**${r.requirement}**`);
+      lines.push(`- Lemma: \`${r.lemmaName}\``);
+      if (r.error) {
+        const shortError = r.error.split('\n').slice(0, 5).join('\n');
+        lines.push('```');
+        lines.push(shortError);
+        lines.push('```');
       }
       lines.push('');
     }
   }
 
-  // --- Obligations ---
+  // --- Errors ---
 
-  if (realGaps.length > 0) {
-    lines.push(`## Obligations\n`);
-    if (obligationsPath) {
-      lines.push(`These requirements could not be automatically verified. See \`${obligationsPath}\` for the obligation lemmas.\n`);
-    }
-    for (const r of realGaps) {
+  if (errors.length > 0) {
+    lines.push(`## Errors\n`);
+
+    for (const r of errors) {
       lines.push(`**${r.requirement}**`);
-      lines.push(`- Failed after ${r.attempts} attempt(s)`);
-      if (r.strategiesTried) {
-        const trail = r.strategiesTried.map((s) => `${s.strategy}${s.success ? '✓' : '✗'}`).join(' → ');
-        lines.push(`- Strategies: ${trail}`);
-      }
-      if (r.strategy === 'roundtrip-fail') {
-        if (r.discrepancy) lines.push(`- Discrepancy: ${r.discrepancy}`);
-        if (r.weakeningType && r.weakeningType !== 'none') lines.push(`- Weakening: ${r.weakeningType}`);
-      }
-      if (r.reasoning) {
-        lines.push(`- Reasoning: ${r.reasoning}`);
-      }
+      lines.push(`- Lemma: \`${r.lemmaName}\``);
+      lines.push(`- Error: ${r.error}`);
       lines.push('');
     }
   }
@@ -112,14 +108,13 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
 }
 
 /**
- * Render results as JSON for machine consumption.
+ * Render audit results as JSON for machine consumption.
  */
-export function renderJson(domain, proveResults, obligationsPath) {
+export function renderJson(domain, auditResults) {
   return JSON.stringify({
     domain,
     timestamp: new Date().toISOString(),
-    verification: proveResults,
-    obligationsFile: obligationsPath,
+    results: auditResults,
     tokenUsage: getTokenUsage(),
   }, null, 2);
 }

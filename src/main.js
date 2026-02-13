@@ -2,46 +2,39 @@ import { parseArgs } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { proveAll } from './prove.js';
+import { audit } from './audit.js';
 import { generateObligations, writeObligations } from './obligations.js';
 import { renderReport, renderJson } from './report.js';
-import { eraseLemmaBodies } from './erase.js';
 
 function printUsage() {
   console.error(`Usage: claimcheck [options]
 
 Options:
-  -r, --requirements <path>   Path to requirements file (markdown)
-  --dfy <path>                Path to domain .dfy file
-  --module <name>             Dafny module name to import
-  -d, --domain <name>         Human-readable domain name (default: from module)
-  -o, --output <dir>          Output directory (default: current dir)
-  --json                      Output JSON instead of markdown
-  --model <id>                Model for all LLM steps (default: claude-sonnet-4-5-20250929)
-  --erase                     Erase lemma proof bodies before showing source to LLM
-  --no-roundtrip              Skip round-trip verification check
-  --informalize-model <id>    Model for informalization (default: claude-haiku-4-5-20251001)
-  --compare-model <id>        Model for round-trip comparison (default: claude-sonnet-4-5-20250929)
-  -v, --verbose               Verbose API logging
-  -h, --help                  Show this help`);
+  -r, --requirements <path>    Requirements file (markdown)
+  -m, --mapping <path>         Mapping file (JSON)
+  --dfy <path>                 Domain .dfy file
+  --module <name>              Dafny module name to import
+  -d, --domain <name>          Human-readable domain name (default: from module)
+  -o, --output <dir>           Output directory (default: current dir)
+  --json                       Output JSON instead of markdown
+  --verify                     Also run dafny verify on each lemma
+  --informalize-model <id>     Model for back-translation (default: claude-haiku-4-5-20251001)
+  --compare-model <id>         Model for comparison (default: claude-sonnet-4-5-20250929)
+  -v, --verbose                Verbose API logging
+  -h, --help                   Show this help`);
 }
 
 /**
  * Parse requirements from markdown text.
  * Extracts numbered items (1. ...), bullets (- ..., * ...), or plain non-empty lines.
- * A trailing [gap] annotation marks a requirement as a correct gap (intentionally unprovable).
  *
- * @returns {{ text: string, gap: boolean }[]}
+ * @returns {string[]}
  */
 function parseRequirements(text) {
   return text
     .split('\n')
     .map((line) => line.replace(/^[\s]*(?:\d+\.|[-*])\s*/, '').trim())
-    .filter((line) => line.length > 0 && !line.startsWith('#'))
-    .map((line) => {
-      const gap = /\s*\[gap\]\s*$/i.test(line);
-      return { text: line.replace(/\s*\[gap\]\s*$/i, '').trim(), gap };
-    });
+    .filter((line) => line.length > 0 && !line.startsWith('#'));
 }
 
 export async function main(argv) {
@@ -49,13 +42,12 @@ export async function main(argv) {
     args: argv.filter((a) => a !== ''),
     options: {
       requirements: { type: 'string', short: 'r' },
+      mapping:      { type: 'string', short: 'm' },
       dfy:          { type: 'string' },
       module:       { type: 'string' },
       domain:       { type: 'string', short: 'd' },
       output:       { type: 'string', short: 'o' },
-      model:              { type: 'string' },
-      erase:              { type: 'boolean', default: false },
-      'no-roundtrip':     { type: 'boolean', default: false },
+      verify:             { type: 'boolean', default: false },
       'informalize-model': { type: 'string' },
       'compare-model':    { type: 'string' },
       json:               { type: 'boolean', default: false },
@@ -77,6 +69,12 @@ export async function main(argv) {
     process.exit(1);
   }
 
+  if (!values.mapping) {
+    console.error('Error: --mapping is required');
+    printUsage();
+    process.exit(1);
+  }
+
   if (!values.dfy) {
     console.error('Error: --dfy is required');
     printUsage();
@@ -91,8 +89,7 @@ export async function main(argv) {
 
   const opts = {
     verbose: values.verbose,
-    ...(values.model ? { model: values.model } : {}),
-    ...(values['no-roundtrip'] ? { skipRoundtrip: true } : {}),
+    verify: values.verify,
     ...(values['informalize-model'] ? { informalizeModel: values['informalize-model'] } : {}),
     ...(values['compare-model'] ? { compareModel: values['compare-model'] } : {}),
   };
@@ -100,45 +97,55 @@ export async function main(argv) {
   // --- Read inputs ---
 
   const requirementsText = await readFile(resolve(values.requirements), 'utf-8');
-  const parsed = parseRequirements(requirementsText);
-  const requirements = parsed.map((r) => r.text);
-  const gapFlags = parsed.map((r) => r.gap);
+  const requirements = parseRequirements(requirementsText);
+
+  const mappingRaw = await readFile(resolve(values.mapping), 'utf-8');
+  const mapping = JSON.parse(mappingRaw);
+
   const domainDfyPath = resolve(values.dfy);
-  const domainSourceRaw = await readFile(domainDfyPath, 'utf-8');
-  const erasedSource = eraseLemmaBodies(domainSourceRaw);
-  const domainSource = values.erase ? erasedSource : domainSourceRaw;
+  const dfySource = await readFile(domainDfyPath, 'utf-8');
+
   const domainModule = values.module;
   const domain = values.domain ?? domainModule;
   const outputDir = resolve(values.output ?? '.');
 
-  console.error(`[claimcheck] ${requirements.length} requirement(s)`);
-  for (let i = 0; i < requirements.length; i++) {
-    console.error(`  - ${requirements[i]}${gapFlags[i] ? ' [gap]' : ''}`);
+  // Validate mapping entries against requirements
+  for (const entry of mapping) {
+    if (!requirements.includes(entry.requirement)) {
+      console.error(`[claimcheck] Warning: mapping requirement not found in requirements file: "${entry.requirement}"`);
+    }
   }
 
-  // --- Prove ---
-
-  console.error(`\n[claimcheck] Proving ${requirements.length} requirement(s)...`);
-  const proveResults = await proveAll(
-    requirements, domainSource, erasedSource, domainDfyPath, domainModule, domain, opts,
-  );
-
-  // Stamp correctGap annotation on results
-  for (let i = 0; i < proveResults.length; i++) {
-    if (gapFlags[i]) proveResults[i].correctGap = true;
+  console.error(`[claimcheck] ${requirements.length} requirement(s), ${mapping.length} mapping(s)`);
+  for (const entry of mapping) {
+    console.error(`  - "${entry.requirement}" → ${entry.lemmaName}`);
   }
 
-  const proved = proveResults.filter((r) => r.status === 'proved');
-  const gaps = proveResults.filter((r) => r.status === 'gap');
-  const correctGaps = gaps.filter((r) => r.correctGap);
-  const realGaps = gaps.filter((r) => !r.correctGap);
-  console.error(`[claimcheck] Proved: ${proved.length}, Correct gaps: ${correctGaps.length}, Obligations: ${realGaps.length}`);
+  // --- Audit ---
 
-  // --- Generate obligations ---
+  console.error(`\n[claimcheck] Auditing ${mapping.length} mapping(s)...`);
+  const auditResults = await audit(mapping, dfySource, domainDfyPath, domainModule, domain, opts);
+
+  const confirmed = auditResults.filter((r) => r.status === 'confirmed');
+  const disputed = auditResults.filter((r) => r.status === 'disputed');
+  const errors = auditResults.filter((r) => r.status === 'error' || r.status === 'verify-failed');
+  console.error(`[claimcheck] Confirmed: ${confirmed.length}, Disputed: ${disputed.length}, Errors: ${errors.length}`);
+
+  // --- Generate obligations for disputed mappings ---
 
   let obligationsPath = null;
-  if (realGaps.length > 0) {
-    const content = generateObligations(realGaps, domainDfyPath, domainModule, outputDir);
+  if (disputed.length > 0) {
+    const gapResults = disputed.map((r) => ({
+      requirement: r.requirement,
+      status: 'gap',
+      strategy: 'roundtrip-fail',
+      attempts: 1,
+      dafnyCode: r.dafnyCode,
+      discrepancy: r.discrepancy,
+      weakeningType: r.weakeningType,
+      reasoning: r.discrepancy,
+    }));
+    const content = generateObligations(gapResults, domainDfyPath, domainModule, outputDir);
     if (content) {
       obligationsPath = await writeObligations(content, outputDir);
       console.error(`[claimcheck] Wrote ${obligationsPath}`);
@@ -148,9 +155,9 @@ export async function main(argv) {
   // --- Report ---
 
   if (values.json) {
-    console.log(renderJson(domain, proveResults, obligationsPath));
+    console.log(renderJson(domain, auditResults));
   } else {
-    const report = renderReport(domain, proveResults, obligationsPath);
+    const report = renderReport(domain, auditResults);
     console.log(report);
   }
 }

@@ -1,176 +1,114 @@
 # Architecture
 
-Claimcheck answers: **does a formally verified Dafny specification cover a set of informal user requirements?**
+Claimcheck is an **audit tool** that answers: does a Dafny lemma actually mean what a requirement says? Dafny can verify proofs, but it can't verify meaning. Claimcheck fills that gap.
 
-Two pipelines exist: a **top-down** pipeline (requirements → lemmas → proof) and **bottom-up** modules (source → claims → English → coverage). They complement each other: top-down generates and verifies new lemmas, bottom-up analyzes what existing verified code already covers.
-
-The top-down pipeline has three phases: formalize, round-trip verify, and prove. The round-trip check catches LLM cheating (tautologies, weakened ensures) that Dafny can't detect.
+Someone else (Claude Code, a human, any agent) writes the lemmas and claims "requirement X is covered by lemma Y." Claimcheck verifies that claim via a round-trip: informalize the lemma back to English (without seeing the requirement), then compare.
 
 ---
 
 ## Input
 
-- **Requirements**: a list of informal statements (markdown, one per line or bullet)
-- **Domain source**: the `.dfy` file containing Model, Inv, Apply, Normalize, etc.
+1. **Requirements** — a markdown file, one requirement per line/bullet:
+   ```markdown
+   - The counter value is always non-negative
+   - The initial state satisfies the invariant
+   ```
+
+2. **Mapping** — a JSON file linking each requirement to a lemma name:
+   ```json
+   [
+     { "requirement": "The counter value is always non-negative", "lemmaName": "CounterNonNegative" },
+     { "requirement": "The initial state satisfies the invariant", "lemmaName": "InitSatisfiesInv" }
+   ]
+   ```
+
+3. **Domain source** — the `.dfy` file containing Model, Inv, Apply, lemmas, etc.
 
 ---
 
-## Top-Down Pipeline
+## Audit Pipeline
 
 ```
-Phase 1 — Formalize (batch)
-    1. LLM sees erased source + ALL requirements → lemma signatures (empty body)
-    2. dafny resolve → typecheck all signatures
-    3. If resolve fails → resolve individually, retry broken ones, obligation if still broken
-
-Round-Trip Check (NEW)
-    4. Informalize: different LLM (haiku) reads each lemma → English back-translation
-       (does NOT see original requirements)
-    5. Compare: LLM (sonnet) checks original requirement vs back-translation
-    6. Mismatch → re-formalize with discrepancy feedback, re-resolve, re-check
-       Still mismatch → obligation (strategy: roundtrip-fail)
-
-Phase 1 continued
-    7. dafny verify with empty bodies (only round-trip-passed lemmas)
-
-Phase 2 — Prove (individual, only for lemmas that need proof)
-    8. LLM sees domain source + well-typed signature + verify error → writes proof body
-    9. dafny verify → if fails, retry once → obligation
+1. Load requirements, mapping, .dfy source
+2. For each mapping entry:
+   a. Extract lemma from .dfy by name (ad-hoc parser)
+   b. Optionally: dafny verify the lemma (confirm it's actually proved)
+3. Batch informalize all lemmas (haiku, 1 LLM call) — does NOT see requirements
+4. Batch compare back-translations against requirements (sonnet, 1 LLM call)
+5. Report: which mappings are confirmed, which are disputed
 ```
 
 ### Why Round-Trip?
 
-The fundamental flaw of the top-down pipeline is that the LLM writes Dafny `ensures` clauses, and Dafny can't tell if they faithfully express the English requirement. The LLM can cheat:
+The fundamental problem: an LLM (or human) can write a Dafny lemma that Dafny proves, but that doesn't actually express the intended requirement. Common failure modes:
+
 - **Tautology**: `requires m <= 100; ensures m <= 100` — ensures restates requires
-- **Weakened ensures**: requirement says "exactly 5 colors" but ensures says "at least 1 color"
+- **Weakened postcondition**: requirement says "exactly 5 colors" but ensures says "at least 1 color"
 - **Narrowed scope**: lemma only covers one case when requirement covers many
 - **Wrong property**: lemma proves something related but different
 
-Dafny happily proves all of these. The round-trip check catches them by informalizing the Dafny code back to English (with a different model that hasn't seen the requirements), then comparing.
+Dafny happily proves all of these. The round-trip catches them by:
 
-### Source Preparation
+1. **Informalize** (haiku): read the Dafny code → produce English description. Does NOT see the original requirement. Rates strength (trivial/weak/moderate/strong).
+2. **Compare** (sonnet): check original requirement vs back-translation. Strict — flags potential mismatches.
 
-Lemma proof bodies are erased and marked `{:axiom}` for Phase 1. This gives the LLM a clean view: all types, functions, predicates, and lemma signatures are preserved, but proof noise is stripped.
+Using different models (haiku for informalization, sonnet for comparison) avoids same-model collusion.
 
-```dafny
-// Before (raw source)
-lemma StepPreservesInv(m: Model, a: Action)
-  requires Inv(m)
-  ensures Inv(Normalize(Apply(m, a)))
-{
-  NormalizePreservesInv(m, a);
-  // ... proof details ...
-}
+### Pre-checks
 
-// After (what the LLM sees in Phase 1)
-lemma {:axiom} StepPreservesInv(m: Model, a: Action)
-  requires Inv(m)
-  ensures Inv(Normalize(Apply(m, a)))
-{
-}
-```
-
-Phase 2 uses the full source by default (the LLM needs to see proof patterns to write proofs). The `--erase` flag makes Phase 2 also use erased source.
-
-### Phase 1: Batch Formalize
-
-The LLM receives erased domain source and **all** requirements at once. It produces one lemma signature per requirement, each with an empty body `{}`.
-
-All signatures are batch-resolved with `dafny resolve` (fast — no Z3). If the batch fails, each lemma is resolved individually. Failing ones are retried (one LLM call with the resolution errors), then re-resolved. Still broken = obligation.
-
-### Round-Trip Check
-
-After resolution, ALL resolved lemmas go through the round-trip check:
-
-1. **Informalize** (haiku, one batch call): reads each lemma and produces structured English — preconditions, postconditions, scope, strength rating. Does NOT see original requirements.
-2. **Pre-checks**: auto-flag trivial-strength informalizations and duplicate postconditions across different requirements.
-3. **Compare** (sonnet, one batch call): checks original requirement vs back-translation. Lists cheating patterns to watch for. Strict — better to flag than miss.
-4. **On mismatch**: re-formalize with discrepancy feedback (one sonnet call), re-resolve, re-check. Still failing = obligation with `strategy: roundtrip-fail`.
-
-Using haiku for informalization and sonnet for comparison avoids same-model collusion. The structured informalization schema (separate preconditions/postconditions/strength) makes tautologies obvious.
-
-Cost: +2 API calls on clean run (~$0.03). +3 more on retry. Negligible vs existing pipeline.
-
-### Phase 2: Write Proofs
-
-For lemmas that resolved and passed round-trip but didn't verify with an empty body, the LLM writes a proof body. It receives:
-- The full domain source (or erased with `--erase`)
-- The well-typed signature
-- The Dafny verification error
-
-It keeps the requires/ensures clauses and fills in the body. One retry on failure.
-
-### Strategies
-
-| Strategy | Phase | Description |
-|----------|-------|-------------|
-| `direct` | 1 | Verified with empty body |
-| `proof` | 2 | LLM wrote a proof body |
-| `proof-retry` | 2 | LLM fixed a failed proof on retry |
-| `roundtrip-fail` | RT | Lemma didn't faithfully express requirement |
-
-### Obligation
-
-If a lemma fails round-trip (even after re-formalization), or Phase 2 retry also fails, the requirement becomes an obligation — a Dafny lemma stub with the error and best attempt.
-
-### Error Attribution
-
-When batch resolve fails, each lemma is resolved individually rather than parsing Dafny error output. `dafny resolve` is fast (no Z3), so N individual calls is fine. Each failing lemma gets its own clean error message for the retry prompt.
-
----
-
-## Bottom-Up Modules
-
-The bottom-up pipeline analyzes existing verified Dafny code to determine what requirements it already covers, without generating new lemmas. It consists of three steps:
-
-### flatten.js — Claim Extraction
-
-Pure data transform, no LLM. Splits a Dafny source file into flat claims:
-- Invariant conjuncts (from `predicate Inv`)
-- Lemma ensures clauses (split on `&&`)
-- Function/predicate contracts
-- Axiom ensures clauses
-
-Each claim gets a structured ID (e.g., `Module.LemmaName.ensures.0`).
-
-### translate.js — Formal→NL Translation
-
-Batched LLM calls (haiku, batches of 10). Translates each Dafny expression to plain English with a confidence score.
-
-### compare.js — Coverage Analysis
-
-Single LLM call (sonnet). Matches translated claims against requirements text. Produces:
-- **proved**: requirements covered by formal claims
-- **missing**: requirements with no formal backing
-- **unexpected**: formal claims not matching any requirement
-- **summary**: overall coverage assessment
-
-### How They Complement Each Other
-
-The top-down pipeline is **generative**: it writes new lemmas to cover requirements. The bottom-up pipeline is **analytical**: it reads existing code to see what's already covered.
-
-Use top-down when you want to verify a new spec against requirements. Use bottom-up when you want to audit an existing verified codebase. The lemmafit dashboard imports both.
-
----
-
-## Soundness Checks
-
-Generated lemmas are rejected before Dafny verification if they contain:
-
-- **`assume` statements** — defeats the purpose of verification
-- **`{:axiom}` attributes** — would make Dafny accept unproved claims
-
-Additionally, `--allow-warnings` is not passed to Dafny, so warnings are treated as failures.
+Before comparison, automatic pre-checks flag:
+- **Trivial strength**: informalization rated the lemma as trivially weak
+- **Duplicate postconditions**: multiple lemmas with identical back-translated postconditions
 
 ---
 
 ## Output
 
-For each requirement:
-- **proved**: the verified Dafny lemma + reasoning
-- **obligation**: the best attempt + Dafny error (with discrepancy for round-trip failures)
+For each mapping entry, one of:
 
-The report shows which requirements are formally verified and which need manual proof. An `obligations.dfy` file is generated with lemma stubs for gaps.
+| Status | Meaning |
+|--------|---------|
+| **confirmed** | Round-trip passed — lemma faithfully expresses the requirement |
+| **disputed** | Round-trip failed — discrepancy between lemma meaning and requirement |
+| **verify-failed** | Dafny verification failed (only with `--verify` flag) |
+| **error** | Lemma not found in source |
+
+Disputed mappings also get an `obligations.dfy` file with lemma stubs.
+
+### Report Format
+
+Markdown by default, JSON with `--json`. Shows:
+- Summary: X confirmed, Y disputed, Z errors
+- Confirmed mappings with lemma code and back-translation
+- Disputed mappings with discrepancy detail and weakening type
+- API token usage
+
+---
+
+## CLI
+
+```
+claimcheck [options]
+  -r, --requirements <path>    Requirements file (markdown)
+  -m, --mapping <path>         Mapping file (JSON)
+  --dfy <path>                 Domain .dfy file
+  --module <name>              Dafny module name to import
+  -d, --domain <name>          Human-readable domain name
+  -o, --output <dir>           Output directory
+  --json                       JSON output
+  --verify                     Also run dafny verify on each lemma
+  --informalize-model <id>     Model for back-translation (default: haiku)
+  --compare-model <id>         Model for comparison (default: sonnet)
+  -v, --verbose                Verbose logging
+```
+
+---
+
+## Soundness Checks
+
+When `--verify` is used, lemmas are rejected before Dafny verification if they contain:
+- **`assume` statements** — defeats the purpose of verification
+- **`{:axiom}` attributes** — would make Dafny accept unproved claims
 
 ---
 
@@ -179,15 +117,13 @@ The report shows which requirements are formally verified and which need manual 
 | File | Purpose |
 |------|---------|
 | main.js | CLI + orchestration |
-| prove.js | three-phase pipeline: batch formalize → round-trip → verify → prove |
-| roundtrip.js | round-trip check: informalize → compare → re-formalize |
+| audit.js | audit pipeline: extract → verify → roundtrip → results |
+| extract.js | extract lemma by name from .dfy source |
+| roundtrip.js | round-trip check: informalize → compare |
 | verify.js | wrap lemma in module, run `dafny verify` / `dafny resolve`, soundness checks |
-| erase.js | strip lemma proof bodies, add {:axiom} |
-| flatten.js | mechanical claim extraction (bottom-up) |
-| translate.js | formal→NL batch translation (bottom-up) |
-| compare.js | NL claim↔requirement matching (bottom-up) |
-| obligations.js | generate obligations.dfy |
+| erase.js | strip lemma proof bodies, add {:axiom} (utility) |
+| obligations.js | generate obligations.dfy for disputed mappings |
 | report.js | markdown/JSON output |
-| prompts.js | all LLM prompts (formalize, round-trip, proof, translate, compare) |
+| prompts.js | LLM prompts (informalize, compare) |
 | schemas.js | tool schemas for structured LLM output |
-| api.js | Anthropic API wrapper (with configurable maxTokens) |
+| api.js | Anthropic API wrapper |

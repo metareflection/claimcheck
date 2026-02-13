@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Run the claimcheck v2 pipeline on all test projects with requirements files.
+ * Run the claimcheck audit pipeline on all test projects with requirements + mapping files.
  *
  * Usage:
  *   node test/integration/run-all.js                # all projects
@@ -15,6 +15,7 @@ import { join, resolve } from 'node:path';
 import { PROJECTS, DAFNY_REPLAY } from './projects.js';
 
 const REQS_DIR = resolve(import.meta.dirname, 'reqs');
+const MAPPINGS_DIR = resolve(import.meta.dirname, 'mappings');
 const OUTPUT_DIR = resolve(import.meta.dirname, 'output');
 
 const args = process.argv.slice(2);
@@ -43,10 +44,15 @@ async function run() {
 
   for (const project of projects) {
     const reqsPath = join(REQS_DIR, `${project.name}.md`);
+    const mappingPath = join(MAPPINGS_DIR, `${project.name}.json`);
     const dfyPath = join(DAFNY_REPLAY, project.entry);
 
     if (!await fileExists(reqsPath)) {
       console.error(`\n=== ${project.name} [skip] no requirements file ===`);
+      continue;
+    }
+    if (!await fileExists(mappingPath)) {
+      console.error(`\n=== ${project.name} [skip] no mapping file ===`);
       continue;
     }
     if (!await fileExists(dfyPath)) {
@@ -60,6 +66,7 @@ async function run() {
 
     await main([
       '-r', reqsPath,
+      '-m', mappingPath,
       '--dfy', dfyPath,
       '--module', project.module,
       '-d', project.name,

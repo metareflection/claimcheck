@@ -1,19 +1,18 @@
 import { callWithTool } from './api.js';
-import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL, BATCH_FORMALIZE_TOOL } from './schemas.js';
+import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL } from './schemas.js';
 import {
   INFORMALIZE_PROMPT,
   ROUNDTRIP_COMPARE_PROMPT,
-  ROUNDTRIP_REFORMALIZE_PROMPT,
 } from './prompts.js';
 
 /**
- * Run the round-trip check on resolved lemmas.
+ * Run the round-trip check on lemmas.
  *
  * 1. Informalize: LLM reads each lemma → English back-translation (does NOT see original requirements)
  * 2. Compare: LLM checks original requirement vs back-translation
  * 3. Pre-checks: flag trivial-strength informalizations, detect duplicate postconditions
  *
- * @param {{ index: number, lemmaName: string, dafnyCode: string, reasoning: string }[]} lemmas
+ * @param {{ index: number, lemmaName: string, dafnyCode: string }[]} lemmas
  * @param {string[]} requirements
  * @param {string} domain
  * @param {object} [opts] - { verbose, informalizeModel, compareModel }
@@ -119,7 +118,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
     const compMatch = comp?.match ?? false;
 
     if (compMatch && !isTrivial) {
-      passed.push(l);
+      passed.push({ ...l, informalization: inf, comparison: comp });
     } else {
       failed.push({
         ...l,
@@ -133,47 +132,4 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
 
   console.error(`[roundtrip] Passed: ${passed.length}, Failed: ${failed.length}`);
   return { passed, failed };
-}
-
-/**
- * Re-formalize lemmas that failed the round-trip check, using discrepancy feedback.
- *
- * @param {object[]} failed - failed lemmas with discrepancy info
- * @param {string[]} requirements
- * @param {string} erasedSource
- * @param {string} domain
- * @param {object} [opts]
- * @returns {Promise<object[]>} re-formalized lemmas (same shape as batchFormalize output)
- */
-export async function roundtripReformalize(failed, requirements, erasedSource, domain, opts = {}) {
-  if (failed.length === 0) return [];
-
-  const model = opts.model ?? 'claude-sonnet-4-5-20250929';
-
-  const failures = failed.map((f) => ({
-    requirementIndex: f.index,
-    requirement: requirements[f.index],
-    dafnyCode: f.dafnyCode,
-    discrepancy: f.discrepancy,
-    weakeningType: f.weakeningType,
-  }));
-
-  console.error(`[roundtrip] Re-formalizing ${failures.length} lemma(s)...`);
-
-  const prompt = ROUNDTRIP_REFORMALIZE_PROMPT(domain, failures, erasedSource);
-  const response = await callWithTool({
-    model,
-    prompt,
-    tool: BATCH_FORMALIZE_TOOL,
-    toolChoice: { type: 'tool', name: 'record_formalizations' },
-    verbose: opts.verbose,
-    maxTokens: 8192,
-  });
-
-  return response.input.lemmas.map((lemma) => ({
-    index: lemma.requirementIndex,
-    lemmaName: lemma.lemmaName,
-    dafnyCode: lemma.dafnyCode,
-    reasoning: lemma.reasoning,
-  }));
 }
