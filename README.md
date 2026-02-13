@@ -1,70 +1,63 @@
 # claimcheck
 
-Check user requirements against formally verified Dafny claims. Uses sentinel proofs to formally confirm matches, and generates proof obligations for anything that can't be automatically discharged.
+Does a formally verified Dafny specification cover a set of informal user requirements?
+
+For each requirement, claimcheck formalizes a Dafny lemma and asks the theorem prover to verify it. Two attempts, then an obligation.
 
 ## Pipeline
 
-1. **Flatten** — normalize `dafny2js --claims` JSON into individual claim items
-2. **Translate** — convert each formal claim to natural language (Haiku)
-3. **Match** — identify candidate claim-requirement matches with confidence scores (Sonnet)
-4. **Prove** — for every requirement, try to formally verify it via strategy escalation:
-   - **Sentinel** — if a candidate match exists, construct a proof that calls the matched lemma (zero LLM cost)
-   - **Direct** — formalize the requirement with an empty proof body
-   - **LLM-guided** — have Sonnet write the proof
-   - **Retry** — feed Dafny errors back for iterative refinement
-5. **Obligations** — write `obligations.dfy` for requirements that couldn't be proved
+```
+for each requirement:
+    1. Formalize   LLM writes a Dafny lemma from the requirement + domain source
+    2. Verify      Dafny checks it
+    3. If failed:  LLM retries once with the Dafny error
+    4. If failed:  emit as obligation
+```
+
+No claims extraction. No NL translation. No matching. The LLM reads the source directly.
 
 ## Usage
 
 ```bash
-# Full pipeline with verification
+# Single project
 node bin/claimcheck.js \
-  -c claims.json \
-  -r requirements.md \
-  --module CounterDomain -d Counter \
-  --dfy ../dafny-replay/counter/CounterDomain.dfy
-
-# Requirements matching only (no Dafny verification)
-node bin/claimcheck.js \
-  -c claims.json \
-  -r requirements.md \
-  --module CounterDomain -d Counter
-
-# Extract claims from Dafny source first
-node bin/claimcheck.js \
-  --extract --dafny2js ../dafny-replay/dafny2js \
+  -r test/integration/reqs/counter.md \
   --dfy ../dafny-replay/counter/CounterDomain.dfy \
-  -r requirements.md \
-  --module CounterDomain -d Counter
+  --module CounterDomain -d counter
 
 # JSON output
-node bin/claimcheck.js -c claims.json -r requirements.md --module CounterDomain --json
+node bin/claimcheck.js \
+  -r test/integration/reqs/counter.md \
+  --dfy ../dafny-replay/counter/CounterDomain.dfy \
+  --module CounterDomain -d counter --json
+
+# All test projects
+node test/integration/run-all.js
+
+# Single test project
+node test/integration/run-all.js counter
 ```
 
 ## Options
 
 | Flag | Description |
 |------|-------------|
-| `-c, --claims <path>` | Path to claims.json (from `dafny2js --claims`) |
 | `-r, --requirements <path>` | Path to requirements file (markdown) |
-| `--dfy <path>` | Path to domain .dfy file (enables verification) |
-| `--module <name>` | Dafny module name to filter claims to |
-| `-d, --domain <name>` | Human-readable domain name for prompts |
+| `--dfy <path>` | Path to domain .dfy file |
+| `--module <name>` | Dafny module name to import |
+| `-d, --domain <name>` | Human-readable domain name (default: module name) |
 | `-o, --output <dir>` | Output directory for obligations.dfy (default: `.`) |
-| `--retries <n>` | Max verification retries per requirement (default: 3) |
-| `--extract` | Run `dafny2js --claims` first (requires `--dafny2js`) |
-| `--dafny2js <path>` | Path to dafny2js project directory |
 | `--json` | Output JSON instead of markdown |
+| `--model <id>` | Override LLM model (default: `claude-sonnet-4-5-20250929`) |
 | `-v, --verbose` | Verbose API/verification logging |
 
 ## Output
 
 **Markdown report** with sections:
-- Formally Verified Requirements — grouped by strategy (sentinel, direct, LLM-guided)
-- Obligations — requirements that need manual proof (see `obligations.dfy`)
-- Unexpected Proofs — claims with no corresponding requirement
+- Formally Verified Requirements — with the proved Dafny lemma
+- Obligations — requirements that need manual proof
 
-**obligations.dfy** — a Dafny module with lemma stubs for each unproved requirement, including the strategy trail and best attempt:
+**obligations.dfy** — a Dafny module with lemma stubs for each unproved requirement:
 
 ```dafny
 include "../dafny-replay/counter/CounterDomain.dfy"
@@ -73,8 +66,8 @@ module Obligations {
   import D = CounterDomain
 
   // Requirement: "The counter never exceeds 100"
-  // Status: unproven after 4 attempt(s)
-  // Strategies: sentinel✗ → direct✗ → llm-guided✗ → retry✗
+  // Status: unproven after 2 attempt(s)
+  // Strategies: direct✗ → retry✗
   lemma CounterNeverExceeds100(m: D.Model)
     requires D.Inv(m)
     ensures m <= 100
@@ -82,32 +75,20 @@ module Obligations {
 }
 ```
 
+## Test Projects
+
+| Project | Domain file | Module |
+|---------|------------|--------|
+| counter | `counter/CounterDomain.dfy` | CounterDomain |
+| kanban | `kanban/KanbanDomain.dfy` | KanbanDomain |
+| colorwheel | `colorwheel/ColorWheelDomain.dfy` | ColorWheelDomain |
+| canon | `canon/CanonDomain.dfy` | CanonDomain |
+| delegation-auth | `delegation-auth/DelegationAuthDomain.dfy` | DelegationAuthDomain |
+
+Requirements files live in `test/integration/reqs/`. Domain `.dfy` files are in `../dafny-replay/`.
+
 ## Requirements
 
 - Node.js 18+
 - `ANTHROPIC_API_KEY` environment variable
-- `dafny` in PATH (for verification step)
-- [dafny-replay/dafny2js](../dafny-replay/dafny2js) (for `--extract` mode)
-
-## Tests
-
-```bash
-# Unit tests
-node --test test/flatten.test.js
-
-# Integration suite: extract claims from all dafny-replay projects + flatten
-./test/integration/run-suite.sh
-
-# Full pipeline on a specific project (needs ANTHROPIC_API_KEY + dafny)
-./test/integration/run-suite.sh --full counter
-```
-
-## Evaluation
-
-See [EVAL.md](EVAL.md) for the promptfoo-based evaluation framework that compares model combinations across 5 test domains.
-
-```bash
-npm run eval           # run default eval
-npm run eval:ab        # A/B model comparison
-npm run eval:view      # open web UI
-```
+- `dafny` in PATH
