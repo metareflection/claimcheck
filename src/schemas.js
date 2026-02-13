@@ -20,3 +20,40 @@ export const FORMALIZE_TOOL = {
     required: ['lemmaName', 'dafnyCode', 'reasoning'],
   },
 };
+
+export const BATCH_FORMALIZE_TOOL = {
+  name: 'record_formalizations',
+  description: 'Record Dafny lemma signatures for all requirements at once.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      lemmas: {
+        type: 'array',
+        description: 'One lemma signature per requirement.',
+        items: {
+          type: 'object',
+          properties: {
+            requirementIndex: {
+              type: 'integer',
+              description: 'Zero-based index into the requirements array.',
+            },
+            lemmaName: {
+              type: 'string',
+              description: 'A descriptive PascalCase name for the lemma.',
+            },
+            dafnyCode: {
+              type: 'string',
+              description: 'Dafny lemma signature with requires/ensures clauses and an empty body {}.',
+            },
+            reasoning: {
+              type: 'string',
+              description: 'Brief explanation of why this lemma expresses the requirement.',
+            },
+          },
+          required: ['requirementIndex', 'lemmaName', 'dafnyCode', 'reasoning'],
+        },
+      },
+    },
+    required: ['lemmas'],
+  },
+};

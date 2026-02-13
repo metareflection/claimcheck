@@ -15,7 +15,7 @@ function getClient() {
  * Call the Anthropic API with a single tool, forcing tool_use.
  * Guarantees structured JSON output matching the tool's input_schema.
  */
-export async function callWithTool({ model, prompt, tool, toolChoice, system, verbose }) {
+export async function callWithTool({ model, prompt, tool, toolChoice, system, verbose, maxTokens }) {
   const anthropic = getClient();
 
   if (verbose) {
@@ -24,7 +24,7 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
 
   const response = await anthropic.messages.create({
     model,
-    max_tokens: 4096,
+    max_tokens: maxTokens ?? 4096,
     tools: [tool],
     tool_choice: toolChoice,
     ...(system ? { system } : {}),

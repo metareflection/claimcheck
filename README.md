@@ -2,19 +2,25 @@
 
 Does a formally verified Dafny specification cover a set of informal user requirements?
 
-For each requirement, claimcheck formalizes a Dafny lemma and asks the theorem prover to verify it. Two attempts, then an obligation.
+Claimcheck formalizes Dafny lemmas for all requirements and asks the theorem prover to verify them. A two-phase pipeline separates formalization (getting types right) from proof (filling in proof bodies).
 
 ## Pipeline
 
 ```
-for each requirement:
-    1. Formalize   LLM writes a Dafny lemma from the requirement + erased domain source
-    2. Verify      Dafny checks it (with soundness checks)
-    3. If failed:  LLM retries once with the Dafny error
-    4. If failed:  emit as obligation
+Phase 1 — Formalize (batch)
+    1. LLM sees erased source + ALL requirements → produces lemma signatures (empty body)
+    2. dafny resolve → typechecks all signatures at once
+    3. If resolve fails → resolve individually, retry broken ones, obligation if still broken
+    4. dafny verify with empty bodies → many lemmas pass here (done!)
+
+Phase 2 — Prove (individual, only for lemmas that need proof)
+    5. LLM sees domain source + well-typed signature + verify error → writes proof body
+    6. dafny verify → if fails, retry once → obligation
 ```
 
-The LLM sees the domain source with lemma proof bodies erased and marked `{:axiom}` — all types, functions, predicates, and lemma signatures preserved, proof noise stripped. Generated lemmas are rejected if they contain `assume` or `{:axiom}` (soundness checks).
+Best case: 1 LLM call + 1 resolve + 1 verify = done.
+
+Phase 1 always uses erased source (lemma bodies stripped, marked `{:axiom}`). Phase 2 uses full source by default, or erased source with `--erase`. Generated lemmas are rejected if they contain `assume` or `{:axiom}` (soundness checks).
 
 ## Usage
 
@@ -49,6 +55,7 @@ node test/integration/run-all.js counter
 | `-o, --output <dir>` | Output directory for obligations.dfy (default: `.`) |
 | `--json` | Output JSON instead of markdown |
 | `--model <id>` | Override LLM model (default: `claude-sonnet-4-5-20250929`) |
+| `--erase` | Also erase lemma bodies for Phase 2 (Phase 1 always uses erased source) |
 | `-v, --verbose` | Verbose API/verification logging |
 
 ## Output
@@ -67,7 +74,7 @@ module Obligations {
 
   // Requirement: "The counter never exceeds 100"
   // Status: unproven after 2 attempt(s)
-  // Strategies: direct✗ → retry✗
+  // Strategies: direct✗ → proof✗ → proof-retry✗
   lemma CounterNeverExceeds100(m: D.Model)
     requires D.Inv(m)
     ensures m <= 100

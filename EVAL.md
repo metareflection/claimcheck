@@ -22,7 +22,7 @@ node eval/bench.js --runs <N> --label <name> [options]
 |------|-------------|
 | `--runs <N>` | Number of runs (default: 3) |
 | `--label <name>` | Label for this result set (used as filename) |
-| `--erase` | Erase lemma proof bodies before showing source to LLM |
+| `--erase` | Also erase lemma bodies for Phase 2 proofs (Phase 1 always uses erased source) |
 | `--model <id>` | Override LLM model (default: `claude-sonnet-4-5-20250929`) |
 | `--verbose` | Verbose logging |
 
@@ -87,8 +87,20 @@ Runs all 5 domains (30 total requirements):
 | canon | 5 | Medium. Graph constraints, allocators. |
 | delegation-auth | 6 | Medium. Auth properties, no-op behaviors. |
 
+## Strategies in Results
+
+The two-phase pipeline reports these strategies:
+
+| Strategy | Meaning |
+|----------|---------|
+| `direct` | Phase 1 — verified with empty body (no proof needed) |
+| `proof` | Phase 2 — LLM wrote a proof body |
+| `proof-retry` | Phase 2 — LLM fixed a failed proof on retry |
+| `formalize` / `resolve-retry` | Phase 1 resolution failures (appear in obligations) |
+
 ## Cost
 
 Each run costs ~$0.50-1.00 with Sonnet, ~$5-10 with Opus. A 3-run eval with Sonnet is ~$2-3.
+The two-phase pipeline reduces LLM calls: Phase 1 batches all requirements in one call. Phase 2 only runs for lemmas that need proofs.
 
 Token counts in `run-all.js` output are cumulative (module-level counter doesn't reset between domains) — the last domain's number is the total. The bench script doesn't have this issue since each domain runs as a separate process.

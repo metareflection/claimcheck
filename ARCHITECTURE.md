@@ -2,7 +2,7 @@
 
 Claimcheck answers: **does a formally verified Dafny specification cover a set of informal user requirements?**
 
-For each requirement, it formalizes a Dafny lemma and asks the theorem prover to verify it. Two attempts, then an obligation.
+A two-phase pipeline separates formalization (getting types right) from proof (filling in proof bodies). Phase 1 batches all requirements in one LLM call. Phase 2 only runs for lemmas that don't verify with an empty body.
 
 ---
 
@@ -18,18 +18,24 @@ No claims extraction. No NL translation. No matching. The LLM reads the source d
 ## Pipeline
 
 ```
-for each requirement:
-    1. Formalize   LLM writes a Dafny lemma from the requirement + domain source
-    2. Verify      Dafny checks it (with soundness checks)
-    3. If failed:  LLM retries once with the Dafny error
-    4. If failed:  emit as obligation
+Phase 1 — Formalize (batch)
+    1. LLM sees erased source + ALL requirements → produces lemma signatures (empty body)
+    2. dafny resolve → typechecks all signatures at once
+    3. If resolve fails → resolve individually, retry broken ones, obligation if still broken
+    4. dafny verify with empty bodies → many lemmas pass here (done!)
+
+Phase 2 — Prove (individual, only for lemmas that need proof)
+    5. LLM sees domain source + well-typed signature + verify error → writes proof body
+    6. dafny verify → if fails, retry once → obligation
 ```
 
-Two LLM calls and two Dafny calls, max. Per requirement.
+Best case (e.g. counter): 1 LLM call + 1 resolve + 1 verify = done. Most invariant-consequence lemmas verify with an empty body.
+
+Worst case: 1 batch LLM call + N individual resolves + retry LLM call + verify + M proof LLM calls + M retries.
 
 ### Source Preparation
 
-Before the LLM sees the domain source, lemma proof bodies are erased and marked `{:axiom}`. This gives the LLM a clean view: all types, functions, predicates, and lemma signatures are preserved, but proof noise is stripped. The LLM knows what's already proved (from `ensures` clauses) without being distracted by proof internals.
+Lemma proof bodies are erased and marked `{:axiom}` for Phase 1. This gives the LLM a clean view: all types, functions, predicates, and lemma signatures are preserved, but proof noise is stripped. The LLM knows what's already proved (from `ensures` clauses) without being distracted by proof internals.
 
 ```dafny
 // Before (raw source)
@@ -41,7 +47,7 @@ lemma StepPreservesInv(m: Model, a: Action)
   // ... proof details ...
 }
 
-// After (what the LLM sees)
+// After (what the LLM sees in Phase 1)
 lemma {:axiom} StepPreservesInv(m: Model, a: Action)
   requires Inv(m)
   ensures Inv(Normalize(Apply(m, a)))
@@ -49,38 +55,47 @@ lemma {:axiom} StepPreservesInv(m: Model, a: Action)
 }
 ```
 
-### Formalize
+Phase 2 uses the full source by default (the LLM needs to see proof patterns to write proofs). The `--erase` flag makes Phase 2 also use erased source.
 
-The LLM receives the erased domain source and the requirement text. It writes a lemma placed in a module that imports the domain as `D`:
+### Phase 1: Batch Formalize
+
+The LLM receives erased domain source and **all** requirements at once. It produces one lemma signature per requirement, each with an empty body `{}`:
 
 ```dafny
-lemma Req_CounterNonNegative(m: D.Model)
+lemma CounterNonNegative(m: D.Model)
   requires D.Inv(m)
   ensures m >= 0
 {}
 ```
 
-### Verify
+All signatures are batch-resolved with `dafny resolve` (fast — no Z3). If the batch fails, each lemma is resolved individually. Failing ones are retried (one LLM call with the resolution errors), then re-resolved. Still broken = obligation.
 
-The lemma is wrapped in a module that imports the domain:
+Resolved signatures are then batch-verified with `dafny verify`. Many pass here (invariant consequences verify with an empty body). Failing ones are verified individually to separate passes from failures.
 
-```dafny
-include "path/to/Domain.dfy"
-module VerifyRequirement {
-  import opened D = DomainModule
-  <lemma>
-}
-```
+### Phase 2: Write Proofs
 
-Dafny verifies it against the **original** source (with full proofs). Before running Dafny, the lemma is checked for soundness: `assume` statements and `{:axiom}` attributes are rejected.
+For lemmas that resolved but didn't verify with an empty body, the LLM writes a proof body. It receives:
+- The full domain source (or erased with `--erase`)
+- The well-typed signature
+- The Dafny verification error
 
-### Retry
+It keeps the requires/ensures clauses and fills in the body. One retry on failure.
 
-The LLM receives the failed lemma and the Dafny error. It fixes types, adds proof hints, or restructures. One chance.
+### Strategies
+
+| Strategy | Phase | Description |
+|----------|-------|-------------|
+| `direct` | 1 | Verified with empty body |
+| `proof` | 2 | LLM wrote a proof body |
+| `proof-retry` | 2 | LLM fixed a failed proof on retry |
 
 ### Obligation
 
-If both attempts fail, the requirement becomes an obligation — a Dafny lemma stub with the error and best attempt.
+If Phase 2 retry also fails, the requirement becomes an obligation — a Dafny lemma stub with the error and best attempt.
+
+### Error Attribution
+
+When batch resolve fails, each lemma is resolved individually rather than parsing Dafny error output. `dafny resolve` is fast (no Z3), so N individual calls is fine. Each failing lemma gets its own clean error message for the retry prompt.
 
 ---
 
@@ -110,11 +125,11 @@ The report shows which requirements are formally verified and which need manual 
 | File | Purpose |
 |------|---------|
 | main.js | CLI + orchestration |
-| prove.js | formalize -> verify -> retry -> obligation |
-| verify.js | wrap lemma in module, run Dafny, soundness checks |
+| prove.js | two-phase pipeline: batch formalize → resolve → verify → prove |
+| verify.js | wrap lemma in module, run `dafny verify` / `dafny resolve`, soundness checks |
 | erase.js | strip lemma proof bodies, add {:axiom} |
 | obligations.js | generate obligations.dfy |
 | report.js | markdown/JSON output |
-| prompts.js | formalize + retry prompts |
-| schemas.js | formalize tool schema |
-| api.js | Anthropic API wrapper |
+| prompts.js | batch formalize, resolution retry, proof, proof retry prompts |
+| schemas.js | formalize tool + batch formalize tool schemas |
+| api.js | Anthropic API wrapper (with configurable maxTokens) |

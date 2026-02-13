@@ -20,11 +20,13 @@ export function renderReport(domain, proveResults, obligationsPath = null) {
   lines.push(`## Summary\n`);
 
   const direct = proved.filter((r) => r.strategy === 'direct').length;
-  const retry = proved.filter((r) => r.strategy === 'retry').length;
+  const proof = proved.filter((r) => r.strategy === 'proof').length;
+  const proofRetry = proved.filter((r) => r.strategy === 'proof-retry').length;
 
   lines.push(`- **Requirements formally verified:** ${proved.length}/${proveResults.length}`);
-  if (direct > 0) lines.push(`  - via direct proof: ${direct}`);
-  if (retry > 0) lines.push(`  - via retry: ${retry}`);
+  if (direct > 0) lines.push(`  - via empty body (direct): ${direct}`);
+  if (proof > 0) lines.push(`  - via proof: ${proof}`);
+  if (proofRetry > 0) lines.push(`  - via proof retry: ${proofRetry}`);
   lines.push(`- **Obligations (could not be verified):** ${gaps.length}`);
   lines.push('');
 

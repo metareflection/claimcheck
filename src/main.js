@@ -87,7 +87,8 @@ export async function main(argv) {
   const requirements = parseRequirements(requirementsText);
   const domainDfyPath = resolve(values.dfy);
   const domainSourceRaw = await readFile(domainDfyPath, 'utf-8');
-  const domainSource = values.erase ? eraseLemmaBodies(domainSourceRaw) : domainSourceRaw;
+  const erasedSource = eraseLemmaBodies(domainSourceRaw);
+  const domainSource = values.erase ? erasedSource : domainSourceRaw;
   const domainModule = values.module;
   const domain = values.domain ?? domainModule;
   const outputDir = resolve(values.output ?? '.');
@@ -101,7 +102,7 @@ export async function main(argv) {
 
   console.error(`\n[claimcheck] Proving ${requirements.length} requirement(s)...`);
   const proveResults = await proveAll(
-    requirements, domainSource, domainDfyPath, domainModule, domain, opts,
+    requirements, domainSource, erasedSource, domainDfyPath, domainModule, domain, opts,
   );
 
   const proved = proveResults.filter((r) => r.status === 'proved');
