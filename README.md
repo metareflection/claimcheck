@@ -100,6 +100,24 @@ In single-prompt mode, disputed results include richer detail: verdict category,
 
 Requirements files live in `test/integration/reqs/`. Claims files in `test/integration/claims/`. Domain `.dfy` files are in `../dafny-replay/`.
 
+## Benchmark Results
+
+Accuracy across 5 domains (counter, kanban, colorwheel, canon, delegation-auth) with 36 requirement-lemma pairs, including 8 deliberately bogus lemmas (tautologies, weakened postconditions, narrowed scope):
+
+| Variant | Accuracy | Time/run | API calls/run |
+|---------|----------|----------|---------------|
+| **Two-pass** (default) | 96.3% (104/108) | ~108s | 2 (batch informalize + batch compare) |
+| **Single-prompt** | 86.1% (31/36) | ~353s | 36 (one per pair) |
+| **Claude Code** (`bench-cc`) | 69.4% (25/36) | ~693s | 36 (one `claude -p` per pair) |
+
+Two-pass had 3 runs; single-prompt and Claude Code had 1 run each.
+
+Key takeaways:
+- Structural separation (two-pass) is both the most accurate and fastest
+- The informalize-without-seeing-requirement step prevents anchoring bias
+- Batching into 2 API calls vs 36 individual calls gives a ~3x speed advantage
+- Claude Code's general-purpose system prompt and lack of structured output hurt both accuracy and speed
+
 ## Requirements
 
 - Node.js 18+
