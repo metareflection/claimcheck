@@ -4,5 +4,5 @@
   { "requirement": "Adding a node with an existing ID is a no-op", "lemmaName": "AddExistingNodeIsNoop", "expected": "confirmed" },
   { "requirement": "Removing a node cleans up related constraints and edges", "lemmaName": "RemoveNodeCleansUp", "expected": "confirmed" },
   { "requirement": "The constraint ID allocator is always fresh", "lemmaName": "ConstraintIdAlwaysFresh", "expected": "confirmed" },
-  { "requirement": "Removing a node cleans up related constraints and edges", "lemmaName": "BogusRemoveNodePartial", "expected": "disputed" }
+  { "requirement": "All constraint targets reference existing nodes", "lemmaName": "BogusConstraintTargetsVacuous", "expected": "disputed", "reason": "vacuous precondition: requires |m.constraints| == 0 makes the ensures trivially true" }
 ]
