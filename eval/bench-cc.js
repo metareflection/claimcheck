@@ -44,6 +44,7 @@ const verbose = args.includes('--verbose');
 
 const domainFilter = getArg('--domain', null);
 const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
+const lemmaFilter = getArg('--lemma', null);
 
 // --- Call claude -p ---
 
@@ -122,7 +123,8 @@ async function main() {
       const claimsPath = join(CLAIMS_DIR, `${project.name}.dfy`);
       const dfySource = await readFile(claimsPath, 'utf-8');
       const mappingPath = join(MAPPINGS_DIR, `${project.name}.json`);
-      const mapping = JSON.parse(await readFile(mappingPath, 'utf-8'));
+      let mapping = JSON.parse(await readFile(mappingPath, 'utf-8'));
+      if (lemmaFilter) mapping = mapping.filter(e => e.lemmaName === lemmaFilter);
 
       for (const entry of mapping) {
         const code = extractLemma(dfySource, entry.lemmaName);
