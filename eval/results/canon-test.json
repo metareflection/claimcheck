@@ -1,0 +1,66 @@
+{
+  "label": "canon-test",
+  "timestamp": "2026-02-14T18:30:08.067Z",
+  "config": {
+    "runs": 1,
+    "model": "claude-sonnet-4-5-20250929",
+    "passthrough": []
+  },
+  "totalElapsedMs": 17530,
+  "results": [
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 17530
+    },
+    {
+      "domain": "canon",
+      "requirement": "All edge endpoints reference existing nodes",
+      "lemmaName": "EdgeEndpointsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 17530
+    },
+    {
+      "domain": "canon",
+      "requirement": "Adding a node with an existing ID is a no-op",
+      "lemmaName": "AddExistingNodeIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 17530
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeCleansUp",
+      "expected": "confirmed",
+      "status": "error",
+      "run": 1,
+      "elapsedMs": 17530
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeDropsId",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 17530
+    },
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExistEmpty",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 17530
+    }
+  ]
+}

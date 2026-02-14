@@ -25,7 +25,7 @@ const MAPPINGS_DIR = resolve(ROOT, 'test/integration/mappings');
 const CLAIMS_DIR = resolve(ROOT, 'test/integration/claims');
 const RESULTS_DIR = resolve(ROOT, 'eval/results');
 
-const DOMAINS = ['counter', 'kanban', 'colorwheel', 'canon', 'delegation-auth'];
+const ALL_DOMAINS = ['counter', 'kanban', 'colorwheel', 'canon', 'delegation-auth'];
 
 // --- Parse args ---
 
@@ -41,6 +41,9 @@ const runs = parseInt(getArg('--runs', '1'));
 const label = getArg('--label', `cc-${Date.now()}`);
 const model = getArg('--model', null);
 const verbose = args.includes('--verbose');
+
+const domainFilter = getArg('--domain', null);
+const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
 
 // --- Call claude -p ---
 

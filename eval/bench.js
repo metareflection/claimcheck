@@ -21,7 +21,7 @@ const CLAIMS_DIR = resolve(ROOT, 'test/integration/claims');
 const RESULTS_DIR = resolve(ROOT, 'eval/results');
 const BIN = resolve(ROOT, 'bin/claimcheck.js');
 
-const DOMAINS = ['counter', 'kanban', 'colorwheel', 'canon', 'delegation-auth'];
+const ALL_DOMAINS = ['counter', 'kanban', 'colorwheel', 'canon', 'delegation-auth'];
 
 // --- Parse args ---
 
@@ -42,6 +42,9 @@ if (args.includes('--single-prompt')) passthrough.push('--single-prompt');
 
 const model = getArg('--model', null);
 if (model) passthrough.push('--model', model);
+
+const domainFilter = getArg('--domain', null);
+const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
 
 // --- Run a single domain ---
 
