@@ -146,7 +146,9 @@ async function main() {
           .replace(/Call the record_claimcheck tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | PARTIALLY_JUSTIFIED | NOT_JUSTIFIED | VACUOUS`);
 
         try {
+          const lemmaStart = Date.now();
           const output = await callClaude(prompt);
+          const elapsedMs = Date.now() - lemmaStart;
           const verdict = parseVerdict(output);
 
           if (verbose) {
@@ -157,7 +159,7 @@ async function main() {
 
           const status = verdict === 'JUSTIFIED' ? 'confirmed' : 'disputed';
 
-          console.error(`    ${entry.lemmaName}: ${verdict || 'PARSE_FAILED'} → ${status}`);
+          console.error(`    ${entry.lemmaName}: ${verdict || 'PARSE_FAILED'} → ${status} (${(elapsedMs / 1000).toFixed(1)}s)`);
 
           allResults.push({
             domain: project.name,
@@ -167,6 +169,7 @@ async function main() {
             status,
             verdict,
             run,
+            elapsedMs,
           });
         } catch (err) {
           console.error(`    ${entry.lemmaName}: ERROR — ${err.message}`);
