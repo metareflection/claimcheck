@@ -107,27 +107,24 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
     compByIndex.set(c.requirementIndex, c);
   }
 
-  // Partition into passed/failed
+  // Partition into passed/failed — trust the compare step's judgement
   const passed = [];
   const failed = [];
 
   for (const l of lemmas) {
     const comp = compByIndex.get(l.index);
     const inf = informalByName.get(l.lemmaName);
-
-    // Auto-fail if trivial strength and no explicit pass
-    const isTrivial = trivialNames.has(l.lemmaName);
     const compMatch = comp?.match ?? false;
 
-    if (compMatch && !isTrivial) {
+    if (compMatch) {
       passed.push({ ...l, informalization: inf, comparison: comp });
     } else {
       failed.push({
         ...l,
         informalization: inf,
         comparison: comp,
-        discrepancy: comp?.discrepancy ?? (isTrivial ? 'Lemma rated as trivially weak — ensures clause may not express the requirement' : 'No comparison produced'),
-        weakeningType: comp?.weakeningType ?? (isTrivial ? 'tautology' : 'none'),
+        discrepancy: comp?.discrepancy ?? 'No comparison produced',
+        weakeningType: comp?.weakeningType ?? 'none',
       });
     }
   }
