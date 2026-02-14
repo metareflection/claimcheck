@@ -85,16 +85,20 @@ function callClaude(prompt) {
 // --- Parse verdict from markdown output ---
 
 function parseVerdict(output) {
-  // Look for **Verdict:** JUSTIFIED|PARTIALLY_JUSTIFIED|NOT_JUSTIFIED|VACUOUS
-  const match = output.match(/\*\*Verdict:\*\*\s*(JUSTIFIED|PARTIALLY[_ ]JUSTIFIED|NOT[_ ]JUSTIFIED|VACUOUS)/i);
-  if (match) {
-    return match[1].toUpperCase().replace(/\s+/g, '_');
+  const VERDICT_RE = /(?:JUSTIFIED|PARTIALLY[_ ]JUSTIFIED|NOT[_ ]JUSTIFIED|VACUOUS)/gi;
+
+  // 1. **Verdict:** JUSTIFIED or Verdict: JUSTIFIED
+  const explicit = output.match(/\*?\*?Verdict:?\*?\*?\s*(JUSTIFIED|PARTIALLY[_ ]JUSTIFIED|NOT[_ ]JUSTIFIED|VACUOUS)/i);
+  if (explicit) {
+    return explicit[1].toUpperCase().replace(/\s+/g, '_');
   }
-  // Fallback: look for verdict without bold
-  const fallback = output.match(/Verdict:\s*(JUSTIFIED|PARTIALLY[_ ]JUSTIFIED|NOT[_ ]JUSTIFIED|VACUOUS)/i);
-  if (fallback) {
-    return fallback[1].toUpperCase().replace(/\s+/g, '_');
+
+  // 2. Last occurrence of a verdict keyword anywhere in the output
+  const all = [...output.matchAll(VERDICT_RE)];
+  if (all.length > 0) {
+    return all[all.length - 1][0].toUpperCase().replace(/\s+/g, '_');
   }
+
   return null;
 }
 
