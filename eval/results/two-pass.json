@@ -1,12 +1,12 @@
 {
   "label": "two-pass",
-  "timestamp": "2026-02-14T18:12:12.642Z",
+  "timestamp": "2026-02-14T19:32:29.982Z",
   "config": {
     "runs": 3,
     "model": "claude-sonnet-4-5-20250929",
     "passthrough": []
   },
-  "totalElapsedMs": 321485,
+  "totalElapsedMs": 323241,
   "results": [
     {
       "domain": "counter",
@@ -15,7 +15,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 20862
+      "elapsedMs": 20472
     },
     {
       "domain": "counter",
@@ -24,7 +24,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 20862
+      "elapsedMs": 20472
     },
     {
       "domain": "counter",
@@ -33,7 +33,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 20862
+      "elapsedMs": 20472
     },
     {
       "domain": "counter",
@@ -42,7 +42,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 20862
+      "elapsedMs": 20472
     },
     {
       "domain": "counter",
@@ -51,7 +51,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 20862
+      "elapsedMs": 20472
     },
     {
       "domain": "counter",
@@ -60,7 +60,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 20862
+      "elapsedMs": 20472
     },
     {
       "domain": "counter",
@@ -69,7 +69,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 20862
+      "elapsedMs": 20472
     },
     {
       "domain": "kanban",
@@ -78,7 +78,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
@@ -87,7 +87,7 @@
       "expected": "confirmed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
@@ -96,16 +96,16 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
       "requirement": "Each column respects its WIP limit (number of cards does not exceed the limit)",
       "lemmaName": "WipLimitsRespected",
       "expected": "confirmed",
-      "status": "confirmed",
+      "status": "disputed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
@@ -114,7 +114,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
@@ -123,7 +123,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
@@ -132,7 +132,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
@@ -141,7 +141,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "kanban",
@@ -150,7 +150,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 27249
+      "elapsedMs": 32502
     },
     {
       "domain": "colorwheel",
@@ -159,7 +159,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17093
+      "elapsedMs": 16964
     },
     {
       "domain": "colorwheel",
@@ -168,7 +168,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17093
+      "elapsedMs": 16964
     },
     {
       "domain": "colorwheel",
@@ -177,7 +177,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17093
+      "elapsedMs": 16964
     },
     {
       "domain": "colorwheel",
@@ -186,7 +186,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17093
+      "elapsedMs": 16964
     },
     {
       "domain": "colorwheel",
@@ -195,7 +195,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17093
+      "elapsedMs": 16964
     },
     {
       "domain": "colorwheel",
@@ -204,7 +204,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17093
+      "elapsedMs": 16964
     },
     {
       "domain": "colorwheel",
@@ -213,7 +213,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 17093
+      "elapsedMs": 16964
     },
     {
       "domain": "canon",
@@ -222,7 +222,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17806
+      "elapsedMs": 19024
     },
     {
       "domain": "canon",
@@ -231,7 +231,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17806
+      "elapsedMs": 19024
     },
     {
       "domain": "canon",
@@ -240,16 +240,25 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 17806
+      "elapsedMs": 19024
     },
     {
       "domain": "canon",
       "requirement": "Removing a node cleans up related constraints and edges",
       "lemmaName": "RemoveNodeCleansUp",
       "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 19024
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeDropsId",
+      "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 17806
+      "elapsedMs": 19024
     },
     {
       "domain": "canon",
@@ -258,7 +267,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 17806
+      "elapsedMs": 19024
     },
     {
       "domain": "delegation-auth",
@@ -267,7 +276,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 22925
+      "elapsedMs": 22071
     },
     {
       "domain": "delegation-auth",
@@ -276,7 +285,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 22925
+      "elapsedMs": 22071
     },
     {
       "domain": "delegation-auth",
@@ -285,7 +294,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 22925
+      "elapsedMs": 22071
     },
     {
       "domain": "delegation-auth",
@@ -294,7 +303,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 22925
+      "elapsedMs": 22071
     },
     {
       "domain": "delegation-auth",
@@ -303,7 +312,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 22925
+      "elapsedMs": 22071
     },
     {
       "domain": "delegation-auth",
@@ -312,7 +321,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 22925
+      "elapsedMs": 22071
     },
     {
       "domain": "delegation-auth",
@@ -321,7 +330,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 22925
+      "elapsedMs": 22071
     },
     {
       "domain": "counter",
@@ -330,7 +339,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 21161
+      "elapsedMs": 17976
     },
     {
       "domain": "counter",
@@ -339,7 +348,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 21161
+      "elapsedMs": 17976
     },
     {
       "domain": "counter",
@@ -348,7 +357,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 21161
+      "elapsedMs": 17976
     },
     {
       "domain": "counter",
@@ -357,7 +366,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 21161
+      "elapsedMs": 17976
     },
     {
       "domain": "counter",
@@ -366,7 +375,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 21161
+      "elapsedMs": 17976
     },
     {
       "domain": "counter",
@@ -375,7 +384,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 21161
+      "elapsedMs": 17976
     },
     {
       "domain": "counter",
@@ -384,7 +393,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 21161
+      "elapsedMs": 17976
     },
     {
       "domain": "kanban",
@@ -393,7 +402,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -402,7 +411,7 @@
       "expected": "confirmed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -411,7 +420,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -420,7 +429,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -429,7 +438,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -438,7 +447,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -447,7 +456,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -456,7 +465,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "kanban",
@@ -465,7 +474,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 29739
+      "elapsedMs": 30450
     },
     {
       "domain": "colorwheel",
@@ -474,7 +483,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 19744
+      "elapsedMs": 17595
     },
     {
       "domain": "colorwheel",
@@ -483,7 +492,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 19744
+      "elapsedMs": 17595
     },
     {
       "domain": "colorwheel",
@@ -492,7 +501,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 19744
+      "elapsedMs": 17595
     },
     {
       "domain": "colorwheel",
@@ -501,7 +510,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 19744
+      "elapsedMs": 17595
     },
     {
       "domain": "colorwheel",
@@ -510,7 +519,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 19744
+      "elapsedMs": 17595
     },
     {
       "domain": "colorwheel",
@@ -519,7 +528,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 19744
+      "elapsedMs": 17595
     },
     {
       "domain": "colorwheel",
@@ -528,7 +537,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 19744
+      "elapsedMs": 17595
     },
     {
       "domain": "canon",
@@ -537,7 +546,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18365
+      "elapsedMs": 21003
     },
     {
       "domain": "canon",
@@ -546,7 +555,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18365
+      "elapsedMs": 21003
     },
     {
       "domain": "canon",
@@ -555,16 +564,25 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18365
+      "elapsedMs": 21003
     },
     {
       "domain": "canon",
       "requirement": "Removing a node cleans up related constraints and edges",
       "lemmaName": "RemoveNodeCleansUp",
       "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 21003
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeDropsId",
+      "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 18365
+      "elapsedMs": 21003
     },
     {
       "domain": "canon",
@@ -573,7 +591,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 18365
+      "elapsedMs": 21003
     },
     {
       "domain": "delegation-auth",
@@ -582,7 +600,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18864
+      "elapsedMs": 21149
     },
     {
       "domain": "delegation-auth",
@@ -591,7 +609,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18864
+      "elapsedMs": 21149
     },
     {
       "domain": "delegation-auth",
@@ -600,7 +618,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18864
+      "elapsedMs": 21149
     },
     {
       "domain": "delegation-auth",
@@ -609,7 +627,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18864
+      "elapsedMs": 21149
     },
     {
       "domain": "delegation-auth",
@@ -618,7 +636,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18864
+      "elapsedMs": 21149
     },
     {
       "domain": "delegation-auth",
@@ -627,7 +645,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 2,
-      "elapsedMs": 18864
+      "elapsedMs": 21149
     },
     {
       "domain": "delegation-auth",
@@ -636,7 +654,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 2,
-      "elapsedMs": 18864
+      "elapsedMs": 21149
     },
     {
       "domain": "counter",
@@ -645,7 +663,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 18984
+      "elapsedMs": 19352
     },
     {
       "domain": "counter",
@@ -654,7 +672,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 18984
+      "elapsedMs": 19352
     },
     {
       "domain": "counter",
@@ -663,7 +681,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 18984
+      "elapsedMs": 19352
     },
     {
       "domain": "counter",
@@ -672,7 +690,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 18984
+      "elapsedMs": 19352
     },
     {
       "domain": "counter",
@@ -681,7 +699,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 18984
+      "elapsedMs": 19352
     },
     {
       "domain": "counter",
@@ -690,7 +708,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 18984
+      "elapsedMs": 19352
     },
     {
       "domain": "counter",
@@ -699,7 +717,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 18984
+      "elapsedMs": 19352
     },
     {
       "domain": "kanban",
@@ -708,7 +726,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
@@ -717,7 +735,7 @@
       "expected": "confirmed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
@@ -726,7 +744,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
@@ -735,7 +753,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
@@ -744,16 +762,16 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
       "requirement": "The card allocator is always fresh (no allocated ID reused)",
       "lemmaName": "AllocatorAlwaysFresh",
       "expected": "confirmed",
-      "status": "disputed",
+      "status": "confirmed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
@@ -762,7 +780,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
@@ -771,7 +789,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "kanban",
@@ -780,7 +798,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 31325
+      "elapsedMs": 26264
     },
     {
       "domain": "colorwheel",
@@ -789,7 +807,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 20059
+      "elapsedMs": 19365
     },
     {
       "domain": "colorwheel",
@@ -798,7 +816,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 20059
+      "elapsedMs": 19365
     },
     {
       "domain": "colorwheel",
@@ -807,7 +825,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 20059
+      "elapsedMs": 19365
     },
     {
       "domain": "colorwheel",
@@ -816,7 +834,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 20059
+      "elapsedMs": 19365
     },
     {
       "domain": "colorwheel",
@@ -825,7 +843,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 20059
+      "elapsedMs": 19365
     },
     {
       "domain": "colorwheel",
@@ -834,7 +852,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 20059
+      "elapsedMs": 19365
     },
     {
       "domain": "colorwheel",
@@ -843,7 +861,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 20059
+      "elapsedMs": 19365
     },
     {
       "domain": "canon",
@@ -852,7 +870,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 17404
+      "elapsedMs": 20525
     },
     {
       "domain": "canon",
@@ -861,7 +879,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 17404
+      "elapsedMs": 20525
     },
     {
       "domain": "canon",
@@ -870,16 +888,25 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 17404
+      "elapsedMs": 20525
     },
     {
       "domain": "canon",
       "requirement": "Removing a node cleans up related constraints and edges",
       "lemmaName": "RemoveNodeCleansUp",
       "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 20525
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeDropsId",
+      "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 17404
+      "elapsedMs": 20525
     },
     {
       "domain": "canon",
@@ -888,7 +915,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 17404
+      "elapsedMs": 20525
     },
     {
       "domain": "delegation-auth",
@@ -897,7 +924,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 19903
+      "elapsedMs": 18528
     },
     {
       "domain": "delegation-auth",
@@ -906,7 +933,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 19903
+      "elapsedMs": 18528
     },
     {
       "domain": "delegation-auth",
@@ -915,7 +942,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 19903
+      "elapsedMs": 18528
     },
     {
       "domain": "delegation-auth",
@@ -924,7 +951,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 19903
+      "elapsedMs": 18528
     },
     {
       "domain": "delegation-auth",
@@ -933,7 +960,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 19903
+      "elapsedMs": 18528
     },
     {
       "domain": "delegation-auth",
@@ -942,7 +969,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 3,
-      "elapsedMs": 19903
+      "elapsedMs": 18528
     },
     {
       "domain": "delegation-auth",
@@ -951,7 +978,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 3,
-      "elapsedMs": 19903
+      "elapsedMs": 18528
     }
   ]
 }
