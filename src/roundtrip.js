@@ -22,11 +22,12 @@ import {
 export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
   if (lemmas.length === 0) return { passed: [], failed: [] };
 
+  const log = opts.log ?? (() => {});
   const informalizeModel = opts.informalizeModel ?? 'claude-haiku-4-5-20251001';
   const compareModel = opts.compareModel ?? opts.model ?? 'claude-sonnet-4-5-20250929';
 
   // Step 1: Informalize all lemmas (one batch call, haiku)
-  console.error(`[roundtrip] Informalizing ${lemmas.length} lemma(s)...`);
+  log(`[roundtrip] Informalizing ${lemmas.length} lemma(s)...`);
 
   const informalizePrompt = INFORMALIZE_PROMPT(domain, lemmas);
   const informalizeResponse = await callWithTool({
@@ -50,7 +51,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
   const trivialNames = new Set();
   for (const inf of informalizations) {
     if (inf.strength === 'trivial') {
-      console.error(`[roundtrip] Pre-check: ${inf.lemmaName} rated as trivial strength`);
+      log(`[roundtrip] Pre-check: ${inf.lemmaName} rated as trivial strength`);
       trivialNames.add(inf.lemmaName);
     }
   }
@@ -66,7 +67,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
   }
   for (const [post, names] of postByText) {
     if (names.length > 1) {
-      console.error(`[roundtrip] Pre-check: duplicate postcondition across ${names.join(', ')}: "${post}"`);
+      log(`[roundtrip] Pre-check: duplicate postcondition across ${names.join(', ')}: "${post}"`);
     }
   }
 
@@ -86,7 +87,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
     },
   }));
 
-  console.error(`[roundtrip] Comparing ${pairs.length} pair(s)...`);
+  log(`[roundtrip] Comparing ${pairs.length} pair(s)...`);
 
   const comparePrompt = ROUNDTRIP_COMPARE_PROMPT(domain, pairs);
   const compareResponse = await callWithTool({
@@ -131,7 +132,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
     }
   }
 
-  console.error(`[roundtrip] Passed: ${passed.length}, Failed: ${failed.length}`);
+  log(`[roundtrip] Passed: ${passed.length}, Failed: ${failed.length}`);
   return { passed, failed };
 }
 
@@ -151,6 +152,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
 export async function singlePromptCheck(lemmas, requirements, domain, opts = {}) {
   if (lemmas.length === 0) return { passed: [], failed: [] };
 
+  const log = opts.log ?? (() => {});
   const model = opts.model ?? 'claude-sonnet-4-5-20250929';
 
   const passed = [];
@@ -158,7 +160,7 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
 
   for (const l of lemmas) {
     const requirement = requirements[l.index];
-    console.error(`[claimcheck] Checking ${l.lemmaName} against: "${requirement.slice(0, 60)}..."`);
+    log(`[claimcheck] Checking ${l.lemmaName} against: "${requirement.slice(0, 60)}..."`);
 
     const prompt = CLAIMCHECK_PROMPT(domain, l.lemmaName, l.dafnyCode, requirement);
     const response = await callWithTool({
@@ -207,7 +209,7 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
     }
   }
 
-  console.error(`[claimcheck] Passed: ${passed.length}, Failed: ${failed.length}`);
+  log(`[claimcheck] Passed: ${passed.length}, Failed: ${failed.length}`);
   return { passed, failed };
 }
 

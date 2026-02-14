@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Run the claimcheck audit pipeline on all test projects with requirements + mapping files.
+ * Run the claimcheck audit pipeline on all test projects with mapping files.
  *
  * Usage:
  *   node test/integration/run-all.js                # all projects
@@ -14,10 +14,8 @@ import { access } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { PROJECTS, DAFNY_REPLAY } from './projects.js';
 
-const REQS_DIR = resolve(import.meta.dirname, 'reqs');
 const MAPPINGS_DIR = resolve(import.meta.dirname, 'mappings');
 const CLAIMS_DIR = resolve(import.meta.dirname, 'claims');
-const OUTPUT_DIR = resolve(import.meta.dirname, 'output');
 
 const args = process.argv.slice(2);
 const projectFilter = args.find(a => !a.startsWith('--'));
@@ -27,7 +25,7 @@ async function fileExists(path) {
   try { await access(path); return true; } catch { return false; }
 }
 
-// Projects that have requirements files
+// Projects that have mapping files
 const PROJECTS_WITH_REQS = PROJECTS.filter(p =>
   ['counter', 'kanban', 'colorwheel', 'canon', 'delegation-auth'].includes(p.name)
 );
@@ -44,14 +42,9 @@ async function run() {
   }
 
   for (const project of projects) {
-    const reqsPath = join(REQS_DIR, `${project.name}.md`);
     const mappingPath = join(MAPPINGS_DIR, `${project.name}.json`);
     const claimsPath = join(CLAIMS_DIR, `${project.name}.dfy`);
 
-    if (!await fileExists(reqsPath)) {
-      console.error(`\n=== ${project.name} [skip] no requirements file ===`);
-      continue;
-    }
     if (!await fileExists(mappingPath)) {
       console.error(`\n=== ${project.name} [skip] no mapping file ===`);
       continue;
@@ -66,12 +59,10 @@ async function run() {
     console.error(`${'='.repeat(60)}`);
 
     await main([
-      '-r', reqsPath,
       '-m', mappingPath,
       '--dfy', claimsPath,
       '--module', project.module,
       '-d', project.name,
-      '-o', OUTPUT_DIR,
       ...passthrough,
     ]);
   }

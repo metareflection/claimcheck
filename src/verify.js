@@ -11,7 +11,7 @@ const execFileAsync = promisify(execFile);
  *
  * @param {string} dafnyCode - the lemma code (placed inside a verification module)
  * @param {string} domainDfyPath - absolute path to the domain .dfy file
- * @param {string} domainModule - the Dafny module name to import (e.g. 'CounterDomain')
+ * @param {string} [domainModule] - the Dafny module name to import (e.g. 'CounterDomain'). If omitted, declarations from the included file are used directly.
  * @param {object} [opts]
  * @returns {Promise<{ success: boolean, error: string|null, output: string }>}
  */
@@ -25,12 +25,13 @@ export async function verify(dafnyCode, domainDfyPath, domainModule, opts = {}) 
   const tmpDir = await mkdtemp(join(tmpdir(), 'claimcheck-'));
   const tmpFile = join(tmpDir, 'verify.dfy');
 
+  const importLine = domainModule
+    ? `  import opened D = ${domainModule}\n\n`
+    : '';
   const fileContent = `include "${domainDfyPath}"
 
 module VerifyRequirement {
-  import opened D = ${domainModule}
-
-  ${dafnyCode}
+${importLine}  ${dafnyCode}
 }
 `;
 

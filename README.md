@@ -35,31 +35,71 @@ Same single-prompt approach piped through `claude -p` — no structural or promp
 
 ## Usage
 
+### File mode (extract lemmas from .dfy)
+
 ```bash
 # Two-pass audit (default)
 node bin/claimcheck.js \
-  -r test/integration/reqs/counter.md \
   -m test/integration/mappings/counter.json \
   --dfy test/integration/claims/counter.dfy \
-  --module CounterDomain -d counter
+  -d counter
+
+# With explicit module (needed for --verify with module-based .dfy files)
+node bin/claimcheck.js \
+  -m test/integration/mappings/counter.json \
+  --dfy test/integration/claims/counter.dfy \
+  --module CounterDomain -d counter --verify
 
 # Single-prompt audit
 node bin/claimcheck.js \
-  -r test/integration/reqs/counter.md \
   -m test/integration/mappings/counter.json \
   --dfy test/integration/claims/counter.dfy \
-  --module CounterDomain -d counter --single-prompt --json
+  -d counter --single-prompt --json
+```
 
+### Stdin mode (pure JSON-in/JSON-out)
+
+Pre-extract your claims and pipe them in:
+
+```bash
+echo '{
+  "claims": [
+    {
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegative",
+      "dafnyCode": "lemma CounterNonNegative(m: int)\n  requires Inv(m)\n  ensures m >= 0\n{}"
+    }
+  ],
+  "domain": "counter"
+}' | node bin/claimcheck.js --stdin
+```
+
+### Library usage
+
+```js
+import { claimcheck } from 'claimcheck';
+
+const { results, tokenUsage } = await claimcheck({
+  claims: [
+    {
+      requirement: 'The counter value is always non-negative',
+      lemmaName: 'CounterNonNegative',
+      dafnyCode: 'lemma CounterNonNegative(m: int)\n  requires Inv(m)\n  ensures m >= 0\n{}',
+    },
+  ],
+  domain: 'counter',
+});
+```
+
+### Tests and benchmarks
+
+```bash
 # All test projects
 node test/integration/run-all.js
 
 # Single test project
 node test/integration/run-all.js counter
-```
 
-### Benchmarks
-
-```bash
 # Run benchmarks
 node eval/bench.js --runs 3 --label two-pass
 node eval/bench.js --runs 3 --label single-prompt --single-prompt
@@ -78,18 +118,17 @@ node eval/compare.js two-pass cc-sonnet
 
 | Flag | Description |
 |------|-------------|
-| `-r, --requirements <path>` | Path to requirements file (markdown) |
-| `-m, --mapping <path>` | Path to mapping file (JSON) |
-| `--dfy <path>` | Path to claims .dfy file (contains the lemmas; must `include` the domain file) |
-| `--module <name>` | Domain module name (used in `import` for verification) |
-| `-d, --domain <name>` | Human-readable domain name (default: module name) |
-| `-o, --output <dir>` | Output directory for obligations.dfy (default: `.`) |
+| `-m, --mapping <path>` | Path to mapping file (JSON: `[{requirement, lemmaName}, ...]`) |
+| `--dfy <path>` | Path to claims .dfy file (contains the lemmas) |
+| `--module <name>` | Dafny module name (optional; needed for `--verify` with module-based files) |
+| `-d, --domain <name>` | Human-readable domain name (default: from `--module` or .dfy filename) |
 | `--json` | Output JSON instead of markdown |
 | `--single-prompt` | Use single-prompt claimcheck mode (one call per pair) |
 | `--model <id>` | Model for single-prompt mode (default: sonnet) |
 | `--verify` | Also run dafny verify on each lemma |
 | `--informalize-model <id>` | Model for back-translation in two-pass mode (default: haiku) |
 | `--compare-model <id>` | Model for comparison in two-pass mode (default: sonnet) |
+| `--stdin` | Read JSON from stdin (pure claimcheck, no file extraction) |
 | `-v, --verbose` | Verbose API/verification logging |
 
 ## Output
@@ -115,7 +154,7 @@ In single-prompt mode, disputed results include richer detail: verdict category,
 | canon | `test/integration/claims/canon.dfy` | CanonDomain |
 | delegation-auth | `test/integration/claims/delegation-auth.dfy` | DelegationAuthDomain |
 
-Each claims file `include`s its domain from `../dafny-replay/`. Requirements in `test/integration/reqs/`, mappings in `test/integration/mappings/`.
+Each claims file `include`s its domain from `../dafny-replay/`. Mappings in `test/integration/mappings/`.
 
 ## Benchmark Results
 

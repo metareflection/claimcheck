@@ -6,6 +6,10 @@
   "bin": {
     "claimcheck": "./bin/claimcheck.js"
   },
+  "exports": {
+    ".": "./src/claimcheck.js",
+    "./audit": "./src/audit.js"
+  },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0"
   }

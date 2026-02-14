@@ -15,7 +15,6 @@ import { resolve, join } from 'node:path';
 import { PROJECTS, DAFNY_REPLAY } from '../test/integration/projects.js';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const REQS_DIR = resolve(ROOT, 'test/integration/reqs');
 const MAPPINGS_DIR = resolve(ROOT, 'test/integration/mappings');
 const CLAIMS_DIR = resolve(ROOT, 'test/integration/claims');
 const RESULTS_DIR = resolve(ROOT, 'eval/results');
@@ -49,13 +48,12 @@ const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
 // --- Run a single domain ---
 
 function runDomain(project) {
-  const reqsPath = join(REQS_DIR, `${project.name}.md`);
   const mappingPath = join(MAPPINGS_DIR, `${project.name}.json`);
   const claimsPath = join(CLAIMS_DIR, `${project.name}.dfy`);
 
   return new Promise((resolve, reject) => {
     execFile('node', [
-      BIN, '-r', reqsPath, '-m', mappingPath,
+      BIN, '-m', mappingPath,
       '--dfy', claimsPath,
       '--module', project.module, '-d', project.name,
       '--json', ...passthrough,

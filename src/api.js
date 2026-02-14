@@ -49,3 +49,8 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
 export function getTokenUsage() {
   return { input: totalInput, output: totalOutput };
 }
+
+export function resetTokenUsage() {
+  totalInput = 0;
+  totalOutput = 0;
+}

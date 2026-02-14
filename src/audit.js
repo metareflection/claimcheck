@@ -1,36 +1,35 @@
 import { extractLemma } from './extract.js';
 import { verify } from './verify.js';
-import { roundtripCheck, singlePromptCheck } from './roundtrip.js';
+import { claimcheck } from './claimcheck.js';
 
 /**
  * Audit a set of requirement→lemma mappings.
  *
- * For each mapping entry:
- * 1. Extract lemma from .dfy source by name
- * 2. Optionally: dafny verify the lemma (confirm it's actually proved)
- * 3. Batch informalize all lemmas (haiku, 1 LLM call) — does NOT see requirements
- * 4. Batch compare back-translations against requirements (sonnet, 1 LLM call)
- * 5. Return: which mappings are trustworthy, which have discrepancies
+ * Thin wrapper over claimcheck() that handles:
+ * 1. Lemma extraction from .dfy source
+ * 2. Optional Dafny verification
+ * 3. Threading eval fields (expected) back into results
  *
- * @param {{ requirement: string, lemmaName: string }[]} mapping
+ * @param {{ requirement: string, lemmaName: string, expected?: string }[]} mapping
  * @param {string} dfySource - full Dafny source
  * @param {string} domainDfyPath - absolute path to .dfy file (for dafny verify)
- * @param {string} domainModule - Dafny module name
+ * @param {string} [domainModule] - Dafny module name (only needed for --verify)
  * @param {string} domain - display name
  * @param {object} [opts] - { verbose, verify, informalizeModel, compareModel, singlePrompt, model }
  * @returns {Promise<object[]>} per-mapping results
  */
 export async function audit(mapping, dfySource, domainDfyPath, domainModule, domain, opts = {}) {
-  const results = [];
+  const log = opts.log ?? console.error;
+  const earlyResults = [];
 
   // Step 1: Extract each lemma from source
-  console.error(`[audit] Extracting ${mapping.length} lemma(s) from source...`);
-  const lemmas = [];
+  log(`[audit] Extracting ${mapping.length} lemma(s) from source...`);
+  const claims = [];
   for (let i = 0; i < mapping.length; i++) {
     const entry = mapping[i];
     const code = extractLemma(dfySource, entry.lemmaName);
     if (!code) {
-      results.push({
+      earlyResults.push({
         index: i,
         requirement: entry.requirement,
         lemmaName: entry.lemmaName,
@@ -40,74 +39,60 @@ export async function audit(mapping, dfySource, domainDfyPath, domainModule, dom
       });
       continue;
     }
-    lemmas.push({ index: i, lemmaName: entry.lemmaName, dafnyCode: code });
+    claims.push({ index: i, requirement: entry.requirement, lemmaName: entry.lemmaName, dafnyCode: code });
   }
 
-  console.error(`[audit] Extracted ${lemmas.length}/${mapping.length} lemma(s)`);
+  log(`[audit] Extracted ${claims.length}/${mapping.length} lemma(s)`);
 
   // Step 2: Optionally verify each lemma with Dafny
-  if (opts.verify && lemmas.length > 0) {
-    console.error(`[audit] Verifying ${lemmas.length} lemma(s) with Dafny...`);
-    for (const l of lemmas) {
-      const result = await verify(l.dafnyCode, domainDfyPath, domainModule, opts);
+  if (opts.verify && claims.length > 0) {
+    log(`[audit] Verifying ${claims.length} lemma(s) with Dafny...`);
+    for (const c of claims) {
+      const result = await verify(c.dafnyCode, domainDfyPath, domainModule, opts);
       if (!result.success) {
-        console.error(`[audit] Verification failed for ${l.lemmaName}: ${result.error?.slice(0, 200)}`);
-        results.push({
-          index: l.index,
-          requirement: mapping[l.index].requirement,
-          lemmaName: l.lemmaName,
-          expected: mapping[l.index].expected ?? 'confirmed',
+        log(`[audit] Verification failed for ${c.lemmaName}: ${result.error?.slice(0, 200)}`);
+        earlyResults.push({
+          index: c.index,
+          requirement: c.requirement,
+          lemmaName: c.lemmaName,
+          expected: mapping[c.index].expected ?? 'confirmed',
           status: 'verify-failed',
           error: result.error,
-          dafnyCode: l.dafnyCode,
+          dafnyCode: c.dafnyCode,
         });
-        // Remove from lemmas to skip roundtrip
-        l.skip = true;
+        c.skip = true;
       }
     }
-    const activeLemmas = lemmas.filter(l => !l.skip);
-    console.error(`[audit] ${activeLemmas.length} lemma(s) verified successfully`);
+    const active = claims.filter(c => !c.skip);
+    log(`[audit] ${active.length} lemma(s) verified successfully`);
   }
 
-  const activeLemmas = lemmas.filter(l => !l.skip);
+  const activeClaims = claims.filter(c => !c.skip);
 
-  // Step 3+4: Round-trip check (informalize + compare)
-  if (activeLemmas.length > 0) {
-    const requirements = mapping.map(m => m.requirement);
-    const check = opts.singlePrompt ? singlePromptCheck : roundtripCheck;
-    const { passed, failed } = await check(activeLemmas, requirements, domain, opts);
-
-    for (const p of passed) {
-      results.push({
-        index: p.index,
-        requirement: mapping[p.index].requirement,
-        lemmaName: p.lemmaName,
-        expected: mapping[p.index].expected ?? 'confirmed',
-        status: 'confirmed',
-        dafnyCode: p.dafnyCode,
-        informalization: p.informalization,
-        comparison: p.comparison,
-      });
-    }
-
-    for (const f of failed) {
-      results.push({
-        index: f.index,
-        requirement: mapping[f.index].requirement,
-        lemmaName: f.lemmaName,
-        expected: mapping[f.index].expected ?? 'confirmed',
-        status: 'disputed',
-        dafnyCode: f.dafnyCode,
-        informalization: f.informalization,
-        comparison: f.comparison,
-        discrepancy: f.discrepancy,
-        weakeningType: f.weakeningType,
-      });
-    }
+  // Step 3: Core claimcheck (informalize + compare)
+  let auditResults = [];
+  if (activeClaims.length > 0) {
+    const { results } = await claimcheck({
+      claims: activeClaims,
+      domain,
+      options: { ...opts, log },
+    });
+    auditResults = results;
   }
 
-  // Sort results by original mapping index
-  results.sort((a, b) => a.index - b.index);
+  // Merge: add expected field back, combine with early results
+  const allResults = [...earlyResults];
+  for (const r of auditResults) {
+    // Find original mapping index
+    const claim = activeClaims.find(c => c.lemmaName === r.lemmaName);
+    const idx = claim?.index ?? 0;
+    allResults.push({
+      ...r,
+      index: idx,
+      expected: mapping[idx].expected ?? 'confirmed',
+    });
+  }
 
-  return results;
+  allResults.sort((a, b) => a.index - b.index);
+  return allResults;
 }
