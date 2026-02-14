@@ -3,8 +3,9 @@
  * Mystery QA benchmark runner.
  *
  * Compares approaches on BIG-bench Minute Mysteries QA (multiple choice):
- *   - baseline: model sees story + question + choices at once (single API call)
- *   - two-pass: model analyzes story first (no choices), then selects (two API calls)
+ *   - baseline: model sees story + question + choices, answers directly (one call)
+ *   - single-prompt: model sees everything, but prompt instructs analyze-then-choose (one call)
+ *   - two-pass: model analyzes story first (no choices), then selects (two calls)
  *
  * Supports two backends:
  *   - api: direct Anthropic API calls (faster, structured output via tool_use)
@@ -158,6 +159,35 @@ ${choiceList}
 Think through the clues in the story step by step. Identify contradictions, alibis, timeline issues, or other evidence that points to the answer.`;
 }
 
+function singlePrompt(story, choices) {
+  const choiceList = choices.map((c, i) => `${String.fromCharCode(65 + i)}. ${c}`).join('\n');
+  return `Read the following mystery story carefully, then answer the question at the end.
+
+## Story
+
+${story}
+
+## Answer Choices
+
+${choiceList}
+
+## Instructions
+
+Before selecting an answer, you MUST complete both passes:
+
+### Pass 1 — Analyze (do this BEFORE looking at the answer choices)
+
+1. **Timeline**: Reconstruct the sequence of events
+2. **Suspects**: List every person who could be responsible
+3. **Clues**: For each suspect, list evidence for and against them
+4. **Contradictions**: Note any statements that don't add up, impossible alibis, or logical inconsistencies
+5. **Conclusion**: Based purely on your analysis, who do you think is responsible and why?
+
+### Pass 2 — Select
+
+Now look at the answer choices. Based on your Pass 1 analysis, select the best answer. If your analysis pointed to someone not in the choices, reconsider the evidence for the available choices.`;
+}
+
 function analyzePrompt(story) {
   return `Read the following mystery story carefully and analyze it.
 
@@ -253,6 +283,26 @@ async function runBaseline(story, choices) {
   }
 }
 
+async function runSinglePrompt(story, choices) {
+  const prompt = singlePrompt(story, choices);
+
+  if (backend === 'api') {
+    const tool = answerTool(choices);
+    const result = await callWithTool({
+      model,
+      prompt,
+      tool,
+      toolChoice: { type: 'tool', name: 'record_answer' },
+      verbose,
+      maxTokens: 8192,
+    });
+    return result.input.answer;
+  } else {
+    const output = await callClaude(prompt + '\n\nState your final answer as:\n\n**Answer:** <letter>');
+    return parseAnswer(output, choices);
+  }
+}
+
 async function runTwoPass(story, choices) {
   // Pass 1: analyze without choices
   const prompt1 = analyzePrompt(story);
@@ -337,10 +387,12 @@ async function main() {
     try {
       if (mode === 'baseline') {
         answer = await runBaseline(ex.input, choices);
+      } else if (mode === 'single-prompt') {
+        answer = await runSinglePrompt(ex.input, choices);
       } else if (mode === 'two-pass') {
         answer = await runTwoPass(ex.input, choices);
       } else {
-        throw new Error(`Unknown mode: ${mode}`);
+        throw new Error(`Unknown mode: ${mode}. Expected: baseline, single-prompt, two-pass`);
       }
     } catch (err) {
       error = err.message;
