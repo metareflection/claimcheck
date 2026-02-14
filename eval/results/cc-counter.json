@@ -1,0 +1,82 @@
+{
+  "label": "cc-counter",
+  "timestamp": "2026-02-14T19:25:40.153Z",
+  "config": {
+    "runs": 1,
+    "model": "(claude-code default)",
+    "mode": "claude-code"
+  },
+  "totalElapsedMs": 113428,
+  "results": [
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegative",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "verdict": "JUSTIFIED",
+      "run": 1,
+      "elapsedMs": 16028
+    },
+    {
+      "domain": "counter",
+      "requirement": "The initial state satisfies the invariant",
+      "lemmaName": "InitSatisfiesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "verdict": "JUSTIFIED",
+      "run": 1,
+      "elapsedMs": 11320
+    },
+    {
+      "domain": "counter",
+      "requirement": "Every action preserves the invariant after normalization",
+      "lemmaName": "StepPreservesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "verdict": "JUSTIFIED",
+      "run": 1,
+      "elapsedMs": 14349
+    },
+    {
+      "domain": "counter",
+      "requirement": "Decrementing at zero keeps the counter at zero",
+      "lemmaName": "DecAtZeroKeepsZero",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "verdict": "JUSTIFIED",
+      "run": 1,
+      "elapsedMs": 15298
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegAlt",
+      "expected": "disputed",
+      "status": "disputed",
+      "verdict": "NOT_JUSTIFIED",
+      "run": 1,
+      "elapsedMs": 17263
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegLarge",
+      "expected": "disputed",
+      "status": "disputed",
+      "verdict": "PARTIALLY_JUSTIFIED",
+      "run": 1,
+      "elapsedMs": 20296
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterLowerBound",
+      "expected": "disputed",
+      "status": "disputed",
+      "verdict": "NOT_JUSTIFIED",
+      "run": 1,
+      "elapsedMs": 18865
+    }
+  ]
+}
