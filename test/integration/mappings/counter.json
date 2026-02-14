@@ -3,7 +3,7 @@
   { "requirement": "The initial state satisfies the invariant", "lemmaName": "InitSatisfiesInvariant", "expected": "confirmed" },
   { "requirement": "Every action preserves the invariant after normalization", "lemmaName": "StepPreservesInvariant", "expected": "confirmed" },
   { "requirement": "Decrementing at zero keeps the counter at zero", "lemmaName": "DecAtZeroKeepsZero", "expected": "confirmed" },
-  { "requirement": "The counter value is always non-negative", "lemmaName": "BogusCounterTautology", "expected": "disputed", "reason": "tautology: ensures m == m proves nothing about non-negativity" },
-  { "requirement": "The counter value is always non-negative", "lemmaName": "BogusCounterNonNegativeVacuous", "expected": "disputed", "reason": "vacuous precondition: requires m > 100 narrows scope, doesn't cover m == 0" },
-  { "requirement": "The counter value is always non-negative", "lemmaName": "BogusCounterWeakBound", "expected": "disputed", "reason": "weakened postcondition: ensures m >= -1 instead of m >= 0" }
+  { "requirement": "The counter value is always non-negative", "lemmaName": "CounterNonNegAlt", "expected": "disputed", "reason": "tautology: ensures m == m proves nothing about non-negativity" },
+  { "requirement": "The counter value is always non-negative", "lemmaName": "CounterNonNegLarge", "expected": "disputed", "reason": "vacuous precondition: requires m > 100 narrows scope, doesn't cover m == 0" },
+  { "requirement": "The counter value is always non-negative", "lemmaName": "CounterLowerBound", "expected": "disputed", "reason": "weakened postcondition: ensures m >= -1 instead of m >= 0" }
 ]

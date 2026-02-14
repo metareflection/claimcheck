@@ -7,5 +7,5 @@
   { "requirement": "The card allocator is always fresh (no allocated ID reused)", "lemmaName": "AllocatorAlwaysFresh", "expected": "confirmed" },
   { "requirement": "Lanes and WIP maps are defined exactly for existing columns", "lemmaName": "LanesAndWipMatchColumns", "expected": "confirmed" },
   { "requirement": "Moving a card preserves the total number of cards", "lemmaName": "MoveCardPreservesTotal", "expected": "disputed", "reason": "tautology: ensures |x| == |x| compares the same expression to itself" },
-  { "requirement": "Every card appears in exactly one column (exact partition)", "lemmaName": "BogusPartialPartition", "expected": "disputed", "reason": "missing conjunct: only proves NoDupSeq, not the bidirectional membership (card in map iff in lanes)" }
+  { "requirement": "Every card appears in exactly one column (exact partition)", "lemmaName": "CardPartitionNoDups", "expected": "disputed", "reason": "missing conjunct: only proves NoDupSeq, not the bidirectional membership (card in map iff in lanes)" }
 ]

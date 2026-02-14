@@ -5,5 +5,5 @@
   { "requirement": "Granting a capability to a non-existent subject is a no-op", "lemmaName": "GrantNonExistentIsNoop", "expected": "confirmed" },
   { "requirement": "Delegating between non-existent subjects is a no-op", "lemmaName": "DelegateNonExistentIsNoop", "expected": "confirmed" },
   { "requirement": "Revoking a non-existent delegation is a no-op", "lemmaName": "RevokeNonExistentIsNoop", "expected": "confirmed" },
-  { "requirement": "Granting a capability to a non-existent subject is a no-op", "lemmaName": "BogusGrantNoopInit", "expected": "disputed", "reason": "vacuous precondition: requires m == Init() restricts to empty model only" }
+  { "requirement": "Granting a capability to a non-existent subject is a no-op", "lemmaName": "GrantNonExistentIsNoopInit", "expected": "disputed", "reason": "vacuous precondition: requires m == Init() restricts to empty model only" }
 ]

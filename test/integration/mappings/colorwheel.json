@@ -5,5 +5,5 @@
   { "requirement": "Contrast pair indices are valid (between 0 and 4)", "lemmaName": "ContrastPairIndicesValid", "expected": "confirmed" },
   { "requirement": "When a mood is set (not Custom), all colors satisfy the mood constraints", "lemmaName": "MoodConstraintsSatisfied", "expected": "confirmed" },
   { "requirement": "Hues follow the selected harmony pattern", "lemmaName": "HuesFollowHarmony", "expected": "confirmed" },
-  { "requirement": "There are always exactly 5 colors in the palette", "lemmaName": "BogusAlwaysOneColor", "expected": "disputed", "reason": "weakened postcondition: ensures |m.colors| >= 1 instead of == 5" }
+  { "requirement": "There are always exactly 5 colors in the palette", "lemmaName": "PaletteNonEmpty", "expected": "disputed", "reason": "weakened postcondition: ensures |m.colors| >= 1 instead of == 5" }
 ]
