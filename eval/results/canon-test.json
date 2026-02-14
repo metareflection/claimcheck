@@ -1,12 +1,12 @@
 {
   "label": "canon-test",
-  "timestamp": "2026-02-14T18:31:50.761Z",
+  "timestamp": "2026-02-14T18:30:08.067Z",
   "config": {
     "runs": 1,
     "model": "claude-sonnet-4-5-20250929",
     "passthrough": []
   },
-  "totalElapsedMs": 19535,
+  "totalElapsedMs": 17530,
   "results": [
     {
       "domain": "canon",
@@ -15,7 +15,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 19535
+      "elapsedMs": 17530
     },
     {
       "domain": "canon",
@@ -24,7 +24,7 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 19535
+      "elapsedMs": 17530
     },
     {
       "domain": "canon",
@@ -33,16 +33,16 @@
       "expected": "confirmed",
       "status": "confirmed",
       "run": 1,
-      "elapsedMs": 19535
+      "elapsedMs": 17530
     },
     {
       "domain": "canon",
       "requirement": "Removing a node cleans up related constraints and edges",
       "lemmaName": "RemoveNodeCleansUp",
       "expected": "confirmed",
-      "status": "confirmed",
+      "status": "error",
       "run": 1,
-      "elapsedMs": 19535
+      "elapsedMs": 17530
     },
     {
       "domain": "canon",
@@ -51,7 +51,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 19535
+      "elapsedMs": 17530
     },
     {
       "domain": "canon",
@@ -60,7 +60,7 @@
       "expected": "disputed",
       "status": "disputed",
       "run": 1,
-      "elapsedMs": 19535
+      "elapsedMs": 17530
     }
   ]
 }

@@ -24,9 +24,10 @@ module CanonClaims {
   lemma RemoveNodeCleansUp(m: Model, id: C.NodeId)
     requires Inv(m)
     requires id in m.nodes
-    ensures id !in Normalize(Apply(m, RemoveNode(id))).nodes
-    ensures C.NoneMatch(Normalize(Apply(m, RemoveNode(id))).constraints, id)
-    ensures C.NoEdgesMention(Normalize(Apply(m, RemoveNode(id))).edges, id)
+    ensures var r := Normalize(Apply(m, RemoveNode(id)));
+            id !in r.nodes
+            && C.NoneMatch(r.constraints, id)
+            && C.NoEdgesMention(r.edges, id)
   {
     C.ShrinkConstraintsSpec(m.constraints, id, 0, [], m.nodes);
     C.FilterOutIncidentEdgesSpec(m.edges, id, 0, [], m.nodes);
