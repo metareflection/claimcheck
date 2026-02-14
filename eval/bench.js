@@ -12,7 +12,7 @@
 import { execFile } from 'node:child_process';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
-import { PROJECTS, DAFNY_REPLAY } from '../test/integration/projects.js';
+import { PROJECTS } from '../test/integration/projects.js';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const MAPPINGS_DIR = resolve(ROOT, 'test/integration/mappings');

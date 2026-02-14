@@ -12,7 +12,7 @@
 import { main } from '../../src/main.js';
 import { access } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
-import { PROJECTS, DAFNY_REPLAY } from './projects.js';
+import { PROJECTS } from './projects.js';
 
 const MAPPINGS_DIR = resolve(import.meta.dirname, 'mappings');
 const CLAIMS_DIR = resolve(import.meta.dirname, 'claims');

@@ -1,14 +1,9 @@
 /**
- * dafny-replay project registry.
+ * Test project registry.
  * Each entry maps a project to its entry file, domain module, and kernel.
  */
 
-import { resolve, join } from 'node:path';
 
-const DAFNY_REPLAY = resolve(import.meta.dirname, '../../../dafny-replay');
-const DAFNY2JS = join(DAFNY_REPLAY, 'dafny2js');
-
-export { DAFNY_REPLAY, DAFNY2JS };
 
 export const PROJECTS = [
   {
