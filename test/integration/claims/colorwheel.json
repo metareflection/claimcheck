@@ -1,0 +1,935 @@
+{
+  "predicates": [
+    {
+      "name": "Inv",
+      "module": "Domain",
+      "line": 5,
+      "isGhost": true
+    },
+    {
+      "name": "ValidColor",
+      "module": "ColorWheelSpec",
+      "body": "0 <= c.h < 360 && 0 <= c.s <= 100 && 0 <= c.l <= 100",
+      "conjuncts": [
+        "0 <= c.h < 360",
+        "0 <= c.s <= 100",
+        "0 <= c.l <= 100"
+      ],
+      "line": 83,
+      "isGhost": false
+    },
+    {
+      "name": "ValidBaseHue",
+      "module": "ColorWheelSpec",
+      "body": "0 <= h < 360",
+      "conjuncts": [
+        "0 <= h < 360"
+      ],
+      "line": 87,
+      "isGhost": false
+    },
+    {
+      "name": "ColorSatisfiesMood",
+      "module": "ColorWheelSpec",
+      "body": "match mood case Vibrant() => c.s >= 70 && 40 <= c.l <= 60 case SoftMuted() => 20 <= c.s <= 45 && 55 <= c.l <= 75 case Pastel() => c.s <= 35 && c.l >= 75 case DeepJewel() => c.s >= 60 && 25 <= c.l <= 45 case Earth() => 15 <= c.s <= 40 && 30 <= c.l <= 60 case Neon() => c.s >= 90 && 50 <= c.l <= 65 case Custom() => true",
+      "conjuncts": [
+        "match mood case Vibrant() => c.s >= 70 && 40 <= c.l <= 60 case SoftMuted() => 20 <= c.s <= 45 && 55 <= c.l <= 75 case Pastel() => c.s <= 35 && c.l >= 75 case DeepJewel() => c.s >= 60 && 25 <= c.l <= 45 case Earth() => 15 <= c.s <= 40 && 30 <= c.l <= 60 case Neon() => c.s >= 90 && 50 <= c.l <= 65 case Custom() => true"
+      ],
+      "line": 91,
+      "isGhost": false
+    },
+    {
+      "name": "HuesMatchHarmony",
+      "module": "ColorWheelSpec",
+      "body": "if harmony == Harmony.Custom then true else var expectedHues: seq<int> := AllHarmonyHues(baseHue, harmony); |colors| == 5 && |expectedHues| == 5 && forall i: int {:trigger expectedHues[i]} {:trigger colors[i]} | 0 <= i < 5 :: colors[i].h == expectedHues[i]",
+      "conjuncts": [
+        "if harmony == Harmony.Custom then true else var expectedHues: seq<int> := AllHarmonyHues(baseHue, harmony); |colors| == 5 && |expectedHues| == 5 && forall i: int {:trigger expectedHues[i]} {:trigger colors[i]} | 0 <= i < 5 :: colors[i].h == expectedHues[i]"
+      ],
+      "line": 196,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "ColorWheelSpec",
+      "body": "ValidBaseHue(m.baseHue) && |m.colors| == 5 && (forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])) && 0 <= m.contrastPair.0 < 5 && 0 <= m.contrastPair.1 < 5 && (m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)) && HuesMatchHarmony(m.colors, m.baseHue, m.harmony)",
+      "conjuncts": [
+        "ValidBaseHue(m.baseHue)",
+        "|m.colors| == 5",
+        "forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])",
+        "0 <= m.contrastPair.0 < 5",
+        "0 <= m.contrastPair.1 < 5",
+        "m.mood != Mood.Custom ==> forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(m.colors[i], m.mood)",
+        "HuesMatchHarmony(m.colors, m.baseHue, m.harmony)"
+      ],
+      "line": 208,
+      "isGhost": false
+    },
+    {
+      "name": "ValidRandomSeeds",
+      "module": "ColorWheelSpec",
+      "body": "|seeds| == 10 && forall i: int {:trigger seeds[i]} | 0 <= i < 10 :: 0 <= seeds[i] && seeds[i] <= 100",
+      "conjuncts": [
+        "|seeds| == 10",
+        "forall i: int {:trigger seeds[i]} | 0 <= i < 10 :: 0 <= seeds[i] && seeds[i] <= 100"
+      ],
+      "line": 238,
+      "isGhost": false
+    },
+    {
+      "name": "AllColorsSatisfyMood",
+      "module": "ColorWheelSpec",
+      "body": "forall i: int {:trigger colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(colors[i], mood)",
+      "conjuncts": [
+        "forall i: int {:trigger colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(colors[i], mood)"
+      ],
+      "line": 243,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "ColorWheelDomain",
+      "body": "CWSpec.Inv(m)",
+      "conjuncts": [
+        "CWSpec.Inv(m)"
+      ],
+      "line": 12,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "Kernel.D.Abs",
+      "line": 5,
+      "isGhost": true
+    },
+    {
+      "name": "HistInv",
+      "module": "Kernel",
+      "body": "(forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])) && D.Inv(h.present) && forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])",
+      "conjuncts": [
+        "forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])",
+        "D.Inv(h.present)",
+        "forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])"
+      ],
+      "line": 74,
+      "isGhost": true
+    },
+    {
+      "name": "HistInv",
+      "module": "ColorWheelKernel",
+      "body": "(forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])) && D.Inv(h.present) && forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])",
+      "conjuncts": [
+        "forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])",
+        "D.Inv(h.present)",
+        "forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])"
+      ],
+      "line": 74,
+      "isGhost": true
+    }
+  ],
+  "lemmas": [
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Domain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 12
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 15
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 6
+    },
+    {
+      "name": "GeneratePaletteColorsValid",
+      "module": "ColorWheelProof",
+      "requires": [
+        "ValidBaseHue(baseHue)",
+        "ValidRandomSeeds(randomSeeds)"
+      ],
+      "ensures": [
+        "ghost var colors: seq<Color> := GeneratePaletteColors(baseHue, mood, harmony, randomSeeds); |colors| == 5 && (forall i: int {:trigger colors[i]} | 0 <= i < 5 :: ValidColor(colors[i])) && (mood != Mood.Custom ==> forall i: int {:trigger colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(colors[i], mood)) && HuesMatchHarmony(colors, baseHue, harmony)"
+      ],
+      "line": 26
+    },
+    {
+      "name": "GenerateColorGoldenValid",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= h < 360",
+        "0 <= colorIndex < 5",
+        "0 <= seedS <= 100",
+        "0 <= seedL <= 100"
+      ],
+      "ensures": [
+        "ValidColor(GenerateColorGolden(h, mood, colorIndex, seedS, seedL))",
+        "mood != Mood.Custom ==> ColorSatisfiesMood(GenerateColorGolden(h, mood, colorIndex, seedS, seedL), mood)"
+      ],
+      "line": 59
+    },
+    {
+      "name": "GoldenSLForMoodValid",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= colorIndex < 5",
+        "0 <= seedS <= 100",
+        "0 <= seedL <= 100"
+      ],
+      "ensures": [
+        "var (s: int, l: int) := GoldenSLForMood(mood, colorIndex, seedS, seedL); 0 <= s <= 100 && 0 <= l <= 100 && (mood != Mood.Custom ==> ColorSatisfiesMood(Color(0, s, l), mood))"
+      ],
+      "line": 75
+    },
+    {
+      "name": "RandomInRangeValid",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= seed <= 100",
+        "min <= max"
+      ],
+      "ensures": [
+        "min <= RandomInRange(seed, min, max) <= max"
+      ],
+      "line": 95
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "ColorWheelProof",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 112
+    },
+    {
+      "name": "NormalizeHueValid",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "0 <= NormalizeHue(h) < 360"
+      ],
+      "line": 131
+    },
+    {
+      "name": "NormalizeEnsuresValidBaseHue",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "ValidBaseHue(Normalize(m).baseHue)"
+      ],
+      "line": 143
+    },
+    {
+      "name": "NormalizeEnsuresColorCount",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "|Normalize(m).colors| == 5"
+      ],
+      "line": 149
+    },
+    {
+      "name": "ClampColorValid",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "ValidColor(ClampColor(c))"
+      ],
+      "line": 155
+    },
+    {
+      "name": "NormalizeEnsuresValidColors",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "forall i: int {:trigger Normalize(m).colors[i]} | 0 <= i < 5 :: ValidColor(Normalize(m).colors[i])"
+      ],
+      "line": 162
+    },
+    {
+      "name": "NormalizeEnsuresValidContrastPair",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "0 <= Normalize(m).contrastPair.0 < 5",
+        "0 <= Normalize(m).contrastPair.1 < 5"
+      ],
+      "line": 177
+    },
+    {
+      "name": "NormalizeColorsEquality",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "Normalize(m).colors == NormalizedColors(m)"
+      ],
+      "line": 203
+    },
+    {
+      "name": "NormalizeMoodImpliesCheck",
+      "module": "ColorWheelProof",
+      "requires": [
+        "Normalize(m).mood != Mood.Custom"
+      ],
+      "ensures": [
+        "m.mood != Mood.Custom",
+        "Normalize(m).mood == m.mood",
+        "AllColorsSatisfyMood(NormalizedColors(m), m.mood)"
+      ],
+      "line": 210
+    },
+    {
+      "name": "NormalizeEnsuresMoodConstraint",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "Normalize(m).mood != Mood.Custom ==> forall i: int {:trigger Normalize(m).colors[i]} | 0 <= i < 5 :: ColorSatisfiesMood(Normalize(m).colors[i], Normalize(m).mood)"
+      ],
+      "line": 300
+    },
+    {
+      "name": "NormalizeEnsuresHarmonyConstraint",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "HuesMatchHarmony(Normalize(m).colors, Normalize(m).baseHue, Normalize(m).harmony)"
+      ],
+      "line": 314
+    },
+    {
+      "name": "AdjustPaletteShiftsHues",
+      "module": "ColorWheelProof",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "ghost var m': Model := Apply(m, AdjustPalette(deltaH, deltaS, deltaL)); forall i: int {:trigger m.colors[i]} {:trigger m'.colors[i]} | 0 <= i < 5 :: m'.colors[i].h == NormalizeHue(m.colors[i].h + deltaH)"
+      ],
+      "line": 327
+    },
+    {
+      "name": "AdjustPaletteShiftsHuesHarmony",
+      "module": "ColorWheelProof",
+      "requires": [
+        "Inv(m)",
+        "|AllHarmonyHues(NormalizeHue(m.baseHue + deltaH), m.harmony)| == 5"
+      ],
+      "ensures": [
+        "ghost var m': Model := Apply(m, AdjustPalette(deltaH, deltaS, deltaL)); forall i: int {:trigger m.colors[i]} {:trigger m'.colors[i]} | 0 <= i < 5 :: m'.colors[i].h == NormalizeHue(m.colors[i].h + deltaH)"
+      ],
+      "line": 353
+    },
+    {
+      "name": "HarmonyHuesShift",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= baseHue < 360",
+        "harmony != Harmony.Custom",
+        "|AllHarmonyHues(baseHue, harmony)| == 5"
+      ],
+      "ensures": [
+        "ghost var oldHues: seq<int> := AllHarmonyHues(baseHue, harmony); ghost var newHues: seq<int> := AllHarmonyHues(NormalizeHue(baseHue + deltaH), harmony); |newHues| == 5 && forall i: int {:trigger oldHues[i]} {:trigger newHues[i]} | 0 <= i < 5 :: newHues[i] == NormalizeHue(oldHues[i] + deltaH)"
+      ],
+      "line": 373
+    },
+    {
+      "name": "HarmonyHuesShiftComplementary",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= baseHue < 360"
+      ],
+      "ensures": [
+        "ghost var oldHues: seq<int> := AllHarmonyHues(baseHue, Complementary); ghost var newHues: seq<int> := AllHarmonyHues(NormalizeHue(baseHue + deltaH), Complementary); |oldHues| == 5 && |newHues| == 5 && forall i: int {:trigger oldHues[i]} {:trigger newHues[i]} | 0 <= i < 5 :: newHues[i] == NormalizeHue(oldHues[i] + deltaH)"
+      ],
+      "line": 403
+    },
+    {
+      "name": "HarmonyHuesShiftTriadic",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= baseHue < 360"
+      ],
+      "ensures": [
+        "ghost var oldHues: seq<int> := AllHarmonyHues(baseHue, Triadic); ghost var newHues: seq<int> := AllHarmonyHues(NormalizeHue(baseHue + deltaH), Triadic); |oldHues| == 5 && |newHues| == 5 && forall i: int {:trigger oldHues[i]} {:trigger newHues[i]} | 0 <= i < 5 :: newHues[i] == NormalizeHue(oldHues[i] + deltaH)"
+      ],
+      "line": 418
+    },
+    {
+      "name": "HarmonyHuesShiftAnalogous",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= baseHue < 360"
+      ],
+      "ensures": [
+        "ghost var oldHues: seq<int> := AllHarmonyHues(baseHue, Analogous); ghost var newHues: seq<int> := AllHarmonyHues(NormalizeHue(baseHue + deltaH), Analogous); |oldHues| == 5 && |newHues| == 5 && forall i: int {:trigger oldHues[i]} {:trigger newHues[i]} | 0 <= i < 5 :: newHues[i] == NormalizeHue(oldHues[i] + deltaH)"
+      ],
+      "line": 433
+    },
+    {
+      "name": "HarmonyHuesShiftSplitComplement",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= baseHue < 360"
+      ],
+      "ensures": [
+        "ghost var oldHues: seq<int> := AllHarmonyHues(baseHue, SplitComplement); ghost var newHues: seq<int> := AllHarmonyHues(NormalizeHue(baseHue + deltaH), SplitComplement); |oldHues| == 5 && |newHues| == 5 && forall i: int {:trigger oldHues[i]} {:trigger newHues[i]} | 0 <= i < 5 :: newHues[i] == NormalizeHue(oldHues[i] + deltaH)"
+      ],
+      "line": 448
+    },
+    {
+      "name": "HarmonyHuesShiftSquare",
+      "module": "ColorWheelProof",
+      "requires": [
+        "0 <= baseHue < 360"
+      ],
+      "ensures": [
+        "ghost var oldHues: seq<int> := AllHarmonyHues(baseHue, Square); ghost var newHues: seq<int> := AllHarmonyHues(NormalizeHue(baseHue + deltaH), Square); |oldHues| == 5 && |newHues| == 5 && forall i: int {:trigger oldHues[i]} {:trigger newHues[i]} | 0 <= i < 5 :: newHues[i] == NormalizeHue(oldHues[i] + deltaH)"
+      ],
+      "line": 463
+    },
+    {
+      "name": "NormalizeHueShiftLemma",
+      "module": "ColorWheelProof",
+      "requires": [],
+      "ensures": [
+        "NormalizeHue(NormalizeHue(a) + b) == NormalizeHue(a + b)"
+      ],
+      "line": 479
+    },
+    {
+      "name": "NormalizeHueModEquiv",
+      "module": "ColorWheelProof",
+      "requires": [
+        "nx == NormalizeHue(x)"
+      ],
+      "ensures": [
+        "(nx - x) % 360 == 0"
+      ],
+      "line": 494
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "ColorWheelDomain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 28
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "ColorWheelDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 34
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Kernel.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 12
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Kernel.D.Abs",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 15
+    },
+    {
+      "name": "DoPreservesInv",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [
+        "D.Inv(Do(h, a).present)"
+      ],
+      "line": 67
+    },
+    {
+      "name": "InitHistorySatisfiesInv",
+      "module": "Kernel",
+      "requires": [],
+      "ensures": [
+        "HistInv(InitHistory())"
+      ],
+      "line": 80
+    },
+    {
+      "name": "UndoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Undo(h))"
+      ],
+      "line": 86
+    },
+    {
+      "name": "RedoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Redo(h))"
+      ],
+      "line": 92
+    },
+    {
+      "name": "DoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Do(h, a))"
+      ],
+      "line": 98
+    },
+    {
+      "name": "PreviewPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Preview(h, a))"
+      ],
+      "line": 105
+    },
+    {
+      "name": "CommitFromPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)",
+        "D.Inv(baseline)"
+      ],
+      "ensures": [
+        "HistInv(CommitFrom(h, baseline))"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DoHasNoRedoBranch",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "Redo(Do(h, a)) == Do(h, a)"
+      ],
+      "line": 120
+    },
+    {
+      "name": "UndoRedoRoundTrip",
+      "module": "Kernel",
+      "requires": [
+        "|h.past| > 0"
+      ],
+      "ensures": [
+        "Redo(Undo(h)) == h"
+      ],
+      "line": 126
+    },
+    {
+      "name": "RedoUndoRoundTrip",
+      "module": "Kernel",
+      "requires": [
+        "|h.future| > 0"
+      ],
+      "ensures": [
+        "Undo(Redo(h)) == h"
+      ],
+      "line": 131
+    },
+    {
+      "name": "UndoAtBeginningIsNoOp",
+      "module": "Kernel",
+      "requires": [
+        "|h.past| == 0"
+      ],
+      "ensures": [
+        "Undo(h) == h"
+      ],
+      "line": 137
+    },
+    {
+      "name": "RedoAtEndIsNoOp",
+      "module": "Kernel",
+      "requires": [
+        "|h.future| == 0"
+      ],
+      "ensures": [
+        "Redo(h) == h"
+      ],
+      "line": 142
+    },
+    {
+      "name": "DoPreservesInv",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [
+        "D.Inv(Do(h, a).present)"
+      ],
+      "line": 67
+    },
+    {
+      "name": "InitHistorySatisfiesInv",
+      "module": "ColorWheelKernel",
+      "requires": [],
+      "ensures": [
+        "HistInv(InitHistory())"
+      ],
+      "line": 80
+    },
+    {
+      "name": "UndoPreservesHistInv",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Undo(h))"
+      ],
+      "line": 86
+    },
+    {
+      "name": "RedoPreservesHistInv",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Redo(h))"
+      ],
+      "line": 92
+    },
+    {
+      "name": "DoPreservesHistInv",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Do(h, a))"
+      ],
+      "line": 98
+    },
+    {
+      "name": "PreviewPreservesHistInv",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Preview(h, a))"
+      ],
+      "line": 105
+    },
+    {
+      "name": "CommitFromPreservesHistInv",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "HistInv(h)",
+        "D.Inv(baseline)"
+      ],
+      "ensures": [
+        "HistInv(CommitFrom(h, baseline))"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DoHasNoRedoBranch",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "Redo(Do(h, a)) == Do(h, a)"
+      ],
+      "line": 120
+    },
+    {
+      "name": "UndoRedoRoundTrip",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "|h.past| > 0"
+      ],
+      "ensures": [
+        "Redo(Undo(h)) == h"
+      ],
+      "line": 126
+    },
+    {
+      "name": "RedoUndoRoundTrip",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "|h.future| > 0"
+      ],
+      "ensures": [
+        "Undo(Redo(h)) == h"
+      ],
+      "line": 131
+    },
+    {
+      "name": "UndoAtBeginningIsNoOp",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "|h.past| == 0"
+      ],
+      "ensures": [
+        "Undo(h) == h"
+      ],
+      "line": 137
+    },
+    {
+      "name": "RedoAtEndIsNoOp",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "|h.future| == 0"
+      ],
+      "ensures": [
+        "Redo(h) == h"
+      ],
+      "line": 142
+    }
+  ],
+  "functions": [
+    {
+      "name": "Apply",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 8
+    },
+    {
+      "name": "RandomInRange",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "0 <= seed <= 100",
+        "min <= max"
+      ],
+      "ensures": [],
+      "line": 115
+    },
+    {
+      "name": "RandomSLForMood",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "0 <= seedS <= 100",
+        "0 <= seedL <= 100"
+      ],
+      "ensures": [],
+      "line": 124
+    },
+    {
+      "name": "GoldenSLForMood",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "0 <= colorIndex < 5",
+        "0 <= seedS <= 100",
+        "0 <= seedL <= 100"
+      ],
+      "ensures": [],
+      "line": 139
+    },
+    {
+      "name": "GenerateColorGolden",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "0 <= h < 360",
+        "0 <= colorIndex < 5",
+        "0 <= seedS <= 100",
+        "0 <= seedL <= 100"
+      ],
+      "ensures": [],
+      "line": 250
+    },
+    {
+      "name": "GeneratePaletteColors",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "ValidBaseHue(baseHue)",
+        "ValidRandomSeeds(randomSeeds)"
+      ],
+      "ensures": [],
+      "line": 261
+    },
+    {
+      "name": "Apply",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 286
+    },
+    {
+      "name": "ApplyLinkedAdjustment",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "|m.colors| == 5",
+        "forall i: int {:trigger m.colors[i]} | 0 <= i < 5 :: ValidColor(m.colors[i])"
+      ],
+      "ensures": [],
+      "line": 342
+    },
+    {
+      "name": "AdjustColorSL",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "0 <= newHue < 360"
+      ],
+      "ensures": [],
+      "line": 377
+    },
+    {
+      "name": "ApplyIndependentAdjustment",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "0 <= index < 5",
+        "|m.colors| == 5"
+      ],
+      "ensures": [],
+      "line": 389
+    },
+    {
+      "name": "ApplySetColorDirect",
+      "module": "ColorWheelSpec",
+      "requires": [
+        "0 <= index < 5",
+        "|m.colors| == 5"
+      ],
+      "ensures": [],
+      "line": 419
+    },
+    {
+      "name": "Apply",
+      "module": "ColorWheelDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 20
+    },
+    {
+      "name": "Apply",
+      "module": "Kernel.D.Abs",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 8
+    },
+    {
+      "name": "Step",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(m)"
+      ],
+      "ensures": [],
+      "line": 23
+    },
+    {
+      "name": "Do",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 36
+    },
+    {
+      "name": "Preview",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 43
+    },
+    {
+      "name": "Step",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "D.Inv(m)"
+      ],
+      "ensures": [],
+      "line": 23
+    },
+    {
+      "name": "Do",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 36
+    },
+    {
+      "name": "Preview",
+      "module": "ColorWheelKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 43
+    },
+    {
+      "name": "Dispatch",
+      "module": "AppCore",
+      "requires": [
+        "K.HistInv(h)"
+      ],
+      "ensures": [],
+      "line": 89
+    },
+    {
+      "name": "Preview",
+      "module": "AppCore",
+      "requires": [
+        "K.HistInv(h)"
+      ],
+      "ensures": [],
+      "line": 90
+    }
+  ],
+  "axioms": []
+}

@@ -1,0 +1,190 @@
+{
+  "predicates": [
+    {
+      "name": "Inv",
+      "module": "Domain",
+      "line": 7,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "CounterDomain",
+      "body": "m >= 0",
+      "conjuncts": [
+        "m >= 0"
+      ],
+      "line": 7,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "ServerKernel.D.Abs",
+      "line": 7,
+      "isGhost": true
+    },
+    {
+      "name": "SInv",
+      "module": "ServerKernel",
+      "body": "D.Inv(s.present)",
+      "conjuncts": [
+        "D.Inv(s.present)"
+      ],
+      "line": 75,
+      "isGhost": true
+    },
+    {
+      "name": "SInv",
+      "module": "CounterServer",
+      "body": "D.Inv(s.present)",
+      "conjuncts": [
+        "D.Inv(s.present)"
+      ],
+      "line": 75,
+      "isGhost": true
+    }
+  ],
+  "lemmas": [
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Domain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 18
+    },
+    {
+      "name": "TryStepOkPreservesInv",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "TryStep(m, a).Ok? ==> Inv(TryStep(m, a).m')"
+      ],
+      "line": 21
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "CounterDomain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 19
+    },
+    {
+      "name": "TryStepOkPreservesInv",
+      "module": "CounterDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "TryStep(m, a).Ok? ==> Inv(TryStep(m, a).m')"
+      ],
+      "line": 24
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "ServerKernel.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 18
+    },
+    {
+      "name": "TryStepOkPreservesInv",
+      "module": "ServerKernel.D.Abs",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "TryStep(m, a).Ok? ==> Inv(TryStep(m, a).m')"
+      ],
+      "line": 21
+    },
+    {
+      "name": "InitServerSatisfiesSInv",
+      "module": "ServerKernel",
+      "requires": [],
+      "ensures": [
+        "SInv(InitServer())"
+      ],
+      "line": 84
+    },
+    {
+      "name": "DispatchPreservesSInv",
+      "module": "ServerKernel",
+      "requires": [
+        "SInv(s)"
+      ],
+      "ensures": [
+        "SInv(Dispatch(s, clientVer, a).0)"
+      ],
+      "line": 91
+    },
+    {
+      "name": "InitServerSatisfiesSInv",
+      "module": "CounterServer",
+      "requires": [],
+      "ensures": [
+        "SInv(InitServer())"
+      ],
+      "line": 84
+    },
+    {
+      "name": "DispatchPreservesSInv",
+      "module": "CounterServer",
+      "requires": [
+        "SInv(s)"
+      ],
+      "ensures": [
+        "SInv(Dispatch(s, clientVer, a).0)"
+      ],
+      "line": 91
+    }
+  ],
+  "functions": [
+    {
+      "name": "Sync",
+      "module": "ServerKernel",
+      "requires": [],
+      "ensures": [
+        "Sync(s).ver == s.ver",
+        "Sync(s).present == s.present"
+      ],
+      "line": 51
+    },
+    {
+      "name": "Sync",
+      "module": "CounterServer",
+      "requires": [],
+      "ensures": [
+        "Sync(s).ver == s.ver",
+        "Sync(s).present == s.present"
+      ],
+      "line": 51
+    },
+    {
+      "name": "GetInvalidMsg",
+      "module": "AppCore",
+      "requires": [
+        "IsInvalid(r)"
+      ],
+      "ensures": [],
+      "line": 75
+    },
+    {
+      "name": "GetSuccessValue",
+      "module": "AppCore",
+      "requires": [
+        "IsSuccess(r)"
+      ],
+      "ensures": [],
+      "line": 79
+    }
+  ],
+  "axioms": []
+}

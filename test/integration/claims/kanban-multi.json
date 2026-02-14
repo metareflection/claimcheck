@@ -1,0 +1,826 @@
+{
+  "predicates": [
+    {
+      "name": "Inv",
+      "module": "Domain",
+      "line": 26,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "Domain",
+      "line": 64,
+      "isGhost": true
+    },
+    {
+      "name": "NoDupSeq",
+      "module": "KanbanDomain",
+      "body": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "conjuncts": [
+        "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "line": 46,
+      "isGhost": false
+    },
+    {
+      "name": "OccursInLanes",
+      "module": "KanbanDomain",
+      "body": "exists c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} :: c in m.lanes && SeqContains(m.lanes[c], id)",
+      "conjuncts": [
+        "exists c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} :: c in m.lanes && SeqContains(m.lanes[c], id)"
+      ],
+      "line": 67,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "KanbanDomain",
+      "body": "NoDupSeq(m.cols) && (forall c: seq<char> {:trigger SeqContains(m.cols, c)} {:trigger c in m.lanes} :: c in m.lanes <==> SeqContains(m.cols, c)) && (forall c: seq<char> {:trigger SeqContains(m.cols, c)} {:trigger c in m.wip} :: c in m.wip <==> SeqContains(m.cols, c)) && (forall c: seq<char>, id: nat {:trigger id in m.cards, m.lanes[c]} {:trigger id in m.cards, c in m.lanes} :: c in m.lanes && SeqContains(m.lanes[c], id) ==> id in m.cards) && (forall id: nat {:trigger CountInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards ==> CountInLanes(m, id) == 1) && (forall c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} :: c in m.lanes ==> NoDupSeq(m.lanes[c])) && (forall c: seq<char> {:trigger m.wip[c]} {:trigger m.lanes[c]} {:trigger c in m.wip} {:trigger c in m.lanes} {:trigger c in m.cols} :: c in m.cols && c in m.lanes && c in m.wip ==> |m.lanes[c]| <= m.wip[c]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "conjuncts": [
+        "NoDupSeq(m.cols)",
+        "forall c: seq<char> {:trigger SeqContains(m.cols, c)} {:trigger c in m.lanes} :: c in m.lanes <==> SeqContains(m.cols, c)",
+        "forall c: seq<char> {:trigger SeqContains(m.cols, c)} {:trigger c in m.wip} :: c in m.wip <==> SeqContains(m.cols, c)",
+        "forall c: seq<char>, id: nat {:trigger id in m.cards, m.lanes[c]} {:trigger id in m.cards, c in m.lanes} :: c in m.lanes && SeqContains(m.lanes[c], id) ==> id in m.cards",
+        "forall id: nat {:trigger CountInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards ==> CountInLanes(m, id) == 1",
+        "forall c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} :: c in m.lanes ==> NoDupSeq(m.lanes[c])",
+        "forall c: seq<char> {:trigger m.wip[c]} {:trigger m.lanes[c]} {:trigger c in m.wip} {:trigger c in m.lanes} {:trigger c in m.cols} :: c in m.cols && c in m.lanes && c in m.wip ==> |m.lanes[c]| <= m.wip[c]",
+        "forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId"
+      ],
+      "line": 89,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "KanbanDomain",
+      "body": "match (orig, cand) case (MoveCard(oid, otoCol, origPlace), MoveCard(cid, ctoCol, candPlace)) => oid == cid && otoCol == ctoCol && (candPlace == origPlace || candPlace == AtEnd) case (_ /* _v23 */, _ /* _v24 */) => orig == cand",
+      "conjuncts": [
+        "match (orig, cand) case (MoveCard(oid, otoCol, origPlace), MoveCard(cid, ctoCol, candPlace)) => oid == cid && otoCol == ctoCol && (candPlace == origPlace || candPlace == AtEnd) case (_ /* _v23 */, _ /* _v24 */) => orig == cand"
+      ],
+      "line": 286,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "MultiCollaboration.D.Abs",
+      "line": 26,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "MultiCollaboration.D.Abs",
+      "line": 64,
+      "isGhost": true
+    }
+  ],
+  "lemmas": [
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Domain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 35
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 70
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 325
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 331
+    },
+    {
+      "name": "MoveCardPreservesInvHelper",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards",
+        "toCol in m.cols",
+        "|Lane(m, toCol)| + (if SeqContains(Lane(m, toCol), id) then 0 else 1) <= Wip(m, toCol)",
+        "lanes1 == map c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} | c in m.lanes :: RemoveFirst(m.lanes[c], id)",
+        "tgt == Get(lanes1, toCol, [])",
+        "pos == PosFromPlace(tgt, place)",
+        "pos >= 0",
+        "TryStep(m, MoveCard(id, toCol, place)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 390
+    },
+    {
+      "name": "AddColumnPreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "!(col in m.cols)",
+        "m2 == Model(m.cols + [col], m.lanes[col := []], m.wip[col := limit], m.cards, m.nextId)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 410
+    },
+    {
+      "name": "NoDupSeqAppend",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(s + [x])"
+      ],
+      "line": 450
+    },
+    {
+      "name": "SeqContainsIndex",
+      "module": "KanbanDomain",
+      "requires": [
+        "0 <= i < |s|",
+        "!SeqContains(s, x)"
+      ],
+      "ensures": [
+        "s[i] != x"
+      ],
+      "line": 471
+    },
+    {
+      "name": "SeqContainsAppend",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "SeqContains(s + [x], y) <==> SeqContains(s, y) || y == x"
+      ],
+      "line": 481
+    },
+    {
+      "name": "CountInLanesAddEmptyColumn",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "!(col in m.cols)",
+        "id in m.cards"
+      ],
+      "ensures": [
+        "CountInLanes(Model(m.cols + [col], m.lanes[col := []], m.wip[col := limit], m.cards, m.nextId), id) == 1"
+      ],
+      "line": 502
+    },
+    {
+      "name": "CountInLanesHelperAddEmptyColumn",
+      "module": "KanbanDomain",
+      "requires": [
+        "!SeqContains(cols, col)"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols + [col], lanes[col := []], id) == CountInLanesHelper(cols, lanes, id)"
+      ],
+      "line": 514
+    },
+    {
+      "name": "SetWipPreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "col in m.cols",
+        "limit >= |Lane(m, col)|",
+        "m2 == Model(m.cols, m.lanes, m.wip[col := limit], m.cards, m.nextId)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 542
+    },
+    {
+      "name": "AddCardPreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "col in m.cols",
+        "|Lane(m, col)| + 1 <= Wip(m, col)",
+        "m2 == Model(m.cols, m.lanes[col := Lane(m, col) + [m.nextId]], m.wip, m.cards[m.nextId := Card(title)], m.nextId + 1)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 553
+    },
+    {
+      "name": "NoDupSeqAppendFresh",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id == m.nextId",
+        "NoDupSeq(lane)",
+        "forall x: nat {:trigger x in m.cards} {:trigger SeqContains(lane, x)} :: SeqContains(lane, x) ==> x in m.cards"
+      ],
+      "ensures": [
+        "NoDupSeq(lane + [id])"
+      ],
+      "line": 596
+    },
+    {
+      "name": "CountInLanesNewCard",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "col in m.cols",
+        "id == m.nextId"
+      ],
+      "ensures": [
+        "CountInLanes(Model(m.cols, m.lanes[col := Lane(m, col) + [id]], m.wip, m.cards[id := Card(\"\")], m.nextId + 1), id) == 1"
+      ],
+      "line": 614
+    },
+    {
+      "name": "CountInLanesHelperNewCard",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "SeqContains(cols, col)",
+        "id == m.nextId",
+        "newLane == Lane(m, col) + [id]",
+        "forall c: seq<char> {:trigger SeqContains(m.cols, c)} {:trigger c in lanes} :: c in lanes <==> SeqContains(m.cols, c)",
+        "lanes == m.lanes",
+        "forall c: seq<char> {:trigger SeqContains<seq<char>>(m.cols, c)} {:trigger SeqContains(cols, c)} :: SeqContains(cols, c) ==> SeqContains(m.cols, c)",
+        "NoDupSeq(cols)"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes[col := newLane], id) == 1"
+      ],
+      "line": 631
+    },
+    {
+      "name": "CountInLanesHelperFreshIdSimple",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id == m.nextId",
+        "forall c: seq<char> {:trigger lanes[c]} {:trigger c in lanes} {:trigger c in cols} :: c in cols && c in lanes ==> forall x: nat {:trigger x in m.cards} {:trigger SeqContains(lanes[c], x)} :: SeqContains(lanes[c], x) ==> x in m.cards"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes, id) == 0"
+      ],
+      "line": 714
+    },
+    {
+      "name": "CountInLanesHelperFreshId",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id == m.nextId",
+        "forall c: seq<char> {:trigger lanes[c]} {:trigger c in lanes} {:trigger c in cols} :: c in cols && c in lanes ==> forall x: nat {:trigger x in m.cards} {:trigger SeqContains(lanes[c], x)} :: SeqContains(lanes[c], x) ==> x in m.cards"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes, id) == 0"
+      ],
+      "line": 740
+    },
+    {
+      "name": "CountInLanesOldCardAfterAdd",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "col in m.cols",
+        "newId == m.nextId",
+        "oldId in m.cards",
+        "oldId != newId"
+      ],
+      "ensures": [
+        "CountInLanes(Model(m.cols, m.lanes[col := Lane(m, col) + [newId]], m.wip, m.cards[newId := Card(\"\")], m.nextId + 1), oldId) == 1"
+      ],
+      "line": 766
+    },
+    {
+      "name": "CountInLanesHelperOldCardAfterAdd",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "SeqContains(cols, col)",
+        "col in lanes",
+        "newLane == lanes[col] + [newId]",
+        "!SeqContains(lanes[col], newId)",
+        "oldId != newId"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes[col := newLane], oldId) == CountInLanesHelper(cols, lanes, oldId)"
+      ],
+      "line": 793
+    },
+    {
+      "name": "CountInLanesHelperSkipCol",
+      "module": "KanbanDomain",
+      "requires": [
+        "!SeqContains(cols, col)",
+        "forall c: seq<char> {:trigger lanes2[c]} {:trigger c in lanes2} {:trigger lanes1[c]} {:trigger c in lanes1} {:trigger c in cols} :: c in cols ==> (if c in lanes1 then lanes1[c] else []) == if c in lanes2 then lanes2[c] else []"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes1, id) == CountInLanesHelper(cols, lanes2, id)"
+      ],
+      "line": 823
+    },
+    {
+      "name": "EditTitlePreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards",
+        "m2 == Model(m.cols, m.lanes, m.wip, m.cards[id := Card(title)], m.nextId)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 836
+    },
+    {
+      "name": "MoveCardPreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards",
+        "toCol in m.cols",
+        "|Lane(m, toCol)| + (if SeqContains(Lane(m, toCol), id) then 0 else 1) <= Wip(m, toCol)",
+        "ghost var lanes1: map<seq<char>, seq<nat>> := map c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} | c in m.lanes :: RemoveFirst(m.lanes[c], id); ghost var tgt: seq<nat> := Get(lanes1, toCol, []); ghost var pos: int := PosFromPlace(tgt, place); pos >= 0 && m2 == Model(m.cols, lanes1[toCol := InsertAt(tgt, ClampPos(pos, |tgt|), id)], m.wip, m.cards, m.nextId)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 851
+    },
+    {
+      "name": "SeqContainsInsertAt",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [
+        "SeqContains(InsertAt(s, i, x), y) <==> y == x || SeqContains(s, y)"
+      ],
+      "line": 977
+    },
+    {
+      "name": "SeqContainsRemoveFirst",
+      "module": "KanbanDomain",
+      "requires": [
+        "x != y"
+      ],
+      "ensures": [
+        "SeqContains(RemoveFirst(s, x), y) <==> SeqContains(s, y)"
+      ],
+      "line": 1011
+    },
+    {
+      "name": "RemoveFirstNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "NoDupSeq(RemoveFirst(s, x))"
+      ],
+      "line": 1066
+    },
+    {
+      "name": "RemoveFirstSubset",
+      "module": "KanbanDomain",
+      "requires": [
+        "SeqContains(RemoveFirst(s, x), y)"
+      ],
+      "ensures": [
+        "SeqContains(s, y)"
+      ],
+      "line": 1102
+    },
+    {
+      "name": "RemoveFirstRemoves",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "!SeqContains(RemoveFirst(s, x), x)"
+      ],
+      "line": 1122
+    },
+    {
+      "name": "NoDupSeqInsertAt",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|",
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(InsertAt(s, i, x))"
+      ],
+      "line": 1152
+    },
+    {
+      "name": "RemoveFirstLength",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "|RemoveFirst(s, x)| == if SeqContains(s, x) then |s| - 1 else |s|"
+      ],
+      "line": 1184
+    },
+    {
+      "name": "MoveCardCountInLanes",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards",
+        "toCol in m.cols",
+        "lanes1 == map c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} | c in m.lanes :: RemoveFirst(m.lanes[c], id)",
+        "tgt == Get(lanes1, toCol, [])",
+        "k <= |tgt|",
+        "cid in m.cards"
+      ],
+      "ensures": [
+        "CountInLanes(Model(m.cols, lanes1[toCol := InsertAt(tgt, k, id)], m.wip, m.cards, m.nextId), cid) == 1"
+      ],
+      "line": 1211
+    },
+    {
+      "name": "MoveCardCountId",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards",
+        "toCol in m.cols",
+        "lanes1 == map c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} | c in m.lanes :: RemoveFirst(m.lanes[c], id)",
+        "tgt == Get(lanes1, toCol, [])",
+        "k <= |tgt|"
+      ],
+      "ensures": [
+        "CountInLanes(Model(m.cols, lanes1[toCol := InsertAt(tgt, k, id)], m.wip, m.cards, m.nextId), id) == 1"
+      ],
+      "line": 1233
+    },
+    {
+      "name": "CountInLanesHelperAfterMove",
+      "module": "KanbanDomain",
+      "requires": [
+        "SeqContains(cols, toCol)",
+        "NoDupSeq(cols)",
+        "forall c: seq<char> {:trigger c in lanes1} {:trigger SeqContains(cols, c)} :: SeqContains(cols, c) ==> c in lanes1",
+        "lanes2 == lanes1[toCol := tgt2]",
+        "SeqContains(tgt2, id)",
+        "forall c: seq<char> {:trigger lanes1[c]} {:trigger c in lanes1} :: c in lanes1 ==> !SeqContains(lanes1[c], id)"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes2, id) == 1"
+      ],
+      "line": 1265
+    },
+    {
+      "name": "CountInLanesHelperZero",
+      "module": "KanbanDomain",
+      "requires": [
+        "forall c: seq<char> {:trigger lanes[c]} {:trigger c in lanes} {:trigger c in cols} :: c in cols && c in lanes ==> !SeqContains(lanes[c], id)"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes, id) == 0"
+      ],
+      "line": 1296
+    },
+    {
+      "name": "MoveCardCountOther",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards",
+        "cid in m.cards",
+        "cid != id",
+        "toCol in m.cols",
+        "lanes1 == map c: seq<char> {:trigger m.lanes[c]} {:trigger c in m.lanes} | c in m.lanes :: RemoveFirst(m.lanes[c], id)",
+        "tgt == Get(lanes1, toCol, [])",
+        "k <= |tgt|"
+      ],
+      "ensures": [
+        "CountInLanes(Model(m.cols, lanes1[toCol := InsertAt(tgt, k, id)], m.wip, m.cards, m.nextId), cid) == 1"
+      ],
+      "line": 1309
+    },
+    {
+      "name": "CountInLanesHelperOtherCard",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "forall c: seq<char> {:trigger c in lanes} {:trigger SeqContains(cols, c)} :: SeqContains(cols, c) ==> c in lanes",
+        "forall c: seq<char> {:trigger lanes[c]} {:trigger c in lanes} :: c in lanes ==> NoDupSeq(lanes[c])",
+        "lanes1 == map c: seq<char> {:trigger lanes[c]} {:trigger c in lanes} | c in lanes :: RemoveFirst(lanes[c], id)",
+        "SeqContains(cols, toCol)",
+        "tgt == Get(lanes1, toCol, [])",
+        "k <= |tgt|",
+        "tgt2 == InsertAt(tgt, k, id)",
+        "lanes2 == lanes1[toCol := tgt2]",
+        "cid != id"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes2, cid) == CountInLanesHelper(cols, lanes, cid)"
+      ],
+      "line": 1329
+    },
+    {
+      "name": "SeqContainsRest",
+      "module": "KanbanDomain",
+      "requires": [
+        "|s| > 0",
+        "SeqContains(s, x)",
+        "s[0] == first",
+        "first != x"
+      ],
+      "ensures": [
+        "SeqContains(s[1..], x)"
+      ],
+      "line": 1394
+    },
+    {
+      "name": "NoDupSeqSuffix",
+      "module": "KanbanDomain",
+      "requires": [
+        "|s| > 0",
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "NoDupSeq(s[1..])"
+      ],
+      "line": 1406
+    },
+    {
+      "name": "CountInLanesHelperWhenNotInCols",
+      "module": "KanbanDomain",
+      "requires": [
+        "!SeqContains(cols, toCol)",
+        "forall c: seq<char> {:trigger c in lanes} {:trigger SeqContains(cols, c)} :: SeqContains(cols, c) ==> c in lanes",
+        "forall c: seq<char> {:trigger lanes[c]} {:trigger c in lanes} :: c in lanes ==> NoDupSeq(lanes[c])",
+        "lanes1 == map c: seq<char> {:trigger lanes[c]} {:trigger c in lanes} | c in lanes :: RemoveFirst(lanes[c], id)",
+        "lanes2 == lanes1[toCol := tgt2]",
+        "cid != id"
+      ],
+      "ensures": [
+        "CountInLanesHelper(cols, lanes2, cid) == CountInLanesHelper(cols, lanes, cid)"
+      ],
+      "line": 1423
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 1454
+    },
+    {
+      "name": "BeforeFirstImpliesAtEnd",
+      "module": "KanbanDomain",
+      "requires": [
+        "TryStep(m, MoveCard(id, toCol, Before(anchor))).Ok?"
+      ],
+      "ensures": [
+        "TryStep(m, MoveCard(id, toCol, AtEnd)).Ok?"
+      ],
+      "line": 1516
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 35
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 70
+    },
+    {
+      "name": "InitServerSatisfiesInv",
+      "module": "MultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "D.Inv(InitServer().present)"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DispatchPreservesInv",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)"
+      ],
+      "line": 294
+    },
+    {
+      "name": "DispatchRejectIsMinimal",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)",
+        "D.Explains(D.RebaseThroughSuffix(s.appliedLog[baseVersion..], orig), aGood)",
+        "D.TryStep(s.present, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "!Dispatch(s, baseVersion, orig).1.Rejected?"
+      ],
+      "line": 304
+    },
+    {
+      "name": "ChooseCandidateFindsGood",
+      "module": "MultiCollaboration",
+      "requires": [
+        "aGood in cs",
+        "D.TryStep(m, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok?"
+      ],
+      "line": 322
+    },
+    {
+      "name": "InitServerSatisfiesInv",
+      "module": "KanbanMultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "D.Inv(InitServer().present)"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DispatchPreservesInv",
+      "module": "KanbanMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)"
+      ],
+      "line": 294
+    },
+    {
+      "name": "DispatchRejectIsMinimal",
+      "module": "KanbanMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)",
+        "D.Explains(D.RebaseThroughSuffix(s.appliedLog[baseVersion..], orig), aGood)",
+        "D.TryStep(s.present, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "!Dispatch(s, baseVersion, orig).1.Rejected?"
+      ],
+      "line": 304
+    },
+    {
+      "name": "ChooseCandidateFindsGood",
+      "module": "KanbanMultiCollaboration",
+      "requires": [
+        "aGood in cs",
+        "D.TryStep(m, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok?"
+      ],
+      "line": 322
+    }
+  ],
+  "functions": [
+    {
+      "name": "InsertAt",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [],
+      "line": 133
+    },
+    {
+      "name": "ClampPos",
+      "module": "KanbanDomain",
+      "requires": [
+        "n >= 0"
+      ],
+      "ensures": [],
+      "line": 148
+    },
+    {
+      "name": "ChooseCandidate",
+      "module": "MultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok? ==> D.TryStep(m, ChooseCandidate(m, cs).value.1) == D.Ok(ChooseCandidate(m, cs).value.0)"
+      ],
+      "line": 119
+    },
+    {
+      "name": "Dispatch",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)",
+        "Version(Dispatch(s, baseVersion, orig).0) == Version(s) || Version(Dispatch(s, baseVersion, orig).0) == Version(s) + 1"
+      ],
+      "line": 131
+    },
+    {
+      "name": "ChooseCandidate",
+      "module": "KanbanMultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok? ==> D.TryStep(m, ChooseCandidate(m, cs).value.1) == D.Ok(ChooseCandidate(m, cs).value.0)"
+      ],
+      "line": 119
+    },
+    {
+      "name": "Dispatch",
+      "module": "KanbanMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)",
+        "Version(Dispatch(s, baseVersion, orig).0) == Version(s) || Version(Dispatch(s, baseVersion, orig).0) == Version(s) + 1"
+      ],
+      "line": 131
+    }
+  ],
+  "axioms": []
+}

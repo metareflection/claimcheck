@@ -88,12 +88,14 @@ async function main() {
   console.error('');
 
   const allResults = [];
+  const totalStart = Date.now();
 
   for (let run = 1; run <= runs; run++) {
     console.error(`── Run ${run}/${runs} ──`);
 
     for (const project of projects) {
       console.error(`  ${project.name}...`);
+      const domainStart = Date.now();
 
       // Load claims source (where lemmas live) and mapping
       const claimsPath = join(CLAIMS_DIR, `${project.name}.dfy`);
@@ -156,9 +158,10 @@ async function main() {
         }
       }
 
+      const domainElapsedMs = Date.now() - domainStart;
       const entries = allResults.filter(r => r.domain === project.name && r.run === run);
       const correct = entries.filter(e => isCorrect(e)).length;
-      console.error(`  ${project.name}: ${correct}/${entries.length} correct`);
+      console.error(`  ${project.name}: ${correct}/${entries.length} correct (${(domainElapsedMs / 1000).toFixed(1)}s)`);
     }
     console.error('');
   }
@@ -175,6 +178,7 @@ async function main() {
       model: model || '(claude-code default)',
       mode: 'claude-code',
     },
+    totalElapsedMs: Date.now() - totalStart,
     results: allResults,
   };
 
@@ -209,7 +213,9 @@ async function main() {
     totalCorrect += entry.correct;
     totalCount += entry.total;
   }
+  const totalElapsedMs = Date.now() - totalStart;
   console.error(`\n  Accuracy: ${totalCorrect}/${totalCount}`);
+  console.error(`  Elapsed: ${(totalElapsedMs / 1000).toFixed(1)}s`);
 }
 
 function isCorrect(r) {

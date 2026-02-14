@@ -104,9 +104,11 @@ async function main() {
   console.log(`${'  Accuracy'.padEnd(57)} ${(totalA.correct + '/' + totalA.total).padEnd(12)}  ${totalB.correct}/${totalB.total}`);
 
   // Config diff
+  const timeA = a.totalElapsedMs ? `${(a.totalElapsedMs / 1000).toFixed(1)}s` : '?';
+  const timeB = b.totalElapsedMs ? `${(b.totalElapsedMs / 1000).toFixed(1)}s` : '?';
   console.log(`\nConfig:`);
-  console.log(`  ${labelA}: model=${a.config.model}, runs=${a.config.runs}`);
-  console.log(`  ${labelB}: model=${b.config.model}, runs=${b.config.runs}`);
+  console.log(`  ${labelA}: model=${a.config.model}, runs=${a.config.runs}, elapsed=${timeA}`);
+  console.log(`  ${labelB}: model=${b.config.model}, runs=${b.config.runs}, elapsed=${timeB}`);
 }
 
 main().catch(err => {

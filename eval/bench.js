@@ -85,14 +85,17 @@ async function main() {
   console.error('');
 
   const allResults = [];
+  const totalStart = Date.now();
 
   for (let run = 1; run <= runs; run++) {
     console.error(`── Run ${run}/${runs} ──`);
 
     for (const project of projects) {
       console.error(`  ${project.name}...`);
+      const domainStart = Date.now();
       try {
         const result = await runDomain(project);
+        const elapsedMs = Date.now() - domainStart;
         const entries = result.results.map(v => ({
           domain: project.name,
           requirement: v.requirement,
@@ -100,18 +103,21 @@ async function main() {
           expected: v.expected ?? 'confirmed',
           status: v.status,
           run,
+          elapsedMs,
         }));
         allResults.push(...entries);
 
         const correct = entries.filter(e => isCorrect(e)).length;
         const total = entries.length;
-        console.error(`  ${project.name}: ${correct}/${total} correct`);
+        console.error(`  ${project.name}: ${correct}/${total} correct (${(elapsedMs / 1000).toFixed(1)}s)`);
       } catch (err) {
         console.error(`  ${project.name}: ERROR — ${err.message}`);
       }
     }
     console.error('');
   }
+
+  const totalElapsedMs = Date.now() - totalStart;
 
   // --- Save results ---
 
@@ -125,6 +131,7 @@ async function main() {
       model: model || 'claude-sonnet-4-5-20250929',
       passthrough,
     },
+    totalElapsedMs,
     results: allResults,
   };
 
@@ -160,6 +167,7 @@ async function main() {
     totalCount += entry.total;
   }
   console.error(`\n  Accuracy: ${totalCorrect}/${totalCount}`);
+  console.error(`  Elapsed: ${(totalElapsedMs / 1000).toFixed(1)}s`);
 }
 
 function isCorrect(r) {

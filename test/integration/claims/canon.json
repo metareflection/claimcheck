@@ -1,0 +1,1100 @@
+{
+  "predicates": [
+    {
+      "name": "Inv",
+      "module": "Domain",
+      "line": 5,
+      "isGhost": true
+    },
+    {
+      "name": "AllIn",
+      "module": "Canon",
+      "body": "forall i: int {:trigger xs[i]} :: 0 <= i < |xs| ==> xs[i] in nodes",
+      "conjuncts": [
+        "forall i: int {:trigger xs[i]} :: 0 <= i < |xs| ==> xs[i] in nodes"
+      ],
+      "line": 36,
+      "isGhost": false
+    },
+    {
+      "name": "ConstraintTargetsValid",
+      "module": "Canon",
+      "body": "match c case Align(_ /* _v0 */, targets, _ /* _v1 */) => AllIn(targets, nodes) case EvenSpace(_ /* _v2 */, targets, _ /* _v3 */) => AllIn(targets, nodes)",
+      "conjuncts": [
+        "match c case Align(_ /* _v0 */, targets, _ /* _v1 */) => AllIn(targets, nodes) case EvenSpace(_ /* _v2 */, targets, _ /* _v3 */) => AllIn(targets, nodes)"
+      ],
+      "line": 40,
+      "isGhost": false
+    },
+    {
+      "name": "AllConstraintsValid",
+      "module": "Canon",
+      "body": "forall i: int {:trigger cs[i]} :: 0 <= i < |cs| ==> ConstraintTargetsValid(cs[i], nodes)",
+      "conjuncts": [
+        "forall i: int {:trigger cs[i]} :: 0 <= i < |cs| ==> ConstraintTargetsValid(cs[i], nodes)"
+      ],
+      "line": 46,
+      "isGhost": false
+    },
+    {
+      "name": "EdgeValid",
+      "module": "Canon",
+      "body": "e.from in nodes && e.to in nodes",
+      "conjuncts": [
+        "e.from in nodes",
+        "e.to in nodes"
+      ],
+      "line": 50,
+      "isGhost": false
+    },
+    {
+      "name": "AllEdgesValid",
+      "module": "Canon",
+      "body": "forall i: int {:trigger es[i]} :: 0 <= i < |es| ==> EdgeValid(es[i], nodes)",
+      "conjuncts": [
+        "forall i: int {:trigger es[i]} :: 0 <= i < |es| ==> EdgeValid(es[i], nodes)"
+      ],
+      "line": 54,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "Canon",
+      "body": "AllConstraintsValid(m.constraints, m.nodes) && AllEdgesValid(m.edges, m.nodes)",
+      "conjuncts": [
+        "AllConstraintsValid(m.constraints, m.nodes)",
+        "AllEdgesValid(m.edges, m.nodes)"
+      ],
+      "line": 58,
+      "isGhost": false
+    },
+    {
+      "name": "Contains",
+      "module": "Canon",
+      "body": "exists i: int {:trigger xs[i]} :: 0 <= i < |xs| && xs[i] == x",
+      "conjuncts": [
+        "exists i: int {:trigger xs[i]} :: 0 <= i < |xs| && xs[i] == x"
+      ],
+      "line": 63,
+      "isGhost": false
+    },
+    {
+      "name": "Mentions",
+      "module": "Canon",
+      "body": "match c case Align(_ /* _v4 */, targets, _ /* _v5 */) => Contains(targets, x) case EvenSpace(_ /* _v6 */, targets, _ /* _v7 */) => Contains(targets, x)",
+      "conjuncts": [
+        "match c case Align(_ /* _v4 */, targets, _ /* _v5 */) => Contains(targets, x) case EvenSpace(_ /* _v6 */, targets, _ /* _v7 */) => Contains(targets, x)"
+      ],
+      "line": 67,
+      "isGhost": false
+    },
+    {
+      "name": "NoneMatch",
+      "module": "Canon",
+      "body": "forall i: int {:trigger cs[i]} :: 0 <= i < |cs| ==> !Mentions(cs[i], x)",
+      "conjuncts": [
+        "forall i: int {:trigger cs[i]} :: 0 <= i < |cs| ==> !Mentions(cs[i], x)"
+      ],
+      "line": 97,
+      "isGhost": false
+    },
+    {
+      "name": "EdgeMentions",
+      "module": "Canon",
+      "body": "e.from == x || e.to == x",
+      "conjuncts": [
+        "e.from == x || e.to == x"
+      ],
+      "line": 114,
+      "isGhost": false
+    },
+    {
+      "name": "NoEdgesMention",
+      "module": "Canon",
+      "body": "forall i: int {:trigger es[i]} :: 0 <= i < |es| ==> !EdgeMentions(es[i], x)",
+      "conjuncts": [
+        "forall i: int {:trigger es[i]} :: 0 <= i < |es| ==> !EdgeMentions(es[i], x)"
+      ],
+      "line": 118,
+      "isGhost": false
+    },
+    {
+      "name": "SameNodes",
+      "module": "Canon",
+      "body": "a == b",
+      "conjuncts": [
+        "a == b"
+      ],
+      "line": 347,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "CanonDomain",
+      "body": "C.Inv(m)",
+      "conjuncts": [
+        "C.Inv(m)"
+      ],
+      "line": 19,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "Kernel.D.Abs",
+      "line": 5,
+      "isGhost": true
+    },
+    {
+      "name": "HistInv",
+      "module": "Kernel",
+      "body": "(forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])) && D.Inv(h.present) && forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])",
+      "conjuncts": [
+        "forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])",
+        "D.Inv(h.present)",
+        "forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])"
+      ],
+      "line": 74,
+      "isGhost": true
+    },
+    {
+      "name": "HistInv",
+      "module": "CanonKernel",
+      "body": "(forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])) && D.Inv(h.present) && forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])",
+      "conjuncts": [
+        "forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])",
+        "D.Inv(h.present)",
+        "forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])"
+      ],
+      "line": 74,
+      "isGhost": true
+    }
+  ],
+  "lemmas": [
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Domain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 12
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 15
+    },
+    {
+      "name": "AllInMinusLemma",
+      "module": "Canon",
+      "requires": [
+        "AllIn(targets, nodes)",
+        "!Contains(targets, x)"
+      ],
+      "ensures": [
+        "AllIn(targets, nodes - {x})"
+      ],
+      "line": 74
+    },
+    {
+      "name": "ConstraintValidMinusLemma",
+      "module": "Canon",
+      "requires": [
+        "ConstraintTargetsValid(c, nodes)",
+        "!Mentions(c, x)"
+      ],
+      "ensures": [
+        "ConstraintTargetsValid(c, nodes - {x})"
+      ],
+      "line": 87
+    },
+    {
+      "name": "AllConstraintsValidMinusLemma",
+      "module": "Canon",
+      "requires": [
+        "AllConstraintsValid(cs, nodes)",
+        "NoneMatch(cs, x)"
+      ],
+      "ensures": [
+        "AllConstraintsValid(cs, nodes - {x})"
+      ],
+      "line": 101
+    },
+    {
+      "name": "EdgeValidMinusLemma",
+      "module": "Canon",
+      "requires": [
+        "EdgeValid(e, nodes)",
+        "!EdgeMentions(e, x)"
+      ],
+      "ensures": [
+        "EdgeValid(e, nodes - {x})"
+      ],
+      "line": 122
+    },
+    {
+      "name": "AllEdgesValidMinusLemma",
+      "module": "Canon",
+      "requires": [
+        "AllEdgesValid(es, nodes)",
+        "NoEdgesMention(es, x)"
+      ],
+      "ensures": [
+        "AllEdgesValid(es, nodes - {x})"
+      ],
+      "line": 129
+    },
+    {
+      "name": "FilterOutIncidentEdgesSpec",
+      "module": "Canon",
+      "requires": [
+        "AllEdgesValid(es, nodes)",
+        "AllEdgesValid(acc, nodes)",
+        "NoEdgesMention(acc, x)",
+        "i <= |es|"
+      ],
+      "ensures": [
+        "AllEdgesValid(FilterOutIncidentEdges(es, x, i, acc), nodes)",
+        "NoEdgesMention(FilterOutIncidentEdges(es, x, i, acc), x)"
+      ],
+      "line": 153
+    },
+    {
+      "name": "AddAlignPreservesInv",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(AddAlign(m, sel))"
+      ],
+      "line": 213
+    },
+    {
+      "name": "AddEvenSpacePreservesInv",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(AddEvenSpace(m, sel))"
+      ],
+      "line": 234
+    },
+    {
+      "name": "DeleteConstraintPreservesInv",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(DeleteConstraint(m, cid))"
+      ],
+      "line": 246
+    },
+    {
+      "name": "AddEdgePreservesInv",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(AddEdge(m, from, to))"
+      ],
+      "line": 262
+    },
+    {
+      "name": "DeleteEdgePreservesInv",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(DeleteEdge(m, from, to))"
+      ],
+      "line": 274
+    },
+    {
+      "name": "FilterOutEdgePreservesValid",
+      "module": "Canon",
+      "requires": [
+        "AllEdgesValid(es, nodes)",
+        "AllEdgesValid(acc, nodes)",
+        "i <= |es|"
+      ],
+      "ensures": [
+        "AllEdgesValid(FilterOutEdge(es, from, to, i, acc), nodes)"
+      ],
+      "line": 292
+    },
+    {
+      "name": "RemoveNodePreservesInv",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(RemoveNode(m, x))"
+      ],
+      "line": 322
+    },
+    {
+      "name": "RemoveFromSeqFromSpec",
+      "module": "Canon",
+      "requires": [
+        "AllIn(xs, nodes)",
+        "AllIn(acc, nodes)",
+        "!Contains(acc, x)",
+        "i <= |xs|"
+      ],
+      "ensures": [
+        "!Contains(RemoveFromSeqFrom(xs, x, i, acc), x)",
+        "AllIn(RemoveFromSeqFrom(xs, x, i, acc), nodes)"
+      ],
+      "line": 547
+    },
+    {
+      "name": "RemoveFromSeqSpec",
+      "module": "Canon",
+      "requires": [
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [
+        "!Contains(RemoveFromSeq(xs, x), x)",
+        "AllIn(RemoveFromSeq(xs, x), nodes)"
+      ],
+      "line": 564
+    },
+    {
+      "name": "FilterOutCidFromPreservesValid",
+      "module": "Canon",
+      "requires": [
+        "AllConstraintsValid(cs, nodes)",
+        "AllConstraintsValid(acc, nodes)",
+        "i <= |cs|"
+      ],
+      "ensures": [
+        "AllConstraintsValid(FilterOutCidFrom(cs, cid, i, acc), nodes)"
+      ],
+      "line": 640
+    },
+    {
+      "name": "FilterOutCidPreservesValid",
+      "module": "Canon",
+      "requires": [
+        "AllConstraintsValid(cs, nodes)"
+      ],
+      "ensures": [
+        "AllConstraintsValid(FilterOutCid(cs, cid), nodes)"
+      ],
+      "line": 658
+    },
+    {
+      "name": "ShrinkConstraintSpec",
+      "module": "Canon",
+      "requires": [
+        "ConstraintTargetsValid(c, nodes)"
+      ],
+      "ensures": [
+        "var (keep: bool, c2: Constraint) := ShrinkConstraint(c, x); keep ==> !Mentions(c2, x) && ConstraintTargetsValid(c2, nodes)"
+      ],
+      "line": 684
+    },
+    {
+      "name": "ShrinkConstraintsSpec",
+      "module": "Canon",
+      "requires": [
+        "AllConstraintsValid(cs, nodes)",
+        "AllConstraintsValid(acc, nodes)",
+        "NoneMatch(acc, x)",
+        "i <= |cs|"
+      ],
+      "ensures": [
+        "AllConstraintsValid(ShrinkConstraints(cs, x, i, acc), nodes)",
+        "NoneMatch(ShrinkConstraints(cs, x, i, acc), x)"
+      ],
+      "line": 709
+    },
+    {
+      "name": "AddNodeImplPreservesInv",
+      "module": "CanonDomain",
+      "requires": [
+        "C.Inv(m)"
+      ],
+      "ensures": [
+        "C.Inv(AddNodeImpl(m, id, x, y))"
+      ],
+      "line": 56
+    },
+    {
+      "name": "MoveNodeImplPreservesInv",
+      "module": "CanonDomain",
+      "requires": [
+        "C.Inv(m)"
+      ],
+      "ensures": [
+        "C.Inv(MoveNodeImpl(m, id, newX, newY))"
+      ],
+      "line": 71
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "CanonDomain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 82
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "CanonDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 87
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Kernel.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 12
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Kernel.D.Abs",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 15
+    },
+    {
+      "name": "DoPreservesInv",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [
+        "D.Inv(Do(h, a).present)"
+      ],
+      "line": 67
+    },
+    {
+      "name": "InitHistorySatisfiesInv",
+      "module": "Kernel",
+      "requires": [],
+      "ensures": [
+        "HistInv(InitHistory())"
+      ],
+      "line": 80
+    },
+    {
+      "name": "UndoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Undo(h))"
+      ],
+      "line": 86
+    },
+    {
+      "name": "RedoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Redo(h))"
+      ],
+      "line": 92
+    },
+    {
+      "name": "DoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Do(h, a))"
+      ],
+      "line": 98
+    },
+    {
+      "name": "PreviewPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Preview(h, a))"
+      ],
+      "line": 105
+    },
+    {
+      "name": "CommitFromPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)",
+        "D.Inv(baseline)"
+      ],
+      "ensures": [
+        "HistInv(CommitFrom(h, baseline))"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DoHasNoRedoBranch",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "Redo(Do(h, a)) == Do(h, a)"
+      ],
+      "line": 120
+    },
+    {
+      "name": "UndoRedoRoundTrip",
+      "module": "Kernel",
+      "requires": [
+        "|h.past| > 0"
+      ],
+      "ensures": [
+        "Redo(Undo(h)) == h"
+      ],
+      "line": 126
+    },
+    {
+      "name": "RedoUndoRoundTrip",
+      "module": "Kernel",
+      "requires": [
+        "|h.future| > 0"
+      ],
+      "ensures": [
+        "Undo(Redo(h)) == h"
+      ],
+      "line": 131
+    },
+    {
+      "name": "UndoAtBeginningIsNoOp",
+      "module": "Kernel",
+      "requires": [
+        "|h.past| == 0"
+      ],
+      "ensures": [
+        "Undo(h) == h"
+      ],
+      "line": 137
+    },
+    {
+      "name": "RedoAtEndIsNoOp",
+      "module": "Kernel",
+      "requires": [
+        "|h.future| == 0"
+      ],
+      "ensures": [
+        "Redo(h) == h"
+      ],
+      "line": 142
+    },
+    {
+      "name": "DoPreservesInv",
+      "module": "CanonKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [
+        "D.Inv(Do(h, a).present)"
+      ],
+      "line": 67
+    },
+    {
+      "name": "InitHistorySatisfiesInv",
+      "module": "CanonKernel",
+      "requires": [],
+      "ensures": [
+        "HistInv(InitHistory())"
+      ],
+      "line": 80
+    },
+    {
+      "name": "UndoPreservesHistInv",
+      "module": "CanonKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Undo(h))"
+      ],
+      "line": 86
+    },
+    {
+      "name": "RedoPreservesHistInv",
+      "module": "CanonKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Redo(h))"
+      ],
+      "line": 92
+    },
+    {
+      "name": "DoPreservesHistInv",
+      "module": "CanonKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Do(h, a))"
+      ],
+      "line": 98
+    },
+    {
+      "name": "PreviewPreservesHistInv",
+      "module": "CanonKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Preview(h, a))"
+      ],
+      "line": 105
+    },
+    {
+      "name": "CommitFromPreservesHistInv",
+      "module": "CanonKernel",
+      "requires": [
+        "HistInv(h)",
+        "D.Inv(baseline)"
+      ],
+      "ensures": [
+        "HistInv(CommitFrom(h, baseline))"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DoHasNoRedoBranch",
+      "module": "CanonKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "Redo(Do(h, a)) == Do(h, a)"
+      ],
+      "line": 120
+    },
+    {
+      "name": "UndoRedoRoundTrip",
+      "module": "CanonKernel",
+      "requires": [
+        "|h.past| > 0"
+      ],
+      "ensures": [
+        "Redo(Undo(h)) == h"
+      ],
+      "line": 126
+    },
+    {
+      "name": "RedoUndoRoundTrip",
+      "module": "CanonKernel",
+      "requires": [
+        "|h.future| > 0"
+      ],
+      "ensures": [
+        "Undo(Redo(h)) == h"
+      ],
+      "line": 131
+    },
+    {
+      "name": "UndoAtBeginningIsNoOp",
+      "module": "CanonKernel",
+      "requires": [
+        "|h.past| == 0"
+      ],
+      "ensures": [
+        "Undo(h) == h"
+      ],
+      "line": 137
+    },
+    {
+      "name": "RedoAtEndIsNoOp",
+      "module": "CanonKernel",
+      "requires": [
+        "|h.future| == 0"
+      ],
+      "ensures": [
+        "Redo(h) == h"
+      ],
+      "line": 142
+    }
+  ],
+  "functions": [
+    {
+      "name": "Apply",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 8
+    },
+    {
+      "name": "Empty",
+      "module": "Canon",
+      "requires": [],
+      "ensures": [
+        "Inv(result)"
+      ],
+      "line": 189
+    },
+    {
+      "name": "Init",
+      "module": "Canon",
+      "requires": [],
+      "ensures": [
+        "Inv(result)"
+      ],
+      "line": 196
+    },
+    {
+      "name": "CanonOnce",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(result)"
+      ],
+      "line": 339
+    },
+    {
+      "name": "CanonFixpoint",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(result)"
+      ],
+      "line": 353
+    },
+    {
+      "name": "Canon",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(result)"
+      ],
+      "line": 366
+    },
+    {
+      "name": "ApplyAll",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(result)"
+      ],
+      "line": 377
+    },
+    {
+      "name": "ApplyOne",
+      "module": "Canon",
+      "requires": [
+        "Inv(m)",
+        "ConstraintTargetsValid(c, m.nodes)"
+      ],
+      "ensures": [
+        "Inv(result)"
+      ],
+      "line": 386
+    },
+    {
+      "name": "ApplyAlignNodes",
+      "module": "Canon",
+      "requires": [
+        "AllIn(targets, nodes)"
+      ],
+      "ensures": [
+        "result.Keys == nodes.Keys"
+      ],
+      "line": 399
+    },
+    {
+      "name": "ApplyAlignNodesFrom",
+      "module": "Canon",
+      "requires": [],
+      "ensures": [
+        "result.Keys == nodes.Keys"
+      ],
+      "line": 409
+    },
+    {
+      "name": "ApplyEvenSpaceNodes",
+      "module": "Canon",
+      "requires": [],
+      "ensures": [
+        "result.Keys == nodes.Keys"
+      ],
+      "line": 427
+    },
+    {
+      "name": "ApplyEvenSpaceNodesFrom",
+      "module": "Canon",
+      "requires": [
+        "AllIn(ordered, nodes)"
+      ],
+      "ensures": [
+        "result.Keys == nodes.Keys"
+      ],
+      "line": 441
+    },
+    {
+      "name": "OrderTargets",
+      "module": "Canon",
+      "requires": [],
+      "ensures": [
+        "AllIn(result, nodes)"
+      ],
+      "line": 484
+    },
+    {
+      "name": "InsertionSortByAxis",
+      "module": "Canon",
+      "requires": [
+        "AllIn(xs, nodes)",
+        "AllIn(acc, nodes)"
+      ],
+      "ensures": [
+        "AllIn(result, nodes)"
+      ],
+      "line": 492
+    },
+    {
+      "name": "InsertByAxis",
+      "module": "Canon",
+      "requires": [
+        "id in nodes",
+        "AllIn(acc, nodes)"
+      ],
+      "ensures": [
+        "AllIn(result, nodes)"
+      ],
+      "line": 506
+    },
+    {
+      "name": "InsertByAxisFrom",
+      "module": "Canon",
+      "requires": [
+        "id in nodes",
+        "AllIn(acc, nodes)"
+      ],
+      "ensures": [
+        "AllIn(result, nodes)"
+      ],
+      "line": 514
+    },
+    {
+      "name": "FilterPresent",
+      "module": "Canon",
+      "requires": [],
+      "ensures": [
+        "AllIn(result, nodes)"
+      ],
+      "line": 589
+    },
+    {
+      "name": "FilterPresentFrom",
+      "module": "Canon",
+      "requires": [
+        "AllIn(acc, nodes)"
+      ],
+      "ensures": [
+        "AllIn(result, nodes)"
+      ],
+      "line": 595
+    },
+    {
+      "name": "MinAlong",
+      "module": "Canon",
+      "requires": [
+        "|xs| > 0",
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [],
+      "line": 733
+    },
+    {
+      "name": "MinAlongFrom",
+      "module": "Canon",
+      "requires": [
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [],
+      "line": 740
+    },
+    {
+      "name": "MaxAlong",
+      "module": "Canon",
+      "requires": [
+        "|xs| > 0",
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [],
+      "line": 750
+    },
+    {
+      "name": "MaxAlongFrom",
+      "module": "Canon",
+      "requires": [
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [],
+      "line": 757
+    },
+    {
+      "name": "SumAlong",
+      "module": "Canon",
+      "requires": [
+        "|xs| > 0",
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [],
+      "line": 767
+    },
+    {
+      "name": "SumAlongFrom",
+      "module": "Canon",
+      "requires": [
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [],
+      "line": 774
+    },
+    {
+      "name": "MeanAlong",
+      "module": "Canon",
+      "requires": [
+        "|xs| > 0",
+        "AllIn(xs, nodes)"
+      ],
+      "ensures": [],
+      "line": 782
+    },
+    {
+      "name": "Apply",
+      "module": "CanonDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 27
+    },
+    {
+      "name": "Apply",
+      "module": "Kernel.D.Abs",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 8
+    },
+    {
+      "name": "Step",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(m)"
+      ],
+      "ensures": [],
+      "line": 23
+    },
+    {
+      "name": "Do",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 36
+    },
+    {
+      "name": "Preview",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 43
+    },
+    {
+      "name": "Step",
+      "module": "CanonKernel",
+      "requires": [
+        "D.Inv(m)"
+      ],
+      "ensures": [],
+      "line": 23
+    },
+    {
+      "name": "Do",
+      "module": "CanonKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 36
+    },
+    {
+      "name": "Preview",
+      "module": "CanonKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 43
+    },
+    {
+      "name": "Dispatch",
+      "module": "AppCore",
+      "requires": [
+        "K.HistInv(h)"
+      ],
+      "ensures": [],
+      "line": 157
+    },
+    {
+      "name": "CanonHistory",
+      "module": "AppCore",
+      "requires": [
+        "K.HistInv(h)"
+      ],
+      "ensures": [
+        "K.HistInv(CanonHistory(h))"
+      ],
+      "line": 162
+    }
+  ],
+  "axioms": []
+}

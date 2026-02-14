@@ -1,0 +1,1189 @@
+{
+  "predicates": [
+    {
+      "name": "Inv",
+      "module": "Domain",
+      "line": 5,
+      "isGhost": true
+    },
+    {
+      "name": "NoDupSeq",
+      "module": "KanbanDomain",
+      "body": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "conjuncts": [
+        "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "line": 49,
+      "isGhost": true
+    },
+    {
+      "name": "OccursInLanes",
+      "module": "KanbanDomain",
+      "body": "exists i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| && exists j: int {:trigger Lane(m.lanes, m.cols[i])[j]} :: 0 <= j < |Lane(m.lanes, m.cols[i])| && Lane(m.lanes, m.cols[i])[j] == id",
+      "conjuncts": [
+        "exists i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| && exists j: int {:trigger Lane(m.lanes, m.cols[i])[j]} :: 0 <= j < |Lane(m.lanes, m.cols[i])| && Lane(m.lanes, m.cols[i])[j] == id"
+      ],
+      "line": 98,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "KanbanDomain",
+      "body": "NoDupSeq(m.cols) && (forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols) && (forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols) && NoDupSeq(AllIds(m)) && (forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)) && (forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]) && forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId",
+      "conjuncts": [
+        "NoDupSeq(m.cols)",
+        "forall i: int {:trigger m.cols[i]} :: (0 <= i < |m.cols| ==> m.cols[i] in m.lanes) && (0 <= i < |m.cols| ==> m.cols[i] in m.wip)",
+        "forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.lanes} :: c in m.lanes ==> c in m.cols",
+        "forall c: seq<char> {:trigger c in m.cols} {:trigger c in m.wip} :: c in m.wip ==> c in m.cols",
+        "NoDupSeq(AllIds(m))",
+        "forall id: nat {:trigger OccursInLanes(m, id)} {:trigger id in m.cards} :: id in m.cards <==> OccursInLanes(m, id)",
+        "forall i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| ==> |m.lanes[m.cols[i]]| <= m.wip[m.cols[i]]",
+        "forall id: int {:trigger id in m.cards} :: id in m.cards ==> id < m.nextId"
+      ],
+      "line": 106,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "Kernel.D.Abs",
+      "line": 5,
+      "isGhost": true
+    },
+    {
+      "name": "HistInv",
+      "module": "Kernel",
+      "body": "(forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])) && D.Inv(h.present) && forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])",
+      "conjuncts": [
+        "forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])",
+        "D.Inv(h.present)",
+        "forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])"
+      ],
+      "line": 74,
+      "isGhost": true
+    },
+    {
+      "name": "HistInv",
+      "module": "KanbanKernel",
+      "body": "(forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])) && D.Inv(h.present) && forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])",
+      "conjuncts": [
+        "forall i: int {:trigger h.past[i]} | 0 <= i < |h.past| :: _default.Inv(h.past[i])",
+        "D.Inv(h.present)",
+        "forall j: int {:trigger h.future[j]} | 0 <= j < |h.future| :: _default.Inv(h.future[j])"
+      ],
+      "line": 74,
+      "isGhost": true
+    }
+  ],
+  "lemmas": [
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Domain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 12
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 15
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 220
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 237
+    },
+    {
+      "name": "RemoveFirstNoDupContains",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "SeqContains(RemoveFirst(s, x), y) <==> SeqContains(s, y) && y != x"
+      ],
+      "line": 497
+    },
+    {
+      "name": "RemoveFirstPreservesNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "NoDupSeq(RemoveFirst(s, x))"
+      ],
+      "line": 548
+    },
+    {
+      "name": "RemoveFirstIndex",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "i < j < |RemoveFirst(s, x)|"
+      ],
+      "ensures": [
+        "RemoveFirst(s, x)[i] != RemoveFirst(s, x)[j]"
+      ],
+      "line": 560
+    },
+    {
+      "name": "RemoveFirstInOriginal",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "SeqContains(RemoveFirst(s, x), y)"
+      ],
+      "ensures": [
+        "SeqContains(s, y)"
+      ],
+      "line": 591
+    },
+    {
+      "name": "RemoveFirstLength",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "SeqContains(s, x) ==> |RemoveFirst(s, x)| == |s| - 1",
+        "!SeqContains(s, x) ==> RemoveFirst(s, x) == s"
+      ],
+      "line": 599
+    },
+    {
+      "name": "InsertAtContains",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [
+        "SeqContains(InsertAt(s, i, x), y) <==> SeqContains(s, y) || y == x"
+      ],
+      "line": 628
+    },
+    {
+      "name": "InsertAtPreservesNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|",
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(InsertAt(s, i, x))"
+      ],
+      "line": 670
+    },
+    {
+      "name": "InsertAtLength",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [
+        "|InsertAt(s, i, x)| == |s| + 1"
+      ],
+      "line": 706
+    },
+    {
+      "name": "RemoveInsertPreservesNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "SeqContains(s, x)",
+        "k <= |RemoveFirst(s, x)|"
+      ],
+      "ensures": [
+        "NoDupSeq(InsertAt(RemoveFirst(s, x), k, x))"
+      ],
+      "line": 712
+    },
+    {
+      "name": "RemoveInsertContents",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "SeqContains(s, x)",
+        "k <= |RemoveFirst(s, x)|"
+      ],
+      "ensures": [
+        "SeqContains(InsertAt(RemoveFirst(s, x), k, x), y) <==> SeqContains(s, y)"
+      ],
+      "line": 726
+    },
+    {
+      "name": "FlattenColsSameColReorder",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "col in lanes",
+        "SeqContains(Lane(lanes, col), id)",
+        "k <= |RemoveFirst(Lane(lanes, col), id)|",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[col := InsertAt(RemoveFirst(Lane(lanes, col), id), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 738
+    },
+    {
+      "name": "LaneNoDupFromFlattened",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "ensures": [
+        "NoDupSeq(Lane(lanes, col))"
+      ],
+      "line": 771
+    },
+    {
+      "name": "FlattenColsUpdateOneLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != col ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, col), y)} {:trigger SeqContains(Lane(lanes', col), y)} :: SeqContains(Lane(lanes', col), y) <==> SeqContains(Lane(lanes, col), y)",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "NoDupSeq(Lane(lanes', col))"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 786
+    },
+    {
+      "name": "ConcatNoDupDisjoint",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a)",
+        "NoDupSeq(b)",
+        "forall x: T {:trigger SeqContains<T>(b, x)} {:trigger SeqContains(a, x)} :: SeqContains(a, x) ==> !SeqContains(b, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(a + b)"
+      ],
+      "line": 846
+    },
+    {
+      "name": "FlattenColsCrossColMove",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "src in lanes && toCol in lanes",
+        "SeqContains(Lane(lanes, src), id)",
+        "k <= |Lane(lanes, toCol)|",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[src := RemoveFirst(Lane(lanes, src), id)][toCol := InsertAt(Lane(lanes, toCol), k, id)]), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 873
+    },
+    {
+      "name": "FlatColsUnique",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col1 in cols && col2 in cols",
+        "col1 != col2",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, col1), id)"
+      ],
+      "ensures": [
+        "!SeqContains(Lane(lanes, col2), id)"
+      ],
+      "line": 927
+    },
+    {
+      "name": "FlatColsPositions",
+      "module": "KanbanDomain",
+      "requires": [
+        "c1 < |cols| && c2 < |cols| && c1 != c2",
+        "i1 < |Lane(lanes, cols[c1])| && i2 < |Lane(lanes, cols[c2])|",
+        "Lane(lanes, cols[c1])[i1] == Lane(lanes, cols[c2])[i2]",
+        "NoDupSeq(FlattenCols(cols, lanes))"
+      ],
+      "ensures": [
+        "false"
+      ],
+      "line": 953
+    },
+    {
+      "name": "FlatColsPositionValid",
+      "module": "KanbanDomain",
+      "requires": [
+        "c < |cols|",
+        "i < |Lane(lanes, cols[c])|"
+      ],
+      "ensures": [
+        "FlatColsPosition(cols, lanes, c, i) < |FlattenCols(cols, lanes)|",
+        "FlattenCols(cols, lanes)[FlatColsPosition(cols, lanes, c, i)] == Lane(lanes, cols[c])[i]"
+      ],
+      "line": 978
+    },
+    {
+      "name": "FlatColsPositionOrder",
+      "module": "KanbanDomain",
+      "requires": [
+        "c1 < c2 < |cols|",
+        "i1 < |Lane(lanes, cols[c1])|",
+        "i2 < |Lane(lanes, cols[c2])|"
+      ],
+      "ensures": [
+        "FlatColsPosition(cols, lanes, c1, i1) < FlatColsPosition(cols, lanes, c2, i2)"
+      ],
+      "line": 993
+    },
+    {
+      "name": "FlatColsPositionNonNeg",
+      "module": "KanbanDomain",
+      "requires": [
+        "c < |cols|",
+        "i < |Lane(lanes, cols[c])|"
+      ],
+      "ensures": [
+        "FlatColsPosition(cols, lanes, c, i) >= 0"
+      ],
+      "line": 1009
+    },
+    {
+      "name": "FlattenColsTwoLaneUpdate",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "src in lanes && toCol in lanes",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "!SeqContains(Lane(lanes, toCol), id)",
+        "NoDupSeq(Lane(lanes, src))",
+        "NoDupSeq(Lane(lanes, toCol))",
+        "NoDupSeq(Lane(lanes', src))",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 1015
+    },
+    {
+      "name": "FindColumnOfFound",
+      "module": "KanbanDomain",
+      "requires": [
+        "exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)"
+      ],
+      "ensures": [
+        "FindColumnOf(cols, lanes, id) in cols",
+        "SeqContains(Lane(lanes, FindColumnOf(cols, lanes, id)), id)"
+      ],
+      "line": 1037
+    },
+    {
+      "name": "FindColumnOfInv",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.cards"
+      ],
+      "ensures": [
+        "FindColumnOf(m.cols, m.lanes, id) in m.cols",
+        "SeqContains(Lane(m.lanes, FindColumnOf(m.cols, m.lanes, id)), id)"
+      ],
+      "line": 1066
+    },
+    {
+      "name": "OccursInLanesEquivSeqContains",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "OccursInLanes(m, id) <==> exists i: int {:trigger m.cols[i]} :: 0 <= i < |m.cols| && SeqContains(Lane(m.lanes, m.cols[i]), id)"
+      ],
+      "line": 1080
+    },
+    {
+      "name": "OccursInLanesEquivSeqContainsLanes",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "(exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)) <==> SeqContains(FlattenCols(cols, lanes), id)"
+      ],
+      "line": 1096
+    },
+    {
+      "name": "FlattenColsSingleLaneAdd",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "toCol in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "!SeqContains(FlattenCols(cols, lanes), id)",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) || y == id"
+      ],
+      "line": 1103
+    },
+    {
+      "name": "FlattenColsSingleLaneRemove",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "NoDupSeq(Lane(lanes', src))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y) && y != id"
+      ],
+      "line": 1169
+    },
+    {
+      "name": "FlatColsUniqueInLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "col in cols",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, col), id)"
+      ],
+      "ensures": [
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger c in cols} :: c in cols && c != col ==> !SeqContains(Lane(lanes, c), id)"
+      ],
+      "line": 1237
+    },
+    {
+      "name": "FlattenColsTwoLaneUpdateHelper",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(cols)",
+        "src in cols && toCol in cols",
+        "src != toCol",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "SeqContains(Lane(lanes, src), id)",
+        "!SeqContains(Lane(lanes, toCol), id)",
+        "NoDupSeq(Lane(lanes', src))",
+        "NoDupSeq(Lane(lanes', toCol))",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols && c != src && c != toCol ==> Lane(lanes', c) == Lane(lanes, c)",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, src), y)} {:trigger SeqContains(Lane(lanes', src), y)} :: SeqContains(Lane(lanes', src), y) <==> SeqContains(Lane(lanes, src), y) && y != id",
+        "forall y: nat {:trigger SeqContains(Lane(lanes, toCol), y)} {:trigger SeqContains(Lane(lanes', toCol), y)} :: SeqContains(Lane(lanes', toCol), y) <==> SeqContains(Lane(lanes, toCol), y) || y == id"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes'))",
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} {:trigger SeqContains(FlattenCols(cols, lanes'), y)} :: SeqContains(FlattenCols(cols, lanes'), y) <==> SeqContains(FlattenCols(cols, lanes), y)"
+      ],
+      "line": 1253
+    },
+    {
+      "name": "SeqContainsWitness",
+      "module": "KanbanDomain",
+      "requires": [
+        "idx < |s|",
+        "s[idx] == x"
+      ],
+      "ensures": [
+        "SeqContains(s, x)"
+      ],
+      "line": 1407
+    },
+    {
+      "name": "OccursInLanesWitness",
+      "module": "KanbanDomain",
+      "requires": [
+        "colIdx < |m.cols|",
+        "posIdx < |Lane(m.lanes, m.cols[colIdx])|",
+        "Lane(m.lanes, m.cols[colIdx])[posIdx] == id"
+      ],
+      "ensures": [
+        "OccursInLanes(m, id)"
+      ],
+      "line": 1414
+    },
+    {
+      "name": "AllIdsContains",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "SeqContains(FlattenCols(cols, lanes), id) <==> exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && SeqContains(Lane(lanes, cols[i]), id)"
+      ],
+      "line": 1422
+    },
+    {
+      "name": "SeqContainsMeansInSeq",
+      "module": "KanbanDomain",
+      "requires": [
+        "SeqContains(s, x)"
+      ],
+      "ensures": [
+        "exists k: int {:trigger s[k]} :: 0 <= k < |s| && s[k] == x"
+      ],
+      "line": 1452
+    },
+    {
+      "name": "ConcatContains",
+      "module": "KanbanDomain",
+      "requires": [],
+      "ensures": [
+        "SeqContains(a + b, x) <==> SeqContains(a, x) || SeqContains(b, x)"
+      ],
+      "line": 1459
+    },
+    {
+      "name": "NoDupSeqNotInTail",
+      "module": "KanbanDomain",
+      "requires": [
+        "|s| > 0",
+        "NoDupSeq(s)",
+        "s[0] == x"
+      ],
+      "ensures": [
+        "forall c: T {:trigger c in s[1..]} :: c in s[1..] ==> c != x"
+      ],
+      "line": 1481
+    },
+    {
+      "name": "NoDupSeqAppend",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(s + [x])"
+      ],
+      "line": 1500
+    },
+    {
+      "name": "FlattenColsUpdateLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "col in cols"
+      ],
+      "ensures": [
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger c in cols} :: c in cols && c != col ==> Lane(lanes[col := newLane], c) == Lane(lanes, c)"
+      ],
+      "line": 1525
+    },
+    {
+      "name": "FlattenColsAppendToLane",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "col in cols",
+        "NoDupSeq(cols)",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "!SeqContains(FlattenCols(cols, lanes), x)"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]))"
+      ],
+      "line": 1531
+    },
+    {
+      "name": "FlattenColsAppendToLaneHelper",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "col in cols",
+        "NoDupSeq(cols)",
+        "NoDupSeq(FlattenCols(cols, lanes))",
+        "!SeqContains(FlattenCols(cols, lanes), x)"
+      ],
+      "ensures": [
+        "NoDupSeq(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]))"
+      ],
+      "line": 1543
+    },
+    {
+      "name": "ConcatDisjoint",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)"
+      ],
+      "ensures": [
+        "forall x: T {:trigger SeqContains<T>(b, x)} {:trigger SeqContains(a, x)} :: SeqContains(a, x) ==> !SeqContains(b, x)"
+      ],
+      "line": 1601
+    },
+    {
+      "name": "ConcatNoDupFreshSubset",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)",
+        "NoDupSeq(b')",
+        "!SeqContains(a, x)",
+        "forall y: T {:trigger SeqContains(b, y)} {:trigger SeqContains(b', y)} :: SeqContains(b', y) <==> SeqContains(b, y) || y == x"
+      ],
+      "ensures": [
+        "NoDupSeq(a + b')"
+      ],
+      "line": 1620
+    },
+    {
+      "name": "FlattenColsUnchanged",
+      "module": "KanbanDomain",
+      "requires": [
+        "forall c: seq<char> {:trigger c in cols} :: c in cols ==> c != col",
+        "forall c: ColId {:trigger Lane(lanes, c)} {:trigger Lane(lanes', c)} {:trigger c in cols} :: c in cols ==> Lane(lanes', c) == Lane(lanes, c)"
+      ],
+      "ensures": [
+        "FlattenCols(cols, lanes') == FlattenCols(cols, lanes)"
+      ],
+      "line": 1658
+    },
+    {
+      "name": "ConcatNoDup",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)"
+      ],
+      "ensures": [
+        "NoDupSeq(a) && NoDupSeq(b)"
+      ],
+      "line": 1670
+    },
+    {
+      "name": "NoDupSeqInsert",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)",
+        "!SeqContains(a, x)",
+        "!SeqContains(b, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(a + [x] + b)"
+      ],
+      "line": 1688
+    },
+    {
+      "name": "FlattenColsAppendContent",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in cols",
+        "col in lanes"
+      ],
+      "ensures": [
+        "forall y: nat {:trigger SeqContains(FlattenCols(cols, lanes), y)} :: SeqContains(FlattenCols(cols, lanes[col := Lane(lanes, col) + [x]]), y) <==> SeqContains(FlattenCols(cols, lanes), y) || y == x"
+      ],
+      "line": 1731
+    },
+    {
+      "name": "ColInColsWitness",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in cols"
+      ],
+      "ensures": [
+        "exists i: int {:trigger cols[i]} :: 0 <= i < |cols| && cols[i] == col"
+      ],
+      "line": 1771
+    },
+    {
+      "name": "ConcatNoDupWithFreshAppend",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(a + b)",
+        "!SeqContains(a, x)",
+        "!SeqContains(b, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(a + (b + [x]))"
+      ],
+      "line": 1778
+    },
+    {
+      "name": "NoDupSeqAppendFresh",
+      "module": "KanbanDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "!(x in s)"
+      ],
+      "ensures": [
+        "NoDupSeq(s + [x])"
+      ],
+      "line": 1789
+    },
+    {
+      "name": "FlattenColsAppendEmpty",
+      "module": "KanbanDomain",
+      "requires": [
+        "col in lanes",
+        "Lane(lanes, col) == []"
+      ],
+      "ensures": [
+        "FlattenCols(cols + [col], lanes) == FlattenCols(cols, lanes)"
+      ],
+      "line": 1803
+    },
+    {
+      "name": "FlattenColsSameLanes",
+      "module": "KanbanDomain",
+      "requires": [
+        "forall c: ColId {:trigger Lane(lanes2, c)} {:trigger Lane(lanes1, c)} {:trigger c in cols} :: c in cols ==> Lane(lanes1, c) == Lane(lanes2, c)"
+      ],
+      "ensures": [
+        "FlattenCols(cols, lanes1) == FlattenCols(cols, lanes2)"
+      ],
+      "line": 1820
+    },
+    {
+      "name": "FreshIdNotInAllIds",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)",
+        "freshId >= m.nextId"
+      ],
+      "ensures": [
+        "!SeqContains(AllIds(m), freshId)"
+      ],
+      "line": 1832
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Kernel.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 12
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Kernel.D.Abs",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [
+        "Inv(Normalize(Apply(m, a)))"
+      ],
+      "line": 15
+    },
+    {
+      "name": "DoPreservesInv",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [
+        "D.Inv(Do(h, a).present)"
+      ],
+      "line": 67
+    },
+    {
+      "name": "InitHistorySatisfiesInv",
+      "module": "Kernel",
+      "requires": [],
+      "ensures": [
+        "HistInv(InitHistory())"
+      ],
+      "line": 80
+    },
+    {
+      "name": "UndoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Undo(h))"
+      ],
+      "line": 86
+    },
+    {
+      "name": "RedoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Redo(h))"
+      ],
+      "line": 92
+    },
+    {
+      "name": "DoPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Do(h, a))"
+      ],
+      "line": 98
+    },
+    {
+      "name": "PreviewPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Preview(h, a))"
+      ],
+      "line": 105
+    },
+    {
+      "name": "CommitFromPreservesHistInv",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)",
+        "D.Inv(baseline)"
+      ],
+      "ensures": [
+        "HistInv(CommitFrom(h, baseline))"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DoHasNoRedoBranch",
+      "module": "Kernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "Redo(Do(h, a)) == Do(h, a)"
+      ],
+      "line": 120
+    },
+    {
+      "name": "UndoRedoRoundTrip",
+      "module": "Kernel",
+      "requires": [
+        "|h.past| > 0"
+      ],
+      "ensures": [
+        "Redo(Undo(h)) == h"
+      ],
+      "line": 126
+    },
+    {
+      "name": "RedoUndoRoundTrip",
+      "module": "Kernel",
+      "requires": [
+        "|h.future| > 0"
+      ],
+      "ensures": [
+        "Undo(Redo(h)) == h"
+      ],
+      "line": 131
+    },
+    {
+      "name": "UndoAtBeginningIsNoOp",
+      "module": "Kernel",
+      "requires": [
+        "|h.past| == 0"
+      ],
+      "ensures": [
+        "Undo(h) == h"
+      ],
+      "line": 137
+    },
+    {
+      "name": "RedoAtEndIsNoOp",
+      "module": "Kernel",
+      "requires": [
+        "|h.future| == 0"
+      ],
+      "ensures": [
+        "Redo(h) == h"
+      ],
+      "line": 142
+    },
+    {
+      "name": "DoPreservesInv",
+      "module": "KanbanKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [
+        "D.Inv(Do(h, a).present)"
+      ],
+      "line": 67
+    },
+    {
+      "name": "InitHistorySatisfiesInv",
+      "module": "KanbanKernel",
+      "requires": [],
+      "ensures": [
+        "HistInv(InitHistory())"
+      ],
+      "line": 80
+    },
+    {
+      "name": "UndoPreservesHistInv",
+      "module": "KanbanKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Undo(h))"
+      ],
+      "line": 86
+    },
+    {
+      "name": "RedoPreservesHistInv",
+      "module": "KanbanKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Redo(h))"
+      ],
+      "line": 92
+    },
+    {
+      "name": "DoPreservesHistInv",
+      "module": "KanbanKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Do(h, a))"
+      ],
+      "line": 98
+    },
+    {
+      "name": "PreviewPreservesHistInv",
+      "module": "KanbanKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "HistInv(Preview(h, a))"
+      ],
+      "line": 105
+    },
+    {
+      "name": "CommitFromPreservesHistInv",
+      "module": "KanbanKernel",
+      "requires": [
+        "HistInv(h)",
+        "D.Inv(baseline)"
+      ],
+      "ensures": [
+        "HistInv(CommitFrom(h, baseline))"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DoHasNoRedoBranch",
+      "module": "KanbanKernel",
+      "requires": [
+        "HistInv(h)"
+      ],
+      "ensures": [
+        "Redo(Do(h, a)) == Do(h, a)"
+      ],
+      "line": 120
+    },
+    {
+      "name": "UndoRedoRoundTrip",
+      "module": "KanbanKernel",
+      "requires": [
+        "|h.past| > 0"
+      ],
+      "ensures": [
+        "Redo(Undo(h)) == h"
+      ],
+      "line": 126
+    },
+    {
+      "name": "RedoUndoRoundTrip",
+      "module": "KanbanKernel",
+      "requires": [
+        "|h.future| > 0"
+      ],
+      "ensures": [
+        "Undo(Redo(h)) == h"
+      ],
+      "line": 131
+    },
+    {
+      "name": "UndoAtBeginningIsNoOp",
+      "module": "KanbanKernel",
+      "requires": [
+        "|h.past| == 0"
+      ],
+      "ensures": [
+        "Undo(h) == h"
+      ],
+      "line": 137
+    },
+    {
+      "name": "RedoAtEndIsNoOp",
+      "module": "KanbanKernel",
+      "requires": [
+        "|h.future| == 0"
+      ],
+      "ensures": [
+        "Redo(h) == h"
+      ],
+      "line": 142
+    }
+  ],
+  "functions": [
+    {
+      "name": "Apply",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 8
+    },
+    {
+      "name": "ClampPos",
+      "module": "KanbanDomain",
+      "requires": [
+        "n >= 0"
+      ],
+      "ensures": [],
+      "line": 54
+    },
+    {
+      "name": "InsertAt",
+      "module": "KanbanDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [],
+      "line": 69
+    },
+    {
+      "name": "FlatColsPosition",
+      "module": "KanbanDomain",
+      "requires": [
+        "c < |cols|",
+        "i < |Lane(lanes, cols[c])|"
+      ],
+      "ensures": [],
+      "line": 75
+    },
+    {
+      "name": "Apply",
+      "module": "KanbanDomain",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 147
+    },
+    {
+      "name": "Apply",
+      "module": "Kernel.D.Abs",
+      "requires": [
+        "Inv(m)"
+      ],
+      "ensures": [],
+      "line": 8
+    },
+    {
+      "name": "Step",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(m)"
+      ],
+      "ensures": [],
+      "line": 23
+    },
+    {
+      "name": "Do",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 36
+    },
+    {
+      "name": "Preview",
+      "module": "Kernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 43
+    },
+    {
+      "name": "Step",
+      "module": "KanbanKernel",
+      "requires": [
+        "D.Inv(m)"
+      ],
+      "ensures": [],
+      "line": 23
+    },
+    {
+      "name": "Do",
+      "module": "KanbanKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 36
+    },
+    {
+      "name": "Preview",
+      "module": "KanbanKernel",
+      "requires": [
+        "D.Inv(h.present)"
+      ],
+      "ensures": [],
+      "line": 43
+    },
+    {
+      "name": "Dispatch",
+      "module": "KanbanAppCore",
+      "requires": [
+        "K.HistInv(h)"
+      ],
+      "ensures": [],
+      "line": 1869
+    }
+  ],
+  "axioms": []
+}

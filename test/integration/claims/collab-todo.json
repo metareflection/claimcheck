@@ -1,0 +1,1907 @@
+{
+  "predicates": [
+    {
+      "name": "Inv",
+      "module": "Domain",
+      "line": 26,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "Domain",
+      "line": 64,
+      "isGhost": true
+    },
+    {
+      "name": "IsLeapYear",
+      "module": "TodoDomainSpec",
+      "body": "(year % 4 == 0 && year % 100 != 0) || year % 400 == 0",
+      "conjuncts": [
+        "(year % 4 == 0 && year % 100 != 0) || year % 400 == 0"
+      ],
+      "line": 72,
+      "isGhost": false
+    },
+    {
+      "name": "ValidDate",
+      "module": "TodoDomainSpec",
+      "body": "d.year >= 1970 && d.month >= 1 && d.month <= 12 && d.day >= 1 && d.day <= DaysInMonth(d.month, d.year)",
+      "conjuncts": [
+        "d.year >= 1970",
+        "d.month >= 1",
+        "d.month <= 12",
+        "d.day >= 1",
+        "d.day <= DaysInMonth(d.month, d.year)"
+      ],
+      "line": 76,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "TodoDomainSpec",
+      "body": "NoDupSeq(m.lists) && (forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.listNames} :: l in m.listNames <==> SeqContains(m.lists, l)) && (forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.tasks} :: l in m.tasks <==> SeqContains(m.lists, l)) && (forall l: int, id: nat {:trigger id in m.taskData, m.tasks[l]} {:trigger id in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], id) ==> id in m.taskData) && (forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && !m.taskData[id].deleted ==> CountInLists(m, id) == 1) && (forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].deleted ==> CountInLists(m, id) == 0) && (forall l: int {:trigger m.tasks[l]} {:trigger l in m.tasks} :: l in m.tasks ==> NoDupSeq(m.tasks[l])) && (forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].tags <= m.tags.Keys) && (forall id: int {:trigger SeqContains(m.lists, id)} :: SeqContains(m.lists, id) ==> id < m.nextListId) && (forall id: int {:trigger id in m.taskData} :: id in m.taskData ==> id < m.nextTaskId) && (forall id: int {:trigger id in m.tags} :: id in m.tags ==> id < m.nextTagId) && (forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].assignees <= m.members) && m.owner in m.members && (m.mode.Personal? ==> m.members == {m.owner}) && (m.mode.Collaborative? ==> |m.members| >= 1) && (forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].dueDate.Some? ==> ValidDate(m.taskData[id].dueDate.value)) && (forall l1: int, l2: int {:trigger m.listNames[l2], m.listNames[l1]} {:trigger m.listNames[l2], l1 in m.listNames} {:trigger m.listNames[l1], l2 in m.listNames} {:trigger l2 in m.listNames, l1 in m.listNames} :: l1 in m.listNames && l2 in m.listNames && l1 != l2 ==> !EqIgnoreCase(m.listNames[l1], m.listNames[l2])) && (forall l: int, t1: nat, t2: nat {:trigger m.taskData[t2], m.taskData[t1], m.tasks[l]} {:trigger m.taskData[t2], m.taskData[t1], l in m.tasks} {:trigger m.taskData[t2], t1 in m.taskData, m.tasks[l]} {:trigger m.taskData[t2], t1 in m.taskData, l in m.tasks} {:trigger t2 in m.taskData, m.taskData[t1], m.tasks[l]} {:trigger t2 in m.taskData, m.taskData[t1], l in m.tasks} {:trigger t2 in m.taskData, t1 in m.taskData, m.tasks[l]} {:trigger t2 in m.taskData, t1 in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], t1) && t1 in m.taskData && !m.taskData[t1].deleted && SeqContains(m.tasks[l], t2) && t2 in m.taskData && !m.taskData[t2].deleted && t1 != t2 ==> !EqIgnoreCase(m.taskData[t1].title, m.taskData[t2].title)) && forall t1: int, t2: int {:trigger m.tags[t2], m.tags[t1]} {:trigger m.tags[t2], t1 in m.tags} {:trigger m.tags[t1], t2 in m.tags} {:trigger t2 in m.tags, t1 in m.tags} :: t1 in m.tags && t2 in m.tags && t1 != t2 ==> !EqIgnoreCase(m.tags[t1].name, m.tags[t2].name)",
+      "conjuncts": [
+        "NoDupSeq(m.lists)",
+        "forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.listNames} :: l in m.listNames <==> SeqContains(m.lists, l)",
+        "forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.tasks} :: l in m.tasks <==> SeqContains(m.lists, l)",
+        "forall l: int, id: nat {:trigger id in m.taskData, m.tasks[l]} {:trigger id in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], id) ==> id in m.taskData",
+        "forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && !m.taskData[id].deleted ==> CountInLists(m, id) == 1",
+        "forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].deleted ==> CountInLists(m, id) == 0",
+        "forall l: int {:trigger m.tasks[l]} {:trigger l in m.tasks} :: l in m.tasks ==> NoDupSeq(m.tasks[l])",
+        "forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].tags <= m.tags.Keys",
+        "forall id: int {:trigger SeqContains(m.lists, id)} :: SeqContains(m.lists, id) ==> id < m.nextListId",
+        "forall id: int {:trigger id in m.taskData} :: id in m.taskData ==> id < m.nextTaskId",
+        "forall id: int {:trigger id in m.tags} :: id in m.tags ==> id < m.nextTagId",
+        "forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].assignees <= m.members",
+        "m.owner in m.members",
+        "m.mode.Personal? ==> m.members == {m.owner}",
+        "m.mode.Collaborative? ==> |m.members| >= 1",
+        "forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].dueDate.Some? ==> ValidDate(m.taskData[id].dueDate.value)",
+        "forall l1: int, l2: int {:trigger m.listNames[l2], m.listNames[l1]} {:trigger m.listNames[l2], l1 in m.listNames} {:trigger m.listNames[l1], l2 in m.listNames} {:trigger l2 in m.listNames, l1 in m.listNames} :: l1 in m.listNames && l2 in m.listNames && l1 != l2 ==> !EqIgnoreCase(m.listNames[l1], m.listNames[l2])",
+        "forall l: int, t1: nat, t2: nat {:trigger m.taskData[t2], m.taskData[t1], m.tasks[l]} {:trigger m.taskData[t2], m.taskData[t1], l in m.tasks} {:trigger m.taskData[t2], t1 in m.taskData, m.tasks[l]} {:trigger m.taskData[t2], t1 in m.taskData, l in m.tasks} {:trigger t2 in m.taskData, m.taskData[t1], m.tasks[l]} {:trigger t2 in m.taskData, m.taskData[t1], l in m.tasks} {:trigger t2 in m.taskData, t1 in m.taskData, m.tasks[l]} {:trigger t2 in m.taskData, t1 in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], t1) && t1 in m.taskData && !m.taskData[t1].deleted && SeqContains(m.tasks[l], t2) && t2 in m.taskData && !m.taskData[t2].deleted && t1 != t2 ==> !EqIgnoreCase(m.taskData[t1].title, m.taskData[t2].title)",
+        "forall t1: int, t2: int {:trigger m.tags[t2], m.tags[t1]} {:trigger m.tags[t2], t1 in m.tags} {:trigger m.tags[t1], t2 in m.tags} {:trigger t2 in m.tags, t1 in m.tags} :: t1 in m.tags && t2 in m.tags && t1 != t2 ==> !EqIgnoreCase(m.tags[t1].name, m.tags[t2].name)"
+      ],
+      "line": 233,
+      "isGhost": true
+    },
+    {
+      "name": "NoDupSeq",
+      "module": "TodoDomainSpec",
+      "body": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "conjuncts": [
+        "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "line": 321,
+      "isGhost": false
+    },
+    {
+      "name": "EqIgnoreCase",
+      "module": "TodoDomainSpec",
+      "body": "ToLower(a) == ToLower(b)",
+      "conjuncts": [
+        "ToLower(a) == ToLower(b)"
+      ],
+      "line": 463,
+      "isGhost": false
+    },
+    {
+      "name": "ListNameExists",
+      "module": "TodoDomainSpec",
+      "body": "exists l: int {:trigger m.listNames[l]} {:trigger l in m.listNames} :: l in m.listNames && (excludeList.None? || l != excludeList.value) && EqIgnoreCase(m.listNames[l], name)",
+      "conjuncts": [
+        "exists l: int {:trigger m.listNames[l]} {:trigger l in m.listNames} :: l in m.listNames && (excludeList.None? || l != excludeList.value) && EqIgnoreCase(m.listNames[l], name)"
+      ],
+      "line": 470,
+      "isGhost": false
+    },
+    {
+      "name": "TaskTitleExistsInList",
+      "module": "TodoDomainSpec",
+      "body": "listId in m.tasks && exists taskId: nat {:trigger m.taskData[taskId]} {:trigger SeqContains(m.tasks[listId], taskId)} {:trigger taskId in m.taskData} :: taskId in m.taskData && SeqContains(m.tasks[listId], taskId) && !m.taskData[taskId].deleted && (excludeTask.None? || taskId != excludeTask.value) && EqIgnoreCase(m.taskData[taskId].title, title)",
+      "conjuncts": [
+        "listId in m.tasks",
+        "exists taskId: nat {:trigger m.taskData[taskId]} {:trigger SeqContains(m.tasks[listId], taskId)} {:trigger taskId in m.taskData} :: taskId in m.taskData && SeqContains(m.tasks[listId], taskId) && !m.taskData[taskId].deleted && (excludeTask.None? || taskId != excludeTask.value) && EqIgnoreCase(m.taskData[taskId].title, title)"
+      ],
+      "line": 479,
+      "isGhost": false
+    },
+    {
+      "name": "TagNameExists",
+      "module": "TodoDomainSpec",
+      "body": "exists t: int {:trigger m.tags[t]} {:trigger t in m.tags} :: t in m.tags && (excludeTag.None? || t != excludeTag.value) && EqIgnoreCase(m.tags[t].name, name)",
+      "conjuncts": [
+        "exists t: int {:trigger m.tags[t]} {:trigger t in m.tags} :: t in m.tags && (excludeTag.None? || t != excludeTag.value) && EqIgnoreCase(m.tags[t].name, name)"
+      ],
+      "line": 491,
+      "isGhost": false
+    },
+    {
+      "name": "Explains",
+      "module": "TodoDomainSpec",
+      "body": "match (orig, cand) case (MoveTask(oid, otoList, origPlace), MoveTask(cid, ctoList, candPlace)) => oid == cid && otoList == ctoList && (candPlace == origPlace || candPlace == AtEnd) case (MoveList(oid, origPlace), MoveList(cid, candPlace)) => oid == cid && (candPlace == origPlace || candPlace == ListAtEnd) case (_ /* _v54 */, _ /* _v55 */) => orig == cand",
+      "conjuncts": [
+        "match (orig, cand) case (MoveTask(oid, otoList, origPlace), MoveTask(cid, ctoList, candPlace)) => oid == cid && otoList == ctoList && (candPlace == origPlace || candPlace == AtEnd) case (MoveList(oid, origPlace), MoveList(cid, candPlace)) => oid == cid && (candPlace == origPlace || candPlace == ListAtEnd) case (_ /* _v54 */, _ /* _v55 */) => orig == cand"
+      ],
+      "line": 956,
+      "isGhost": true
+    },
+    {
+      "name": "IsPriorityTask",
+      "module": "TodoDomainSpec",
+      "body": "t.starred && !t.completed && !t.deleted",
+      "conjuncts": [
+        "t.starred",
+        "!t.completed",
+        "!t.deleted"
+      ],
+      "line": 1030,
+      "isGhost": false
+    },
+    {
+      "name": "IsLogbookTask",
+      "module": "TodoDomainSpec",
+      "body": "t.completed && !t.deleted",
+      "conjuncts": [
+        "t.completed",
+        "!t.deleted"
+      ],
+      "line": 1038,
+      "isGhost": false
+    },
+    {
+      "name": "IsVisibleTask",
+      "module": "TodoDomainSpec",
+      "body": "!t.deleted",
+      "conjuncts": [
+        "!t.deleted"
+      ],
+      "line": 1044,
+      "isGhost": false
+    },
+    {
+      "name": "MatchesSmartList",
+      "module": "TodoDomainSpec",
+      "body": "match smartList case Priority() => IsPriorityTask(t) case Logbook() => IsLogbookTask(t)",
+      "conjuncts": [
+        "match smartList case Priority() => IsPriorityTask(t) case Logbook() => IsLogbookTask(t)"
+      ],
+      "line": 1050,
+      "isGhost": false
+    },
+    {
+      "name": "IsLeapYear",
+      "module": "TodoDomain",
+      "body": "(year % 4 == 0 && year % 100 != 0) || year % 400 == 0",
+      "conjuncts": [
+        "(year % 4 == 0 && year % 100 != 0) || year % 400 == 0"
+      ],
+      "line": 72,
+      "isGhost": false
+    },
+    {
+      "name": "ValidDate",
+      "module": "TodoDomain",
+      "body": "d.year >= 1970 && d.month >= 1 && d.month <= 12 && d.day >= 1 && d.day <= DaysInMonth(d.month, d.year)",
+      "conjuncts": [
+        "d.year >= 1970",
+        "d.month >= 1",
+        "d.month <= 12",
+        "d.day >= 1",
+        "d.day <= DaysInMonth(d.month, d.year)"
+      ],
+      "line": 76,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "TodoDomain",
+      "body": "NoDupSeq(m.lists) && (forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.listNames} :: l in m.listNames <==> SeqContains(m.lists, l)) && (forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.tasks} :: l in m.tasks <==> SeqContains(m.lists, l)) && (forall l: int, id: nat {:trigger id in m.taskData, m.tasks[l]} {:trigger id in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], id) ==> id in m.taskData) && (forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && !m.taskData[id].deleted ==> CountInLists(m, id) == 1) && (forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].deleted ==> CountInLists(m, id) == 0) && (forall l: int {:trigger m.tasks[l]} {:trigger l in m.tasks} :: l in m.tasks ==> NoDupSeq(m.tasks[l])) && (forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].tags <= m.tags.Keys) && (forall id: int {:trigger SeqContains(m.lists, id)} :: SeqContains(m.lists, id) ==> id < m.nextListId) && (forall id: int {:trigger id in m.taskData} :: id in m.taskData ==> id < m.nextTaskId) && (forall id: int {:trigger id in m.tags} :: id in m.tags ==> id < m.nextTagId) && (forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].assignees <= m.members) && m.owner in m.members && (m.mode.Personal? ==> m.members == {m.owner}) && (m.mode.Collaborative? ==> |m.members| >= 1) && (forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].dueDate.Some? ==> ValidDate(m.taskData[id].dueDate.value)) && (forall l1: int, l2: int {:trigger m.listNames[l2], m.listNames[l1]} {:trigger m.listNames[l2], l1 in m.listNames} {:trigger m.listNames[l1], l2 in m.listNames} {:trigger l2 in m.listNames, l1 in m.listNames} :: l1 in m.listNames && l2 in m.listNames && l1 != l2 ==> !EqIgnoreCase(m.listNames[l1], m.listNames[l2])) && (forall l: int, t1: nat, t2: nat {:trigger m.taskData[t2], m.taskData[t1], m.tasks[l]} {:trigger m.taskData[t2], m.taskData[t1], l in m.tasks} {:trigger m.taskData[t2], t1 in m.taskData, m.tasks[l]} {:trigger m.taskData[t2], t1 in m.taskData, l in m.tasks} {:trigger t2 in m.taskData, m.taskData[t1], m.tasks[l]} {:trigger t2 in m.taskData, m.taskData[t1], l in m.tasks} {:trigger t2 in m.taskData, t1 in m.taskData, m.tasks[l]} {:trigger t2 in m.taskData, t1 in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], t1) && t1 in m.taskData && !m.taskData[t1].deleted && SeqContains(m.tasks[l], t2) && t2 in m.taskData && !m.taskData[t2].deleted && t1 != t2 ==> !EqIgnoreCase(m.taskData[t1].title, m.taskData[t2].title)) && forall t1: int, t2: int {:trigger m.tags[t2], m.tags[t1]} {:trigger m.tags[t2], t1 in m.tags} {:trigger m.tags[t1], t2 in m.tags} {:trigger t2 in m.tags, t1 in m.tags} :: t1 in m.tags && t2 in m.tags && t1 != t2 ==> !EqIgnoreCase(m.tags[t1].name, m.tags[t2].name)",
+      "conjuncts": [
+        "NoDupSeq(m.lists)",
+        "forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.listNames} :: l in m.listNames <==> SeqContains(m.lists, l)",
+        "forall l: nat {:trigger SeqContains(m.lists, l)} {:trigger l in m.tasks} :: l in m.tasks <==> SeqContains(m.lists, l)",
+        "forall l: int, id: nat {:trigger id in m.taskData, m.tasks[l]} {:trigger id in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], id) ==> id in m.taskData",
+        "forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && !m.taskData[id].deleted ==> CountInLists(m, id) == 1",
+        "forall id: nat {:trigger CountInLists(m, id)} {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].deleted ==> CountInLists(m, id) == 0",
+        "forall l: int {:trigger m.tasks[l]} {:trigger l in m.tasks} :: l in m.tasks ==> NoDupSeq(m.tasks[l])",
+        "forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].tags <= m.tags.Keys",
+        "forall id: int {:trigger SeqContains(m.lists, id)} :: SeqContains(m.lists, id) ==> id < m.nextListId",
+        "forall id: int {:trigger id in m.taskData} :: id in m.taskData ==> id < m.nextTaskId",
+        "forall id: int {:trigger id in m.tags} :: id in m.tags ==> id < m.nextTagId",
+        "forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData ==> m.taskData[id].assignees <= m.members",
+        "m.owner in m.members",
+        "m.mode.Personal? ==> m.members == {m.owner}",
+        "m.mode.Collaborative? ==> |m.members| >= 1",
+        "forall id: int {:trigger m.taskData[id]} {:trigger id in m.taskData} :: id in m.taskData && m.taskData[id].dueDate.Some? ==> ValidDate(m.taskData[id].dueDate.value)",
+        "forall l1: int, l2: int {:trigger m.listNames[l2], m.listNames[l1]} {:trigger m.listNames[l2], l1 in m.listNames} {:trigger m.listNames[l1], l2 in m.listNames} {:trigger l2 in m.listNames, l1 in m.listNames} :: l1 in m.listNames && l2 in m.listNames && l1 != l2 ==> !EqIgnoreCase(m.listNames[l1], m.listNames[l2])",
+        "forall l: int, t1: nat, t2: nat {:trigger m.taskData[t2], m.taskData[t1], m.tasks[l]} {:trigger m.taskData[t2], m.taskData[t1], l in m.tasks} {:trigger m.taskData[t2], t1 in m.taskData, m.tasks[l]} {:trigger m.taskData[t2], t1 in m.taskData, l in m.tasks} {:trigger t2 in m.taskData, m.taskData[t1], m.tasks[l]} {:trigger t2 in m.taskData, m.taskData[t1], l in m.tasks} {:trigger t2 in m.taskData, t1 in m.taskData, m.tasks[l]} {:trigger t2 in m.taskData, t1 in m.taskData, l in m.tasks} :: l in m.tasks && SeqContains(m.tasks[l], t1) && t1 in m.taskData && !m.taskData[t1].deleted && SeqContains(m.tasks[l], t2) && t2 in m.taskData && !m.taskData[t2].deleted && t1 != t2 ==> !EqIgnoreCase(m.taskData[t1].title, m.taskData[t2].title)",
+        "forall t1: int, t2: int {:trigger m.tags[t2], m.tags[t1]} {:trigger m.tags[t2], t1 in m.tags} {:trigger m.tags[t1], t2 in m.tags} {:trigger t2 in m.tags, t1 in m.tags} :: t1 in m.tags && t2 in m.tags && t1 != t2 ==> !EqIgnoreCase(m.tags[t1].name, m.tags[t2].name)"
+      ],
+      "line": 233,
+      "isGhost": true
+    },
+    {
+      "name": "NoDupSeq",
+      "module": "TodoDomain",
+      "body": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "conjuncts": [
+        "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "line": 321,
+      "isGhost": false
+    },
+    {
+      "name": "EqIgnoreCase",
+      "module": "TodoDomain",
+      "body": "ToLower(a) == ToLower(b)",
+      "conjuncts": [
+        "ToLower(a) == ToLower(b)"
+      ],
+      "line": 463,
+      "isGhost": false
+    },
+    {
+      "name": "ListNameExists",
+      "module": "TodoDomain",
+      "body": "exists l: int {:trigger m.listNames[l]} {:trigger l in m.listNames} :: l in m.listNames && (excludeList.None? || l != excludeList.value) && EqIgnoreCase(m.listNames[l], name)",
+      "conjuncts": [
+        "exists l: int {:trigger m.listNames[l]} {:trigger l in m.listNames} :: l in m.listNames && (excludeList.None? || l != excludeList.value) && EqIgnoreCase(m.listNames[l], name)"
+      ],
+      "line": 470,
+      "isGhost": false
+    },
+    {
+      "name": "TaskTitleExistsInList",
+      "module": "TodoDomain",
+      "body": "listId in m.tasks && exists taskId: nat {:trigger m.taskData[taskId]} {:trigger SeqContains(m.tasks[listId], taskId)} {:trigger taskId in m.taskData} :: taskId in m.taskData && SeqContains(m.tasks[listId], taskId) && !m.taskData[taskId].deleted && (excludeTask.None? || taskId != excludeTask.value) && EqIgnoreCase(m.taskData[taskId].title, title)",
+      "conjuncts": [
+        "listId in m.tasks",
+        "exists taskId: nat {:trigger m.taskData[taskId]} {:trigger SeqContains(m.tasks[listId], taskId)} {:trigger taskId in m.taskData} :: taskId in m.taskData && SeqContains(m.tasks[listId], taskId) && !m.taskData[taskId].deleted && (excludeTask.None? || taskId != excludeTask.value) && EqIgnoreCase(m.taskData[taskId].title, title)"
+      ],
+      "line": 479,
+      "isGhost": false
+    },
+    {
+      "name": "TagNameExists",
+      "module": "TodoDomain",
+      "body": "exists t: int {:trigger m.tags[t]} {:trigger t in m.tags} :: t in m.tags && (excludeTag.None? || t != excludeTag.value) && EqIgnoreCase(m.tags[t].name, name)",
+      "conjuncts": [
+        "exists t: int {:trigger m.tags[t]} {:trigger t in m.tags} :: t in m.tags && (excludeTag.None? || t != excludeTag.value) && EqIgnoreCase(m.tags[t].name, name)"
+      ],
+      "line": 491,
+      "isGhost": false
+    },
+    {
+      "name": "Explains",
+      "module": "TodoDomain",
+      "body": "match (orig, cand) case (MoveTask(oid, otoList, origPlace), MoveTask(cid, ctoList, candPlace)) => oid == cid && otoList == ctoList && (candPlace == origPlace || candPlace == AtEnd) case (MoveList(oid, origPlace), MoveList(cid, candPlace)) => oid == cid && (candPlace == origPlace || candPlace == ListAtEnd) case (_ /* _v54 */, _ /* _v55 */) => orig == cand",
+      "conjuncts": [
+        "match (orig, cand) case (MoveTask(oid, otoList, origPlace), MoveTask(cid, ctoList, candPlace)) => oid == cid && otoList == ctoList && (candPlace == origPlace || candPlace == AtEnd) case (MoveList(oid, origPlace), MoveList(cid, candPlace)) => oid == cid && (candPlace == origPlace || candPlace == ListAtEnd) case (_ /* _v54 */, _ /* _v55 */) => orig == cand"
+      ],
+      "line": 956,
+      "isGhost": true
+    },
+    {
+      "name": "IsPriorityTask",
+      "module": "TodoDomain",
+      "body": "t.starred && !t.completed && !t.deleted",
+      "conjuncts": [
+        "t.starred",
+        "!t.completed",
+        "!t.deleted"
+      ],
+      "line": 1030,
+      "isGhost": false
+    },
+    {
+      "name": "IsLogbookTask",
+      "module": "TodoDomain",
+      "body": "t.completed && !t.deleted",
+      "conjuncts": [
+        "t.completed",
+        "!t.deleted"
+      ],
+      "line": 1038,
+      "isGhost": false
+    },
+    {
+      "name": "IsVisibleTask",
+      "module": "TodoDomain",
+      "body": "!t.deleted",
+      "conjuncts": [
+        "!t.deleted"
+      ],
+      "line": 1044,
+      "isGhost": false
+    },
+    {
+      "name": "MatchesSmartList",
+      "module": "TodoDomain",
+      "body": "match smartList case Priority() => IsPriorityTask(t) case Logbook() => IsLogbookTask(t)",
+      "conjuncts": [
+        "match smartList case Priority() => IsPriorityTask(t) case Logbook() => IsLogbookTask(t)"
+      ],
+      "line": 1050,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "MultiCollaboration.D.Abs",
+      "line": 26,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "MultiCollaboration.D.Abs",
+      "line": 64,
+      "isGhost": true
+    },
+    {
+      "name": "IsLeapYear",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "(year % 4 == 0 && year % 100 != 0) || year % 400 == 0",
+      "conjuncts": [
+        "(year % 4 == 0 && year % 100 != 0) || year % 400 == 0"
+      ],
+      "line": 72,
+      "isGhost": false
+    },
+    {
+      "name": "ValidDate",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "d.year >= 1970 && d.month >= 1 && d.month <= 12 && d.day >= 1 && d.day <= DaysInMonth(d.month, d.year)",
+      "conjuncts": [
+        "d.year >= 1970",
+        "d.month >= 1",
+        "d.month <= 12",
+        "d.day >= 1",
+        "d.day <= DaysInMonth(d.month, d.year)"
+      ],
+      "line": 76,
+      "isGhost": false
+    },
+    {
+      "name": "Inv",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "NoDupSeq(m.lists) && (forall l: nat :: l in m.listNames <==> SeqContains(m.lists, l)) && (forall l: nat :: l in m.tasks <==> SeqContains(m.lists, l)) && (forall l: int, id: nat :: l in m.tasks && SeqContains(m.tasks[l], id) ==> id in m.taskData) && (forall id: nat :: id in m.taskData && !m.taskData[id].deleted ==> CountInLists(m, id) == 1) && (forall id: nat :: id in m.taskData && m.taskData[id].deleted ==> CountInLists(m, id) == 0) && (forall l: int :: l in m.tasks ==> NoDupSeq(m.tasks[l])) && (forall id: int :: id in m.taskData ==> m.taskData[id].tags <= m.tags.Keys) && (forall id: int :: SeqContains(m.lists, id) ==> id < m.nextListId) && (forall id: int :: id in m.taskData ==> id < m.nextTaskId) && (forall id: int :: id in m.tags ==> id < m.nextTagId) && (forall id: int :: id in m.taskData ==> m.taskData[id].assignees <= m.members) && m.owner in m.members && (m.mode.Personal? ==> m.members == {m.owner}) && (m.mode.Collaborative? ==> |m.members| >= 1) && (forall id: int :: id in m.taskData && m.taskData[id].dueDate.Some? ==> ValidDate(m.taskData[id].dueDate.value)) && (forall l1: int, l2: int :: l1 in m.listNames && l2 in m.listNames && l1 != l2 ==> !EqIgnoreCase(m.listNames[l1], m.listNames[l2])) && (forall l: int, t1: nat, t2: nat :: l in m.tasks && SeqContains(m.tasks[l], t1) && t1 in m.taskData && !m.taskData[t1].deleted && SeqContains(m.tasks[l], t2) && t2 in m.taskData && !m.taskData[t2].deleted && t1 != t2 ==> !EqIgnoreCase(m.taskData[t1].title, m.taskData[t2].title)) && forall t1: int, t2: int :: t1 in m.tags && t2 in m.tags && t1 != t2 ==> !EqIgnoreCase(m.tags[t1].name, m.tags[t2].name)",
+      "conjuncts": [
+        "NoDupSeq(m.lists)",
+        "forall l: nat :: l in m.listNames <==> SeqContains(m.lists, l)",
+        "forall l: nat :: l in m.tasks <==> SeqContains(m.lists, l)",
+        "forall l: int, id: nat :: l in m.tasks && SeqContains(m.tasks[l], id) ==> id in m.taskData",
+        "forall id: nat :: id in m.taskData && !m.taskData[id].deleted ==> CountInLists(m, id) == 1",
+        "forall id: nat :: id in m.taskData && m.taskData[id].deleted ==> CountInLists(m, id) == 0",
+        "forall l: int :: l in m.tasks ==> NoDupSeq(m.tasks[l])",
+        "forall id: int :: id in m.taskData ==> m.taskData[id].tags <= m.tags.Keys",
+        "forall id: int :: SeqContains(m.lists, id) ==> id < m.nextListId",
+        "forall id: int :: id in m.taskData ==> id < m.nextTaskId",
+        "forall id: int :: id in m.tags ==> id < m.nextTagId",
+        "forall id: int :: id in m.taskData ==> m.taskData[id].assignees <= m.members",
+        "m.owner in m.members",
+        "m.mode.Personal? ==> m.members == {m.owner}",
+        "m.mode.Collaborative? ==> |m.members| >= 1",
+        "forall id: int :: id in m.taskData && m.taskData[id].dueDate.Some? ==> ValidDate(m.taskData[id].dueDate.value)",
+        "forall l1: int, l2: int :: l1 in m.listNames && l2 in m.listNames && l1 != l2 ==> !EqIgnoreCase(m.listNames[l1], m.listNames[l2])",
+        "forall l: int, t1: nat, t2: nat :: l in m.tasks && SeqContains(m.tasks[l], t1) && t1 in m.taskData && !m.taskData[t1].deleted && SeqContains(m.tasks[l], t2) && t2 in m.taskData && !m.taskData[t2].deleted && t1 != t2 ==> !EqIgnoreCase(m.taskData[t1].title, m.taskData[t2].title)",
+        "forall t1: int, t2: int :: t1 in m.tags && t2 in m.tags && t1 != t2 ==> !EqIgnoreCase(m.tags[t1].name, m.tags[t2].name)"
+      ],
+      "line": 233,
+      "isGhost": true
+    },
+    {
+      "name": "NoDupSeq",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "forall i: int, j: int :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "conjuncts": [
+        "forall i: int, j: int :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "line": 321,
+      "isGhost": false
+    },
+    {
+      "name": "EqIgnoreCase",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "ToLower(a) == ToLower(b)",
+      "conjuncts": [
+        "ToLower(a) == ToLower(b)"
+      ],
+      "line": 463,
+      "isGhost": false
+    },
+    {
+      "name": "ListNameExists",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "exists l: int :: l in m.listNames && (excludeList.None? || l != excludeList.value) && EqIgnoreCase(m.listNames[l], name)",
+      "conjuncts": [
+        "exists l: int :: l in m.listNames && (excludeList.None? || l != excludeList.value) && EqIgnoreCase(m.listNames[l], name)"
+      ],
+      "line": 470,
+      "isGhost": false
+    },
+    {
+      "name": "TaskTitleExistsInList",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "listId in m.tasks && exists taskId: nat :: taskId in m.taskData && SeqContains(m.tasks[listId], taskId) && !m.taskData[taskId].deleted && (excludeTask.None? || taskId != excludeTask.value) && EqIgnoreCase(m.taskData[taskId].title, title)",
+      "conjuncts": [
+        "listId in m.tasks",
+        "exists taskId: nat :: taskId in m.taskData && SeqContains(m.tasks[listId], taskId) && !m.taskData[taskId].deleted && (excludeTask.None? || taskId != excludeTask.value) && EqIgnoreCase(m.taskData[taskId].title, title)"
+      ],
+      "line": 479,
+      "isGhost": false
+    },
+    {
+      "name": "TagNameExists",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "exists t: int :: t in m.tags && (excludeTag.None? || t != excludeTag.value) && EqIgnoreCase(m.tags[t].name, name)",
+      "conjuncts": [
+        "exists t: int :: t in m.tags && (excludeTag.None? || t != excludeTag.value) && EqIgnoreCase(m.tags[t].name, name)"
+      ],
+      "line": 491,
+      "isGhost": false
+    },
+    {
+      "name": "Explains",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "match (orig, cand) case (MoveTask(oid, otoList, origPlace), MoveTask(cid, ctoList, candPlace)) => oid == cid && otoList == ctoList && (candPlace == origPlace || candPlace == AtEnd) case (MoveList(oid, origPlace), MoveList(cid, candPlace)) => oid == cid && (candPlace == origPlace || candPlace == ListAtEnd) case (_ /* _v54 */, _ /* _v55 */) => orig == cand",
+      "conjuncts": [
+        "match (orig, cand) case (MoveTask(oid, otoList, origPlace), MoveTask(cid, ctoList, candPlace)) => oid == cid && otoList == ctoList && (candPlace == origPlace || candPlace == AtEnd) case (MoveList(oid, origPlace), MoveList(cid, candPlace)) => oid == cid && (candPlace == origPlace || candPlace == ListAtEnd) case (_ /* _v54 */, _ /* _v55 */) => orig == cand"
+      ],
+      "line": 956,
+      "isGhost": true
+    },
+    {
+      "name": "IsPriorityTask",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "t.starred && !t.completed && !t.deleted",
+      "conjuncts": [
+        "t.starred",
+        "!t.completed",
+        "!t.deleted"
+      ],
+      "line": 1030,
+      "isGhost": false
+    },
+    {
+      "name": "IsLogbookTask",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "t.completed && !t.deleted",
+      "conjuncts": [
+        "t.completed",
+        "!t.deleted"
+      ],
+      "line": 1038,
+      "isGhost": false
+    },
+    {
+      "name": "IsVisibleTask",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "!t.deleted",
+      "conjuncts": [
+        "!t.deleted"
+      ],
+      "line": 1044,
+      "isGhost": false
+    },
+    {
+      "name": "MatchesSmartList",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "body": "match smartList case Priority() => IsPriorityTask(t) case Logbook() => IsLogbookTask(t)",
+      "conjuncts": [
+        "match smartList case Priority() => IsPriorityTask(t) case Logbook() => IsLogbookTask(t)"
+      ],
+      "line": 1050,
+      "isGhost": false
+    }
+  ],
+  "lemmas": [
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Domain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 35
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 70
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "TodoDomainSpec",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 1189
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "TodoDomainSpec",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 1198
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "TodoDomainSpec",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "TodoDomain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 23
+    },
+    {
+      "name": "NoDupSeqAppend",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(s + [x])"
+      ],
+      "line": 46
+    },
+    {
+      "name": "SeqContainsAppend",
+      "module": "TodoDomain",
+      "requires": [],
+      "ensures": [
+        "SeqContains(s + [x], y) <==> SeqContains(s, y) || y == x"
+      ],
+      "line": 68
+    },
+    {
+      "name": "RemoveFirstPreservesNoDup",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "NoDupSeq(RemoveFirst(s, x))"
+      ],
+      "line": 89
+    },
+    {
+      "name": "RemoveFirstInOriginal",
+      "module": "TodoDomain",
+      "requires": [
+        "SeqContains(RemoveFirst(s, x), y)"
+      ],
+      "ensures": [
+        "SeqContains(s, y)"
+      ],
+      "line": 131
+    },
+    {
+      "name": "RemoveFirstSeqContains",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "SeqContains(RemoveFirst(s, x), y) <==> SeqContains(s, y) && y != x"
+      ],
+      "line": 152
+    },
+    {
+      "name": "NoDupSeqTail",
+      "module": "TodoDomain",
+      "requires": [
+        "|s| > 0",
+        "NoDupSeq(s)"
+      ],
+      "ensures": [
+        "NoDupSeq(s[1..])"
+      ],
+      "line": 231
+    },
+    {
+      "name": "InsertAtPreservesNoDup",
+      "module": "TodoDomain",
+      "requires": [
+        "i <= |s|",
+        "NoDupSeq(s)",
+        "!SeqContains(s, x)"
+      ],
+      "ensures": [
+        "NoDupSeq(InsertAt(s, i, x))"
+      ],
+      "line": 245
+    },
+    {
+      "name": "InsertAtSeqContains",
+      "module": "TodoDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [
+        "SeqContains(InsertAt(s, i, x), y) <==> SeqContains(s, y) || y == x"
+      ],
+      "line": 272
+    },
+    {
+      "name": "CountInListsHelper_Empty",
+      "module": "TodoDomain",
+      "requires": [],
+      "ensures": [
+        "CountInListsHelper([], tasks, id) == 0"
+      ],
+      "line": 305
+    },
+    {
+      "name": "CountInListsHelper_Decompose",
+      "module": "TodoDomain",
+      "requires": [
+        "|lists| > 0"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) == (if lists[0] in tasks && SeqContains(tasks[lists[0]], id) then 1 else 0) + CountInListsHelper(lists[1..], tasks, id)"
+      ],
+      "line": 310
+    },
+    {
+      "name": "CountInListsHelper_NotInAny",
+      "module": "TodoDomain",
+      "requires": [
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> !SeqContains(tasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) == 0"
+      ],
+      "line": 318
+    },
+    {
+      "name": "RemoveFirst_NotContains",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "x != y"
+      ],
+      "ensures": [
+        "SeqContains(RemoveFirst(s, x), y) == SeqContains(s, y)"
+      ],
+      "line": 330
+    },
+    {
+      "name": "CountInListsHelper_RemoveFirst",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "SeqContains(lists, l)"
+      ],
+      "ensures": [
+        "CountInListsHelper(RemoveFirst(lists, l), tasks, id) == CountInListsHelper(lists, tasks, id) - ListContrib(l, tasks, id)"
+      ],
+      "line": 403
+    },
+    {
+      "name": "CountInListsHelper_InsertAt",
+      "module": "TodoDomain",
+      "requires": [
+        "k <= |lists|",
+        "!SeqContains(lists, l)"
+      ],
+      "ensures": [
+        "CountInListsHelper(InsertAt(lists, k, l), tasks, id) == CountInListsHelper(lists, tasks, id) + ListContrib(l, tasks, id)"
+      ],
+      "line": 439
+    },
+    {
+      "name": "CountInListsHelper_MovePreserves",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "SeqContains(lists, l)",
+        "k <= |RemoveFirst(lists, l)|"
+      ],
+      "ensures": [
+        "CountInListsHelper(InsertAt(RemoveFirst(lists, l), k, l), tasks, id) == CountInListsHelper(lists, tasks, id)"
+      ],
+      "line": 477
+    },
+    {
+      "name": "CountAfterRemoveAll_Core",
+      "module": "TodoDomain",
+      "requires": [
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> NoDupSeq(tasks[l])",
+        "newTasks.Keys == tasks.Keys",
+        "forall l: int {:trigger tasks[l]} {:trigger newTasks[l]} {:trigger l in newTasks} :: l in newTasks ==> newTasks[l] == RemoveFirst(tasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, newTasks, id) == 0"
+      ],
+      "line": 502
+    },
+    {
+      "name": "CountInListsHelper_ExactlyInOne",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "SeqContains(lists, targetList)",
+        "targetList in tasks",
+        "SeqContains(tasks[targetList], id)",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks && l != targetList ==> !SeqContains(tasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) == 1"
+      ],
+      "line": 531
+    },
+    {
+      "name": "CountInListsHelper_NotInAnyExceptTarget",
+      "module": "TodoDomain",
+      "requires": [
+        "!SeqContains(lists, targetList)",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks && l != targetList ==> !SeqContains(tasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) == 0"
+      ],
+      "line": 570
+    },
+    {
+      "name": "SeqContainsTail",
+      "module": "TodoDomain",
+      "requires": [
+        "|s| > 0",
+        "s[0] == head",
+        "head != x",
+        "SeqContains(s, x)"
+      ],
+      "ensures": [
+        "SeqContains(s[1..], x)"
+      ],
+      "line": 593
+    },
+    {
+      "name": "SeqMembershipEquivSeqContains",
+      "module": "TodoDomain",
+      "requires": [],
+      "ensures": [
+        "x in s <==> SeqContains(s, x)"
+      ],
+      "line": 606
+    },
+    {
+      "name": "CountAfterInsertOne",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "SeqContains(lists, targetList)",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> !SeqContains(tasks[l], id)",
+        "SeqContains(newLane, id)",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks && l != targetList ==> !SeqContains(tasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks[targetList := newLane], id) == 1"
+      ],
+      "line": 613
+    },
+    {
+      "name": "CountAfterRemoveAll_InTail",
+      "module": "TodoDomain",
+      "requires": [
+        "!SeqContains(lists, targetList)",
+        "forall l: int {:trigger origTasks[l]} {:trigger l in origTasks} :: l in origTasks ==> NoDupSeq(origTasks[l])",
+        "tasks1 == map l: int {:trigger origTasks[l]} {:trigger l in origTasks} | l in origTasks :: RemoveFirst(origTasks[l], id)",
+        "tasks2 == tasks1[targetList := newLane]"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks2, id) == 0"
+      ],
+      "line": 655
+    },
+    {
+      "name": "CountInListsHelper_NotInTail",
+      "module": "TodoDomain",
+      "requires": [
+        "!SeqContains(lists, targetList)",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks && l != targetList ==> !SeqContains(tasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) == 0"
+      ],
+      "line": 692
+    },
+    {
+      "name": "CountInListsHelper_NotInTail_AfterRemove",
+      "module": "TodoDomain",
+      "requires": [
+        "!SeqContains(lists, targetList)",
+        "forall l: int {:trigger origTasks[l]} {:trigger l in origTasks} :: l in origTasks ==> NoDupSeq(origTasks[l])",
+        "forall l: int {:trigger l in origTasks} {:trigger l in tasks} :: l in tasks && l != targetList ==> l in origTasks",
+        "forall l: int {:trigger origTasks[l]} {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks && l != targetList ==> tasks[l] == RemoveFirst(origTasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) == 0"
+      ],
+      "line": 714
+    },
+    {
+      "name": "DeletedTaskNotInLists",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "id in m.taskData",
+        "m.taskData[id].deleted"
+      ],
+      "ensures": [
+        "CountInLists(m, id) == 0"
+      ],
+      "line": 745
+    },
+    {
+      "name": "CountInListsHelper_AppendEmpty",
+      "module": "TodoDomain",
+      "requires": [
+        "newListId !in tasks"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists + [newListId], tasks[newListId := []], id) == CountInListsHelper(lists, tasks, id)"
+      ],
+      "line": 759
+    },
+    {
+      "name": "CountInListsHelper_MapUpdate",
+      "module": "TodoDomain",
+      "requires": [
+        "listId in tasks",
+        "tasks[listId] == lane"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks[listId := lane], id) == CountInListsHelper(lists, tasks, id)"
+      ],
+      "line": 795
+    },
+    {
+      "name": "CountUnchangedForNewList",
+      "module": "TodoDomain",
+      "requires": [
+        "!SeqContains(m.lists, newListId)",
+        "newListId !in m.tasks"
+      ],
+      "ensures": [
+        "CountInListsHelper(m.lists + [newListId], m.tasks[newListId := []], id) == CountInLists(m, id)"
+      ],
+      "line": 815
+    },
+    {
+      "name": "CountUnchangedForOtherTasks",
+      "module": "TodoDomain",
+      "requires": [
+        "targetList in tasks",
+        "newId != otherId"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks[targetList := tasks[targetList] + [newId]], otherId) == CountInListsHelper(lists, tasks, otherId)"
+      ],
+      "line": 829
+    },
+    {
+      "name": "NewTaskCountIsOne",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "SeqContains(lists, targetList)",
+        "targetList in tasks",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> !SeqContains(tasks[l], newId)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks[targetList := tasks[targetList] + [newId]], newId) == 1"
+      ],
+      "line": 861
+    },
+    {
+      "name": "NewTaskCountIsOne_Tail",
+      "module": "TodoDomain",
+      "requires": [
+        "targetList in tasks",
+        "!SeqContains(lists, targetList)",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> !SeqContains(tasks[l], newId)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks[targetList := tasks[targetList] + [newId]], newId) == 0"
+      ],
+      "line": 903
+    },
+    {
+      "name": "CountUnchangedAfterRemove_Wrapper",
+      "module": "TodoDomain",
+      "requires": [
+        "removedId != otherId",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> NoDupSeq(tasks[l])",
+        "newTasks.Keys == tasks.Keys",
+        "forall l: int {:trigger tasks[l]} {:trigger newTasks[l]} {:trigger l in newTasks} :: l in newTasks ==> newTasks[l] == RemoveFirst(tasks[l], removedId)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, newTasks, otherId) == CountInListsHelper(lists, tasks, otherId)"
+      ],
+      "line": 931
+    },
+    {
+      "name": "CountAfterRemoveAll_Wrapper",
+      "module": "TodoDomain",
+      "requires": [
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> NoDupSeq(tasks[l])",
+        "newTasks == map l: int {:trigger tasks[l]} {:trigger l in tasks} | l in tasks :: RemoveFirst(tasks[l], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, newTasks, id) == 0"
+      ],
+      "line": 965
+    },
+    {
+      "name": "CountInListsHelper_HasOne",
+      "module": "TodoDomain",
+      "requires": [
+        "SeqContains(lists, listId)",
+        "listId in tasks",
+        "SeqContains(tasks[listId], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) >= 1"
+      ],
+      "line": 994
+    },
+    {
+      "name": "CountInListsHelper_HasTwo",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "listId1 != listId2",
+        "SeqContains(lists, listId1)",
+        "SeqContains(lists, listId2)",
+        "listId1 in tasks",
+        "listId2 in tasks",
+        "SeqContains(tasks[listId1], id)",
+        "SeqContains(tasks[listId2], id)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks, id) >= 2"
+      ],
+      "line": 1023
+    },
+    {
+      "name": "CountAfterMoveTask_Wrapper",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "SeqContains(lists, targetList)",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> NoDupSeq(tasks[l])",
+        "tasks1.Keys == tasks.Keys",
+        "forall l: int {:trigger tasks[l]} {:trigger tasks1[l]} {:trigger l in tasks1} :: l in tasks1 ==> tasks1[l] == RemoveFirst(tasks[l], id)",
+        "SeqContains(newLane, id)",
+        "NoDupSeq(newLane)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks1[targetList := newLane], id) == 1"
+      ],
+      "line": 1072
+    },
+    {
+      "name": "CountInListsHelper_SameOnSubset",
+      "module": "TodoDomain",
+      "requires": [
+        "!SeqContains(lists, excludedKey)",
+        "forall l: int {:trigger tasks1[l]} {:trigger tasks2[l]} {:trigger l in tasks2} {:trigger l in tasks1} {:trigger l in lists} :: (l in lists && l in tasks1 ==> l in tasks2) && (l in lists && l in tasks1 ==> tasks2[l] == tasks1[l])",
+        "forall l: int {:trigger l in tasks2} {:trigger l in tasks1} {:trigger l in lists} :: l in lists && l !in tasks1 ==> l !in tasks2"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks1, id) == CountInListsHelper(lists, tasks2, id)"
+      ],
+      "line": 1108
+    },
+    {
+      "name": "CountUnchangedAfterMoveTask_Wrapper",
+      "module": "TodoDomain",
+      "requires": [
+        "movedId != otherId",
+        "NoDupSeq(lists)",
+        "SeqContains(lists, targetList)",
+        "targetList in tasks",
+        "forall l: int {:trigger tasks[l]} {:trigger l in tasks} :: l in tasks ==> NoDupSeq(tasks[l])",
+        "tasks1.Keys == tasks.Keys",
+        "forall l: int {:trigger tasks[l]} {:trigger tasks1[l]} {:trigger l in tasks1} :: l in tasks1 ==> tasks1[l] == RemoveFirst(tasks[l], movedId)",
+        "NoDupSeq(newLane)",
+        "SeqContains(newLane, otherId) <==> SeqContains(tasks[targetList], otherId)"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks1[targetList := newLane], otherId) == CountInListsHelper(lists, tasks, otherId)"
+      ],
+      "line": 1139
+    },
+    {
+      "name": "CountInLists_AfterRemoveList",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "SeqContains(m.lists, removedListId)",
+        "removedListId in m.tasks",
+        "!SeqContains(m.tasks[removedListId], tid)"
+      ],
+      "ensures": [
+        "CountInListsHelper(RemoveFirst(m.lists, removedListId), m.tasks - {removedListId}, tid) == CountInLists(m, tid)"
+      ],
+      "line": 1215
+    },
+    {
+      "name": "CountInListsHelper_RemoveList",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(lists)",
+        "SeqContains(lists, removedListId)",
+        "removedListId in tasks",
+        "!SeqContains(tasks[removedListId], tid)"
+      ],
+      "ensures": [
+        "CountInListsHelper(RemoveFirst(lists, removedListId), tasks - {removedListId}, tid) == CountInListsHelper(lists, tasks, tid)"
+      ],
+      "line": 1227
+    },
+    {
+      "name": "CountInListsHelper_TasksSubset",
+      "module": "TodoDomain",
+      "requires": [
+        "!SeqContains(lists, removedListId)",
+        "tasks' == tasks - {removedListId}"
+      ],
+      "ensures": [
+        "CountInListsHelper(lists, tasks', tid) == CountInListsHelper(lists, tasks, tid)"
+      ],
+      "line": 1278
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 1308
+    },
+    {
+      "name": "AddListPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, AddList(name)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 1391
+    },
+    {
+      "name": "RenameListPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, RenameList(listId, newName)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 1457
+    },
+    {
+      "name": "DeleteListPreservesInvF",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "SeqContains(m.lists, listId)",
+        "TryStep(m, DeleteList(listId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "forall lid: int {:trigger SeqContains(m2.lists, lid)} :: SeqContains(m2.lists, lid) ==> lid < m2.nextListId"
+      ],
+      "line": 1467
+    },
+    {
+      "name": "DeleteListPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, DeleteList(listId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 1493
+    },
+    {
+      "name": "MoveListPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, MoveList(listId, listPlace)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 1606
+    },
+    {
+      "name": "MoveListPreservesInvCount",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, MoveList(listId, listPlace)) == Ok(m2)"
+      ],
+      "ensures": [
+        "forall tid: nat {:trigger CountInLists(m2, tid)} {:trigger m2.taskData[tid]} {:trigger tid in m2.taskData} :: tid in m2.taskData && !m2.taskData[tid].deleted ==> CountInLists(m2, tid) == 1",
+        "forall tid: nat {:trigger CountInLists(m2, tid)} {:trigger m2.taskData[tid]} {:trigger tid in m2.taskData} :: tid in m2.taskData && m2.taskData[tid].deleted ==> CountInLists(m2, tid) == 0"
+      ],
+      "line": 1664
+    },
+    {
+      "name": "MoveListPreservesInvF",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, MoveList(listId, listPlace)) == Ok(m2)"
+      ],
+      "ensures": [
+        "forall lid: int {:trigger SeqContains(m2.lists, lid)} :: SeqContains(m2.lists, lid) ==> lid < m2.nextListId"
+      ],
+      "line": 1698
+    },
+    {
+      "name": "MoveListPreservesInvF_Helper",
+      "module": "TodoDomain",
+      "requires": [
+        "rf == RemoveFirst(s, x)",
+        "SeqContains(rf, lid)"
+      ],
+      "ensures": [
+        "SeqContains(s, lid)"
+      ],
+      "line": 1741
+    },
+    {
+      "name": "AddTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, AddTask(listId, title)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 1749
+    },
+    {
+      "name": "FindListForTaskInList",
+      "module": "TodoDomain",
+      "requires": [
+        "FindListForTask(m, taskId) == Some(listId)"
+      ],
+      "ensures": [
+        "SeqContains(m.lists, listId)",
+        "listId in m.tasks",
+        "SeqContains(m.tasks[listId], taskId)"
+      ],
+      "line": 1814
+    },
+    {
+      "name": "FindListForTaskHelperInList",
+      "module": "TodoDomain",
+      "requires": [
+        "FindListForTaskHelper(lists, tasks, taskId) == Some(listId)"
+      ],
+      "ensures": [
+        "SeqContains(lists, listId)",
+        "listId in tasks",
+        "SeqContains(tasks[listId], taskId)"
+      ],
+      "line": 1823
+    },
+    {
+      "name": "FindListForTaskIsSome",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "taskId in m.taskData",
+        "!m.taskData[taskId].deleted"
+      ],
+      "ensures": [
+        "FindListForTask(m, taskId).Some?"
+      ],
+      "line": 1850
+    },
+    {
+      "name": "FindListForTaskIsSomeHelper",
+      "module": "TodoDomain",
+      "requires": [
+        "CountInListsHelper(lists, tasks, taskId) >= 1"
+      ],
+      "ensures": [
+        "FindListForTaskHelper(lists, tasks, taskId).Some?"
+      ],
+      "line": 1862
+    },
+    {
+      "name": "FindListForTaskIsNoneForDeleted",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "taskId in m.taskData",
+        "m.taskData[taskId].deleted"
+      ],
+      "ensures": [
+        "FindListForTask(m, taskId).None?"
+      ],
+      "line": 1887
+    },
+    {
+      "name": "FindListForTaskIsNoneHelper",
+      "module": "TodoDomain",
+      "requires": [
+        "CountInListsHelper(lists, tasks, taskId) == 0"
+      ],
+      "ensures": [
+        "FindListForTaskHelper(lists, tasks, taskId).None?"
+      ],
+      "line": 1898
+    },
+    {
+      "name": "FindListForTaskUnique",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "FindListForTask(m, taskId) == Some(listId)",
+        "SeqContains(m.lists, otherListId) && otherListId in m.tasks",
+        "SeqContains(m.tasks[otherListId], taskId)"
+      ],
+      "ensures": [
+        "listId == otherListId"
+      ],
+      "line": 1922
+    },
+    {
+      "name": "EditTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, EditTask(taskId, title, notes)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 1948
+    },
+    {
+      "name": "DeleteTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, DeleteTask(taskId, userId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2036
+    },
+    {
+      "name": "RestoreTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, RestoreTask(taskId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2116
+    },
+    {
+      "name": "MoveTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, MoveTask(taskId, toList, taskPlace)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2171
+    },
+    {
+      "name": "CompleteTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, CompleteTask(taskId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2315
+    },
+    {
+      "name": "UncompleteTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, UncompleteTask(taskId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2323
+    },
+    {
+      "name": "StarTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, StarTask(taskId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2331
+    },
+    {
+      "name": "UnstarTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, UnstarTask(taskId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2339
+    },
+    {
+      "name": "SetDueDatePreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, SetDueDate(taskId, dueDate)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2347
+    },
+    {
+      "name": "AssignTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, AssignTask(taskId, userId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2355
+    },
+    {
+      "name": "UnassignTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, UnassignTask(taskId, userId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2364
+    },
+    {
+      "name": "AddTagToTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, AddTagToTask(taskId, tagId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2372
+    },
+    {
+      "name": "RemoveTagFromTaskPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, RemoveTagFromTask(taskId, tagId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2380
+    },
+    {
+      "name": "CreateTagPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, CreateTag(name)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2388
+    },
+    {
+      "name": "RenameTagPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, RenameTag(tagId, newName)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2397
+    },
+    {
+      "name": "DeleteTagPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, DeleteTag(tagId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2405
+    },
+    {
+      "name": "MakeCollaborativePreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, MakeCollaborative) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2425
+    },
+    {
+      "name": "AddMemberPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, AddMember(userId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2434
+    },
+    {
+      "name": "RemoveMemberPreservesInv",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, RemoveMember(userId)) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 2444
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "TodoDomain",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 2473
+    },
+    {
+      "name": "NoDupSeqRemove",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "i < |s|"
+      ],
+      "ensures": [
+        "NoDupSeq(s[..i] + s[i + 1..])"
+      ],
+      "line": 2503
+    },
+    {
+      "name": "SeqContainsRemove",
+      "module": "TodoDomain",
+      "requires": [
+        "NoDupSeq(s)",
+        "i < |s|"
+      ],
+      "ensures": [
+        "SeqContains(s[..i] + s[i + 1..], x) <==> SeqContains(s, x) && x != s[i]"
+      ],
+      "line": 2520
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 35
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 70
+    },
+    {
+      "name": "InitServerSatisfiesInv",
+      "module": "MultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "D.Inv(InitServer().present)"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DispatchPreservesInv",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)"
+      ],
+      "line": 294
+    },
+    {
+      "name": "DispatchRejectIsMinimal",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)",
+        "D.Explains(D.RebaseThroughSuffix(s.appliedLog[baseVersion..], orig), aGood)",
+        "D.TryStep(s.present, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "!Dispatch(s, baseVersion, orig).1.Rejected?"
+      ],
+      "line": 304
+    },
+    {
+      "name": "ChooseCandidateFindsGood",
+      "module": "MultiCollaboration",
+      "requires": [
+        "aGood in cs",
+        "D.TryStep(m, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok?"
+      ],
+      "line": 322
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 1189
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 1198
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "InitServerSatisfiesInv",
+      "module": "TodoMultiCollaborationSpec",
+      "requires": [],
+      "ensures": [
+        "D.Inv(InitServer().present)"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DispatchPreservesInv",
+      "module": "TodoMultiCollaborationSpec",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)"
+      ],
+      "line": 294
+    },
+    {
+      "name": "DispatchRejectIsMinimal",
+      "module": "TodoMultiCollaborationSpec",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)",
+        "D.Explains(D.RebaseThroughSuffix(s.appliedLog[baseVersion..], orig), aGood)",
+        "D.TryStep(s.present, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "!Dispatch(s, baseVersion, orig).1.Rejected?"
+      ],
+      "line": 304
+    },
+    {
+      "name": "ChooseCandidateFindsGood",
+      "module": "TodoMultiCollaborationSpec",
+      "requires": [
+        "aGood in cs",
+        "D.TryStep(m, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok?"
+      ],
+      "line": 322
+    },
+    {
+      "name": "InitServerSatisfiesInv",
+      "module": "TodoMultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "D.Inv(InitServer().present)"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DispatchPreservesInv",
+      "module": "TodoMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)"
+      ],
+      "line": 294
+    },
+    {
+      "name": "DispatchRejectIsMinimal",
+      "module": "TodoMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)",
+        "D.Explains(D.RebaseThroughSuffix(s.appliedLog[baseVersion..], orig), aGood)",
+        "D.TryStep(s.present, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "!Dispatch(s, baseVersion, orig).1.Rejected?"
+      ],
+      "line": 304
+    },
+    {
+      "name": "ChooseCandidateFindsGood",
+      "module": "TodoMultiCollaboration",
+      "requires": [
+        "aGood in cs",
+        "D.TryStep(m, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok?"
+      ],
+      "line": 322
+    }
+  ],
+  "functions": [
+    {
+      "name": "InsertAt",
+      "module": "TodoDomainSpec",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [],
+      "line": 337
+    },
+    {
+      "name": "ClampPos",
+      "module": "TodoDomainSpec",
+      "requires": [
+        "n >= 0"
+      ],
+      "ensures": [],
+      "line": 352
+    },
+    {
+      "name": "InsertAt",
+      "module": "TodoDomain",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [],
+      "line": 337
+    },
+    {
+      "name": "ClampPos",
+      "module": "TodoDomain",
+      "requires": [
+        "n >= 0"
+      ],
+      "ensures": [],
+      "line": 352
+    },
+    {
+      "name": "ChooseCandidate",
+      "module": "MultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok? ==> D.TryStep(m, ChooseCandidate(m, cs).value.1) == D.Ok(ChooseCandidate(m, cs).value.0)"
+      ],
+      "line": 119
+    },
+    {
+      "name": "Dispatch",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)",
+        "Version(Dispatch(s, baseVersion, orig).0) == Version(s) || Version(Dispatch(s, baseVersion, orig).0) == Version(s) + 1"
+      ],
+      "line": 131
+    },
+    {
+      "name": "InsertAt",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "requires": [
+        "i <= |s|"
+      ],
+      "ensures": [],
+      "line": 337
+    },
+    {
+      "name": "ClampPos",
+      "module": "TodoMultiCollaborationSpec.D.Abs",
+      "requires": [
+        "n >= 0"
+      ],
+      "ensures": [],
+      "line": 352
+    },
+    {
+      "name": "ChooseCandidate",
+      "module": "TodoMultiCollaborationSpec",
+      "requires": [],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok? ==> D.TryStep(m, ChooseCandidate(m, cs).value.1) == D.Ok(ChooseCandidate(m, cs).value.0)"
+      ],
+      "line": 119
+    },
+    {
+      "name": "Dispatch",
+      "module": "TodoMultiCollaborationSpec",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)",
+        "Version(Dispatch(s, baseVersion, orig).0) == Version(s) || Version(Dispatch(s, baseVersion, orig).0) == Version(s) + 1"
+      ],
+      "line": 131
+    },
+    {
+      "name": "ChooseCandidate",
+      "module": "TodoMultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok? ==> D.TryStep(m, ChooseCandidate(m, cs).value.1) == D.Ok(ChooseCandidate(m, cs).value.0)"
+      ],
+      "line": 119
+    },
+    {
+      "name": "Dispatch",
+      "module": "TodoMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)",
+        "Version(Dispatch(s, baseVersion, orig).0) == Version(s) || Version(Dispatch(s, baseVersion, orig).0) == Version(s) + 1"
+      ],
+      "line": 131
+    }
+  ],
+  "axioms": []
+}

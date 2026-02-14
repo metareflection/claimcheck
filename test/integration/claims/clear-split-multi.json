@@ -1,0 +1,1333 @@
+{
+  "predicates": [
+    {
+      "name": "Inv",
+      "module": "Domain",
+      "line": 26,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "Domain",
+      "line": 64,
+      "isGhost": true
+    },
+    {
+      "name": "NoDuplicates",
+      "module": "ClearSplitSpec",
+      "body": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "conjuncts": [
+        "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "line": 68,
+      "isGhost": false
+    },
+    {
+      "name": "SeqMatchesSet",
+      "module": "ClearSplitSpec",
+      "body": "|s| == |set_| && NoDuplicates(s) && forall p: seq<char> {:trigger p in set_} {:trigger p in s} :: p in s <==> p in set_",
+      "conjuncts": [
+        "|s| == |set_|",
+        "NoDuplicates(s)",
+        "forall p: seq<char> {:trigger p in set_} {:trigger p in s} :: p in s <==> p in set_"
+      ],
+      "line": 91,
+      "isGhost": true
+    },
+    {
+      "name": "ShareKeysConsistent",
+      "module": "ClearSplitSpec",
+      "body": "|e.shareKeys| == |e.shares| && NoDuplicates(e.shareKeys) && forall k: seq<char> {:trigger k in e.shares.Keys} {:trigger k in e.shareKeys} :: k in e.shareKeys <==> k in e.shares.Keys",
+      "conjuncts": [
+        "|e.shareKeys| == |e.shares|",
+        "NoDuplicates(e.shareKeys)",
+        "forall k: seq<char> {:trigger k in e.shares.Keys} {:trigger k in e.shareKeys} :: k in e.shareKeys <==> k in e.shares.Keys"
+      ],
+      "line": 99,
+      "isGhost": true
+    },
+    {
+      "name": "ShareKeysOk",
+      "module": "ClearSplitSpec",
+      "body": "|e.shareKeys| == |e.shares| && NoDuplicates(e.shareKeys) && forall i: int {:trigger e.shareKeys[i]} :: 0 <= i < |e.shareKeys| ==> e.shareKeys[i] in e.shares",
+      "conjuncts": [
+        "|e.shareKeys| == |e.shares|",
+        "NoDuplicates(e.shareKeys)",
+        "forall i: int {:trigger e.shareKeys[i]} :: 0 <= i < |e.shareKeys| ==> e.shareKeys[i] in e.shares"
+      ],
+      "line": 107,
+      "isGhost": false
+    },
+    {
+      "name": "AllSharesValid",
+      "module": "ClearSplitSpec",
+      "body": "forall i: int {:trigger keys[i]} :: (0 <= i < |keys| ==> keys[i] in members) && (0 <= i < |keys| ==> keys[i] in shares) && (0 <= i < |keys| ==> shares[keys[i]] >= 0)",
+      "conjuncts": [
+        "forall i: int {:trigger keys[i]} :: (0 <= i < |keys| ==> keys[i] in members) && (0 <= i < |keys| ==> keys[i] in shares) && (0 <= i < |keys| ==> shares[keys[i]] >= 0)"
+      ],
+      "line": 115,
+      "isGhost": false
+    },
+    {
+      "name": "ValidExpenseCheck",
+      "module": "ClearSplitSpec",
+      "body": "ShareKeysOk(e) && e.amount >= 0 && e.paidBy in members && AllSharesValid(members, e.shares, e.shareKeys) && SumValuesSeq(e.shares, e.shareKeys) == e.amount",
+      "conjuncts": [
+        "ShareKeysOk(e)",
+        "e.amount >= 0",
+        "e.paidBy in members",
+        "AllSharesValid(members, e.shares, e.shareKeys)",
+        "SumValuesSeq(e.shares, e.shareKeys) == e.amount"
+      ],
+      "line": 121,
+      "isGhost": false
+    },
+    {
+      "name": "ValidSettlement",
+      "module": "ClearSplitSpec",
+      "body": "s.amount >= 0 && s.from in members && s.to in members && s.from != s.to",
+      "conjuncts": [
+        "s.amount >= 0",
+        "s.from in members",
+        "s.to in members",
+        "s.from != s.to"
+      ],
+      "line": 130,
+      "isGhost": false
+    },
+    {
+      "name": "ValidExpense",
+      "module": "ClearSplitSpec",
+      "body": "e.amount >= 0 && e.paidBy in members && (forall p: seq<char> {:trigger p in members} {:trigger p in e.shares} :: p in e.shares ==> p in members) && (forall p: seq<char> {:trigger e.shares[p]} {:trigger p in e.shares} :: p in e.shares ==> e.shares[p] >= 0) && SumValues(e.shares) == e.amount",
+      "conjuncts": [
+        "e.amount >= 0",
+        "e.paidBy in members",
+        "forall p: seq<char> {:trigger p in members} {:trigger p in e.shares} :: p in e.shares ==> p in members",
+        "forall p: seq<char> {:trigger e.shares[p]} {:trigger p in e.shares} :: p in e.shares ==> e.shares[p] >= 0",
+        "SumValues(e.shares) == e.amount"
+      ],
+      "line": 139,
+      "isGhost": true
+    },
+    {
+      "name": "WellFormedExpense",
+      "module": "ClearSplitSpec",
+      "body": "ShareKeysConsistent(e) && ValidExpense(members, e)",
+      "conjuncts": [
+        "ShareKeysConsistent(e)",
+        "ValidExpense(members, e)"
+      ],
+      "line": 149,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "ClearSplitSpec",
+      "body": "SeqMatchesSet(model.memberList, model.members) && (forall i: int {:trigger model.expenses[i]} :: 0 <= i < |model.expenses| ==> WellFormedExpense(model.members, model.expenses[i])) && forall i: int {:trigger model.settlements[i]} :: 0 <= i < |model.settlements| ==> ValidSettlement(model.members, model.settlements[i])",
+      "conjuncts": [
+        "SeqMatchesSet(model.memberList, model.members)",
+        "forall i: int {:trigger model.expenses[i]} :: 0 <= i < |model.expenses| ==> WellFormedExpense(model.members, model.expenses[i])",
+        "forall i: int {:trigger model.settlements[i]} :: 0 <= i < |model.settlements| ==> ValidSettlement(model.members, model.settlements[i])"
+      ],
+      "line": 157,
+      "isGhost": true
+    },
+    {
+      "name": "NoDuplicates",
+      "module": "ClearSplit",
+      "body": "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]",
+      "conjuncts": [
+        "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "line": 68,
+      "isGhost": false
+    },
+    {
+      "name": "SeqMatchesSet",
+      "module": "ClearSplit",
+      "body": "|s| == |set_| && NoDuplicates(s) && forall p: seq<char> {:trigger p in set_} {:trigger p in s} :: p in s <==> p in set_",
+      "conjuncts": [
+        "|s| == |set_|",
+        "NoDuplicates(s)",
+        "forall p: seq<char> {:trigger p in set_} {:trigger p in s} :: p in s <==> p in set_"
+      ],
+      "line": 91,
+      "isGhost": true
+    },
+    {
+      "name": "ShareKeysConsistent",
+      "module": "ClearSplit",
+      "body": "|e.shareKeys| == |e.shares| && NoDuplicates(e.shareKeys) && forall k: seq<char> {:trigger k in e.shares.Keys} {:trigger k in e.shareKeys} :: k in e.shareKeys <==> k in e.shares.Keys",
+      "conjuncts": [
+        "|e.shareKeys| == |e.shares|",
+        "NoDuplicates(e.shareKeys)",
+        "forall k: seq<char> {:trigger k in e.shares.Keys} {:trigger k in e.shareKeys} :: k in e.shareKeys <==> k in e.shares.Keys"
+      ],
+      "line": 99,
+      "isGhost": true
+    },
+    {
+      "name": "ShareKeysOk",
+      "module": "ClearSplit",
+      "body": "|e.shareKeys| == |e.shares| && NoDuplicates(e.shareKeys) && forall i: int {:trigger e.shareKeys[i]} :: 0 <= i < |e.shareKeys| ==> e.shareKeys[i] in e.shares",
+      "conjuncts": [
+        "|e.shareKeys| == |e.shares|",
+        "NoDuplicates(e.shareKeys)",
+        "forall i: int {:trigger e.shareKeys[i]} :: 0 <= i < |e.shareKeys| ==> e.shareKeys[i] in e.shares"
+      ],
+      "line": 107,
+      "isGhost": false
+    },
+    {
+      "name": "AllSharesValid",
+      "module": "ClearSplit",
+      "body": "forall i: int {:trigger keys[i]} :: (0 <= i < |keys| ==> keys[i] in members) && (0 <= i < |keys| ==> keys[i] in shares) && (0 <= i < |keys| ==> shares[keys[i]] >= 0)",
+      "conjuncts": [
+        "forall i: int {:trigger keys[i]} :: (0 <= i < |keys| ==> keys[i] in members) && (0 <= i < |keys| ==> keys[i] in shares) && (0 <= i < |keys| ==> shares[keys[i]] >= 0)"
+      ],
+      "line": 115,
+      "isGhost": false
+    },
+    {
+      "name": "ValidExpenseCheck",
+      "module": "ClearSplit",
+      "body": "ShareKeysOk(e) && e.amount >= 0 && e.paidBy in members && AllSharesValid(members, e.shares, e.shareKeys) && SumValuesSeq(e.shares, e.shareKeys) == e.amount",
+      "conjuncts": [
+        "ShareKeysOk(e)",
+        "e.amount >= 0",
+        "e.paidBy in members",
+        "AllSharesValid(members, e.shares, e.shareKeys)",
+        "SumValuesSeq(e.shares, e.shareKeys) == e.amount"
+      ],
+      "line": 121,
+      "isGhost": false
+    },
+    {
+      "name": "ValidSettlement",
+      "module": "ClearSplit",
+      "body": "s.amount >= 0 && s.from in members && s.to in members && s.from != s.to",
+      "conjuncts": [
+        "s.amount >= 0",
+        "s.from in members",
+        "s.to in members",
+        "s.from != s.to"
+      ],
+      "line": 130,
+      "isGhost": false
+    },
+    {
+      "name": "ValidExpense",
+      "module": "ClearSplit",
+      "body": "e.amount >= 0 && e.paidBy in members && (forall p: seq<char> {:trigger p in members} {:trigger p in e.shares} :: p in e.shares ==> p in members) && (forall p: seq<char> {:trigger e.shares[p]} {:trigger p in e.shares} :: p in e.shares ==> e.shares[p] >= 0) && SumValues(e.shares) == e.amount",
+      "conjuncts": [
+        "e.amount >= 0",
+        "e.paidBy in members",
+        "forall p: seq<char> {:trigger p in members} {:trigger p in e.shares} :: p in e.shares ==> p in members",
+        "forall p: seq<char> {:trigger e.shares[p]} {:trigger p in e.shares} :: p in e.shares ==> e.shares[p] >= 0",
+        "SumValues(e.shares) == e.amount"
+      ],
+      "line": 139,
+      "isGhost": true
+    },
+    {
+      "name": "WellFormedExpense",
+      "module": "ClearSplit",
+      "body": "ShareKeysConsistent(e) && ValidExpense(members, e)",
+      "conjuncts": [
+        "ShareKeysConsistent(e)",
+        "ValidExpense(members, e)"
+      ],
+      "line": 149,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "ClearSplit",
+      "body": "SeqMatchesSet(model.memberList, model.members) && (forall i: int {:trigger model.expenses[i]} :: 0 <= i < |model.expenses| ==> WellFormedExpense(model.members, model.expenses[i])) && forall i: int {:trigger model.settlements[i]} :: 0 <= i < |model.settlements| ==> ValidSettlement(model.members, model.settlements[i])",
+      "conjuncts": [
+        "SeqMatchesSet(model.memberList, model.members)",
+        "forall i: int {:trigger model.expenses[i]} :: 0 <= i < |model.expenses| ==> WellFormedExpense(model.members, model.expenses[i])",
+        "forall i: int {:trigger model.settlements[i]} :: 0 <= i < |model.settlements| ==> ValidSettlement(model.members, model.settlements[i])"
+      ],
+      "line": 157,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "ClearSplitDomain",
+      "body": "C.Inv(m)",
+      "conjuncts": [
+        "C.Inv(m)"
+      ],
+      "line": 26,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "ClearSplitDomain",
+      "body": "orig == cand",
+      "conjuncts": [
+        "orig == cand"
+      ],
+      "line": 78,
+      "isGhost": true
+    },
+    {
+      "name": "Inv",
+      "module": "MultiCollaboration.D.Abs",
+      "line": 26,
+      "isGhost": true
+    },
+    {
+      "name": "Explains",
+      "module": "MultiCollaboration.D.Abs",
+      "line": 64,
+      "isGhost": true
+    }
+  ],
+  "lemmas": [
+    {
+      "name": "InitSatisfiesInv",
+      "module": "Domain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 35
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "Domain",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 70
+    },
+    {
+      "name": "Conservation",
+      "module": "ClearSplitSpec",
+      "requires": [
+        "Inv(model)"
+      ],
+      "ensures": [
+        "SumValues(Balances(model)) == 0"
+      ],
+      "line": 314
+    },
+    {
+      "name": "AddExpenseDelta",
+      "module": "ClearSplitSpec",
+      "requires": [
+        "Inv(model)",
+        "ValidExpenseCheck(model.members, e)",
+        "model' == Model(model.members, model.memberList, model.expenses + [e], model.settlements)"
+      ],
+      "ensures": [
+        "Inv(model')",
+        "e.paidBy !in e.shares ==> GetBalance(model', e.paidBy) == GetBalance(model, e.paidBy) + e.amount",
+        "forall p: seq<char> {:trigger e.shares[p]} {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} {:trigger p in e.shares} :: p in e.shares && p != e.paidBy ==> GetBalance(model', p) == GetBalance(model, p) - e.shares[p]",
+        "e.paidBy in e.shares ==> GetBalance(model', e.paidBy) == GetBalance(model, e.paidBy) + e.amount - e.shares[e.paidBy]",
+        "forall p: PersonId {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} {:trigger p in e.shares} :: p !in e.shares && p != e.paidBy ==> GetBalance(model', p) == GetBalance(model, p)",
+        "SumValues(Balances(model')) == 0"
+      ],
+      "line": 319
+    },
+    {
+      "name": "AddSettlementDelta",
+      "module": "ClearSplitSpec",
+      "requires": [
+        "Inv(model)",
+        "ValidSettlement(model.members, s)",
+        "model' == Model(model.members, model.memberList, model.expenses, model.settlements + [s])"
+      ],
+      "ensures": [
+        "Inv(model')",
+        "s.from != s.to ==> GetBalance(model', s.from) == GetBalance(model, s.from) + s.amount",
+        "s.from != s.to ==> GetBalance(model', s.to) == GetBalance(model, s.to) - s.amount",
+        "forall p: PersonId {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} :: p != s.from && p != s.to ==> GetBalance(model', p) == GetBalance(model, p)",
+        "SumValues(Balances(model')) == 0"
+      ],
+      "line": 340
+    },
+    {
+      "name": "ExplainSumsToBalance",
+      "module": "ClearSplitSpec",
+      "requires": [
+        "Inv(model)",
+        "p in model.members"
+      ],
+      "ensures": [
+        "SumSeq(ExplainExpenses(model, p)) == GetBalance(model, p)"
+      ],
+      "line": 356
+    },
+    {
+      "name": "SumValuesRemoveKey",
+      "module": "ClearSplit",
+      "requires": [
+        "p in m"
+      ],
+      "ensures": [
+        "SumValues(m) == m[p] + SumValues(m - {p})"
+      ],
+      "line": 403
+    },
+    {
+      "name": "SumValuesAnyKey",
+      "module": "ClearSplit",
+      "requires": [
+        "p in m",
+        "q in m",
+        "p != q"
+      ],
+      "ensures": [
+        "m[p] + SumValues(m - {p}) == m[q] + SumValues(m - {q})"
+      ],
+      "line": 421
+    },
+    {
+      "name": "SumValuesAllZero",
+      "module": "ClearSplit",
+      "requires": [
+        "forall p: seq<char> {:trigger m[p]} {:trigger p in m} :: p in m ==> m[p] == 0"
+      ],
+      "ensures": [
+        "SumValues(m) == 0"
+      ],
+      "line": 442
+    },
+    {
+      "name": "AddToMapSumChange",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "SumValues(AddToMap(b, p, delta)) == SumValues(b) + delta"
+      ],
+      "line": 457
+    },
+    {
+      "name": "SeqToSetSizeBound",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "|set i: int {:trigger s[i]} | 0 <= i < |s| :: s[i]| <= |s|"
+      ],
+      "line": 475
+    },
+    {
+      "name": "SeqWithDupSmallerSet",
+      "module": "ClearSplit",
+      "requires": [
+        "0 <= i < j < |s|",
+        "s[i] == s[j]"
+      ],
+      "ensures": [
+        "|set k: int {:trigger s[k]} | 0 <= k < |s| :: s[k]| < |s|"
+      ],
+      "line": 489
+    },
+    {
+      "name": "SeqNoDuplicates",
+      "module": "ClearSplit",
+      "requires": [
+        "forall k: seq<char> {:trigger k in keys} {:trigger k in m.Keys} :: k in m.Keys <==> k in keys",
+        "|keys| == |m|"
+      ],
+      "ensures": [
+        "forall i: int, j: int {:trigger keys[j], keys[i]} :: 0 <= i < j < |keys| ==> keys[i] != keys[j]"
+      ],
+      "line": 529
+    },
+    {
+      "name": "NoDupSeqToSetSizeGeneral",
+      "module": "ClearSplit",
+      "requires": [
+        "NoDuplicates(s)"
+      ],
+      "ensures": [
+        "|set i: int {:trigger s[i]} | 0 <= i < |s| :: s[i]| == |s|"
+      ],
+      "line": 562
+    },
+    {
+      "name": "NoDupSeqToSetSize",
+      "module": "ClearSplit",
+      "requires": [
+        "forall i: int, j: int {:trigger s[j], s[i]} :: 0 <= i < j < |s| ==> s[i] != s[j]"
+      ],
+      "ensures": [
+        "|set i: int {:trigger s[i]} | 0 <= i < |s| :: s[i]| == |s|"
+      ],
+      "line": 580
+    },
+    {
+      "name": "SubsetEqualSizeIsEqual",
+      "module": "ClearSplit",
+      "requires": [
+        "a <= b",
+        "|a| == |b|"
+      ],
+      "ensures": [
+        "a == b"
+      ],
+      "line": 598
+    },
+    {
+      "name": "CardinalitySubsetStrict",
+      "module": "ClearSplit",
+      "requires": [
+        "a <= b",
+        "x in b && x !in a"
+      ],
+      "ensures": [
+        "|a| < |b|"
+      ],
+      "line": 610
+    },
+    {
+      "name": "CardinalitySubset",
+      "module": "ClearSplit",
+      "requires": [
+        "a <= b"
+      ],
+      "ensures": [
+        "|a| <= |b|"
+      ],
+      "line": 620
+    },
+    {
+      "name": "SubsetEqualSize",
+      "module": "ClearSplit",
+      "requires": [
+        "a <= b",
+        "|a| == |b|"
+      ],
+      "ensures": [
+        "a == b"
+      ],
+      "line": 637
+    },
+    {
+      "name": "ShareKeysOkImpliesConsistent",
+      "module": "ClearSplit",
+      "requires": [
+        "ShareKeysOk(e)"
+      ],
+      "ensures": [
+        "ShareKeysConsistent(e)"
+      ],
+      "line": 653
+    },
+    {
+      "name": "ValidExpenseCheckImpliesWellFormed",
+      "module": "ClearSplit",
+      "requires": [
+        "ValidExpenseCheck(members, e)"
+      ],
+      "ensures": [
+        "WellFormedExpense(members, e)"
+      ],
+      "line": 674
+    },
+    {
+      "name": "SumValuesSeqEquiv",
+      "module": "ClearSplit",
+      "requires": [
+        "forall k: seq<char> {:trigger k in keys} {:trigger k in m.Keys} :: k in m.Keys <==> k in keys",
+        "|keys| == |m|"
+      ],
+      "ensures": [
+        "SumValuesSeq(m, keys) == SumValues(m)"
+      ],
+      "line": 693
+    },
+    {
+      "name": "RestCoversMapMinus",
+      "module": "ClearSplit",
+      "requires": [
+        "|keys| > 0",
+        "k == keys[0]",
+        "k in m",
+        "forall x: seq<char> {:trigger x in keys} {:trigger x in m.Keys} :: x in m.Keys <==> x in keys",
+        "|keys| == |m|"
+      ],
+      "ensures": [
+        "forall x: seq<char> {:trigger x in keys[1..]} {:trigger x in (m - {k}).Keys} :: x in (m - {k}).Keys <==> x in keys[1..]",
+        "|keys[1..]| == |m - {k}|"
+      ],
+      "line": 712
+    },
+    {
+      "name": "MemberListNoDuplicates",
+      "module": "ClearSplit",
+      "requires": [
+        "forall p: seq<char> {:trigger p in memberList} {:trigger p in members} :: p in members <==> p in memberList",
+        "|memberList| == |members|"
+      ],
+      "ensures": [
+        "forall i: int, j: int {:trigger memberList[j], memberList[i]} :: 0 <= i < j < |memberList| ==> memberList[i] != memberList[j]"
+      ],
+      "line": 761
+    },
+    {
+      "name": "ZeroBalancesEquiv",
+      "module": "ClearSplit",
+      "requires": [
+        "forall p: seq<char> {:trigger p in memberList} {:trigger p in members} :: p in members <==> p in memberList",
+        "|memberList| == |members|"
+      ],
+      "ensures": [
+        "ZeroBalancesSeq(memberList) == ZeroBalances(members)"
+      ],
+      "line": 791
+    },
+    {
+      "name": "ZeroBalancesSum",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "SumValues(ZeroBalances(members)) == 0"
+      ],
+      "line": 833
+    },
+    {
+      "name": "BalancesEquiv",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)"
+      ],
+      "ensures": [
+        "Balances(model) == BalancesGhost(model)"
+      ],
+      "line": 848
+    },
+    {
+      "name": "NoDupHeadNotInTail",
+      "module": "ClearSplit",
+      "requires": [
+        "|keys| > 0 && NoDuplicates(keys)"
+      ],
+      "ensures": [
+        "keys[0] !in keys[1..]"
+      ],
+      "line": 859
+    },
+    {
+      "name": "NoDupTail",
+      "module": "ClearSplit",
+      "requires": [
+        "|keys| > 0 && NoDuplicates(keys)"
+      ],
+      "ensures": [
+        "NoDuplicates(keys[1..])"
+      ],
+      "line": 869
+    },
+    {
+      "name": "SumValuesSeqRemoveNonMember",
+      "module": "ClearSplit",
+      "requires": [
+        "p !in keys"
+      ],
+      "ensures": [
+        "SumValuesSeq(m, keys) == SumValuesSeq(m - {p}, keys)"
+      ],
+      "line": 874
+    },
+    {
+      "name": "ApplySharesSeqKeysUnchanged",
+      "module": "ClearSplit",
+      "requires": [
+        "forall k: seq<char> {:trigger k in b.Keys} {:trigger k in shares.Keys} :: k in shares.Keys ==> k in b.Keys"
+      ],
+      "ensures": [
+        "ApplySharesSeq(b, shares, keys).Keys == b.Keys"
+      ],
+      "line": 903
+    },
+    {
+      "name": "AddToMapMinusCommutes",
+      "module": "ClearSplit",
+      "requires": [
+        "p != k",
+        "p in b"
+      ],
+      "ensures": [
+        "AddToMap(b, p, delta) - {k} == AddToMap(b - {k}, p, delta)"
+      ],
+      "line": 922
+    },
+    {
+      "name": "AddToMapSumChangeImplHelper",
+      "module": "ClearSplit",
+      "requires": [
+        "NoDuplicates(bKeys)",
+        "forall k: seq<char> {:trigger k in bKeys} {:trigger k in b.Keys} :: k in b.Keys <==> k in bKeys",
+        "|bKeys| == |b|",
+        "p in b",
+        "p in bKeys"
+      ],
+      "ensures": [
+        "SumValuesSeq(AddToMap(b, p, delta), bKeys) == SumValuesSeq(b, bKeys) + delta"
+      ],
+      "line": 928
+    },
+    {
+      "name": "AddToMapSumChangeImpl",
+      "module": "ClearSplit",
+      "requires": [
+        "NoDuplicates(bKeys)",
+        "forall k: seq<char> {:trigger k in bKeys} {:trigger k in b.Keys} :: k in b.Keys <==> k in bKeys",
+        "|bKeys| == |b|",
+        "p in b"
+      ],
+      "ensures": [
+        "SumValuesSeq(AddToMap(b, p, delta), bKeys) == SumValuesSeq(b, bKeys) + delta"
+      ],
+      "line": 955
+    },
+    {
+      "name": "ApplySharesSeqSumChangeImpl",
+      "module": "ClearSplit",
+      "requires": [
+        "NoDuplicates(keys)",
+        "NoDuplicates(bKeys)",
+        "forall k: seq<char> {:trigger k in bKeys} {:trigger k in b.Keys} :: k in b.Keys <==> k in bKeys",
+        "|bKeys| == |b|",
+        "forall k: seq<char> {:trigger k in b.Keys} {:trigger k in shares.Keys} :: k in shares.Keys ==> k in b.Keys"
+      ],
+      "ensures": [
+        "SumValuesSeq(ApplySharesSeq(b, shares, keys), bKeys) == SumValuesSeq(b, bKeys) - SumValuesSeq(shares, keys)"
+      ],
+      "line": 965
+    },
+    {
+      "name": "ApplySharesSeqSumChange",
+      "module": "ClearSplit",
+      "requires": [
+        "NoDuplicates(keys)",
+        "forall k: seq<char> {:trigger k in keys} {:trigger k in shares.Keys} :: k in shares.Keys <==> k in keys",
+        "|keys| == |shares|",
+        "NoDuplicates(bKeys)",
+        "forall k: seq<char> {:trigger k in bKeys} {:trigger k in b.Keys} :: k in b.Keys <==> k in bKeys",
+        "|bKeys| == |b|",
+        "forall k: seq<char> {:trigger k in b.Keys} {:trigger k in shares.Keys} :: k in shares.Keys ==> k in b.Keys"
+      ],
+      "ensures": [
+        "SumValues(ApplySharesSeq(b, shares, keys)) == SumValues(b) - SumValuesSeq(shares, keys)"
+      ],
+      "line": 995
+    },
+    {
+      "name": "ApplyExpensePreservesSum",
+      "module": "ClearSplit",
+      "requires": [
+        "ShareKeysConsistent(e)",
+        "SumValues(e.shares) == e.amount",
+        "NoDuplicates(bKeys)",
+        "forall k: seq<char> {:trigger k in bKeys} {:trigger k in b.Keys} :: k in b.Keys <==> k in bKeys",
+        "|bKeys| == |b|",
+        "e.paidBy in b",
+        "forall k: seq<char> {:trigger k in b.Keys} {:trigger k in e.shares.Keys} :: k in e.shares.Keys ==> k in b.Keys"
+      ],
+      "ensures": [
+        "SumValues(ApplyExpenseToBalances(b, e)) == SumValues(b)"
+      ],
+      "line": 1011
+    },
+    {
+      "name": "ApplySettlementPreservesSum",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "SumValues(ApplySettlementToBalances(b, s)) == SumValues(b)"
+      ],
+      "line": 1029
+    },
+    {
+      "name": "ApplyExpenseKeysUnchanged",
+      "module": "ClearSplit",
+      "requires": [
+        "e.paidBy in b.Keys",
+        "forall k: seq<char> {:trigger k in b.Keys} {:trigger k in e.shares.Keys} :: k in e.shares.Keys ==> k in b.Keys"
+      ],
+      "ensures": [
+        "ApplyExpenseToBalances(b, e).Keys == b.Keys"
+      ],
+      "line": 1042
+    },
+    {
+      "name": "ApplyExpensesPreservesSum",
+      "module": "ClearSplit",
+      "requires": [
+        "forall i: int {:trigger expenses[i]} :: 0 <= i < |expenses| ==> ShareKeysConsistent(expenses[i])",
+        "forall i: int {:trigger expenses[i]} :: 0 <= i < |expenses| ==> SumValues(expenses[i].shares) == expenses[i].amount",
+        "NoDuplicates(bKeys)",
+        "forall k: seq<char> {:trigger k in bKeys} {:trigger k in b.Keys} :: k in b.Keys <==> k in bKeys",
+        "|bKeys| == |b|",
+        "forall i: int {:trigger expenses[i]} :: 0 <= i < |expenses| ==> expenses[i].paidBy in b.Keys",
+        "forall i: int {:trigger expenses[i]} :: 0 <= i < |expenses| ==> forall k: seq<char> {:trigger k in b.Keys} {:trigger k in expenses[i].shares.Keys} :: k in expenses[i].shares.Keys ==> k in b.Keys"
+      ],
+      "ensures": [
+        "SumValues(ApplyExpensesSeq(b, expenses)) == SumValues(b)"
+      ],
+      "line": 1052
+    },
+    {
+      "name": "ApplySettlementsPreservesSum",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "SumValues(ApplySettlementsSeq(b, settlements)) == SumValues(b)"
+      ],
+      "line": 1073
+    },
+    {
+      "name": "Conservation",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)"
+      ],
+      "ensures": [
+        "SumValues(Balances(model)) == 0"
+      ],
+      "line": 1088
+    },
+    {
+      "name": "AddToMapDelta",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "GetFromMap(AddToMap(b, q, delta), p) == GetFromMap(b, p) + if p == q then delta else 0"
+      ],
+      "line": 1129
+    },
+    {
+      "name": "NoDuplicatesRest",
+      "module": "ClearSplit",
+      "requires": [
+        "|keys| > 0",
+        "NoDuplicates(keys)"
+      ],
+      "ensures": [
+        "NoDuplicates(keys[1..])"
+      ],
+      "line": 1133
+    },
+    {
+      "name": "NoDuplicatesFirstNotInRest",
+      "module": "ClearSplit",
+      "requires": [
+        "|keys| > 0",
+        "NoDuplicates(keys)"
+      ],
+      "ensures": [
+        "keys[0] !in keys[1..]"
+      ],
+      "line": 1147
+    },
+    {
+      "name": "ApplySharesDeltaAfterProcessed",
+      "module": "ClearSplit",
+      "requires": [
+        "p !in keys"
+      ],
+      "ensures": [
+        "GetFromMap(ApplySharesSeq(b, shares, keys), p) == GetFromMap(b, p)"
+      ],
+      "line": 1162
+    },
+    {
+      "name": "ApplySharesDelta",
+      "module": "ClearSplit",
+      "requires": [
+        "NoDuplicates(keys)"
+      ],
+      "ensures": [
+        "GetFromMap(ApplySharesSeq(b, shares, keys), p) == GetFromMap(b, p) + if p in shares && p in keys then -shares[p] else 0"
+      ],
+      "line": 1183
+    },
+    {
+      "name": "ApplyExpenseDeltaForPerson",
+      "module": "ClearSplit",
+      "requires": [
+        "NoDuplicates(e.shareKeys)",
+        "forall k: seq<char> {:trigger k in e.shareKeys} {:trigger k in e.shares} :: k in e.shares <==> k in e.shareKeys"
+      ],
+      "ensures": [
+        "GetFromMap(ApplyExpenseToBalances(b, e), p) == GetFromMap(b, p) + ExpenseDeltaForPerson(e, p)"
+      ],
+      "line": 1209
+    },
+    {
+      "name": "ApplySettlementDeltaForPerson",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "GetFromMap(ApplySettlementToBalances(b, s), p) == GetFromMap(b, p) + SettlementDeltaForPerson(s, p)"
+      ],
+      "line": 1219
+    },
+    {
+      "name": "ApplyExpensesSeqConcat",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "ApplyExpensesSeq(b, expenses1 + expenses2) == ApplyExpensesSeq(ApplyExpensesSeq(b, expenses1), expenses2)"
+      ],
+      "line": 1228
+    },
+    {
+      "name": "ApplySettlementsSeqConcat",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "ApplySettlementsSeq(b, settlements1 + settlements2) == ApplySettlementsSeq(ApplySettlementsSeq(b, settlements1), settlements2)"
+      ],
+      "line": 1242
+    },
+    {
+      "name": "SettlementsPreserveDelta",
+      "module": "ClearSplit",
+      "requires": [
+        "GetFromMap(b1', p) == GetFromMap(b1, p) + delta"
+      ],
+      "ensures": [
+        "GetFromMap(ApplySettlementsSeq(b1', settlements), p) == GetFromMap(ApplySettlementsSeq(b1, settlements), p) + delta"
+      ],
+      "line": 1256
+    },
+    {
+      "name": "AddExpenseBalanceRelation",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)",
+        "ValidExpenseCheck(model.members, e)",
+        "model' == Model(model.members, model.memberList, model.expenses + [e], model.settlements)"
+      ],
+      "ensures": [
+        "forall p: PersonId {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} {:trigger p in e.shares} :: p == e.paidBy && p !in e.shares ==> GetBalance(model', p) == GetBalance(model, p) + e.amount",
+        "forall p: seq<char> {:trigger e.shares[p]} {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} {:trigger p in e.shares} :: p in e.shares && p != e.paidBy ==> GetBalance(model', p) == GetBalance(model, p) - e.shares[p]",
+        "e.paidBy in e.shares ==> GetBalance(model', e.paidBy) == GetBalance(model, e.paidBy) + e.amount - e.shares[e.paidBy]",
+        "forall p: PersonId {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} {:trigger p in e.shares} :: p !in e.shares && p != e.paidBy ==> GetBalance(model', p) == GetBalance(model, p)"
+      ],
+      "line": 1281
+    },
+    {
+      "name": "AddSettlementBalanceRelation",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)",
+        "ValidSettlement(model.members, s)",
+        "model' == Model(model.members, model.memberList, model.expenses, model.settlements + [s])"
+      ],
+      "ensures": [
+        "s.from != s.to ==> GetBalance(model', s.from) == GetBalance(model, s.from) + s.amount",
+        "s.from != s.to ==> GetBalance(model', s.to) == GetBalance(model, s.to) - s.amount",
+        "forall p: PersonId {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} :: p != s.from && p != s.to ==> GetBalance(model', p) == GetBalance(model, p)"
+      ],
+      "line": 1329
+    },
+    {
+      "name": "AddExpenseDelta",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)",
+        "ValidExpenseCheck(model.members, e)",
+        "model' == Model(model.members, model.memberList, model.expenses + [e], model.settlements)"
+      ],
+      "ensures": [
+        "Inv(model')",
+        "e.paidBy !in e.shares ==> GetBalance(model', e.paidBy) == GetBalance(model, e.paidBy) + e.amount",
+        "forall p: seq<char> {:trigger e.shares[p]} {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} {:trigger p in e.shares} :: p in e.shares && p != e.paidBy ==> GetBalance(model', p) == GetBalance(model, p) - e.shares[p]",
+        "e.paidBy in e.shares ==> GetBalance(model', e.paidBy) == GetBalance(model, e.paidBy) + e.amount - e.shares[e.paidBy]",
+        "forall p: PersonId {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} {:trigger p in e.shares} :: p !in e.shares && p != e.paidBy ==> GetBalance(model', p) == GetBalance(model, p)",
+        "SumValues(Balances(model')) == 0"
+      ],
+      "line": 1368
+    },
+    {
+      "name": "AddSettlementDelta",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)",
+        "ValidSettlement(model.members, s)",
+        "model' == Model(model.members, model.memberList, model.expenses, model.settlements + [s])"
+      ],
+      "ensures": [
+        "Inv(model')",
+        "s.from != s.to ==> GetBalance(model', s.from) == GetBalance(model, s.from) + s.amount",
+        "s.from != s.to ==> GetBalance(model', s.to) == GetBalance(model, s.to) - s.amount",
+        "forall p: PersonId {:trigger GetBalance(model, p)} {:trigger GetBalance(model', p)} :: p != s.from && p != s.to ==> GetBalance(model', p) == GetBalance(model, p)",
+        "SumValues(Balances(model')) == 0"
+      ],
+      "line": 1375
+    },
+    {
+      "name": "SumSeqConcat",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "SumSeq(a + b) == SumSeq(a) + SumSeq(b)"
+      ],
+      "line": 1385
+    },
+    {
+      "name": "ApplyExpensesDeltaForPerson",
+      "module": "ClearSplit",
+      "requires": [
+        "forall i: int {:trigger expenses[i]} :: 0 <= i < |expenses| ==> ShareKeysConsistent(expenses[i])"
+      ],
+      "ensures": [
+        "GetFromMap(ApplyExpensesSeq(b, expenses), p) == GetFromMap(b, p) + SumSeq(ExpenseDeltas(expenses, p))"
+      ],
+      "line": 1404
+    },
+    {
+      "name": "ApplySettlementsDeltaForPerson",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "GetFromMap(ApplySettlementsSeq(b, settlements), p) == GetFromMap(b, p) + SumSeq(SettlementDeltas(settlements, p))"
+      ],
+      "line": 1418
+    },
+    {
+      "name": "ZeroBalancesSeqContains",
+      "module": "ClearSplit",
+      "requires": [
+        "p in memberList"
+      ],
+      "ensures": [
+        "p in ZeroBalancesSeq(memberList)"
+      ],
+      "line": 1431
+    },
+    {
+      "name": "ExplainSumsToBalance",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)",
+        "p in model.members"
+      ],
+      "ensures": [
+        "SumSeq(ExplainExpenses(model, p)) == GetBalance(model, p)"
+      ],
+      "line": 1443
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "ClearSplitDomain",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())",
+        "Inv(Init())"
+      ],
+      "line": 52
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "ClearSplitDomain",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 58
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "ClearSplitDomain",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 88
+    },
+    {
+      "name": "InitSatisfiesInv",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [],
+      "ensures": [
+        "Inv(Init())"
+      ],
+      "line": 35
+    },
+    {
+      "name": "StepPreservesInv",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "TryStep(m, a) == Ok(m2)"
+      ],
+      "ensures": [
+        "Inv(m2)"
+      ],
+      "line": 39
+    },
+    {
+      "name": "CandidatesComplete",
+      "module": "MultiCollaboration.D.Abs",
+      "requires": [
+        "Inv(m)",
+        "Explains(orig, aGood)",
+        "TryStep(m, aGood) == Ok(m2)"
+      ],
+      "ensures": [
+        "aGood in Candidates(m, orig)"
+      ],
+      "line": 70
+    },
+    {
+      "name": "InitServerSatisfiesInv",
+      "module": "MultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "D.Inv(InitServer().present)"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DispatchPreservesInv",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)"
+      ],
+      "line": 294
+    },
+    {
+      "name": "DispatchRejectIsMinimal",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)",
+        "D.Explains(D.RebaseThroughSuffix(s.appliedLog[baseVersion..], orig), aGood)",
+        "D.TryStep(s.present, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "!Dispatch(s, baseVersion, orig).1.Rejected?"
+      ],
+      "line": 304
+    },
+    {
+      "name": "ChooseCandidateFindsGood",
+      "module": "MultiCollaboration",
+      "requires": [
+        "aGood in cs",
+        "D.TryStep(m, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok?"
+      ],
+      "line": 322
+    },
+    {
+      "name": "InitServerSatisfiesInv",
+      "module": "ClearSplitMultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "D.Inv(InitServer().present)"
+      ],
+      "line": 112
+    },
+    {
+      "name": "DispatchPreservesInv",
+      "module": "ClearSplitMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)"
+      ],
+      "line": 294
+    },
+    {
+      "name": "DispatchRejectIsMinimal",
+      "module": "ClearSplitMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)",
+        "D.Explains(D.RebaseThroughSuffix(s.appliedLog[baseVersion..], orig), aGood)",
+        "D.TryStep(s.present, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "!Dispatch(s, baseVersion, orig).1.Rejected?"
+      ],
+      "line": 304
+    },
+    {
+      "name": "ChooseCandidateFindsGood",
+      "module": "ClearSplitMultiCollaboration",
+      "requires": [
+        "aGood in cs",
+        "D.TryStep(m, aGood) == D.Ok(m2)"
+      ],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok?"
+      ],
+      "line": 322
+    }
+  ],
+  "functions": [
+    {
+      "name": "SumValues",
+      "module": "ClearSplitSpec",
+      "requires": [],
+      "ensures": [
+        "|m| > 0 ==> exists k: seq<char> {:trigger {k}} {:trigger m[k]} {:trigger k in m} :: k in m && SumValues(m) == m[k] + SumValues(m - {k})"
+      ],
+      "line": 74
+    },
+    {
+      "name": "ZeroBalancesSeq",
+      "module": "ClearSplitSpec",
+      "requires": [],
+      "ensures": [
+        "forall p: seq<char> {:trigger p in ZeroBalancesSeq(memberList)} {:trigger p in memberList} :: p in memberList ==> p in ZeroBalancesSeq(memberList)",
+        "forall p: seq<char> {:trigger ZeroBalancesSeq(memberList)[p]} {:trigger p in ZeroBalancesSeq(memberList)} :: p in ZeroBalancesSeq(memberList) ==> ZeroBalancesSeq(memberList)[p] == 0"
+      ],
+      "line": 177
+    },
+    {
+      "name": "SumValues",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "|m| > 0 ==> exists k: seq<char> {:trigger {k}} {:trigger m[k]} {:trigger k in m} :: k in m && SumValues(m) == m[k] + SumValues(m - {k})"
+      ],
+      "line": 390
+    },
+    {
+      "name": "ZeroBalances",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "forall p: seq<char> {:trigger p in ZeroBalances(members)} {:trigger p in members} :: p in members ==> p in ZeroBalances(members)",
+        "forall p: seq<char> {:trigger p in members} {:trigger p in ZeroBalances(members)} :: p in ZeroBalances(members) ==> p in members",
+        "forall p: seq<char> {:trigger ZeroBalances(members)[p]} {:trigger p in ZeroBalances(members)} :: p in ZeroBalances(members) ==> ZeroBalances(members)[p] == 0"
+      ],
+      "line": 749
+    },
+    {
+      "name": "BalancesGhost",
+      "module": "ClearSplit",
+      "requires": [
+        "Inv(model)"
+      ],
+      "ensures": [],
+      "line": 840
+    },
+    {
+      "name": "ZeroBalancesSeq",
+      "module": "ClearSplit",
+      "requires": [],
+      "ensures": [
+        "forall p: seq<char> {:trigger p in ZeroBalancesSeq(memberList)} {:trigger p in memberList} :: p in memberList ==> p in ZeroBalancesSeq(memberList)",
+        "forall p: seq<char> {:trigger ZeroBalancesSeq(memberList)[p]} {:trigger p in ZeroBalancesSeq(memberList)} :: p in ZeroBalancesSeq(memberList) ==> ZeroBalancesSeq(memberList)[p] == 0"
+      ],
+      "line": 177
+    },
+    {
+      "name": "ChooseCandidate",
+      "module": "MultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok? ==> D.TryStep(m, ChooseCandidate(m, cs).value.1) == D.Ok(ChooseCandidate(m, cs).value.0)"
+      ],
+      "line": 119
+    },
+    {
+      "name": "Dispatch",
+      "module": "MultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)",
+        "Version(Dispatch(s, baseVersion, orig).0) == Version(s) || Version(Dispatch(s, baseVersion, orig).0) == Version(s) + 1"
+      ],
+      "line": 131
+    },
+    {
+      "name": "ChooseCandidate",
+      "module": "ClearSplitMultiCollaboration",
+      "requires": [],
+      "ensures": [
+        "ChooseCandidate(m, cs).Ok? ==> D.TryStep(m, ChooseCandidate(m, cs).value.1) == D.Ok(ChooseCandidate(m, cs).value.0)"
+      ],
+      "line": 119
+    },
+    {
+      "name": "Dispatch",
+      "module": "ClearSplitMultiCollaboration",
+      "requires": [
+        "baseVersion <= Version(s)",
+        "D.Inv(s.present)"
+      ],
+      "ensures": [
+        "D.Inv(Dispatch(s, baseVersion, orig).0.present)",
+        "Version(Dispatch(s, baseVersion, orig).0) == Version(s) || Version(Dispatch(s, baseVersion, orig).0) == Version(s) + 1"
+      ],
+      "line": 131
+    },
+    {
+      "name": "InitServerWithMembers",
+      "module": "ClearSplitMultiAppCore",
+      "requires": [
+        "C.NoDuplicates(memberList)"
+      ],
+      "ensures": [],
+      "line": 121
+    },
+    {
+      "name": "ServerDispatch",
+      "module": "ClearSplitMultiAppCore",
+      "requires": [
+        "baseVersion <= MC.Version(server)",
+        "D.Inv(server.present)"
+      ],
+      "ensures": [],
+      "line": 177
+    },
+    {
+      "name": "GetFirstPending",
+      "module": "ClearSplitMultiAppCore",
+      "requires": [
+        "|client.pending| > 0"
+      ],
+      "ensures": [],
+      "line": 233
+    }
+  ],
+  "axioms": []
+}
