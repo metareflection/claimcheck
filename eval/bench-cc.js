@@ -12,7 +12,7 @@
  *   node eval/bench-cc.js --runs 3 --label cc-opus --model claude-opus-4-6
  */
 
-import { execFile } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { PROJECTS, DAFNY_REPLAY } from '../test/integration/projects.js';
@@ -48,17 +48,35 @@ const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
 // --- Call claude -p ---
 
 function callClaude(prompt) {
-  const ccArgs = ['-p', prompt, '--output-format', 'text'];
+  const ccArgs = ['-p', prompt, '--output-format', 'text', '--max-turns', '1', '--tools', ''];
   if (model) ccArgs.push('--model', model);
 
   return new Promise((resolve, reject) => {
-    execFile('claude', ccArgs, { timeout: 120000, maxBuffer: 1024 * 1024 }, (err, stdout, stderr) => {
-      if (verbose && stderr) process.stderr.write(stderr);
-      if (err) {
-        reject(new Error(`claude -p failed: ${err.message}`));
-        return;
+    const env = { ...process.env };
+    delete env.CLAUDECODE;
+    const proc = spawn('claude', ccArgs, {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      env,
+    });
+
+    let stdout = '';
+    let stderr = '';
+    proc.stdout.on('data', d => { stdout += d; });
+    proc.stderr.on('data', d => { stderr += d; });
+
+    if (verbose) {
+      proc.stderr.on('data', d => process.stderr.write(d));
+    }
+
+    proc.on('close', code => {
+      if (code !== 0) {
+        reject(new Error(`claude -p failed: ${stderr || `exit code ${code}`}`));
+      } else {
+        resolve(stdout);
       }
-      resolve(stdout);
+    });
+    proc.on('error', err => {
+      reject(new Error(`Failed to spawn claude: ${err.message}`));
     });
   });
 }
@@ -122,7 +140,8 @@ async function main() {
           continue;
         }
 
-        const prompt = CLAIMCHECK_PROMPT(project.name, entry.lemmaName, code, entry.requirement);
+        const prompt = CLAIMCHECK_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
+          .replace(/Call the record_claimcheck tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | PARTIALLY_JUSTIFIED | NOT_JUSTIFIED | VACUOUS`);
 
         try {
           const output = await callClaude(prompt);
