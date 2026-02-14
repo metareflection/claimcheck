@@ -5,14 +5,23 @@ Benchmark harness for measuring claimcheck accuracy across configurations.
 ## Quick Start
 
 ```bash
-# Run 3 times with default settings (sonnet, no erase)
-node eval/bench.js --runs 3 --label sonnet
+# API two-pass audit (default)
+node eval/bench.js --runs 3 --label two-pass
 
-# Compare two configs
-node eval/compare.js sonnet opus
+# API single-prompt audit
+node eval/bench.js --runs 3 --label single-prompt --single-prompt
+
+# Claude Code benchmark (no structural separation)
+node eval/bench-cc.js --runs 1 --label cc-sonnet
+
+# Compare any two configs
+node eval/compare.js two-pass single-prompt
+node eval/compare.js single-prompt cc-sonnet
 ```
 
-## Bench
+## bench.js — API Benchmark
+
+Runs the audit pipeline (two-pass or single-prompt) via the Anthropic API.
 
 ```bash
 node eval/bench.js --runs <N> --label <name> [options]
@@ -22,13 +31,29 @@ node eval/bench.js --runs <N> --label <name> [options]
 |------|-------------|
 | `--runs <N>` | Number of runs (default: 3) |
 | `--label <name>` | Label for this result set (used as filename) |
-| `--erase` | Also erase lemma bodies for Phase 2 proofs (Phase 1 always uses erased source) |
-| `--model <id>` | Override LLM model (default: `claude-sonnet-4-5-20250929`) |
+| `--single-prompt` | Use single-prompt claimcheck mode |
+| `--model <id>` | Override LLM model (default: sonnet) |
+| `--erase` | Erase lemma bodies before audit |
 | `--verbose` | Verbose logging |
 
 Results are saved to `eval/results/<label>.json`.
 
-## Compare
+## bench-cc.js — Claude Code Benchmark
+
+Runs the claimcheck prompt via `claude -p` for each requirement-lemma pair. The model sees everything in one shot — no structural or prompt-level separation. Useful for measuring whether look-ahead at the NL requirement affects results.
+
+```bash
+node eval/bench-cc.js --runs <N> --label <name> [options]
+```
+
+| Flag | Description |
+|------|-------------|
+| `--runs <N>` | Number of runs (default: 1) |
+| `--label <name>` | Label for this result set |
+| `--model <id>` | Claude Code model (default: Claude Code's default) |
+| `--verbose` | Show model output |
+
+## compare.js — Compare Results
 
 ```bash
 node eval/compare.js <label-a> <label-b>
@@ -39,68 +64,68 @@ Shows per-requirement pass rates side by side with regression indicators.
 ## Example Configurations
 
 ```bash
-# Sonnet baseline
-node eval/bench.js --runs 3 --label sonnet
+# Two-pass baseline (structural separation)
+node eval/bench.js --runs 3 --label two-pass
 
-# Sonnet with erasure
-node eval/bench.js --runs 3 --label sonnet-erase --erase
+# Single-prompt (prompt-level separation)
+node eval/bench.js --runs 3 --label single-prompt --single-prompt
 
-# Opus
-node eval/bench.js --runs 3 --label opus --model claude-opus-4-6
+# Single-prompt with Opus
+node eval/bench.js --runs 3 --label single-opus --single-prompt --model claude-opus-4-6
 
-# Opus with erasure
-node eval/bench.js --runs 3 --label opus-erase --model claude-opus-4-6 --erase
+# Claude Code (no separation)
+node eval/bench-cc.js --runs 1 --label cc-sonnet
 ```
 
 ## Reading Results
 
 ```
-                                                  sonnet        opus
+                                                  two-pass      single-prompt
 ---------------------------------------------------------------------------
 
   counter
     The counter value is always non-negative        3/3           3/3
-    The counter never exceeds 100                   0/3           0/3
+    The initial state satisfies the invariant       3/3           3/3
   kanban
     Every card appears in exactly one column...     1/3           3/3  ↑
     ...
 
-  Total                                             72/90         81/90
+  Total                                             10/12         11/12
 ```
 
-- `3/3` = proved in all 3 runs (consistent)
-- `1/3` = proved once (flaky — LLM variance)
-- `0/3` = never proved (hard or impossible)
+- `3/3` = confirmed in all 3 runs (consistent)
+- `1/3` = confirmed once (flaky — LLM variance)
+- `0/3` = never confirmed (disputed every time)
 - `↑` / `↓` = improvement / regression vs the other config
 
 3 runs is enough to separate consistent from flaky. Use 5 for more confidence.
 
 ## What It Tests
 
-Runs all 5 domains (30 total requirements):
+Runs all 5 domains across the mapped requirements:
 
 | Domain | Requirements | Notes |
 |--------|-------------|-------|
-| counter | 5 | Simple. 4 provable, 1 correct gap (unbounded). |
+| counter | 5 (4 mapped) | Simple. Non-negativity, invariant preservation. |
 | kanban | 8 | Medium. WIP limits, partitions, allocators. |
 | colorwheel | 6 | Hard. Mood constraints, harmony patterns. |
 | canon | 5 | Medium. Graph constraints, allocators. |
 | delegation-auth | 6 | Medium. Auth properties, no-op behaviors. |
 
-## Strategies in Results
+## Comparison Matrix
 
-The two-phase pipeline reports these strategies:
+The key experimental question: does look-ahead at the NL requirement affect the audit?
 
-| Strategy | Meaning |
-|----------|---------|
-| `direct` | Phase 1 — verified with empty body (no proof needed) |
-| `proof` | Phase 2 — LLM wrote a proof body |
-| `proof-retry` | Phase 2 — LLM fixed a failed proof on retry |
-| `formalize` / `resolve-retry` | Phase 1 resolution failures (appear in obligations) |
+| Config | Separation | Interface | Flag |
+|--------|-----------|-----------|------|
+| Two-pass (default) | Structural (different models) | API | `bench.js` |
+| Single-prompt | Prompt-level ("do this BEFORE reading NL") | API | `bench.js --single-prompt` |
+| Claude Code | None (model sees everything) | `claude -p` | `bench-cc.js` |
+
+If single-prompt and Claude Code results match two-pass results, structural separation is unnecessary overhead. If they diverge, look-ahead matters.
 
 ## Cost
 
-Each run costs ~$0.50-1.00 with Sonnet, ~$5-10 with Opus. A 3-run eval with Sonnet is ~$2-3.
-The two-phase pipeline reduces LLM calls: Phase 1 batches all requirements in one call. Phase 2 only runs for lemmas that need proofs.
+Each API run costs ~$0.50-1.00 with Sonnet. Claude Code runs use your Claude Code quota/billing.
 
 Token counts in `run-all.js` output are cumulative (module-level counter doesn't reset between domains) — the last domain's number is the total. The bench script doesn't have this issue since each domain runs as a separate process.

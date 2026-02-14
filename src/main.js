@@ -18,6 +18,8 @@ Options:
   -o, --output <dir>           Output directory (default: current dir)
   --json                       Output JSON instead of markdown
   --verify                     Also run dafny verify on each lemma
+  --single-prompt              Use single-prompt claimcheck mode (one call per pair)
+  --model <id>                 Model for single-prompt mode (default: claude-sonnet-4-5-20250929)
   --informalize-model <id>     Model for back-translation (default: claude-haiku-4-5-20251001)
   --compare-model <id>         Model for comparison (default: claude-sonnet-4-5-20250929)
   -v, --verbose                Verbose API logging
@@ -48,6 +50,8 @@ export async function main(argv) {
       domain:       { type: 'string', short: 'd' },
       output:       { type: 'string', short: 'o' },
       verify:             { type: 'boolean', default: false },
+      'single-prompt':    { type: 'boolean', default: false },
+      model:              { type: 'string' },
       'informalize-model': { type: 'string' },
       'compare-model':    { type: 'string' },
       json:               { type: 'boolean', default: false },
@@ -90,6 +94,8 @@ export async function main(argv) {
   const opts = {
     verbose: values.verbose,
     verify: values.verify,
+    singlePrompt: values['single-prompt'],
+    ...(values.model ? { model: values.model } : {}),
     ...(values['informalize-model'] ? { informalizeModel: values['informalize-model'] } : {}),
     ...(values['compare-model'] ? { compareModel: values['compare-model'] } : {}),
   };

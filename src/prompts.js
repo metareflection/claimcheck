@@ -87,3 +87,74 @@ If the back-translation's strength is "trivial", that is almost always a mismatc
 
 Call the record_roundtrip_comparisons tool with one entry per pair.`;
 }
+
+/**
+ * Build a single-prompt claimcheck for one requirement-lemma pair.
+ *
+ * The prompt asks the model to:
+ * 1. Informalize the lemma (without reading the NL requirement first)
+ * 2. Compare against the NL requirement
+ * 3. Check for vacuity and surprising restrictions
+ *
+ * Based on claimcheck-prompt.md.
+ *
+ * @param {string} domain - domain display name
+ * @param {string} lemmaName
+ * @param {string} dafnyCode - extracted lemma source
+ * @param {string} requirement - natural language requirement
+ */
+export function CLAIMCHECK_PROMPT(domain, lemmaName, dafnyCode, requirement) {
+  return `You are reviewing whether a verified Dafny lemma justifies a natural language requirement it claims to formalize, in the "${domain}" domain.
+
+**Key assumption:** The Dafny code is correct and verified. You are NOT auditing the proof. You are checking whether the lemma contract (requires/ensures) actually says what the natural language claims it says.
+
+## Dafny Code
+
+\`\`\`dafny
+${dafnyCode}
+\`\`\`
+
+## Analysis (Two Passes)
+
+### Pass 1 — Informalize the Lemma
+
+State in plain English:
+- **What it guarantees** (ensures clauses, in your own words)
+- **Under what conditions** (requires clauses, in your own words — unfold predicates enough to be clear, but invariant dependencies are fine and expected)
+
+Do this BEFORE reading the natural language requirement below.
+
+### Pass 2 — Compare
+
+Now read the NL requirement:
+
+> ${requirement}
+
+Answer three questions:
+
+**1. Does the ensures clause express the NL claim?**
+- **Yes**: The guarantee matches the requirement (it may be stronger, that's fine).
+- **Partially**: The guarantee covers some but not all of the NL claim. State what's missing.
+- **No**: The guarantee says something different from the NL claim.
+
+Pay attention to: quantifier scope, boundary conditions (\`<\` vs \`<=\`), and whether the Dafny formalizes a slightly different concept than the NL intends.
+
+**2. Is the guarantee vacuous?**
+Does the ensures clause already follow trivially from the requires clauses?
+- **No**: The lemma establishes something beyond its assumptions.
+- **Yes**: The ensures is already inside the requires. The lemma proves nothing. Explain.
+
+**Important:** A lemma that extracts a concrete consequence from an invariant is NOT vacuous. For example, \`requires Inv(m); ensures m >= 0\` is a useful projection — it makes a specific property of the invariant visible. Only flag vacuity when the ensures literally restates a requires clause without unfolding any definitions (e.g. \`requires m >= 0; ensures m >= 0\`).
+
+**3. Are there surprising restrictions in the requires?**
+Invariant dependencies and standard well-formedness conditions are expected and fine. But flag any requires clause that **restricts when the property holds** in a way the NL requirement doesn't mention.
+
+## Guidelines
+- Be precise about quantifiers and boundary conditions.
+- Invariant dependencies in requires are normal — don't flag them.
+- Unfold predicates when checking vacuity.
+- If the NL requirement is ambiguous, note which interpretation the Dafny chose.
+- Your job is adversarial but not paranoid.
+
+Call the record_claimcheck tool with your analysis for lemma \`${lemmaName}\`.`;
+}

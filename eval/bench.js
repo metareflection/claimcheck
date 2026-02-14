@@ -15,6 +15,8 @@ import { PROJECTS, DAFNY_REPLAY } from '../test/integration/projects.js';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const REQS_DIR = resolve(ROOT, 'test/integration/reqs');
+const MAPPINGS_DIR = resolve(ROOT, 'test/integration/mappings');
+const CLAIMS_DIR = resolve(ROOT, 'test/integration/claims');
 const RESULTS_DIR = resolve(ROOT, 'eval/results');
 const BIN = resolve(ROOT, 'bin/claimcheck.js');
 
@@ -36,6 +38,7 @@ const passthrough = [];
 
 if (args.includes('--erase')) passthrough.push('--erase');
 if (args.includes('--verbose')) passthrough.push('--verbose');
+if (args.includes('--single-prompt')) passthrough.push('--single-prompt');
 
 const model = getArg('--model', null);
 if (model) passthrough.push('--model', model);
@@ -44,11 +47,13 @@ if (model) passthrough.push('--model', model);
 
 function runDomain(project) {
   const reqsPath = join(REQS_DIR, `${project.name}.md`);
-  const dfyPath = join(DAFNY_REPLAY, project.entry);
+  const mappingPath = join(MAPPINGS_DIR, `${project.name}.json`);
+  const claimsPath = join(CLAIMS_DIR, `${project.name}.dfy`);
 
   return new Promise((resolve, reject) => {
     execFile('node', [
-      BIN, '-r', reqsPath, '--dfy', dfyPath,
+      BIN, '-r', reqsPath, '-m', mappingPath,
+      '--dfy', claimsPath,
       '--module', project.module, '-d', project.name,
       '--json', ...passthrough,
     ], { timeout: 600000 }, (err, stdout, stderr) => {
@@ -88,7 +93,7 @@ async function main() {
       console.error(`  ${project.name}...`);
       try {
         const result = await runDomain(project);
-        const requirements = result.verification.map(v => ({
+        const requirements = result.results.map(v => ({
           domain: project.name,
           requirement: v.requirement,
           status: v.status,
@@ -99,11 +104,11 @@ async function main() {
         }));
         allResults.push(...requirements);
 
-        const proved = result.verification.filter(v => v.status === 'proved').length;
-        const correctGaps = result.verification.filter(v => v.correctGap).length;
-        const total = result.verification.length;
-        const covered = proved + correctGaps;
-        console.error(`  ${project.name}: ${covered}/${total} (${proved} proved, ${correctGaps} correct gaps)`);
+        const confirmed = result.results.filter(v => v.status === 'confirmed' || v.status === 'proved').length;
+        const disputed = result.results.filter(v => v.status === 'disputed').length;
+        const errors = result.results.filter(v => v.status === 'error' || v.status === 'verify-failed').length;
+        const total = result.results.length;
+        console.error(`  ${project.name}: ${confirmed}/${total} confirmed, ${disputed} disputed, ${errors} errors`);
       } catch (err) {
         console.error(`  ${project.name}: ERROR — ${err.message}`);
       }
@@ -138,7 +143,7 @@ async function main() {
     const key = `${r.domain}/${r.requirement}`;
     if (!byReq[key]) byReq[key] = { domain: r.domain, requirement: r.requirement, passed: 0, total: 0, correctGap: r.correctGap };
     byReq[key].total++;
-    if (r.status === 'proved') byReq[key].passed++;
+    if (r.status === 'confirmed' || r.status === 'proved') byReq[key].passed++;
   }
 
   console.error('\nSummary:');
@@ -161,7 +166,7 @@ async function main() {
     if (entry.correctGap) totalCorrectGaps += entry.total;
   }
   const provable = totalCount - totalCorrectGaps;
-  console.error(`\n  Total: ${totalPassed}/${provable} proved (${totalCorrectGaps} correct gap runs excluded)`);
+  console.error(`\n  Total: ${totalPassed}/${provable} confirmed (${totalCorrectGaps} correct gap runs excluded)`);
 }
 
 main().catch(err => {

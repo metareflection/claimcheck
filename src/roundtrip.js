@@ -1,8 +1,9 @@
 import { callWithTool } from './api.js';
-import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL } from './schemas.js';
+import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL, CLAIMCHECK_TOOL } from './schemas.js';
 import {
   INFORMALIZE_PROMPT,
   ROUNDTRIP_COMPARE_PROMPT,
+  CLAIMCHECK_PROMPT,
 } from './prompts.js';
 
 /**
@@ -132,4 +133,89 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
 
   console.error(`[roundtrip] Passed: ${passed.length}, Failed: ${failed.length}`);
   return { passed, failed };
+}
+
+/**
+ * Single-prompt claimcheck: one API call per requirement-lemma pair.
+ *
+ * Uses the claimcheck-prompt.md approach: the model informalizes the lemma
+ * first (without seeing the NL requirement), then compares. Separation is
+ * prompt-level, not structural.
+ *
+ * @param {{ index: number, lemmaName: string, dafnyCode: string }[]} lemmas
+ * @param {string[]} requirements
+ * @param {string} domain
+ * @param {object} [opts] - { verbose, model }
+ * @returns {Promise<{ passed: object[], failed: object[] }>}
+ */
+export async function singlePromptCheck(lemmas, requirements, domain, opts = {}) {
+  if (lemmas.length === 0) return { passed: [], failed: [] };
+
+  const model = opts.model ?? 'claude-sonnet-4-5-20250929';
+
+  const passed = [];
+  const failed = [];
+
+  for (const l of lemmas) {
+    const requirement = requirements[l.index];
+    console.error(`[claimcheck] Checking ${l.lemmaName} against: "${requirement.slice(0, 60)}..."`);
+
+    const prompt = CLAIMCHECK_PROMPT(domain, l.lemmaName, l.dafnyCode, requirement);
+    const response = await callWithTool({
+      model,
+      prompt,
+      tool: CLAIMCHECK_TOOL,
+      toolChoice: { type: 'tool', name: 'record_claimcheck' },
+      verbose: opts.verbose,
+      maxTokens: 4096,
+    });
+
+    const result = response.input;
+
+    // Map to informalization shape for report compatibility
+    const informalization = {
+      naturalLanguage: result.informalization,
+      preconditions: '(see informalization)',
+      postcondition: '(see informalization)',
+      scope: '(see informalization)',
+      strength: result.vacuous ? 'trivial' : 'moderate',
+      confidence: 1,
+    };
+
+    // Map to comparison shape for report compatibility
+    const comparison = {
+      requirementIndex: l.index,
+      lemmaName: l.lemmaName,
+      match: result.verdict === 'JUSTIFIED',
+      discrepancy: result.verdict !== 'JUSTIFIED' ? result.ensuresExplanation : '',
+      weakeningType: verdictToWeakeningType(result),
+      explanation: result.ensuresExplanation,
+      // Preserve the richer claimcheck fields
+      claimcheck: result,
+    };
+
+    if (result.verdict === 'JUSTIFIED') {
+      passed.push({ ...l, informalization, comparison });
+    } else {
+      failed.push({
+        ...l,
+        informalization,
+        comparison,
+        discrepancy: result.ensuresExplanation || result.vacuousExplanation || result.surprisingRestrictions,
+        weakeningType: verdictToWeakeningType(result),
+      });
+    }
+  }
+
+  console.error(`[claimcheck] Passed: ${passed.length}, Failed: ${failed.length}`);
+  return { passed, failed };
+}
+
+function verdictToWeakeningType(result) {
+  if (result.verdict === 'JUSTIFIED') return 'none';
+  if (result.verdict === 'VACUOUS') return 'tautology';
+  if (result.ensuresMatchesNL === 'No') return 'wrong-property';
+  if (result.ensuresMatchesNL === 'Partially') return 'weakened-postcondition';
+  if (result.surprisingRestrictions !== 'None') return 'narrowed-scope';
+  return 'weakened-postcondition';
 }

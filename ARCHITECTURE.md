@@ -28,6 +28,10 @@ Someone else (Claude Code, a human, any agent) writes the lemmas and claims "req
 
 ## Audit Pipeline
 
+Two modes are available:
+
+### Two-pass mode (default)
+
 ```
 1. Load requirements, mapping, .dfy source
 2. For each mapping entry:
@@ -38,6 +42,20 @@ Someone else (Claude Code, a human, any agent) writes the lemmas and claims "req
 5. Report: which mappings are confirmed, which are disputed
 ```
 
+Uses **structural separation**: different models for informalization and comparison, so the informalizer cannot be influenced by the NL requirement.
+
+### Single-prompt mode (`--single-prompt`)
+
+```
+1. Load requirements, mapping, .dfy source
+2. For each mapping entry:
+   a. Extract lemma from .dfy by name
+   b. Single LLM call per pair: informalize → compare → check vacuity → verdict
+3. Report with richer output: verdict, vacuity check, surprising restrictions
+```
+
+Uses **prompt-level separation**: the model is instructed to informalize the lemma before reading the NL requirement, but both appear in the same prompt. Produces richer output (JUSTIFIED / PARTIALLY_JUSTIFIED / NOT_JUSTIFIED / VACUOUS verdicts).
+
 ### Why Round-Trip?
 
 The fundamental problem: an LLM (or human) can write a Dafny lemma that Dafny proves, but that doesn't actually express the intended requirement. Common failure modes:
@@ -47,14 +65,18 @@ The fundamental problem: an LLM (or human) can write a Dafny lemma that Dafny pr
 - **Narrowed scope**: lemma only covers one case when requirement covers many
 - **Wrong property**: lemma proves something related but different
 
-Dafny happily proves all of these. The round-trip catches them by:
+Dafny happily proves all of these. The round-trip catches them.
+
+**Two-pass mode** catches these by:
 
 1. **Informalize** (haiku): read the Dafny code → produce English description. Does NOT see the original requirement. Rates strength (trivial/weak/moderate/strong).
 2. **Compare** (sonnet): check original requirement vs back-translation. Strict — flags potential mismatches.
 
 Using different models (haiku for informalization, sonnet for comparison) avoids same-model collusion.
 
-### Pre-checks
+**Single-prompt mode** catches these via a structured two-pass analysis within one prompt (informalize first, then compare, plus vacuity and restriction checks).
+
+### Pre-checks (two-pass mode only)
 
 Before comparison, automatic pre-checks flag:
 - **Trivial strength**: informalization rated the lemma as trivially weak
@@ -91,14 +113,16 @@ Markdown by default, JSON with `--json`. Shows:
 claimcheck [options]
   -r, --requirements <path>    Requirements file (markdown)
   -m, --mapping <path>         Mapping file (JSON)
-  --dfy <path>                 Domain .dfy file
+  --dfy <path>                 Claims .dfy file (containing the lemmas)
   --module <name>              Dafny module name to import
   -d, --domain <name>          Human-readable domain name
   -o, --output <dir>           Output directory
   --json                       JSON output
   --verify                     Also run dafny verify on each lemma
-  --informalize-model <id>     Model for back-translation (default: haiku)
-  --compare-model <id>         Model for comparison (default: sonnet)
+  --single-prompt              Use single-prompt claimcheck mode (one call per pair)
+  --model <id>                 Model for single-prompt mode (default: sonnet)
+  --informalize-model <id>     Model for back-translation in two-pass mode (default: haiku)
+  --compare-model <id>         Model for comparison in two-pass mode (default: sonnet)
   -v, --verbose                Verbose logging
 ```
 
@@ -119,12 +143,12 @@ When `--verify` is used, lemmas are rejected before Dafny verification if they c
 | main.js | CLI + orchestration |
 | audit.js | audit pipeline: extract → verify → roundtrip → results |
 | extract.js | extract lemma by name from .dfy source |
-| roundtrip.js | round-trip check: informalize → compare |
+| roundtrip.js | round-trip check: two-pass (informalize → compare) and single-prompt modes |
 | verify.js | wrap lemma in module, run `dafny verify` / `dafny resolve`, soundness checks |
 | erase.js | strip lemma proof bodies, add {:axiom} (utility) |
 | obligations.js | generate obligations.dfy for disputed mappings |
 | report.js | markdown/JSON output |
-| prompts.js | LLM prompts (informalize, compare) |
+| prompts.js | LLM prompts (informalize, compare, single-prompt claimcheck) |
 | schemas.js | tool schemas for structured LLM output |
 | api.js | Anthropic API wrapper |
 

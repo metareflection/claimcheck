@@ -1,41 +1,54 @@
 # claimcheck
 
-Does a formally verified Dafny specification cover a set of informal user requirements?
+Does a Dafny lemma actually mean what a natural language requirement says? Dafny can verify proofs, but it can't verify meaning. Claimcheck fills that gap.
 
-Claimcheck formalizes Dafny lemmas for all requirements and asks the theorem prover to verify them. A two-phase pipeline separates formalization (getting types right) from proof (filling in proof bodies).
+Someone else (Claude Code, a human, any agent) writes the lemmas and claims "requirement X is covered by lemma Y." Claimcheck verifies that claim via a round-trip: informalize the lemma back to English (without seeing the requirement), then compare.
 
-## Pipeline
+## Modes
+
+### Two-pass mode (default)
+
+Structural separation — different models for informalization and comparison:
 
 ```
-Phase 1 — Formalize (batch)
-    1. LLM sees erased source + ALL requirements → produces lemma signatures (empty body)
-    2. dafny resolve → typechecks all signatures at once
-    3. If resolve fails → resolve individually, retry broken ones, obligation if still broken
-    4. dafny verify with empty bodies → many lemmas pass here (done!)
-
-Phase 2 — Prove (individual, only for lemmas that need proof)
-    5. LLM sees domain source + well-typed signature + verify error → writes proof body
-    6. dafny verify → if fails, retry once → obligation
+1. Extract mapped lemmas from claims .dfy file
+2. Batch informalize all lemmas (haiku) — does NOT see requirements
+3. Batch compare back-translations against requirements (sonnet)
+4. Report: confirmed / disputed
 ```
 
-Best case: 1 LLM call + 1 resolve + 1 verify = done.
+### Single-prompt mode (`--single-prompt`)
 
-Phase 1 always uses erased source (lemma bodies stripped, marked `{:axiom}`). Phase 2 uses full source by default, or erased source with `--erase`. Generated lemmas are rejected if they contain `assume` or `{:axiom}` (soundness checks).
+Prompt-level separation — one model does both passes sequentially:
+
+```
+1. Extract mapped lemmas from claims .dfy file
+2. For each mapping: single LLM call with two-pass prompt
+   a. Pass 1: informalize the lemma (before seeing the NL requirement)
+   b. Pass 2: compare, check vacuity, flag surprising restrictions
+3. Report with richer verdicts: JUSTIFIED / PARTIALLY_JUSTIFIED / NOT_JUSTIFIED / VACUOUS
+```
+
+### Claude Code benchmark (`eval/bench-cc.js`)
+
+Same single-prompt approach piped through `claude -p` — no structural or prompt-level separation (the model sees everything at once). Useful for comparing whether look-ahead matters.
 
 ## Usage
 
 ```bash
-# Single project
+# Two-pass audit (default)
 node bin/claimcheck.js \
   -r test/integration/reqs/counter.md \
-  --dfy ../dafny-replay/counter/CounterDomain.dfy \
+  -m test/integration/mappings/counter.json \
+  --dfy test/integration/claims/counter.dfy \
   --module CounterDomain -d counter
 
-# JSON output
+# Single-prompt audit
 node bin/claimcheck.js \
   -r test/integration/reqs/counter.md \
-  --dfy ../dafny-replay/counter/CounterDomain.dfy \
-  --module CounterDomain -d counter --json
+  -m test/integration/mappings/counter.json \
+  --dfy test/integration/claims/counter.dfy \
+  --module CounterDomain -d counter --single-prompt --json
 
 # All test projects
 node test/integration/run-all.js
@@ -49,38 +62,31 @@ node test/integration/run-all.js counter
 | Flag | Description |
 |------|-------------|
 | `-r, --requirements <path>` | Path to requirements file (markdown) |
-| `--dfy <path>` | Path to domain .dfy file |
+| `-m, --mapping <path>` | Path to mapping file (JSON) |
+| `--dfy <path>` | Path to claims .dfy file (containing the lemmas) |
 | `--module <name>` | Dafny module name to import |
 | `-d, --domain <name>` | Human-readable domain name (default: module name) |
 | `-o, --output <dir>` | Output directory for obligations.dfy (default: `.`) |
 | `--json` | Output JSON instead of markdown |
-| `--model <id>` | Override LLM model (default: `claude-sonnet-4-5-20250929`) |
-| `--erase` | Also erase lemma bodies for Phase 2 (Phase 1 always uses erased source) |
+| `--single-prompt` | Use single-prompt claimcheck mode (one call per pair) |
+| `--model <id>` | Model for single-prompt mode (default: sonnet) |
+| `--verify` | Also run dafny verify on each lemma |
+| `--informalize-model <id>` | Model for back-translation in two-pass mode (default: haiku) |
+| `--compare-model <id>` | Model for comparison in two-pass mode (default: sonnet) |
 | `-v, --verbose` | Verbose API/verification logging |
 
 ## Output
 
-**Markdown report** with sections:
-- Formally Verified Requirements — with the proved Dafny lemma
-- Obligations — requirements that need manual proof
+For each mapping entry, one of:
 
-**obligations.dfy** — a Dafny module with lemma stubs for each unproved requirement:
+| Status | Meaning |
+|--------|---------|
+| **confirmed** | Round-trip passed — lemma faithfully expresses the requirement |
+| **disputed** | Round-trip failed — discrepancy between lemma meaning and requirement |
+| **verify-failed** | Dafny verification failed (only with `--verify` flag) |
+| **error** | Lemma not found in source |
 
-```dafny
-include "../dafny-replay/counter/CounterDomain.dfy"
-
-module Obligations {
-  import D = CounterDomain
-
-  // Requirement: "The counter never exceeds 100"
-  // Status: unproven after 2 attempt(s)
-  // Strategies: direct✗ → proof✗ → proof-retry✗
-  lemma CounterNeverExceeds100(m: D.Model)
-    requires D.Inv(m)
-    ensures m <= 100
-  { /* OBLIGATION */ }
-}
-```
+In single-prompt mode, disputed results include richer detail: verdict category, vacuity analysis, and surprising restrictions.
 
 ## Test Projects
 
@@ -92,10 +98,10 @@ module Obligations {
 | canon | `canon/CanonDomain.dfy` | CanonDomain |
 | delegation-auth | `delegation-auth/DelegationAuthDomain.dfy` | DelegationAuthDomain |
 
-Requirements files live in `test/integration/reqs/`. Domain `.dfy` files are in `../dafny-replay/`.
+Requirements files live in `test/integration/reqs/`. Claims files in `test/integration/claims/`. Domain `.dfy` files are in `../dafny-replay/`.
 
 ## Requirements
 
 - Node.js 18+
 - `ANTHROPIC_API_KEY` environment variable
-- `dafny` in PATH
+- `dafny` in PATH (only for `--verify`)

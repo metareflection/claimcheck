@@ -1,6 +1,6 @@
 import { extractLemma } from './extract.js';
 import { verify } from './verify.js';
-import { roundtripCheck } from './roundtrip.js';
+import { roundtripCheck, singlePromptCheck } from './roundtrip.js';
 
 /**
  * Audit a set of requirement→lemma mappings.
@@ -17,7 +17,7 @@ import { roundtripCheck } from './roundtrip.js';
  * @param {string} domainDfyPath - absolute path to .dfy file (for dafny verify)
  * @param {string} domainModule - Dafny module name
  * @param {string} domain - display name
- * @param {object} [opts] - { verbose, verify, informalizeModel, compareModel }
+ * @param {object} [opts] - { verbose, verify, informalizeModel, compareModel, singlePrompt, model }
  * @returns {Promise<object[]>} per-mapping results
  */
 export async function audit(mapping, dfySource, domainDfyPath, domainModule, domain, opts = {}) {
@@ -72,7 +72,8 @@ export async function audit(mapping, dfySource, domainDfyPath, domainModule, dom
   // Step 3+4: Round-trip check (informalize + compare)
   if (activeLemmas.length > 0) {
     const requirements = mapping.map(m => m.requirement);
-    const { passed, failed } = await roundtripCheck(activeLemmas, requirements, domain, opts);
+    const check = opts.singlePrompt ? singlePromptCheck : roundtripCheck;
+    const { passed, failed } = await check(activeLemmas, requirements, domain, opts);
 
     for (const p of passed) {
       results.push({

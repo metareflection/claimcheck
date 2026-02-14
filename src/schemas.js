@@ -48,6 +48,55 @@ export const INFORMALIZE_TOOL = {
   },
 };
 
+export const CLAIMCHECK_TOOL = {
+  name: 'record_claimcheck',
+  description: 'Record the result of checking whether a Dafny lemma contract justifies a natural language claim.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      lemmaName: {
+        type: 'string',
+        description: 'Name of the lemma being checked.',
+      },
+      requirement: {
+        type: 'string',
+        description: 'The natural language requirement being checked.',
+      },
+      informalization: {
+        type: 'string',
+        description: 'Plain English: "This lemma guarantees that ... provided that ..."',
+      },
+      ensuresMatchesNL: {
+        type: 'string',
+        enum: ['Yes', 'Partially', 'No'],
+        description: 'Does the ensures clause express the NL claim?',
+      },
+      ensuresExplanation: {
+        type: 'string',
+        description: 'Explanation of ensures vs NL comparison. Required if not Yes.',
+      },
+      vacuous: {
+        type: 'boolean',
+        description: 'True if the ensures literally restates a requires clause without unfolding any definitions. Extracting a consequence from an invariant (e.g. requires Inv(m); ensures m >= 0) is NOT vacuous.',
+      },
+      vacuousExplanation: {
+        type: 'string',
+        description: 'Explanation if vacuous is true.',
+      },
+      surprisingRestrictions: {
+        type: 'string',
+        description: 'Any requires clauses that restrict when the property holds in a way the NL does not mention. "None" if none.',
+      },
+      verdict: {
+        type: 'string',
+        enum: ['JUSTIFIED', 'PARTIALLY_JUSTIFIED', 'NOT_JUSTIFIED', 'VACUOUS'],
+        description: 'Overall verdict.',
+      },
+    },
+    required: ['lemmaName', 'requirement', 'informalization', 'ensuresMatchesNL', 'ensuresExplanation', 'vacuous', 'vacuousExplanation', 'surprisingRestrictions', 'verdict'],
+  },
+};
+
 export const ROUNDTRIP_COMPARE_TOOL = {
   name: 'record_roundtrip_comparisons',
   description: 'Record comparison results between original requirements and back-translated lemmas.',

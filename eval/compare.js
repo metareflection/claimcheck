@@ -30,7 +30,7 @@ function aggregate(results) {
     const key = `${r.domain}/${r.requirement}`;
     if (!byReq[key]) byReq[key] = { domain: r.domain, requirement: r.requirement, passed: 0, total: 0, correctGap: r.correctGap || false };
     byReq[key].total++;
-    if (r.status === 'proved') byReq[key].passed++;
+    if (r.status === 'proved' || r.status === 'confirmed') byReq[key].passed++;
   }
   return byReq;
 }
