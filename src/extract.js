@@ -111,9 +111,6 @@ function findBodyBrace(src, start) {
       continue;
     }
 
-    // Semicolon means no body (abstract lemma)
-    if (c === ';' && parenDepth === 0) return -1;
-
     // New declaration keyword means we overshot
     const wordMatch = src.slice(i).match(/^[a-zA-Z_]\w*/);
     if (wordMatch) {
