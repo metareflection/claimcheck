@@ -1,0 +1,2689 @@
+{
+  "label": "mystery-baseline-sonnet",
+  "timestamp": "2026-02-14T22:15:34.042Z",
+  "config": {
+    "mode": "baseline",
+    "backend": "api",
+    "model": "claude-sonnet-4-5-20250929",
+    "total": 203
+  },
+  "totalElapsedMs": 1779118,
+  "accuracy": 0.541871921182266,
+  "correct": 110,
+  "total": 203,
+  "results": [
+    {
+      "storyId": "5minutemystery-who-let-the-frogs-out",
+      "choices": [
+        "Kyle Kravetsky",
+        "Marnie Pepper",
+        "Matilda Robbens",
+        "Sergio Ramos"
+      ],
+      "correctAnswer": "Matilda Robbens",
+      "answer": "Sergio Ramos",
+      "correct": false,
+      "elapsedMs": 8099
+    },
+    {
+      "storyId": "5minutemystery-uncle-buck-field-trip",
+      "choices": [
+        "Collin",
+        "Erica",
+        "Rory",
+        "Rusty"
+      ],
+      "correctAnswer": "Rory",
+      "answer": "Rory",
+      "correct": true,
+      "elapsedMs": 9573
+    },
+    {
+      "storyId": "5minutemystery-mystery-of-the-white-hats",
+      "choices": [
+        "Captain Stark",
+        "Chet",
+        "Doug",
+        "Ernie"
+      ],
+      "correctAnswer": "Chet",
+      "answer": "Chet",
+      "correct": true,
+      "elapsedMs": 10593
+    },
+    {
+      "storyId": "5minutemystery-the-missing-popcorn",
+      "choices": [
+        "Private First Class Dicky Mosier",
+        "Private Joe Locke",
+        "Specialist Fifth Class Ron Henson",
+        "Specialist Fourth Class Patrick Macnamara"
+      ],
+      "correctAnswer": "Private Joe Locke",
+      "answer": "Private First Class Dicky Mosier",
+      "correct": false,
+      "elapsedMs": 5688
+    },
+    {
+      "storyId": "5minutemystery-mystery-on-the-moor",
+      "choices": [
+        "Jack MacGinnis",
+        "James Macready",
+        "Samuel Doone",
+        "Tom Jenkins"
+      ],
+      "correctAnswer": "James Macready",
+      "answer": "Tom Jenkins",
+      "correct": false,
+      "elapsedMs": 7989
+    },
+    {
+      "storyId": "5minutemystery-who-stole-curious-george",
+      "choices": [
+        "Dexter",
+        "Mr. Ferguson",
+        "Mrs. Yee",
+        "Skyler"
+      ],
+      "correctAnswer": "Dexter",
+      "answer": "Mrs. Yee",
+      "correct": false,
+      "elapsedMs": 9259
+    },
+    {
+      "storyId": "5minutemystery-the-saxophones-ghost",
+      "choices": [
+        "Building Manager",
+        "Eric",
+        "Lenny",
+        "Red"
+      ],
+      "correctAnswer": "Building Manager",
+      "answer": "Building Manager",
+      "correct": true,
+      "elapsedMs": 7466
+    },
+    {
+      "storyId": "5minutemystery-who-shot-mom",
+      "choices": [
+        "Dad",
+        "Randy",
+        "Roger",
+        "Rory"
+      ],
+      "correctAnswer": "Randy",
+      "answer": "Randy",
+      "correct": true,
+      "elapsedMs": 10761
+    },
+    {
+      "storyId": "5minutemystery-finding-the-flower-fund",
+      "choices": [
+        "James Faust",
+        "Justin Thorn",
+        "Lincoln Smith",
+        "Linda Hinton"
+      ],
+      "correctAnswer": "Lincoln Smith",
+      "answer": "James Faust",
+      "correct": false,
+      "elapsedMs": 5530
+    },
+    {
+      "storyId": "5minutemystery-map-of-the-traitor",
+      "choices": [
+        "Benjamin",
+        "Edward",
+        "Jonathan",
+        "Lucius"
+      ],
+      "correctAnswer": "Jonathan",
+      "answer": "Jonathan",
+      "correct": true,
+      "elapsedMs": 4463
+    },
+    {
+      "storyId": "5minutemystery-the-crusaders-robe",
+      "choices": [
+        "Captain Fosters",
+        "Godefroi",
+        "Morgan Grant",
+        "Sir Francis Walters"
+      ],
+      "correctAnswer": "Godefroi",
+      "answer": "Morgan Grant",
+      "correct": false,
+      "elapsedMs": 8849
+    },
+    {
+      "storyId": "5minutemystery-mr-patricks-history-class",
+      "choices": [
+        "Corporal Tom Patrick",
+        "Pvt. Billy Calhoun",
+        "Pvt. Jack Trueblood",
+        "Sgt. Patrick Culpepper"
+      ],
+      "correctAnswer": "Pvt. Billy Calhoun",
+      "answer": "Pvt. Billy Calhoun",
+      "correct": true,
+      "elapsedMs": 10734
+    },
+    {
+      "storyId": "5minutemystery-bigfoot-mystery",
+      "choices": [
+        "Burt",
+        "Jerry",
+        "Leng",
+        "Winston"
+      ],
+      "correctAnswer": "Jerry",
+      "answer": "Jerry",
+      "correct": true,
+      "elapsedMs": 8711
+    },
+    {
+      "storyId": "5minutemystery-missing-movie-money",
+      "choices": [
+        "Billy",
+        "Cody",
+        "Juliet",
+        "Tammy"
+      ],
+      "correctAnswer": "Cody",
+      "answer": "Cody",
+      "correct": true,
+      "elapsedMs": 7806
+    },
+    {
+      "storyId": "5minutemystery-missing-ammunition",
+      "choices": [
+        "Henry",
+        "Mr. Samuel",
+        "Mr. Smith",
+        "Young Soldier"
+      ],
+      "correctAnswer": "Henry",
+      "answer": "Mr. Smith",
+      "correct": false,
+      "elapsedMs": 11722
+    },
+    {
+      "storyId": "5minutemystery-the-sky-sleuths",
+      "choices": [
+        "Bug collector",
+        "Elderly man",
+        "Family man",
+        "Motorcyclist"
+      ],
+      "correctAnswer": "Bug collector",
+      "answer": "Family man",
+      "correct": false,
+      "elapsedMs": 7719
+    },
+    {
+      "storyId": "5minutemystery-battle-of-the-bulge",
+      "choices": [
+        "Anderson",
+        "Dilworth",
+        "Maguire",
+        "Siegel"
+      ],
+      "correctAnswer": "Dilworth",
+      "answer": "Dilworth",
+      "correct": true,
+      "elapsedMs": 6142
+    },
+    {
+      "storyId": "5minutemystery-the-missing-button",
+      "choices": [
+        "Eliza Murray",
+        "George Sanders",
+        "Stable boy Ian",
+        "Thomas Murray"
+      ],
+      "correctAnswer": "Stable boy Ian",
+      "answer": "Eliza Murray",
+      "correct": false,
+      "elapsedMs": 12160
+    },
+    {
+      "storyId": "5minutemystery-the-railroad-mystery",
+      "choices": [
+        "Alvarado",
+        "The engineer",
+        "The mechanic",
+        "Zebediah"
+      ],
+      "correctAnswer": "Zebediah",
+      "answer": "Zebediah",
+      "correct": true,
+      "elapsedMs": 6681
+    },
+    {
+      "storyId": "5minutemystery-the-date",
+      "choices": [
+        "Bob",
+        "Cynthia",
+        "Diane",
+        "Kristin"
+      ],
+      "correctAnswer": "Bob",
+      "answer": "Bob",
+      "correct": true,
+      "elapsedMs": 7476
+    },
+    {
+      "storyId": "5minutemystery-b-movie-murder",
+      "choices": [
+        "Angela",
+        "Debbie",
+        "Sal",
+        "Tom"
+      ],
+      "correctAnswer": "Angela",
+      "answer": "Debbie",
+      "correct": false,
+      "elapsedMs": 10648
+    },
+    {
+      "storyId": "5minutemystery-the-jackie-mitchell-autographed-baseball-mystery",
+      "choices": [
+        "Dr. Edgar Newton",
+        "Melinda Baker",
+        "Simon Plympton",
+        "Susan Plympton"
+      ],
+      "correctAnswer": "Susan Plympton",
+      "answer": "Susan Plympton",
+      "correct": true,
+      "elapsedMs": 12216
+    },
+    {
+      "storyId": "5minutemystery-the-easter-egg-mystery",
+      "choices": [
+        "Anna",
+        "Cole",
+        "Justin",
+        "Lizzie",
+        "Rachel"
+      ],
+      "correctAnswer": "Lizzie",
+      "answer": "Lizzie",
+      "correct": true,
+      "elapsedMs": 6627
+    },
+    {
+      "storyId": "5minutemystery-easter-rhyme",
+      "choices": [
+        "Abbott",
+        "Andy",
+        "Randy",
+        "Speedy"
+      ],
+      "correctAnswer": "Speedy",
+      "answer": "Speedy",
+      "correct": true,
+      "elapsedMs": 9895
+    },
+    {
+      "storyId": "5minutemystery-the-april-fool",
+      "choices": [
+        "Boston, MA",
+        "Philadelphia, PA",
+        "Pittsburgh, PA",
+        "Raleigh, NC",
+        "Washington, DC"
+      ],
+      "correctAnswer": "Washington, DC",
+      "answer": "Washington, DC",
+      "correct": true,
+      "elapsedMs": 8967
+    },
+    {
+      "storyId": "5minutemystery-green-feet",
+      "choices": [
+        "Carm",
+        "Diane",
+        "Jen",
+        "Maureen"
+      ],
+      "correctAnswer": "Diane",
+      "answer": "Carm",
+      "correct": false,
+      "elapsedMs": 8799
+    },
+    {
+      "storyId": "5minutemystery-restaurant-roulette",
+      "choices": [
+        "Atsushi Nishi",
+        "Gianni Girodano",
+        "Jack McDonald",
+        "Jean-Pierre Dubois"
+      ],
+      "correctAnswer": "Gianni Girodano",
+      "answer": "Gianni Girodano",
+      "correct": true,
+      "elapsedMs": 8692
+    },
+    {
+      "storyId": "5minutemystery-violating-the-pirate-code",
+      "choices": [
+        "Bosun Ridley",
+        "Mr Arbuthnot",
+        "Nehemiah",
+        "Will"
+      ],
+      "correctAnswer": "Bosun Ridley",
+      "answer": "Bosun Ridley",
+      "correct": true,
+      "elapsedMs": 10318
+    },
+    {
+      "storyId": "5minutemystery-space-station-sagittarius-six-suffers-sabotage",
+      "choices": [
+        "Cpl. Bennington",
+        "Scrivine",
+        "Sgt. O'Hennessey",
+        "Sgt.Valance"
+      ],
+      "correctAnswer": "Sgt.Valance",
+      "answer": "Scrivine",
+      "correct": false,
+      "elapsedMs": 12728
+    },
+    {
+      "storyId": "5minutemystery-flying-saucer-of-new-mexico",
+      "choices": [
+        "Dora",
+        "Lester",
+        "Uncle Art",
+        "Zach"
+      ],
+      "correctAnswer": "Dora",
+      "answer": "Lester",
+      "correct": false,
+      "elapsedMs": 6618
+    },
+    {
+      "storyId": "5minutemystery-great-musket-mystery",
+      "choices": [
+        "Lyle Day",
+        "Mary Wright",
+        "Paul Revere",
+        "Stevie Brown"
+      ],
+      "correctAnswer": "Lyle Day",
+      "answer": "Lyle Day",
+      "correct": true,
+      "elapsedMs": 10270
+    },
+    {
+      "storyId": "5minutemystery-true-green-a-st-patricks-day-mystery",
+      "choices": [
+        "Emily Carpenter",
+        "Evan Carpenter",
+        "Richie Harris",
+        "Zachary MacDonald"
+      ],
+      "correctAnswer": "Emily Carpenter",
+      "answer": "Emily Carpenter",
+      "correct": true,
+      "elapsedMs": 7091
+    },
+    {
+      "storyId": "5minutemystery-st-patricks-day-pearls",
+      "choices": [
+        "Christopher",
+        "Earl",
+        "Robert",
+        "Tom"
+      ],
+      "correctAnswer": "Tom",
+      "answer": "Tom",
+      "correct": true,
+      "elapsedMs": 8801
+    },
+    {
+      "storyId": "5minutemystery-death-in-the-theatre",
+      "choices": [
+        "Helen Smith",
+        "Joanne Driscoll",
+        "Kevin Doyle",
+        "Sarah Jones"
+      ],
+      "correctAnswer": "Kevin Doyle",
+      "answer": "Kevin Doyle",
+      "correct": true,
+      "elapsedMs": 5993
+    },
+    {
+      "storyId": "5minutemystery-death-at-andersonville",
+      "choices": [
+        "Corporal Wardlow Horner",
+        "Private Jamie Whisenant",
+        "Sergeant Coleman Crosby",
+        "Sergeant Josiah Thornton"
+      ],
+      "correctAnswer": "Sergeant Josiah Thornton",
+      "answer": "Sergeant Josiah Thornton",
+      "correct": true,
+      "elapsedMs": 12625
+    },
+    {
+      "storyId": "5minutemystery-the-big-game",
+      "choices": [
+        "Carli Antor",
+        "Chuck Jarrett",
+        "Rich Pender",
+        "Tom Barrett"
+      ],
+      "correctAnswer": "Tom Barrett",
+      "answer": "Tom Barrett",
+      "correct": true,
+      "elapsedMs": 6647
+    },
+    {
+      "storyId": "5minutemystery-the-liberty-gun",
+      "choices": [
+        "Bob Turkle",
+        "Captain Parker",
+        "Paul Rhodes",
+        "Tom Wise"
+      ],
+      "correctAnswer": "Captain Parker",
+      "answer": "Captain Parker",
+      "correct": true,
+      "elapsedMs": 6985
+    },
+    {
+      "storyId": "5minutemystery-summer-camp",
+      "choices": [
+        "Allie",
+        "Danny",
+        "Diane's campers",
+        "Tom"
+      ],
+      "correctAnswer": "Tom",
+      "answer": "Danny",
+      "correct": false,
+      "elapsedMs": 8320
+    },
+    {
+      "storyId": "5minutemystery-mystery-at-lyndleys-fort",
+      "choices": [
+        "Bo",
+        "John",
+        "John's wife",
+        "Nathan Drew"
+      ],
+      "correctAnswer": "Nathan Drew",
+      "answer": "John's wife",
+      "correct": false,
+      "elapsedMs": 8152
+    },
+    {
+      "storyId": "5minutemystery-riddle-of-the-confederate-spy",
+      "choices": [
+        "Garrett",
+        "McMurty",
+        "Parker",
+        "Winslow"
+      ],
+      "correctAnswer": "Parker",
+      "answer": "Parker",
+      "correct": true,
+      "elapsedMs": 2937
+    },
+    {
+      "storyId": "5minutemystery-thin-ice",
+      "choices": [
+        "Hortence Lacombe",
+        "Joe Tucker",
+        "Mikey Chanowski",
+        "Shea Callaghan"
+      ],
+      "correctAnswer": "Shea Callaghan",
+      "answer": "Shea Callaghan",
+      "correct": true,
+      "elapsedMs": 11325
+    },
+    {
+      "storyId": "5minutemystery-flouted",
+      "choices": [
+        "Chloe Streamer",
+        "Lyle Esposito",
+        "Marty Nolan",
+        "Susan Moorgate"
+      ],
+      "correctAnswer": "Marty Nolan",
+      "answer": "Marty Nolan",
+      "correct": true,
+      "elapsedMs": 10207
+    },
+    {
+      "storyId": "5minutemystery-car-trouble",
+      "choices": [
+        "Mr. Carlson",
+        "Mr. Leamington",
+        "Mrs. Roberts",
+        "Randy Peters"
+      ],
+      "correctAnswer": "Randy Peters",
+      "answer": "Randy Peters",
+      "correct": true,
+      "elapsedMs": 8414
+    },
+    {
+      "storyId": "5minutemystery-mr-poes-birthday-party",
+      "choices": [
+        "Anthony",
+        "Connor",
+        "Skylar",
+        "Stephen",
+        "Tommy"
+      ],
+      "correctAnswer": "Connor",
+      "answer": "Connor",
+      "correct": true,
+      "elapsedMs": 10638
+    },
+    {
+      "storyId": "5minutemystery-the-root-of-all-evil",
+      "choices": [
+        "Bryan Durell",
+        "Grieve Collier",
+        "Jacques Bourbonne",
+        "Ruth Majick"
+      ],
+      "correctAnswer": "Bryan Durell",
+      "answer": "Grieve Collier",
+      "correct": false,
+      "elapsedMs": 8907
+    },
+    {
+      "storyId": "5minutemystery-get-the-lead-out",
+      "choices": [
+        "Benjamin Trodger",
+        "Cynthia Kirwan",
+        "Dan Skinner",
+        "Shel Jonas"
+      ],
+      "correctAnswer": "Dan Skinner",
+      "answer": "Dan Skinner",
+      "correct": true,
+      "elapsedMs": 7575
+    },
+    {
+      "storyId": "5minutemystery-popping-a-wheelie",
+      "choices": [
+        "Cory",
+        "David",
+        "Mark",
+        "String"
+      ],
+      "correctAnswer": "David",
+      "answer": "David",
+      "correct": true,
+      "elapsedMs": 6855
+    },
+    {
+      "storyId": "5minutemystery-the-mystery-of-the-leprechauns-trophy",
+      "choices": [
+        "Barry",
+        "Casey",
+        "Mr. Carswell",
+        "Tony"
+      ],
+      "correctAnswer": "Tony",
+      "answer": "Tony",
+      "correct": true,
+      "elapsedMs": 10548
+    },
+    {
+      "storyId": "5minutemystery-the-mysterious-chicken",
+      "choices": [
+        "Ed",
+        "Ed’s Husky",
+        "Ed's mother",
+        "Zeke"
+      ],
+      "correctAnswer": "Ed",
+      "answer": "Ed's Husky",
+      "correct": false,
+      "elapsedMs": 12385
+    },
+    {
+      "storyId": "5minutemystery-the-late-night-horror-show",
+      "choices": [
+        "Andrew",
+        "David",
+        "Dennis",
+        "Matthew"
+      ],
+      "correctAnswer": "David",
+      "answer": "David",
+      "correct": true,
+      "elapsedMs": 9329
+    },
+    {
+      "storyId": "5minutemystery-making-partner",
+      "choices": [
+        "Dan Cartman",
+        "Jill",
+        "Mike Creighton",
+        "Mrs. Krantz"
+      ],
+      "correctAnswer": "Mike Creighton",
+      "answer": "Mrs. Krantz",
+      "correct": false,
+      "elapsedMs": 12185
+    },
+    {
+      "storyId": "5minutemystery-no-retreat-from-death",
+      "choices": [
+        "Amanda Kent",
+        "Craig Willis",
+        "Niles Anderson",
+        "Stephanie Clark"
+      ],
+      "correctAnswer": "Niles Anderson",
+      "answer": "Stephanie Clark",
+      "correct": false,
+      "elapsedMs": 9830
+    },
+    {
+      "storyId": "5minutemystery-a-monster-of-a-mystery",
+      "choices": [
+        "Donald",
+        "Linda",
+        "Randy",
+        "Wendell"
+      ],
+      "correctAnswer": "Linda",
+      "answer": "Linda",
+      "correct": true,
+      "elapsedMs": 11572
+    },
+    {
+      "storyId": "5minutemystery-chow-baby",
+      "choices": [
+        "Beryl Hives",
+        "Dawn de Jong",
+        "Konrad Pushkin",
+        "Pete Stampkowski"
+      ],
+      "correctAnswer": "Beryl Hives",
+      "answer": "Beryl Hives",
+      "correct": true,
+      "elapsedMs": 15659
+    },
+    {
+      "storyId": "5minutemystery-the-mystery-of-the-frowning-clown",
+      "choices": [
+        "Bumbo",
+        "Dusty",
+        "Mr. Green",
+        "Stage Manager"
+      ],
+      "correctAnswer": "Stage Manager",
+      "answer": "Mr. Green",
+      "correct": false,
+      "elapsedMs": 13356
+    },
+    {
+      "storyId": "5minutemystery-the-strangest-sport-of-all",
+      "choices": [
+        "Ernie",
+        "Gordon",
+        "Jesse",
+        "Mac"
+      ],
+      "correctAnswer": "Jesse",
+      "answer": "Jesse",
+      "correct": true,
+      "elapsedMs": 9224
+    },
+    {
+      "storyId": "5minutemystery-who-stole-storimons-wallet",
+      "choices": [
+        "Danny",
+        "Mick",
+        "Mr. Storimon",
+        "Policeman"
+      ],
+      "correctAnswer": "Mr. Storimon",
+      "answer": "Mr. Storimon",
+      "correct": true,
+      "elapsedMs": 12038
+    },
+    {
+      "storyId": "5minutemystery-miles-archer-solves-a-case",
+      "choices": [
+        "Arnold Grossmecker",
+        "Brigid Jellicoe",
+        "Quinton Jesselton",
+        "Sandra O’Malley"
+      ],
+      "correctAnswer": "Quinton Jesselton",
+      "answer": "Sandra O'Malley",
+      "correct": false,
+      "elapsedMs": 7736
+    },
+    {
+      "storyId": "5minutemystery-murder-in-the-early-morning",
+      "choices": [
+        "Constance",
+        "John",
+        "Nancy",
+        "Vernon"
+      ],
+      "correctAnswer": "Vernon",
+      "answer": "Vernon",
+      "correct": true,
+      "elapsedMs": 9294
+    },
+    {
+      "storyId": "5minutemystery-raiding-cane",
+      "choices": [
+        "Brent Pearson",
+        "Frank Weiss",
+        "Michael Weiss",
+        "Ronald Weiss"
+      ],
+      "correctAnswer": "Frank Weiss",
+      "answer": "Brent Pearson",
+      "correct": false,
+      "elapsedMs": 10618
+    },
+    {
+      "storyId": "5minutemystery-the-missing-dagger",
+      "choices": [
+        "Chris Palmer",
+        "Matthew Light",
+        "Mitchell Land",
+        "Paul Benham",
+        "Russell Smith"
+      ],
+      "correctAnswer": "Paul Benham",
+      "answer": "Mitchell Land",
+      "correct": false,
+      "elapsedMs": 9770
+    },
+    {
+      "storyId": "5minutemystery-mystery-of-the-bratty-kid",
+      "choices": [
+        "Angelita",
+        "Emily",
+        "Jessica",
+        "Percy Wellington"
+      ],
+      "correctAnswer": "Angelita",
+      "answer": "Percy Wellington",
+      "correct": false,
+      "elapsedMs": 11067
+    },
+    {
+      "storyId": "5minutemystery-the-card-shark",
+      "choices": [
+        "The cowboy",
+        "The gunslinger",
+        "The lady",
+        "The sheriff"
+      ],
+      "correctAnswer": "The sheriff",
+      "answer": "The lady",
+      "correct": false,
+      "elapsedMs": 6335
+    },
+    {
+      "storyId": "5minutemystery-department-store-murder",
+      "choices": [
+        "Ed Puckett",
+        "Gene Roberts",
+        "George Whitley",
+        "Justin Tanner"
+      ],
+      "correctAnswer": "Justin Tanner",
+      "answer": "Justin Tanner",
+      "correct": true,
+      "elapsedMs": 9732
+    },
+    {
+      "storyId": "5minutemystery-the-candy-store-mystery",
+      "choices": [
+        "Brianna Cates",
+        "Emilee Johnson",
+        "Justin Cates",
+        "Olivia (Livvie) Johnson",
+        "Trevor Cates"
+      ],
+      "correctAnswer": "Justin Cates",
+      "answer": "Brianna Cates",
+      "correct": false,
+      "elapsedMs": 11985
+    },
+    {
+      "storyId": "5minutemystery-for-the-birds",
+      "choices": [
+        "Billy Mumms",
+        "Cheryl Judson",
+        "Stan Mifflin",
+        "Tor Hansen"
+      ],
+      "correctAnswer": "Cheryl Judson",
+      "answer": "Cheryl Judson",
+      "correct": true,
+      "elapsedMs": 4825
+    },
+    {
+      "storyId": "5minutemystery-the-zoo-job",
+      "choices": [
+        "Cindy",
+        "Henry",
+        "Leonard",
+        "Tom"
+      ],
+      "correctAnswer": "Cindy",
+      "answer": "Cindy",
+      "correct": true,
+      "elapsedMs": 11036
+    },
+    {
+      "storyId": "5minutemystery-did-the-vicar-solve-the-mystery",
+      "choices": [
+        "Elmer Tydings",
+        "John Stubbs",
+        "Katherine Tydings",
+        "Louise Stubbs"
+      ],
+      "correctAnswer": "Katherine Tydings",
+      "answer": "Louise Stubbs",
+      "correct": false,
+      "elapsedMs": 11144
+    },
+    {
+      "storyId": "5minutemystery-who-scratched-the-porsche",
+      "choices": [
+        "Colonel Greenerbaum",
+        "Fido",
+        "Malcolm",
+        "Roxie"
+      ],
+      "correctAnswer": "Colonel Greenerbaum",
+      "answer": "Colonel Greenerbaum",
+      "correct": true,
+      "elapsedMs": 9171
+    },
+    {
+      "storyId": "5minutemystery-the-thief-in-the-night-mystery",
+      "choices": [
+        "Jon Shaw",
+        "Max Reinke",
+        "Todd Summers",
+        "Zac Coulson"
+      ],
+      "correctAnswer": "Zac Coulson",
+      "answer": "Zac Coulson",
+      "correct": true,
+      "elapsedMs": 8939
+    },
+    {
+      "storyId": "5minutemystery-ladies-at-table",
+      "choices": [
+        "Alice",
+        "Frances",
+        "Leona",
+        "Mary",
+        "Ruth"
+      ],
+      "correctAnswer": "Leona",
+      "answer": "Frances",
+      "correct": false,
+      "elapsedMs": 8117
+    },
+    {
+      "storyId": "5minutemystery-the-diamond-necklace",
+      "choices": [
+        "Abby Grant",
+        "Colonel Barrow",
+        "Fiona Duncan",
+        "Harold Duncan",
+        "Maurice Eades"
+      ],
+      "correctAnswer": "Fiona Duncan",
+      "answer": "Fiona Duncan",
+      "correct": true,
+      "elapsedMs": 9270
+    },
+    {
+      "storyId": "5minutemystery-rhyming-presidents-mystery",
+      "choices": [
+        "George Bush",
+        "Gerald Ford",
+        "John Quincy Adams",
+        "Richard Nixon"
+      ],
+      "correctAnswer": "Gerald Ford",
+      "answer": "Gerald Ford",
+      "correct": true,
+      "elapsedMs": 6795
+    },
+    {
+      "storyId": "5minutemystery-the-white-house-ghosts",
+      "choices": [
+        "Andrew Jackson",
+        "Calvin Coolidge",
+        "John Adams",
+        "William Howard Taft"
+      ],
+      "correctAnswer": "Calvin Coolidge",
+      "answer": "Calvin Coolidge",
+      "correct": true,
+      "elapsedMs": 6797
+    },
+    {
+      "storyId": "5minutemystery-mr-patrick-and-the-graveyard-mystery",
+      "choices": [
+        "Grave no.1",
+        "Grave no.2",
+        "Grave no.3",
+        "Grave no.4",
+        "Grave no.5"
+      ],
+      "correctAnswer": "Grave no.4",
+      "answer": "Grave no.3",
+      "correct": false,
+      "elapsedMs": 7490
+    },
+    {
+      "storyId": "5minutemystery-lockbox-100",
+      "choices": [
+        "Edward Frates",
+        "James Madigan",
+        "Peter Zielny",
+        "Ronald Finch",
+        "Russell Winwood"
+      ],
+      "correctAnswer": "Russell Winwood",
+      "answer": "Edward Frates",
+      "correct": false,
+      "elapsedMs": 10580
+    },
+    {
+      "storyId": "5minutemystery-mystery-at-the-detectives-office",
+      "choices": [
+        "Joe the janitor",
+        "Larry",
+        "Mr. Jorgensen",
+        "the building manager"
+      ],
+      "correctAnswer": "the building manager",
+      "answer": "Mr. Jorgensen",
+      "correct": false,
+      "elapsedMs": 7066
+    },
+    {
+      "storyId": "5minutemystery-the-secret-in-the-old-trunk",
+      "choices": [
+        "Dennis Boyles",
+        "George Boyles",
+        "John Boyles",
+        "Patricia (Trish) Boyles Sykes",
+        "Patrick Boyles"
+      ],
+      "correctAnswer": "Patrick Boyles",
+      "answer": "Patrick Boyles",
+      "correct": true,
+      "elapsedMs": 9677
+    },
+    {
+      "storyId": "5minutemystery-the-restless-ghost",
+      "choices": [
+        "Casey McCormick",
+        "Connie McCormick",
+        "Ellen McCormick",
+        "Michael McCormick, Jr.",
+        "The ghost of Mike McCormick, Sr."
+      ],
+      "correctAnswer": "Casey McCormick",
+      "answer": "Ellen McCormick",
+      "correct": false,
+      "elapsedMs": 8934
+    },
+    {
+      "storyId": "5minutemystery-the-secret-friend",
+      "choices": [
+        "Bill Baker",
+        "Harold Coker",
+        "Lyn Baker",
+        "Midge Coker"
+      ],
+      "correctAnswer": "Midge Coker",
+      "answer": "Midge Coker",
+      "correct": true,
+      "elapsedMs": 8128
+    },
+    {
+      "storyId": "5minutemystery-the-cross-homestead-mystery",
+      "choices": [
+        "Journal entry of Edith",
+        "Journal entry of Leonard",
+        "Journal entry of Susie",
+        "Journal entry of Victor",
+        "Journal entry of Wilbur"
+      ],
+      "correctAnswer": "Journal entry of Leonard",
+      "answer": "Journal entry of Leonard",
+      "correct": true,
+      "elapsedMs": 14403
+    },
+    {
+      "storyId": "5minutemystery-is-it-a-wonderful-life",
+      "choices": [
+        "Dr. Gilchrest",
+        "Jonathan Cartright",
+        "Miser James Cartright (suicide)",
+        "Moira Laurie"
+      ],
+      "correctAnswer": "Moira Laurie",
+      "answer": "Jonathan Cartright",
+      "correct": false,
+      "elapsedMs": 10822
+    },
+    {
+      "storyId": "5minutemystery-lestrade-solves-a-case",
+      "choices": [
+        "Archibald Hopkins",
+        "Countess Mannerley",
+        "Loralie Courtney",
+        "Robert Bannington"
+      ],
+      "correctAnswer": "Robert Bannington",
+      "answer": "Robert Bannington",
+      "correct": true,
+      "elapsedMs": 8412
+    },
+    {
+      "storyId": "5minutemystery-whole-stole-the-new-years-kiss",
+      "choices": [
+        "Danny",
+        "Jeremy",
+        "Reese",
+        "RJ"
+      ],
+      "correctAnswer": "RJ",
+      "answer": "RJ",
+      "correct": true,
+      "elapsedMs": 7593
+    },
+    {
+      "storyId": "5minutemystery-the-new-years-eve-mystery",
+      "choices": [
+        "Juanita Wade",
+        "Mary Beth Sloan",
+        "Noel King",
+        "Roy Wade",
+        "Theresa King"
+      ],
+      "correctAnswer": "Mary Beth Sloan",
+      "answer": "Mary Beth Sloan",
+      "correct": true,
+      "elapsedMs": 7276
+    },
+    {
+      "storyId": "5minutemystery-the-twelfth-night-mystery",
+      "choices": [
+        "Balthasar",
+        "Caspar",
+        "Dad",
+        "Melchoir"
+      ],
+      "correctAnswer": "Caspar",
+      "answer": "Melchoir",
+      "correct": false,
+      "elapsedMs": 11234
+    },
+    {
+      "storyId": "5minutemystery-sugar-lands-candy-crook",
+      "choices": [
+        "King Ted",
+        "Lancelot",
+        "Pride",
+        "Rupert"
+      ],
+      "correctAnswer": "King Ted",
+      "answer": "Rupert",
+      "correct": false,
+      "elapsedMs": 8960
+    },
+    {
+      "storyId": "5minutemystery-what-the-dickensa-christmas-eve-mystery",
+      "choices": [
+        "Fagin",
+        "Nancy",
+        "Oliver Twist",
+        "The Artful Dodger",
+        "The Rich Gentleman"
+      ],
+      "correctAnswer": "The Rich Gentleman",
+      "answer": "The Artful Dodger",
+      "correct": false,
+      "elapsedMs": 8088
+    },
+    {
+      "storyId": "5minutemystery-the-secret-santa-mystery",
+      "choices": [
+        "Al Busby",
+        "Bob (Bobby) Key",
+        "Chuck Daughtry",
+        "Jeff Reynolds",
+        "Jim Dockery"
+      ],
+      "correctAnswer": "Jim Dockery",
+      "answer": "Jim Dockery",
+      "correct": true,
+      "elapsedMs": 8789
+    },
+    {
+      "storyId": "5minutemystery-the-silly-santa-mystery",
+      "choices": [
+        "Mr. Corrigan",
+        "Mrs. Martin",
+        "Santa Claus",
+        "The photographer"
+      ],
+      "correctAnswer": "The photographer",
+      "answer": "The photographer",
+      "correct": true,
+      "elapsedMs": 7001
+    },
+    {
+      "storyId": "5minutemystery-sky-jack",
+      "choices": [
+        "Clem Duster",
+        "Cliff Snelling",
+        "David Loftkiss",
+        "Tom Jenks"
+      ],
+      "correctAnswer": "Tom Jenks",
+      "answer": "Tom Jenks",
+      "correct": true,
+      "elapsedMs": 8066
+    },
+    {
+      "storyId": "5minutemystery-dr-watson-and-the-thwarted-engagement",
+      "choices": [
+        "Georgette Pelham",
+        "Reverend Marvin Ingalls",
+        "Sheila Ingalls",
+        "Wallace Anders"
+      ],
+      "correctAnswer": "Wallace Anders",
+      "answer": "Wallace Anders",
+      "correct": true,
+      "elapsedMs": 8365
+    },
+    {
+      "storyId": "5minutemystery-shoot-out-at-splithead-canyon",
+      "choices": [
+        "Big George Ratcliffe",
+        "Chester Morris",
+        "Joe Franklin",
+        "Slim Jameson"
+      ],
+      "correctAnswer": "Slim Jameson",
+      "answer": "Chester Morris",
+      "correct": false,
+      "elapsedMs": 10353
+    },
+    {
+      "storyId": "5minutemystery-the-mystery-of-the-american-raid",
+      "choices": [
+        "Admiral Taro",
+        "Gina",
+        "Kira",
+        "The Emperor"
+      ],
+      "correctAnswer": "Admiral Taro",
+      "answer": "Admiral Taro",
+      "correct": true,
+      "elapsedMs": 8653
+    },
+    {
+      "storyId": "5minutemystery-the-missing-ornament-mystery",
+      "choices": [
+        "Jackie Hadley",
+        "Lennie Hadley",
+        "Mike Hadley",
+        "Sandy Hadley",
+        "Tommy Hadley"
+      ],
+      "correctAnswer": "Lennie Hadley",
+      "answer": "Lennie Hadley",
+      "correct": true,
+      "elapsedMs": 9187
+    },
+    {
+      "storyId": "5minutemystery-the-pilgrim-thanksgiving-puzzle",
+      "choices": [
+        "John Alden",
+        "Miles Standish",
+        "Priscilla Mulllins",
+        "William Bradford"
+      ],
+      "correctAnswer": "John Alden",
+      "answer": "John Alden",
+      "correct": true,
+      "elapsedMs": 7203
+    },
+    {
+      "storyId": "5minutemystery-the-disappearing-turkey",
+      "choices": [
+        "Darby",
+        "Father",
+        "Greg",
+        "Uncle Larry"
+      ],
+      "correctAnswer": "Father",
+      "answer": "Uncle Larry",
+      "correct": false,
+      "elapsedMs": 10653
+    },
+    {
+      "storyId": "5minutemystery-a-thanksgiving-mystery-poem",
+      "choices": [
+        "Libby",
+        "Rusty",
+        "Tiny",
+        "Tom"
+      ],
+      "correctAnswer": "Rusty",
+      "answer": "Libby",
+      "correct": false,
+      "elapsedMs": 6490
+    },
+    {
+      "storyId": "5minutemystery-turkey-cull",
+      "choices": [
+        "Beaker",
+        "Beau",
+        "Leaf",
+        "Red"
+      ],
+      "correctAnswer": "Beau",
+      "answer": "Red",
+      "correct": false,
+      "elapsedMs": 7782
+    },
+    {
+      "storyId": "5minutemystery-a-turkey-day-struggle",
+      "choices": [
+        "Aunt Rachel",
+        "Chris",
+        "Diane",
+        "Jack the Dog"
+      ],
+      "correctAnswer": "Chris",
+      "answer": "Chris",
+      "correct": true,
+      "elapsedMs": 6782
+    },
+    {
+      "storyId": "5minutemystery-the-missing-briefcase",
+      "choices": [
+        "Porter 1",
+        "Porter 2",
+        "Porter 3",
+        "Porter 4"
+      ],
+      "correctAnswer": "Porter 3",
+      "answer": "Porter 4",
+      "correct": false,
+      "elapsedMs": 11675
+    },
+    {
+      "storyId": "5minutemystery-everythings-not-just-ducky",
+      "choices": [
+        "Bethany",
+        "Connor",
+        "Emma",
+        "Tim"
+      ],
+      "correctAnswer": "Bethany",
+      "answer": "Tim",
+      "correct": false,
+      "elapsedMs": 5103
+    },
+    {
+      "storyId": "5minutemystery-a-darkened-veterans-day",
+      "choices": [
+        "Colonel Abraham",
+        "Frank Thompson",
+        "Mr. Landry",
+        "Ryan Smith"
+      ],
+      "correctAnswer": "Colonel Abraham",
+      "answer": "Colonel Abraham",
+      "correct": true,
+      "elapsedMs": 7346
+    },
+    {
+      "storyId": "5minutemystery-the-missing-ring",
+      "choices": [
+        "Fingers Ferguson",
+        "Joe Morgan",
+        "Manuel Garcia",
+        "Mr. Bridges"
+      ],
+      "correctAnswer": "Joe Morgan",
+      "answer": "Mr. Bridges",
+      "correct": false,
+      "elapsedMs": 5267
+    },
+    {
+      "storyId": "5minutemystery-brass-keyboard-mystery",
+      "choices": [
+        "April Key #4",
+        "Denise Key #6",
+        "Harold Key #1",
+        "Kirsten Key #5",
+        "Robert (Buddy) Key #3"
+      ],
+      "correctAnswer": "April Key #4",
+      "answer": "Kirsten Key #5",
+      "correct": false,
+      "elapsedMs": 10853
+    },
+    {
+      "storyId": "5minutemystery-the-curse-of-the-unlucky-streak",
+      "choices": [
+        "Coach Williams",
+        "Joe",
+        "Mrs. Williams",
+        "Roderick"
+      ],
+      "correctAnswer": "Joe",
+      "answer": "Joe",
+      "correct": true,
+      "elapsedMs": 8603
+    },
+    {
+      "storyId": "5minutemystery-halloween-2008",
+      "choices": [
+        "Bride",
+        "Groom",
+        "Indian Chief",
+        "Wealthy Woman"
+      ],
+      "correctAnswer": "Groom",
+      "answer": "Groom",
+      "correct": true,
+      "elapsedMs": 6629
+    },
+    {
+      "storyId": "5minutemystery-the-trick-or-treat-mystery",
+      "choices": [
+        "Dorothy",
+        "Superman",
+        "The Ghost",
+        "The Lion",
+        "The Witch"
+      ],
+      "correctAnswer": "The Witch",
+      "answer": "The Ghost",
+      "correct": false,
+      "elapsedMs": 6532
+    },
+    {
+      "storyId": "5minutemystery-house-of-the-rising-pumpkin",
+      "choices": [
+        "Curtis",
+        "Dabney",
+        "Kim",
+        "Mary"
+      ],
+      "correctAnswer": "Kim",
+      "answer": "Curtis",
+      "correct": false,
+      "elapsedMs": 7505
+    },
+    {
+      "storyId": "5minutemystery-the-secret-of-the-scarecrows-mask",
+      "choices": [
+        "Charles Kincaid",
+        "Chester",
+        "Mrs. Winfrey",
+        "Mr. Winfrey"
+      ],
+      "correctAnswer": "Chester",
+      "answer": "Chester",
+      "correct": true,
+      "elapsedMs": 4948
+    },
+    {
+      "storyId": "5minutemystery-the-scarecrow-slasher",
+      "choices": [
+        "Annie",
+        "Mr. Forbes",
+        "Mrs. Avery",
+        "Philips"
+      ],
+      "correctAnswer": "Philips",
+      "answer": "Philips",
+      "correct": true,
+      "elapsedMs": 8384
+    },
+    {
+      "storyId": "5minutemystery-the-golden-ruse",
+      "choices": [
+        "Miss Jones",
+        "Miss. Pendlebury",
+        "Mr. Horgan",
+        "Mr. Reese"
+      ],
+      "correctAnswer": "Mr. Horgan",
+      "answer": "Miss. Pendlebury",
+      "correct": false,
+      "elapsedMs": 6816
+    },
+    {
+      "storyId": "5minutemystery-hound-of-the-buskerville",
+      "choices": [
+        "Balloon Twister",
+        "Living Statue",
+        "Mime",
+        "Stilt-Walker"
+      ],
+      "correctAnswer": "Stilt-Walker",
+      "answer": "Living Statue",
+      "correct": false,
+      "elapsedMs": 7122
+    },
+    {
+      "storyId": "5minutemystery-moriarty-picks-a-murderer-part-two",
+      "choices": [
+        "Hansom Cab Driver",
+        "Policeman",
+        "Theater Usher",
+        "Ticket Seller"
+      ],
+      "correctAnswer": "Theater Usher",
+      "answer": "Theater Usher",
+      "correct": true,
+      "elapsedMs": 8890
+    },
+    {
+      "storyId": "5minutemystery-the-scent-of-a-thief",
+      "choices": [
+        "Betty",
+        "Darlene",
+        "Mr. Danby",
+        "Mr. Harrison"
+      ],
+      "correctAnswer": "Mr. Harrison",
+      "answer": "Mr. Harrison",
+      "correct": true,
+      "elapsedMs": 9676
+    },
+    {
+      "storyId": "5minutemystery-moriarty-picks-a-murderer-part-one",
+      "choices": [
+        "Ed the Bludgeoner",
+        "Fastidious Fred Fielder",
+        "Herman Houlihan",
+        "Morris the Ascot Dandy"
+      ],
+      "correctAnswer": "Fastidious Fred Fielder",
+      "answer": "Fastidious Fred Fielder",
+      "correct": true,
+      "elapsedMs": 9984
+    },
+    {
+      "storyId": "5minutemystery-the-geneva-summit-goldfish-mystery",
+      "choices": [
+        "Ermina Glandon",
+        "George Adams",
+        "Matthew O'Leary",
+        "Prince Rahim",
+        "Ronald Reagan"
+      ],
+      "correctAnswer": "Ronald Reagan",
+      "answer": "George Adams",
+      "correct": false,
+      "elapsedMs": 10862
+    },
+    {
+      "storyId": "5minutemystery-a-straw-stuffed-mystery",
+      "choices": [
+        "Bill Albertson",
+        "Mr. Fletcher",
+        "Professor Surenie",
+        "Rachel Beaton"
+      ],
+      "correctAnswer": "Mr. Fletcher",
+      "answer": "Mr. Fletcher",
+      "correct": true,
+      "elapsedMs": 8552
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-shoplifter",
+      "choices": [
+        "Jane Croydon",
+        "Johnny Martin",
+        "Martha Hampden",
+        "Steve Kravitz"
+      ],
+      "correctAnswer": "Johnny Martin",
+      "answer": "Jane Croydon",
+      "correct": false,
+      "elapsedMs": 9627
+    },
+    {
+      "storyId": "5minutemystery-the-hanging-figure",
+      "choices": [
+        "Daisy Morris",
+        "Dale Clark",
+        "Iain Potts",
+        "Lucy Smith"
+      ],
+      "correctAnswer": "Dale Clark",
+      "answer": "Daisy Morris",
+      "correct": false,
+      "elapsedMs": 6417
+    },
+    {
+      "storyId": "5minutemystery-our-quarterback-is-missing",
+      "choices": [
+        "Coach Roster",
+        "Eddie",
+        "Eddie's Mom",
+        "Marissa"
+      ],
+      "correctAnswer": "Eddie's Mom",
+      "answer": "Coach Roster",
+      "correct": false,
+      "elapsedMs": 8377
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-case-of-the-missing-canary",
+      "choices": [
+        "Alex Johnston",
+        "Jimmy Carstairs",
+        "Lydia Carstairs",
+        "Sarabelle"
+      ],
+      "correctAnswer": "Alex Johnston",
+      "answer": "Alex Johnston",
+      "correct": true,
+      "elapsedMs": 7000
+    },
+    {
+      "storyId": "5minutemystery-register-robbery",
+      "choices": [
+        "Dan",
+        "David",
+        "Robert",
+        "Teresa"
+      ],
+      "correctAnswer": "David",
+      "answer": "David",
+      "correct": true,
+      "elapsedMs": 6289
+    },
+    {
+      "storyId": "5minutemystery-mr-patrick-back-in-class",
+      "choices": [
+        "CSA currency",
+        "Diamond necklace",
+        "Gold money clip",
+        "Jewel encrusted pistol",
+        "Lithograph photo"
+      ],
+      "correctAnswer": "Lithograph photo",
+      "answer": "Lithograph photo",
+      "correct": true,
+      "elapsedMs": 7369
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-blackmailer",
+      "choices": [
+        "Horace Sage",
+        "Martin Amberton",
+        "Mary Devers",
+        "Susan Royster"
+      ],
+      "correctAnswer": "Mary Devers",
+      "answer": "Martin Amberton",
+      "correct": false,
+      "elapsedMs": 11511
+    },
+    {
+      "storyId": "5minutemystery-a-dream-of-old-salem",
+      "choices": [
+        "Abigail Thorpe",
+        "Adam Browne",
+        "Goodwife Browne",
+        "Sarah Goodwin"
+      ],
+      "correctAnswer": "Adam Browne",
+      "answer": "Adam Browne",
+      "correct": true,
+      "elapsedMs": 10526
+    },
+    {
+      "storyId": "5minutemystery-the-antique-clock-mystery",
+      "choices": [
+        "The grandfather clock (stopped at 10:10 p.m.)",
+        "The mantle clock (stopped at 10:59 p.m.)",
+        "The pocket watch (stopped at 3:18 a.m.)",
+        "The wall clock (stopped at 2:01 a.m.)",
+        "The wristwatch (stopped at 5:22 p.m.)"
+      ],
+      "correctAnswer": "The mantle clock (stopped at 10:59 p.m.)",
+      "answer": "The wall clock (stopped at 2:01 a.m.)",
+      "correct": false,
+      "elapsedMs": 6645
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-perjurer",
+      "choices": [
+        "Horace Osamway",
+        "John Eberley",
+        "Martha Cranston",
+        "Mildred Greene"
+      ],
+      "correctAnswer": "John Eberley",
+      "answer": "Martha Cranston",
+      "correct": false,
+      "elapsedMs": 10903
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-embezzler",
+      "choices": [
+        "Joan Carstairs",
+        "Les Nolting",
+        "Paul Brassard",
+        "Sarah Kimble"
+      ],
+      "correctAnswer": "Sarah Kimble",
+      "answer": "Paul Brassard",
+      "correct": false,
+      "elapsedMs": 11436
+    },
+    {
+      "storyId": "5minutemystery-the-backyard-slumber-party",
+      "choices": [
+        "Justin Scott",
+        "Martin Simmons",
+        "Stephen Kennelly",
+        "Trevor Sutherland"
+      ],
+      "correctAnswer": "Trevor Sutherland",
+      "answer": "Trevor Sutherland",
+      "correct": true,
+      "elapsedMs": 9434
+    },
+    {
+      "storyId": "5minutemystery-the-rock-star-mystery",
+      "choices": [
+        "Gorg",
+        "Stu",
+        "The Neighborhood Burgler",
+        "Tina"
+      ],
+      "correctAnswer": "Tina",
+      "answer": "Tina",
+      "correct": true,
+      "elapsedMs": 9818
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-arsonist",
+      "choices": [
+        "Keen Observer",
+        "Minding My Own Business",
+        "Scared Stiff",
+        "Watchful Waiter"
+      ],
+      "correctAnswer": "Watchful Waiter",
+      "answer": "Watchful Waiter",
+      "correct": true,
+      "elapsedMs": 13411
+    },
+    {
+      "storyId": "5minutemystery-fatal-computer-crash",
+      "choices": [
+        "Alex Redoff",
+        "Cheryl Compton",
+        "Claire Denninger",
+        "Natalie Sampson"
+      ],
+      "correctAnswer": "Natalie Sampson",
+      "answer": "Natalie Sampson",
+      "correct": true,
+      "elapsedMs": 4711
+    },
+    {
+      "storyId": "5minutemystery-the-rob-club-murder-mystery",
+      "choices": [
+        "Al Gibson",
+        "Johnny Woodward",
+        "Ray Shields",
+        "Tim Acord",
+        "Watson Treadway"
+      ],
+      "correctAnswer": "Johnny Woodward",
+      "answer": "Al Gibson",
+      "correct": false,
+      "elapsedMs": 10213
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-litterer",
+      "choices": [
+        "Concerned Neighbor",
+        "Confused Commuter",
+        "Perplexed Dog Walker",
+        "Smug in Suburbia"
+      ],
+      "correctAnswer": "Smug in Suburbia",
+      "answer": "Confused Commuter",
+      "correct": false,
+      "elapsedMs": 9373
+    },
+    {
+      "storyId": "5minutemystery-drama-queen",
+      "choices": [
+        "Alfred Cooper",
+        "Isabelle Rogers",
+        "James Fennimore",
+        "Madge Anderson"
+      ],
+      "correctAnswer": "James Fennimore",
+      "answer": "Madge Anderson",
+      "correct": false,
+      "elapsedMs": 7726
+    },
+    {
+      "storyId": "5minutemystery-the-gourmet-mystery",
+      "choices": [
+        "Antoine",
+        "Georges Monceau",
+        "Sally Horvats",
+        "Sam Wheeler"
+      ],
+      "correctAnswer": "Sally Horvats",
+      "answer": "Sam Wheeler",
+      "correct": false,
+      "elapsedMs": 8403
+    },
+    {
+      "storyId": "5minutemystery-the-potter-book-mystery",
+      "choices": [
+        "Alfred",
+        "Ann",
+        "Rusty",
+        "Uncle Ezra"
+      ],
+      "correctAnswer": "Uncle Ezra",
+      "answer": "Ann",
+      "correct": false,
+      "elapsedMs": 9366
+    },
+    {
+      "storyId": "5minutemystery-death-in-the-office",
+      "choices": [
+        "Cynthia Peck",
+        "Josh Kesler",
+        "Megan Brewer",
+        "Steve Ledbetter"
+      ],
+      "correctAnswer": "Megan Brewer",
+      "answer": "Josh Kesler",
+      "correct": false,
+      "elapsedMs": 13981
+    },
+    {
+      "storyId": "5minutemystery-chief-inspector-japp-solves-a-case",
+      "choices": [
+        "Alan Harrison",
+        "Evelyn Johnston",
+        "George Smythe",
+        "Herbert Grosvenor"
+      ],
+      "correctAnswer": "Alan Harrison",
+      "answer": "Evelyn Johnston",
+      "correct": false,
+      "elapsedMs": 7022
+    },
+    {
+      "storyId": "5minutemystery-who-stole-the-cavemans-dinner",
+      "choices": [
+        "Dinosaur",
+        "Droo",
+        "Father",
+        "Monkeys"
+      ],
+      "correctAnswer": "Dinosaur",
+      "answer": "Dinosaur",
+      "correct": true,
+      "elapsedMs": 7724
+    },
+    {
+      "storyId": "5minutemystery-the-stolen-car-mystery",
+      "choices": [
+        "David Kelly",
+        "Donna Allen",
+        "Larry Roberts",
+        "Nancy Lee"
+      ],
+      "correctAnswer": "Donna Allen",
+      "answer": "Donna Allen",
+      "correct": true,
+      "elapsedMs": 5549
+    },
+    {
+      "storyId": "5minutemystery-the-straw-hat-theater-mysteriesfinal-curtain",
+      "choices": [
+        "Arthur Glendon",
+        "Josh Whitehead",
+        "Linda Eberlie",
+        "Sam Watson",
+        "Stella Marlowe"
+      ],
+      "correctAnswer": "Linda Eberlie",
+      "answer": "Linda Eberlie",
+      "correct": true,
+      "elapsedMs": 7149
+    },
+    {
+      "storyId": "5minutemystery-itheft",
+      "choices": [
+        "Lea Thompson",
+        "Rachel Vermeer",
+        "Shawn Ramos",
+        "Shay Dulaney"
+      ],
+      "correctAnswer": "Rachel Vermeer",
+      "answer": "Rachel Vermeer",
+      "correct": true,
+      "elapsedMs": 5743
+    },
+    {
+      "storyId": "5minutemystery-the-punch-with-a-punch",
+      "choices": [
+        "Carole",
+        "Dan",
+        "Diane",
+        "Principal Whittenmeyer"
+      ],
+      "correctAnswer": "Carole",
+      "answer": "Diane",
+      "correct": false,
+      "elapsedMs": 8309
+    },
+    {
+      "storyId": "5minutemystery-the-straw-hat-theater-mysteriesbox-office-nightmare",
+      "choices": [
+        "Basil Carmody",
+        "John Franklin",
+        "Lawrence Blake",
+        "Martha Gilmont"
+      ],
+      "correctAnswer": "John Franklin",
+      "answer": "Martha Gilmont",
+      "correct": false,
+      "elapsedMs": 7105
+    },
+    {
+      "storyId": "5minutemystery-the-waffle-man-mystery",
+      "choices": [
+        "Larry",
+        "The Old Man",
+        "The Waffle Man",
+        "Vera"
+      ],
+      "correctAnswer": "Vera",
+      "answer": "Larry",
+      "correct": false,
+      "elapsedMs": 9176
+    },
+    {
+      "storyId": "5minutemystery-the-sunday-school-tithe-mystery",
+      "choices": [
+        "Doc Bentson",
+        "Ellie Wilson",
+        "James Gant",
+        "Judy Gant",
+        "Waylon Marsh"
+      ],
+      "correctAnswer": "Waylon Marsh",
+      "answer": "Waylon Marsh",
+      "correct": true,
+      "elapsedMs": 10840
+    },
+    {
+      "storyId": "5minutemystery-the-straw-hat-theater-mysteriescasting-call",
+      "choices": [
+        "Alice Cartwright",
+        "Arthur Glendon",
+        "Janice Starling",
+        "Sandra Buckingham"
+      ],
+      "correctAnswer": "Arthur Glendon",
+      "answer": "Arthur Glendon",
+      "correct": true,
+      "elapsedMs": 9867
+    },
+    {
+      "storyId": "5minutemystery-the-anonymous-bank-robber",
+      "choices": [
+        "Edward Cantrell",
+        "Larry Brooks",
+        "Lester Barton",
+        "Oscar Jordan"
+      ],
+      "correctAnswer": "Lester Barton",
+      "answer": "Edward Cantrell",
+      "correct": false,
+      "elapsedMs": 6837
+    },
+    {
+      "storyId": "5minutemystery-the-house-of-lies",
+      "choices": [
+        "Debra",
+        "Luke",
+        "Olivia",
+        "The Butler"
+      ],
+      "correctAnswer": "The Butler",
+      "answer": "The Butler",
+      "correct": true,
+      "elapsedMs": 6864
+    },
+    {
+      "storyId": "5minutemystery-the-straw-hat-theater-mysterieson-stage",
+      "choices": [
+        "Grace Upshaw",
+        "Linda Grant",
+        "Molly Trumbull",
+        "Samantha Powers"
+      ],
+      "correctAnswer": "Grace Upshaw",
+      "answer": "Samantha Powers",
+      "correct": false,
+      "elapsedMs": 8386
+    },
+    {
+      "storyId": "5minutemystery-canada-day",
+      "choices": [
+        "Little black-haired girl",
+        "Redheaded woman",
+        "Stocky blonde man",
+        "Tall bald man"
+      ],
+      "correctAnswer": "Tall bald man",
+      "answer": "Stocky blonde man",
+      "correct": false,
+      "elapsedMs": 7793
+    },
+    {
+      "storyId": "5minutemystery-the-missing-communion-set",
+      "choices": [
+        "Allison Jordan",
+        "Heather Guse",
+        "Janelle Herbst",
+        "Josh Darvin",
+        "Justin Paul"
+      ],
+      "correctAnswer": "Josh Darvin",
+      "answer": "Josh Darvin",
+      "correct": true,
+      "elapsedMs": 5820
+    },
+    {
+      "storyId": "5minutemystery-who-stole-super-bowl-sunday",
+      "choices": [
+        "Aunt Mary",
+        "Phil",
+        "Rick",
+        "Uncle Charlie"
+      ],
+      "correctAnswer": "Aunt Mary",
+      "answer": "Rick",
+      "correct": false,
+      "elapsedMs": 10225
+    },
+    {
+      "storyId": "5minutemystery-the-cocktail-conundrum",
+      "choices": [
+        "Ian Fairbank",
+        "Mr. Fairbank",
+        "Mr. Lewis Rhys",
+        "Mrs. Fairbank"
+      ],
+      "correctAnswer": "Mrs. Fairbank",
+      "answer": "Mrs. Fairbank",
+      "correct": true,
+      "elapsedMs": 7300
+    },
+    {
+      "storyId": "5minutemystery-the-gypsys-secret-numbers",
+      "choices": [
+        "Great Marchelli",
+        "Lorenzo",
+        "Ringmaster",
+        "Sheriff"
+      ],
+      "correctAnswer": "Sheriff",
+      "answer": "Sheriff",
+      "correct": true,
+      "elapsedMs": 10534
+    },
+    {
+      "storyId": "5minutemystery-its-gone",
+      "choices": [
+        "Abe",
+        "Lance",
+        "The Amazing Andrew",
+        "Zora the Magnificent"
+      ],
+      "correctAnswer": "The Amazing Andrew",
+      "answer": "Zora the Magnificent",
+      "correct": false,
+      "elapsedMs": 8316
+    },
+    {
+      "storyId": "5minutemystery-the-misers-hoard",
+      "choices": [
+        "Bob Parsons",
+        "John Entwhistle III",
+        "Sam Greenway",
+        "Sarah Parsons"
+      ],
+      "correctAnswer": "Sarah Parsons",
+      "answer": "John Entwhistle III",
+      "correct": false,
+      "elapsedMs": 6572
+    },
+    {
+      "storyId": "5minutemystery-the-cornfield-caper",
+      "choices": [
+        "Austin",
+        "Billy",
+        "Nick"
+      ],
+      "correctAnswer": "Billy",
+      "answer": "Billy",
+      "correct": true,
+      "elapsedMs": 5392
+    },
+    {
+      "storyId": "5minutemystery-a-stolen-future",
+      "choices": [
+        "Donna Blake",
+        "George Wilson",
+        "Jeffery Sharp",
+        "Pete Thompson"
+      ],
+      "correctAnswer": "Jeffery Sharp",
+      "answer": "Jeffery Sharp",
+      "correct": true,
+      "elapsedMs": 9151
+    },
+    {
+      "storyId": "5minutemystery-the-dirty-half-dozen",
+      "choices": [
+        "Bethany Knight",
+        "Joe Clark",
+        "Sherry Fogle",
+        "Tonya Muse",
+        "Wayne Clark"
+      ],
+      "correctAnswer": "Wayne Clark",
+      "answer": "Joe Clark",
+      "correct": false,
+      "elapsedMs": 7474
+    },
+    {
+      "storyId": "5minutemystery-a-porsche-of-course",
+      "choices": [
+        "Amy Golden",
+        "Frankie Cole",
+        "Jeremy Steele",
+        "Lionel Jacobs",
+        "Susan Barker"
+      ],
+      "correctAnswer": "Frankie Cole",
+      "answer": "Lionel Jacobs",
+      "correct": false,
+      "elapsedMs": 9462
+    },
+    {
+      "storyId": "5minutemystery-the-mystery-of-the-missing-story",
+      "choices": [
+        "Alex Rebmevon",
+        "Amy",
+        "Lucy",
+        "Sarah"
+      ],
+      "correctAnswer": "Lucy",
+      "answer": "Lucy",
+      "correct": true,
+      "elapsedMs": 12399
+    },
+    {
+      "storyId": "5minutemystery-the-case-of-the-missing-friend",
+      "choices": [
+        "Billy Friend",
+        "Diana Scott",
+        "Harrell Garner",
+        "Susan Allen"
+      ],
+      "correctAnswer": "Diana Scott",
+      "answer": "Diana Scott",
+      "correct": true,
+      "elapsedMs": 10161
+    },
+    {
+      "storyId": "5minutemystery-sweat-it-out",
+      "choices": [
+        "Chris Henderson",
+        "Dave Perkins",
+        "Larry Douglas",
+        "Nathan Elliott"
+      ],
+      "correctAnswer": "Chris Henderson",
+      "answer": "Chris Henderson",
+      "correct": true,
+      "elapsedMs": 10813
+    },
+    {
+      "storyId": "5minutemystery-mystery-of-the-missing-heart",
+      "choices": [
+        "Eric Winter",
+        "Jenny Jackson",
+        "Jimmy Jackson",
+        "Wendy LaRue"
+      ],
+      "correctAnswer": "Eric Winter",
+      "answer": "Eric Winter",
+      "correct": true,
+      "elapsedMs": 5922
+    },
+    {
+      "storyId": "5minutemystery-stealing-second-base",
+      "choices": [
+        "Coach Joe Morgan",
+        "Mary Thornton",
+        "Randy Newsom",
+        "Shorty Gilstrap"
+      ],
+      "correctAnswer": "Mary Thornton",
+      "answer": "Mary Thornton",
+      "correct": true,
+      "elapsedMs": 5772
+    },
+    {
+      "storyId": "5minutemystery-murder-in-the-old-house",
+      "choices": [
+        "Bathroom",
+        "Bedroom of daughter, Anita Jensen",
+        "Bedroom of oldest son, Harry Jensen",
+        "Bedroom of youngest son, Edward Jensen",
+        "Master bedroom of Earl and Mildrid Jensen"
+      ],
+      "correctAnswer": "Bathroom",
+      "answer": "Master bedroom of Earl and Mildrid Jensen",
+      "correct": false,
+      "elapsedMs": 8408
+    },
+    {
+      "storyId": "5minutemystery-the-chess-mystery",
+      "choices": [
+        "Father",
+        "Greg",
+        "Tina",
+        "Uncle Larry"
+      ],
+      "correctAnswer": "Greg",
+      "answer": "Father",
+      "correct": false,
+      "elapsedMs": 10463
+    },
+    {
+      "storyId": "5minutemystery-lost-stolen-and-found",
+      "choices": [
+        "John Beddington",
+        "Louisa Perry",
+        "Mary Ingram",
+        "Sarah Upton"
+      ],
+      "correctAnswer": "Louisa Perry",
+      "answer": "Mary Ingram",
+      "correct": false,
+      "elapsedMs": 6113
+    },
+    {
+      "storyId": "5minutemystery-the-chocolate-cupcake-caper",
+      "choices": [
+        "Geraldine",
+        "Julianna",
+        "Luis",
+        "Mr. Bento"
+      ],
+      "correctAnswer": "Geraldine",
+      "answer": "Luis",
+      "correct": false,
+      "elapsedMs": 11714
+    },
+    {
+      "storyId": "5minutemystery-dead-mans-island",
+      "choices": [
+        "Grandpa",
+        "Grandpa's grandfather",
+        "Lisa",
+        "Mike"
+      ],
+      "correctAnswer": "Lisa",
+      "answer": "Mike",
+      "correct": false,
+      "elapsedMs": 7548
+    },
+    {
+      "storyId": "5minutemystery-who-stole-the-rock-of-ages",
+      "choices": [
+        "Denise Hurst",
+        "Jim Gaigon",
+        "Juan Carde",
+        "Skye Smith"
+      ],
+      "correctAnswer": "Juan Carde",
+      "answer": "Skye Smith",
+      "correct": false,
+      "elapsedMs": 10795
+    },
+    {
+      "storyId": "5minutemystery-all-washed-up",
+      "choices": [
+        "Captain Kildare",
+        "Latrisha Lanigan",
+        "Mark Colson",
+        "Marvin Fishback"
+      ],
+      "correctAnswer": "Mark Colson",
+      "answer": "Mark Colson",
+      "correct": true,
+      "elapsedMs": 9117
+    },
+    {
+      "storyId": "5minutemystery-the-hidden-messenger",
+      "choices": [
+        "Jean",
+        "Marie",
+        "Molly",
+        "Smith"
+      ],
+      "correctAnswer": "Smith",
+      "answer": "Smith",
+      "correct": true,
+      "elapsedMs": 5167
+    },
+    {
+      "storyId": "5minutemystery-the-disappearing-dollhouse",
+      "choices": [
+        "Julia",
+        "Kyle",
+        "Lucius",
+        "Reg"
+      ],
+      "correctAnswer": "Reg",
+      "answer": "Reg",
+      "correct": true,
+      "elapsedMs": 8610
+    },
+    {
+      "storyId": "5minutemystery-a-bear-a-dog-and-a-mystery",
+      "choices": [
+        "Mom",
+        "Old Mugger",
+        "Orville",
+        "Taylor"
+      ],
+      "correctAnswer": "Taylor",
+      "answer": "Taylor",
+      "correct": true,
+      "elapsedMs": 11067
+    },
+    {
+      "storyId": "5minutemystery-the-mystery-of-the-talented-cat",
+      "choices": [
+        "Edith",
+        "Joshua Sellers",
+        "Muggles",
+        "Rick"
+      ],
+      "correctAnswer": "Edith",
+      "answer": "Rick",
+      "correct": false,
+      "elapsedMs": 9560
+    },
+    {
+      "storyId": "5minutemystery-the-haunted-portrait",
+      "choices": [
+        "Jonathan Ingersoll",
+        "Lucille Cameron",
+        "Marion Montgomery",
+        "Teddy Auchinlech"
+      ],
+      "correctAnswer": "Jonathan Ingersoll",
+      "answer": "Teddy Auchinlech",
+      "correct": false,
+      "elapsedMs": 10843
+    },
+    {
+      "storyId": "5minutemystery-the-classic-automobile-mystery",
+      "choices": [
+        "Gary Riggs",
+        "Gerald \"Doc\" McCroy",
+        "Mike Benson",
+        "Tommy Flowers"
+      ],
+      "correctAnswer": "Gerald \"Doc\" McCroy",
+      "answer": "Mike Benson",
+      "correct": false,
+      "elapsedMs": 12271
+    },
+    {
+      "storyId": "5minutemystery-rocks-and-feathers",
+      "choices": [
+        "Barley",
+        "Bertha",
+        "Joseph",
+        "Tom"
+      ],
+      "correctAnswer": "Tom",
+      "answer": "Tom",
+      "correct": true,
+      "elapsedMs": 7884
+    },
+    {
+      "storyId": "5minutemystery-who-is-telling-the-truth",
+      "choices": [
+        "Bill Flowers",
+        "Jane Neal",
+        "Jimmy Smith",
+        "Larry Gerard",
+        "Paula Newsome"
+      ],
+      "correctAnswer": "Paula Newsome",
+      "answer": "Jimmy Smith",
+      "correct": false,
+      "elapsedMs": 10088
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-identity-thief",
+      "choices": [
+        "Grace Means",
+        "Joan Colthrop",
+        "Laura Parsons",
+        "Maybelle Johnson"
+      ],
+      "correctAnswer": "Joan Colthrop",
+      "answer": "Joan Colthrop",
+      "correct": true,
+      "elapsedMs": 10905
+    },
+    {
+      "storyId": "5minutemystery-ask-marthathe-pickpocket",
+      "choices": [
+        "Johnny Anderson",
+        "Morris Emerson",
+        "Sarah Browne",
+        "Tom Blankenship"
+      ],
+      "correctAnswer": "Tom Blankenship",
+      "answer": "Tom Blankenship",
+      "correct": true,
+      "elapsedMs": 10754
+    },
+    {
+      "storyId": "5minutemystery-diamond-deception",
+      "choices": [
+        "Horace",
+        "Jake",
+        "John",
+        "Lewis"
+      ],
+      "correctAnswer": "Lewis",
+      "answer": "Lewis",
+      "correct": true,
+      "elapsedMs": 6857
+    },
+    {
+      "storyId": "5minutemystery-where-is-matthew",
+      "choices": [
+        "Andy's bedroom",
+        "Matthew's bedroom",
+        "The garage",
+        "The hall closet",
+        "The tree house"
+      ],
+      "correctAnswer": "The tree house",
+      "answer": "The tree house",
+      "correct": true,
+      "elapsedMs": 6963
+    },
+    {
+      "storyId": "5minutemystery-the-mysterious-gift",
+      "choices": [
+        "CIndy",
+        "Josie's mother",
+        "Lester",
+        "Lorraine"
+      ],
+      "correctAnswer": "Lorraine",
+      "answer": "Lester",
+      "correct": false,
+      "elapsedMs": 10547
+    },
+    {
+      "storyId": "5minutemystery-perry-mason-and-the-high-school-crush-murder",
+      "choices": [
+        "Morris Ingalls",
+        "Randolph Johnson",
+        "Sarah Conrad",
+        "Tom Gooding"
+      ],
+      "correctAnswer": "Morris Ingalls",
+      "answer": "Randolph Johnson",
+      "correct": false,
+      "elapsedMs": 8009
+    },
+    {
+      "storyId": "5minutemystery-who-stole-super-tuesday",
+      "choices": [
+        "Barry",
+        "Ricky Churrelo",
+        "Simon Knowles",
+        "Xavier Ericksen"
+      ],
+      "correctAnswer": "Simon Knowles",
+      "answer": "Barry",
+      "correct": false,
+      "elapsedMs": 10628
+    },
+    {
+      "storyId": "5minutemystery-the-missing-son",
+      "choices": [
+        "Caleb",
+        "Conner",
+        "Jordan",
+        "Kyle"
+      ],
+      "correctAnswer": "Caleb",
+      "answer": "Jordan",
+      "correct": false,
+      "elapsedMs": 6657
+    },
+    {
+      "storyId": "5minutemystery-the-stolen-cupcake",
+      "choices": [
+        "Angelica",
+        "Caedon",
+        "Ross",
+        "Tony"
+      ],
+      "correctAnswer": "Caedon",
+      "answer": "Angelica",
+      "correct": false,
+      "elapsedMs": 9938
+    },
+    {
+      "storyId": "5minutemystery-school-trip",
+      "choices": [
+        "Beth",
+        "Damon",
+        "Leo",
+        "Mr. Michael's",
+        "The Seniors"
+      ],
+      "correctAnswer": "The Seniors",
+      "answer": "Leo",
+      "correct": false,
+      "elapsedMs": 8596
+    },
+    {
+      "storyId": "5minutemystery-arsonist-attack",
+      "choices": [
+        "Jade Foster",
+        "Jock Matt",
+        "Madelyn Reader",
+        "Max Crabgrass",
+        "Security Guard"
+      ],
+      "correctAnswer": "Jade Foster",
+      "answer": "Jade Foster",
+      "correct": true,
+      "elapsedMs": 7261
+    },
+    {
+      "storyId": "5minutemystery-investigation-sabotager",
+      "choices": [
+        "Emma",
+        "Mary",
+        "Peter",
+        "Tim",
+        "Valerie"
+      ],
+      "correctAnswer": "Emma",
+      "answer": "Emma",
+      "correct": true,
+      "elapsedMs": 6661
+    },
+    {
+      "storyId": "5minutemystery-the-presidential-smear-campaint-a-jacelyn-drew-mystery",
+      "choices": [
+        "Brittany",
+        "Isis",
+        "Marie",
+        "Norma"
+      ],
+      "correctAnswer": "Isis",
+      "answer": "Isis",
+      "correct": true,
+      "elapsedMs": 8606
+    },
+    {
+      "storyId": "5minutemystery-the-sunday-mystery",
+      "choices": [
+        "Jack Jackson",
+        "Jimmy Jackson",
+        "Jon Jackson",
+        "Maria Jackson",
+        "Spot"
+      ],
+      "correctAnswer": "Spot",
+      "answer": "Jon Jackson",
+      "correct": false,
+      "elapsedMs": 5499
+    },
+    {
+      "storyId": "5minutemystery-the-mystery-of-heritage",
+      "choices": [
+        "Jack Anderson",
+        "Jessica Anderson",
+        "Martha Anderson",
+        "Mrs. Neil"
+      ],
+      "correctAnswer": "Jessica Anderson",
+      "answer": "Jessica Anderson",
+      "correct": true,
+      "elapsedMs": 5936
+    },
+    {
+      "storyId": "5minutemystery-murder-of-the-actor",
+      "choices": [
+        "Bruce Whittingley",
+        "Marie Carloette",
+        "Mario Marcino"
+      ],
+      "correctAnswer": "Marie Carloette",
+      "answer": "Marie Carloette",
+      "correct": true,
+      "elapsedMs": 10728
+    },
+    {
+      "storyId": "5minutemystery-another-hotel-murder",
+      "choices": [
+        "Dianne Shelby",
+        "James Castro",
+        "Kevin King",
+        "Roger Shelby"
+      ],
+      "correctAnswer": "James Castro",
+      "answer": "James Castro",
+      "correct": true,
+      "elapsedMs": 9439
+    },
+    {
+      "storyId": "5minutemystery-the-missing-book",
+      "choices": [
+        "Brad",
+        "Fred",
+        "Mrs. Dunwoodee",
+        "Ricky"
+      ],
+      "correctAnswer": "Fred",
+      "answer": "Brad",
+      "correct": false,
+      "elapsedMs": 7957
+    },
+    {
+      "storyId": "5minutemystery-the-necklace",
+      "choices": [
+        "Aunt Mary",
+        "Dad",
+        "Mom",
+        "Uncle Henry",
+        "Uncle John"
+      ],
+      "correctAnswer": "Dad",
+      "answer": "Dad",
+      "correct": true,
+      "elapsedMs": 7258
+    },
+    {
+      "storyId": "5minutemystery-the-purloined-wallet",
+      "choices": [
+        "Bill Buchanan",
+        "Carson Thomson",
+        "Cooper",
+        "David Nader",
+        "Vincent Garcia"
+      ],
+      "correctAnswer": "David Nader",
+      "answer": "Carson Thomson",
+      "correct": false,
+      "elapsedMs": 7860
+    }
+  ]
+}
