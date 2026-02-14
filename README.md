@@ -57,6 +57,23 @@ node test/integration/run-all.js
 node test/integration/run-all.js counter
 ```
 
+### Benchmarks
+
+```bash
+# Run benchmarks
+node eval/bench.js --runs 3 --label two-pass
+node eval/bench.js --runs 3 --label single-prompt --single-prompt
+node eval/bench-cc.js --runs 1 --label cc-sonnet
+
+# Run a single domain or lemma
+node eval/bench-cc.js --runs 1 --label test --domain counter
+node eval/bench-cc.js --runs 1 --label test --domain counter --lemma CounterNonNegative
+
+# Compare results
+node eval/compare.js two-pass single-prompt
+node eval/compare.js two-pass cc-sonnet
+```
+
 ## Options
 
 | Flag | Description |
