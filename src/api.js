@@ -25,6 +25,7 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
   const response = await anthropic.messages.create({
     model,
     max_tokens: maxTokens ?? 4096,
+    temperature: 0,
     tools: [tool],
     tool_choice: toolChoice,
     ...(system ? { system } : {}),
