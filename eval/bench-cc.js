@@ -101,9 +101,6 @@ async function main() {
       const mappingPath = join(MAPPINGS_DIR, `${project.name}.json`);
       const mapping = JSON.parse(await readFile(mappingPath, 'utf-8'));
 
-      let confirmed = 0;
-      let disputed = 0;
-
       for (const entry of mapping) {
         const code = extractLemma(dfySource, entry.lemmaName);
         if (!code) {
@@ -111,6 +108,8 @@ async function main() {
           allResults.push({
             domain: project.name,
             requirement: entry.requirement,
+            lemmaName: entry.lemmaName,
+            expected: entry.expected ?? 'confirmed',
             status: 'error',
             verdict: null,
             run,
@@ -131,8 +130,6 @@ async function main() {
           }
 
           const status = verdict === 'JUSTIFIED' ? 'confirmed' : 'disputed';
-          if (status === 'confirmed') confirmed++;
-          else disputed++;
 
           console.error(`    ${entry.lemmaName}: ${verdict || 'PARSE_FAILED'} → ${status}`);
 
@@ -140,6 +137,7 @@ async function main() {
             domain: project.name,
             requirement: entry.requirement,
             lemmaName: entry.lemmaName,
+            expected: entry.expected ?? 'confirmed',
             status,
             verdict,
             run,
@@ -150,6 +148,7 @@ async function main() {
             domain: project.name,
             requirement: entry.requirement,
             lemmaName: entry.lemmaName,
+            expected: entry.expected ?? 'confirmed',
             status: 'error',
             verdict: null,
             run,
@@ -157,7 +156,9 @@ async function main() {
         }
       }
 
-      console.error(`  ${project.name}: ${confirmed}/${mapping.length} confirmed, ${disputed} disputed`);
+      const entries = allResults.filter(r => r.domain === project.name && r.run === run);
+      const correct = entries.filter(e => isCorrect(e)).length;
+      console.error(`  ${project.name}: ${correct}/${entries.length} correct`);
     }
     console.error('');
   }
@@ -173,8 +174,6 @@ async function main() {
       runs,
       model: model || '(claude-code default)',
       mode: 'claude-code',
-      erase: false,
-      passthrough: [],
     },
     results: allResults,
   };
@@ -185,31 +184,37 @@ async function main() {
 
   // --- Print summary ---
 
-  const byReq = {};
+  const byKey = {};
   for (const r of allResults) {
-    const key = `${r.domain}/${r.requirement}`;
-    if (!byReq[key]) byReq[key] = { domain: r.domain, requirement: r.requirement, passed: 0, total: 0 };
-    byReq[key].total++;
-    if (r.status === 'confirmed') byReq[key].passed++;
+    const key = `${r.domain}/${r.lemmaName}`;
+    if (!byKey[key]) byKey[key] = { domain: r.domain, requirement: r.requirement, lemmaName: r.lemmaName, expected: r.expected, correct: 0, total: 0 };
+    byKey[key].total++;
+    if (isCorrect(r)) byKey[key].correct++;
   }
 
   console.error('\nSummary:');
   let currentDomain = null;
-  let totalPassed = 0;
+  let totalCorrect = 0;
   let totalCount = 0;
-  for (const entry of Object.values(byReq)) {
+  for (const entry of Object.values(byKey)) {
     if (entry.domain !== currentDomain) {
       currentDomain = entry.domain;
       console.error(`  ${currentDomain}`);
     }
-    const short = entry.requirement.length > 50
-      ? entry.requirement.slice(0, 50) + '...'
-      : entry.requirement;
-    console.error(`    ${short.padEnd(55)} ${entry.passed}/${entry.total}`);
-    totalPassed += entry.passed;
+    const tag = entry.expected === 'disputed' ? ' [bogus]' : '';
+    const name = entry.lemmaName.length > 40
+      ? entry.lemmaName.slice(0, 40) + '...'
+      : entry.lemmaName;
+    console.error(`    ${name.padEnd(43)} ${entry.correct}/${entry.total}${tag}`);
+    totalCorrect += entry.correct;
     totalCount += entry.total;
   }
-  console.error(`\n  Total: ${totalPassed}/${totalCount} confirmed`);
+  console.error(`\n  Accuracy: ${totalCorrect}/${totalCount}`);
+}
+
+function isCorrect(r) {
+  if (r.expected === 'disputed') return r.status === 'disputed';
+  return r.status === 'confirmed';
 }
 
 main().catch(err => {

@@ -38,27 +38,6 @@ export function extractLemma(dfySource, lemmaName) {
 }
 
 /**
- * List all lemma names in a Dafny source file.
- *
- * @param {string} dfySource - full Dafny source
- * @returns {string[]} lemma names
- */
-export function listLemmaNames(dfySource) {
-  const stripped = stripComments(dfySource);
-  const pattern = /\b(?:twostate\s+)?(?:ghost\s+)?lemma\s+(?:\{:[^}]*\}\s*)*([A-Za-z_]\w*)/g;
-  const seen = new Set();
-  const names = [];
-  let match;
-  while ((match = pattern.exec(stripped)) !== null) {
-    if (!seen.has(match[1])) {
-      seen.add(match[1]);
-      names.push(match[1]);
-    }
-  }
-  return names;
-}
-
-/**
  * Find the body opening brace of a lemma, skipping braces inside clause expressions.
  *
  * After the lemma name + params, we're in clause territory. Clause keywords are:

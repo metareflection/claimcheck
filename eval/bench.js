@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
  * Benchmark runner. Runs all domains N times, saves per-requirement results.
+ * Scores accuracy against expected outcomes in mapping files.
  *
  * Usage:
- *   node eval/bench.js --runs 3 --label baseline
- *   node eval/bench.js --runs 3 --label erased --erase
+ *   node eval/bench.js --runs 3 --label two-pass
+ *   node eval/bench.js --runs 3 --label single-prompt --single-prompt
  *   node eval/bench.js --runs 3 --label opus --model claude-opus-4-6
  */
 
@@ -36,7 +37,6 @@ const runs = parseInt(getArg('--runs', '3'));
 const label = getArg('--label', `run-${Date.now()}`);
 const passthrough = [];
 
-if (args.includes('--erase')) passthrough.push('--erase');
 if (args.includes('--verbose')) passthrough.push('--verbose');
 if (args.includes('--single-prompt')) passthrough.push('--single-prompt');
 
@@ -93,22 +93,19 @@ async function main() {
       console.error(`  ${project.name}...`);
       try {
         const result = await runDomain(project);
-        const requirements = result.results.map(v => ({
+        const entries = result.results.map(v => ({
           domain: project.name,
           requirement: v.requirement,
+          lemmaName: v.lemmaName,
+          expected: v.expected ?? 'confirmed',
           status: v.status,
-          strategy: v.strategy || null,
-          attempts: v.attempts,
-          correctGap: v.correctGap || false,
           run,
         }));
-        allResults.push(...requirements);
+        allResults.push(...entries);
 
-        const confirmed = result.results.filter(v => v.status === 'confirmed' || v.status === 'proved').length;
-        const disputed = result.results.filter(v => v.status === 'disputed').length;
-        const errors = result.results.filter(v => v.status === 'error' || v.status === 'verify-failed').length;
-        const total = result.results.length;
-        console.error(`  ${project.name}: ${confirmed}/${total} confirmed, ${disputed} disputed, ${errors} errors`);
+        const correct = entries.filter(e => isCorrect(e)).length;
+        const total = entries.length;
+        console.error(`  ${project.name}: ${correct}/${total} correct`);
       } catch (err) {
         console.error(`  ${project.name}: ERROR — ${err.message}`);
       }
@@ -126,7 +123,6 @@ async function main() {
     config: {
       runs,
       model: model || 'claude-sonnet-4-5-20250929',
-      erase: args.includes('--erase'),
       passthrough,
     },
     results: allResults,
@@ -138,35 +134,37 @@ async function main() {
 
   // --- Print summary ---
 
-  const byReq = {};
+  const byKey = {};
   for (const r of allResults) {
-    const key = `${r.domain}/${r.requirement}`;
-    if (!byReq[key]) byReq[key] = { domain: r.domain, requirement: r.requirement, passed: 0, total: 0, correctGap: r.correctGap };
-    byReq[key].total++;
-    if (r.status === 'confirmed' || r.status === 'proved') byReq[key].passed++;
+    const key = `${r.domain}/${r.lemmaName}`;
+    if (!byKey[key]) byKey[key] = { domain: r.domain, requirement: r.requirement, lemmaName: r.lemmaName, expected: r.expected, correct: 0, total: 0 };
+    byKey[key].total++;
+    if (isCorrect(r)) byKey[key].correct++;
   }
 
   console.error('\nSummary:');
   let currentDomain = null;
-  let totalPassed = 0;
+  let totalCorrect = 0;
   let totalCount = 0;
-  let totalCorrectGaps = 0;
-  for (const entry of Object.values(byReq)) {
+  for (const entry of Object.values(byKey)) {
     if (entry.domain !== currentDomain) {
       currentDomain = entry.domain;
       console.error(`  ${currentDomain}`);
     }
-    const short = entry.requirement.length > 50
-      ? entry.requirement.slice(0, 50) + '...'
-      : entry.requirement;
-    const tag = entry.correctGap ? ' [gap]' : '';
-    console.error(`    ${short.padEnd(55)} ${entry.passed}/${entry.total}${tag}`);
-    totalPassed += entry.passed;
+    const tag = entry.expected === 'disputed' ? ' [bogus]' : '';
+    const name = entry.lemmaName.length > 40
+      ? entry.lemmaName.slice(0, 40) + '...'
+      : entry.lemmaName;
+    console.error(`    ${name.padEnd(43)} ${entry.correct}/${entry.total}${tag}`);
+    totalCorrect += entry.correct;
     totalCount += entry.total;
-    if (entry.correctGap) totalCorrectGaps += entry.total;
   }
-  const provable = totalCount - totalCorrectGaps;
-  console.error(`\n  Total: ${totalPassed}/${provable} confirmed (${totalCorrectGaps} correct gap runs excluded)`);
+  console.error(`\n  Accuracy: ${totalCorrect}/${totalCount}`);
+}
+
+function isCorrect(r) {
+  if (r.expected === 'disputed') return r.status === 'disputed';
+  return r.status === 'confirmed';
 }
 
 main().catch(err => {

@@ -1,6 +1,8 @@
 [
-  { "requirement": "The counter value is always non-negative", "lemmaName": "CounterNonNegative" },
-  { "requirement": "The initial state satisfies the invariant", "lemmaName": "InitSatisfiesInvariant" },
-  { "requirement": "Every action preserves the invariant after normalization", "lemmaName": "StepPreservesInvariant" },
-  { "requirement": "Decrementing at zero keeps the counter at zero", "lemmaName": "DecAtZeroKeepsZero" }
+  { "requirement": "The counter value is always non-negative", "lemmaName": "CounterNonNegative", "expected": "confirmed" },
+  { "requirement": "The initial state satisfies the invariant", "lemmaName": "InitSatisfiesInvariant", "expected": "confirmed" },
+  { "requirement": "Every action preserves the invariant after normalization", "lemmaName": "StepPreservesInvariant", "expected": "confirmed" },
+  { "requirement": "Decrementing at zero keeps the counter at zero", "lemmaName": "DecAtZeroKeepsZero", "expected": "confirmed" },
+  { "requirement": "The counter value is always non-negative", "lemmaName": "BogusCounterPositive", "expected": "disputed" },
+  { "requirement": "Every action preserves the invariant after normalization", "lemmaName": "BogusStepNoNormalize", "expected": "disputed" }
 ]
