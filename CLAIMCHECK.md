@@ -8,33 +8,6 @@ After writing or modifying Dafny lemmas that claim to formalize natural-language
 
 ## How to run
 
-### Option 1: Stdin mode (preferred for programmatic use)
-
-Pipe pre-extracted claims as JSON:
-
-```bash
-echo '{
-  "claims": [
-    {
-      "requirement": "The counter value is always non-negative",
-      "lemmaName": "CounterNonNegative",
-      "dafnyCode": "lemma CounterNonNegative(m: int)\n  requires Inv(m)\n  ensures m >= 0\n{}"
-    }
-  ],
-  "domain": "mydomain"
-}' | node /path/to/claimcheck/bin/claimcheck.js --stdin
-```
-
-The input JSON has:
-- `claims`: array of `{ requirement, lemmaName, dafnyCode }` objects
-- `domain`: human-readable domain name (used in LLM prompts)
-
-The output JSON has:
-- `results`: array of `{ requirement, lemmaName, status, ... }` where status is `confirmed`, `disputed`, or `error`
-- `tokenUsage`: `{ input, output }`
-
-### Option 2: File mode
-
 Point at a mapping JSON and a .dfy file:
 
 ```bash
@@ -46,6 +19,8 @@ node /path/to/claimcheck/bin/claimcheck.js \
 ```
 
 The mapping JSON is an array of `{ requirement, lemmaName }` objects. The .dfy file contains the lemmas referenced by `lemmaName`. The `--module` flag is optional (only needed with `--verify` for module-based .dfy files).
+
+A `--stdin` mode is also available for programmatic use — pipe `{ "claims": [{ requirement, lemmaName, dafnyCode }], "domain": "..." }` as JSON and get results on stdout.
 
 ## Interpreting results
 
