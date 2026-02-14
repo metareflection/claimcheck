@@ -80,8 +80,8 @@ node eval/compare.js two-pass cc-sonnet
 |------|-------------|
 | `-r, --requirements <path>` | Path to requirements file (markdown) |
 | `-m, --mapping <path>` | Path to mapping file (JSON) |
-| `--dfy <path>` | Path to claims .dfy file (containing the lemmas) |
-| `--module <name>` | Dafny module name to import |
+| `--dfy <path>` | Path to claims .dfy file (contains the lemmas; must `include` the domain file) |
+| `--module <name>` | Domain module name (used in `import` for verification) |
 | `-d, --domain <name>` | Human-readable domain name (default: module name) |
 | `-o, --output <dir>` | Output directory for obligations.dfy (default: `.`) |
 | `--json` | Output JSON instead of markdown |
@@ -107,15 +107,15 @@ In single-prompt mode, disputed results include richer detail: verdict category,
 
 ## Test Projects
 
-| Project | Domain file | Module |
-|---------|------------|--------|
-| counter | `counter/CounterDomain.dfy` | CounterDomain |
-| kanban | `kanban/KanbanDomain.dfy` | KanbanDomain |
-| colorwheel | `colorwheel/ColorWheelDomain.dfy` | ColorWheelDomain |
-| canon | `canon/CanonDomain.dfy` | CanonDomain |
-| delegation-auth | `delegation-auth/DelegationAuthDomain.dfy` | DelegationAuthDomain |
+| Project | Claims file | Domain module |
+|---------|------------|---------------|
+| counter | `test/integration/claims/counter.dfy` | CounterDomain |
+| kanban | `test/integration/claims/kanban.dfy` | KanbanDomain |
+| colorwheel | `test/integration/claims/colorwheel.dfy` | ColorWheelDomain |
+| canon | `test/integration/claims/canon.dfy` | CanonDomain |
+| delegation-auth | `test/integration/claims/delegation-auth.dfy` | DelegationAuthDomain |
 
-Requirements files live in `test/integration/reqs/`. Claims files in `test/integration/claims/`. Domain `.dfy` files are in `../dafny-replay/`.
+Each claims file `include`s its domain from `../dafny-replay/`. Requirements in `test/integration/reqs/`, mappings in `test/integration/mappings/`.
 
 ## Benchmark Results
 
@@ -140,3 +140,4 @@ Key takeaways:
 - Node.js 18+
 - `ANTHROPIC_API_KEY` environment variable
 - `dafny` in PATH (only for `--verify`)
+- [dafny-replay](https://github.com/metareflection/dafny-replay) cloned as a sibling directory (required for tests and benchmarks — the claims `.dfy` files `include` domain files from `../../dafny-replay/`)
