@@ -40,7 +40,7 @@
     "lemmaName": "UnanimousExclusion"
   },
   {
-    "requirement": "Adding a ballot to the election cannot cause any candidate's tally to decrease",
+    "requirement": "Adding ballots can't decrease a tally",
     "lemmaName": "TallyMonotonic"
   }
 ]

@@ -101,3 +101,12 @@ lemma UnanimousExclusion(ballots: seq<int>, c: int, other: int)
   if ballots != [] { UnanimousExclusion(ballots[1..], c, other); }
 }
 
+// ── Monotonicity ────────────────────────────────────────────────
+
+lemma TallyMonotonic(ballots: seq<int>, v: int, c: int)
+  ensures Count(ballots + [v], c) >= Count(ballots, c)
+{
+  if v == c { VoteIncrement(ballots, c); }
+  else      { VoteNoEffect(ballots, c, v); }
+}
+
