@@ -79,6 +79,30 @@ Now compare your summary to the claim:
 Verdict: SUPPORTS, REFUTES, or NOT_ENOUGH_INFO.`;
 }
 
+function groundedPrompt(claim, evidenceSentences) {
+  return `You are a fact-checker. Determine whether the evidence from Wikipedia supports, refutes, or is insufficient to evaluate the claim.
+
+## Claim
+
+${claim}
+
+## Evidence
+
+${evidenceSentences.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+
+## Instructions
+
+1. Break the claim into its distinct assertions.
+2. For each assertion, quote the specific evidence span that addresses it (or state "no relevant evidence").
+3. State whether that span SUPPORTS, CONTRADICTS, or provides NO_EVIDENCE for the assertion.
+4. Derive the final verdict:
+   - All assertions supported → SUPPORTS
+   - Any contradiction → REFUTES
+   - Insufficient coverage → NOT_ENOUGH_INFO
+
+You must cite evidence before judging. No citation, no claim of support.`;
+}
+
 function summarizePrompt(evidenceSentences) {
   return `You are a careful reader. Summarize what the following evidence sentences from Wikipedia establish.
 
@@ -166,6 +190,7 @@ async function main() {
         singlePrompt: singlePromptPrompt(e.claim, ev),
         summarize: summarizePrompt(ev),
         compare: (summary) => comparePrompt(summary, e.claim),
+        grounded: groundedPrompt(e.claim, ev),
       };
     },
   });

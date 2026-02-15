@@ -65,6 +65,49 @@ export const verdictTool = {
   },
 };
 
+export const groundedTool = {
+  name: 'record_grounded_verdict',
+  description: 'Record your evidence-grounded verdict. You MUST cite evidence spans before judging.',
+  input_schema: {
+    type: 'object',
+    required: ['assertions', 'verdict'],
+    properties: {
+      assertions: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['text', 'evidence_span', 'relationship', 'reasoning'],
+          properties: {
+            text: {
+              type: 'string',
+              description: 'One distinct assertion from the claim.',
+            },
+            evidence_span: {
+              type: 'string',
+              description: 'Exact quote from the evidence that addresses this assertion, or "no relevant evidence" if none.',
+            },
+            relationship: {
+              type: 'string',
+              enum: ['SUPPORTS', 'CONTRADICTS', 'NO_EVIDENCE'],
+              description: 'Whether the evidence span supports, contradicts, or does not address this assertion.',
+            },
+            reasoning: {
+              type: 'string',
+              description: 'Brief explanation of the entailment relationship.',
+            },
+          },
+        },
+        description: 'Per-assertion evidence grounding. Cite the evidence BEFORE stating the relationship.',
+      },
+      verdict: {
+        type: 'string',
+        enum: VERDICTS,
+        description: 'Final verdict derived from per-assertion judgments: all supported → SUPPORTS, any contradiction → REFUTES, insufficient coverage → NOT_ENOUGH_INFO.',
+      },
+    },
+  },
+};
+
 export const summarizeTool = {
   name: 'record_summary',
   description: 'Record your summary of what the evidence text establishes.',
@@ -213,8 +256,10 @@ export async function runOne({ mode, backend, model, verbose }, prompts) {
     return runTwoPass({ backend, model, verbose }, prompts.summarize, claim =>
       prompts.compare(claim),
     );
+  } else if (mode === 'grounded') {
+    return runGrounded({ backend, model, verbose }, prompts.grounded);
   } else {
-    throw new Error(`Unknown mode: ${mode}. Expected: baseline, single-prompt, two-pass`);
+    throw new Error(`Unknown mode: ${mode}. Expected: baseline, single-prompt, two-pass, grounded`);
   }
 }
 
@@ -224,6 +269,23 @@ async function runBaseline({ backend, model, verbose }, prompt) {
       model, prompt, tool: verdictTool,
       toolChoice: { type: 'tool', name: 'record_verdict' },
       verbose,
+    });
+    return normalizeVerdict(result.input.verdict);
+  } else {
+    const output = await callClaude(
+      prompt + '\n\nState your final verdict as: **Verdict:** SUPPORTS | REFUTES | NOT_ENOUGH_INFO',
+      { model, verbose },
+    );
+    return parseVerdict(output);
+  }
+}
+
+async function runGrounded({ backend, model, verbose }, prompt) {
+  if (backend === 'api') {
+    const result = await callWithTool({
+      model, prompt, tool: groundedTool,
+      toolChoice: { type: 'tool', name: 'record_grounded_verdict' },
+      verbose, maxTokens: 8192,
     });
     return normalizeVerdict(result.input.verdict);
   } else {
