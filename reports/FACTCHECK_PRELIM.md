@@ -1,18 +1,18 @@
 # Fact-Checking Benchmarks: Preliminary Results
 
-Model: `claude-sonnet-4-5-20250929` | Temperature: 0 | Date: 2026-02-14
+Model: `claude-sonnet-4-5-20250929` | Temperature: 0 | Date: 2026-02-15
 
 ## Summary
 
 | Dataset | Baseline | Two-Pass | Delta | N |
 |---------|----------|----------|-------|---|
-| SciFact (Sonnet) | **79.8%** | — | — | 321 |
-| SciFact (Opus) | **83.5%** | — | — | 321 |
+| SciFact (Sonnet) | 79.8% | — | — | 321 |
+| SciFact (Opus) | 83.5% | — | — | 321 |
 | FEVER | **95.6%** | 82.8% | **-12.8** | 500 |
 | VitaminC | **83.8%** | 78.6% | **-5.2** | 500 |
-| HealthVer | running... | — | — | 3,740 |
+| HealthVer | **63.5%** | — | — | 3,740 |
 
-Two-pass is worse than baseline on both FEVER and VitaminC. The summarization step loses critical details.
+Two-pass is worse than baseline on both FEVER and VitaminC. The summarization step loses critical details. HealthVer is the hardest benchmark by far — the model struggles most with SUPPORTS claims in the health domain.
 
 ## Per-Label Breakdown
 
@@ -41,6 +41,16 @@ Two-pass is worse than baseline on both FEVER and VitaminC. The summarization st
 | NOT_ENOUGH_INFO | 91/112 (81.3%) | 94/112 (83.9%) |
 
 SciFact two-pass results not yet available at full scale.
+
+### HealthVer (N=3,740, full dev+test)
+
+| Label | Baseline |
+|-------|----------|
+| SUPPORTS | 338/1204 (28.1%) |
+| REFUTES | 423/816 (51.8%) |
+| NOT_ENOUGH_INFO | 1615/1720 (93.9%) |
+
+SUPPORTS accuracy is strikingly low at 28.1%. The model defaults to NEI on health claims where the evidence actually supports the claim — likely because PubMed abstracts use hedged, qualified language ("may be associated with", "results suggest") that the model interprets as insufficient.
 
 ## Analysis
 
@@ -73,10 +83,21 @@ FEVER and VitaminC are detail-heavy tasks where the baseline model is already re
 - Numeric/threshold claims are especially vulnerable: "less than 160 people", "under 200,000 copies" — summary paraphrases the number, compare pass can't verify the threshold
 - The 20 improvements are mostly NEI corrections and fixing baseline over-confidence on REFUTES
 
+### HealthVer: why so hard?
+
+HealthVer SUPPORTS accuracy (28.1%) is dramatically lower than FEVER (91.3%) or VitaminC (91.1%). The model over-predicts NOT_ENOUGH_INFO on health claims. Likely causes:
+
+- **Hedged language**: PubMed abstracts say "may be associated with", "results suggest", "further research is needed" — the model reads this as insufficient evidence rather than support
+- **Domain complexity**: health claims involve causal reasoning about treatments, risk factors, and outcomes that require domain expertise to evaluate
+- **Label semantics mismatch**: HealthVer's "Support" may have a lower bar than what the model considers sufficient — if a study shows a trend, HealthVer labels it Support, but the model wants stronger evidence
+
+This makes HealthVer the most interesting benchmark for improvement — there's 36 points of headroom on SUPPORTS alone.
+
 ## Next Steps
 
-1. **Run SciFact two-pass** at full scale to confirm whether it's the exception (where two-pass helps)
-2. **Run HealthVer** baseline and two-pass — scientific domain like SciFact but different evidence source
-3. **Less-lossy summarization** — modify the summarize tool schema to preserve exact numbers, dates, names, and quotes rather than paraphrasing
-4. **Hybrid approach** — pass raw evidence alongside the summary in pass 2, so the model can check details
-5. **Error analysis on SciFact** — understand whether the error mode there is genuinely anchoring (which two-pass fixes) vs detail loss (which it causes)
+1. **HealthVer error analysis** — look at SUPPORTS failures to understand the hedged-language hypothesis
+2. **Run SciFact two-pass** at full scale to confirm whether scientific domains benefit from two-pass
+3. **HealthVer two-pass on a sample** — `--sample 500` to see if two-pass helps or hurts on scientific health claims
+4. **Less-lossy summarization** — modify the summarize tool schema to preserve exact numbers, dates, names, and quotes rather than paraphrasing
+5. **Hybrid approach** — pass raw evidence alongside the summary in pass 2, so the model can check details
+6. **Prompt tuning for HealthVer** — calibrate the SUPPORTS threshold, possibly with few-shot examples showing hedged language that still counts as support
