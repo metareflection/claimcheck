@@ -35,8 +35,10 @@ export function parseArgs(prefix) {
   const sample = parseInt(getArg('--sample', '0')) || 0;
   const verbose = args.includes('--verbose');
   const seed = parseInt(getArg('--seed', '42')) || 42;
+  const softAgg = args.includes('--soft-agg');
+  const contrastive = args.includes('--contrastive');
 
-  return { mode, backend, label, model, limit, offset, sample, verbose, seed };
+  return { mode, backend, label, model, limit, offset, sample, verbose, seed, softAgg, contrastive };
 }
 
 // ---------------------------------------------------------------------------
@@ -107,6 +109,67 @@ export const groundedTool = {
     },
   },
 };
+
+/**
+ * Build the grounded tool schema, optionally with soft aggregation and contrastive fields.
+ */
+export function buildGroundedTool({ softAgg, contrastive } = {}) {
+  const verdictDesc = softAgg
+    ? 'Final verdict using your best judgment: if most assertions are supported and none contradicted, SUPPORTS is appropriate even without perfect coverage. REFUTES if any assertion is contradicted. NOT_ENOUGH_INFO only if the evidence genuinely does not address the core of the claim.'
+    : 'Final verdict derived from per-assertion judgments: all supported → SUPPORTS, any contradiction → REFUTES, insufficient coverage → NOT_ENOUGH_INFO.';
+
+  const props = { ...groundedTool.input_schema.properties, verdict: { ...groundedTool.input_schema.properties.verdict, description: verdictDesc } };
+  const required = [...groundedTool.input_schema.required];
+
+  if (contrastive) {
+    props.contrastive_analysis = {
+      type: 'object',
+      required: ['if_supports', 'if_refutes', 'if_nei'],
+      properties: {
+        if_supports: { type: 'string', description: 'What specific evidence would need to be true for SUPPORTS to be the correct verdict? Is that what the evidence says?' },
+        if_refutes: { type: 'string', description: 'What specific evidence would need to be true for REFUTES to be the correct verdict? Is that what the evidence says?' },
+        if_nei: { type: 'string', description: 'What would need to be missing or ambiguous for NOT_ENOUGH_INFO to be correct? Is that the case here?' },
+      },
+      description: 'Consider what each verdict would require before choosing.',
+    };
+    required.splice(required.indexOf('verdict'), 0, 'contrastive_analysis');
+  }
+
+  return {
+    name: 'record_grounded_verdict',
+    description: groundedTool.description,
+    input_schema: { type: 'object', required, properties: props },
+  };
+}
+
+/**
+ * Build the grounded prompt instruction block based on flags.
+ */
+export function groundedInstructions({ softAgg, contrastive } = {}) {
+  const steps = [`1. Break the claim into its distinct assertions.
+2. For each assertion, quote the specific evidence span that addresses it (or state "no relevant evidence").
+3. State whether that span SUPPORTS, CONTRADICTS, or provides NO_EVIDENCE for the assertion.`];
+
+  if (contrastive) {
+    steps.push(`4. Before choosing a verdict, consider: what would the evidence need to say for each of SUPPORTS, REFUTES, and NOT_ENOUGH_INFO to be correct? Which scenario matches reality?`);
+  }
+
+  if (softAgg) {
+    steps.push(`${contrastive ? '5' : '4'}. Derive the final verdict using your best judgment:
+   - If most assertions are supported and none contradicted → SUPPORTS (perfect coverage is not required)
+   - Any assertion contradicted → REFUTES
+   - Evidence genuinely does not address the core claim → NOT_ENOUGH_INFO`);
+  } else {
+    steps.push(`${contrastive ? '5' : '4'}. Derive the final verdict:
+   - All assertions supported → SUPPORTS
+   - Any contradiction → REFUTES
+   - Insufficient coverage → NOT_ENOUGH_INFO`);
+  }
+
+  steps.push('\nYou must cite evidence before judging. No citation, no claim of support.');
+
+  return steps.join('\n');
+}
 
 export const summarizeTool = {
   name: 'record_summary',
@@ -247,7 +310,7 @@ export function sampleEntries(entries, n, seed) {
  * @param {object} prompts           - { baseline, singlePrompt, summarize, compare }
  *   Each is a string (the fully-rendered prompt for this entry).
  */
-export async function runOne({ mode, backend, model, verbose }, prompts) {
+export async function runOne({ mode, backend, model, verbose, softAgg, contrastive }, prompts) {
   if (mode === 'baseline') {
     return runBaseline({ backend, model, verbose }, prompts.baseline);
   } else if (mode === 'single-prompt') {
@@ -257,7 +320,7 @@ export async function runOne({ mode, backend, model, verbose }, prompts) {
       prompts.compare(claim),
     );
   } else if (mode === 'grounded') {
-    return runGrounded({ backend, model, verbose }, prompts.grounded);
+    return runGrounded({ backend, model, verbose, softAgg, contrastive }, prompts.grounded);
   } else {
     throw new Error(`Unknown mode: ${mode}. Expected: baseline, single-prompt, two-pass, grounded`);
   }
@@ -280,10 +343,11 @@ async function runBaseline({ backend, model, verbose }, prompt) {
   }
 }
 
-async function runGrounded({ backend, model, verbose }, prompt) {
+async function runGrounded({ backend, model, verbose, softAgg, contrastive }, prompt) {
   if (backend === 'api') {
+    const tool = (softAgg || contrastive) ? buildGroundedTool({ softAgg, contrastive }) : groundedTool;
     const result = await callWithTool({
-      model, prompt, tool: groundedTool,
+      model, prompt, tool,
       toolChoice: { type: 'tool', name: 'record_grounded_verdict' },
       verbose, maxTokens: 8192,
     });
@@ -373,10 +437,10 @@ async function runTwoPass({ backend, model, verbose }, summarizePrompt, makeComp
  * @param {function} [opts.entryToResult] - (entry, verdict, elapsedMs, error) => result object
  */
 export async function runBench({ benchName, config, entries, makePrompts, entryToResult }) {
-  const { mode, backend, model, label, verbose } = config;
+  const { mode, backend, model, label, verbose, softAgg, contrastive } = config;
 
   console.error(`${benchName} Benchmark: ${label}`);
-  console.error(`  mode: ${mode}`);
+  console.error(`  mode: ${mode}${softAgg ? ' +soft-agg' : ''}${contrastive ? ' +contrastive' : ''}`);
   console.error(`  backend: ${backend}`);
   console.error(`  model: ${model}`);
   console.error(`  entries: ${entries.length}`);
@@ -396,7 +460,7 @@ export async function runBench({ benchName, config, entries, makePrompts, entryT
 
     try {
       const prompts = makePrompts(e);
-      verdict = await runOne({ mode, backend, model, verbose }, prompts);
+      verdict = await runOne({ mode, backend, model, verbose, softAgg, contrastive }, prompts);
     } catch (err) {
       error = err.message;
       console.error(`    ERROR: ${error}`);

@@ -19,7 +19,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import {
-  parseArgs, sampleEntries, runBench,
+  parseArgs, sampleEntries, runBench, groundedInstructions,
 } from './lib/bench-common.js';
 
 const DATA_DIR = resolve(import.meta.dirname, '../data/vitaminc');
@@ -84,7 +84,7 @@ Now compare your summary to the claim:
 Verdict: SUPPORTS, REFUTES, or NOT_ENOUGH_INFO.`;
 }
 
-function groundedPrompt(claim, evidence, page) {
+function groundedPrompt(claim, evidence, page, flags) {
   const pageNote = page ? `\n\n**Source:** ${page.replace(/_/g, ' ')}` : '';
   return `You are a fact-checker. Determine whether the evidence supports, refutes, or is insufficient to evaluate the claim.
 
@@ -98,15 +98,7 @@ ${evidence}
 
 ## Instructions
 
-1. Break the claim into its distinct assertions.
-2. For each assertion, quote the specific evidence span that addresses it (or state "no relevant evidence").
-3. State whether that span SUPPORTS, CONTRADICTS, or provides NO_EVIDENCE for the assertion.
-4. Derive the final verdict:
-   - All assertions supported → SUPPORTS
-   - Any contradiction → REFUTES
-   - Insufficient coverage → NOT_ENOUGH_INFO
-
-You must cite evidence before judging. No citation, no claim of support.`;
+${groundedInstructions(flags)}`;
 }
 
 function summarizePrompt(evidence, page) {
@@ -189,7 +181,7 @@ async function main() {
         singlePrompt: singlePromptPrompt(e.claim, e.evidence, e.page),
         summarize: summarizePrompt(e.evidence, e.page),
         compare: (summary) => comparePrompt(summary, e.claim),
-        grounded: groundedPrompt(e.claim, e.evidence, e.page),
+        grounded: groundedPrompt(e.claim, e.evidence, e.page, config),
       };
     },
   });

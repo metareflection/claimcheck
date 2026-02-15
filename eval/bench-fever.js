@@ -16,7 +16,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import {
-  parseArgs, sampleEntries, runBench,
+  parseArgs, sampleEntries, runBench, groundedInstructions,
 } from './lib/bench-common.js';
 
 const DATA_DIR = resolve(import.meta.dirname, '../data/fever');
@@ -79,7 +79,7 @@ Now compare your summary to the claim:
 Verdict: SUPPORTS, REFUTES, or NOT_ENOUGH_INFO.`;
 }
 
-function groundedPrompt(claim, evidenceSentences) {
+function groundedPrompt(claim, evidenceSentences, flags) {
   return `You are a fact-checker. Determine whether the evidence from Wikipedia supports, refutes, or is insufficient to evaluate the claim.
 
 ## Claim
@@ -92,15 +92,7 @@ ${evidenceSentences.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
 ## Instructions
 
-1. Break the claim into its distinct assertions.
-2. For each assertion, quote the specific evidence span that addresses it (or state "no relevant evidence").
-3. State whether that span SUPPORTS, CONTRADICTS, or provides NO_EVIDENCE for the assertion.
-4. Derive the final verdict:
-   - All assertions supported → SUPPORTS
-   - Any contradiction → REFUTES
-   - Insufficient coverage → NOT_ENOUGH_INFO
-
-You must cite evidence before judging. No citation, no claim of support.`;
+${groundedInstructions(flags)}`;
 }
 
 function summarizePrompt(evidenceSentences) {
@@ -190,7 +182,7 @@ async function main() {
         singlePrompt: singlePromptPrompt(e.claim, ev),
         summarize: summarizePrompt(ev),
         compare: (summary) => comparePrompt(summary, e.claim),
-        grounded: groundedPrompt(e.claim, ev),
+        grounded: groundedPrompt(e.claim, ev, config),
       };
     },
   });

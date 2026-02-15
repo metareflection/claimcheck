@@ -19,7 +19,7 @@
 
 import { readFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
-import { parseArgs, runBench } from './lib/bench-common.js';
+import { parseArgs, runBench, groundedInstructions } from './lib/bench-common.js';
 
 const DATA_DIR = resolve(import.meta.dirname, '../data/scifact/data');
 const config = parseArgs('scifact');
@@ -89,7 +89,7 @@ Now compare your summary to the claim:
 Verdict: SUPPORTS, REFUTES, or NOT_ENOUGH_INFO.`;
 }
 
-function groundedPrompt(claim, title, evidenceSentences) {
+function groundedPrompt(claim, title, evidenceSentences, flags) {
   return `You are a scientific fact-checker. Determine whether the evidence from a research paper supports, refutes, or is insufficient to evaluate the claim.
 
 ## Claim
@@ -106,15 +106,7 @@ ${evidenceSentences.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
 ## Instructions
 
-1. Break the claim into its distinct assertions.
-2. For each assertion, quote the specific evidence span that addresses it (or state "no relevant evidence").
-3. State whether that span SUPPORTS, CONTRADICTS, or provides NO_EVIDENCE for the assertion.
-4. Derive the final verdict:
-   - All assertions supported → SUPPORTS
-   - Any contradiction → REFUTES
-   - Insufficient coverage → NOT_ENOUGH_INFO
-
-You must cite evidence before judging. No citation, no claim of support.`;
+${groundedInstructions(flags)}`;
 }
 
 function summarizePrompt(title, evidenceSentences) {
@@ -269,7 +261,7 @@ async function main() {
         singlePrompt: singlePromptPrompt(e.claim, e.title, e.evidenceSentences),
         summarize: summarizePrompt(e.title, e.evidenceSentences),
         compare: (summary) => comparePrompt(summary, e.claim),
-        grounded: groundedPrompt(e.claim, e.title, e.evidenceSentences),
+        grounded: groundedPrompt(e.claim, e.title, e.evidenceSentences, config),
       };
     },
     entryToResult(e, verdict, isCorrect, elapsedMs, error) {
