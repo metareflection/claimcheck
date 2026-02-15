@@ -38,5 +38,9 @@
   {
     "requirement": "In a unanimous election, every other candidate receives zero votes",
     "lemmaName": "UnanimousExclusion"
+  },
+  {
+    "requirement": "Adding a ballot to the election cannot cause any candidate's tally to decrease",
+    "lemmaName": "TallyMonotonic"
   }
 ]

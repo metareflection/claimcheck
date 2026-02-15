@@ -2,8 +2,8 @@
 
 ## Summary
 
-- **Mappings audited:** 10
-- **Confirmed:** 10
+- **Mappings audited:** 11
+- **Confirmed:** 11
 
 ## Confirmed Mappings
 
@@ -29,7 +29,7 @@ lemma EmptyElection(c: int)
 
 **A single ballot cast for a candidate gives that candidate exactly one vote**
 - Lemma: `SingleBallotFor`
-- Back-translation: For any candidate, a ballot sequence containing only that candidate's vote counts as exactly one vote for that candidate.
+- Back-translation: For any candidate, counting votes in a single-ballot sequence containing that candidate yields exactly one vote.
 ```dafny
 lemma SingleBallotFor(c: int)
   ensures Count([c], c) == 1
@@ -38,7 +38,7 @@ lemma SingleBallotFor(c: int)
 
 **A single ballot cast for one candidate gives every other candidate zero votes**
 - Lemma: `SingleBallotAgainst`
-- Back-translation: For any two distinct candidates, a ballot sequence containing only a vote for one candidate counts as zero votes for the other candidate.
+- Back-translation: For any two distinct candidates, counting votes for one candidate in a single-ballot sequence containing the other candidate yields zero votes.
 ```dafny
 lemma SingleBallotAgainst(c: int, other: int)
   requires c != other
@@ -77,7 +77,7 @@ lemma VoteNoEffect(ballots: seq<int>, c: int, other: int)
 
 **Merging two ballot boxes produces a tally equal to the sum of the individual tallies**
 - Lemma: `CombineTallies`
-- Back-translation: For any two ballot sequences and any candidate, the vote count for that candidate in the concatenation of the two sequences equals the sum of the vote counts in each sequence separately.
+- Back-translation: For any two sequences of ballots and any candidate, the vote count for that candidate in the concatenation of the two sequences equals the sum of the vote counts in each sequence separately.
 ```dafny
 lemma CombineTallies(a: seq<int>, b: seq<int>, c: int)
   ensures Count(a + b, c) == Count(a, c) + Count(b, c)
@@ -93,7 +93,7 @@ lemma CombineTallies(a: seq<int>, b: seq<int>, c: int)
 
 **The order in which ballots are counted does not affect the final tally**
 - Lemma: `OrderIrrelevant`
-- Back-translation: For any two ballot sequences with the same multiset of votes and any candidate, the vote count for that candidate is the same in both sequences.
+- Back-translation: For any two sequences of ballots with the same multiset of elements and any candidate, the vote count for that candidate is the same in both sequences.
 ```dafny
 lemma OrderIrrelevant(a: seq<int>, b: seq<int>, c: int)
   requires multiset(a) == multiset(b)
@@ -106,7 +106,7 @@ lemma OrderIrrelevant(a: seq<int>, b: seq<int>, c: int)
 
 **In a unanimous election, the winning candidate's tally equals the total number of ballots**
 - Lemma: `UnanimousTally`
-- Back-translation: For any ballot sequence where every ballot is a vote for a particular candidate, the vote count for that candidate equals the total number of ballots.
+- Back-translation: For any sequence of ballots where every ballot is for the same candidate, the vote count for that candidate equals the total number of ballots.
 ```dafny
 lemma UnanimousTally(ballots: seq<int>, c: int)
   requires forall i :: 0 <= i < |ballots| ==> ballots[i] == c
@@ -118,7 +118,7 @@ lemma UnanimousTally(ballots: seq<int>, c: int)
 
 **In a unanimous election, every other candidate receives zero votes**
 - Lemma: `UnanimousExclusion`
-- Back-translation: For any ballot sequence where every ballot is a vote for a particular candidate, and any other candidate different from that one, the vote count for the other candidate is zero.
+- Back-translation: For any sequence of ballots where every ballot is for the same candidate, the vote count for any different candidate is zero.
 ```dafny
 lemma UnanimousExclusion(ballots: seq<int>, c: int, other: int)
   requires forall i :: 0 <= i < |ballots| ==> ballots[i] == c
@@ -129,5 +129,17 @@ lemma UnanimousExclusion(ballots: seq<int>, c: int, other: int)
 }
 ```
 
+**Adding a ballot to the election cannot cause any candidate's tally to decrease**
+- Lemma: `TallyMonotonic`
+- Back-translation: For any sequence of ballots, any vote, and any candidate, appending the vote to the sequence does not decrease the vote count for that candidate.
+```dafny
+lemma TallyMonotonic(ballots: seq<int>, v: int, c: int)
+  ensures Count(ballots + [v], c) >= Count(ballots, c)
+{
+  if v == c { VoteIncrement(ballots, c); }
+  else      { VoteNoEffect(ballots, c, v); }
+}
+```
+
 ---
-*API usage: 5637 input tokens, 2442 output tokens*
+*API usage: 5956 input tokens, 2576 output tokens*

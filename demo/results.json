@@ -1,6 +1,6 @@
 {
   "domain": "election",
-  "timestamp": "2026-02-15T16:14:51.962Z",
+  "timestamp": "2026-02-15T16:59:55.245Z",
   "results": [
     {
       "requirement": "No candidate can receive more votes than the total number of ballots cast",
@@ -12,7 +12,7 @@
         "naturalLanguage": "For any sequence of ballots and any candidate, the count of votes for that candidate is at most the total number of ballots.",
         "preconditions": "None.",
         "postcondition": "Count(ballots, c) <= |ballots|",
-        "scope": "A single state (applies to any given sequence of ballots).",
+        "scope": "A single state (any sequence of ballots and candidate).",
         "strength": "moderate",
         "confidence": 0.95
       },
@@ -20,9 +20,9 @@
         "requirementIndex": 0,
         "lemmaName": "CountBounded",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that no candidate can receive more votes than total ballots. The postcondition Count(ballots, c) <= |ballots| directly expresses this constraint."
+        "explanation": "The back-translation correctly captures that the count of votes for any candidate cannot exceed the total number of ballots. The meaning is preserved exactly."
       },
       "index": 0,
       "expected": "confirmed"
@@ -34,7 +34,7 @@
       "dafnyCode": "lemma EmptyElection(c: int)\n  ensures Count([], c) == 0\n{}",
       "informalization": {
         "lemmaName": "EmptyElection",
-        "naturalLanguage": "For any candidate, counting votes in an empty ballot sequence yields zero votes.",
+        "naturalLanguage": "For any candidate, the count of votes in an empty ballot sequence is zero.",
         "preconditions": "None.",
         "postcondition": "Count([], c) == 0",
         "scope": "A single state (the empty ballot sequence).",
@@ -45,9 +45,9 @@
         "requirementIndex": 1,
         "lemmaName": "EmptyElection",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly states that in an empty ballot sequence, any candidate has zero votes. The postcondition Count([], c) == 0 matches the requirement. While marked 'trivial', the requirement itself is also trivial."
+        "explanation": "The back-translation correctly states that any candidate has zero votes in an empty ballot sequence. This matches the requirement that every candidate has zero votes in an empty election. The 'trivial' strength is appropriate here since the requirement itself is about a trivial base case."
       },
       "index": 1,
       "expected": "confirmed"
@@ -59,7 +59,7 @@
       "dafnyCode": "lemma SingleBallotFor(c: int)\n  ensures Count([c], c) == 1\n{}",
       "informalization": {
         "lemmaName": "SingleBallotFor",
-        "naturalLanguage": "For any candidate, a ballot sequence containing only that candidate's vote counts as exactly one vote for that candidate.",
+        "naturalLanguage": "For any candidate, a ballot sequence containing only that candidate receives exactly one vote for that candidate.",
         "preconditions": "None.",
         "postcondition": "Count([c], c) == 1",
         "scope": "A single state (a single-element ballot sequence).",
@@ -70,9 +70,9 @@
         "requirementIndex": 2,
         "lemmaName": "SingleBallotFor",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that a single ballot for a candidate gives that candidate exactly one vote. The postcondition Count([c], c) == 1 matches the requirement. While marked 'trivial', the requirement itself is also trivial."
+        "explanation": "The back-translation correctly captures that a single ballot for a candidate gives that candidate exactly one vote. The 'trivial' strength is appropriate for this simple base case requirement."
       },
       "index": 2,
       "expected": "confirmed"
@@ -84,8 +84,8 @@
       "dafnyCode": "lemma SingleBallotAgainst(c: int, other: int)\n  requires c != other\n  ensures Count([c], other) == 0\n{}",
       "informalization": {
         "lemmaName": "SingleBallotAgainst",
-        "naturalLanguage": "For any two distinct candidates, a ballot sequence containing only a vote for one candidate counts as zero votes for the other candidate.",
-        "preconditions": "c != other (the two candidates are different).",
+        "naturalLanguage": "For any two distinct candidates, a ballot sequence containing only the first candidate receives zero votes for the second candidate.",
+        "preconditions": "c != other",
         "postcondition": "Count([c], other) == 0",
         "scope": "A single state (a single-element ballot sequence).",
         "strength": "trivial",
@@ -95,9 +95,9 @@
         "requirementIndex": 3,
         "lemmaName": "SingleBallotAgainst",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that a single ballot for one candidate gives every other candidate zero votes. The precondition c != other and postcondition Count([c], other) == 0 match the requirement. While marked 'trivial', the requirement itself is also trivial."
+        "explanation": "The back-translation correctly states that a ballot for one candidate gives zero votes to a different candidate. This matches the requirement about 'every other candidate' receiving zero votes (proven for any specific other candidate). The 'trivial' strength is appropriate for this simple case."
       },
       "index": 3,
       "expected": "confirmed"
@@ -109,10 +109,10 @@
       "dafnyCode": "lemma VoteIncrement(ballots: seq<int>, c: int)\n  ensures Count(ballots + [c], c) == Count(ballots, c) + 1\n{\n  if ballots != [] {\n    VoteIncrement(ballots[1..], c);\n    assert ballots + [c] == [ballots[0]] + (ballots[1..] + [c]);\n  }\n}",
       "informalization": {
         "lemmaName": "VoteIncrement",
-        "naturalLanguage": "Adding a ballot for candidate c to any ballot sequence increases the count for c by exactly one.",
+        "naturalLanguage": "When a ballot for candidate c is appended to a ballot sequence, the count of votes for c increases by exactly one.",
         "preconditions": "None.",
         "postcondition": "Count(ballots + [c], c) == Count(ballots, c) + 1",
-        "scope": "A transition (appending a ballot to a sequence).",
+        "scope": "A transition from one ballot sequence to another (appending a ballot).",
         "strength": "strong",
         "confidence": 0.96
       },
@@ -120,9 +120,9 @@
         "requirementIndex": 4,
         "lemmaName": "VoteIncrement",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that casting a ballot for a candidate increases that candidate's tally by exactly one. The postcondition Count(ballots + [c], c) == Count(ballots, c) + 1 precisely expresses this increment."
+        "explanation": "The back-translation correctly captures that appending a ballot for candidate c increases that candidate's count by exactly one. This matches the requirement about casting a ballot increasing the tally by exactly one."
       },
       "index": 4,
       "expected": "confirmed"
@@ -134,10 +134,10 @@
       "dafnyCode": "lemma VoteNoEffect(ballots: seq<int>, c: int, other: int)\n  requires c != other\n  ensures Count(ballots + [other], c) == Count(ballots, c)\n{\n  if ballots != [] {\n    VoteNoEffect(ballots[1..], c, other);\n    assert ballots + [other] == [ballots[0]] + (ballots[1..] + [other]);\n  }\n}",
       "informalization": {
         "lemmaName": "VoteNoEffect",
-        "naturalLanguage": "Adding a ballot for a different candidate to any ballot sequence does not change the count for the original candidate.",
-        "preconditions": "c != other (the two candidates are different).",
+        "naturalLanguage": "When a ballot for a different candidate is appended to a ballot sequence, the count of votes for the original candidate remains unchanged.",
+        "preconditions": "c != other",
         "postcondition": "Count(ballots + [other], c) == Count(ballots, c)",
-        "scope": "A transition (appending a ballot to a sequence).",
+        "scope": "A transition from one ballot sequence to another (appending a ballot for a different candidate).",
         "strength": "strong",
         "confidence": 0.96
       },
@@ -145,9 +145,9 @@
         "requirementIndex": 5,
         "lemmaName": "VoteNoEffect",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that casting a ballot for one candidate does not change any other candidate's tally. The precondition c != other and postcondition Count(ballots + [other], c) == Count(ballots, c) match the requirement."
+        "explanation": "The back-translation correctly states that appending a ballot for one candidate does not change another candidate's count. This matches the requirement that casting a ballot for one candidate doesn't change other candidates' tallies."
       },
       "index": 5,
       "expected": "confirmed"
@@ -162,17 +162,17 @@
         "naturalLanguage": "The count of votes for a candidate in the concatenation of two ballot sequences equals the sum of the counts in each sequence separately.",
         "preconditions": "None.",
         "postcondition": "Count(a + b, c) == Count(a, c) + Count(b, c)",
-        "scope": "A single state (applies to any two ballot sequences).",
+        "scope": "A single state (two ballot sequences and their concatenation).",
         "strength": "strong",
-        "confidence": 0.97
+        "confidence": 0.96
       },
       "comparison": {
         "requirementIndex": 6,
         "lemmaName": "CombineTallies",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that merging two ballot boxes produces a tally equal to the sum of individual tallies. The postcondition Count(a + b, c) == Count(a, c) + Count(b, c) expresses this additivity property."
+        "explanation": "The back-translation correctly captures that concatenating two ballot sequences produces a count equal to the sum of individual counts. This matches the requirement about merging ballot boxes producing the sum of individual tallies."
       },
       "index": 6,
       "expected": "confirmed"
@@ -184,10 +184,10 @@
       "dafnyCode": "lemma OrderIrrelevant(a: seq<int>, b: seq<int>, c: int)\n  requires multiset(a) == multiset(b)\n  ensures Count(a, c) == Count(b, c)\n{\n  CountEqualsMultiplicity(a, c);\n  CountEqualsMultiplicity(b, c);\n}",
       "informalization": {
         "lemmaName": "OrderIrrelevant",
-        "naturalLanguage": "If two ballot sequences contain the same multiset of votes, then the count of votes for any candidate is the same in both sequences.",
-        "preconditions": "multiset(a) == multiset(b) (the two sequences have the same multiset of elements).",
+        "naturalLanguage": "If two ballot sequences contain the same multiset of ballots, they receive the same count of votes for any candidate.",
+        "preconditions": "multiset(a) == multiset(b)",
         "postcondition": "Count(a, c) == Count(b, c)",
-        "scope": "A single state (applies to any two ballot sequences with equal multisets).",
+        "scope": "A single state (two ballot sequences with identical multisets).",
         "strength": "strong",
         "confidence": 0.94
       },
@@ -195,9 +195,9 @@
         "requirementIndex": 7,
         "lemmaName": "OrderIrrelevant",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that order doesn't affect the final tally. The precondition multiset(a) == multiset(b) and postcondition Count(a, c) == Count(b, c) express that sequences with the same votes (regardless of order) have the same count."
+        "explanation": "The back-translation correctly states that two ballot sequences with the same multiset have the same count. This is the formal way to express that order doesn't affect the tally - if two sequences have the same elements (just reordered), they have the same multiset and thus the same count."
       },
       "index": 7,
       "expected": "confirmed"
@@ -209,10 +209,10 @@
       "dafnyCode": "lemma UnanimousTally(ballots: seq<int>, c: int)\n  requires forall i :: 0 <= i < |ballots| ==> ballots[i] == c\n  ensures Count(ballots, c) == |ballots|\n{\n  if ballots != [] { UnanimousTally(ballots[1..], c); }\n}",
       "informalization": {
         "lemmaName": "UnanimousTally",
-        "naturalLanguage": "If every ballot in a sequence is a vote for candidate c, then the count of votes for c equals the total number of ballots.",
-        "preconditions": "forall i :: 0 <= i < |ballots| ==> ballots[i] == c (every ballot is a vote for c).",
+        "naturalLanguage": "If all ballots in a sequence are for the same candidate, the count of votes for that candidate equals the total number of ballots.",
+        "preconditions": "forall i :: 0 <= i < |ballots| ==> ballots[i] == c",
         "postcondition": "Count(ballots, c) == |ballots|",
-        "scope": "A single state (applies to any ballot sequence where all votes are for the same candidate).",
+        "scope": "A single state (a ballot sequence where all ballots are for one candidate).",
         "strength": "strong",
         "confidence": 0.96
       },
@@ -220,9 +220,9 @@
         "requirementIndex": 8,
         "lemmaName": "UnanimousTally",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that in a unanimous election, the winning candidate's tally equals the total number of ballots. The precondition (all ballots for c) and postcondition Count(ballots, c) == |ballots| match the requirement."
+        "explanation": "The back-translation correctly captures that when all ballots are for the same candidate, that candidate's count equals the total number of ballots. This matches the requirement about unanimous elections."
       },
       "index": 8,
       "expected": "confirmed"
@@ -234,10 +234,10 @@
       "dafnyCode": "lemma UnanimousExclusion(ballots: seq<int>, c: int, other: int)\n  requires forall i :: 0 <= i < |ballots| ==> ballots[i] == c\n  requires other != c\n  ensures Count(ballots, other) == 0\n{\n  if ballots != [] { UnanimousExclusion(ballots[1..], c, other); }\n}",
       "informalization": {
         "lemmaName": "UnanimousExclusion",
-        "naturalLanguage": "If every ballot in a sequence is a vote for candidate c, then the count of votes for any different candidate is zero.",
-        "preconditions": "forall i :: 0 <= i < |ballots| ==> ballots[i] == c (every ballot is a vote for c), and other != c (the other candidate is different).",
+        "naturalLanguage": "If all ballots in a sequence are for one candidate, the count of votes for any different candidate is zero.",
+        "preconditions": "forall i :: 0 <= i < |ballots| ==> ballots[i] == c; other != c",
         "postcondition": "Count(ballots, other) == 0",
-        "scope": "A single state (applies to any ballot sequence where all votes are for the same candidate).",
+        "scope": "A single state (a ballot sequence where all ballots are for one candidate).",
         "strength": "strong",
         "confidence": 0.96
       },
@@ -245,16 +245,41 @@
         "requirementIndex": 9,
         "lemmaName": "UnanimousExclusion",
         "match": true,
-        "discrepancy": "",
+        "discrepancy": "none",
         "weakeningType": "none",
-        "explanation": "The back-translation correctly captures that in a unanimous election, every other candidate receives zero votes. The preconditions (all ballots for c, other != c) and postcondition Count(ballots, other) == 0 match the requirement."
+        "explanation": "The back-translation correctly states that when all ballots are for one candidate, any different candidate receives zero votes. This matches the requirement about every other candidate receiving zero votes in a unanimous election."
       },
       "index": 9,
+      "expected": "confirmed"
+    },
+    {
+      "requirement": "Adding a ballot to the election cannot cause any candidate's tally to decrease",
+      "lemmaName": "TallyMonotonic",
+      "status": "confirmed",
+      "dafnyCode": "lemma TallyMonotonic(ballots: seq<int>, v: int, c: int)\n  ensures Count(ballots + [v], c) >= Count(ballots, c)\n{\n  if v == c { VoteIncrement(ballots, c); }\n  else      { VoteNoEffect(ballots, c, v); }\n}",
+      "informalization": {
+        "lemmaName": "TallyMonotonic",
+        "naturalLanguage": "When any ballot is appended to a ballot sequence, the count of votes for any candidate is at least as large as before.",
+        "preconditions": "None.",
+        "postcondition": "Count(ballots + [v], c) >= Count(ballots, c)",
+        "scope": "A transition from one ballot sequence to another (appending a ballot).",
+        "strength": "strong",
+        "confidence": 0.96
+      },
+      "comparison": {
+        "requirementIndex": 10,
+        "lemmaName": "TallyMonotonic",
+        "match": true,
+        "discrepancy": "none",
+        "weakeningType": "none",
+        "explanation": "The back-translation correctly captures that appending any ballot cannot decrease any candidate's count (it's at least as large as before). This matches the requirement that adding a ballot cannot cause tallies to decrease."
+      },
+      "index": 10,
       "expected": "confirmed"
     }
   ],
   "tokenUsage": {
-    "input": 5649,
-    "output": 2561
+    "input": 5933,
+    "output": 2655
   }
 }
