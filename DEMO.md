@@ -1,12 +1,12 @@
-# Claimcheck — Demo Script (1 minute)
+# Claimcheck — Demo Script
 
-## The Problem (15s)
+## The Problem
 
 Dafny is a verification language: if your proof compiles, it's mathematically correct. But **correct proof ≠ correct meaning**. A lemma can verify perfectly and still not say what you think it says. Tautologies, narrowed scope, wrong properties — Dafny can't catch these because it doesn't know your *intent*.
 
 Claimcheck fills that gap. It takes your natural-language requirements, takes your Dafny lemmas, and asks: **do these actually match?**
 
-## How It Works (10s)
+## How It Works
 
 Round-trip verification in two passes:
 
@@ -15,7 +15,7 @@ Round-trip verification in two passes:
 
 Different models, no anchoring bias. If the lemma doesn't say what the requirement says, the mismatch surfaces.
 
-## The Demo: Verified Election Tally (35s)
+## The Demo: Verified Election Tally
 
 We asked Claude Code to build a verified election tally system — a `Count` function that tallies ballots, with 11 lemmas covering bounds, vote effects, aggregation, unanimity, and monotonicity.
 
