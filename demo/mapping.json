@@ -1,0 +1,42 @@
+[
+  {
+    "requirement": "No candidate can receive more votes than the total number of ballots cast",
+    "lemmaName": "CountBounded"
+  },
+  {
+    "requirement": "In an empty election with no ballots, every candidate has zero votes",
+    "lemmaName": "EmptyElection"
+  },
+  {
+    "requirement": "A single ballot cast for a candidate gives that candidate exactly one vote",
+    "lemmaName": "SingleBallotFor"
+  },
+  {
+    "requirement": "A single ballot cast for one candidate gives every other candidate zero votes",
+    "lemmaName": "SingleBallotAgainst"
+  },
+  {
+    "requirement": "Casting a ballot for a candidate increases that candidate's tally by exactly one",
+    "lemmaName": "VoteIncrement"
+  },
+  {
+    "requirement": "Casting a ballot for one candidate does not change any other candidate's tally",
+    "lemmaName": "VoteNoEffect"
+  },
+  {
+    "requirement": "Merging two ballot boxes produces a tally equal to the sum of the individual tallies",
+    "lemmaName": "CombineTallies"
+  },
+  {
+    "requirement": "The order in which ballots are counted does not affect the final tally",
+    "lemmaName": "OrderIrrelevant"
+  },
+  {
+    "requirement": "In a unanimous election, the winning candidate's tally equals the total number of ballots",
+    "lemmaName": "UnanimousTally"
+  },
+  {
+    "requirement": "In a unanimous election, every other candidate receives zero votes",
+    "lemmaName": "UnanimousExclusion"
+  }
+]
