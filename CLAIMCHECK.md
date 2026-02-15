@@ -1,6 +1,6 @@
 # Using claimcheck
 
-claimcheck verifies that Dafny lemmas actually express the natural-language requirements they claim to cover. 
+claimcheck confirms that Dafny lemmas actually express the natural-language requirements they claim to cover. 
 
 ## When to use
 
