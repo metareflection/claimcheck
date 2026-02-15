@@ -10,7 +10,7 @@ Model: `claude-sonnet-4-5-20250929` | Temperature: 0 | Date: 2026-02-15
 | SciFact (Opus) | 83.5% | — | — | 321 |
 | FEVER | **95.6%** | 82.8% | **-12.8** | 500 |
 | VitaminC | **83.8%** | 78.6% | **-5.2** | 500 |
-| HealthVer | **63.5%** | — | — | 3,740 |
+| HealthVer | **63.5%** | 53.0% | **-10.5** | 3,740 / 100 |
 
 Two-pass is worse than baseline on both FEVER and VitaminC. The summarization step loses critical details. HealthVer is the hardest benchmark by far — the model struggles most with SUPPORTS claims in the health domain.
 
@@ -42,15 +42,15 @@ Two-pass is worse than baseline on both FEVER and VitaminC. The summarization st
 
 SciFact two-pass results not yet available at full scale.
 
-### HealthVer (N=3,740, full dev+test)
+### HealthVer (Baseline N=3,740 full; Two-Pass N=100 sample)
 
-| Label | Baseline |
-|-------|----------|
-| SUPPORTS | 338/1204 (28.1%) |
-| REFUTES | 423/816 (51.8%) |
-| NOT_ENOUGH_INFO | 1615/1720 (93.9%) |
+| Label | Baseline | Two-Pass | Delta |
+|-------|----------|----------|-------|
+| SUPPORTS | 338/1204 (28.1%) | 7/39 (17.9%) | **-10.2** |
+| REFUTES | 423/816 (51.8%) | 7/20 (35.0%) | **-16.8** |
+| NOT_ENOUGH_INFO | 1615/1720 (93.9%) | 39/41 (95.1%) | +1.2 |
 
-SUPPORTS accuracy is strikingly low at 28.1%. The model defaults to NEI on health claims where the evidence actually supports the claim — likely because PubMed abstracts use hedged, qualified language ("may be associated with", "results suggest") that the model interprets as insufficient.
+SUPPORTS accuracy is strikingly low at 28.1% baseline — and two-pass makes it worse (17.9%). The model defaults to NEI on health claims where the evidence actually supports the claim — likely because PubMed abstracts use hedged, qualified language ("may be associated with", "results suggest") that the model interprets as insufficient. Two-pass amplifies this by adding another layer of skepticism.
 
 ## Analysis
 
