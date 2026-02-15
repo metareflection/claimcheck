@@ -1,0 +1,4030 @@
+{
+  "label": "vitaminc-baseline",
+  "timestamp": "2026-02-15T00:36:32.944Z",
+  "config": {
+    "mode": "baseline",
+    "backend": "api",
+    "model": "claude-sonnet-4-5-20250929",
+    "total": 500
+  },
+  "totalElapsedMs": 1699114,
+  "accuracy": 0.838,
+  "correct": 419,
+  "total": 500,
+  "byLabel": {
+    "SUPPORTS": {
+      "correct": 236,
+      "total": 259
+    },
+    "REFUTES": {
+      "correct": 148,
+      "total": 178
+    },
+    "NOT_ENOUGH_INFO": {
+      "correct": 35,
+      "total": 63
+    }
+  },
+  "results": [
+    {
+      "id": "5ee3932bc9e77c0008cca0b3_2",
+      "claim": "Less than 16,200 people had died of coronavirus around the world by 23 March .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3537
+    },
+    {
+      "id": "5ed50880c9e77c000848d34d_1",
+      "claim": "Lost ran from September 22 , 2004 to May 23 , 2010 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2473
+    },
+    {
+      "id": "5ed50882c9e77c000848f2ff_2",
+      "claim": "John Hurt stars in Tinker Tailor Soldier Spy .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3274
+    },
+    {
+      "id": "5ec55990c9e77c000842d175_3",
+      "claim": "Edinburgh is home to five Scottish Premiership teams .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5442
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca61f_2",
+      "claim": "There were less than 13 deaths from coronavirus in Italy .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2291
+    },
+    {
+      "id": "5ede072fc9e77c00084d2b49_2",
+      "claim": "Rocky does not have any money when Duke threatens to sue him .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4018
+    },
+    {
+      "id": "5ed50882c9e77c000848f9fa_3",
+      "claim": "The Roman invasions were ended by Otto I , Holy Roman Emperor .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6259
+    },
+    {
+      "id": "5ed50880c9e77c000848d2ff_4",
+      "claim": "Buffy Summers has been portrayed by a student and a model .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3117
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca667_1",
+      "claim": "Around 80,995 cases have been confirmed before February 26 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3521
+    },
+    {
+      "id": "5ed50881c9e77c000848ec61_3",
+      "claim": "Stephen Colbert hosted the CBS show The Late Show with Stephen Colbert .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2834
+    },
+    {
+      "id": "5ee3949bc9e77c0008ccffd9_2",
+      "claim": "Craig Ashley David is from the United Kingdom .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 2186
+    },
+    {
+      "id": "5ece9463c9e77c0008467583_2",
+      "claim": "El Camino is an American action drama film .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3795
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a71df_1",
+      "claim": "High-Speed Rail line will be operational from 2025 onward in India .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3921
+    },
+    {
+      "id": "5ebe6f30c9e77c00084084e4_2",
+      "claim": "Pokemon Stadium was well received by the critics .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3204
+    },
+    {
+      "id": "5ed50881c9e77c000848ea1f_2",
+      "claim": "There are people that can be classified as monks .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 2791
+    },
+    {
+      "id": "5eb9573bc9e77c0008fa1a5e_4",
+      "claim": "Ocean Eyes was Billie Eilish 's second single .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2465
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbfd2_2",
+      "claim": "The education department in Hunan , averred on the Hunan Daily on 23 January , that it would ban off-school tutors and restrict unapproved student gatherings during the 2019-20 coronavirus pandemic .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4302
+    },
+    {
+      "id": "5ede0730c9e77c00084d35e5_2",
+      "claim": "The movie Hitman : Agent 47 is given a rating of more than 4 % based on 22 reviews , with an average rating of 3.5/10 on Rotten Tomatoes .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3173
+    },
+    {
+      "id": "5ec284fbc9e77c00084158bd_4",
+      "claim": "The Predator made more than $ 50.7 million in the United States and Canada .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2722
+    },
+    {
+      "id": "5ed50882c9e77c000848f1d0_4",
+      "claim": "Mickey Rourke has featured in films other than a superhero film based on a Marvel Comics character .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3296
+    },
+    {
+      "id": "5eafed80c9e77c0009ce1138_2",
+      "claim": "Based on less than 30 reviews , the fourth season of The Americans scored 9.6 out of 10 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2723
+    },
+    {
+      "id": "5ed50882c9e77c000848ed4a_3",
+      "claim": "The French Resistance excluded electric power grids from their acts of sabotage .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3914
+    },
+    {
+      "id": "5ed7ad03c9e77c00084a7834_2",
+      "claim": "The artist Tablo 's second album was to be released in 2016 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3382
+    },
+    {
+      "id": "5ed50880c9e77c000848d1e4_4",
+      "claim": "Villa Club hosted an event .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4687
+    },
+    {
+      "id": "5ec5598fc9e77c000842ce6e_3",
+      "claim": "Fantasia Barrino was featured on a cover of a Cindy Lauper song .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4775
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9dbf_1",
+      "claim": "China had reported less than 31,000 coronavirus cases by February 7 , 2020 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2896
+    },
+    {
+      "id": "5ed50882c9e77c000848f50f_3",
+      "claim": "The TV series `` Make It or Break It '' ended on May 14th .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3440
+    },
+    {
+      "id": "5ed50881c9e77c000848e62d_1",
+      "claim": "You Belong with Me is a fan club .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2596
+    },
+    {
+      "id": "5ee39329c9e77c0008cc9384_4",
+      "claim": "More than 60,400 cases of COVID-19 have been confirmed .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3206
+    },
+    {
+      "id": "5ece9462c9e77c0008466fd6_3",
+      "claim": "In Phi Phi Islands , the `` peak/high season '' is from June to October .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3513
+    },
+    {
+      "id": "5ed50882c9e77c000848f584_1",
+      "claim": "Taran Killam is a person .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2857
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca13e_2",
+      "claim": "The US administration of Donald Trump has pushed back against such disinformation saying that China 's `` censorship supercharged a virus that has now turned into a global pandemic '' .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3810
+    },
+    {
+      "id": "5ec7d50dc9e77c0008441c26_2",
+      "claim": "Kingpin 's wife and son had a car crash while fleeing from him because he fought with Spider-Man .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3703
+    },
+    {
+      "id": "5ee3932bc9e77c0008cc9fd3_1",
+      "claim": "Less than 160 people have tested positive for COVID-19 in Italy during the pandemic .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3595
+    },
+    {
+      "id": "5ed50882c9e77c000848f1c2_1",
+      "claim": "Regina King refuses to be an actress .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3906
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0c82_1",
+      "claim": "In the first half of 2015 , less than 300 i8s and under 1,000 i3s were registered .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5456
+    },
+    {
+      "id": "5ed50881c9e77c000848dfb5_4",
+      "claim": "Baz Luhrmann 's film Australia has one genre .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2679
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb206_1",
+      "claim": "There has been less than 300 coronavirus related deaths in Italy .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4406
+    },
+    {
+      "id": "5ed4de03c9e77c00084892a2_2",
+      "claim": "`` Reapers '' ( vampires ) are sensitive to ultraviolet light in the film Blade ll .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3312
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd0113_4",
+      "claim": "In `` The Adventures of Pluto Nash '' Crater is thrown and ends over a table card of a casino .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3767
+    },
+    {
+      "id": "5ed50881c9e77c000848e1ea_2",
+      "claim": "Varsity Blues ( film ) was filmed with a $ 16 million budget .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2733
+    },
+    {
+      "id": "5ee39329c9e77c0008cc93cc_2",
+      "claim": "The upper estimates and the initial random COVID-19 test results in Germany are consistent with each other .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3817
+    },
+    {
+      "id": "5ece9464c9e77c0008467bdb_2",
+      "claim": "Will Poulter will appear in the film The Little Stranger , portraying a troubled war veteran .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2871
+    },
+    {
+      "id": "5ece9462c9e77c0008466c44_2",
+      "claim": "Thomas Meunier played as a substitute for PSG .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2772
+    },
+    {
+      "id": "5ed7ad01c9e77c00084a624b_4",
+      "claim": "I Am ... Sasha Fierce was launched after November 16 , 2008 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2301
+    },
+    {
+      "id": "5ed50882c9e77c000848ed76_3",
+      "claim": "Polar bears depend on large fast-food chains as their main food source .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2834
+    },
+    {
+      "id": "5ed50880c9e77c000848d406_4",
+      "claim": "The Republic of Macedonia is in Europe .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4584
+    },
+    {
+      "id": "5ed50881c9e77c000848e808_3",
+      "claim": "Sheryl Lee repeated her role as Loretta Palmer .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4326
+    },
+    {
+      "id": "5ed50882c9e77c000848fb3b_2",
+      "claim": "The Endless River is Pink Floyd 's reunion tour .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3249
+    },
+    {
+      "id": "5ec284fcc9e77c0008415fc9_2",
+      "claim": "Ian Richardson worked for the BBC .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3589
+    },
+    {
+      "id": "5ee3932dc9e77c0008ccb6d8_4",
+      "claim": "The 2019-nCoV is a new coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3356
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb3a3_1",
+      "claim": "More than 50 Cuban doctors and nurses specialized in infectious diseases were sent to Italy before March 22 , 2020 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4454
+    },
+    {
+      "id": "5ebbf32bc9e77c0009295242_3",
+      "claim": "Love , Simon was reviewed by more than 37 critics on Metacritic .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2490
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf8f7_4",
+      "claim": "Indian actor Aparshakti Khurana 's father is an astrologer .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3015
+    },
+    {
+      "id": "5ed50880c9e77c000848d793_1",
+      "claim": "I Kissed a Girl is a work of music .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2217
+    },
+    {
+      "id": "5ed50882c9e77c000848f47b_4",
+      "claim": "Forceps are used for cooking .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3178
+    },
+    {
+      "id": "5ec55988c9e77c000842b926_2",
+      "claim": "Saudade was released after 31 March 2014 via ESL Music .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3163
+    },
+    {
+      "id": "5ebbf32bc9e77c000929562b_1",
+      "claim": "The movie The Fly II fared well at the box office .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2800
+    },
+    {
+      "id": "5eb29885c9e77c0008d926e7_2",
+      "claim": "Newcastle United had put Jacob Murphy 's worth at £32 million .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 2945
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbbab_4",
+      "claim": "Over 60,390 people have tested positive for coronavirus as of February 13 , 2020 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3649
+    },
+    {
+      "id": "5ed50880c9e77c000848dc6c_2",
+      "claim": "Annette Badland played Bad Horse in The Sparticle Mystery .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2617
+    },
+    {
+      "id": "5ebbf32bc9e77c0009295835_1",
+      "claim": "The Marshall Mathers LP album was certified Diamond after 2012 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2294
+    },
+    {
+      "id": "5ed50880c9e77c000848d209_4",
+      "claim": "Fidel Castro has a brother called Jose Castro .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2341
+    },
+    {
+      "id": "5ebe6f31c9e77c0008409202_3",
+      "claim": "Barnsley is the first club in the second-level league football to play over 2,000 games .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3442
+    },
+    {
+      "id": "5ed50880c9e77c000848dad8_2",
+      "claim": "Peking University is in a unitary sovereign state in Eastern Europe .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2880
+    },
+    {
+      "id": "5ed50882c9e77c000848f474_3",
+      "claim": "Tamerlan Tsarnaev was declared a suspect of an FBI bombing .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3406
+    },
+    {
+      "id": "5ed50880c9e77c000848d980_4",
+      "claim": "Miracle at St. Anna is set in Spanish-occupied Europe during WWll .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3094
+    },
+    {
+      "id": "5ec7d50cc9e77c00084414f6_2",
+      "claim": "Paul Scholes had the number 36 shirt that was later used by Ashley young .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2962
+    },
+    {
+      "id": "5ed50882c9e77c000848ef96_4",
+      "claim": "Michelin Guides are a series of guide books .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2563
+    },
+    {
+      "id": "5ec284fdc9e77c00084164ee_2",
+      "claim": "Katherine Schwarzenegger 's father , Arnold , is a bodybuilder , businessman , and investor .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3442
+    },
+    {
+      "id": "5ebe6f2fc9e77c00084081be_2",
+      "claim": "Lincoln , Nebraska has 19 docks .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3748
+    },
+    {
+      "id": "5ec284fcc9e77c0008415d52_3",
+      "claim": "SWMRS gave a show in Glasgow after 2016 where they performed in Loch Lomond .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4649
+    },
+    {
+      "id": "5ec284fbc9e77c0008415915_3",
+      "claim": "The Predator scored below 56 % based on more than 18 reviews .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3078
+    },
+    {
+      "id": "5ee3932bc9e77c0008cc9e19_2",
+      "claim": "There have been recorded over 48,000 recoveries from coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4041
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6c5a_1",
+      "claim": "Before March 19 , 2018 , See You Again had less than 19.3 million likes on YouTube .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3865
+    },
+    {
+      "id": "5ed50882c9e77c000848f968_3",
+      "claim": "Middle-earth was invented by a French writer .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3947
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6fba_3",
+      "claim": "Less than 197 people reviewed Red Sparrow on Rotten Tomatoes , with an averaging rating of more than 5.5/10 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3215
+    },
+    {
+      "id": "5ed50881c9e77c000848e176_4",
+      "claim": "Tata Motors is absent from the BSE SENSEX index .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2649
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0b1e_2",
+      "claim": "In the film Far from the Madding Crowd Fanny dies while giving birth to her baby , who also died .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4089
+    },
+    {
+      "id": "5ed50882c9e77c000848f91f_4",
+      "claim": "Shane McMahon worked for WWL .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2871
+    },
+    {
+      "id": "5ec7d50dc9e77c0008441c1f_1",
+      "claim": "Peter Parker was a 26-year-old in the Spider Man : Into the Spider-Verse .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3056
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca613_1",
+      "claim": "The efforts of Chinese authorities in managing and containing the epidemic have been praised by the WHO , leading Director-General Tedros Adhanom to express confidence in China 's measures against the coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3863
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccc124_1",
+      "claim": "Less than 205,000 coronavirus cases have been registered globally .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4854
+    },
+    {
+      "id": "5ec284fbc9e77c00084158d9_2",
+      "claim": "The Predator grossed less than $ 115.9 million worldwide .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3412
+    },
+    {
+      "id": "5ed50880c9e77c000848d1a3_3",
+      "claim": "Magic Johnson was a professional basketball player .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2927
+    },
+    {
+      "id": "5ec55989c9e77c000842bb5c_4",
+      "claim": "Winners will qualify for the 2018-19 UEFA Europa League round below the third .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3496
+    },
+    {
+      "id": "5ed50880c9e77c000848d344_1",
+      "claim": "Steve Wozniak was a colleague of Rod Holt .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3091
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd011b_1",
+      "claim": "By 2011 , the album `` Paris '' has sold under 200,000 copies .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3373
+    },
+    {
+      "id": "5ed50880c9e77c000848d07f_2",
+      "claim": "I Kissed a Girl was only recorded by an American bassist .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4123
+    },
+    {
+      "id": "5ee39329c9e77c0008cc90b8_2",
+      "claim": "Cases with 'pneumonia of unknown cause ' started from an animal and fish market which led to the coronavirus pandemic .",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5276
+    },
+    {
+      "id": "5ed50882c9e77c000848f307_1",
+      "claim": "Goosebumps ( film ) is based on a story by Jane Austen .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5244
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbaeb_3",
+      "claim": "A French traveler who came from Lombardy was treated in Auvergne-Rhône-Alpes .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3222
+    },
+    {
+      "id": "5ed50881c9e77c000848e6be_4",
+      "claim": "Humphrey Bogart was ranked the worst male star of Classic American cinema .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2650
+    },
+    {
+      "id": "5ed50880c9e77c000848d99c_4",
+      "claim": "Trollhunters is a film .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2571
+    },
+    {
+      "id": "5ec284ffc9e77c0008417e8a_2",
+      "claim": "Cars 2 's orchestral scores were composed and conducted by Randy Newman .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2574
+    },
+    {
+      "id": "5ee393b7c9e77c0008ccc47a_2",
+      "claim": "Before February 14 , there were less than 65,214 confirmed cases of coronavirus .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3805
+    },
+    {
+      "id": "5ed50880c9e77c000848dcf1_1",
+      "claim": "The Godfather Part II is a political party .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4208
+    },
+    {
+      "id": "5ee39329c9e77c0008cc9235_1",
+      "claim": "There are less than 300 laboratory-confirmed cases of coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2763
+    },
+    {
+      "id": "5ed50880c9e77c000848d8a0_4",
+      "claim": "Men in Black II is a 2002 film .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2151
+    },
+    {
+      "id": "5ec284fbc9e77c00084158ee_2",
+      "claim": "Wilder pleaded guilty to `` enticing a minor by computer '' .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3728
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca4b2_1",
+      "claim": "The 2019-20 coronavirus is spread through respiratory droplets exhaled by people .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3251
+    },
+    {
+      "id": "5ed50880c9e77c000848d090_2",
+      "claim": "French Indochina was in Southeast Asia .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2344
+    },
+    {
+      "id": "5ee393b7c9e77c0008ccc3b0_4",
+      "claim": "An associate professor at the University of Sydney reflected on the effect of coronavirus on Chinese students .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3009
+    },
+    {
+      "id": "5ed50882c9e77c000848ecb9_2",
+      "claim": "Juventus F.C . is the second oldest ultimate frisbee club in Italy .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3161
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9c49_4",
+      "claim": "From less than 832 coronavirus tests carried out in Jersey on March 30 , more than 70 were positive , and under 100 were still waiting for its results .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5186
+    },
+    {
+      "id": "5ed50881c9e77c000848e112_1",
+      "claim": "Down With Love is a romantic movie .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3550
+    },
+    {
+      "id": "5ed50880c9e77c000848cf55_3",
+      "claim": "The TV series `` Shooter '' stars Ryan Phillippe in the lead role .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2391
+    },
+    {
+      "id": "5ed50882c9e77c000848f4a7_2",
+      "claim": "Dilwale Dulhania Le Jayenge started filming in September 1994 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2804
+    },
+    {
+      "id": "5ed50880c9e77c000848d3b3_1",
+      "claim": "Tie Your Mother Down was released as a single .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2618
+    },
+    {
+      "id": "5ebbf32bc9e77c0009295489_3",
+      "claim": "Austin Mahone released more than 4 free download songs , including the track Say My Name .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3669
+    },
+    {
+      "id": "5ee39329c9e77c0008cc943d_3",
+      "claim": "More than 202,500 coronavirus cases have been reported globally , of which more than 8,100 have died during the 2019-20 pandemic .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5760
+    },
+    {
+      "id": "5ede072ec9e77c00084d2997_1",
+      "claim": "Taye Diggs is featured in the Revival of Hedwig and the Angry Inch .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3169
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6cd1_1",
+      "claim": "CC Sabathia is an active player with less than 2,050 strikeouts and is 61st in the list of players with over 2,000 strikeouts .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5866
+    },
+    {
+      "id": "5ee39419c9e77c0008ccfb7b_4",
+      "claim": "HBO ordered the seventh season of Game of Thrones after 2013 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2753
+    },
+    {
+      "id": "5ed50880c9e77c000848d300_2",
+      "claim": "Camden , New Jersey is a country .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2726
+    },
+    {
+      "id": "5ed50880c9e77c000848d766_4",
+      "claim": "Arizona is a Four Corners state .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4581
+    },
+    {
+      "id": "5ed50880c9e77c000848dc9d_2",
+      "claim": "House ran for 9 seasons .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2506
+    },
+    {
+      "id": "5ee393b5c9e77c0008ccb85c_2",
+      "claim": "The sum of coronavirus cases reported by over 190 countries is under 691,000 with around less than 33,000 deaths .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4843
+    },
+    {
+      "id": "5ee39329c9e77c0008cc93b3_4",
+      "claim": "More than 28,333 cases of COVID-19 have been confirmed .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3198
+    },
+    {
+      "id": "5ed50881c9e77c000848e556_2",
+      "claim": "Hindu Kush 's highest point is the peak called Hindu Kush .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3429
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6ba2_3",
+      "claim": "After February 24 , 2019 , See You Again reported 4 billion views on YouTube .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4158
+    },
+    {
+      "id": "5ebe6f32c9e77c00084096e9_2",
+      "claim": "Night School made a total global profit of less than $ 76 million .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4828
+    },
+    {
+      "id": "5ed50880c9e77c000848dc72_3",
+      "claim": "CHiPs is a film that was made in Russia and categorized as drama .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3916
+    },
+    {
+      "id": "5eb29888c9e77c0008d93847_4",
+      "claim": "Based on more than 10 reviews , Extinction holds an approval rating of more than 20 % and an average rating of less than 3.7/10 on Rotten Tomatoes .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3944
+    },
+    {
+      "id": "5ed4de09c9e77c000848abd0_1",
+      "claim": "Jim Keltner 's musical style and range are visible in Josie on Aja by Steely Dan .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2914
+    },
+    {
+      "id": "5ebe6f2ec9e77c0008407a11_1",
+      "claim": "In the movie Dumb and Dumberer : When Harry Met Lloyd , the character of the Jessica 's father is played by Bob Saget .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3407
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbd45_3",
+      "claim": "More than 473,000 cases of COVID-19 have been reported in over 190 countries and territories as of 26 March .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3967
+    },
+    {
+      "id": "5ed50880c9e77c000848d697_3",
+      "claim": "Duff McKagan was born on February 5 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4545
+    },
+    {
+      "id": "5ed50882c9e77c000848ef52_4",
+      "claim": "Speech recognition incorporates knowledge and research in computational linguistics .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3516
+    },
+    {
+      "id": "5ed50882c9e77c000848fa5e_3",
+      "claim": "Stan Beeman is the character of a film .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4124
+    },
+    {
+      "id": "5ed50881c9e77c000848ea69_3",
+      "claim": "Shane McMahon worked for FIFA .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2664
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6bff_3",
+      "claim": "After 18 October 2018 , See You Again had more than 21.7 million likes .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3938
+    },
+    {
+      "id": "5ec55988c9e77c000842b926_1",
+      "claim": "Saudade was released after 31 March 2014 via ESL Music .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2798
+    },
+    {
+      "id": "5eb29888c9e77c0008d93788_2",
+      "claim": "The Equalizer 2 scored over 49/100 , with less than 33 critics .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3423
+    },
+    {
+      "id": "5ed5087fc9e77c000848cedb_3",
+      "claim": "Tremont Street Subway served Boylston , Park Street , Scollay Square , Adams Square , and Haymarket stations .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2404
+    },
+    {
+      "id": "5ec7d50ec9e77c0008442b58_2",
+      "claim": "In August Rush , Lyla lives with a roommate who is a violinist .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2459
+    },
+    {
+      "id": "5ed4de07c9e77c000848a13e_1",
+      "claim": "Dieumerci Mbokani played for R.S.C . Anderlecht in a game against K.S.K . Beveren on May 7 , 2007 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4464
+    },
+    {
+      "id": "5ed4de09c9e77c000848ac0d_2",
+      "claim": "Less than 172 people reviewed The Kid Who Would Be King on Rotten Tomatoes .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2668
+    },
+    {
+      "id": "5ed50882c9e77c000848fa7e_3",
+      "claim": "A View to a Kill is a film produced by Albert R. Broccoli and Michael G. Wilson .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2504
+    },
+    {
+      "id": "5ed7ad00c9e77c00084a5e53_4",
+      "claim": "The film Rambo : Last Blood has more than 134 reviews on Rotten Tomatoes .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2525
+    },
+    {
+      "id": "5ed50882c9e77c000848fc3b_2",
+      "claim": "Atlanta , Georgia is a place where Due Date was shot .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2797
+    },
+    {
+      "id": "5ec55990c9e77c000842d16d_2",
+      "claim": "Before 1998 , The Dillinger Escape Plan band was a hardcore punk band .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4231
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccb9ee_4",
+      "claim": "Over 198,000 Coronavirus cases have been registered worldwide .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3464
+    },
+    {
+      "id": "5ed50882c9e77c000848f83e_1",
+      "claim": "Star Trek : Discovery is a series .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2647
+    },
+    {
+      "id": "5ed50881c9e77c000848e8cf_4",
+      "claim": "Don Hall is a television writer .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2661
+    },
+    {
+      "id": "5ec7d50fc9e77c00084433a5_3",
+      "claim": "Kimi Räikkönen 's son is called Ace .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3228
+    },
+    {
+      "id": "5ed50880c9e77c000848d1e3_1",
+      "claim": "Victoria ( Dance Exponents song ) was released in New Zealand in 1980 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4039
+    },
+    {
+      "id": "5ec7d50ec9e77c00084424ca_2",
+      "claim": "Type O Negative performed doom metal music .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2675
+    },
+    {
+      "id": "5ed4de07c9e77c000848a145_1",
+      "claim": "Dieumerci Mbokani used to play for Anderlecht .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3931
+    },
+    {
+      "id": "5ec7d50dc9e77c0008442394_3",
+      "claim": "Robert Francis `` Bobby '' Kennedy was the grandfather of Joseph Patrick `` Joe '' Kennedy III .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3151
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9d28_2",
+      "claim": "Less than 250,000 tests for the coronavirus had been performed in Italy by March 21 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6651
+    },
+    {
+      "id": "5ebe6f2cc9e77c0008407711_4",
+      "claim": "The Frozen Ground scored less than 57.5 % on Rotten Tomatoes .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2256
+    },
+    {
+      "id": "5ed50882c9e77c000848f38c_2",
+      "claim": "Byron Howard was nominated for a Golden Globe for the movie Tangled .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3682
+    },
+    {
+      "id": "5ed50881c9e77c000848ec67_2",
+      "claim": "Miranda Otto is the aunt of actress Gracie Otto .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3119
+    },
+    {
+      "id": "5ed50880c9e77c000848d796_3",
+      "claim": "Black Canary is a cigarette brand .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2315
+    },
+    {
+      "id": "5ee39419c9e77c0008ccfa07_1",
+      "claim": "In the film , `` The Hunchback of Notre Dame '' , Dom Claude witnessed Quasimodo dying .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2866
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6c33_4",
+      "claim": "After 14 July 2018 , See You Again reported 690,000 dislikes .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6244
+    },
+    {
+      "id": "5ed50882c9e77c000848f1ba_1",
+      "claim": "Jeong Hyeong-don is South Korean .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2440
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6a11_1",
+      "claim": "Mary Poppins Returns collected less than $ 349.5 million globally .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2372
+    },
+    {
+      "id": "5ed50881c9e77c000848dfba_3",
+      "claim": "Among the teams in the European Division of the National Basketball Association 's Western Conference are the New York Knicks .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2920
+    },
+    {
+      "id": "5ec55990c9e77c000842d339_4",
+      "claim": "Morning Phase had sold over 450,000 copies before 2016 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2349
+    },
+    {
+      "id": "5ed50882c9e77c000848ee37_4",
+      "claim": "The music duo `` Tenacious D '' formed in 1992 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2670
+    },
+    {
+      "id": "5ed50882c9e77c000848f26c_3",
+      "claim": "Harris Jayaraj was born after February 1975 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2270
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc99dc_2",
+      "claim": "Every country tested at most 3.5 % of its population for coronavirus .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4711
+    },
+    {
+      "id": "5ee3932dc9e77c0008ccb5e9_1",
+      "claim": "The University of Southampton 's WorldPop research group put together a coronavirus risk map on February 4 , 2020 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3736
+    },
+    {
+      "id": "5ed50882c9e77c000848efad_1",
+      "claim": "Invasion literature was influential in Britain in shaping technological advancement .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2720
+    },
+    {
+      "id": "5ed50880c9e77c000848d8cb_4",
+      "claim": "The World Trade Center opened on the 4th of April .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3403
+    },
+    {
+      "id": "5ebe6f2ec9e77c0008407a3d_3",
+      "claim": "The movie Yamla Pagla Deewana 2 made less than 32 crores in two days .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2930
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbe55_2",
+      "claim": "The largest Stock fall due to the coronavirus pandemic was before 10th March 2020 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2628
+    },
+    {
+      "id": "5ea2d97dc9e77c0009cdb1e7_2",
+      "claim": "King endorsed two candidates during the 2014 elections .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2940
+    },
+    {
+      "id": "5ed50881c9e77c000848e3a7_4",
+      "claim": "Kelly Preston had only one job .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2376
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb34a_4",
+      "claim": "As of 23 January , 633 laboratory-confirmed cases have been reported in Mainland China .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2614
+    },
+    {
+      "id": "5ec284fcc9e77c0008415fd9_4",
+      "claim": "Guns N ' Roses ' second studio album is titled Use Your Illusion I .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2335
+    },
+    {
+      "id": "5ed50882c9e77c000848f70f_2",
+      "claim": "Selena Gomez & the Scene 's debut album earned a Gold certification .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2506
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd002d_4",
+      "claim": "Taran Killiam 's second child is called Juanita Mea Killiam .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3867
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6c5c_4",
+      "claim": "After March 11 , 2018 , See You Again was the second most viewed video on YouTube .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3301
+    },
+    {
+      "id": "5ed4de0bc9e77c000848b6d9_1",
+      "claim": "Dabangg 3 earned more than 115 crores in India and over 140 crores globally .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3275
+    },
+    {
+      "id": "5ec284fbc9e77c00084157d6_4",
+      "claim": "Hexham became the administrative centre for the Tynedale district before 1970 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2696
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0f37_1",
+      "claim": "There are two posters .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 2734
+    },
+    {
+      "id": "5ed7ad01c9e77c00084a64e5_1",
+      "claim": "AMC is the largest global cinema exhibitor .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3737
+    },
+    {
+      "id": "5ed50882c9e77c000848eead_4",
+      "claim": "The horse 's anatomy has changed as it evolved .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4700
+    },
+    {
+      "id": "5ec7d50ec9e77c000844241e_3",
+      "claim": "19 out of 21 of the take shelter sites tallied reviews from the top critics .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2894
+    },
+    {
+      "id": "5eafed80c9e77c0009ce1681_4",
+      "claim": "Grand Theft Auto : Vice City is the second best-selling PlayStation 2 game as of March 2008 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2667
+    },
+    {
+      "id": "5ed50880c9e77c000848dac5_2",
+      "claim": "To Pimp a Butterfly was a song .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3693
+    },
+    {
+      "id": "5ee39329c9e77c0008cc9258_4",
+      "claim": "More than 5,750 deaths have been attributed to COVID-19 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3547
+    },
+    {
+      "id": "5ed50881c9e77c000848de79_2",
+      "claim": "James VI and I was a monarch of England .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4835
+    },
+    {
+      "id": "5ed50881c9e77c000848e98b_3",
+      "claim": "The album Avenged Sevenfold was released after 2002 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2273
+    },
+    {
+      "id": "5ee39329c9e77c0008cc93ff_1",
+      "claim": "Anxiety over the pneumonia outbreak in Wuhan was worsened by the anticipation of people travelling for Chinese New Year .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3889
+    },
+    {
+      "id": "5ed50880c9e77c000848d0de_4",
+      "claim": "Harold Macmillan was from France .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2603
+    },
+    {
+      "id": "5ed50882c9e77c000848fa16_4",
+      "claim": "Tylenol is a drug .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2741
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb3e6_2",
+      "claim": "A resident of Spain , originally from Italy , may have been infected with coronavirus following a trip to Bergamo and Milan from February 12-22 , 2020 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4192
+    },
+    {
+      "id": "5ec55991c9e77c000842df49_2",
+      "claim": "Carcharodontosaurus appeared in `` Dinosaur Planet '' .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3539
+    },
+    {
+      "id": "5ed50881c9e77c000848ec9d_2",
+      "claim": "Matteo Renzi served as Prime Minister of Italy for three years .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2563
+    },
+    {
+      "id": "5ec284fbc9e77c00084158f3_3",
+      "claim": "The Predator grossed more than $ 67 million worldwide .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2523
+    },
+    {
+      "id": "5ebbf32bc9e77c000929585a_3",
+      "claim": "More than 60,400 coronavirus cases had been confirmed in China as of February 13 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3583
+    },
+    {
+      "id": "5ec284fec9e77c00084171e2_4",
+      "claim": "An electrical surge goes through the spilled blood of Sio in the series Afro Samurai .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3819
+    },
+    {
+      "id": "5ed50881c9e77c000848e9ee_4",
+      "claim": "Appropriation in art involves pre-existing objects .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3714
+    },
+    {
+      "id": "5eb29888c9e77c0008d937b3_2",
+      "claim": "The Equalizer 2 earned less than $ 38 million .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2426
+    },
+    {
+      "id": "5ed4de0bc9e77c000848b671_1",
+      "claim": "Tontine schemes are illegal in many states in the United States .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5386
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca68d_3",
+      "claim": "There were less than 25,000 confirmed cases and less than 2,400 recoveries in Italy .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3006
+    },
+    {
+      "id": "5ed50882c9e77c000848f09f_1",
+      "claim": "Speech recognition is ignored in the computer science fields .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3388
+    },
+    {
+      "id": "5ebe6f2fc9e77c00084081b7_4",
+      "claim": "On Rotten Tomatoes , The Oath has an approval rating of less than 65 % according to more than 56 reviews and an average rating of less than 5.8 out of 10 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3422
+    },
+    {
+      "id": "5ebbf32bc9e77c0009295846_2",
+      "claim": "Less than 2,820 deaths had been attributed to COVID-19 by 27 February during the pandemic .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4521
+    },
+    {
+      "id": "5ed50880c9e77c000848d17d_1",
+      "claim": "Middle-earth was created by J. R. R. Tolkien .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2718
+    },
+    {
+      "id": "5ed50881c9e77c000848e128_3",
+      "claim": "The Washington Wizards have won four conference titles .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2813
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6c83_1",
+      "claim": "Before November 25 , 2017 , See You Again was the second most viewed video .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2366
+    },
+    {
+      "id": "5ee39418c9e77c0008ccf50d_3",
+      "claim": "Veeru Devgan died after he turned 80 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2790
+    },
+    {
+      "id": "5ed50882c9e77c000848fc97_1",
+      "claim": "The United Nations Charter was drafted in 1946 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4246
+    },
+    {
+      "id": "5ea2d97dc9e77c0009cdaf28_2",
+      "claim": "The Vow was received positively by critics .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2570
+    },
+    {
+      "id": "5ee393b7c9e77c0008ccc6c6_4",
+      "claim": "On March 30 , 2020 , the confirmed cases of coronavirus in Nevada were more than 800 and the deaths were over 14 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3752
+    },
+    {
+      "id": "5ed50880c9e77c000848dd15_2",
+      "claim": "Morse Code is used in air traffic control .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4656
+    },
+    {
+      "id": "5ed7ad00c9e77c00084a5e34_2",
+      "claim": "The film Rambo : Last Blood had a strong theatrical performance according to the studio Lionsgate .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3516
+    },
+    {
+      "id": "5ed50880c9e77c000848d770_1",
+      "claim": "Ashley Graham has appeared in Vogue magazine .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2817
+    },
+    {
+      "id": "5ed50880c9e77c000848dc46_1",
+      "claim": "Nine Inch Nails is responsible for the song Happiness in Slavery .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2620
+    },
+    {
+      "id": "5ec284fbc9e77c0008415905_4",
+      "claim": "he Predator will open in more than 4,000 theaters .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2563
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf940_4",
+      "claim": "Paul Pelliot claimed that Marco Polo was a significant figure in the government in Yangzhou , China .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4250
+    },
+    {
+      "id": "5ee393b5c9e77c0008ccb888_1",
+      "claim": "Students from the University of Washington stopped attending physical classes on March 6 , 2020 , due to coronavirus .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4449
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf6fa_2",
+      "claim": "Wish Upon has an approval rating of 24 % based on more than 32 reviews .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3171
+    },
+    {
+      "id": "5ebe6f2ec9e77c0008407a40_4",
+      "claim": "Yamla Pagla Deewana 2 made less than 150 crore in two days .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2127
+    },
+    {
+      "id": "5ece9463c9e77c000846765d_1",
+      "claim": "Metacritic assigned the movie The Sun Is Also a Star a score of less than 52 % based on less than 20 critics .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3140
+    },
+    {
+      "id": "5ed50882c9e77c000848fd9c_3",
+      "claim": "Black Canary is a cigarette brand from the United States .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3539
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc99b1_1",
+      "claim": "Less than 161,000 COVID-19 cases have been confirmed globally .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 2938
+    },
+    {
+      "id": "5ed50882c9e77c000848f7e9_4",
+      "claim": "Kelly Preston has starred in television series .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 2857
+    },
+    {
+      "id": "5ed50880c9e77c000848d731_1",
+      "claim": "The Quran is Wiccan .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5316
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccb97e_2",
+      "claim": "The state media declared that Xi Jinping had known crucial details about the outbreak .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4290
+    },
+    {
+      "id": "5ed50882c9e77c000848f903_3",
+      "claim": "Paul Nicholls played the role of Sam Casey in the TV series Law & Order : US .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5724
+    },
+    {
+      "id": "5ed50882c9e77c000848fd13_2",
+      "claim": "You Belong with Me is a fan club .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2411
+    },
+    {
+      "id": "5ed50881c9e77c000848e0e0_2",
+      "claim": "Hot Right Now is from the album Escape from Planet Monday .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2874
+    },
+    {
+      "id": "5ede072ec9e77c00084d256b_1",
+      "claim": "There are less than five volumes of Raving Rabbids .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3494
+    },
+    {
+      "id": "5ed50881c9e77c000848e79f_2",
+      "claim": "Palo Alto , California is a city .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2993
+    },
+    {
+      "id": "5eb9573cc9e77c0008fa1bbe_2",
+      "claim": "Billie Eilish ` s first album was the most sold of 2019 in the US .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3047
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6b8a_2",
+      "claim": "Before April 22 , 2019 , See You Again reported 23.6 million likes .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5803
+    },
+    {
+      "id": "5ee39329c9e77c0008cc92d4_1",
+      "claim": "Group A matches included the squads of Taipei .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3222
+    },
+    {
+      "id": "5ed50881c9e77c000848e68e_3",
+      "claim": "Lil Wayne is one of Birthday Song 's producers .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2903
+    },
+    {
+      "id": "5eb29888c9e77c0008d935aa_2",
+      "claim": "Christopher Plummer took over Spacey 's role .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 2644
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca200_4",
+      "claim": "Over 7,100 coronavirus fatalities have been recorded globally .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3120
+    },
+    {
+      "id": "5ed50882c9e77c000848ee26_3",
+      "claim": "`` Raabta '' is a romantic Hindi song .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3806
+    },
+    {
+      "id": "5ed50881c9e77c000848e2c8_4",
+      "claim": "The horse began to become domesticated around 4000 BC .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3544
+    },
+    {
+      "id": "5ed4de09c9e77c000848aa19_2",
+      "claim": "Geffen created Assylum records before 1971 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2748
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccba0f_3",
+      "claim": "Over 160 cases of COVID-19 have been confirmed in Italy .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2830
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbe10_1",
+      "claim": "Coronavirus has caused less than 171 deaths during the pandemic as of January 9 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3159
+    },
+    {
+      "id": "5ed50881c9e77c000848e46d_3",
+      "claim": "`` In the End '' was a track on the album Hybrid Conspiracy .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3243
+    },
+    {
+      "id": "5ed50881c9e77c000848dd92_3",
+      "claim": "Gin is a chemical element .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2904
+    },
+    {
+      "id": "5ed50881c9e77c000848e31b_4",
+      "claim": "Saxony used to be a kingdom .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4340
+    },
+    {
+      "id": "5ed50880c9e77c000848dbbe_3",
+      "claim": "Ludwig van Beethoven was born in Constantinople .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2396
+    },
+    {
+      "id": "5ed50880c9e77c000848dc0b_4",
+      "claim": "Advertising is a visual form of marketing communication .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2811
+    },
+    {
+      "id": "5ed50880c9e77c000848d3c9_2",
+      "claim": "Derek Hough has worked .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4549
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccc265_2",
+      "claim": "Japan has more than one case of coronavirus .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2379
+    },
+    {
+      "id": "5ed50881c9e77c000848df31_1",
+      "claim": "Chris Kyle died on March 2 , 2013 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3746
+    },
+    {
+      "id": "5ed50881c9e77c000848e0b6_2",
+      "claim": "Australia ( 2008 film ) production took place in Bowen .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3047
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbeaf_1",
+      "claim": "There were more than 31,500 coronavirus cases in China as of 7 February 2020 during the pandemic .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3289
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccb923_2",
+      "claim": "Less than 78,500 cases of coronavirus had been confirmed by February 22 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2527
+    },
+    {
+      "id": "5ec7d50dc9e77c00084418b4_1",
+      "claim": "The film Dear Dictator received mixed reviews .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2487
+    },
+    {
+      "id": "5ed50882c9e77c000848fc97_2",
+      "claim": "The United Nations Charter was drafted in 1946 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2843
+    },
+    {
+      "id": "5ee39418c9e77c0008ccf16b_2",
+      "claim": "Mary of Teck was the Queen of the Ireland Dominions .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5625
+    },
+    {
+      "id": "5ec7d50bc9e77c0008440ccd_2",
+      "claim": "John Legend 's real name is John Roger Stephens .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2927
+    },
+    {
+      "id": "5ed50882c9e77c000848fada_4",
+      "claim": "Camden is a city in New Jersey .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4408
+    },
+    {
+      "id": "5ed50882c9e77c000848fce9_2",
+      "claim": "David Spade starred in something .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4163
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0cc5_4",
+      "claim": "As of May 2014 , under 900,000 copies were sold .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3264
+    },
+    {
+      "id": "5ee3949bc9e77c0008ccffd7_4",
+      "claim": "According to Rolling Stone , Pearl Jam tore apart its own fame in the 2000s ,",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6213
+    },
+    {
+      "id": "5ed4de07c9e77c000848a025_2",
+      "claim": "France is a member of the European Union .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3392
+    },
+    {
+      "id": "5ed50882c9e77c000848eeb4_1",
+      "claim": "Jackie ( 2016 film ) was directed by Peter Jackson .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2660
+    },
+    {
+      "id": "5ed50880c9e77c000848d5a6_3",
+      "claim": "There is a film called The Daily Show .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2895
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbad5_1",
+      "claim": "A teenager of Sondrio and his school friend tested positive on COVID-19 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6277
+    },
+    {
+      "id": "5eb29887c9e77c0008d92ddd_2",
+      "claim": "Based on 378 audience reviews , Bright scored 74 % .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3618
+    },
+    {
+      "id": "5ec5598dc9e77c000842c59b_4",
+      "claim": "The movie Ouija : Origin of Evil has an average rating of more than 6.15/10 on Rotten Tomatoes .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2644
+    },
+    {
+      "id": "5ec5598ac9e77c000842bc9b_1",
+      "claim": "The film Analyze This was a box office success .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3201
+    },
+    {
+      "id": "5ec284fec9e77c00084177fe_3",
+      "claim": "Esai Morales played Bob Valenzuela in La Bamba .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2827
+    },
+    {
+      "id": "5ee3932bc9e77c0008cc9f24_3",
+      "claim": "As of February 22 , 2020 , there have been more than 78,000 coronavirus cases in all of China 's provinces and over two dozen other countries .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4504
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf7f3_2",
+      "claim": "On August 15 , Kevin Kline , along with two other stars , signed onto The Road to El Dorado .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4542
+    },
+    {
+      "id": "5ed50880c9e77c000848dc7f_2",
+      "claim": "Ian Brennan is a director .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2743
+    },
+    {
+      "id": "5ec5598fc9e77c000842cc89_3",
+      "claim": "The Texans won more than seven games in a row .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3779
+    },
+    {
+      "id": "5ed50881c9e77c000848e9aa_3",
+      "claim": "Justine Bateman was born in the 1960s .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2424
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6cca_3",
+      "claim": "After August 26 , 2012 , Adam Dunn was one of the strikeout leaders with more than 1,980 strikeouts .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3555
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd015f_1",
+      "claim": "In the series Bones , Agent Booth tries to avoid and hates when people relate him with an assassin from his family .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3617
+    },
+    {
+      "id": "5ed50881c9e77c000848df0d_2",
+      "claim": "Tremont Street Subway served Boylston station .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2678
+    },
+    {
+      "id": "5ed50882c9e77c000848ed85_2",
+      "claim": "Queen ( band ) is a British rock band .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3912
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6b71_3",
+      "claim": "There are more than 164 videos that have received more than 1 billion views .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3381
+    },
+    {
+      "id": "5ed50882c9e77c000848eee5_3",
+      "claim": "Alexandra Daddario was born on March 16 , 1986 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2612
+    },
+    {
+      "id": "5ee39419c9e77c0008ccfcb1_2",
+      "claim": "In The Golden Girls , Dorothy Zbornak was six foot tall .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2788
+    },
+    {
+      "id": "5ed50882c9e77c000848f880_4",
+      "claim": "Mogadishu is a city .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3396
+    },
+    {
+      "id": "5ed4de0ac9e77c000848b0dc_1",
+      "claim": "Bo Burnham 's Eighth Grade , was praised by critics .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2731
+    },
+    {
+      "id": "5ed50880c9e77c000848cf3c_1",
+      "claim": "Lalla Ward is a writer .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2622
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6b60_2",
+      "claim": "Before June 23 , 2019 , See You Again reported 24.3 million likes .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3836
+    },
+    {
+      "id": "5ed4de09c9e77c000848ac2e_1",
+      "claim": "Averaged over less than 45 reviewers , The Kid Who Would Be King received an approval rating of less than 85 % and an average rating of more than 6.9/10 on Rotten Tomatoes .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3133
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9c29_3",
+      "claim": "By 13 February 2020 , there were more than 60,390 confirmed cases of coronavirus .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4818
+    },
+    {
+      "id": "5ee3932bc9e77c0008cc9fd0_2",
+      "claim": "The 2019-20 coronavirus pandemic in Italy and South Korea exposed a great difference in the number of deaths and measures taken to counter the virus .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3967
+    },
+    {
+      "id": "5ede072ec9e77c00084d2499_3",
+      "claim": "The film , Case 39 , was released before 2010 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2488
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccc22e_1",
+      "claim": "In Italy , less than 190,00 cases have been confirmed , with less than 25,600 fatalities , and less than 56,000 recoveries .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4366
+    },
+    {
+      "id": "5ec7d50bc9e77c0008440e31_1",
+      "claim": "Akiem Jamar Hicks currently plays for the Chicago Bears .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4400
+    },
+    {
+      "id": "5ed50880c9e77c000848d4c4_3",
+      "claim": "San Diego Comic-Con was founded as the Silver State Comic Book Convention .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2485
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6b62_2",
+      "claim": "Before June 21 , 2019 , See You Again reported 24.2 million likes .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6043
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb320_4",
+      "claim": "More than 87,500 cases have recovered from the coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2773
+    },
+    {
+      "id": "5eb2988ac9e77c0008d9475c_1",
+      "claim": "Kesari had a budget greater than 70000 crores .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3954
+    },
+    {
+      "id": "5ec284fcc9e77c0008415c11_3",
+      "claim": "Captain America : Civil War ( film ) was reviewed by more than 397 critics and received an average score above 7.71/10 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3184
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca498_3",
+      "claim": "More than 36,000 coronavirus cases were reported worldwide before February 9 , 2020 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3160
+    },
+    {
+      "id": "5ebe6f32c9e77c0008409715_2",
+      "claim": "Panjaa received positive reviews .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2143
+    },
+    {
+      "id": "5eb29888c9e77c0008d93955_2",
+      "claim": "The Equalizer 2 has grossed over $ 124 million worldwide .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 2885
+    },
+    {
+      "id": "5ed50882c9e77c000848f321_3",
+      "claim": "Jenna Jameson was an actress .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2997
+    },
+    {
+      "id": "5ed50881c9e77c000848e301_3",
+      "claim": "The film Frozen ranks # 2 in the list of the highest-grossing animated film of all time .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3277
+    },
+    {
+      "id": "5ec7d50fc9e77c0008442f40_1",
+      "claim": "Luton Town FC was given planning permission to build in the centre of Luton a new stadium at Power Court with more than 17500 seats .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3519
+    },
+    {
+      "id": "5ed7ad01c9e77c00084a6271_2",
+      "claim": "The Penrith Panthers have existed for 46 years .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3776
+    },
+    {
+      "id": "5ebbf32bc9e77c0009295834_1",
+      "claim": "The Marshall Mathers LP album received the Grammy Award for Best Rap Album after 2010 .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6811
+    },
+    {
+      "id": "5ed50880c9e77c000848d8fb_3",
+      "claim": "Harvard University is a large university .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2917
+    },
+    {
+      "id": "5ed50881c9e77c000848e33a_3",
+      "claim": "Tylenol is a brand of drugs .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2327
+    },
+    {
+      "id": "5ed50880c9e77c000848d9cd_3",
+      "claim": "The TV series Bones was produced .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3048
+    },
+    {
+      "id": "5ebbf32bc9e77c0009295441_1",
+      "claim": "The American President grossed less than $ 85 million domestically .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2396
+    },
+    {
+      "id": "5ec7d50ec9e77c0008442761_2",
+      "claim": "Rudimentary Peni is an anarcho-punk band .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3033
+    },
+    {
+      "id": "5ed50882c9e77c000848eeeb_4",
+      "claim": "José Ferrer was an actor and director .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3087
+    },
+    {
+      "id": "5eb9573ac9e77c0008fa17bb_1",
+      "claim": "Shallow became Lady Gaga 's fifth number-one single and Bradley Cooper 's first .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2840
+    },
+    {
+      "id": "5ee3932dc9e77c0008ccb4d5_2",
+      "claim": "As of January 24 , 2020 , a Taiwanese man with coronavirus was fined for hiding his condition .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3202
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9ade_2",
+      "claim": "The people of the United States have been a target of increased xenophobic attacks since the COVID-19 outbreak .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5578
+    },
+    {
+      "id": "5ed50882c9e77c000848ecce_4",
+      "claim": "Global warming threatens legal security .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4674
+    },
+    {
+      "id": "5ed50880c9e77c000848d182_1",
+      "claim": "Rupert Murdoch has control of a business .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3791
+    },
+    {
+      "id": "5ed50880c9e77c000848d794_2",
+      "claim": "Francis I of France was born in December .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2736
+    },
+    {
+      "id": "5ec284fec9e77c0008416ec8_4",
+      "claim": "Ewan MacColl was Scottish .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2220
+    },
+    {
+      "id": "5ed50882c9e77c000848f1cc_1",
+      "claim": "Harold Macmillan was born on February 10 , 1794 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2519
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccab77_3",
+      "claim": "Spain has more than 6,100 confirmed coronavirus cases and more than 192 fatalities .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2623
+    },
+    {
+      "id": "5ed7acfdc9e77c00084a5654_4",
+      "claim": "Pigs were the first to be identified as infected with influenza .",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4287
+    },
+    {
+      "id": "5ede072ec9e77c00084d2474_3",
+      "claim": "Orkut.com and Orkut.com.br were ranked above 500 worldwide by Alexa traffic .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4019
+    },
+    {
+      "id": "5eb29885c9e77c0008d927fc_1",
+      "claim": "The House has less than 22 critics on Metacritic .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3032
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccba17_1",
+      "claim": "Over 366,000 cases of Coronavirus have been registered worldwide .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3441
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf6ee_1",
+      "claim": "Wish Upon has an approval rating of 18 % based on more than 70 reviews .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 2621
+    },
+    {
+      "id": "5ebe6f2cc9e77c0008407700_1",
+      "claim": "The Frozen Ground was shown in a small number of cinemas .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3764
+    },
+    {
+      "id": "5ed50881c9e77c000848de2f_3",
+      "claim": "Meteora is an album by Linkin Park .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3379
+    },
+    {
+      "id": "5ed50882c9e77c000848fc53_4",
+      "claim": "Blue Jasmine is an American television series .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2616
+    },
+    {
+      "id": "5ee3949bc9e77c0008ccff52_2",
+      "claim": "Despicable Me 2 is the highest-grossing Illumination Entertainment film , and Jurassic Park is the only Universal Studio film that has had higher grossing than it .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3882
+    },
+    {
+      "id": "5eb29887c9e77c0008d92de7_2",
+      "claim": "7 million of Bright 's audience was between the ages of 18-49 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2604
+    },
+    {
+      "id": "5ec284fcc9e77c000841591c_4",
+      "claim": "The Predator premiered at the Toronto International Film Festival before 7 September 2018 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2410
+    },
+    {
+      "id": "5ee39329c9e77c0008cc9390_1",
+      "claim": "There have been fewer than 160 confirmed cases of COVID-19 .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4726
+    },
+    {
+      "id": "5ebe6f30c9e77c0008408a5e_1",
+      "claim": "Javagal Srinath had a bad performance against Australia in the World Cup final .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3762
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0f60_3",
+      "claim": "Based on 64 reviews , Dirty Grandpa scored 6 % .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3929
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb3d2_2",
+      "claim": "By February 15 , 2020 , fewer than 67,105 Covid-19 cases have been reported globally .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2670
+    },
+    {
+      "id": "5ece9461c9e77c00084660bc_4",
+      "claim": "The Allstate Arena has hosted more than two editions of the NXT TakeOver .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3481
+    },
+    {
+      "id": "5ec55991c9e77c000842db6a_4",
+      "claim": "Alfie is the father of Henry IV .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3670
+    },
+    {
+      "id": "5ee39329c9e77c0008cc91a8_4",
+      "claim": "By mid-March 2020 , there were more than 15000 COVID-19 active cases in Italy .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2704
+    },
+    {
+      "id": "5ed50881c9e77c000848eb4a_4",
+      "claim": "I Kissed a Girl is a song .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2637
+    },
+    {
+      "id": "5ed50880c9e77c000848d9cb_3",
+      "claim": "Fist of Legend is a remake of Fist of Fury .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2578
+    },
+    {
+      "id": "5ece9461c9e77c0008465d20_4",
+      "claim": "Lost in London contains more than 20 shooting locations .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2966
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc977f_1",
+      "claim": "Madrid is an autonomous community in Spain .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3648
+    },
+    {
+      "id": "5ed50882c9e77c000848f547_1",
+      "claim": "Craig David was nominated for Best American Male .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4894
+    },
+    {
+      "id": "5eb29888c9e77c0008d933e1_4",
+      "claim": "Mychal Thompson 's son plays for the Chicago White Sox .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3432
+    },
+    {
+      "id": "5ec7d50dc9e77c0008441fa6_2",
+      "claim": "The American Diabetes Association donated more than $ 40 million after 2005 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3237
+    },
+    {
+      "id": "5ed50882c9e77c000848f453_2",
+      "claim": "Guillermo del Toro died in 1964 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2763
+    },
+    {
+      "id": "5ebe6f30c9e77c0008408757_3",
+      "claim": "After June 2015 , CinemaSins gained over 4.5 million subscribers and over 819 million video views .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5529
+    },
+    {
+      "id": "5ebe6f2fc9e77c00084081ef_4",
+      "claim": "The NASCAR team reassumed the Chip Ganassi Racing name after 2013 and Ganassi revealed that Earnhardt was never truly involved with the team .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3478
+    },
+    {
+      "id": "5ebe6f2bc9e77c00084075a4_4",
+      "claim": "Nasal congestion may cause mild annoyance .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2678
+    },
+    {
+      "id": "5ed50881c9e77c000848e08c_3",
+      "claim": "Live Through This is an album .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2161
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccb925_2",
+      "claim": "Qatar was among the countries that have reported cases of coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2536
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0f7b_2",
+      "claim": "Mark Kermode reviewed the movie negatively .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3192
+    },
+    {
+      "id": "5ed50882c9e77c000848f55e_3",
+      "claim": "Manmohan Singh was the first Sikh in office .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2233
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbeae_2",
+      "claim": "During the pandemic , South China Agricultural University researchers announced high genome similarity between viruses in pangolins and human patients with coronavirus in February 2020 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5481
+    },
+    {
+      "id": "5ed50880c9e77c000848dd00_2",
+      "claim": "The series finale of Make It or Break It is ending on its 4th season .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2577
+    },
+    {
+      "id": "5ece9464c9e77c0008467b4c_2",
+      "claim": "Based on more than 65 reviewers , Rise of the Tomb Raider scored more than 85 % on GameRankings , and over 100 reviewers rated the game on Metacritic .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4843
+    },
+    {
+      "id": "5ec284fdc9e77c00084168f7_1",
+      "claim": "Joel and Ethan 's last name is Coen .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3723
+    },
+    {
+      "id": "5ed50882c9e77c000848f038_3",
+      "claim": "West Virginia borders Ohio and Pennsylvania to the north .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2998
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd0110_2",
+      "claim": "In `` The Adventures of Pluto Nash '' , Pluto buys a robot as his bodyguard .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4680
+    },
+    {
+      "id": "5ee3949bc9e77c0008ccfef7_4",
+      "claim": "The reign of James VI and I in Scotland was shorter than 57 years and 350 days .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2708
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca864_4",
+      "claim": "Nevada has more than 1,000 confirmed coronavirus cases .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2292
+    },
+    {
+      "id": "5ed50882c9e77c000848ee56_3",
+      "claim": "Michaela Watkins was born on December 17 , 1971 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2550
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6a42_1",
+      "claim": "In Mary Poppins Returns , Michael forgives his children after they repeat what Mary said about their mother and how she was always with them to comfort him .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3655
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0cd1_3",
+      "claim": "The film is the fourteenth installment of the franchise .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2952
+    },
+    {
+      "id": "5ed7ad01c9e77c00084a679e_2",
+      "claim": "In the 2017 UEFA Champions League , Navas pushed Miralem Pjanić 's shot to the right .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3725
+    },
+    {
+      "id": "5ed50881c9e77c000848e912_1",
+      "claim": "House contains a character played by Omar Epps .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2821
+    },
+    {
+      "id": "5ec284fbc9e77c00084158e3_4",
+      "claim": "The Predator grossed more than $ 101 million worldwide .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3103
+    },
+    {
+      "id": "5ec284fdc9e77c000841681b_1",
+      "claim": "Klaus has garnered over 20 million views globally in its first month of release .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3539
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd0127_4",
+      "claim": "The album `` Paris '' has sold around 1 million copies worldwide .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3139
+    },
+    {
+      "id": "5ec284fec9e77c0008417339_4",
+      "claim": "On Rotten Tomatoes , I Am Mother holds an approval rating of more than 89.5 % based on more than 47 reviews ,",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2967
+    },
+    {
+      "id": "5ed50881c9e77c000848ea8a_4",
+      "claim": "Charles Manson is a former lawyer .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3468
+    },
+    {
+      "id": "5ec284fbc9e77c00084158f4_2",
+      "claim": "The Predator grossed less than $ 65 million worldwide .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2500
+    },
+    {
+      "id": "5ed50882c9e77c000848f413_2",
+      "claim": "Jean-Michel Basquiat died age 30 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3746
+    },
+    {
+      "id": "5ec284fec9e77c0008416fd8_3",
+      "claim": "Before 2018 , Shivaay won the 64th National Film Award for best visual effects .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2741
+    },
+    {
+      "id": "5ed50881c9e77c000848e8e3_3",
+      "claim": "Michigan is a state .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2641
+    },
+    {
+      "id": "5ed4de05c9e77c0008489936_4",
+      "claim": "Me Against the World is the seventh studio album by 2pac .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2548
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbc00_1",
+      "claim": "During the 2019-20 coronavirus pandemic , new hospitals were below half-capacity due to shortages of beds and medical supplies .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4481
+    },
+    {
+      "id": "5ece9463c9e77c0008467754_1",
+      "claim": "Before 2015 , reviewers ranked the film The Grand Budapest Hotel as the best in the 21st century .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 2964
+    },
+    {
+      "id": "5ee39329c9e77c0008cc90ad_1",
+      "claim": "More/less than 72,000 people have recovered from COVID-19 ( disease ) .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4709
+    },
+    {
+      "id": "5ee39329c9e77c0008cc9505_1",
+      "claim": "By February 3 , 2020 , Turkey canceled travels from China until the end of the month , due to the coronavirus pandemic .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3585
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb266_3",
+      "claim": "As of 1 February 2020 , less than 13,980 coronavirus cases have been confirmed in every province-level division of China .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2721
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0f95_2",
+      "claim": "Magnussen was to replace Pastor Maldonado in the current season .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3636
+    },
+    {
+      "id": "5ee39329c9e77c0008cc90fb_2",
+      "claim": "Less than 900 COVID-19 cases have been confirmed .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2836
+    },
+    {
+      "id": "5ed50881c9e77c000848ddca_1",
+      "claim": "Brad Wilk died before being a member of Greta in 1990 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5305
+    },
+    {
+      "id": "5ece9461c9e77c0008465b3e_3",
+      "claim": "Chris Long and four other NFL players won consecutive Super Bowls for different teams .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3657
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd0038_2",
+      "claim": "By late 2013 , Roar had sold under 12 million units .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2634
+    },
+    {
+      "id": "5ebe6f2ec9e77c0008407ace_1",
+      "claim": "The movie Seema Raja received mixed reviews .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2672
+    },
+    {
+      "id": "5ec5598dc9e77c000842c5aa_3",
+      "claim": "The movie Ouija : Origin of Evil has an approval rating of more than 78 % on Rotten Tomatoes .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2690
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccc246_4",
+      "claim": "Coronavirus has claimed more than 2,765 lives .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3575
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9d88_1",
+      "claim": "According to Hu Xijin , the government of Wuhan had a slow reaction to coronavirus .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3712
+    },
+    {
+      "id": "5ed50880c9e77c000848dc43_3",
+      "claim": "The film How to Train Your Dragon 2 used animated dragons .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4179
+    },
+    {
+      "id": "5ee39419c9e77c0008ccfa46_2",
+      "claim": "Wakefield designed the cover of the album Toxicity .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3681
+    },
+    {
+      "id": "5ede072fc9e77c00084d3463_2",
+      "claim": "Bart Scott played in all 16 games of the 2005 season .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3545
+    },
+    {
+      "id": "5ebe6f2ec9e77c0008407d37_4",
+      "claim": "Michel Macary was part of the team that designed Stade de France .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2396
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca202_2",
+      "claim": "There are less than 141,000 confirmed coronavirus cases around the world .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2502
+    },
+    {
+      "id": "5ed50882c9e77c000848ed9d_3",
+      "claim": "The film Despicable Me 2 was directed by Pierre Coffin and Chris Renaud .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3141
+    },
+    {
+      "id": "5ed50880c9e77c000848d2e3_3",
+      "claim": "Tamerlan Tsarnaev had a female sibling .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2446
+    },
+    {
+      "id": "5ed4de05c9e77c0008489a7f_4",
+      "claim": "After March 2015 , less than 1.65 % of smartphone users in the United States were running BlackBerry .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3159
+    },
+    {
+      "id": "5ee39419c9e77c0008ccfcb4_2",
+      "claim": "Liam Neeson is British , and was born in Ballymena .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4752
+    },
+    {
+      "id": "5ed50881c9e77c000848e276_4",
+      "claim": "Ralph Fults was born in 1911 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3831
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6b97_2",
+      "claim": "Before March 22 , 2019 , See You Again reported 4 billion views on YouTube .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4405
+    },
+    {
+      "id": "5ec55990c9e77c000842d062_1",
+      "claim": "Silverchair took a one year break after their tour .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2971
+    },
+    {
+      "id": "5ee3932cc9e77c0008ccb388_1",
+      "claim": "The cruise ship Diamond Princess is British .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3422
+    },
+    {
+      "id": "5ec55988c9e77c000842b94c_2",
+      "claim": "Stuber scored more than 36 % based on less than 10 critics .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3847
+    },
+    {
+      "id": "5ec284fdc9e77c0008416b6c_4",
+      "claim": "Juninho Paulista has scored fourteen goals in sixty-eight games for Brazil .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2867
+    },
+    {
+      "id": "5ed7ad01c9e77c00084a67a6_1",
+      "claim": "An over-the-shoulder shot is also called a half-bicycle kick .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2537
+    },
+    {
+      "id": "5ed50880c9e77c000848da31_4",
+      "claim": "Don Bradman was called the `` greatest living Australian '' by a Prime Minister .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4469
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccc037_4",
+      "claim": "More than 74,000 cases of coronavirus have been reported in all provinces of China and more than two dozen other countries .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3440
+    },
+    {
+      "id": "5ed50882c9e77c000848f875_2",
+      "claim": "Always was directed by Gandhi .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2372
+    },
+    {
+      "id": "5ed50880c9e77c000848d3be_1",
+      "claim": "Aaron Burr was a department store that went out of business in the eighties .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4332
+    },
+    {
+      "id": "5eb29888c9e77c0008d9398c_4",
+      "claim": "Rotten Tomatoes has given The Equalizer an average rating of 5.6/10 based on more than 153 reviews .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3583
+    },
+    {
+      "id": "5ed50880c9e77c000848d37a_3",
+      "claim": "Veeru Devgan is a soccer player .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2487
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca37b_1",
+      "claim": "Dr. David Nabarro suggested that an aggressive approach by the WHO towards the coronavirus would be counterproductive .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5310
+    },
+    {
+      "id": "5ed50881c9e77c000848e8fa_2",
+      "claim": "The Lincoln-Douglas debates happened in a car .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3344
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9c14_1",
+      "claim": "From the under 600 tests performed in Jersey by 23 March , less than 20 were positive , and less than 100 were still awaiting the results .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3487
+    },
+    {
+      "id": "5ebe6f32c9e77c00084096ba_1",
+      "claim": "Night School earned more than $ 24.5 million outside of the U.S. and Canada , and a worldwide total of more than $ 101.5 million .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3201
+    },
+    {
+      "id": "5ece9464c9e77c0008467a55_3",
+      "claim": "Dolemite Is My Name '' scored 68/100 based on more than 8 reviews .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3272
+    },
+    {
+      "id": "5ed50881c9e77c000848e210_3",
+      "claim": "Edgar Wright is a sportsman .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2313
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbcfa_1",
+      "claim": "The United Arab Emirates closed its borders due to the 2019–20 coronavirus pandemic .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4232
+    },
+    {
+      "id": "5ed50881c9e77c000848decd_3",
+      "claim": "The song Bad Romance was a major success .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4181
+    },
+    {
+      "id": "5ed50880c9e77c000848db42_4",
+      "claim": "Rock band Paramore was formed before 2000 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2997
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf7bd_3",
+      "claim": "Blade Runner 2049 got more than 370 reviews .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2225
+    },
+    {
+      "id": "5ec284fcc9e77c0008415fdb_1",
+      "claim": "Double Talkin ' Jive , from Use Your Illusion I , was written by Stradlin .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3350
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6a24_2",
+      "claim": "Topsy is an eccentric character from Mary Poppins Returns .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5308
+    },
+    {
+      "id": "5ed50880c9e77c000848dcc7_4",
+      "claim": "Mani Ratnam is widely credited with altering the Tamil publishing industry .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2995
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca0bb_4",
+      "claim": "More than 576,000 coronavirus cases and more than 26,400 fatalities have been registered globally .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3565
+    },
+    {
+      "id": "5ed50881c9e77c000848ddb4_3",
+      "claim": "Roland Emmerich is heterosexual .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2158
+    },
+    {
+      "id": "5ed50880c9e77c000848d021_4",
+      "claim": "The story of the film `` Blue Jasmine '' takes place in Manhattan and San Francisco .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4415
+    },
+    {
+      "id": "5ec284fec9e77c00084174dc_3",
+      "claim": "In 1986 , Chick Corea 's Akoustic band released an eponymous album .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3408
+    },
+    {
+      "id": "5ece9464c9e77c0008467a4b_3",
+      "claim": "`` Dolemite Is My Name '' scored 97 % based on more than 190 reviews .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2694
+    },
+    {
+      "id": "5ed50880c9e77c000848d021_2",
+      "claim": "Blue Jasmine takes place in Boston only .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3103
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd01cf_2",
+      "claim": "Lady Gaga´s album `` Born This Way '' was her third studio project .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2558
+    },
+    {
+      "id": "5ec7d50ec9e77c0008442418_1",
+      "claim": "19 out of 21 tallied reviews from top critics have been positive .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2765
+    },
+    {
+      "id": "5ebe6f2cc9e77c0008407755_1",
+      "claim": "The movie Insidious : The Last Key has grossed the most globally in the series ahead of Chapter 2 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3073
+    },
+    {
+      "id": "5ee39329c9e77c0008cc9338_4",
+      "claim": "888 cases of COVID-19 have been confirmed in Italy .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4115
+    },
+    {
+      "id": "5ed50880c9e77c000848dba3_2",
+      "claim": "Beaverton , Oregon 's city center is a place .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3358
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccc2d4_4",
+      "claim": "Less than 2,703 people have died of coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3565
+    },
+    {
+      "id": "5ed50881c9e77c000848ec8a_2",
+      "claim": "Blue Jasmine is a television show .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2749
+    },
+    {
+      "id": "5ec7d50dc9e77c0008441d8b_4",
+      "claim": "In the film When We First Met , Ethan and Avery enter into a piano bar .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2520
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccba10_3",
+      "claim": "60,391 Coronavirus cases have been registered worldwide .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4474
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9b53_2",
+      "claim": "On March 17 , 2020 , there were more than 196,000 cases of coronavirus and over 7,900 deaths worldwide .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3401
+    },
+    {
+      "id": "5ee3932ac9e77c0008cc9cc5_1",
+      "claim": "A five-year-old child from Cebu was a suspected case of coronavirus .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3605
+    },
+    {
+      "id": "5ea2d97bc9e77c0009cda6f6_3",
+      "claim": "Fred is a lizard .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3132
+    },
+    {
+      "id": "5ed50880c9e77c000848dac5_3",
+      "claim": "To Pimp a Butterfly was an album .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2549
+    },
+    {
+      "id": "5ed50880c9e77c000848dd4e_3",
+      "claim": "Dreamer ( 2005 ) is a movie .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2842
+    },
+    {
+      "id": "5ee39419c9e77c0008ccfb22_2",
+      "claim": "Sam Saletta plays a 14-year-old boy named Ryan in the film Billboard Dad .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3266
+    },
+    {
+      "id": "5eb2988ac9e77c0008d9491f_1",
+      "claim": "Article 15 grossed less than 30 crore in India .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2422
+    },
+    {
+      "id": "5ebe6f32c9e77c00084099ad_4",
+      "claim": "Parker teamed with Nick Rogers on the episode of NXT that aired on July 4 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3793
+    },
+    {
+      "id": "5ec7d50dc9e77c0008441e7a_1",
+      "claim": "Factor VIII can be deactivated proteolytically by the activated Protein C when it is without protection from vWF .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4368
+    },
+    {
+      "id": "5ed50880c9e77c000848d6ba_1",
+      "claim": "To Pimp a Butterfly sold at least 850,000 copies .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3524
+    },
+    {
+      "id": "5ed50880c9e77c000848d30f_2",
+      "claim": "Tottenham Hotspur F.C . is British .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4204
+    },
+    {
+      "id": "5ece9464c9e77c0008467bc5_1",
+      "claim": "Nadine Coyle is Irish .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2445
+    },
+    {
+      "id": "5ebbf32bc9e77c000929523e_4",
+      "claim": "Love , Simon earned more than $ 17.25 million outside North America .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2641
+    },
+    {
+      "id": "5ee3949ac9e77c0008ccfd37_3",
+      "claim": "On Rotten Tomatoes , Southpaw has a rating of 57 % based on 150 reviews .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4824
+    },
+    {
+      "id": "5ed50881c9e77c000848e971_3",
+      "claim": "The album `` Cher '' was released by Atlantic Records .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2245
+    },
+    {
+      "id": "5ec284fbc9e77c00084158d4_1",
+      "claim": "The Predator grossed over $ 115 million worldwide .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2462
+    },
+    {
+      "id": "5ed7acffc9e77c00084a5b82_4",
+      "claim": "Thaddeus Charles Young is currently a free agent .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3675
+    },
+    {
+      "id": "5ed50881c9e77c000848defd_1",
+      "claim": "Tilda Swinton is only Scottish .",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3978
+    },
+    {
+      "id": "5ed50882c9e77c000848f498_2",
+      "claim": "Sean Penn was in Fast Times at Ridgemont High .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3241
+    },
+    {
+      "id": "5ed50882c9e77c000848f21d_2",
+      "claim": "Soyuz is still in beta mode .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3894
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce09da_2",
+      "claim": "Orgy is a synthpunk band .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2968
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf8b2_2",
+      "claim": "Regina King was born in Los Angeles .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2480
+    },
+    {
+      "id": "5ed4de09c9e77c000848ac3e_3",
+      "claim": "Bob Sapp trained at the AMC Pankration and Team Quest gyms in the United States .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3556
+    },
+    {
+      "id": "5ee3949ac9e77c0008ccfd35_1",
+      "claim": "Southpaw´s story was predictable for critics but they liked Gyllenhaal .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3848
+    },
+    {
+      "id": "5ed50882c9e77c000848ede9_3",
+      "claim": "The human brain has a membrane .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3346
+    },
+    {
+      "id": "5ed50882c9e77c000848f121_4",
+      "claim": "Camden is a city in New Jersey .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3521
+    },
+    {
+      "id": "5ee3932bc9e77c0008cca0c4_1",
+      "claim": "The US CDC encouraged elders and people with severe chronic conditions to avoid crowds and self-isolate at their residencies .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4329
+    },
+    {
+      "id": "5ee39419c9e77c0008ccfaea_1",
+      "claim": "In Mohra , Raveena Tandon plays the role of Roma Singh .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2759
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a6ccd_2",
+      "claim": "On July 22 , 2012 , Jim Thome had less than 2,528 strikeouts in his career , Alex Rodriguez had less than 1,998 , and Adam Dunn had less than 1,953 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4900
+    },
+    {
+      "id": "5ed50882c9e77c000848f213_3",
+      "claim": "Guillermo del Toro works in the music industry .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2603
+    },
+    {
+      "id": "5ec7d50dc9e77c0008441f92_4",
+      "claim": "Donald Sterling paid the levy of less than $ 20,000 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3214
+    },
+    {
+      "id": "5ec7d50dc9e77c0008441d89_1",
+      "claim": "Shelley Hennig plays a part in When We First Met .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4651
+    },
+    {
+      "id": "5ee3949bc9e77c0008cd0184_4",
+      "claim": "`` Do n't Stop 'Til You Get Enough '' was a Michael Jackson´s number-one single .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2933
+    },
+    {
+      "id": "5ed50881c9e77c000848df0c_3",
+      "claim": "Recovery is Eminem 's seventh studio album .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2845
+    },
+    {
+      "id": "5ec284fcc9e77c0008415990_4",
+      "claim": "Believe , by Justin Beiber , was released after June 17 , 2012 .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3261
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce0884_1",
+      "claim": "John Schlesinger directed the third version of the novel Far from the Madding Crowd .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3055
+    },
+    {
+      "id": "5ee39419c9e77c0008ccf8f1_1",
+      "claim": "Asylum Records produced songs for American singer Bob Woodruff .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4736
+    },
+    {
+      "id": "5ed50881c9e77c000848e316_2",
+      "claim": "The Gifted is a television series .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2793
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccbbfc_2",
+      "claim": "In late January 2020 , the Chinese government rejected assistance from the CDC and the WHO to combat coronavirus .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5051
+    },
+    {
+      "id": "5ec55990c9e77c000842cf7e_1",
+      "claim": "3OH ! 3 performed at the MTV Video Music Awards 2009 on September 13 .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3156
+    },
+    {
+      "id": "5ed50881c9e77c000848dda5_3",
+      "claim": "Larry Wilmore is a woman .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4120
+    },
+    {
+      "id": "5ed50880c9e77c000848da1d_2",
+      "claim": "Trace Cyrus is a sibling of Noah Cyrus .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2653
+    },
+    {
+      "id": "5eafed81c9e77c0009ce1ae0_1",
+      "claim": "The movie Resident Evil : The Final Chapter has received more than 76 reviews .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2574
+    },
+    {
+      "id": "5ed50881c9e77c000848e533_1",
+      "claim": "Raabta ( song ) is a song that has only been featured in The Matrix .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5269
+    },
+    {
+      "id": "5eafed7ec9e77c0009ce07d7_4",
+      "claim": "Erwin Schrödinger was born more than 100 years ago .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4007
+    },
+    {
+      "id": "5ed50882c9e77c000848f28b_4",
+      "claim": "Alexandra Daddario is a singer .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2458
+    },
+    {
+      "id": "5ea2d97dc9e77c0009cdad92_3",
+      "claim": "Deezer made an announcement regarding its availability in Latin American countries on June 8 .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4847
+    },
+    {
+      "id": "5ed50881c9e77c000848e9d3_1",
+      "claim": "Lemmy had a distinct gravelly voice that made him known .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3372
+    },
+    {
+      "id": "5ed7ad02c9e77c00084a7031_4",
+      "claim": "Robert Lester Zamora is also known as `` Kevin Mumbere '' .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2798
+    },
+    {
+      "id": "5ed50882c9e77c000848ed2a_4",
+      "claim": "French Indochina was a grouping of French colonial territories .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4015
+    },
+    {
+      "id": "5ed50882c9e77c000848fcb1_1",
+      "claim": "Live Through This has sold over 1.6 thousand copies .",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4013
+    },
+    {
+      "id": "5ed50880c9e77c000848d92c_3",
+      "claim": "Magic Johnson played for the Bulls .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2346
+    },
+    {
+      "id": "5ed7ad01c9e77c00084a62ca_2",
+      "claim": "Robert Garza is the City Manager of Las Cruces , New Mexico .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3287
+    },
+    {
+      "id": "5ee393b6c9e77c0008ccc031_3",
+      "claim": "As of 26 February , more than 18 countries have confirmed coronavirus cases .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3962
+    },
+    {
+      "id": "5ed4de08c9e77c000848a7a5_1",
+      "claim": "Fanhaus produces many shows including a game show called Google Trends , a current live-stream called FanhausTV on YouTube and the now-defunct Sex Swing : The Animated Series .",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4829
+    },
+    {
+      "id": "5ed4de03c9e77c0008489398_4",
+      "claim": "Jean-Michel Jarre has surpassed 3 times the record he broke during his performance at Place de la Concorde .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3341
+    },
+    {
+      "id": "5ed50881c9e77c000848ea36_4",
+      "claim": "Papua is a place .",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3944
+    },
+    {
+      "id": "5ec284fcc9e77c0008415baa_1",
+      "claim": "Pierce the Veil is a Mexican-American rock band .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3237
+    },
+    {
+      "id": "5ed7ad00c9e77c00084a5e32_3",
+      "claim": "The film Rambo : Last Blood 's earned more than $ 86.9 million globally .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3521
+    },
+    {
+      "id": "5ebe6f30c9e77c00084088ff_1",
+      "claim": "Sonic the Hedgehog is a family film .",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3175
+    },
+    {
+      "id": "5ed50880c9e77c000848d930_4",
+      "claim": "Rupert Murdoch is only a journalist .",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3790
+    },
+    {
+      "id": "5eb9573bc9e77c0008fa18e4_2",
+      "claim": "Sacramento Republic FC will be the 29th MLS franchise that will begin play in 2022 .",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3001
+    }
+  ]
+}

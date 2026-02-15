@@ -1,0 +1,4030 @@
+{
+  "label": "fever-two-pass",
+  "timestamp": "2026-02-15T01:32:26.167Z",
+  "config": {
+    "mode": "two-pass",
+    "backend": "api",
+    "model": "claude-sonnet-4-5-20250929",
+    "total": 500
+  },
+  "totalElapsedMs": 4959176,
+  "accuracy": 0.828,
+  "correct": 414,
+  "total": 500,
+  "byLabel": {
+    "SUPPORTS": {
+      "correct": 105,
+      "total": 172
+    },
+    "REFUTES": {
+      "correct": 151,
+      "total": 170
+    },
+    "NOT_ENOUGH_INFO": {
+      "correct": 158,
+      "total": 158
+    }
+  },
+  "results": [
+    {
+      "id": 64196,
+      "claim": "Men in Black II is a 1992 film.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12271
+    },
+    {
+      "id": 17031,
+      "claim": "Reign Over Me was written and directed by Mike Binder in 2001.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10115
+    },
+    {
+      "id": 147487,
+      "claim": "The Armenian Genocide occurred during the Reconstruction.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7384
+    },
+    {
+      "id": 219278,
+      "claim": "Capsicum chinense is a species of chili pepper.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9678
+    },
+    {
+      "id": 104324,
+      "claim": "Rage Against the Machine performed at concert halls and arenas.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7593
+    },
+    {
+      "id": 27307,
+      "claim": "Philomena was nominated.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11637
+    },
+    {
+      "id": 53675,
+      "claim": "Birthday Song (2 Chainz song) was produced by Sonny Digital.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 13872
+    },
+    {
+      "id": 215140,
+      "claim": "Private Lives is only a horror movie made by a Bollywood director.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10205
+    },
+    {
+      "id": 206157,
+      "claim": "Palo Alto, California is a city.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 15277
+    },
+    {
+      "id": 211781,
+      "claim": "Brick (film) was written by Michael Bay only.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9560
+    },
+    {
+      "id": 90038,
+      "claim": "In the End was a track on Love, Lust, Faith and Dreams.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7043
+    },
+    {
+      "id": 54077,
+      "claim": "The Hundred Years' War includes the Civil War.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 13688
+    },
+    {
+      "id": 216401,
+      "claim": "Homer Hickman has written memoirs.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11288
+    },
+    {
+      "id": 95586,
+      "claim": "Kesha is Jewish.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7300
+    },
+    {
+      "id": 23633,
+      "claim": "James VI and I was a ruler.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12280
+    },
+    {
+      "id": 196960,
+      "claim": "Diwali spiritually signifies the victory of light over darkness.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11838
+    },
+    {
+      "id": 165870,
+      "claim": "Buffy Summers appears only in a television series.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 16661
+    },
+    {
+      "id": 193420,
+      "claim": "The Eighth Doctor has only ever been a comedy character.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7982
+    },
+    {
+      "id": 121016,
+      "claim": "The Mod Squad ran on FOX for five years.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7758
+    },
+    {
+      "id": 201833,
+      "claim": "Dakota Fanning was involved with a 2009 film called Coraline.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 15303
+    },
+    {
+      "id": 118091,
+      "claim": "Moonlight's filming began in 1815.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8447
+    },
+    {
+      "id": 165235,
+      "claim": "There are no musical or creative works in existence that have been created by Phillip Glass.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12755
+    },
+    {
+      "id": 92172,
+      "claim": "Neil Diamond is a painter.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7680
+    },
+    {
+      "id": 158419,
+      "claim": "The Penibaetic System is the southernmost of the three systems of mountain ranges in the Iberian Peninsula.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 11258
+    },
+    {
+      "id": 196747,
+      "claim": "The person known as \"The Master of Suspense\" was the director for Marnie.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8323
+    },
+    {
+      "id": 26839,
+      "claim": "Hedda Gabler's world premiere took place at the Battle of Hastings.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10824
+    },
+    {
+      "id": 218463,
+      "claim": "The Hanford Site hosts a research center.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6822
+    },
+    {
+      "id": 202050,
+      "claim": "Tamerlan Tsarnaev was an only child.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 14738
+    },
+    {
+      "id": 99732,
+      "claim": "Margaret Thatcher was a spokesperson for Doritos.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7890
+    },
+    {
+      "id": 110598,
+      "claim": "The Road to El Dorado stars Jim Cummings and Ryan Gosling.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7653
+    },
+    {
+      "id": 77955,
+      "claim": "Dilwale Dulhania Le Jayenge was an animated film.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7740
+    },
+    {
+      "id": 140144,
+      "claim": "Annette Badland was in a cult.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8256
+    },
+    {
+      "id": 214243,
+      "claim": "DJ Quik is a DJ and record producer from Atlanta.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8232
+    },
+    {
+      "id": 6275,
+      "claim": "Recovery is an album focusing on themes of isolation and addiction.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11320
+    },
+    {
+      "id": 169002,
+      "claim": "Manmohan Singh was re-elected after completing a full five-year term in 2009.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12193
+    },
+    {
+      "id": 96266,
+      "claim": "Edmund H. North presented an Academy Award.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6942
+    },
+    {
+      "id": 183140,
+      "claim": "Tata Motors is a constituent of the national competition.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7942
+    },
+    {
+      "id": 41522,
+      "claim": "Colin Kaepernick plays for the 49ers.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7685
+    },
+    {
+      "id": 102892,
+      "claim": "Hourglass came out in the 80s.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10298
+    },
+    {
+      "id": 48574,
+      "claim": "The ancient Roman town of Pompeii is being rebuilt near Naples.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7467
+    },
+    {
+      "id": 124503,
+      "claim": "Stanley Williams was Catholic.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7566
+    },
+    {
+      "id": 217187,
+      "claim": "A monk lives monastically.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10091
+    },
+    {
+      "id": 79208,
+      "claim": "Arizona is not a part of the United States.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 20227
+    },
+    {
+      "id": 43153,
+      "claim": "The series finale of Make It or Break It ended on the 5th month of the calendar year.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9843
+    },
+    {
+      "id": 228320,
+      "claim": "Island Records was founded by only Batman.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12712
+    },
+    {
+      "id": 83684,
+      "claim": "Knocked Up was released nationwide.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7627
+    },
+    {
+      "id": 110772,
+      "claim": "Sidse Babett Knudsen is Swedish.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9314
+    },
+    {
+      "id": 1035,
+      "claim": "Anushka Sharma is an actress.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10232
+    },
+    {
+      "id": 161253,
+      "claim": "French Indochina was officially known as Mario after 1887.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7452
+    },
+    {
+      "id": 106757,
+      "claim": "The Mod Squad is a comedy series.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7447
+    },
+    {
+      "id": 103872,
+      "claim": "Uranium-235 was discovered by a person who lived forever.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10405
+    },
+    {
+      "id": 182271,
+      "claim": "Saturn Corporation has no trademark.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8494
+    },
+    {
+      "id": 157018,
+      "claim": "Billboard Dad was produced by Alan Metter.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7107
+    },
+    {
+      "id": 144161,
+      "claim": "Janet Leigh was a person.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7965
+    },
+    {
+      "id": 62048,
+      "claim": "Michigan is the largest state by total area east of the highway.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7875
+    },
+    {
+      "id": 161572,
+      "claim": "Baz Luhrmann only has films from 2007.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 14807
+    },
+    {
+      "id": 46297,
+      "claim": "Noel Fisher portrayed Hermione Granger.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7302
+    },
+    {
+      "id": 152285,
+      "claim": "Tool is a mechanic collective.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7114
+    },
+    {
+      "id": 111170,
+      "claim": "One of the founders of San Diego Comic-Con was Chevron.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8221
+    },
+    {
+      "id": 179348,
+      "claim": "Osamu Tezuka's mother had to erase pages in his binder.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7116
+    },
+    {
+      "id": 62919,
+      "claim": "Trevor Griffiths was only born on April 14, 1935.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9056
+    },
+    {
+      "id": 21588,
+      "claim": "Danger UXB is from the late seventies.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9678
+    },
+    {
+      "id": 204643,
+      "claim": "Rio's sequel is a 2014 book.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12030
+    },
+    {
+      "id": 183626,
+      "claim": "Finding Dory was directed by an American and it is a film.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8437
+    },
+    {
+      "id": 7418,
+      "claim": "The Faroe Islands existed in 1035.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9905
+    },
+    {
+      "id": 71089,
+      "claim": "Britt Robertson never portrayed the role of Sophia Amoruso.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11627
+    },
+    {
+      "id": 50964,
+      "claim": "Vietnam is the 14th most famous country in the world.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7383
+    },
+    {
+      "id": 8247,
+      "claim": "Moonlight's filming began in a store.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7210
+    },
+    {
+      "id": 158241,
+      "claim": "Sophia Bush starred in a Taylor Swift music video.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7018
+    },
+    {
+      "id": 165233,
+      "claim": "There are eleven symphonic works in existence that have been composed by Phillip Glass.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 13069
+    },
+    {
+      "id": 26524,
+      "claim": "Harvard University is a thousand square feet.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8032
+    },
+    {
+      "id": 179735,
+      "claim": "Wentworth Miller made his screenwriting debut with the 80s film Stoker.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11537
+    },
+    {
+      "id": 2616,
+      "claim": "Eddie Guerrero experienced drug addiction.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12798
+    },
+    {
+      "id": 152559,
+      "claim": "A monster is any creature that is often hideous and either scary or dangerous or both.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7922
+    },
+    {
+      "id": 32355,
+      "claim": "Terry Crews was a linebacker.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9969
+    },
+    {
+      "id": 36569,
+      "claim": "Knocked Up is only a TV show.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10738
+    },
+    {
+      "id": 90958,
+      "claim": "Kerplunk was released through Epitaph Records.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9292
+    },
+    {
+      "id": 194361,
+      "claim": "Happiness in Slavery is only an album.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11024
+    },
+    {
+      "id": 81519,
+      "claim": "The CONCACAF Champions League is organized for football clubs in Africa.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7213
+    },
+    {
+      "id": 185212,
+      "claim": "Home for the Holidays stars a producer from the United States.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12539
+    },
+    {
+      "id": 218479,
+      "claim": "The Hanford Site is the host of the Pacific Northwest National Laboratory.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10516
+    },
+    {
+      "id": 161566,
+      "claim": "Baz Luhrmann's film Waluigi is an epic historical romantic drama.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8132
+    },
+    {
+      "id": 104820,
+      "claim": "The Gifted is a murderer.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8345
+    },
+    {
+      "id": 156440,
+      "claim": "Sheryl Lee was in a movie that was written and directed by Woody Allen.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11982
+    },
+    {
+      "id": 203002,
+      "claim": "The current President of Lockheed Martin holds no other positions in the company.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9396
+    },
+    {
+      "id": 151070,
+      "claim": "The United Nations Charter was vetoed at the San Francisco War Memorial and Performing Arts Center.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11891
+    },
+    {
+      "id": 146399,
+      "claim": "Black Canary is a character in works published by an American comic book publisher.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10852
+    },
+    {
+      "id": 46383,
+      "claim": "The White House Press Secretary is a senior official.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8345
+    },
+    {
+      "id": 138356,
+      "claim": "Murda Beatz was born on February 11, 1984.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9156
+    },
+    {
+      "id": 158306,
+      "claim": "Bessie Smith was a singer.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8705
+    },
+    {
+      "id": 47411,
+      "claim": "Shane McMahon did not wrestle in the main event of multiple WWE pay per views.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7561
+    },
+    {
+      "id": 6274,
+      "claim": "Recovery is an album by Marshall Mathers III.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8329
+    },
+    {
+      "id": 179352,
+      "claim": "Osamu Tezuka practiced at least one art as a child.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12058
+    },
+    {
+      "id": 194343,
+      "claim": "Nine Inch Nails is responsible for the song Happiness in Slavery.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10558
+    },
+    {
+      "id": 192973,
+      "claim": "Roland Emmerich is a closeted gay.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11457
+    },
+    {
+      "id": 127722,
+      "claim": "Saxony is the tenth largest German cat.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 15598
+    },
+    {
+      "id": 208159,
+      "claim": "Easy A is a film released in 2010.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10123
+    },
+    {
+      "id": 223334,
+      "claim": "The principal photography of The Disaster Artist (film) started on December.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10884
+    },
+    {
+      "id": 194781,
+      "claim": "Fortunes of War stars the actor Kenneth Branagh.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10856
+    },
+    {
+      "id": 64631,
+      "claim": "Sheryl Lee appeared in Café Society.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11341
+    },
+    {
+      "id": 140846,
+      "claim": "Shooter is about an expert marksman who tries to stop the assassination of the president.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7057
+    },
+    {
+      "id": 224371,
+      "claim": "Southampton F.C. has won a competition.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12675
+    },
+    {
+      "id": 139661,
+      "claim": "Colombiana was produced by Luc Besson in 2001.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 9550
+    },
+    {
+      "id": 187312,
+      "claim": "Diana, Princess of Wales divorced on August 28, 1996.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7019
+    },
+    {
+      "id": 95728,
+      "claim": "John Dolmayan is a German songwriter.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11331
+    },
+    {
+      "id": 46225,
+      "claim": "The Gifted was created by Matt Nix and is acclaimed.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7891
+    },
+    {
+      "id": 134346,
+      "claim": "Poldark series two did not begin sometime after 6 July 2016.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9204
+    },
+    {
+      "id": 18822,
+      "claim": "The Quran is Islamic.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 13501
+    },
+    {
+      "id": 170409,
+      "claim": "Michael Vick played with The Beatles and The Killers.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7987
+    },
+    {
+      "id": 4171,
+      "claim": "A monster is a creature.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10570
+    },
+    {
+      "id": 105933,
+      "claim": "The Bloods are a primarily, though not exclusively, White street gang.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8711
+    },
+    {
+      "id": 191420,
+      "claim": "Keith Urban is an Australian country music artist's second studio album.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9915
+    },
+    {
+      "id": 161856,
+      "claim": "An Emmy winner is Robert Lopez.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12756
+    },
+    {
+      "id": 36370,
+      "claim": "Uranium-235 was discovered by a Canadian-American physicist.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10245
+    },
+    {
+      "id": 12369,
+      "claim": "James VI and I was a major advocate of women's rights for Scotland.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10985
+    },
+    {
+      "id": 170947,
+      "claim": "Smriti Mandhana was born July 18, 1996.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10261
+    },
+    {
+      "id": 215211,
+      "claim": "Dreamer (2005 film) was directed by an American screenwriter, director, and actor.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9259
+    },
+    {
+      "id": 50916,
+      "claim": "Shane McMahon worked for the Big Show.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7409
+    },
+    {
+      "id": 181126,
+      "claim": "So You Think You Can Dance premiered with over ten million contestants.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7640
+    },
+    {
+      "id": 53676,
+      "claim": "Birthday Song (2 Chainz song) was produced by a producer.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12986
+    },
+    {
+      "id": 752,
+      "claim": "Tottenham Hotspur F.C. is a football club.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 19053
+    },
+    {
+      "id": 121119,
+      "claim": "The 14th Dalai Lama lives in Japan exclusively.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9630
+    },
+    {
+      "id": 214256,
+      "claim": "DJ Quik was conceived on January 22nd, 1970.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11004
+    },
+    {
+      "id": 181992,
+      "claim": "Forceps are an instrument that is unable to be handheld.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8985
+    },
+    {
+      "id": 170424,
+      "claim": "Michael Vick has a middle name.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9102
+    },
+    {
+      "id": 199428,
+      "claim": "Richard Linklater's cousin plays Mason's sister.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9433
+    },
+    {
+      "id": 183619,
+      "claim": "Finding Dory was written.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9209
+    },
+    {
+      "id": 50127,
+      "claim": "Harold Macmillan died on December 29, 1986.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10203
+    },
+    {
+      "id": 39018,
+      "claim": "Duane Chapman's father is Duane Lee \"Dog\" Chapman I.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11031
+    },
+    {
+      "id": 7047,
+      "claim": "Viola Davis was unable to appear in Kate & Leopold.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7203
+    },
+    {
+      "id": 96943,
+      "claim": "Hot Right Now is off of DJ Fresh's fourth album.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7202
+    },
+    {
+      "id": 214271,
+      "claim": "DJ Quik's real name is DJ Quik.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9831
+    },
+    {
+      "id": 49785,
+      "claim": "Kendall Jenner is unfamous.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 14533
+    },
+    {
+      "id": 28864,
+      "claim": "Angela Bassett has only received a bachelors degree.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9433
+    },
+    {
+      "id": 31771,
+      "claim": "Shane McMahon won the Hardcore Championship thrice.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10893
+    },
+    {
+      "id": 197375,
+      "claim": "Simón Bolívar was Dominican.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7122
+    },
+    {
+      "id": 226860,
+      "claim": "Jenna Jameson worked as a glamor model.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12109
+    },
+    {
+      "id": 62492,
+      "claim": "Duane Chapman is a Gemini.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10493
+    },
+    {
+      "id": 13742,
+      "claim": "Neil Diamond likes to be called Leslie.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7329
+    },
+    {
+      "id": 173511,
+      "claim": "Sancho Panza is a Don Quixote character.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10252
+    },
+    {
+      "id": 55335,
+      "claim": "Hourglass was released in 1997.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10564
+    },
+    {
+      "id": 204356,
+      "claim": "The Cretaceous is an event.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10417
+    },
+    {
+      "id": 161007,
+      "claim": "Gal Gadot was ranked behind Esti Ginzburgh for highest earning actress/models in Israel.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12483
+    },
+    {
+      "id": 96603,
+      "claim": "Nestor Carbonell is famous.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11887
+    },
+    {
+      "id": 101183,
+      "claim": "Camden, New Jersey is a country.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 14292
+    },
+    {
+      "id": 4179,
+      "claim": "The 14th Dalai Lama fled to India during the Tibetan uprising.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10812
+    },
+    {
+      "id": 218246,
+      "claim": "Libya is the largest country in Africa.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8204
+    },
+    {
+      "id": 60459,
+      "claim": "Aristotle tutored Philip II of Macedon.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10591
+    },
+    {
+      "id": 160483,
+      "claim": "Juventus F.C. is the second oldest association football (soccer) club engaged in professional competition.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 13038
+    },
+    {
+      "id": 17030,
+      "claim": "Reign Over Me was written and directed by Mike Binder.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9497
+    },
+    {
+      "id": 172514,
+      "claim": "Entourage (film) was a film adaptation of a comic.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9854
+    },
+    {
+      "id": 116067,
+      "claim": "The University of Illinois at Chicago is privately funded.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7028
+    },
+    {
+      "id": 125780,
+      "claim": "Youtube is listed as the second most popular website on the planet.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10796
+    },
+    {
+      "id": 138206,
+      "claim": "Brazzers is a pornographic production company based in Montreal.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9006
+    },
+    {
+      "id": 226859,
+      "claim": "Jenna Jameson only worked as a professional actress.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7313
+    },
+    {
+      "id": 186924,
+      "claim": "Geffen Records released Cher.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9503
+    },
+    {
+      "id": 136040,
+      "claim": "Stanley Williams died.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10628
+    },
+    {
+      "id": 132495,
+      "claim": "Danger UXB is a work.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10535
+    },
+    {
+      "id": 179739,
+      "claim": "Wentworth Miller made his screenwriting debut with the 2013 top-grossing film.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8375
+    },
+    {
+      "id": 93033,
+      "claim": "Moonlight was filmed on a beach in Miami, Florida.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11002
+    },
+    {
+      "id": 96901,
+      "claim": "Pearl Jam does not play rock music.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11527
+    },
+    {
+      "id": 185234,
+      "claim": "Home for the Holidays stars no children of Charlie Chaplin.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12821
+    },
+    {
+      "id": 209888,
+      "claim": "In a Lonely Place was based on a 1980 novel.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9617
+    },
+    {
+      "id": 187775,
+      "claim": "The Sterile Cuckoo was adapted by Alvin Sargent.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 14769
+    },
+    {
+      "id": 104386,
+      "claim": "Tenacious D started in 1997.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10029
+    },
+    {
+      "id": 181204,
+      "claim": "Southpaw is a movie created and released in the United States.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7014
+    },
+    {
+      "id": 95056,
+      "claim": "Eddie Guerrero's problems were written into his storylines.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11548
+    },
+    {
+      "id": 207516,
+      "claim": "Mel B collaborated with Ciara.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8983
+    },
+    {
+      "id": 7347,
+      "claim": "Paris (Paris Hilton album) incorporates rhythm and lyrics of soul.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7374
+    },
+    {
+      "id": 64226,
+      "claim": "Aparshakti Khurana refused to appear in Dangal.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10344
+    },
+    {
+      "id": 213937,
+      "claim": "Gray Matter Interactive Studios, Inc. was separated from Activision in January 2002.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10097
+    },
+    {
+      "id": 27564,
+      "claim": "The Dark Tower has remained unadapted to film.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 13095
+    },
+    {
+      "id": 219291,
+      "claim": "Capsicum chinense is never known as the \"bonnet pepper\".",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10363
+    },
+    {
+      "id": 43812,
+      "claim": "Papua was formerly called Irian Barat.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12188
+    },
+    {
+      "id": 187216,
+      "claim": "The Hurt Locker is 2010 American film.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9651
+    },
+    {
+      "id": 201745,
+      "claim": "North Vietnam was officially called the Democratic Republic of Vietnam between 1945 and 1976.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9730
+    },
+    {
+      "id": 100515,
+      "claim": "Bret Easton Ellis barely wrote the screenplay for a 2013 film.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7502
+    },
+    {
+      "id": 170410,
+      "claim": "Michael Vick's dog's name is Paws.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8645
+    },
+    {
+      "id": 98559,
+      "claim": "Steve Wozniak was a pet of Rod Holt.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11018
+    },
+    {
+      "id": 226140,
+      "claim": "Richard Dawkins makes regular film cameos.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7113
+    },
+    {
+      "id": 145508,
+      "claim": "Terry Crews played on a football team.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11229
+    },
+    {
+      "id": 73136,
+      "claim": "XHamster puts into production a reality series.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9686
+    },
+    {
+      "id": 147762,
+      "claim": "Noah Cyrus is of no relation to Billy Ray Cyrus.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12857
+    },
+    {
+      "id": 148362,
+      "claim": "\"Champ\" is a nickname held by James Jones.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9526
+    },
+    {
+      "id": 185240,
+      "claim": "Home for the Holidays stars an American singer.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7837
+    },
+    {
+      "id": 115473,
+      "claim": "Jennifer Lopez's The Remixes was not the first in history to debut at number one on the U.S. Billboard 200.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11609
+    },
+    {
+      "id": 129881,
+      "claim": "The Prowler made his last appearance in The Amazing Spider-Man #78.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7631
+    },
+    {
+      "id": 202789,
+      "claim": "Despicable Me 2 was produced for Universal Pictures in 2014.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12493
+    },
+    {
+      "id": 47158,
+      "claim": "Sidse Babett Knudsen was born Monday, November 22nd, 1968.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7580
+    },
+    {
+      "id": 204425,
+      "claim": "In August 1991, Brad Wilk co-founded Rage.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12195
+    },
+    {
+      "id": 123393,
+      "claim": "The Prowler is a fictional pig.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8080
+    },
+    {
+      "id": 47542,
+      "claim": "Ashley Cole plays as a left-back for the Los Angeles Galaxy.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10839
+    },
+    {
+      "id": 77824,
+      "claim": "The first inauguration of Bill Clinton took place in Vietnam.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8153
+    },
+    {
+      "id": 85293,
+      "claim": "Rupert Murdoch is the CEO of The Galactic Empire.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7504
+    },
+    {
+      "id": 137334,
+      "claim": "Fox 2000 Pictures released the film Soul Food.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8991
+    },
+    {
+      "id": 76552,
+      "claim": "Scotty Moore was a sandwich engineer.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8910
+    },
+    {
+      "id": 105931,
+      "claim": "There is a television series called Cheese in the Trap (TV series).",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9838
+    },
+    {
+      "id": 226143,
+      "claim": "Richard Dawkins has yet to appear on the radio.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11418
+    },
+    {
+      "id": 54164,
+      "claim": "Janet Leigh was an actress.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 18166
+    },
+    {
+      "id": 116424,
+      "claim": "An expert marksman is the subject of Shooter.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10240
+    },
+    {
+      "id": 5127,
+      "claim": "Kellyanne Conway did not claim Michael Flynn had the full confidence of the president hours before he was dismissed.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11617
+    },
+    {
+      "id": 5689,
+      "claim": "Amyotrophic lateral sclerosis is a cure.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10570
+    },
+    {
+      "id": 223346,
+      "claim": "The principal photography of The Disaster Artist (film) is incapable of starting.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10896
+    },
+    {
+      "id": 185231,
+      "claim": "Home for the Holidays stars a famous American actor.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 13678
+    },
+    {
+      "id": 175659,
+      "claim": "Fabian Nicieza is a novelist.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7810
+    },
+    {
+      "id": 193873,
+      "claim": "Bea Arthur's date of birth was May 13th, 1922.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8547
+    },
+    {
+      "id": 202453,
+      "claim": "Tinker Tailor Soldier Spy stars Aaron Carter.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7567
+    },
+    {
+      "id": 109834,
+      "claim": "Trevor Griffiths was born on Mars.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7570
+    },
+    {
+      "id": 213931,
+      "claim": "Gray Matter Interactive Studios, Inc. was acquired by Activision in January 20, 2002.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8056
+    },
+    {
+      "id": 123076,
+      "claim": "Residents of Basildon work in Central London.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7022
+    },
+    {
+      "id": 150920,
+      "claim": "Sam Claflin was not in Pirates of the Caribbean: On Stranger Tides.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10174
+    },
+    {
+      "id": 23126,
+      "claim": "Derek Hough has worked with a K-pop singer.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10192
+    },
+    {
+      "id": 32827,
+      "claim": "Wish Upon was released in the 21st century.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10701
+    },
+    {
+      "id": 41803,
+      "claim": "EA Black Box was a video game ender.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9790
+    },
+    {
+      "id": 185239,
+      "claim": "Home for the Holidays stars an American flag.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7527
+    },
+    {
+      "id": 122910,
+      "claim": "XHamster's The Sex Factor makes eight men and eight women compete to become a porn star and it has been watched.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 9933
+    },
+    {
+      "id": 46508,
+      "claim": "Angelsberg is not a town.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8473
+    },
+    {
+      "id": 181977,
+      "claim": "Forceps are used for pulling objects.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8902
+    },
+    {
+      "id": 60092,
+      "claim": "David Packouz is a musician.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11038
+    },
+    {
+      "id": 101746,
+      "claim": "Reign Over Me was withheld in 2007.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7334
+    },
+    {
+      "id": 123831,
+      "claim": "Melancholia was directed by a screenwriter.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9808
+    },
+    {
+      "id": 182440,
+      "claim": "Epistemology studies the nature of information.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7191
+    },
+    {
+      "id": 48959,
+      "claim": "Always premiered at the American Film Festival.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7501
+    },
+    {
+      "id": 64113,
+      "claim": "Marvel vs. Capcom: Infinite incorporates combos.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10107
+    },
+    {
+      "id": 111492,
+      "claim": "José Ferrer played the part of defensive lineman.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7533
+    },
+    {
+      "id": 227140,
+      "claim": "New Orleans Pelicans compete in the NBA.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11145
+    },
+    {
+      "id": 192981,
+      "claim": "Roland Emmerich is gay.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9823
+    },
+    {
+      "id": 186882,
+      "claim": "Live Through This has only been sold in Australia.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10203
+    },
+    {
+      "id": 171078,
+      "claim": "Lalla Ward was declared Sarah Ward.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7242
+    },
+    {
+      "id": 13630,
+      "claim": "Melancholia's director was a Danish screenwriter.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9919
+    },
+    {
+      "id": 179022,
+      "claim": "Steve Ditko graduated in New York City.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8103
+    },
+    {
+      "id": 82761,
+      "claim": "In 2014, Halsey signed her first recording contract.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12622
+    },
+    {
+      "id": 208151,
+      "claim": "Easy A's writer is Bert V. Royal.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10671
+    },
+    {
+      "id": 174594,
+      "claim": "Artpop sold copies.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11564
+    },
+    {
+      "id": 187120,
+      "claim": "Eva Mendes has only ever been a gardener.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10646
+    },
+    {
+      "id": 35260,
+      "claim": "Shane McMahon won the European Championship once in 1998.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7022
+    },
+    {
+      "id": 192977,
+      "claim": "Roland Emmerich is a collector of stamps.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7456
+    },
+    {
+      "id": 14428,
+      "claim": "Gordon Ramsay has had apprentices.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10990
+    },
+    {
+      "id": 150319,
+      "claim": "John Deighton worked a silver claim.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7867
+    },
+    {
+      "id": 122459,
+      "claim": "Randy Savage wears his hair long.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7932
+    },
+    {
+      "id": 11698,
+      "claim": "Taran Killam is a Buddhist.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8172
+    },
+    {
+      "id": 195024,
+      "claim": "Girl is by an American blues singer.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7127
+    },
+    {
+      "id": 189894,
+      "claim": "Stadium Arcadium failed to be nominated for Grammies.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11740
+    },
+    {
+      "id": 140018,
+      "claim": "Over half of the University of Mississippi's students are Mississippian.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10409
+    },
+    {
+      "id": 83559,
+      "claim": "PacSun sells products.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9390
+    },
+    {
+      "id": 118509,
+      "claim": "Speech recognition incorporates knowledge and research in data analytics.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8241
+    },
+    {
+      "id": 161842,
+      "claim": "Robert Lopez has won a Tony Award.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10424
+    },
+    {
+      "id": 49740,
+      "claim": "The Bee Gees wrote music.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11031
+    },
+    {
+      "id": 36333,
+      "claim": "Underdog was directed by a Belgian film director.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10708
+    },
+    {
+      "id": 124443,
+      "claim": "House is on ABC.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11002
+    },
+    {
+      "id": 228351,
+      "claim": "Island Records was co-founded by Chris Blackwell.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12170
+    },
+    {
+      "id": 114033,
+      "claim": "Sam Claflin is a director.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7233
+    },
+    {
+      "id": 168548,
+      "claim": "Rick Yune was on a show.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10073
+    },
+    {
+      "id": 136704,
+      "claim": "Edmund H. North was the winner of an Academy Award.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10620
+    },
+    {
+      "id": 36091,
+      "claim": "Liverpool is in the United Kingdom.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12706
+    },
+    {
+      "id": 194783,
+      "claim": "Fortunes of War spotlights Emma Thompson.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8331
+    },
+    {
+      "id": 208133,
+      "claim": "Easy A is an American teen comedy film.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9418
+    },
+    {
+      "id": 28324,
+      "claim": "Muscarinic acetylcholine receptors are actylcholine receptors.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10963
+    },
+    {
+      "id": 226102,
+      "claim": "Bongwater was based on a book.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10322
+    },
+    {
+      "id": 181642,
+      "claim": "Mogadishu's location is Somalia.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10322
+    },
+    {
+      "id": 215489,
+      "claim": "Weekly Idol is hosted by Jeong Hyeong-don, a comedian and actor.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7298
+    },
+    {
+      "id": 138527,
+      "claim": "The Cincinnati Kid was produced by a Canadian film director.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8339
+    },
+    {
+      "id": 6106,
+      "claim": "Mount Rushmore was built by Gutzon Borglum and his son Lincoln Borglum in the twentieth century.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11724
+    },
+    {
+      "id": 170403,
+      "claim": "Michael Vick's middle name is Jeremy.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8821
+    },
+    {
+      "id": 42340,
+      "claim": "Bessie Smith was a blues singer; she sang \"Ring of Fire\".",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7888
+    },
+    {
+      "id": 50012,
+      "claim": "Margaret Thatcher implemented policies that have come to be known as Thatcherism in 2003.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11360
+    },
+    {
+      "id": 186873,
+      "claim": "Live Through This has sold for over 1.6 million dollars.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7622
+    },
+    {
+      "id": 213924,
+      "claim": "Gray Matter Interactive Studios, Inc. was only a agency.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8972
+    },
+    {
+      "id": 28626,
+      "claim": "Fist of Legend is a remake of an 1872 film.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11667
+    },
+    {
+      "id": 68081,
+      "claim": "Cheese in the Trap (TV series) is from a town call Santa in South Korea.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7441
+    },
+    {
+      "id": 119695,
+      "claim": "Michelin Guides are independently published.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9115
+    },
+    {
+      "id": 101771,
+      "claim": "Joe Walsh was brought into the Rock and Roll Hall of Fame.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10512
+    },
+    {
+      "id": 72024,
+      "claim": "Tool is not a band.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12993
+    },
+    {
+      "id": 18355,
+      "claim": "Damon Albarn had nothing to do with the album Everyday Robots.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11137
+    },
+    {
+      "id": 111325,
+      "claim": "Winter's Tale is only a movie.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8401
+    },
+    {
+      "id": 26675,
+      "claim": "Tottenham Hotspur F.C. was the first British club to win a UEFA club competition.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11364
+    },
+    {
+      "id": 103914,
+      "claim": "December was the month when Lockhead Martin F-35 Lightning II first flew.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9650
+    },
+    {
+      "id": 181214,
+      "claim": "Southpaw is produced by Antoine Fuqua.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7892
+    },
+    {
+      "id": 87460,
+      "claim": "XHamster produces a collection of Indian literature.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6810
+    },
+    {
+      "id": 194472,
+      "claim": "Tilda Swinton is only a lawyer.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10383
+    },
+    {
+      "id": 110504,
+      "claim": "The Mighty Ducks was only distributed by a subsidiary of 20th Century Fox.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10521
+    },
+    {
+      "id": 192921,
+      "claim": "\"Love the Way You Lie\" failed to receive any Grammy nominations.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9744
+    },
+    {
+      "id": 142701,
+      "claim": "Qui-Gon Jinn is a writer in the Star Wars franchise.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9543
+    },
+    {
+      "id": 207383,
+      "claim": "Efraim Diveroli was sentenced to federal prison.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10776
+    },
+    {
+      "id": 178159,
+      "claim": "The World Trade Center opened in NYC.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10587
+    },
+    {
+      "id": 166654,
+      "claim": "Anne Rice lived in the twenty first century.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11170
+    },
+    {
+      "id": 201749,
+      "claim": "North Vietnam was a state in North Asia.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11383
+    },
+    {
+      "id": 186976,
+      "claim": "Bermuda Triangle is where a number of aircraft and ships have disappeared.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11972
+    },
+    {
+      "id": 93285,
+      "claim": "A Milli is a building by a hip hop recording artist.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10343
+    },
+    {
+      "id": 37490,
+      "claim": "Lebanon is the place in which John Dolmayan was born.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10717
+    },
+    {
+      "id": 168041,
+      "claim": "Larry Wilmore is Canadian.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8270
+    },
+    {
+      "id": 179334,
+      "claim": "Osamu Tezuka was a young adult.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8678
+    },
+    {
+      "id": 227347,
+      "claim": "Giada at Home first aired in 2008.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9355
+    },
+    {
+      "id": 88872,
+      "claim": "Jim Broadbent is involved with Game of Thrones (season 7).",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10289
+    },
+    {
+      "id": 34004,
+      "claim": "In the End has piano in it.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8500
+    },
+    {
+      "id": 195060,
+      "claim": "Albert S. Ruddy is born in China.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9317
+    },
+    {
+      "id": 102998,
+      "claim": "Danger UXB stars David Mitchell.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7479
+    },
+    {
+      "id": 193854,
+      "claim": "Barry Van Dyke is the second son of Dick Van Dyke.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10883
+    },
+    {
+      "id": 148295,
+      "claim": "Proverbs are included in folklore.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11342
+    },
+    {
+      "id": 211777,
+      "claim": "Brick (film) was directed by Joseph Gordon-Levitt.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8466
+    },
+    {
+      "id": 127048,
+      "claim": "Hush (2016 film) was produced by Intrepid Pictures.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10593
+    },
+    {
+      "id": 106851,
+      "claim": "Wales' population rapidly expanded because of the South Wales Coalfield's exploitation.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10592
+    },
+    {
+      "id": 27206,
+      "claim": "Victoria Palace Theatre is in a corpse.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8076
+    },
+    {
+      "id": 202776,
+      "claim": "Despicable Me 2 was directed by someone.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11407
+    },
+    {
+      "id": 39098,
+      "claim": "Danny Brown is a dancer.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8200
+    },
+    {
+      "id": 128551,
+      "claim": "The Colosseum is in France.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8387
+    },
+    {
+      "id": 33277,
+      "claim": "Sandra Bullock was fired by ABC.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8101
+    },
+    {
+      "id": 82129,
+      "claim": "Microbiologist research challenges information found in immunology.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10163
+    },
+    {
+      "id": 90611,
+      "claim": "Psych's protagonist is a dog.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11415
+    },
+    {
+      "id": 145271,
+      "claim": "Huckabee is hosted by Mike Huckabee.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8852
+    },
+    {
+      "id": 166626,
+      "claim": "Anne Rice was born in New Jersey.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8513
+    },
+    {
+      "id": 182268,
+      "claim": "Saturn Corporation has no other names.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8400
+    },
+    {
+      "id": 29993,
+      "claim": "The Mirny (sloop-of-war) was a ship without allegiance.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10635
+    },
+    {
+      "id": 107134,
+      "claim": "David Packouz is a Canadian citizen.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7542
+    },
+    {
+      "id": 94637,
+      "claim": "TV Choice is a roadshow series.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9300
+    },
+    {
+      "id": 186591,
+      "claim": "Asylum Records is a record label founded in 1971.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9155
+    },
+    {
+      "id": 46475,
+      "claim": "DreamWorks Animation produced Trollhunters.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9111
+    },
+    {
+      "id": 185214,
+      "claim": "Home for the Holidays stars an actor.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 13308
+    },
+    {
+      "id": 193416,
+      "claim": "The Eighth Doctor is a science project character.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9520
+    },
+    {
+      "id": 94414,
+      "claim": "Rupert Murdoch is powerless over News Corp.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 14649
+    },
+    {
+      "id": 52801,
+      "claim": "Mud refused to hire Reese Witherspoon.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9711
+    },
+    {
+      "id": 226095,
+      "claim": "Bongwater follows the story of a marijuana dealer.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10891
+    },
+    {
+      "id": 63168,
+      "claim": "AMGTV has drama television programming.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9260
+    },
+    {
+      "id": 169049,
+      "claim": "Manmohan Singh was elected again.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11388
+    },
+    {
+      "id": 106870,
+      "claim": "Raees (film) prominently features an Indian movie actor who was born in 1965.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11045
+    },
+    {
+      "id": 47385,
+      "claim": "Chile is in the northern part of the western hemisphere.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7221
+    },
+    {
+      "id": 185300,
+      "claim": "Bradley Fuller is the co-owner of Platinum Dunes with both Michael Bay and Andrew Form.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11152
+    },
+    {
+      "id": 81110,
+      "claim": "Melancholia stars a Polish-Canadian lion.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7583
+    },
+    {
+      "id": 44389,
+      "claim": "Alexandra Daddario identifies as an American.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7216
+    },
+    {
+      "id": 182278,
+      "claim": "Saturn Corporation is also known as a balloon.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9458
+    },
+    {
+      "id": 181607,
+      "claim": "WGBH-TV is located in a slum.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7655
+    },
+    {
+      "id": 199757,
+      "claim": "Tijuana is on an island.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10937
+    },
+    {
+      "id": 174604,
+      "claim": "Artpop had first-week sales of about 500,000 copies.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10490
+    },
+    {
+      "id": 138178,
+      "claim": "The Others (2001 film) won Best Actor.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7865
+    },
+    {
+      "id": 94616,
+      "claim": "Robert Palmer (writer) wrote on a wall.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8271
+    },
+    {
+      "id": 201115,
+      "claim": "Marcus Bentley was born on November 5th, 1267.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10599
+    },
+    {
+      "id": 178335,
+      "claim": "Al Jardine provided the lead vocal part on a song penned by C. E. Quick.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7367
+    },
+    {
+      "id": 75312,
+      "claim": "Match Point explores the role of bankers in the 2008 collapse.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7963
+    },
+    {
+      "id": 86530,
+      "claim": "Michael B. Jordan was born.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8262
+    },
+    {
+      "id": 118940,
+      "claim": "Aarhus is the second-largest city in flag.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11060
+    },
+    {
+      "id": 220207,
+      "claim": "Rabbta (song) is a Hindi song from a 2012 film.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11865
+    },
+    {
+      "id": 37537,
+      "claim": "A View to a Kill is a romance movie.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12280
+    },
+    {
+      "id": 71862,
+      "claim": "The Faroe Islands are still part of the Hereditary Kingdom of Norway.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9163
+    },
+    {
+      "id": 175472,
+      "claim": "Christian Gottlob Neefe was born in 1760.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9322
+    },
+    {
+      "id": 84472,
+      "claim": "Charles Manson is a current cult leader.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10980
+    },
+    {
+      "id": 88569,
+      "claim": "Lizzy Caplan reviewed the television show Party Down",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6845
+    },
+    {
+      "id": 54622,
+      "claim": "Joe Rogan was an actor.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12201
+    },
+    {
+      "id": 181863,
+      "claim": "Princess Mononoke has a violent animal.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7512
+    },
+    {
+      "id": 124400,
+      "claim": "Annette Badland played only Doomsday Dora in The Imitation Game.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 13534
+    },
+    {
+      "id": 216394,
+      "claim": "Homer Hickman wrote three of the Josh Thurlow historical fiction novels.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7299
+    },
+    {
+      "id": 202949,
+      "claim": "Avenged Sevenfold was released by a Dutch band.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9385
+    },
+    {
+      "id": 160424,
+      "claim": "in 2015, Gal Gadot was ranked ahead of Shlomit Malka for highest earning actress/models in Israel.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7304
+    },
+    {
+      "id": 29857,
+      "claim": "Mary of Teck's son never abdicated the throne.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 13027
+    },
+    {
+      "id": 45818,
+      "claim": "Fidel Castro has a brother called Raúl Castro.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 14320
+    },
+    {
+      "id": 153261,
+      "claim": "The CONCACAF Champions League is a dead body.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10637
+    },
+    {
+      "id": 80051,
+      "claim": "Ingushetia was established on June 4th, 1992.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12047
+    },
+    {
+      "id": 194016,
+      "claim": "Kim Jong-il is designated a posthumous title.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7026
+    },
+    {
+      "id": 155807,
+      "claim": "Chile is not a stable nation.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 11880
+    },
+    {
+      "id": 203007,
+      "claim": "The current Chief Executive Officer of Lockheed Martin was born in Kansas.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8082
+    },
+    {
+      "id": 88378,
+      "claim": "Daggering is a form of art.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6927
+    },
+    {
+      "id": 206730,
+      "claim": "Samwell Tarly appears in The Lord of the Rings series.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11514
+    },
+    {
+      "id": 154538,
+      "claim": "Stephen Hillenburg died in California.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7529
+    },
+    {
+      "id": 114190,
+      "claim": "Neil Diamond is a painter.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8138
+    },
+    {
+      "id": 31885,
+      "claim": "Gin is a drink.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12307
+    },
+    {
+      "id": 35575,
+      "claim": "Tim Roth was not born on May 14th, 1961.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 9662
+    },
+    {
+      "id": 133133,
+      "claim": "Francis I of France was the first King of France from the legislative branch.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8809
+    },
+    {
+      "id": 181871,
+      "claim": "Princess Mononoke has a dark atmosphere.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10885
+    },
+    {
+      "id": 196730,
+      "claim": "Marnie was created in 2014.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7881
+    },
+    {
+      "id": 136463,
+      "claim": "Cheese in the Trap (TV series) comes from South Korea",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9244
+    },
+    {
+      "id": 17129,
+      "claim": "Jens Stoltenberg was Prime Minister of Canada from 2000 to 2001.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10244
+    },
+    {
+      "id": 137498,
+      "claim": "Danger UXB is from 1980.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10908
+    },
+    {
+      "id": 202467,
+      "claim": "Tinker Tailor Soldier Spy stars a vegan.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7664
+    },
+    {
+      "id": 98635,
+      "claim": "The Prowler was created by Stan Lee, John Buscema, and Jim Mooney in 1972.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8347
+    },
+    {
+      "id": 81499,
+      "claim": "Renato Balestra was born in Naples.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8111
+    },
+    {
+      "id": 157813,
+      "claim": "One of the most influential bands of its time is Pearl Jam.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12256
+    },
+    {
+      "id": 136951,
+      "claim": "Dakota Fanning is a photographer.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8275
+    },
+    {
+      "id": 9292,
+      "claim": "The Mirny (sloop-of-war) circumnavigated the globe.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10592
+    },
+    {
+      "id": 183634,
+      "claim": "Finding Dory was directed by someone who is based in Beijing.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6835
+    },
+    {
+      "id": 154009,
+      "claim": "Justin Chatwin is not an actor.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10002
+    },
+    {
+      "id": 140779,
+      "claim": "English people are descended from several sheep.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8235
+    },
+    {
+      "id": 172290,
+      "claim": "The King and I is based on Anna and the King of Siam.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10797
+    },
+    {
+      "id": 150834,
+      "claim": "Tool has not produced albums.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10098
+    },
+    {
+      "id": 202040,
+      "claim": "Tamerlan Tsarnaev had a sister.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7350
+    },
+    {
+      "id": 81351,
+      "claim": "Touchscreens are only used in tablet computers.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11054
+    },
+    {
+      "id": 111980,
+      "claim": "Mary of Teck was a professional athlete.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10052
+    },
+    {
+      "id": 109293,
+      "claim": "Jack Falahee died in 1989.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 13570
+    },
+    {
+      "id": 145037,
+      "claim": "Edmund H. North co-wrote the review for Patton.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8149
+    },
+    {
+      "id": 22186,
+      "claim": "Highway to Heaven ran until 1989.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8545
+    },
+    {
+      "id": 165877,
+      "claim": "Buffy Summers appears in radio.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7732
+    },
+    {
+      "id": 13934,
+      "claim": "The Republic of Macedonia is in the Balkan Peninsula.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10467
+    },
+    {
+      "id": 183628,
+      "claim": "Finding Dory was written.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9401
+    },
+    {
+      "id": 192966,
+      "claim": "Roland Emmerich is an inactive campaigner.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10133
+    },
+    {
+      "id": 53948,
+      "claim": "Paris (Paris Hilton album) incorporates reggae rhythms and lyrics.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7380
+    },
+    {
+      "id": 172524,
+      "claim": "Entourage (film) is a film that has a financial deficit of $49 million dollars.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11271
+    },
+    {
+      "id": 45963,
+      "claim": "Peking University is in a unitary sovereign state in East Asia.",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 11488
+    },
+    {
+      "id": 104692,
+      "claim": "Rhythm Nation was the highest grossing cover by Girls' Generation.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7760
+    },
+    {
+      "id": 194458,
+      "claim": "Tilda Swinton is a performance artist.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9082
+    },
+    {
+      "id": 101359,
+      "claim": "Lithuanians are a sports group.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8089
+    },
+    {
+      "id": 92344,
+      "claim": "Human trafficking is the trade of animals.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9092
+    },
+    {
+      "id": 185417,
+      "claim": "CHiPs is a film.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11518
+    },
+    {
+      "id": 125388,
+      "claim": "Kerplunk was released through a record label.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9150
+    },
+    {
+      "id": 215498,
+      "claim": "Weekly Idol is hosted only by Celine Dion.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 18565
+    },
+    {
+      "id": 171620,
+      "claim": "Dave Gibbons is an English writer for Marvel Comics.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7389
+    },
+    {
+      "id": 132077,
+      "claim": "The State of Palestine claims the West Bank and is contested.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7265
+    },
+    {
+      "id": 55294,
+      "claim": "House is an American medical drama.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10173
+    },
+    {
+      "id": 132317,
+      "claim": "Tim Roth is an English composer.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10756
+    },
+    {
+      "id": 156957,
+      "claim": "Colombiana is a French horror film.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7188
+    },
+    {
+      "id": 217685,
+      "claim": "The Pelican Brief is based on a movie of the same name.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8396
+    },
+    {
+      "id": 21146,
+      "claim": "Kuching is a city in Singapore.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 16923
+    },
+    {
+      "id": 106071,
+      "claim": "San Diego Comic-Con was founded by Richard Alf.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 13876
+    },
+    {
+      "id": 173140,
+      "claim": "Anne Sullivan was born on April 12 1866.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9828
+    },
+    {
+      "id": 215135,
+      "claim": "Private Lives is a 1940 comedy in three acts by Noel Coward.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9360
+    },
+    {
+      "id": 203176,
+      "claim": "There are zero Polynesian languages.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 9706
+    },
+    {
+      "id": 121283,
+      "claim": "Lost lasted from October 14, 1985 to December 13, 1999.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8045
+    },
+    {
+      "id": 14429,
+      "claim": "Gordon Ramsay has had trainees.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7049
+    },
+    {
+      "id": 23118,
+      "claim": "Brazzers is a production company.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9208
+    },
+    {
+      "id": 192717,
+      "claim": "The Millers aired on NBC.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7005
+    },
+    {
+      "id": 94507,
+      "claim": "Fantastic Four (2005 film) was released early 2000s.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7675
+    },
+    {
+      "id": 169025,
+      "claim": "Manmohan Singh was the first Sikh in North Carolina.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8112
+    },
+    {
+      "id": 195072,
+      "claim": "Albert S. Ruddy is a on stage television producer.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7459
+    },
+    {
+      "id": 156075,
+      "claim": "Aarhus is located on the west coast of the Jutland peninsula.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9309
+    },
+    {
+      "id": 43644,
+      "claim": "Wilhelmina Slater name at birth was Wanda Smith.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9980
+    },
+    {
+      "id": 194915,
+      "claim": "Stripes featured Conrad Dunn.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12424
+    },
+    {
+      "id": 161571,
+      "claim": "Baz Luhrmann's film Australia is solely an epic historical romantic comedy.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 11595
+    },
+    {
+      "id": 208156,
+      "claim": "Easy A is teen comedy movie from the United States.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10370
+    },
+    {
+      "id": 79072,
+      "claim": "James VI and I was a major advocate of a single parliament for England.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11616
+    },
+    {
+      "id": 47384,
+      "claim": "Chile is in the western hemisphere.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10679
+    },
+    {
+      "id": 36347,
+      "claim": "The series finale of Make It or Break It ended in 2014.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9874
+    },
+    {
+      "id": 164631,
+      "claim": "To Pimp a Butterfly sold at least 850,000 copies.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11126
+    },
+    {
+      "id": 164636,
+      "claim": "To Pimp a Butterfly refused to sell any copies in America until 2017.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11993
+    },
+    {
+      "id": 201802,
+      "claim": "Dakota Fanning was involved with a film called Cherie Currie in The Runaways.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7762
+    },
+    {
+      "id": 158294,
+      "claim": "Liam Neeson was nominated for three Academy Awards.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7279
+    },
+    {
+      "id": 139869,
+      "claim": "Andrew Kevin Walker was nominated by the BAFTA for his directing.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7271
+    },
+    {
+      "id": 61612,
+      "claim": "Mike Huckabee is a folk religious figure with no official status.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 20825
+    },
+    {
+      "id": 25089,
+      "claim": "Most of Ripon College's student body die on campus.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11496
+    },
+    {
+      "id": 65516,
+      "claim": "In the End was released through Warner Bros entertainment company.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11155
+    },
+    {
+      "id": 184064,
+      "claim": "Kenneth Lonergan died on October 16, 1962.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11866
+    },
+    {
+      "id": 67212,
+      "claim": "John Dolmayan is Armenian-American and Indian.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11592
+    },
+    {
+      "id": 201383,
+      "claim": "Varsity Blues (film) was pirated 52 million times.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7575
+    },
+    {
+      "id": 44332,
+      "claim": "Robert Palmer (writer) played the clarinet in a band.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 14197
+    },
+    {
+      "id": 167979,
+      "claim": "Don Bradman's status as a national icon was recognized after his school years.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6721
+    },
+    {
+      "id": 190147,
+      "claim": "Oscar de la Hoya was The Ring magazine's top-rated fighter in the world in 1997 and 1999.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7385
+    },
+    {
+      "id": 35905,
+      "claim": "Flaked is scheduled to premiere in June 2015.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 10909
+    },
+    {
+      "id": 22846,
+      "claim": "Penguin Books is a publishing house founded in 1930.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10746
+    },
+    {
+      "id": 151399,
+      "claim": "Reign Over Me was put out in 2007.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11927
+    },
+    {
+      "id": 105419,
+      "claim": "Youtube is not a website.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7886
+    },
+    {
+      "id": 33918,
+      "claim": "Andrew Kevin Walker was born on August 24, 1964.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9317
+    },
+    {
+      "id": 165118,
+      "claim": "Mickey Rourke appeared in a film written by Sylvester Stallone.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 12029
+    },
+    {
+      "id": 185402,
+      "claim": "CHiPs is exclusively a German film.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9255
+    },
+    {
+      "id": 25551,
+      "claim": "The Washington Wizards won a title in 1975.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 14339
+    },
+    {
+      "id": 108547,
+      "claim": "Ed Wood is not a movie.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 15011
+    },
+    {
+      "id": 159576,
+      "claim": "Dan O'Bannon was killed on December 17th, 2009.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8583
+    },
+    {
+      "id": 14406,
+      "claim": "Rage Against the Machine performed at live venues and festivals.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10782
+    },
+    {
+      "id": 110276,
+      "claim": "Stanley Williams is currently a college student in 2017.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12293
+    },
+    {
+      "id": 172466,
+      "claim": "Matteo Renzi was conceived on January 11th, 1975.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10476
+    },
+    {
+      "id": 147477,
+      "claim": "Arizona is a state of the United States.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 13106
+    },
+    {
+      "id": 137956,
+      "claim": "John Krasinski played Jim Halpert on The Office.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10582
+    },
+    {
+      "id": 211804,
+      "claim": "Brick (film) was the highest grossing film Joseph Gordon-Levitt was part of.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8707
+    },
+    {
+      "id": 59056,
+      "claim": "Humphrey Bogart is incapable of receiving an Oscar Nomination.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 15716
+    },
+    {
+      "id": 157485,
+      "claim": "Cate Blanchett ignored the offer to act in Cate Blanchett.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12365
+    },
+    {
+      "id": 125491,
+      "claim": "Hot Right Now is from the album Escape from Planet Monday.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8782
+    },
+    {
+      "id": 216349,
+      "claim": "The Chagatai language was the shared literary language of Central Asia at one point.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10017
+    },
+    {
+      "id": 5076,
+      "claim": "The State of Palestine claims Algeria.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9617
+    },
+    {
+      "id": 138273,
+      "claim": "Joe Walsh was inducted in 2001 and he was successful.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10192
+    },
+    {
+      "id": 23726,
+      "claim": "Stephen Hillenburg was raised on a farm.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7255
+    },
+    {
+      "id": 36242,
+      "claim": "Mud was made before Matthew McConaughey was born.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 9671
+    },
+    {
+      "id": 171629,
+      "claim": "Dave Gibbons's middle name is Chester-Jason.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10097
+    },
+    {
+      "id": 91959,
+      "claim": "Thomas Jefferson retired from a position.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 9157
+    },
+    {
+      "id": 56542,
+      "claim": "Mike Huckabee was a sergeant in the Army.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7899
+    },
+    {
+      "id": 227361,
+      "claim": "Giada at Home aired on the Food Network beginning in 2008.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10883
+    },
+    {
+      "id": 209860,
+      "claim": "Tie Your Mother Down was from Queen's 1986 album.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 12809
+    },
+    {
+      "id": 130059,
+      "claim": "The 100 is not a TV series following a group of teens.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 15629
+    },
+    {
+      "id": 199764,
+      "claim": "Tijuana is the largest city in the running for the 2020 Olympics.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7052
+    },
+    {
+      "id": 178340,
+      "claim": "Al Jardine is a flutist.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7317
+    },
+    {
+      "id": 15006,
+      "claim": "Wildfang was founded in 2010.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 10337
+    },
+    {
+      "id": 170397,
+      "claim": "Michael Vick is Jewish.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7568
+    },
+    {
+      "id": 179266,
+      "claim": "Tylenol is advertised for worsening the symptoms of allergies.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10686
+    },
+    {
+      "id": 141328,
+      "claim": "Reign Over Me was scripted and directed by Mike Binder.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9613
+    },
+    {
+      "id": 131254,
+      "claim": "In the End was written by rock band Linkin Park.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8222
+    },
+    {
+      "id": 194029,
+      "claim": "Kim Jong-il is designated Eternal General Secretary after his death.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12043
+    },
+    {
+      "id": 173506,
+      "claim": "Sancho Panza is a non-fiction character.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10103
+    },
+    {
+      "id": 32825,
+      "claim": "The CONCACAF Champions League is organized for football clubs in the evil realm.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8347
+    },
+    {
+      "id": 110429,
+      "claim": "Henry II of France died in a tournament held to celebrate the autumn.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11314
+    },
+    {
+      "id": 187785,
+      "claim": "The Sterile Cuckoo was adapted from a commercial.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 10446
+    },
+    {
+      "id": 212331,
+      "claim": "Mary-Kate Olsen and Ashley Olsen are incapable of being fashion designers.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7781
+    },
+    {
+      "id": 114475,
+      "claim": "Bones is a work.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 16913
+    },
+    {
+      "id": 156775,
+      "claim": "Byron Howard sang in the film Tangled.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7125
+    },
+    {
+      "id": 119519,
+      "claim": "Scotty Moore was American and Irish.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11342
+    },
+    {
+      "id": 49707,
+      "claim": "Blue Jasmine has an English actress in it.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11002
+    },
+    {
+      "id": 5346,
+      "claim": "Ripon College is in California.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7402
+    },
+    {
+      "id": 79038,
+      "claim": "A tourist destination is Croatia.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10441
+    },
+    {
+      "id": 111153,
+      "claim": "Caroline Kennedy is a person who authors books.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9950
+    },
+    {
+      "id": 122290,
+      "claim": "A River Runs Through It has been recognized.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7733
+    },
+    {
+      "id": 13217,
+      "claim": "Tremont Street Subway is a tunnel.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 10357
+    },
+    {
+      "id": 114567,
+      "claim": "Seohyun is a dog.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8126
+    },
+    {
+      "id": 159944,
+      "claim": "Christa McAuliffe taught social studies at Concord High School.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 11268
+    },
+    {
+      "id": 194477,
+      "claim": "Tilda Swinton is a film actress.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8457
+    },
+    {
+      "id": 78689,
+      "claim": "You Belong with Me was the opening number in Katy Perry's debut concert tour.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8587
+    },
+    {
+      "id": 52572,
+      "claim": "Bad Romance was one of the best-selling stocks of all time.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 11681
+    },
+    {
+      "id": 64622,
+      "claim": "TakePart is a division of an American film production company.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9655
+    }
+  ]
+}
