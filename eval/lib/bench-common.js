@@ -155,7 +155,7 @@ export function groundedInstructions({ softAgg, contrastive } = {}) {
   }
 
   if (softAgg) {
-    steps.push(`${contrastive ? '5' : '4'}. Derive the final verdict using your best judgment:
+    steps.push(`${contrastive ? '5' : '4'}. Derive the final verdict:
    - If most assertions are supported and none contradicted → SUPPORTS (perfect coverage is not required)
    - Any assertion contradicted → REFUTES
    - Evidence genuinely does not address the core claim → NOT_ENOUGH_INFO`);

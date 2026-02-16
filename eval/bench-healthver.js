@@ -90,9 +90,28 @@ Now compare your summary to the claim:
 Verdict: SUPPORTS, REFUTES, or NOT_ENOUGH_INFO.`;
 }
 
+const GROUNDED_EXAMPLES = `
+## Examples
+
+### Example 1
+**Claim:** "warmer weather slow coronavirus"
+**Evidence:** "temperature is the most influential parameter that reduces the growth at the rate of 13-17 cases/day with a 1C rise in temperature."
+**Verdict:** SUPPORTS — The evidence directly states that rising temperature reduces COVID-19 growth rate, which is what the claim asserts.
+
+### Example 2
+**Claim:** "CT changes consistent with COVID-19 pneumonia can be observed in asymptomatic patients, as well as mild damage to the immune system."
+**Evidence:** "The number of these epitopes and the prevalence of the common coronaviruses suggest that a large part of the world population has some degree of specific immunity against SARS-CoV-2 already."
+**Verdict:** NOT_ENOUGH_INFO — The evidence discusses pre-existing immunity in the general population, which is related to immune response but does not address CT changes in asymptomatic patients or immune damage.
+
+### Example 3
+**Claim:** "COVID-19 rarely spreads between people and animals"
+**Evidence:** "stronger social distancing, e.g., cutting 75% of social ties, can reduce the outbreak by 75%"
+**Verdict:** NOT_ENOUGH_INFO — The evidence is about social distancing effectiveness, not animal-to-human transmission. Same broad topic (COVID-19) but entirely different assertion.
+`;
+
 function groundedPrompt(claim, title, evidenceSentences, flags) {
   return `You are a scientific fact-checker specializing in health claims. Determine whether the evidence from a research paper supports, refutes, or is insufficient to evaluate the claim.
-
+${GROUNDED_EXAMPLES}
 ## Claim
 
 ${claim}
