@@ -89,7 +89,6 @@ def load_rows(path):
             skipped += 1
             continue
         rows.append({
-            'id': r['id'],
             'expected': r['expected'],
             'model_verdict': v,
             'features': feat,
