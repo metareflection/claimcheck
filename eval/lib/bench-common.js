@@ -37,8 +37,9 @@ export function parseArgs(prefix) {
   const seed = parseInt(getArg('--seed', '42')) || 42;
   const softAgg = args.includes('--soft-agg');
   const contrastive = args.includes('--contrastive');
+  const concurrency = parseInt(getArg('--concurrency', '1')) || 1;
 
-  return { mode, backend, label, model, limit, offset, sample, verbose, seed, softAgg, contrastive };
+  return { mode, backend, label, model, limit, offset, sample, verbose, seed, softAgg, contrastive, concurrency };
 }
 
 // ---------------------------------------------------------------------------
@@ -351,13 +352,14 @@ async function runGrounded({ backend, model, verbose, softAgg, contrastive }, pr
       toolChoice: { type: 'tool', name: 'record_grounded_verdict' },
       verbose, maxTokens: 8192,
     });
-    return normalizeVerdict(result.input.verdict);
+    const verdict = normalizeVerdict(result.input.verdict);
+    return { verdict, grounded: result.input };
   } else {
     const output = await callClaude(
       prompt + '\n\nState your final verdict as: **Verdict:** SUPPORTS | REFUTES | NOT_ENOUGH_INFO',
       { model, verbose },
     );
-    return parseVerdict(output);
+    return { verdict: parseVerdict(output), grounded: null };
   }
 }
 
@@ -437,30 +439,40 @@ async function runTwoPass({ backend, model, verbose }, summarizePrompt, makeComp
  * @param {function} [opts.entryToResult] - (entry, verdict, elapsedMs, error) => result object
  */
 export async function runBench({ benchName, config, entries, makePrompts, entryToResult }) {
-  const { mode, backend, model, label, verbose, softAgg, contrastive } = config;
+  const { mode, backend, model, label, verbose, softAgg, contrastive, concurrency = 1 } = config;
 
   console.error(`${benchName} Benchmark: ${label}`);
   console.error(`  mode: ${mode}${softAgg ? ' +soft-agg' : ''}${contrastive ? ' +contrastive' : ''}`);
   console.error(`  backend: ${backend}`);
   console.error(`  model: ${model}`);
   console.error(`  entries: ${entries.length}`);
+  console.error(`  concurrency: ${concurrency}`);
   console.error('');
 
-  const allResults = [];
+  const allResults = new Array(entries.length);
   const totalStart = Date.now();
   let correct = 0;
+  let completed = 0;
 
-  for (let i = 0; i < entries.length; i++) {
+  async function processEntry(i) {
     const e = entries[i];
     console.error(`  [${i + 1}/${entries.length}] claim ${e.id} (${e.label})...`);
 
     const start = Date.now();
     let verdict = null;
+    let grounded = null;
     let error = null;
 
     try {
       const prompts = makePrompts(e);
-      verdict = await runOne({ mode, backend, model, verbose, softAgg, contrastive }, prompts);
+      const raw = await runOne({ mode, backend, model, verbose, softAgg, contrastive }, prompts);
+      // runGrounded returns { verdict, grounded }, others return a string
+      if (raw && typeof raw === 'object') {
+        verdict = raw.verdict;
+        grounded = raw.grounded;
+      } else {
+        verdict = raw;
+      }
     } catch (err) {
       error = err.message;
       console.error(`    ERROR: ${error}`);
@@ -469,12 +481,13 @@ export async function runBench({ benchName, config, entries, makePrompts, entryT
     const elapsedMs = Date.now() - start;
     const isCorrect = verdict === e.label;
     if (isCorrect) correct++;
+    completed++;
 
     const tag = isCorrect ? 'CORRECT' : verdict ? 'WRONG' : 'PARSE_FAILED';
-    console.error(`    ${tag}: "${verdict}" (expected "${e.label}") (${(elapsedMs / 1000).toFixed(1)}s)`);
+    console.error(`    ${tag}: "${verdict}" (expected "${e.label}") (${(elapsedMs / 1000).toFixed(1)}s) [${completed}/${entries.length}]`);
 
     const result = entryToResult
-      ? entryToResult(e, verdict, isCorrect, elapsedMs, error)
+      ? entryToResult(e, verdict, isCorrect, elapsedMs, error, grounded)
       : {
           id: e.id,
           claim: e.claim,
@@ -482,10 +495,27 @@ export async function runBench({ benchName, config, entries, makePrompts, entryT
           verdict,
           correct: isCorrect,
           elapsedMs,
+          ...(grounded ? { grounded } : {}),
           ...(error ? { error } : {}),
         };
 
-    allResults.push(result);
+    allResults[i] = result;
+  }
+
+  if (concurrency <= 1) {
+    for (let i = 0; i < entries.length; i++) {
+      await processEntry(i);
+    }
+  } else {
+    // Simple semaphore-based concurrency
+    let next = 0;
+    const workers = Array.from({ length: Math.min(concurrency, entries.length) }, async () => {
+      while (next < entries.length) {
+        const i = next++;
+        await processEntry(i);
+      }
+    });
+    await Promise.all(workers);
   }
 
   const totalElapsedMs = Date.now() - totalStart;

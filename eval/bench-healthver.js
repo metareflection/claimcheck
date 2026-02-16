@@ -226,7 +226,7 @@ async function main() {
         grounded: groundedPrompt(e.claim, e.title, ev, config),
       };
     },
-    entryToResult(e, verdict, isCorrect, elapsedMs, error) {
+    entryToResult(e, verdict, isCorrect, elapsedMs, error, grounded) {
       return {
         id: e.id,
         claim: e.claim,
@@ -235,6 +235,7 @@ async function main() {
         verdict,
         correct: isCorrect,
         elapsedMs,
+        ...(grounded ? { grounded } : {}),
         ...(error ? { error } : {}),
       };
     },
