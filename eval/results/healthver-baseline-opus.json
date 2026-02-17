@@ -1,0 +1,4530 @@
+{
+  "label": "healthver-baseline-opus",
+  "timestamp": "2026-02-17T02:27:26.505Z",
+  "config": {
+    "mode": "baseline",
+    "backend": "api",
+    "model": "claude-opus-4-6",
+    "total": 500
+  },
+  "totalElapsedMs": 267099,
+  "accuracy": 0.648,
+  "correct": 324,
+  "total": 500,
+  "byLabel": {
+    "SUPPORTS": {
+      "correct": 52,
+      "total": 153
+    },
+    "REFUTES": {
+      "correct": 57,
+      "total": 112
+    },
+    "NOT_ENOUGH_INFO": {
+      "correct": 215,
+      "total": 235
+    }
+  },
+  "results": [
+    {
+      "id": 2163,
+      "claim": "Avoid medications to lower fever if sick with the new coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6356
+    },
+    {
+      "id": 738,
+      "claim": "warmer weather slow coronavirus",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4954
+    },
+    {
+      "id": 3201,
+      "claim": "The drugs have anti-inflammatory effects \"in addition to their blood pressure benefits.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4518
+    },
+    {
+      "id": 1933,
+      "claim": "The most effective way to protect yourself against the new coronavirus is by frequently cleaning your hands with alcohol-based hand",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7575
+    },
+    {
+      "id": 85,
+      "claim": "Traditional medicines involving plant-based formulations have proven successful in boosting immunity and providing tolerance to virus infections.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3963
+    },
+    {
+      "id": 1580,
+      "claim": "Are hydroxychloroquine and chloroquine safe? Hydroxychloroquine and chloroquine are generally considered safe when taken for conditions that they have been approved for.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3902
+    },
+    {
+      "id": 222,
+      "claim": "young and healthy peope are in low risk with covid-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4276
+    },
+    {
+      "id": 3572,
+      "claim": "Based on currently available information, WHO does not recommend against the use of of ibuprofen.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6163
+    },
+    {
+      "id": 2,
+      "claim": "Can Vitamin C Protect You from COVID-19?",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3293
+    },
+    {
+      "id": 3196,
+      "claim": "Can acetaminophen (Tylenol) treat the coronavirus disease? No",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4683
+    },
+    {
+      "id": 878,
+      "claim": "People may take ibuprofen for body aches, headaches, or chronic health conditions, such as arthritis or lupus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3587
+    },
+    {
+      "id": 1011,
+      "claim": "Research shows COVID-19 is a multi-organ metabolic disease",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4722
+    },
+    {
+      "id": 1888,
+      "claim": "in some people with severe COVID-19, the body goes rogue and attacks one of its own key immune defenses instead of the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3101
+    },
+    {
+      "id": 3188,
+      "claim": "with autoimmune conditions such as lupus, a person experiences \"dysregulations of the immune system,\" meaning the immune system itself is compromised or malfunctioning",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5191
+    },
+    {
+      "id": 537,
+      "claim": "There is currently not enough evidence to support the effectiveness of face shields for source control",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4537
+    },
+    {
+      "id": 214,
+      "claim": "When the immune system's next stage kicked in, both adults and children made antibodies targeting the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5226
+    },
+    {
+      "id": 1625,
+      "claim": "young and healthy peope are in low risk with covid-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3693
+    },
+    {
+      "id": 272,
+      "claim": "Do you need hand sanitizer to effectively fight COVID-19? Per the Centers for Disease Control and Prevention, the most effective way of fighting coronavirus is using soap and water to wash your hands",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4557
+    },
+    {
+      "id": 1322,
+      "claim": "SARS-CoV-2 is more stable on plastic and stainless steel than on copper and cardboard",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5006
+    },
+    {
+      "id": 1298,
+      "claim": "vitamin C supports your immune system.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4930
+    },
+    {
+      "id": 3152,
+      "claim": "covid-19 patients taking hydroxychloroquine do not benefit",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3892
+    },
+    {
+      "id": 1484,
+      "claim": "Duo of antiviral drugs strongly inhibits SARS-CoV-2 in the lab",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6814
+    },
+    {
+      "id": 865,
+      "claim": "the lack of Vitamin D make you more susceptible to the Covid-19 coronavirus",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8085
+    },
+    {
+      "id": 3006,
+      "claim": "Can Nicotine Patches Help You Avoid COVID-19? The short answer is YES",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6110
+    },
+    {
+      "id": 2795,
+      "claim": "Dogs May Not Spread Covid-19, but Cats Can Pass It to Each Other",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4859
+    },
+    {
+      "id": 3154,
+      "claim": "both dogs and cats can be infected by the virus that causes Covid-19 in humans, but none of the ten animals observed in the study showed clinical symptoms like coughing",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5717
+    },
+    {
+      "id": 2017,
+      "claim": "young peope are not at risk and do not die from covid-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6054
+    },
+    {
+      "id": 543,
+      "claim": "COVID-19 is shedding new light on how viruses can kick some patient's immune system into overdrive to deadly effect in what is known as a cytokine storm syndrome.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4196
+    },
+    {
+      "id": 873,
+      "claim": "The COVID-19 disease can infect anyone at any age. People with pre-existing health conditions such as asthma, COPD, diabetes and heart disease appear to be more at risk.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6680
+    },
+    {
+      "id": 1264,
+      "claim": "Research shows COVID-19 is a multi-organ metabolic disease",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4602
+    },
+    {
+      "id": 2036,
+      "claim": "Surgical Masks Stop Transmission Of COVID-19 From Symptomatic People",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 10969
+    },
+    {
+      "id": 3269,
+      "claim": "Infections occur mainly through exposure to respiratory droplets when a person is in close contact with someone who has COVID-19.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4276
+    },
+    {
+      "id": 2923,
+      "claim": "a popular treatment to tamp down the immune system in severely ill patients may help a few, but could harm many others.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4272
+    },
+    {
+      "id": 2778,
+      "claim": "While there are a lot of unknowns with the novel virus, there's no evidence of COVID-19 transmitting through food or packaging, according to the Food and Drug Administration.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5986
+    },
+    {
+      "id": 417,
+      "claim": "Can my pet spread the coronavirus? Yes it can",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4200
+    },
+    {
+      "id": 3495,
+      "claim": "The immune system, noticing the infection, flares up, which can cause the lungs to fill with fluid and prevent adequate oxygen flow.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7621
+    },
+    {
+      "id": 1311,
+      "claim": "A central player in the fight against the novel coronavirus is our immune system.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 7865
+    },
+    {
+      "id": 2449,
+      "claim": "wearing a mask  may offer some protection for the covid-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3997
+    },
+    {
+      "id": 2633,
+      "claim": "Early studies have found that cats are the animals most likely to catch the new coronavirus. They can also show symptoms of COVID-19 and might be able to pass it to other cats.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6171
+    },
+    {
+      "id": 1253,
+      "claim": "The populations at highest risk of severe cases of COVID-19 (the elderly and those with underlying health conditions) and the timing of the outbreak (end of winter in the Northern Hemisphere when population Vitamin D levels are typically lowest) are consistent with deficient Vitamin D status being a risk factor for COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7984
+    },
+    {
+      "id": 94,
+      "claim": "Heart damage lingers in COVID-19 patients, even after recovery",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5130
+    },
+    {
+      "id": 550,
+      "claim": "First of all, Covid-19 is just one coronavirus of many",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 7837
+    },
+    {
+      "id": 399,
+      "claim": "The use of ACE inhibitors was associated with an almost 40% lower risk of COVID-19 hospitalization for the older, Medicare Advantage patients - but there was no significant difference in risk for the younger, commercially insured patients.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5874
+    },
+    {
+      "id": 1606,
+      "claim": "Ultraviolet lamps kill the COVID-19 virus. No, UV lamps do not sterilize hands or skins areas, and can actually cause irritation.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7534
+    },
+    {
+      "id": 57,
+      "claim": "The analyses clearly show that SARS-CoV-2 is not a laboratory construct or a purposefully manipulated virus",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4777
+    },
+    {
+      "id": 3448,
+      "claim": "Can acetaminophen (Tylenol) treat the coronavirus disease? No",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3667
+    },
+    {
+      "id": 2984,
+      "claim": "camostat mesylate cure coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3904
+    },
+    {
+      "id": 491,
+      "claim": "Experts anticipate some seasonal impact on the spread of the coronavirus, though the exact relationship is unclear.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6258
+    },
+    {
+      "id": 273,
+      "claim": "it is safe for you to defer taking anti-fever like ibuprofen medicines for minor illnesses.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5880
+    },
+    {
+      "id": 3330,
+      "claim": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4801
+    },
+    {
+      "id": 3459,
+      "claim": "Can coronavirus spread through food or packaging? No Absolutely not",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8153
+    },
+    {
+      "id": 1000,
+      "claim": "The antiviral drug remdesivir has been one of the few treatments that's seemed to help curb death rates in COVID-19 patients so ill that they need a ventilator.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3668
+    },
+    {
+      "id": 544,
+      "claim": "Studies on the use of available vaccines, including BCG (Bacille Calmette-Guérin vaccine), to develop immunity against this virus are also underway. Specific vaccines against SARS-CoV-2 are also being developed in many laboratories across the world.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5026
+    },
+    {
+      "id": 611,
+      "claim": "all hand sanitizers works against covid-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5068
+    },
+    {
+      "id": 191,
+      "claim": "Yes, kids can get COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3619
+    },
+    {
+      "id": 2354,
+      "claim": "People with Diabetes May Have Higher Risk for COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4981
+    },
+    {
+      "id": 1287,
+      "claim": "Animals don't appear to play a significant role in spreading the virus that causes COVID-19.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5253
+    },
+    {
+      "id": 1156,
+      "claim": "Understanding these immune changes may help in finding treatments that work for older COVID-19 patients, but, it may also help younger people who may have some of the same problems without knowing it.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4873
+    },
+    {
+      "id": 28,
+      "claim": "Can coronavirus be transmitted over surfaces? Yes.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3608
+    },
+    {
+      "id": 2881,
+      "claim": "cloth face mask with a filter can help prevent the spread of COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5302
+    },
+    {
+      "id": 862,
+      "claim": "fear and anxiety about a new disease and what could happen can be overwhelming and cause strong emotions in adults and children.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4428
+    },
+    {
+      "id": 1190,
+      "claim": "ARDS (acute respiratory distress syndrome) is a Common Cause of Death in Critically Ill Coronavirus Patients",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4888
+    },
+    {
+      "id": 279,
+      "claim": "The populations at highest risk of severe cases of COVID-19 (the elderly and those with underlying health conditions) and the timing of the outbreak (end of winter in the Northern Hemisphere when population Vitamin D levels are typically lowest) are consistent with deficient Vitamin D status being a risk factor for COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9054
+    },
+    {
+      "id": 3136,
+      "claim": "young peope are not at risk and do not die from covid-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4791
+    },
+    {
+      "id": 2429,
+      "claim": "Dogs can test positive for the virus.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4935
+    },
+    {
+      "id": 3545,
+      "claim": "Most children with COVID-19 have mild symptoms or have no symptoms at all.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4499
+    },
+    {
+      "id": 2355,
+      "claim": "Can coronavirus spread through food or packaging? No Absolutely not",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7334
+    },
+    {
+      "id": 1790,
+      "claim": "Some people with diabetes, a disease that affects the body's ability to produce or use the hormone insulin to reduce glucose (sugar) in the blood, may be concerned about being at higher risk of getting COVID-19. However, this is a misconception.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4419
+    },
+    {
+      "id": 487,
+      "claim": "Studies on the use of available vaccines, including BCG (Bacille Calmette-Guérin vaccine), to develop immunity against this virus are also underway. Specific vaccines against SARS-CoV-2 are also being developed in many laboratories across the world.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6773
+    },
+    {
+      "id": 2470,
+      "claim": "COVID-19 and kids: What can happen when children get the coronavirus. A rare but sometimes deadly syndrome poses extra risk for COVID's youngest victims.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5675
+    },
+    {
+      "id": 3146,
+      "claim": "Frequent hand washing, avoiding crowds and contact with sick people, and cleaning and disinfecting frequently touched surfaces can help prevent coronavirus infections.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9260
+    },
+    {
+      "id": 2687,
+      "claim": "For most patients, COVID-19 begins and ends in their lungs, because like the flu, coronaviruses are respiratory diseases",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4380
+    },
+    {
+      "id": 1002,
+      "claim": "Does vaping increase your risk of getting COVID-19? Doctors weigh in",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3385
+    },
+    {
+      "id": 3443,
+      "claim": "vitamin D might help protect against becoming infected with, and developing serious symptoms of, COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7869
+    },
+    {
+      "id": 1456,
+      "claim": "smokers were statistically less likely to be admitted for treatment for Covid-19.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4801
+    },
+    {
+      "id": 1037,
+      "claim": "Is it safe to take acetaminophen/Tylenol to treat coronavirus symptoms? yes it is.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5664
+    },
+    {
+      "id": 3012,
+      "claim": "a popular treatment to tamp down the immune system in severely ill patients may help a few, but could harm many others.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5663
+    },
+    {
+      "id": 2239,
+      "claim": "Eating garlic will protect me against getting the coronavirus.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5018
+    },
+    {
+      "id": 451,
+      "claim": "Mask wearing and social distancing for COVID-19 may be slowing influenza spread",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4906
+    },
+    {
+      "id": 1179,
+      "claim": "simple cloth face coverings help prevent transmission of COVID-19 by people who have the virus but don't know it",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5101
+    },
+    {
+      "id": 74,
+      "claim": "Masks prevent the spread of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4965
+    },
+    {
+      "id": 2612,
+      "claim": "N95 masks are better than clothe masks",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3901
+    },
+    {
+      "id": 2878,
+      "claim": "to reduce the spread of the virus: try to stay at least 2 metres (3 steps) away from anyone you do not live with (or anyone not in your support bubble); wash your hands with soap and water often - do this for at least 20 seconds; use hand sanitiser gel if soap and water are not available; wash your hands as soon as you get home; cover your mouth and nose with a tissue or your sleeve (not your hands) when you cough or sneeze; put used tissues in the bin immediately and wash your hands afterwards",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5518
+    },
+    {
+      "id": 1519,
+      "claim": "The pandemic coronavirus will wane with warmer weather, like some other respiratory",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5766
+    },
+    {
+      "id": 3562,
+      "claim": "Smoking is a risk factor for COVID-19 patients, but one particular substance in cigarettes - nicotine - might prevent infection in some people, or improve COVID-19 prognosis",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6024
+    },
+    {
+      "id": 1274,
+      "claim": "certain marijuana strains could possibly prevent COVID-19 infection.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3771
+    },
+    {
+      "id": 2733,
+      "claim": "The immune system, noticing the infection, flares up, which can cause the lungs to fill with fluid and prevent adequate oxygen flow.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4296
+    },
+    {
+      "id": 2897,
+      "claim": "there is no clear evidence that using ibuprofen to treat symptoms such as a high temperature can make coronavirus (covid-19) worse",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 8166
+    },
+    {
+      "id": 3214,
+      "claim": "Severe COVID-19 outcomes decreases as the pandemic progressed from winter to the warmer months",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5552
+    },
+    {
+      "id": 2882,
+      "claim": "drugs (Anti-inflammatory drugs, which includes steroids such as prednisone and non-steroidal drugs like ibuprofen) are helpful for symptomatic treatment only and are not a cure. By decreasing inflammation, they can decrease pain, swelling, redness and other symptoms that may be associated with inflammation.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7234
+    },
+    {
+      "id": 2712,
+      "claim": "COVID-19 can survive on surfaces, like a tabletop",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7242
+    },
+    {
+      "id": 1617,
+      "claim": "Mask wearing and social distancing for COVID-19 may be slowing influenza spread",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 2899
+    },
+    {
+      "id": 2213,
+      "claim": "Dogs May Not Spread Covid-19, but Cats Can Pass It to Each Other",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7439
+    },
+    {
+      "id": 2751,
+      "claim": "Surgical Masks Stop Transmission Of COVID-19 From Symptomatic People",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4760
+    },
+    {
+      "id": 82,
+      "claim": "Vitamin C cures COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4761
+    },
+    {
+      "id": 517,
+      "claim": "headache was a symptom in some COVID-19 patients.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3316
+    },
+    {
+      "id": 634,
+      "claim": "The coronavirus that causes COVID-19 can spread between people interacting in close proximity - for example, speaking, coughing, sneezing, or singing- even if those people do not symptoms",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4906
+    },
+    {
+      "id": 457,
+      "claim": "Several already approved drugs, including lopinavir (LPV), ritonavir, chloroquine, favipiravir, and remdesivir, an antiviral awaiting approval have been repurposed and their efficacy in fighting COVID-19 is being evaluated",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4576
+    },
+    {
+      "id": 182,
+      "claim": "Is it safe to take acetaminophen/Tylenol to treat coronavirus symptoms? yes it is.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3366
+    },
+    {
+      "id": 3202,
+      "claim": "Tiny antibody component highly effective against SARS-COV-2 in animal studies",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5363
+    },
+    {
+      "id": 1697,
+      "claim": "there is evidence that routine use of ibuprofen associated with higher covid-19 mortality",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3329
+    },
+    {
+      "id": 415,
+      "claim": "Some people with diabetes, a disease that affects the body's ability to produce or use the hormone insulin to reduce glucose (sugar) in the blood, may be concerned about being at higher risk of getting COVID-19. However, this is a misconception.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4833
+    },
+    {
+      "id": 1078,
+      "claim": "Animals don't appear to play a significant role in spreading the virus that causes COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5019
+    },
+    {
+      "id": 312,
+      "claim": "Remdesivir has not been approved by the U.S. Food and Drug Administration (FDA) for any use, and its safety and efficacy have not been established.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3774
+    },
+    {
+      "id": 439,
+      "claim": "simple cloth face coverings help prevent transmission of COVID-19 by people who have the virus but don't know it",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5575
+    },
+    {
+      "id": 1095,
+      "claim": "SARS-CoV-2, the official name of the virus that causes COVID-19, is spread by respiratory droplets produced when people breathe, talk, sneeze or cough.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4455
+    },
+    {
+      "id": 748,
+      "claim": "The virus that causes COVID-19 appears to spread more efficiently than influenza but not as efficiently as measles, which is among the most contagious viruses known to affect people.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4533
+    },
+    {
+      "id": 2243,
+      "claim": "A study from the Journal of Hospital Infection found that wearing a face covering slashed the risk of infection by 24% for a simple cotton covering and up to 99% for a professional, medical-grade filtration mask.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5391
+    },
+    {
+      "id": 3634,
+      "claim": "a small number of pets worldwide, including cats and dogs, can be infected with the virus that causes COVID-19, mostly after close contact with people with COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3452
+    },
+    {
+      "id": 1031,
+      "claim": "Vitamin D may improve odds of survival from COVID-19.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7783
+    },
+    {
+      "id": 3149,
+      "claim": "wearing a mask helps stop infected people from spreading the new coronavirus to others.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5187
+    },
+    {
+      "id": 2043,
+      "claim": "The high temperature and low relative humidity lead to high evaporation rates of saliva-contaminated droplets, thus significantly reducing the coronavirus viability",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5737
+    },
+    {
+      "id": 3226,
+      "claim": "there are few novel sars-cov-2 cases in malaria countries because of the use of the antimalarial drug hydroxychloroquine.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6558
+    },
+    {
+      "id": 3342,
+      "claim": "Higher risk if you have type 1 diabetes. Compared to people without diabetes, people with type 1 diabetes are approximately 3.5 times as likely to die in hospital with COVID-19, while people with type 2 are approximately twice as likely.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4594
+    },
+    {
+      "id": 1723,
+      "claim": "non-steroidal anti-inflammatory drugs (NSAIDs) such as Advil and Motrin can make COVID-19 symptoms worse.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4199
+    },
+    {
+      "id": 3248,
+      "claim": "Like other viruses with a lipid envelope, SARS-CoV-2 is probably sensitive to temperature, humidity, and solar radiation",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 10309
+    },
+    {
+      "id": 2847,
+      "claim": "mix and drink as hot tea every afternoon",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7137
+    },
+    {
+      "id": 3193,
+      "claim": "Severe COVID-19 outcomes decreases as the pandemic progressed from winter to the warmer months",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5276
+    },
+    {
+      "id": 3057,
+      "claim": "The coronavirus came from the local wet market in China",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5226
+    },
+    {
+      "id": 2649,
+      "claim": "For most patients, COVID-19 begins and ends in their lungs, because like the flu, coronaviruses are respiratory diseases",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5478
+    },
+    {
+      "id": 388,
+      "claim": "certain marijuana strains could possibly prevent COVID-19 infection.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5394
+    },
+    {
+      "id": 1515,
+      "claim": "Duo of antiviral drugs strongly inhibits SARS-CoV-2 in the lab",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5471
+    },
+    {
+      "id": 1681,
+      "claim": "Early symptoms for covid-19: include fever, cough, and shortness of breath. These appear as soon as 2 days, or as long as 14 days, after exposure to the virus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3814
+    },
+    {
+      "id": 1651,
+      "claim": "New evidence suggests the coronavirus has lasting impacts on the heart, raising alarm for cardiologists who have been concerned about potential long-term heart injury from COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 8229
+    },
+    {
+      "id": 2950,
+      "claim": "vitamin D might be able to protect people from the coronavirus (COVID-19).",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7885
+    },
+    {
+      "id": 2315,
+      "claim": "In severe cases of COVID-19, activation patterns of B cells resemble those seen in systemic lupus erythematosus, an autoimmune disease. Emory researchers want to see how far that resemblance extends.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4697
+    },
+    {
+      "id": 3123,
+      "claim": "diabetes significantly increases coronavirus sufferers risk of dying",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5520
+    },
+    {
+      "id": 2724,
+      "claim": "masks protect you as the wearer and protects others",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5714
+    },
+    {
+      "id": 3118,
+      "claim": "Can acetaminophen (Tylenol) treat the coronavirus disease? No",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 8114
+    },
+    {
+      "id": 1815,
+      "claim": "Blood Pressure Meds Could Improve Survival in COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 10159
+    },
+    {
+      "id": 1788,
+      "claim": "Before preparing or eating food it is important to always wash your hands with soap and water for 20 seconds for general food safety.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3491
+    },
+    {
+      "id": 3554,
+      "claim": "It does not make a lot of sense that if somebody is otherwise healthy and young and they have hypertension alone, that they should be at increased risk",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6657
+    },
+    {
+      "id": 1721,
+      "claim": "there is also growing evidence that smaller particles called aerosols can hang in the air longer and travel farther.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3106
+    },
+    {
+      "id": 2487,
+      "claim": "masks protect you as the wearer and protects others",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3980
+    },
+    {
+      "id": 20,
+      "claim": "UV light is the latest popular tool in the ongoing race to find ways to prevent oneself from catching SARS-CoV-2, the virus that causes COVID-19.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 9443
+    },
+    {
+      "id": 3491,
+      "claim": "No drug is approved by the Food and Drug Administration (FDA) for COVID-19, although dozens of candidates - including drugs used to treat rheumatoid arthritis, parasites, cancer, and HIV - have been proposed",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7391
+    },
+    {
+      "id": 2353,
+      "claim": "N95 masks are more effective than regular masks.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3081
+    },
+    {
+      "id": 357,
+      "claim": "Many experts believe that the rapid decline in certain COVID-19 patients, including those who need support from a ventilator, comes down to an individual's immune system",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6177
+    },
+    {
+      "id": 1605,
+      "claim": "Coronavirus Can Linger in Air for Hours.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4330
+    },
+    {
+      "id": 2340,
+      "claim": "with autoimmune conditions such as lupus, a person experiences \"dysregulations of the immune system,\" meaning the immune system itself is compromised or malfunctioning",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3640
+    },
+    {
+      "id": 2129,
+      "claim": "People with weakened immune systems are at higher risk of getting severely sick from SARS-CoV-2, the virus that causes COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3916
+    },
+    {
+      "id": 3135,
+      "claim": "Dogs can test positive for the virus.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4931
+    },
+    {
+      "id": 990,
+      "claim": "it is safe for you to defer taking anti-fever like ibuprofen medicines for minor illnesses.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6848
+    },
+    {
+      "id": 1567,
+      "claim": "there's actually elevated transmission during the winter months from COVID.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4763
+    },
+    {
+      "id": 1987,
+      "claim": "Can acetaminophen (Tylenol) treat the coronavirus disease? No",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4589
+    },
+    {
+      "id": 2308,
+      "claim": "the symptoms of COVID-19 are no worse than a cold",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5564
+    },
+    {
+      "id": 901,
+      "claim": "A central player in the fight against the novel coronavirus is our immune system.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5163
+    },
+    {
+      "id": 1559,
+      "claim": "The new coronavirus may cause migraine attacks. Headaches in general may be a symptom. Learn more about the new coronavirus, migraine, and COVID-19 symptoms.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3750
+    },
+    {
+      "id": 704,
+      "claim": "vitamin C supports your immune system.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4175
+    },
+    {
+      "id": 2503,
+      "claim": "Cats may be able to spread coronavirus to humans despite showing no symptoms",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5764
+    },
+    {
+      "id": 2003,
+      "claim": "Cats may be able to spread coronavirus to humans despite showing no symptoms",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3857
+    },
+    {
+      "id": 2179,
+      "claim": "Surgical Masks Stop Transmission Of COVID-19 From Symptomatic People",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3721
+    },
+    {
+      "id": 125,
+      "claim": "fear and anxiety about a new disease and what could happen can be overwhelming and cause strong emotions in adults and children.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4231
+    },
+    {
+      "id": 2201,
+      "claim": "Cloth face coverings are most likely to reduce the spread of the COVID-19 virus when they are widely used by people in public settings",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4588
+    },
+    {
+      "id": 1294,
+      "claim": "People may take ibuprofen for body aches, headaches, or chronic health conditions, such as arthritis or lupus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4827
+    },
+    {
+      "id": 956,
+      "claim": "The first known cases of COVID-19 were in Wuhan, China",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3401
+    },
+    {
+      "id": 1735,
+      "claim": "The virus that causes COVID-19 appears to spread more efficiently than influenza but not as efficiently as measles, which is among the most contagious viruses known to affect people.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4712
+    },
+    {
+      "id": 1630,
+      "claim": "Several recent studies have looked at the impact of vitamin D on COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6620
+    },
+    {
+      "id": 2740,
+      "claim": "there is no clear evidence that using ibuprofen to treat symptoms such as a high temperature can make coronavirus (covid-19) worse",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4007
+    },
+    {
+      "id": 2118,
+      "claim": "Higher risk if you have type 1 diabetes. Compared to people without diabetes, people with type 1 diabetes are approximately 3.5 times as likely to die in hospital with COVID-19, while people with type 2 are approximately twice as likely.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3960
+    },
+    {
+      "id": 1374,
+      "claim": "people develop abdominal discomfort or nausea when calcium gets too high",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3737
+    },
+    {
+      "id": 1656,
+      "claim": "budesonide, commonly prescribed in the United States under the name Pulmicort, is a good treatment for COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3529
+    },
+    {
+      "id": 131,
+      "claim": "Long-term health conditions and aging weaken your immune system",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3609
+    },
+    {
+      "id": 733,
+      "claim": "budesonide, commonly prescribed in the United States under the name Pulmicort, is a good treatment for COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3950
+    },
+    {
+      "id": 3501,
+      "claim": "covid-19 increases risk of heart attacks and stroke",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3353
+    },
+    {
+      "id": 25,
+      "claim": "Can coronavirus be transmitted over surfaces? Yes.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2406
+    },
+    {
+      "id": 554,
+      "claim": "young and healthy peope are in low risk with covid-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3606
+    },
+    {
+      "id": 579,
+      "claim": "Research shows COVID-19 is a multi-organ metabolic disease",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5234
+    },
+    {
+      "id": 832,
+      "claim": "Vitamin C infusion can help improve the prognosis of patients with SARI.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3756
+    },
+    {
+      "id": 1080,
+      "claim": "Many experts believe that the rapid decline in certain COVID-19 patients, including those who need support from a ventilator, comes down to an individual's immune system",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6519
+    },
+    {
+      "id": 2538,
+      "claim": "the warmer weather will slow the spread of SARS-CoV-2, the novel coronavirus that causes COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6919
+    },
+    {
+      "id": 1446,
+      "claim": "social distancing can not help you to avoid catching a virus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4443
+    },
+    {
+      "id": 2086,
+      "claim": "Avoid medications to lower fever if sick with the new coronavirus",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4232
+    },
+    {
+      "id": 1524,
+      "claim": "the lack of Vitamin D make you more susceptible to the Covid-19 coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7682
+    },
+    {
+      "id": 2323,
+      "claim": "Coronaviruses cause respiratory illnesses, so the lungs are usually affected first. Early symptoms include fever, cough, and shortness of breath.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4290
+    },
+    {
+      "id": 1103,
+      "claim": "all workers wear face coverings to prevent the spread of their respiratory droplets. This is because people can spread SARS-CoV-2, the virus that causes COVID-19, by coughing, sneezing, or talking-even if they do not feel sick.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5613
+    },
+    {
+      "id": 2954,
+      "claim": "The new coronavirus can damage the lungs, heart and brain, which increases the risk of long-term health problems.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5681
+    },
+    {
+      "id": 2227,
+      "claim": "The N95 respirator is thicker than a surgical mask, but neither Schaffner",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4502
+    },
+    {
+      "id": 3163,
+      "claim": "It does not make a lot of sense that if somebody is otherwise healthy and young and they have hypertension alone, that they should be at increased risk",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6565
+    },
+    {
+      "id": 3093,
+      "claim": "there is no link between vitamin D concentrations and risk of COVID-19 infection.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6102
+    },
+    {
+      "id": 2045,
+      "claim": "Vinegar can kill microorganisms such as bacteria and viruses and treat yeast infections.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3454
+    },
+    {
+      "id": 1698,
+      "claim": "The COVID-19 disease can infect anyone at any age. People with pre-existing health conditions such as asthma, COPD, diabetes and heart disease appear to be more at risk.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6414
+    },
+    {
+      "id": 2212,
+      "claim": "Some herbal medicine advocates believe that the combination of garlic, ginger and some herbs can cure Coronavirus.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5424
+    },
+    {
+      "id": 2545,
+      "claim": "Because SARS-CoV-2 has been discovered so recently, there haven't been many studies looking at how effective cleaners are against it",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4716
+    },
+    {
+      "id": 3628,
+      "claim": "a popular treatment to tamp down the immune system in severely ill patients may help a few, but could harm many others.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4471
+    },
+    {
+      "id": 2524,
+      "claim": "fever is beneficial to the body's natural immune response to fight covid-19;",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4589
+    },
+    {
+      "id": 3418,
+      "claim": "Blood pressure drugs may improve COVID-19 survival",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5560
+    },
+    {
+      "id": 890,
+      "claim": "Can we get the virus from our pets? No, we can't",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4296
+    },
+    {
+      "id": 3475,
+      "claim": "dexamethasone reduced death rates",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5222
+    },
+    {
+      "id": 1754,
+      "claim": "COVID-19 is shedding new light on how viruses can kick some patient's immune system into overdrive to deadly effect in what is known as a cytokine storm syndrome.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4974
+    },
+    {
+      "id": 687,
+      "claim": "Is it safe to take acetaminophen/Tylenol to treat coronavirus symptoms? yes it is.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6259
+    },
+    {
+      "id": 2754,
+      "claim": "N95 masks are more effective than regular masks.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3218
+    },
+    {
+      "id": 1639,
+      "claim": "cats can pass the virus to other cats, they discovered no proof that the animals can pass COVID-19 to humans",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4828
+    },
+    {
+      "id": 1033,
+      "claim": "Long-term health conditions and aging weaken your immune system",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4885
+    },
+    {
+      "id": 2855,
+      "claim": "Supplements and products unlikely to help with coronavirus and could be dangerous",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6651
+    },
+    {
+      "id": 1683,
+      "claim": "children are unlikely to die from COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3982
+    },
+    {
+      "id": 3505,
+      "claim": "The coronavirus came from the local wet market in China",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4267
+    },
+    {
+      "id": 2009,
+      "claim": "To help slow the spread and reduce your risk of COVID-19, stay at least 6 feet away from others. Keeping physical distance is important, even if you are not sick.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6782
+    },
+    {
+      "id": 911,
+      "claim": "Early symptoms for covid-19: include fever, cough, and shortness of breath. These appear as soon as 2 days, or as long as 14 days, after exposure to the virus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3522
+    },
+    {
+      "id": 3298,
+      "claim": "For most patients, COVID-19 begins and ends in their lungs, because like the flu, coronaviruses are respiratory diseases",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3713
+    },
+    {
+      "id": 2453,
+      "claim": "While there is very limited data (and none specific for COVID-19), the following cocktail may have a role in the prevention/mitigation of COVID-19 disease. Vitamin C 500 mg BID and Quercetin 250 mg daily Zinc 75-100 mg/day",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 11087
+    },
+    {
+      "id": 3395,
+      "claim": "If your head is spinning, let medical experts provide some focus on one of the symptoms of the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4494
+    },
+    {
+      "id": 2529,
+      "claim": "Ferrets can catch the coronavirus and might give it to other ferrets. But poultry and pigs don't appear to be at risk.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4617
+    },
+    {
+      "id": 2606,
+      "claim": "there is no link between vitamin D concentrations and risk of COVID-19 infection.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5869
+    },
+    {
+      "id": 2886,
+      "claim": "vitamin D might be able to protect people from the coronavirus (COVID-19).",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5866
+    },
+    {
+      "id": 2392,
+      "claim": "A headache is a potential symptom of COVID-19.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4195
+    },
+    {
+      "id": 3472,
+      "claim": "the warmer weather will slow the spread of SARS-CoV-2, the novel coronavirus that causes COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4549
+    },
+    {
+      "id": 3589,
+      "claim": "SARS-CoV-2 and COVID-19 are the same thing",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3955
+    },
+    {
+      "id": 2139,
+      "claim": "Pets can Spread Coronavirus (COVID-19) to People",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4603
+    },
+    {
+      "id": 40,
+      "claim": "a person can also get the coronavirus if they touch a surface or object that has viral particles on it and then touch their mouth, nose, or eyes.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5026
+    },
+    {
+      "id": 2962,
+      "claim": "Vitamin B could help prevent the 'worst outcomes' in covid-19 cases",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 8918
+    },
+    {
+      "id": 968,
+      "claim": "a study reports the potential contribution of vitamin D deficiency to an increased risk of COVID-19 in a subset of health care workers in the UK",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5951
+    },
+    {
+      "id": 45,
+      "claim": "people may acquire SARS-CoV-2 through the air and after touching contaminated objects.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5107
+    },
+    {
+      "id": 96,
+      "claim": "A few cats have reportedly tested positive for COVID-19 after they came into contact with people who were infected. They include pet cats and zoo animals.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5684
+    },
+    {
+      "id": 278,
+      "claim": "dry indoor air may encourage Coronavirus spread",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5672
+    },
+    {
+      "id": 2791,
+      "claim": "Supplements and products unlikely to help with coronavirus and could be dangerous",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5242
+    },
+    {
+      "id": 2409,
+      "claim": "In severe cases of COVID-19, activation patterns of B cells resemble those seen in systemic lupus erythematosus, an autoimmune disease. Emory researchers want to see how far that resemblance extends.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3491
+    },
+    {
+      "id": 3004,
+      "claim": "Various coronaviruses infect numerous species, but the first human coronaviruses weren't discovered until the mid-1960s.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3807
+    },
+    {
+      "id": 1835,
+      "claim": "there is evidence that routine use of ibuprofen associated with higher covid-19 mortality",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4603
+    },
+    {
+      "id": 1180,
+      "claim": "The science is clear: Face masks can prevent coronavirus transmission and save lives.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9076
+    },
+    {
+      "id": 711,
+      "claim": "Favipiravir, an antiviral drug used for influenza in Japan, is currently being studied in humans for treating COVID-19 in over 30 clinical trials (as of July 31, 2020). It is not known whether it is safe or helpful for this disease.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8087
+    },
+    {
+      "id": 1806,
+      "claim": "Can coronavirus be transmitted over surfaces? Yes.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5164
+    },
+    {
+      "id": 3360,
+      "claim": "Scientists are endeavoring to find antivirals specific to the virus. Several drugs such as chloroquine, arbidol, remdesivir, and favipiravir are currently undergoing clinical studies to test their efficacy and safety in the treatment of coronavirus disease 2019 (COVID-19) in China; some promising results have been achieved thus far.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7545
+    },
+    {
+      "id": 3720,
+      "claim": "If your head is spinning, let medical experts provide some focus on one of the symptoms of the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5045
+    },
+    {
+      "id": 2841,
+      "claim": "Blood pressure drugs may improve COVID-19 survival",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4046
+    },
+    {
+      "id": 1459,
+      "claim": "The pandemic coronavirus will wane with warmer weather, like some other respiratory",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5242
+    },
+    {
+      "id": 627,
+      "claim": "wet weather can kill the new coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4060
+    },
+    {
+      "id": 541,
+      "claim": "The coronavirus can live on a surgical mask for 7 days, cloth for 2 days, and paper for 3 hours.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4793
+    },
+    {
+      "id": 2635,
+      "claim": "a popular treatment to tamp down the immune system in severely ill patients may help a few, but could harm many others.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5268
+    },
+    {
+      "id": 1492,
+      "claim": "there is evidence that routine use of ibuprofen associated with higher covid-19 mortality",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4320
+    },
+    {
+      "id": 3072,
+      "claim": "Can coronavirus spread through food or packaging? No Absolutely not",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2901
+    },
+    {
+      "id": 2853,
+      "claim": "People with diabetes have not a higher risk for complications from coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2975
+    },
+    {
+      "id": 891,
+      "claim": "The coronavirus that causes COVID-19 can spread between people interacting in close proximity - for example, speaking, coughing, sneezing, or singing- even if those people do not symptoms",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4676
+    },
+    {
+      "id": 2015,
+      "claim": "Hot weather can spread the virus more as it may get you more out there, make you more mobile and you would actually interact with more people",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5591
+    },
+    {
+      "id": 1382,
+      "claim": "only people with symptoms can spread the the new coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3109
+    },
+    {
+      "id": 3381,
+      "claim": "he virus that causes coronavirus disease 2019 (COVID-19) is stable for several hours to days in aerosols and on surfaces",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5572
+    },
+    {
+      "id": 2990,
+      "claim": "with autoimmune conditions such as lupus, a person experiences \"dysregulations of the immune system,\" meaning the immune system itself is compromised or malfunctioning",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5155
+    },
+    {
+      "id": 178,
+      "claim": "Coronaviruses are a large family of different viruses and have coexisted with humans for a long time. The leap from animals to humans, however, coronavirus is new",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7594
+    },
+    {
+      "id": 1262,
+      "claim": "Covid 19 is different from the flu",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2911
+    },
+    {
+      "id": 2697,
+      "claim": "the mechanism behind the protective effects of smoking could be found in nicotine",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4792
+    },
+    {
+      "id": 842,
+      "claim": "Duo of antiviral drugs strongly inhibits SARS-CoV-2 in the lab",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5451
+    },
+    {
+      "id": 196,
+      "claim": "The coronavirus that causes COVID-19 can spread between people interacting in close proximity - for example, speaking, coughing, sneezing, or singing- even if those people do not symptoms",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4859
+    },
+    {
+      "id": 3419,
+      "claim": "the mechanism behind the protective effects of smoking could be found in nicotine",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4166
+    },
+    {
+      "id": 3315,
+      "claim": "Coronaviruses cause respiratory illnesses, so the lungs are usually affected first. Early symptoms include fever, cough, and shortness of breath.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6273
+    },
+    {
+      "id": 72,
+      "claim": "The CORONAVIRUS is not of natural origin",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5339
+    },
+    {
+      "id": 1985,
+      "claim": "The CORONAVIRUS did not emerge in Wuhan",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3153
+    },
+    {
+      "id": 195,
+      "claim": "fear and anxiety about a new disease and what could happen can be overwhelming and cause strong emotions in adults and children.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4021
+    },
+    {
+      "id": 2338,
+      "claim": "there are few novel sars-cov-2 cases in malaria countries because of the use of the antimalarial drug hydroxychloroquine.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7234
+    },
+    {
+      "id": 2514,
+      "claim": "masks prevent me from spreading COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7596
+    },
+    {
+      "id": 920,
+      "claim": "Vitamin C cures COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7766
+    },
+    {
+      "id": 2656,
+      "claim": "No drug is approved by the Food and Drug Administration (FDA) for COVID-19, although dozens of candidates - including drugs used to treat rheumatoid arthritis, parasites, cancer, and HIV - have been proposed",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4562
+    },
+    {
+      "id": 690,
+      "claim": "The coronavirus can live on a surgical mask for 7 days, cloth for 2 days, and paper for 3 hours.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5718
+    },
+    {
+      "id": 1061,
+      "claim": "in some people with severe COVID-19, the body goes rogue and attacks one of its own key immune defenses instead of the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4781
+    },
+    {
+      "id": 27,
+      "claim": "Understanding these immune changes may help in finding treatments that work for older COVID-19 patients, but, it may also help younger people who may have some of the same problems without knowing it.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8234
+    },
+    {
+      "id": 2111,
+      "claim": "the warmer weather will slow the spread of SARS-CoV-2, the novel coronavirus that causes COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4857
+    },
+    {
+      "id": 1631,
+      "claim": "When the immune system's next stage kicked in, both adults and children made antibodies targeting the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3970
+    },
+    {
+      "id": 2236,
+      "claim": "the warmer weather will slow the spread of SARS-CoV-2, the novel coronavirus that causes COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9608
+    },
+    {
+      "id": 2932,
+      "claim": "masks protect you as the wearer and protects others",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4936
+    },
+    {
+      "id": 1324,
+      "claim": "High Blood Pressure Doubles Coronavirus Death Risk",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5200
+    },
+    {
+      "id": 1332,
+      "claim": "There is currently not enough evidence to support the effectiveness of face shields for source control",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4280
+    },
+    {
+      "id": 2587,
+      "claim": "the warmer weather will slow the spread of SARS-CoV-2, the novel coronavirus that causes COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7662
+    },
+    {
+      "id": 1432,
+      "claim": "immune responses to coronavirus in severely ill and critically ill patients are as strong or stronger than those of patients with milder illness.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3714
+    },
+    {
+      "id": 152,
+      "claim": "fear and anxiety about a new disease and what could happen can be overwhelming and cause strong emotions in adults and children.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4439
+    },
+    {
+      "id": 2245,
+      "claim": "coronavirus is man-made",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6026
+    },
+    {
+      "id": 1377,
+      "claim": "There is no evidence taking vitamin D supplements will protect people from Covid-19.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7881
+    },
+    {
+      "id": 2592,
+      "claim": "drugs (Anti-inflammatory drugs, which includes steroids such as prednisone and non-steroidal drugs like ibuprofen) are helpful for symptomatic treatment only and are not a cure. By decreasing inflammation, they can decrease pain, swelling, redness and other symptoms that may be associated with inflammation.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6783
+    },
+    {
+      "id": 2969,
+      "claim": "mix and drink as hot tea every afternoon",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5388
+    },
+    {
+      "id": 2448,
+      "claim": "People with weakened immune systems are at higher risk of getting severely sick from SARS-CoV-2, the virus that causes COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4538
+    },
+    {
+      "id": 3340,
+      "claim": "it's also important to have a strong immune system that can fight back against the germs you may encounter.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5899
+    },
+    {
+      "id": 1848,
+      "claim": "a study reports the potential contribution of vitamin D deficiency to an increased risk of COVID-19 in a subset of health care workers in the UK",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4880
+    },
+    {
+      "id": 1132,
+      "claim": "CT changes consistent with COVID-19 pneumonia can be observed in asymptomatic patients, as well as mild damage to the immune system.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4332
+    },
+    {
+      "id": 3412,
+      "claim": "People with weakened immune systems are at higher risk of getting severely sick from SARS-CoV-2, the virus that causes COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4097
+    },
+    {
+      "id": 2985,
+      "claim": "Hot weather can spread the virus more as it may get you more out there, make you more mobile and you would actually interact with more people",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5621
+    },
+    {
+      "id": 1551,
+      "claim": "early increases in positivity rates among people age 17 to 24 were followed by several weeks of rising positivity rates in people 25 and older",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5014
+    },
+    {
+      "id": 3111,
+      "claim": "camostat mesylate cure coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3914
+    },
+    {
+      "id": 1318,
+      "claim": "Low Vitamin D Levels Tied to Odds for Severe COVID",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5296
+    },
+    {
+      "id": 2821,
+      "claim": "Like other viruses with a lipid envelope, SARS-CoV-2 is probably sensitive to temperature, humidity, and solar radiation",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5069
+    },
+    {
+      "id": 1486,
+      "claim": "A central player in the fight against the novel coronavirus is our immune system.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4541
+    },
+    {
+      "id": 1652,
+      "claim": "The first known cases of COVID-19 were in Wuhan, China",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4707
+    },
+    {
+      "id": 1773,
+      "claim": "Vitamin B Could Relieve COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3359
+    },
+    {
+      "id": 777,
+      "claim": "While there is no evidence that infected animals can spread COVID-19 to humans, some pet owners might be concerned, understandably so, that their pet could become infected with COVID-19 and fall ill.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 8678
+    },
+    {
+      "id": 3442,
+      "claim": "Supplements and products unlikely to help with coronavirus and could be dangerous",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7534
+    },
+    {
+      "id": 1334,
+      "claim": "Cell that Ab8 is highly effective in preventing and treating SARS-CoV-2 infection in mice and hamsters. Its tiny size not only increases its potential for diffusion in tissues to better neutralize the virus, but also makes it possible to administer the drug by alternative routes, including inhalation. Importantly, it does not bind to human cells -- a good sign that it won't have negative side-effects in people.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5521
+    },
+    {
+      "id": 432,
+      "claim": "elderly or people with underlying medical conditions are in high risk with covid-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4679
+    },
+    {
+      "id": 496,
+      "claim": "Understanding these immune changes may help in finding treatments that work for older COVID-19 patients, but, it may also help younger people who may have some of the same problems without knowing it.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6089
+    },
+    {
+      "id": 93,
+      "claim": "Coronavirus can Be Crushed By Warmer Weather",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 8859
+    },
+    {
+      "id": 489,
+      "claim": "Is it safe to take acetaminophen/Tylenol to treat coronavirus symptoms? yes it is.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4900
+    },
+    {
+      "id": 435,
+      "claim": "If you have any of the main symptoms of coronavirus (COVID-19), get a test as soon as possible.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5423
+    },
+    {
+      "id": 3054,
+      "claim": "it appears that the virus that causes COVID-19 can spread from people to animals after close contact with people with COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5338
+    },
+    {
+      "id": 2810,
+      "claim": "Scientists are endeavoring to find antivirals specific to the virus. Several drugs such as chloroquine, arbidol, remdesivir, and favipiravir are currently undergoing clinical studies to test their efficacy and safety in the treatment of coronavirus disease 2019 (COVID-19) in China; some promising results have been achieved thus far.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7492
+    },
+    {
+      "id": 204,
+      "claim": "The virus that causes COVID-19 appears to spread more efficiently than influenza but not as efficiently as measles, which is among the most contagious viruses known to affect people.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4287
+    },
+    {
+      "id": 3526,
+      "claim": "A report indicates that Acetaminophen (Tylenol) may be preferred over Ibuprofen (Advil) for coronavirus (fever)",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4257
+    },
+    {
+      "id": 2772,
+      "claim": "Coronaviruses cause respiratory illnesses, so the lungs are usually affected first. Early symptoms include fever, cough, and shortness of breath.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4433
+    },
+    {
+      "id": 2746,
+      "claim": "Coronaviruses cause respiratory illnesses, so the lungs are usually affected first. Early symptoms include fever, cough, and shortness of breath.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3824
+    },
+    {
+      "id": 397,
+      "claim": "Several already approved drugs, including lopinavir (LPV), ritonavir, chloroquine, favipiravir, and remdesivir, an antiviral awaiting approval have been repurposed and their efficacy in fighting COVID-19 is being evaluated",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6367
+    },
+    {
+      "id": 1098,
+      "claim": "New evidence suggests the coronavirus has lasting impacts on the heart, raising alarm for cardiologists who have been concerned about potential long-term heart injury from COVID-19.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 8385
+    },
+    {
+      "id": 3239,
+      "claim": "Based on currently available information, WHO does not recommend against the use of of ibuprofen.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5309
+    },
+    {
+      "id": 2102,
+      "claim": "In such a scenario, differentiating whether the cause of death is specifically due to COVID-19 or the result of treatment limitations can be difficult.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5356
+    },
+    {
+      "id": 584,
+      "claim": "Is it safe to take acetaminophen/Tylenol to treat coronavirus symptoms? yes it is.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3892
+    },
+    {
+      "id": 2887,
+      "claim": "Coronavirus (COVID-19) Know how to protect yourself and others from COVID-19 and what to do if you are sick.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4301
+    },
+    {
+      "id": 3338,
+      "claim": "there is no scientific evidence establishing a link between ibuprofen and worsening of covid-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6755
+    },
+    {
+      "id": 3430,
+      "claim": "Vitamin D Supplementation Could Reduce Risk of Influenza and COVID-19 Infections and Deaths",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4944
+    },
+    {
+      "id": 3027,
+      "claim": "College students, many of whom are already stressed, reported an increase in depression and anxiety during the initial outbreak.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5227
+    },
+    {
+      "id": 310,
+      "claim": "0% Isopropyl Alcohol Is a Better Disinfectant Than 99% Isopropyl Alcohol When It Comes to COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3788
+    },
+    {
+      "id": 1401,
+      "claim": "BCG vaccine can boost the immune system enough to prevent healthcare workers from catching coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4264
+    },
+    {
+      "id": 102,
+      "claim": "When the immune system's next stage kicked in, both adults and children made antibodies targeting the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4155
+    },
+    {
+      "id": 355,
+      "claim": "Symptoms of COVID-19 may appear 2-14 days after exposure.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4272
+    },
+    {
+      "id": 1375,
+      "claim": "immune responses to coronavirus in severely ill and critically ill patients are as strong or stronger than those of patients with milder illness.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4349
+    },
+    {
+      "id": 1064,
+      "claim": "If you have any of the main symptoms of coronavirus (COVID-19), get a test as soon as possible.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3973
+    },
+    {
+      "id": 359,
+      "claim": "certain marijuana strains could possibly prevent COVID-19 infection.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4012
+    },
+    {
+      "id": 1550,
+      "claim": "people may acquire SARS-CoV-2 through the air and after touching contaminated objects.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5566
+    },
+    {
+      "id": 2553,
+      "claim": "camostat mesylate cure coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4411
+    },
+    {
+      "id": 3082,
+      "claim": "Coronavirus remains stable on metals and plastic for three days. Outside a lab, however, the virus might last considerably longer: its genetic material could be detected on surfaces 17 days after a cruise ship was empty of passengers (although it's not clear whether that material represents infectious virus particles).",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5971
+    },
+    {
+      "id": 1101,
+      "claim": "a person can also get the coronavirus if they touch a surface or object that has viral particles on it and then touch their mouth, nose, or eyes.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6124
+    },
+    {
+      "id": 1356,
+      "claim": "wearing a face mask do not stopped person-to-person spread of the virus.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5797
+    },
+    {
+      "id": 1558,
+      "claim": "coronavirus can be prevented by having millets in one's diet because it generates heat in the body.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4492
+    },
+    {
+      "id": 2474,
+      "claim": "Like other viruses with a lipid envelope, SARS-CoV-2 is probably sensitive to temperature, humidity, and solar radiation",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4867
+    },
+    {
+      "id": 1609,
+      "claim": "all hand sanitizers works against covid-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5770
+    },
+    {
+      "id": 2942,
+      "claim": "In such a scenario, differentiating whether the cause of death is specifically due to COVID-19 or the result of treatment limitations can be difficult.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6136
+    },
+    {
+      "id": 565,
+      "claim": "Although cardiovascular diseases in combination with COVID-19 portend increased risk of severity and mortality, the use of [ACE inhibitors and ARBs] is not the likely culprit.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4361
+    },
+    {
+      "id": 1435,
+      "claim": "Severe coronavirus cases may start with body aches",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5684
+    },
+    {
+      "id": 3463,
+      "claim": "In severe cases of COVID-19, activation patterns of B cells resemble those seen in systemic lupus erythematosus, an autoimmune disease. Emory researchers want to see how far that resemblance extends.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4539
+    },
+    {
+      "id": 140,
+      "claim": "Since patients treated with ACEIs and ARBS will have increased numbers of ACE2 receptors in their lungs for coronavirus S proteins to bind to, they may be at increased risk of severe disease outcomes due to SARS-CoV-2infections",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4496
+    },
+    {
+      "id": 29,
+      "claim": "the lack of Vitamin D make you more susceptible to the Covid-19 coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8739
+    },
+    {
+      "id": 2676,
+      "claim": "cloth face mask with a filter can help prevent the spread of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7984
+    },
+    {
+      "id": 346,
+      "claim": "Yes, the novel coronavirus can survive on surfaces. No, it doesn't seem to matter.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9071
+    },
+    {
+      "id": 2384,
+      "claim": "the Covid-19 coronavirus can stay on various surfaces for a while",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3718
+    },
+    {
+      "id": 1554,
+      "claim": "Coronaviruses are a large family of different viruses and have coexisted with humans for a long time. The leap from animals to humans, however, coronavirus is new",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9085
+    },
+    {
+      "id": 2079,
+      "claim": "Ferrets can catch the coronavirus and might give it to other ferrets. But poultry and pigs don't appear to be at risk.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3665
+    },
+    {
+      "id": 1718,
+      "claim": "The coronavirus that causes COVID-19 can spread between people interacting in close proximity - for example, speaking, coughing, sneezing, or singing- even if those people do not symptoms",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4234
+    },
+    {
+      "id": 2837,
+      "claim": "A new Chinese coronavirus, a cousin of the SARS virus, has infected hundreds since the outbreak began in Wuhan, China, in December.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4685
+    },
+    {
+      "id": 3414,
+      "claim": "Evidence is currently lacking and it is too early to make robust conclusions on any link between use of angiotensin-converting enzyme (ACE) inhibitors and angiotensin II type-I receptor blockers with risk or severity of novel coronavirus disease 2019 (COVID-19) infection.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5269
+    },
+    {
+      "id": 159,
+      "claim": "SARS-CoV-2 is more stable on plastic and stainless steel than on copper and cardboard",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4091
+    },
+    {
+      "id": 1230,
+      "claim": "Yes, the novel coronavirus can survive on surfaces. No, it doesn't seem to matter.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6810
+    },
+    {
+      "id": 3174,
+      "claim": "Wear masks with two or more layers to stop the spread of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6510
+    },
+    {
+      "id": 3195,
+      "claim": "Enjoy ginger, but it's not a 'cure' for COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4217
+    },
+    {
+      "id": 3262,
+      "claim": "5G caused the coronavirus outbreak",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5874
+    },
+    {
+      "id": 3075,
+      "claim": "A few cases of dogs tested weak positives of Coronavirus and there is evidence they can transmit to humans directly.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5188
+    },
+    {
+      "id": 2066,
+      "claim": "he virus that causes coronavirus disease 2019 (COVID-19) is stable for several hours to days in aerosols and on surfaces",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5360
+    },
+    {
+      "id": 2527,
+      "claim": "Saliva testing does depend on standard PCR technology, and it does require some manual labor in order to move it through",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3769
+    },
+    {
+      "id": 365,
+      "claim": "Early symptoms for covid-19: include fever, cough, and shortness of breath. These appear as soon as 2 days, or as long as 14 days, after exposure to the virus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3772
+    },
+    {
+      "id": 608,
+      "claim": "Several already approved drugs, including lopinavir (LPV), ritonavir, chloroquine, favipiravir, and remdesivir, an antiviral awaiting approval have been repurposed and their efficacy in fighting COVID-19 is being evaluated",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6742
+    },
+    {
+      "id": 3354,
+      "claim": "the mechanism behind the protective effects of smoking could be found in nicotine",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6118
+    },
+    {
+      "id": 3713,
+      "claim": "Wearing the N95 respirator mask can protect against coronavirus",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5763
+    },
+    {
+      "id": 1102,
+      "claim": "Vitamin C may help shorten the duration and severity of colds caused by other viruses, but this is no guarantee that it will have the same effect on the coronavirus that causes COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3916
+    },
+    {
+      "id": 773,
+      "claim": "Vitamin C cures COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 8170
+    },
+    {
+      "id": 1793,
+      "claim": "The analyses clearly show that SARS-CoV-2 is not a laboratory construct or a purposefully manipulated virus",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3383
+    },
+    {
+      "id": 3446,
+      "claim": "vitamin D might be able to protect people from the coronavirus (COVID-19).",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5850
+    },
+    {
+      "id": 1544,
+      "claim": "chloroquine and hydroxychloroquine (HCQ), which have been extensively used for the treatment of malaria with known safety and efficacy, also limit acidification of endosomes, Golgi vesicles, and lysosomes. These molecules significantly reduce SARS-CoV and SARS-CoV-2 infection in vitro.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4936
+    },
+    {
+      "id": 1027,
+      "claim": "Does ultraviolet light kill the coronavirus ? No",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3894
+    },
+    {
+      "id": 37,
+      "claim": "The CORONAVIRUS is not of natural origin",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3947
+    },
+    {
+      "id": 67,
+      "claim": "Can dogs and cats get coronavirus ? the short answer is YES",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4506
+    },
+    {
+      "id": 19,
+      "claim": "Namely, winter is coming. On the minds of many restaurant owners is the fact that this month's mild weather is just weeks away from becoming a cold, windy, rainy mess, perhaps heavily impacting outdoor dining - one of the few ways restaurants have been able to (barely) scrape by.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4506
+    },
+    {
+      "id": 1452,
+      "claim": "Understanding these immune changes may help in finding treatments that work for older COVID-19 patients, but, it may also help younger people who may have some of the same problems without knowing it.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5187
+    },
+    {
+      "id": 561,
+      "claim": "Cell that Ab8 is highly effective in preventing and treating SARS-CoV-2 infection in mice and hamsters. Its tiny size not only increases its potential for diffusion in tissues to better neutralize the virus, but also makes it possible to administer the drug by alternative routes, including inhalation. Importantly, it does not bind to human cells -- a good sign that it won't have negative side-effects in people.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5335
+    },
+    {
+      "id": 1479,
+      "claim": "Several already approved drugs, including lopinavir (LPV), ritonavir, chloroquine, favipiravir, and remdesivir, an antiviral awaiting approval have been repurposed and their efficacy in fighting COVID-19 is being evaluated",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4699
+    },
+    {
+      "id": 1438,
+      "claim": "Vitamin C infusion can help improve the prognosis of patients with SARI.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7659
+    },
+    {
+      "id": 2707,
+      "claim": "Unfortunately, to date, no vaccines or antiviral drugs have been approved for the treatment of SARS-CoV-2 infection by regulatory agencies.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4222
+    },
+    {
+      "id": 2145,
+      "claim": "Masks do reduce spread of flu and some COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4413
+    },
+    {
+      "id": 947,
+      "claim": "children are unlikely to die from COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3991
+    },
+    {
+      "id": 2597,
+      "claim": "there is no clear evidence that using ibuprofen to treat symptoms such as a high temperature can make coronavirus (covid-19) worse",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3499
+    },
+    {
+      "id": 1765,
+      "claim": "social distancing is the most effective measure of containing the spread of the new coronavirus.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4227
+    },
+    {
+      "id": 1951,
+      "claim": "throwing hot water on ginger as a cure-all for COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4479
+    },
+    {
+      "id": 87,
+      "claim": "a person can also get the coronavirus if they touch a surface or object that has viral particles on it and then touch their mouth, nose, or eyes.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6810
+    },
+    {
+      "id": 737,
+      "claim": "Social distancing is crucial for preventing the spread of contagious illnesses such as COVID-19 (coronavirus). COVID-19 can spread through coughing, sneezing and close contact. By minimizing the amount of close contact we have with others, we reduce our chances of catching the virus and spreading it to our loved ones and within our community.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5002
+    },
+    {
+      "id": 174,
+      "claim": "in some people with severe COVID-19, the body goes rogue and attacks one of its own key immune defenses instead of the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2974
+    },
+    {
+      "id": 2793,
+      "claim": "cloth face mask with a filter can help prevent the spread of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6099
+    },
+    {
+      "id": 2490,
+      "claim": "Coronavirus (COVID-19) Know how to protect yourself and others from COVID-19 and what to do if you are sick.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5086
+    },
+    {
+      "id": 3263,
+      "claim": "the risk of animals spreading COVID-19 to people is considered to be low.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5371
+    },
+    {
+      "id": 2655,
+      "claim": "the risk of animals spreading COVID-19 to people is considered to be low.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3831
+    },
+    {
+      "id": 321,
+      "claim": "Scientific data has shown that cats can be infected with SARS-CoV-2 and can spread it to other cats.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5833
+    },
+    {
+      "id": 2148,
+      "claim": "Nonsteroidal anti-inflammatory drugs (NSAIDs), such as ibuprofen, aspirin, and Advil, reduce fever, pain, and inflammation.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4321
+    },
+    {
+      "id": 1153,
+      "claim": "One reason Covid-19 has spread so rapidly is that people infected with the SARS-CoV-2 coronavirus can show no symptoms of disease and yet are still contagious - they don't look or feel sick but still transmit the virus without realizing.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5061
+    },
+    {
+      "id": 2211,
+      "claim": "wearing a mask  may offer some protection for the covid-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4867
+    },
+    {
+      "id": 380,
+      "claim": "Heart damage lingers in COVID-19 patients, even after recovery",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4134
+    },
+    {
+      "id": 21,
+      "claim": "smokers were statistically less likely to be admitted for treatment for Covid-19.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4083
+    },
+    {
+      "id": 2974,
+      "claim": "Wear masks with two or more layers to stop the spread of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3729
+    },
+    {
+      "id": 671,
+      "claim": "Do you need hand sanitizer to effectively fight COVID-19? Per the Centers for Disease Control and Prevention, the most effective way of fighting coronavirus is using soap and water to wash your hands",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5083
+    },
+    {
+      "id": 1261,
+      "claim": "CT changes consistent with COVID-19 pneumonia can be observed in asymptomatic patients, as well as mild damage to the immune system.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4097
+    },
+    {
+      "id": 2224,
+      "claim": "Drugs widely used to treat high blood pressure appear to make COVID-19 dangerously worse.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6596
+    },
+    {
+      "id": 333,
+      "claim": "wet weather can kill the new coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4985
+    },
+    {
+      "id": 3021,
+      "claim": "Wearing a surgical face mask probably won't keep you from getting sick",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6114
+    },
+    {
+      "id": 1545,
+      "claim": "wear cloth face coverings in public can stop spreading coronanvirus when social distancing is difficult. This advice is based on evidence that people with COVID-19 can transmit the COVID-19 virus before they realize they have it.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6520
+    },
+    {
+      "id": 219,
+      "claim": "only people with symptoms can spread the the new coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4969
+    },
+    {
+      "id": 2220,
+      "claim": "Coronaviruses cause respiratory illnesses, so the lungs are usually affected first. Early symptoms include fever, cough, and shortness of breath.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3791
+    },
+    {
+      "id": 224,
+      "claim": "elderly or people with underlying medical conditions are in high risk with covid-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4276
+    },
+    {
+      "id": 1571,
+      "claim": "The first known cases of COVID-19 were in Wuhan, China",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4617
+    },
+    {
+      "id": 1418,
+      "claim": "Face masks could be giving people Covid-19 immunity",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3397
+    },
+    {
+      "id": 685,
+      "claim": "Duo of antiviral drugs strongly inhibits SARS-CoV-2 in the lab",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5355
+    },
+    {
+      "id": 1856,
+      "claim": "budesonide, commonly prescribed in the United States under the name Pulmicort, is a good treatment for COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4774
+    },
+    {
+      "id": 179,
+      "claim": "young and healthy peope are in low risk with covid-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3973
+    },
+    {
+      "id": 1665,
+      "claim": "people develop abdominal discomfort or nausea when calcium gets too high",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3779
+    },
+    {
+      "id": 1923,
+      "claim": "Wearing a surgical face mask probably won't keep you from getting sick",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6070
+    },
+    {
+      "id": 1552,
+      "claim": "COVID-19 rarely spreads between people and animals",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3885
+    },
+    {
+      "id": 1437,
+      "claim": "in some people with severe COVID-19, the body goes rogue and attacks one of its own key immune defenses instead of the coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5441
+    },
+    {
+      "id": 827,
+      "claim": "individuals with hypertension get more serious cases of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4135
+    },
+    {
+      "id": 749,
+      "claim": "Young adults are driving coronavirus infections and are likely spreading the virus to older, more vulnerable populations",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4338
+    },
+    {
+      "id": 3721,
+      "claim": "Hydroxychloroquine is an Effective Treatment for COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3573
+    },
+    {
+      "id": 1979,
+      "claim": "The researchers also ranked face mask material from most to least effective in their testing.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4617
+    },
+    {
+      "id": 752,
+      "claim": "Vitamin Deficiency May Raise Risk of Serious COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6700
+    },
+    {
+      "id": 1295,
+      "claim": "do surgical masks actually prevent the spread of COVID-19? No, absolutely not.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6228
+    },
+    {
+      "id": 783,
+      "claim": "There's an evidence that pets are playing a role in spreading COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6199
+    },
+    {
+      "id": 1268,
+      "claim": "coronavirus originate in a Chinese laboratory",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7121
+    },
+    {
+      "id": 1045,
+      "claim": "Yes, the novel coronavirus can survive on surfaces. No, it doesn't seem to matter.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6952
+    },
+    {
+      "id": 1328,
+      "claim": "Social distancing is crucial for preventing the spread of contagious illnesses such as COVID-19 (coronavirus). COVID-19 can spread through coughing, sneezing and close contact. By minimizing the amount of close contact we have with others, we reduce our chances of catching the virus and spreading it to our loved ones and within our community.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5861
+    },
+    {
+      "id": 2351,
+      "claim": "Hydroxychloroquine is an Effective Treatment for COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4906
+    },
+    {
+      "id": 1737,
+      "claim": "social distancing is the most effective measure of containing the spread of the new coronavirus.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4668
+    },
+    {
+      "id": 539,
+      "claim": "vitamin C supports your immune system.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4572
+    },
+    {
+      "id": 2219,
+      "claim": "The new coronavirus can damage the lungs, heart and brain, which increases the risk of long-term health problems.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 8256
+    },
+    {
+      "id": 607,
+      "claim": "Early symptoms for covid-19: include fever, cough, and shortness of breath. These appear as soon as 2 days, or as long as 14 days, after exposure to the virus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3994
+    },
+    {
+      "id": 3310,
+      "claim": "VITAMIN D HEALTHY LEVELS decrease COVID-19 MORTALITY RATES",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6277
+    },
+    {
+      "id": 1251,
+      "claim": "Duo of antiviral drugs strongly inhibits SARS-CoV-2 in the lab",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6445
+    },
+    {
+      "id": 1232,
+      "claim": "Can people who are asymptomatic spread coronavirus? The answer is NO",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4242
+    },
+    {
+      "id": 3102,
+      "claim": "masks protect you as the wearer and protects others",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3959
+    },
+    {
+      "id": 2721,
+      "claim": "Vitamin D Supplementation Could Reduce Risk of Influenza and COVID-19 Infections and Deaths",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 9386
+    },
+    {
+      "id": 2293,
+      "claim": "COVID-19 can survive on surfaces, like a tabletop",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5697
+    },
+    {
+      "id": 2980,
+      "claim": "masks are effective in limiting spread of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5913
+    },
+    {
+      "id": 655,
+      "claim": "Some people with diabetes, a disease that affects the body's ability to produce or use the hormone insulin to reduce glucose (sugar) in the blood, may be concerned about being at higher risk of getting COVID-19. However, this is a misconception.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6240
+    },
+    {
+      "id": 851,
+      "claim": "High Blood Pressure Doubles Coronavirus Death Risk",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5816
+    },
+    {
+      "id": 675,
+      "claim": "People who are infected but do not show symptoms can also spread the virus to others.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3942
+    },
+    {
+      "id": 1357,
+      "claim": "Low Vitamin D Levels Tied to Odds for Severe COVID",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4493
+    },
+    {
+      "id": 1176,
+      "claim": "Masks prevent the spread of COVID-19",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 8259
+    },
+    {
+      "id": 2269,
+      "claim": "drugs (Anti-inflammatory drugs, which includes steroids such as prednisone and non-steroidal drugs like ibuprofen) are helpful for symptomatic treatment only and are not a cure. By decreasing inflammation, they can decrease pain, swelling, redness and other symptoms that may be associated with inflammation.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6274
+    },
+    {
+      "id": 2569,
+      "claim": "In such a scenario, differentiating whether the cause of death is specifically due to COVID-19 or the result of treatment limitations can be difficult.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5634
+    },
+    {
+      "id": 3482,
+      "claim": "If you're worried about corona, only the N95 mask will protect you",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4324
+    },
+    {
+      "id": 2088,
+      "claim": "there are few novel sars-cov-2 cases in malaria countries because of the use of the antimalarial drug hydroxychloroquine.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6742
+    },
+    {
+      "id": 1389,
+      "claim": "fear and anxiety about a new disease and what could happen can be overwhelming and cause strong emotions in adults and children.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3238
+    },
+    {
+      "id": 3521,
+      "claim": "The overall risk of dying in the hospital from COVID-19 among people with T1D is very low, however, one study found that this risk is higher for people with T1D (3.5 times higher) compared to people without diabetes.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5445
+    },
+    {
+      "id": 696,
+      "claim": "Many experts believe that the rapid decline in certain COVID-19 patients, including those who need support from a ventilator, comes down to an individual's immune system",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5704
+    },
+    {
+      "id": 2459,
+      "claim": "While there is very limited data (and none specific for COVID-19), the following cocktail may have a role in the prevention/mitigation of COVID-19 disease. Vitamin C 500 mg BID and Quercetin 250 mg daily Zinc 75-100 mg/day",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 8069
+    },
+    {
+      "id": 3252,
+      "claim": "For most patients, COVID-19 begins and ends in their lungs, because like the flu, coronaviruses are respiratory diseases",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3986
+    },
+    {
+      "id": 1164,
+      "claim": "Mask wearing and social distancing for COVID-19 may be slowing influenza spread",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4921
+    },
+    {
+      "id": 2122,
+      "claim": "there is no link between vitamin D concentrations and risk of COVID-19 infection.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6158
+    },
+    {
+      "id": 2022,
+      "claim": "Vitamins and Minerals Help Fight Coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7213
+    },
+    {
+      "id": 2157,
+      "claim": "high doses of vitamins and natural remedies can stave off COVID-19 — but evidence to support these claims is lacking.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4254
+    },
+    {
+      "id": 300,
+      "claim": "Currently, the antibody responses against SARS-CoV-2 remain poorly understood and the clinical utility of serological testing is unclear",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4315
+    },
+    {
+      "id": 1168,
+      "claim": "Cell that Ab8 is highly effective in preventing and treating SARS-CoV-2 infection in mice and hamsters. Its tiny size not only increases its potential for diffusion in tissues to better neutralize the virus, but also makes it possible to administer the drug by alternative routes, including inhalation. Importantly, it does not bind to human cells -- a good sign that it won't have negative side-effects in people.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6198
+    },
+    {
+      "id": 1409,
+      "claim": "SARS-CoV-2 is more stable on plastic and stainless steel than on copper and cardboard",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3952
+    },
+    {
+      "id": 1883,
+      "claim": "Vitamin C infusion can help improve the prognosis of patients with SARI.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 8798
+    },
+    {
+      "id": 2554,
+      "claim": "Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6671
+    },
+    {
+      "id": 425,
+      "claim": "Can my pet spread the coronavirus? Yes it can",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6109
+    },
+    {
+      "id": 2198,
+      "claim": "COVID-19 and kids: What can happen when children get the coronavirus. A rare but sometimes deadly syndrome poses extra risk for COVID's youngest victims.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4209
+    },
+    {
+      "id": 1191,
+      "claim": "Antibiotics do work against viruses",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7749
+    },
+    {
+      "id": 976,
+      "claim": "Mask wearing and social distancing for COVID-19 may be slowing influenza spread",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6493
+    },
+    {
+      "id": 3243,
+      "claim": "it is safe take Advil to bring down your temperature caused by covid-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5417
+    },
+    {
+      "id": 961,
+      "claim": "ACE inhibitors and angiotensin receptor blockers may increase the risk of severe COVID-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4244
+    },
+    {
+      "id": 1782,
+      "claim": "Are hydroxychloroquine and chloroquine safe? Hydroxychloroquine and chloroquine are generally considered safe when taken for conditions that they have been approved for.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 8181
+    },
+    {
+      "id": 3732,
+      "claim": "COVID-19 and kids: What can happen when children get the coronavirus. A rare but sometimes deadly syndrome poses extra risk for COVID's youngest victims.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5388
+    },
+    {
+      "id": 2833,
+      "claim": "the new coronavirus can persist in the body for at least two weeks after symptoms of the disease clear up.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4694
+    },
+    {
+      "id": 1307,
+      "claim": "Symptoms of COVID-19 may appear 2-14 days after exposure.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4005
+    },
+    {
+      "id": 1838,
+      "claim": "While there is no evidence that infected animals can spread COVID-19 to humans, some pet owners might be concerned, understandably so, that their pet could become infected with COVID-19 and fall ill.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5405
+    },
+    {
+      "id": 802,
+      "claim": "In covid-19 patients especially old people, those who had sufficient levels of vitamin D were more than 51% less likely to die than patients who were deficient.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4648
+    },
+    {
+      "id": 2226,
+      "claim": "Covid-19 kills also young people",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7746
+    },
+    {
+      "id": 1925,
+      "claim": "Coronavirus disease (COVID-19) is a novel (new) coronavirus, one that has not been previously identified in humans, and is responsible for an outbreak of respiratory illness that became a global pandemic in 2020.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5006
+    },
+    {
+      "id": 3276,
+      "claim": "Coronaviruses cause respiratory illnesses, so the lungs are usually affected first. Early symptoms include fever, cough, and shortness of breath.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4145
+    },
+    {
+      "id": 1044,
+      "claim": "COVID-19 is shedding new light on how viruses can kick some patient's immune system into overdrive to deadly effect in what is known as a cytokine storm syndrome.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5145
+    },
+    {
+      "id": 3504,
+      "claim": "People with Diabetes May Have Higher Risk for COVID-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4531
+    },
+    {
+      "id": 1417,
+      "claim": "Coronavirus Can Linger in Air for Hours.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3975
+    },
+    {
+      "id": 2312,
+      "claim": "No, garlic doesn't cure coronavirus.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 9177
+    },
+    {
+      "id": 2341,
+      "claim": "5G caused the coronavirus outbreak",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5233
+    },
+    {
+      "id": 2174,
+      "claim": "a small number of pets worldwide, including cats and dogs, can be infected with the virus that causes COVID-19, mostly after close contact with people with COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3671
+    },
+    {
+      "id": 1065,
+      "claim": "Symptoms of COVID-19 may appear 2-14 days after exposure.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3654
+    },
+    {
+      "id": 3735,
+      "claim": "The immune system, noticing the infection, flares up, which can cause the lungs to fill with fluid and prevent adequate oxygen flow.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4442
+    },
+    {
+      "id": 1217,
+      "claim": "Duo of antiviral drugs strongly inhibits SARS-CoV-2 in the lab",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5013
+    },
+    {
+      "id": 2588,
+      "claim": "headaches are rarely the sole symptom present in a coronavirus patient.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4834
+    },
+    {
+      "id": 3060,
+      "claim": "Diabetes is generally known to weaken the immune system, making it harder to protect against viral infections like COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4317
+    },
+    {
+      "id": 284,
+      "claim": "Are hydroxychloroquine and chloroquine safe? Hydroxychloroquine and chloroquine are generally considered safe when taken for conditions that they have been approved for.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4816
+    },
+    {
+      "id": 1348,
+      "claim": "5G networks facilitate the spread of the coronavirus.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5161
+    },
+    {
+      "id": 1237,
+      "claim": "Namely, winter is coming. On the minds of many restaurant owners is the fact that this month's mild weather is just weeks away from becoming a cold, windy, rainy mess, perhaps heavily impacting outdoor dining - one of the few ways restaurants have been able to (barely) scrape by.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4888
+    },
+    {
+      "id": 636,
+      "claim": "What are the best antibiotics for the coronavirus? None whatsoever.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4051
+    },
+    {
+      "id": 280,
+      "claim": "elderly or people with underlying medical conditions are in high risk with covid-19",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4246
+    },
+    {
+      "id": 747,
+      "claim": "vitamin C can prevent or treat COVID-19 (coronavirus)",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5767
+    },
+    {
+      "id": 370,
+      "claim": "Before preparing or eating food it is important to always wash your hands with soap and water for 20 seconds for general food safety.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3272
+    },
+    {
+      "id": 3212,
+      "claim": "It appears that the virus that causes COVID-19 can spread from people to animals in some situations.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5920
+    },
+    {
+      "id": 1537,
+      "claim": "'Social distancing' could help stop coronavirus spread",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6235
+    },
+    {
+      "id": 598,
+      "claim": "Hot matcha green tea (with EGCG) can do magic for covid-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5831
+    },
+    {
+      "id": 3325,
+      "claim": "it is \"significantly\" improving oronavirus patients symptoms when traiting them with Vitamin C.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6012
+    },
+    {
+      "id": 2134,
+      "claim": "There's been much speculation about whether vitamin D might prevent or help survival with COVID-19, and two new studies appear to underscore the link.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6541
+    },
+    {
+      "id": 3620,
+      "claim": "there is no clear evidence that using ibuprofen to treat symptoms such as a high temperature can make coronavirus (covid-19) worse",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4577
+    },
+    {
+      "id": 142,
+      "claim": "Yes, the novel coronavirus can survive on surfaces. No, it doesn't seem to matter.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6129
+    },
+    {
+      "id": 1022,
+      "claim": "VITAMIN D LEVELS increase COVID-19 MORTALITY RATES",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7204
+    },
+    {
+      "id": 1832,
+      "claim": "Samples from the lungs of patients show a runaway immune system reaction could be one mechanism behind severe COVID-19 cases.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 9590
+    },
+    {
+      "id": 739,
+      "claim": "Namely, winter is coming. On the minds of many restaurant owners is the fact that this month's mild weather is just weeks away from becoming a cold, windy, rainy mess, perhaps heavily impacting outdoor dining - one of the few ways restaurants have been able to (barely) scrape by.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5766
+    },
+    {
+      "id": 715,
+      "claim": "The use of ACE inhibitors was associated with an almost 40% lower risk of COVID-19 hospitalization for the older, Medicare Advantage patients - but there was no significant difference in risk for the younger, commercially insured patients.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4606
+    },
+    {
+      "id": 3096,
+      "claim": "Coronavirus remains stable on metals and plastic for three days. Outside a lab, however, the virus might last considerably longer: its genetic material could be detected on surfaces 17 days after a cruise ship was empty of passengers (although it's not clear whether that material represents infectious virus particles).",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5485
+    },
+    {
+      "id": 1636,
+      "claim": "Scientific data has shown that cats can be infected with SARS-CoV-2 and can spread it to other cats.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4749
+    },
+    {
+      "id": 1837,
+      "claim": "Drugs for high blood pressure appear to make COVID-19 worse",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4166
+    },
+    {
+      "id": 2802,
+      "claim": "Many readers have written in to ask whether ibuprofen or other non-steroidal anti-inflammatory drugs, or NSAIDs, can worsen COVID-19, the disease caused by the novel coronavirus.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6961
+    },
+    {
+      "id": 2861,
+      "claim": "Avoid medications to lower fever if sick with the new coronavirus",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3454
+    },
+    {
+      "id": 1602,
+      "claim": "Understanding these immune changes may help in finding treatments that work for older COVID-19 patients, but, it may also help younger people who may have some of the same problems without knowing it.",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6288
+    },
+    {
+      "id": 99,
+      "claim": "A headache isn't a common symptom of the virus, but about 14% of people infected with corna have experienced it",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6317
+    },
+    {
+      "id": 2030,
+      "claim": "fever was the first symptom in COVID-19 patients.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4398
+    },
+    {
+      "id": 1087,
+      "claim": "The new coronavirus can infect organs throughout the body, including lungs, throat, heart, liver, brain, kidneys and the intestines",
+      "title": "",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6852
+    },
+    {
+      "id": 1757,
+      "claim": "A central player in the fight against the novel coronavirus is our immune system.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5406
+    },
+    {
+      "id": 989,
+      "claim": "non-steroidal anti-inflammatory drugs (NSAIDs) such as Advil and Motrin can make COVID-19 symptoms worse.",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5998
+    },
+    {
+      "id": 1825,
+      "claim": "Dexamethasone cures covid-19",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4918
+    },
+    {
+      "id": 1614,
+      "claim": "Vitamin C may help shorten the duration and severity of colds caused by other viruses, but this is no guarantee that it will have the same effect on the coronavirus that causes COVID-19.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3893
+    },
+    {
+      "id": 473,
+      "claim": "VITAMIN D LEVELS increase COVID-19 MORTALITY RATES",
+      "title": "",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5182
+    },
+    {
+      "id": 3500,
+      "claim": "N95 masks are more effective than regular masks.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3592
+    },
+    {
+      "id": 2310,
+      "claim": "Hidden immune weakness found in gravely ill COVID-19 patients.",
+      "title": "",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5200
+    }
+  ]
+}
