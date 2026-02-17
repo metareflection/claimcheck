@@ -90,13 +90,15 @@ HealthVer, N=500, seed 42.
 
 Deltas relative to baseline.
 
-**Decomposition alone hurts.** Without proper aggregation, atomic representation makes the model *more* conservative. It sees that not every assertion is fully supported and defaults to NOT_ENOUGH_INFO. The local commitments are correct but the aggregation rule is wrong.
+**Decomposition alone hurts.** Without proper aggregation, atomic representation makes the model *more* conservative. It sees that not every assertion is fully supported and defaults to NOT_ENOUGH_INFO. The local commitments are reasonable but the implicit aggregation rule (all assertions must be supported) is wrong for this domain.
 
-**Soft aggregation is the main driver.** It changes the rule from "all assertions must be supported" to "most supported, none contradicted." This matches the entailment threshold used by human annotators.
+**Soft aggregation is the main driver.** It changes the aggregation rule from "all assertions must be supported" to "most supported, none contradicted." This matches the entailment threshold used by human annotators. Critically, soft-agg is only possible *because* decomposition creates separable local commitments — without the structured intermediate representation, there is nothing to aggregate over. Decomposition enables aggregation design.
 
-**Contrastive aggregation adds a modest boost** by forcing explicit per-hypothesis evaluation before choosing. It mainly improves REFUTES detection (+4pp).
+**Contrastive adds a modest boost** by forcing explicit per-hypothesis evaluation. It mainly improves REFUTES detection (+4pp). Analysis of local commitment quality shows contrastive does not systematically change assertion-level labels (88% of entries have identical local labels with and without contrastive). Instead, it corrects specific misclassifications on boundary cases — when combined with soft-agg, these targeted corrections are amplified by the relaxed aggregation threshold.
 
-**The two are super-additive.** Soft-agg alone: +2.4pp. Contrastive alone: +0.4pp. Both: +3.4pp. Contrastive helps the model make better local commitments (distinguishing "supports" from "doesn't contradict"), which makes soft aggregation more accurate.
+**The two are super-additive.** Soft-agg alone: +2.4pp. Contrastive alone: +0.4pp. Both: +3.4pp. The super-additivity arises because contrastive fixes a small number of local misclassifications (8/17 entries where `both` wins over `softagg` show changed local labels) that soft-agg's relaxed threshold then correctly aggregates.
+
+**Note:** Unlike Dafny, where the gain comes from representation isolation (hiding the hypothesis), fact-checking gains come primarily from aggregation design over the structured representation. These are distinct mechanisms unified by the same principle: decoupling representation from evaluation creates a structured intermediate form that can be reasoned about explicitly.
 
 ## Why It Works: Anchoring Bias in LLMs
 
