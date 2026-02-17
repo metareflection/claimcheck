@@ -47,7 +47,7 @@ The intervention operates through two distinct mechanisms depending on the domai
 | Prompt-level separation | 86.1% | Single call, instructions say "informalize first" |
 | **Structural separation** | **96.3%** | Two calls: informalize without seeing requirement, then compare |
 
-The 26.9pp gap between no separation and structural separation is the clearest demonstration of anchoring bias. Even prompt-level instructions to "analyze first" lose 10.2pp vs actual structural enforcement. The model *cannot help* being influenced by the requirement when it's visible.
+The 26.9pp gap between no separation and structural separation is the clearest demonstration of premature hypothesis fixation. Even prompt-level instructions to "informalize first" lose 10.2pp vs actual structural enforcement. The model *cannot help* being influenced by the requirement when it's visible — the representation is conditioned on the hypothesis even when instructed otherwise.
 
 All three variants catch all 8 deliberately bogus lemmas (100%). The accuracy difference comes entirely from false disputes of valid lemmas — structural separation reduces false positives.
 
