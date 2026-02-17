@@ -1,22 +1,30 @@
-# Structural Separation Reduces Anchoring Bias in LLM Reasoning
+# Decoupling Representation from Evaluation in LLM Reasoning
 
 ## Core Idea
 
 When LLMs evaluate a hypothesis against evidence, the default reasoning path is:
 
 ```
-input → hypothesis → selective evidence retrieval
+h = f(input)
+verdict = g(h, input)       # representation is conditioned on hypothesis
 ```
 
-The model forms a hypothesis early and selectively attends to evidence that confirms it. This is anchoring bias.
+The model forms a hypothesis early, then constructs a representation of the evidence conditioned on that hypothesis. This leads to premature hypothesis fixation.
 
 Structural separation forces a different path:
 
 ```
-input → atomic evidence representation → local commitments → global aggregation
+E = R(input)                 # representation (hypothesis-free)
+L = C(E)                     # local commitments
+verdict = A(L)               # aggregation
 ```
 
 The model builds a representation of the evidence *before* any hypothesis exists, makes local commitments about what each piece of evidence means, and only then aggregates into a global judgment. Local commitments are locked in before the global hypothesis forms, preventing selective reinterpretation.
+
+The intervention operates through two distinct mechanisms depending on the domain:
+
+1. **Representation isolation** (Dafny): The hypothesis is literally hidden during representation construction. The model informalizes code without seeing the NL requirement. This is information hiding.
+2. **Structured intermediate representation** (Fact-checking, Mystery): The model sees all information but must produce atomic local commitments via a tool schema before aggregating. Decomposition creates a structured representation that explicit aggregation rules can operate on — without it, the model produces a single black-box verdict with no separable aggregation step.
 
 ## Three Domains
 
