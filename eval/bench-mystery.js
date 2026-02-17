@@ -6,6 +6,7 @@
  *   - baseline: model sees story + question + choices, answers directly (one call)
  *   - single-prompt: model sees everything, but prompt instructs analyze-then-choose (one call)
  *   - two-pass: model analyzes story first (no choices), then selects (two calls)
+ *   - grounded: model must quote specific clues from the story, analyze each, then answer (one call)
  *
  * Supports two backends:
  *   - api: direct Anthropic API calls (faster, structured output via tool_use)
@@ -42,6 +43,7 @@ const label = getArg('--label', `mystery-${mode}-${Date.now()}`);
 const model = getArg('--model', 'claude-sonnet-4-5-20250929');
 const limit = parseInt(getArg('--limit', '0')) || 0;
 const offset = parseInt(getArg('--offset', '0')) || 0;
+const concurrency = parseInt(getArg('--concurrency', '1')) || 1;
 const verbose = args.includes('--verbose');
 
 // --- Tool schemas for structured API output ---
@@ -103,6 +105,50 @@ const analysisTool = {
     },
   },
 };
+
+function groundedAnswerTool(choices) {
+  return {
+    name: 'record_grounded_answer',
+    description: 'Record your clue-by-clue analysis and answer to the mystery.',
+    input_schema: {
+      type: 'object',
+      required: ['clues', 'contradictions', 'answer'],
+      properties: {
+        clues: {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: ['quote', 'implication'],
+            properties: {
+              quote: {
+                type: 'string',
+                description: 'Exact quote from the story text that constitutes a clue.',
+              },
+              implication: {
+                type: 'string',
+                description: 'What this clue implies — who it implicates or exonerates, and why.',
+              },
+            },
+          },
+          description: 'Key clues extracted from the story. Quote the exact text before analyzing.',
+        },
+        contradictions: {
+          type: 'string',
+          description: 'Which clues conflict with each other, impossible alibis, or logical inconsistencies.',
+        },
+        reasoning: {
+          type: 'string',
+          description: 'Based on the clues and contradictions, who is responsible and why.',
+        },
+        answer: {
+          type: 'string',
+          enum: choices,
+          description: 'The correct answer.',
+        },
+      },
+    },
+  };
+}
 
 // --- Claude Code backend ---
 
@@ -225,6 +271,30 @@ ${choiceList}
 ## Instructions
 
 Based on your prior analysis, select the best answer. If your analysis already identified the answer, select it. If your analysis pointed to someone not in the choices, reconsider the evidence for the available choices.`;
+}
+
+function groundedPrompt(story, choices) {
+  const choiceList = choices.map((c, i) => `${String.fromCharCode(65 + i)}. ${c}`).join('\n');
+  return `Read the following mystery story carefully, then answer the question at the end.
+
+## Story
+
+${story}
+
+## Answer Choices
+
+${choiceList}
+
+## Instructions
+
+You must analyze the story by extracting specific clues BEFORE choosing an answer. For each clue:
+
+1. **Quote** the exact sentence or phrase from the story
+2. **Analyze** what this clue implies — who it implicates or exonerates, and why
+
+After extracting all relevant clues, identify contradictions between them (impossible alibis, timeline conflicts, logical inconsistencies). Then select your answer based on the evidence you cited.
+
+Extract at least 3 clues. Every claim you make must be grounded in a direct quote from the story.`;
 }
 
 // --- Parse answer from CC text output ---
@@ -351,6 +421,26 @@ async function runTwoPass(story, choices) {
   }
 }
 
+async function runGrounded(story, choices) {
+  const prompt = groundedPrompt(story, choices);
+
+  if (backend === 'api') {
+    const tool = groundedAnswerTool(choices);
+    const result = await callWithTool({
+      model,
+      prompt,
+      tool,
+      toolChoice: { type: 'tool', name: 'record_grounded_answer' },
+      verbose,
+      maxTokens: 8192,
+    });
+    return result.input.answer;
+  } else {
+    const output = await callClaude(prompt + '\n\nState your final answer as:\n\n**Answer:** <letter>');
+    return parseAnswer(output, choices);
+  }
+}
+
 // --- Main ---
 
 async function main() {
@@ -368,11 +458,11 @@ async function main() {
   console.error(`  examples: ${examples.length}${offset ? ` (offset ${offset})` : ''}`);
   console.error('');
 
-  const allResults = [];
+  const allResults = new Array(examples.length);
   const totalStart = Date.now();
   let correct = 0;
 
-  for (let i = 0; i < examples.length; i++) {
+  async function processExample(i) {
     const ex = examples[i];
     const choices = Object.keys(ex.target_scores);
     const correctAnswer = choices.find(c => ex.target_scores[c] === 1);
@@ -391,8 +481,10 @@ async function main() {
         answer = await runSinglePrompt(ex.input, choices);
       } else if (mode === 'two-pass') {
         answer = await runTwoPass(ex.input, choices);
+      } else if (mode === 'grounded') {
+        answer = await runGrounded(ex.input, choices);
       } else {
-        throw new Error(`Unknown mode: ${mode}. Expected: baseline, single-prompt, two-pass`);
+        throw new Error(`Unknown mode: ${mode}. Expected: baseline, single-prompt, two-pass, grounded`);
       }
     } catch (err) {
       error = err.message;
@@ -406,7 +498,7 @@ async function main() {
     const tag = isCorrect ? 'CORRECT' : answer ? 'WRONG' : 'PARSE_FAILED';
     console.error(`    ${tag}: "${answer}" (expected "${correctAnswer}") (${(elapsedMs / 1000).toFixed(1)}s)`);
 
-    allResults.push({
+    allResults[i] = {
       storyId,
       choices,
       correctAnswer,
@@ -414,7 +506,22 @@ async function main() {
       correct: isCorrect,
       elapsedMs,
       ...(error ? { error } : {}),
+    };
+  }
+
+  if (concurrency <= 1) {
+    for (let i = 0; i < examples.length; i++) {
+      await processExample(i);
+    }
+  } else {
+    let next = 0;
+    const workers = Array.from({ length: Math.min(concurrency, examples.length) }, async () => {
+      while (next < examples.length) {
+        const i = next++;
+        await processExample(i);
+      }
     });
+    await Promise.all(workers);
   }
 
   const totalElapsedMs = Date.now() - totalStart;
