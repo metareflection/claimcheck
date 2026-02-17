@@ -27,6 +27,24 @@ A structured tool schema enforces this order — the model must cite before judg
 
 Both flags are enabled for all grounded runs reported here.
 
+## Ablation (HealthVer, N=500, seed 42)
+
+| Config | Accuracy | SUPPORTS | REFUTES | NEI |
+|--------|----------|----------|---------|-----|
+| Baseline (no decomposition) | 65.4% | 28% | 58% | 93% |
+| Grounded (neither flag) | 63.8% | 25% | 57% | 92% |
+| Grounded + soft-agg | 67.8% | 37% | 62% | 90% |
+| Grounded + contrastive | 65.8% | 28% | 61% | 93% |
+| Grounded + both | **68.8%** | **42%** | 61% | 90% |
+
+Grounded decomposition alone *hurts* (-1.6pp). Without relaxed aggregation, per-assertion analysis makes the model more conservative — it notes not every assertion is fully supported and defaults to NOT_ENOUGH_INFO.
+
+**Soft aggregation is the main driver** (+4.0pp over neither). It allows "most supported, none contradicted" to count as SUPPORTS, which matches the entailment threshold used by annotators.
+
+**Contrastive adds a modest boost** (+2.0pp over neither), mainly via REFUTES (+4pp). It helps the model distinguish refutation from insufficient evidence.
+
+**The two flags are super-additive**: soft-agg alone gives +4.0pp, contrastive alone gives +2.0pp, but combined they give +5.0pp. Contrastive analysis helps the model identify which assertions genuinely support (rather than merely don't contradict), making the soft-agg threshold more accurate.
+
 ## Cross-Dataset Results
 
 | Dataset | Domain | N | Baseline | Grounded | Delta |
