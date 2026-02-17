@@ -67,17 +67,43 @@ Structured = grounded decomposition with soft aggregation and contrastive analys
 
 The gain correlates with how conservative the baseline is on SUPPORTS. When the baseline already achieves >90% SUPPORTS accuracy (FEVER, VitaminC), there is no anchoring bias to correct. When the baseline is below 70% on SUPPORTS (HealthVer, AVeriTeC, PubHealth, SciFact), the model is defaulting to NOT_ENOUGH_INFO due to confirmation bias on "insufficient evidence" — structural separation corrects this.
 
-### Mystery Solving (BIG-bench Minute Mysteries, N=203)
+### Mystery Solving
+
+#### BIG-bench Minute Mysteries (N=203)
 
 | Method | Haiku | Sonnet | Opus |
 |--------|-------|--------|------|
 | Baseline | 40.9% | 54.2% | 65.0% |
-| Grounded (local commitments only) | 41.9% (+1.0pp) | 60.6% (+6.4pp) | 69.5% (+4.5pp) |
-| Grounded + contrastive (full aggregation) | 42.4% (+1.5pp) | 64.5% (+10.3pp) | 70.0% (+5.0pp) |
+| Single-prompt (prompt-level separation) | — | 49.8% (-4.4pp) | 67.5% (+2.5pp) |
+| Grounded (structural, local commitments only) | 41.9% (+1.0pp) | 60.6% (+6.4pp) | 69.5% (+4.5pp) |
+| Grounded + contrastive | 42.4% (+1.5pp) | 64.5% (+10.3pp) | 70.0% (+5.0pp) |
 
 No prior published LLM results on this task. Random baseline is 24.2%.
 
-**Model capability threshold.** Structural separation requires sufficient base capability to produce useful local commitments. Haiku can fill in the tool schema but its clue extractions and implications are too shallow for aggregation to improve on — the structured intermediate representation has low fidelity. Sonnet shows the largest gains because it produces quality local commitments but doesn't self-separate without scaffolding. Opus benefits less because it already partially performs structured reasoning internally — the external scaffolding is partially redundant. The technique is not a universal amplifier; it requires that the model can produce faithful atomic representations when asked.
+**Prompt-level separation fails for Sonnet.** Single-prompt (-4.4pp) is *worse* than baseline — the two-pass prompt instructions add confusion without actually enforcing separation. But structural enforcement via tool schema (+6.4pp) works. This replicates the Dafny finding in a second domain: for models that don't already self-separate, prompt-level instructions are not just insufficient — they're counterproductive. Opus shows the expected gradient (baseline < single-prompt < grounded), consistent with Dafny.
+
+#### MuSR Murder Mysteries (N=250, Sonnet)
+
+| Method | Accuracy |
+|--------|----------|
+| Baseline | 78.4% |
+| Single-prompt | 76.0% (-2.4pp) |
+| Grounded | 76.4% (-2.0pp) |
+| Grounded + contrastive | 78.8% (+0.4pp) |
+
+MuSR baseline is already 78.4% — well above the threshold where structural separation helps. This is consistent with the fact-checking pattern: FEVER (95.6% baseline) and VitaminC (83.8%) also see no benefit. When the model already reasons well on the task, external scaffolding adds overhead without correcting fixation.
+
+### Model Capability Threshold
+
+| Model | Minute Mysteries Delta | HealthVer Delta (N=500) |
+|-------|----------------------|------------------------|
+| Haiku | +1.5pp | +0.2pp |
+| Sonnet | +10.3pp | +3.4pp |
+| Opus | +5.0pp | +1.8pp |
+
+Deltas for best structured config vs baseline.
+
+Structural separation requires sufficient base capability to produce useful local commitments. Haiku can fill in the tool schema but its clue extractions and implications are too shallow for aggregation to improve on — the structured intermediate representation has low fidelity. Sonnet shows the largest gains because it produces quality local commitments but doesn't self-separate without scaffolding. Opus benefits less because it already partially performs structured reasoning internally — the external scaffolding is partially redundant. The technique is not a universal amplifier; it requires that the model can produce faithful atomic representations when asked.
 
 
 ## Ablation: Which Phase Matters?
@@ -133,7 +159,15 @@ This is stronger than prompt-level instructions ("analyze before judging") becau
 - The model cannot skip phases or reorder them
 - The output is machine-readable and auditable
 
-The Dafny results quantify this: structural separation (96.3%) vs prompt-level separation (86.1%) — a 10.2pp gap from enforcement mechanism alone.
+**Enforcement > instruction**, quantified across two domains:
+
+| Domain | No separation | Prompt-level | Structural |
+|--------|--------------|--------------|------------|
+| Dafny (N=36) | 69.4% | 86.1% (+16.7pp) | **96.3%** (+26.9pp) |
+| Minute Mysteries, Sonnet (N=203) | 54.2% | 49.8% (-4.4pp) | **64.5%** (+10.3pp) |
+| Minute Mysteries, Opus (N=203) | 65.0% | 67.5% (+2.5pp) | **70.0%** (+5.0pp) |
+
+Prompt-level separation can even *hurt* (Sonnet on mysteries: -4.4pp). The model attempts to follow the two-pass instructions but executes them poorly, producing worse reasoning than if left to its own devices. Structural enforcement via tool schemas avoids this failure mode entirely — the model doesn't need to interpret meta-instructions about how to reason; the schema dictates the structure.
 
 ## Reproducibility
 
@@ -143,15 +177,27 @@ All results use Anthropic API with tool use. Temperature 0.
 # Dafny verification
 node eval/bench-claimcheck.js
 
-# Fact-checking (example: HealthVer)
+# Fact-checking (HealthVer, full + multi-model)
 node eval/bench-healthver.js --mode baseline --label healthver-baseline
 node eval/bench-healthver.js --mode grounded --soft-agg --contrastive \
   --concurrency 10 --label healthver-grounded
+# Multi-model (500 sample)
+for m in claude-haiku-4-5-20251001 claude-sonnet-4-5-20250929 claude-opus-4-6; do
+  node eval/bench-healthver.js --mode baseline --model $m --sample 500 --concurrency 10 --label healthver-baseline-${m}
+  node eval/bench-healthver.js --mode grounded --soft-agg --contrastive --model $m --sample 500 --concurrency 10 --label healthver-grounded-${m}
+done
 
-# Mystery solving
+# Minute Mysteries (all modes, multi-model)
 node eval/bench-mystery.js --mode baseline --label mystery-baseline
+node eval/bench-mystery.js --mode single-prompt --concurrency 10 --label mystery-single
 node eval/bench-mystery.js --mode grounded --concurrency 10 --label mystery-grounded
 node eval/bench-mystery.js --mode grounded --contrastive --concurrency 10 --label mystery-grounded-contrastive
+
+# MuSR Murder Mysteries
+node eval/bench-musr.js --mode baseline --concurrency 10 --label musr-baseline
+node eval/bench-musr.js --mode single-prompt --concurrency 10 --label musr-single
+node eval/bench-musr.js --mode grounded --concurrency 10 --label musr-grounded
+node eval/bench-musr.js --mode grounded --contrastive --concurrency 10 --label musr-grounded-contrastive
 
 # Ablation (HealthVer, 500 sample)
 node eval/bench-healthver.js --mode grounded --sample 500 --concurrency 10 --label ablation-neither
@@ -160,4 +206,4 @@ node eval/bench-healthver.js --mode grounded --contrastive --sample 500 --concur
 node eval/bench-healthver.js --mode grounded --soft-agg --contrastive --sample 500 --concurrency 10 --label ablation-both
 ```
 
-Models: `claude-sonnet-4-5-20250929`, `claude-opus-4-6`.
+Models: `claude-haiku-4-5-20251001`, `claude-sonnet-4-5-20250929`, `claude-opus-4-6`.
