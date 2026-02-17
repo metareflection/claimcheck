@@ -1,0 +1,2765 @@
+{
+  "label": "musr-single-sonnet",
+  "timestamp": "2026-02-17T02:25:25.103Z",
+  "config": {
+    "mode": "single-prompt",
+    "model": "claude-sonnet-4-5-20250929",
+    "contrastive": false,
+    "total": 250
+  },
+  "totalElapsedMs": 299717,
+  "accuracy": 0.76,
+  "correct": 190,
+  "total": 250,
+  "results": [
+    {
+      "storyId": "musr-0",
+      "choices": [
+        "Mackenzie",
+        "Ana"
+      ],
+      "correctAnswer": "Mackenzie",
+      "answer": "Mackenzie",
+      "correct": true,
+      "elapsedMs": 12710
+    },
+    {
+      "storyId": "musr-1",
+      "choices": [
+        "Mackenzie",
+        "Ana"
+      ],
+      "correctAnswer": "Ana",
+      "answer": "Ana",
+      "correct": true,
+      "elapsedMs": 11836
+    },
+    {
+      "storyId": "musr-2",
+      "choices": [
+        "Harry",
+        "Rosemary"
+      ],
+      "correctAnswer": "Harry",
+      "answer": "Harry",
+      "correct": true,
+      "elapsedMs": 5631
+    },
+    {
+      "storyId": "musr-3",
+      "choices": [
+        "Harry",
+        "Rosemary"
+      ],
+      "correctAnswer": "Rosemary",
+      "answer": "Harry",
+      "correct": false,
+      "elapsedMs": 15537
+    },
+    {
+      "storyId": "musr-4",
+      "choices": [
+        "Amelia",
+        "Emma"
+      ],
+      "correctAnswer": "Amelia",
+      "answer": "Amelia",
+      "correct": true,
+      "elapsedMs": 13956
+    },
+    {
+      "storyId": "musr-5",
+      "choices": [
+        "Amelia",
+        "Emma"
+      ],
+      "correctAnswer": "Emma",
+      "answer": "Emma",
+      "correct": true,
+      "elapsedMs": 5066
+    },
+    {
+      "storyId": "musr-6",
+      "choices": [
+        "Terrance",
+        "Nelson"
+      ],
+      "correctAnswer": "Terrance",
+      "answer": "Terrance",
+      "correct": true,
+      "elapsedMs": 14552
+    },
+    {
+      "storyId": "musr-7",
+      "choices": [
+        "Terrance",
+        "Nelson"
+      ],
+      "correctAnswer": "Nelson",
+      "answer": "Nelson",
+      "correct": true,
+      "elapsedMs": 10623
+    },
+    {
+      "storyId": "musr-8",
+      "choices": [
+        "Ronald",
+        "Julia"
+      ],
+      "correctAnswer": "Ronald",
+      "answer": "Julia",
+      "correct": false,
+      "elapsedMs": 5024
+    },
+    {
+      "storyId": "musr-9",
+      "choices": [
+        "Ronald",
+        "Julia"
+      ],
+      "correctAnswer": "Julia",
+      "answer": "Julia",
+      "correct": true,
+      "elapsedMs": 4546
+    },
+    {
+      "storyId": "musr-10",
+      "choices": [
+        "Unity",
+        "Vivian"
+      ],
+      "correctAnswer": "Unity",
+      "answer": "Unity",
+      "correct": true,
+      "elapsedMs": 11820
+    },
+    {
+      "storyId": "musr-11",
+      "choices": [
+        "Unity",
+        "Vivian"
+      ],
+      "correctAnswer": "Vivian",
+      "answer": "Vivian",
+      "correct": true,
+      "elapsedMs": 12928
+    },
+    {
+      "storyId": "musr-12",
+      "choices": [
+        "Milton",
+        "Emma"
+      ],
+      "correctAnswer": "Milton",
+      "answer": "Milton",
+      "correct": true,
+      "elapsedMs": 14080
+    },
+    {
+      "storyId": "musr-13",
+      "choices": [
+        "Milton",
+        "Emma"
+      ],
+      "correctAnswer": "Emma",
+      "answer": "Emma",
+      "correct": true,
+      "elapsedMs": 15323
+    },
+    {
+      "storyId": "musr-14",
+      "choices": [
+        "Lance",
+        "Harper"
+      ],
+      "correctAnswer": "Lance",
+      "answer": "Lance",
+      "correct": true,
+      "elapsedMs": 13881
+    },
+    {
+      "storyId": "musr-15",
+      "choices": [
+        "Lance",
+        "Harper"
+      ],
+      "correctAnswer": "Harper",
+      "answer": "Harper",
+      "correct": true,
+      "elapsedMs": 14491
+    },
+    {
+      "storyId": "musr-16",
+      "choices": [
+        "Ruby",
+        "Roscoe"
+      ],
+      "correctAnswer": "Ruby",
+      "answer": "Ruby",
+      "correct": true,
+      "elapsedMs": 6278
+    },
+    {
+      "storyId": "musr-17",
+      "choices": [
+        "Ruby",
+        "Roscoe"
+      ],
+      "correctAnswer": "Roscoe",
+      "answer": "Roscoe",
+      "correct": true,
+      "elapsedMs": 13672
+    },
+    {
+      "storyId": "musr-18",
+      "choices": [
+        "Angela",
+        "Roy"
+      ],
+      "correctAnswer": "Angela",
+      "answer": "Angela",
+      "correct": true,
+      "elapsedMs": 5160
+    },
+    {
+      "storyId": "musr-19",
+      "choices": [
+        "Angela",
+        "Roy"
+      ],
+      "correctAnswer": "Roy",
+      "answer": "Roy",
+      "correct": true,
+      "elapsedMs": 14358
+    },
+    {
+      "storyId": "musr-20",
+      "choices": [
+        "Ervin",
+        "Andrew"
+      ],
+      "correctAnswer": "Ervin",
+      "answer": "Ervin",
+      "correct": true,
+      "elapsedMs": 12930
+    },
+    {
+      "storyId": "musr-21",
+      "choices": [
+        "Ervin",
+        "Andrew"
+      ],
+      "correctAnswer": "Andrew",
+      "answer": "Andrew",
+      "correct": true,
+      "elapsedMs": 12813
+    },
+    {
+      "storyId": "musr-22",
+      "choices": [
+        "Oscar",
+        "Brianna"
+      ],
+      "correctAnswer": "Oscar",
+      "answer": "Oscar",
+      "correct": true,
+      "elapsedMs": 4747
+    },
+    {
+      "storyId": "musr-23",
+      "choices": [
+        "Oscar",
+        "Brianna"
+      ],
+      "correctAnswer": "Brianna",
+      "answer": "Brianna",
+      "correct": true,
+      "elapsedMs": 14521
+    },
+    {
+      "storyId": "musr-24",
+      "choices": [
+        "Jay",
+        "Autumn"
+      ],
+      "correctAnswer": "Jay",
+      "answer": "Jay",
+      "correct": true,
+      "elapsedMs": 5091
+    },
+    {
+      "storyId": "musr-25",
+      "choices": [
+        "Jay",
+        "Autumn"
+      ],
+      "correctAnswer": "Autumn",
+      "answer": "Autumn",
+      "correct": true,
+      "elapsedMs": 12622
+    },
+    {
+      "storyId": "musr-26",
+      "choices": [
+        "Anthony",
+        "Max"
+      ],
+      "correctAnswer": "Anthony",
+      "answer": "Anthony",
+      "correct": true,
+      "elapsedMs": 5085
+    },
+    {
+      "storyId": "musr-27",
+      "choices": [
+        "Anthony",
+        "Max"
+      ],
+      "correctAnswer": "Max",
+      "answer": "Max",
+      "correct": true,
+      "elapsedMs": 14213
+    },
+    {
+      "storyId": "musr-28",
+      "choices": [
+        "Xochitl",
+        "Martin"
+      ],
+      "correctAnswer": "Xochitl",
+      "answer": "Martin",
+      "correct": false,
+      "elapsedMs": 12299
+    },
+    {
+      "storyId": "musr-29",
+      "choices": [
+        "Xochitl",
+        "Martin"
+      ],
+      "correctAnswer": "Martin",
+      "answer": "Martin",
+      "correct": true,
+      "elapsedMs": 12732
+    },
+    {
+      "storyId": "musr-30",
+      "choices": [
+        "Willard",
+        "Miles"
+      ],
+      "correctAnswer": "Willard",
+      "answer": "Miles",
+      "correct": false,
+      "elapsedMs": 13049
+    },
+    {
+      "storyId": "musr-31",
+      "choices": [
+        "Willard",
+        "Miles"
+      ],
+      "correctAnswer": "Miles",
+      "answer": "Miles",
+      "correct": true,
+      "elapsedMs": 12526
+    },
+    {
+      "storyId": "musr-32",
+      "choices": [
+        "Hugo",
+        "Maria"
+      ],
+      "correctAnswer": "Hugo",
+      "answer": "Hugo",
+      "correct": true,
+      "elapsedMs": 11605
+    },
+    {
+      "storyId": "musr-33",
+      "choices": [
+        "Hugo",
+        "Maria"
+      ],
+      "correctAnswer": "Maria",
+      "answer": "Maria",
+      "correct": true,
+      "elapsedMs": 15135
+    },
+    {
+      "storyId": "musr-34",
+      "choices": [
+        "Paige",
+        "Alicia"
+      ],
+      "correctAnswer": "Paige",
+      "answer": "Paige",
+      "correct": true,
+      "elapsedMs": 5234
+    },
+    {
+      "storyId": "musr-35",
+      "choices": [
+        "Paige",
+        "Alicia"
+      ],
+      "correctAnswer": "Alicia",
+      "answer": "Alicia",
+      "correct": true,
+      "elapsedMs": 14315
+    },
+    {
+      "storyId": "musr-36",
+      "choices": [
+        "Jay",
+        "Karl"
+      ],
+      "correctAnswer": "Jay",
+      "answer": "Karl",
+      "correct": false,
+      "elapsedMs": 14548
+    },
+    {
+      "storyId": "musr-37",
+      "choices": [
+        "Jay",
+        "Karl"
+      ],
+      "correctAnswer": "Karl",
+      "answer": "Karl",
+      "correct": true,
+      "elapsedMs": 11301
+    },
+    {
+      "storyId": "musr-38",
+      "choices": [
+        "Fred",
+        "Imogen"
+      ],
+      "correctAnswer": "Fred",
+      "answer": "Fred",
+      "correct": true,
+      "elapsedMs": 4332
+    },
+    {
+      "storyId": "musr-39",
+      "choices": [
+        "Fred",
+        "Imogen"
+      ],
+      "correctAnswer": "Imogen",
+      "answer": "Imogen",
+      "correct": true,
+      "elapsedMs": 15815
+    },
+    {
+      "storyId": "musr-40",
+      "choices": [
+        "Timothy",
+        "Ricky"
+      ],
+      "correctAnswer": "Timothy",
+      "answer": "Timothy",
+      "correct": true,
+      "elapsedMs": 15144
+    },
+    {
+      "storyId": "musr-41",
+      "choices": [
+        "Timothy",
+        "Ricky"
+      ],
+      "correctAnswer": "Ricky",
+      "answer": "Ricky",
+      "correct": true,
+      "elapsedMs": 12608
+    },
+    {
+      "storyId": "musr-42",
+      "choices": [
+        "Lillian",
+        "Kimberly"
+      ],
+      "correctAnswer": "Lillian",
+      "answer": "Kimberly",
+      "correct": false,
+      "elapsedMs": 6480
+    },
+    {
+      "storyId": "musr-43",
+      "choices": [
+        "Lillian",
+        "Kimberly"
+      ],
+      "correctAnswer": "Kimberly",
+      "answer": "Kimberly",
+      "correct": true,
+      "elapsedMs": 13294
+    },
+    {
+      "storyId": "musr-44",
+      "choices": [
+        "Peyton",
+        "Isolde"
+      ],
+      "correctAnswer": "Peyton",
+      "answer": "Isolde",
+      "correct": false,
+      "elapsedMs": 13421
+    },
+    {
+      "storyId": "musr-45",
+      "choices": [
+        "Peyton",
+        "Isolde"
+      ],
+      "correctAnswer": "Isolde",
+      "answer": "Peyton",
+      "correct": false,
+      "elapsedMs": 13091
+    },
+    {
+      "storyId": "musr-46",
+      "choices": [
+        "Lucy",
+        "Jacqueline"
+      ],
+      "correctAnswer": "Lucy",
+      "answer": "Lucy",
+      "correct": true,
+      "elapsedMs": 12296
+    },
+    {
+      "storyId": "musr-47",
+      "choices": [
+        "Lucy",
+        "Jacqueline"
+      ],
+      "correctAnswer": "Jacqueline",
+      "answer": "Lucy",
+      "correct": false,
+      "elapsedMs": 13250
+    },
+    {
+      "storyId": "musr-48",
+      "choices": [
+        "Harvey",
+        "Sergio"
+      ],
+      "correctAnswer": "Harvey",
+      "answer": "Sergio",
+      "correct": false,
+      "elapsedMs": 13327
+    },
+    {
+      "storyId": "musr-49",
+      "choices": [
+        "Harvey",
+        "Sergio"
+      ],
+      "correctAnswer": "Sergio",
+      "answer": "Sergio",
+      "correct": true,
+      "elapsedMs": 12745
+    },
+    {
+      "storyId": "musr-50",
+      "choices": [
+        "Penelope",
+        "Francis"
+      ],
+      "correctAnswer": "Penelope",
+      "answer": "Penelope",
+      "correct": true,
+      "elapsedMs": 13411
+    },
+    {
+      "storyId": "musr-51",
+      "choices": [
+        "Penelope",
+        "Francis"
+      ],
+      "correctAnswer": "Francis",
+      "answer": "Francis",
+      "correct": true,
+      "elapsedMs": 14645
+    },
+    {
+      "storyId": "musr-52",
+      "choices": [
+        "Irving",
+        "Addison"
+      ],
+      "correctAnswer": "Irving",
+      "answer": "Addison",
+      "correct": false,
+      "elapsedMs": 10276
+    },
+    {
+      "storyId": "musr-53",
+      "choices": [
+        "Irving",
+        "Addison"
+      ],
+      "correctAnswer": "Addison",
+      "answer": "Addison",
+      "correct": true,
+      "elapsedMs": 11326
+    },
+    {
+      "storyId": "musr-54",
+      "choices": [
+        "Letti",
+        "Deborah"
+      ],
+      "correctAnswer": "Letti",
+      "answer": "Letti",
+      "correct": true,
+      "elapsedMs": 14129
+    },
+    {
+      "storyId": "musr-55",
+      "choices": [
+        "Letti",
+        "Deborah"
+      ],
+      "correctAnswer": "Deborah",
+      "answer": "Deborah",
+      "correct": true,
+      "elapsedMs": 13955
+    },
+    {
+      "storyId": "musr-56",
+      "choices": [
+        "Dexter",
+        "Daisy"
+      ],
+      "correctAnswer": "Dexter",
+      "answer": "Dexter",
+      "correct": true,
+      "elapsedMs": 13914
+    },
+    {
+      "storyId": "musr-57",
+      "choices": [
+        "Dexter",
+        "Daisy"
+      ],
+      "correctAnswer": "Daisy",
+      "answer": "Daisy",
+      "correct": true,
+      "elapsedMs": 13281
+    },
+    {
+      "storyId": "musr-58",
+      "choices": [
+        "Van",
+        "Wilfred"
+      ],
+      "correctAnswer": "Van",
+      "answer": "Van",
+      "correct": true,
+      "elapsedMs": 6038
+    },
+    {
+      "storyId": "musr-59",
+      "choices": [
+        "Van",
+        "Wilfred"
+      ],
+      "correctAnswer": "Wilfred",
+      "answer": "Wilfred",
+      "correct": true,
+      "elapsedMs": 5100
+    },
+    {
+      "storyId": "musr-60",
+      "choices": [
+        "Marianne",
+        "Sidney"
+      ],
+      "correctAnswer": "Marianne",
+      "answer": "Marianne",
+      "correct": true,
+      "elapsedMs": 15545
+    },
+    {
+      "storyId": "musr-61",
+      "choices": [
+        "Marianne",
+        "Sidney"
+      ],
+      "correctAnswer": "Sidney",
+      "answer": "Sidney",
+      "correct": true,
+      "elapsedMs": 14150
+    },
+    {
+      "storyId": "musr-62",
+      "choices": [
+        "Penelope",
+        "Melody"
+      ],
+      "correctAnswer": "Penelope",
+      "answer": "Penelope",
+      "correct": true,
+      "elapsedMs": 13294
+    },
+    {
+      "storyId": "musr-63",
+      "choices": [
+        "Penelope",
+        "Melody"
+      ],
+      "correctAnswer": "Melody",
+      "answer": "Penelope",
+      "correct": false,
+      "elapsedMs": 15206
+    },
+    {
+      "storyId": "musr-64",
+      "choices": [
+        "Rosemary",
+        "Mia"
+      ],
+      "correctAnswer": "Rosemary",
+      "answer": "Rosemary",
+      "correct": true,
+      "elapsedMs": 5122
+    },
+    {
+      "storyId": "musr-65",
+      "choices": [
+        "Rosemary",
+        "Mia"
+      ],
+      "correctAnswer": "Mia",
+      "answer": "Mia",
+      "correct": true,
+      "elapsedMs": 10955
+    },
+    {
+      "storyId": "musr-66",
+      "choices": [
+        "Malaysia",
+        "Richard"
+      ],
+      "correctAnswer": "Malaysia",
+      "correct": false,
+      "elapsedMs": 5108
+    },
+    {
+      "storyId": "musr-67",
+      "choices": [
+        "Malaysia",
+        "Richard"
+      ],
+      "correctAnswer": "Richard",
+      "answer": "Richard",
+      "correct": true,
+      "elapsedMs": 12744
+    },
+    {
+      "storyId": "musr-68",
+      "choices": [
+        "Paige",
+        "Marianne"
+      ],
+      "correctAnswer": "Paige",
+      "answer": "Paige",
+      "correct": true,
+      "elapsedMs": 12462
+    },
+    {
+      "storyId": "musr-69",
+      "choices": [
+        "Paige",
+        "Marianne"
+      ],
+      "correctAnswer": "Marianne",
+      "answer": "Marianne",
+      "correct": true,
+      "elapsedMs": 5618
+    },
+    {
+      "storyId": "musr-70",
+      "choices": [
+        "Claire",
+        "Isla"
+      ],
+      "correctAnswer": "Claire",
+      "answer": "Claire",
+      "correct": true,
+      "elapsedMs": 4340
+    },
+    {
+      "storyId": "musr-71",
+      "choices": [
+        "Claire",
+        "Isla"
+      ],
+      "correctAnswer": "Isla",
+      "answer": "Claire",
+      "correct": false,
+      "elapsedMs": 13122
+    },
+    {
+      "storyId": "musr-72",
+      "choices": [
+        "Milton",
+        "Alice"
+      ],
+      "correctAnswer": "Milton",
+      "answer": "Milton",
+      "correct": true,
+      "elapsedMs": 12324
+    },
+    {
+      "storyId": "musr-73",
+      "choices": [
+        "Milton",
+        "Alice"
+      ],
+      "correctAnswer": "Alice",
+      "answer": "Alice",
+      "correct": true,
+      "elapsedMs": 12032
+    },
+    {
+      "storyId": "musr-74",
+      "choices": [
+        "Russell",
+        "Alice"
+      ],
+      "correctAnswer": "Russell",
+      "answer": "Alice",
+      "correct": false,
+      "elapsedMs": 17117
+    },
+    {
+      "storyId": "musr-75",
+      "choices": [
+        "Russell",
+        "Alice"
+      ],
+      "correctAnswer": "Alice",
+      "answer": "Alice",
+      "correct": true,
+      "elapsedMs": 5621
+    },
+    {
+      "storyId": "musr-76",
+      "choices": [
+        "Zara",
+        "Catherine"
+      ],
+      "correctAnswer": "Zara",
+      "answer": "Catherine",
+      "correct": false,
+      "elapsedMs": 14066
+    },
+    {
+      "storyId": "musr-77",
+      "choices": [
+        "Zara",
+        "Catherine"
+      ],
+      "correctAnswer": "Catherine",
+      "answer": "Catherine",
+      "correct": true,
+      "elapsedMs": 5084
+    },
+    {
+      "storyId": "musr-78",
+      "choices": [
+        "Naomi",
+        "Lloyd"
+      ],
+      "correctAnswer": "Naomi",
+      "answer": "Naomi",
+      "correct": true,
+      "elapsedMs": 15089
+    },
+    {
+      "storyId": "musr-79",
+      "choices": [
+        "Naomi",
+        "Lloyd"
+      ],
+      "correctAnswer": "Lloyd",
+      "answer": "Lloyd",
+      "correct": true,
+      "elapsedMs": 6752
+    },
+    {
+      "storyId": "musr-80",
+      "choices": [
+        "Samuel",
+        "Bernard"
+      ],
+      "correctAnswer": "Samuel",
+      "answer": "Samuel",
+      "correct": true,
+      "elapsedMs": 13567
+    },
+    {
+      "storyId": "musr-81",
+      "choices": [
+        "Samuel",
+        "Bernard"
+      ],
+      "correctAnswer": "Bernard",
+      "answer": "Bernard",
+      "correct": true,
+      "elapsedMs": 7114
+    },
+    {
+      "storyId": "musr-82",
+      "choices": [
+        "Stacey",
+        "Hector"
+      ],
+      "correctAnswer": "Stacey",
+      "answer": "Stacey",
+      "correct": true,
+      "elapsedMs": 11021
+    },
+    {
+      "storyId": "musr-83",
+      "choices": [
+        "Stacey",
+        "Hector"
+      ],
+      "correctAnswer": "Hector",
+      "answer": "Stacey",
+      "correct": false,
+      "elapsedMs": 11728
+    },
+    {
+      "storyId": "musr-84",
+      "choices": [
+        "Russell",
+        "Travis"
+      ],
+      "correctAnswer": "Russell",
+      "answer": "Russell",
+      "correct": true,
+      "elapsedMs": 14918
+    },
+    {
+      "storyId": "musr-85",
+      "choices": [
+        "Russell",
+        "Travis"
+      ],
+      "correctAnswer": "Travis",
+      "answer": "Travis",
+      "correct": true,
+      "elapsedMs": 4369
+    },
+    {
+      "storyId": "musr-86",
+      "choices": [
+        "Gregory",
+        "Madelyn"
+      ],
+      "correctAnswer": "Gregory",
+      "answer": "Gregory",
+      "correct": true,
+      "elapsedMs": 5670
+    },
+    {
+      "storyId": "musr-87",
+      "choices": [
+        "Gregory",
+        "Madelyn"
+      ],
+      "correctAnswer": "Madelyn",
+      "answer": "Madelyn",
+      "correct": true,
+      "elapsedMs": 14304
+    },
+    {
+      "storyId": "musr-88",
+      "choices": [
+        "Frederick",
+        "Jerome"
+      ],
+      "correctAnswer": "Frederick",
+      "answer": "Jerome",
+      "correct": false,
+      "elapsedMs": 4641
+    },
+    {
+      "storyId": "musr-89",
+      "choices": [
+        "Frederick",
+        "Jerome"
+      ],
+      "correctAnswer": "Jerome",
+      "answer": "Jerome",
+      "correct": true,
+      "elapsedMs": 6295
+    },
+    {
+      "storyId": "musr-90",
+      "choices": [
+        "Lucy",
+        "Clara"
+      ],
+      "correctAnswer": "Lucy",
+      "answer": "Lucy",
+      "correct": true,
+      "elapsedMs": 13894
+    },
+    {
+      "storyId": "musr-91",
+      "choices": [
+        "Lucy",
+        "Clara"
+      ],
+      "correctAnswer": "Clara",
+      "answer": "Clara",
+      "correct": true,
+      "elapsedMs": 14534
+    },
+    {
+      "storyId": "musr-92",
+      "choices": [
+        "Madison",
+        "Christine"
+      ],
+      "correctAnswer": "Madison",
+      "answer": "Madison",
+      "correct": true,
+      "elapsedMs": 5785
+    },
+    {
+      "storyId": "musr-93",
+      "choices": [
+        "Madison",
+        "Christine"
+      ],
+      "correctAnswer": "Christine",
+      "answer": "Christine",
+      "correct": true,
+      "elapsedMs": 14324
+    },
+    {
+      "storyId": "musr-94",
+      "choices": [
+        "Mackenzie",
+        "Erika"
+      ],
+      "correctAnswer": "Mackenzie",
+      "answer": "Mackenzie",
+      "correct": true,
+      "elapsedMs": 15002
+    },
+    {
+      "storyId": "musr-95",
+      "choices": [
+        "Mackenzie",
+        "Erika"
+      ],
+      "correctAnswer": "Erika",
+      "answer": "Erika",
+      "correct": true,
+      "elapsedMs": 16533
+    },
+    {
+      "storyId": "musr-96",
+      "choices": [
+        "Gary",
+        "Dale"
+      ],
+      "correctAnswer": "Gary",
+      "answer": "Dale",
+      "correct": false,
+      "elapsedMs": 14735
+    },
+    {
+      "storyId": "musr-97",
+      "choices": [
+        "Gary",
+        "Dale"
+      ],
+      "correctAnswer": "Dale",
+      "answer": "Dale",
+      "correct": true,
+      "elapsedMs": 6348
+    },
+    {
+      "storyId": "musr-98",
+      "choices": [
+        "Addison",
+        "Octavia"
+      ],
+      "correctAnswer": "Addison",
+      "answer": "Octavia",
+      "correct": false,
+      "elapsedMs": 7028
+    },
+    {
+      "storyId": "musr-99",
+      "choices": [
+        "Addison",
+        "Octavia"
+      ],
+      "correctAnswer": "Octavia",
+      "answer": "Octavia",
+      "correct": true,
+      "elapsedMs": 11156
+    },
+    {
+      "storyId": "musr-100",
+      "choices": [
+        "Maurice",
+        "Rex"
+      ],
+      "correctAnswer": "Maurice",
+      "answer": "Maurice",
+      "correct": true,
+      "elapsedMs": 5039
+    },
+    {
+      "storyId": "musr-101",
+      "choices": [
+        "Maurice",
+        "Rex"
+      ],
+      "correctAnswer": "Rex",
+      "answer": "Rex",
+      "correct": true,
+      "elapsedMs": 13918
+    },
+    {
+      "storyId": "musr-102",
+      "choices": [
+        "Isla",
+        "Randy"
+      ],
+      "correctAnswer": "Isla",
+      "answer": "Isla",
+      "correct": true,
+      "elapsedMs": 13323
+    },
+    {
+      "storyId": "musr-103",
+      "choices": [
+        "Isla",
+        "Randy"
+      ],
+      "correctAnswer": "Randy",
+      "answer": "Randy",
+      "correct": true,
+      "elapsedMs": 10869
+    },
+    {
+      "storyId": "musr-104",
+      "choices": [
+        "Justin",
+        "Frederick"
+      ],
+      "correctAnswer": "Justin",
+      "answer": "Justin",
+      "correct": true,
+      "elapsedMs": 14827
+    },
+    {
+      "storyId": "musr-105",
+      "choices": [
+        "Justin",
+        "Frederick"
+      ],
+      "correctAnswer": "Frederick",
+      "answer": "Frederick",
+      "correct": true,
+      "elapsedMs": 12244
+    },
+    {
+      "storyId": "musr-106",
+      "choices": [
+        "Eric",
+        "Priscilla"
+      ],
+      "correctAnswer": "Eric",
+      "answer": "Eric",
+      "correct": true,
+      "elapsedMs": 5732
+    },
+    {
+      "storyId": "musr-107",
+      "choices": [
+        "Eric",
+        "Priscilla"
+      ],
+      "correctAnswer": "Priscilla",
+      "answer": "Priscilla",
+      "correct": true,
+      "elapsedMs": 13186
+    },
+    {
+      "storyId": "musr-108",
+      "choices": [
+        "Nathaniel",
+        "Bridget"
+      ],
+      "correctAnswer": "Nathaniel",
+      "answer": "Nathaniel",
+      "correct": true,
+      "elapsedMs": 14080
+    },
+    {
+      "storyId": "musr-109",
+      "choices": [
+        "Nathaniel",
+        "Bridget"
+      ],
+      "correctAnswer": "Bridget",
+      "answer": "Bridget",
+      "correct": true,
+      "elapsedMs": 12373
+    },
+    {
+      "storyId": "musr-110",
+      "choices": [
+        "Rose",
+        "Aubrey"
+      ],
+      "correctAnswer": "Rose",
+      "answer": "Aubrey",
+      "correct": false,
+      "elapsedMs": 6669
+    },
+    {
+      "storyId": "musr-111",
+      "choices": [
+        "Rose",
+        "Aubrey"
+      ],
+      "correctAnswer": "Aubrey",
+      "answer": "Rose",
+      "correct": false,
+      "elapsedMs": 13575
+    },
+    {
+      "storyId": "musr-112",
+      "choices": [
+        "Aubrey",
+        "Garry"
+      ],
+      "correctAnswer": "Aubrey",
+      "answer": "Aubrey",
+      "correct": true,
+      "elapsedMs": 12477
+    },
+    {
+      "storyId": "musr-113",
+      "choices": [
+        "Aubrey",
+        "Garry"
+      ],
+      "correctAnswer": "Garry",
+      "answer": "Garry",
+      "correct": true,
+      "elapsedMs": 11248
+    },
+    {
+      "storyId": "musr-114",
+      "choices": [
+        "Abigail",
+        "Veronica"
+      ],
+      "correctAnswer": "Abigail",
+      "answer": "Abigail",
+      "correct": true,
+      "elapsedMs": 14038
+    },
+    {
+      "storyId": "musr-115",
+      "choices": [
+        "Abigail",
+        "Veronica"
+      ],
+      "correctAnswer": "Veronica",
+      "answer": "Abigail",
+      "correct": false,
+      "elapsedMs": 14681
+    },
+    {
+      "storyId": "musr-116",
+      "choices": [
+        "Sam",
+        "Steve"
+      ],
+      "correctAnswer": "Sam",
+      "answer": "Sam",
+      "correct": true,
+      "elapsedMs": 11692
+    },
+    {
+      "storyId": "musr-117",
+      "choices": [
+        "Sam",
+        "Steve"
+      ],
+      "correctAnswer": "Steve",
+      "answer": "Steve",
+      "correct": true,
+      "elapsedMs": 11245
+    },
+    {
+      "storyId": "musr-118",
+      "choices": [
+        "Salvador",
+        "Wade"
+      ],
+      "correctAnswer": "Salvador",
+      "answer": "Salvador",
+      "correct": true,
+      "elapsedMs": 5911
+    },
+    {
+      "storyId": "musr-119",
+      "choices": [
+        "Salvador",
+        "Wade"
+      ],
+      "correctAnswer": "Wade",
+      "answer": "Wade",
+      "correct": true,
+      "elapsedMs": 12371
+    },
+    {
+      "storyId": "musr-120",
+      "choices": [
+        "Mack",
+        "Taylor"
+      ],
+      "correctAnswer": "Mack",
+      "answer": "Mack",
+      "correct": true,
+      "elapsedMs": 13427
+    },
+    {
+      "storyId": "musr-121",
+      "choices": [
+        "Mack",
+        "Taylor"
+      ],
+      "correctAnswer": "Taylor",
+      "answer": "Taylor",
+      "correct": true,
+      "elapsedMs": 10554
+    },
+    {
+      "storyId": "musr-122",
+      "choices": [
+        "Clyde",
+        "Paul"
+      ],
+      "correctAnswer": "Clyde",
+      "answer": "Clyde",
+      "correct": true,
+      "elapsedMs": 12954
+    },
+    {
+      "storyId": "musr-123",
+      "choices": [
+        "Clyde",
+        "Paul"
+      ],
+      "correctAnswer": "Paul",
+      "answer": "Paul",
+      "correct": true,
+      "elapsedMs": 14347
+    },
+    {
+      "storyId": "musr-124",
+      "choices": [
+        "Yvette",
+        "Lillian"
+      ],
+      "correctAnswer": "Yvette",
+      "answer": "Yvette",
+      "correct": true,
+      "elapsedMs": 10944
+    },
+    {
+      "storyId": "musr-125",
+      "choices": [
+        "Yvette",
+        "Lillian"
+      ],
+      "correctAnswer": "Lillian",
+      "answer": "Yvette",
+      "correct": false,
+      "elapsedMs": 11891
+    },
+    {
+      "storyId": "musr-126",
+      "choices": [
+        "Timothy",
+        "Adam"
+      ],
+      "correctAnswer": "Timothy",
+      "answer": "Timothy",
+      "correct": true,
+      "elapsedMs": 13642
+    },
+    {
+      "storyId": "musr-127",
+      "choices": [
+        "Timothy",
+        "Adam"
+      ],
+      "correctAnswer": "Adam",
+      "answer": "Adam",
+      "correct": true,
+      "elapsedMs": 5024
+    },
+    {
+      "storyId": "musr-128",
+      "choices": [
+        "Orville",
+        "Troy"
+      ],
+      "correctAnswer": "Orville",
+      "answer": "Troy",
+      "correct": false,
+      "elapsedMs": 5848
+    },
+    {
+      "storyId": "musr-129",
+      "choices": [
+        "Orville",
+        "Troy"
+      ],
+      "correctAnswer": "Troy",
+      "answer": "Orville",
+      "correct": false,
+      "elapsedMs": 15006
+    },
+    {
+      "storyId": "musr-130",
+      "choices": [
+        "Francis",
+        "Camille"
+      ],
+      "correctAnswer": "Francis",
+      "answer": "Camille",
+      "correct": false,
+      "elapsedMs": 15688
+    },
+    {
+      "storyId": "musr-131",
+      "choices": [
+        "Francis",
+        "Camille"
+      ],
+      "correctAnswer": "Camille",
+      "answer": "Camille",
+      "correct": true,
+      "elapsedMs": 15258
+    },
+    {
+      "storyId": "musr-132",
+      "choices": [
+        "Jesse",
+        "Brian"
+      ],
+      "correctAnswer": "Jesse",
+      "answer": "Jesse",
+      "correct": true,
+      "elapsedMs": 14515
+    },
+    {
+      "storyId": "musr-133",
+      "choices": [
+        "Jesse",
+        "Brian"
+      ],
+      "correctAnswer": "Brian",
+      "answer": "Jesse",
+      "correct": false,
+      "elapsedMs": 12544
+    },
+    {
+      "storyId": "musr-134",
+      "choices": [
+        "Albert",
+        "Mya"
+      ],
+      "correctAnswer": "Albert",
+      "answer": "Mya",
+      "correct": false,
+      "elapsedMs": 14612
+    },
+    {
+      "storyId": "musr-135",
+      "choices": [
+        "Albert",
+        "Mya"
+      ],
+      "correctAnswer": "Mya",
+      "answer": "Mya",
+      "correct": true,
+      "elapsedMs": 13416
+    },
+    {
+      "storyId": "musr-136",
+      "choices": [
+        "Jim",
+        "Woodrow"
+      ],
+      "correctAnswer": "Jim",
+      "answer": "Jim",
+      "correct": true,
+      "elapsedMs": 14596
+    },
+    {
+      "storyId": "musr-137",
+      "choices": [
+        "Jim",
+        "Woodrow"
+      ],
+      "correctAnswer": "Woodrow",
+      "answer": "Woodrow",
+      "correct": true,
+      "elapsedMs": 14429
+    },
+    {
+      "storyId": "musr-138",
+      "choices": [
+        "Grace",
+        "Chester"
+      ],
+      "correctAnswer": "Grace",
+      "answer": "Grace",
+      "correct": true,
+      "elapsedMs": 13125
+    },
+    {
+      "storyId": "musr-139",
+      "choices": [
+        "Grace",
+        "Chester"
+      ],
+      "correctAnswer": "Chester",
+      "answer": "Chester",
+      "correct": true,
+      "elapsedMs": 13829
+    },
+    {
+      "storyId": "musr-140",
+      "choices": [
+        "Leona",
+        "Freya"
+      ],
+      "correctAnswer": "Leona",
+      "answer": "Leona",
+      "correct": true,
+      "elapsedMs": 15515
+    },
+    {
+      "storyId": "musr-141",
+      "choices": [
+        "Leona",
+        "Freya"
+      ],
+      "correctAnswer": "Freya",
+      "answer": "Freya",
+      "correct": true,
+      "elapsedMs": 16136
+    },
+    {
+      "storyId": "musr-142",
+      "choices": [
+        "Bella",
+        "Jose"
+      ],
+      "correctAnswer": "Bella",
+      "answer": "Bella",
+      "correct": true,
+      "elapsedMs": 13699
+    },
+    {
+      "storyId": "musr-143",
+      "choices": [
+        "Bella",
+        "Jose"
+      ],
+      "correctAnswer": "Jose",
+      "answer": "Bella",
+      "correct": false,
+      "elapsedMs": 13879
+    },
+    {
+      "storyId": "musr-144",
+      "choices": [
+        "Charlotte",
+        "Rachel"
+      ],
+      "correctAnswer": "Charlotte",
+      "answer": "Rachel",
+      "correct": false,
+      "elapsedMs": 14668
+    },
+    {
+      "storyId": "musr-145",
+      "choices": [
+        "Charlotte",
+        "Rachel"
+      ],
+      "correctAnswer": "Rachel",
+      "answer": "Rachel",
+      "correct": true,
+      "elapsedMs": 10269
+    },
+    {
+      "storyId": "musr-146",
+      "choices": [
+        "Meredith",
+        "Hugo"
+      ],
+      "correctAnswer": "Meredith",
+      "answer": "Meredith",
+      "correct": true,
+      "elapsedMs": 11026
+    },
+    {
+      "storyId": "musr-147",
+      "choices": [
+        "Meredith",
+        "Hugo"
+      ],
+      "correctAnswer": "Hugo",
+      "answer": "Meredith",
+      "correct": false,
+      "elapsedMs": 14682
+    },
+    {
+      "storyId": "musr-148",
+      "choices": [
+        "Sophia",
+        "Virgil"
+      ],
+      "correctAnswer": "Sophia",
+      "answer": "Sophia",
+      "correct": true,
+      "elapsedMs": 14826
+    },
+    {
+      "storyId": "musr-149",
+      "choices": [
+        "Sophia",
+        "Virgil"
+      ],
+      "correctAnswer": "Virgil",
+      "answer": "Virgil",
+      "correct": true,
+      "elapsedMs": 13106
+    },
+    {
+      "storyId": "musr-150",
+      "choices": [
+        "Bruce",
+        "Norris"
+      ],
+      "correctAnswer": "Bruce",
+      "answer": "Bruce",
+      "correct": true,
+      "elapsedMs": 5390
+    },
+    {
+      "storyId": "musr-151",
+      "choices": [
+        "Bruce",
+        "Norris"
+      ],
+      "correctAnswer": "Norris",
+      "answer": "Norris",
+      "correct": true,
+      "elapsedMs": 14460
+    },
+    {
+      "storyId": "musr-152",
+      "choices": [
+        "Ivy",
+        "Clarence"
+      ],
+      "correctAnswer": "Ivy",
+      "answer": "Ivy",
+      "correct": true,
+      "elapsedMs": 12506
+    },
+    {
+      "storyId": "musr-153",
+      "choices": [
+        "Ivy",
+        "Clarence"
+      ],
+      "correctAnswer": "Clarence",
+      "answer": "Clarence",
+      "correct": true,
+      "elapsedMs": 5709
+    },
+    {
+      "storyId": "musr-154",
+      "choices": [
+        "Clayton",
+        "Madelyn"
+      ],
+      "correctAnswer": "Clayton",
+      "answer": "Clayton",
+      "correct": true,
+      "elapsedMs": 15844
+    },
+    {
+      "storyId": "musr-155",
+      "choices": [
+        "Clayton",
+        "Madelyn"
+      ],
+      "correctAnswer": "Madelyn",
+      "answer": "Clayton",
+      "correct": false,
+      "elapsedMs": 5594
+    },
+    {
+      "storyId": "musr-156",
+      "choices": [
+        "Stuart",
+        "Alice"
+      ],
+      "correctAnswer": "Stuart",
+      "answer": "Alice",
+      "correct": false,
+      "elapsedMs": 12711
+    },
+    {
+      "storyId": "musr-157",
+      "choices": [
+        "Stuart",
+        "Alice"
+      ],
+      "correctAnswer": "Alice",
+      "answer": "Alice",
+      "correct": true,
+      "elapsedMs": 13849
+    },
+    {
+      "storyId": "musr-158",
+      "choices": [
+        "Bryan",
+        "Everett"
+      ],
+      "correctAnswer": "Bryan",
+      "answer": "Everett",
+      "correct": false,
+      "elapsedMs": 12056
+    },
+    {
+      "storyId": "musr-159",
+      "choices": [
+        "Bryan",
+        "Everett"
+      ],
+      "correctAnswer": "Everett",
+      "answer": "Everett",
+      "correct": true,
+      "elapsedMs": 11351
+    },
+    {
+      "storyId": "musr-160",
+      "choices": [
+        "Serenity",
+        "Naomi"
+      ],
+      "correctAnswer": "Serenity",
+      "answer": "Serenity",
+      "correct": true,
+      "elapsedMs": 4648
+    },
+    {
+      "storyId": "musr-161",
+      "choices": [
+        "Serenity",
+        "Naomi"
+      ],
+      "correctAnswer": "Naomi",
+      "answer": "Serenity",
+      "correct": false,
+      "elapsedMs": 14544
+    },
+    {
+      "storyId": "musr-162",
+      "choices": [
+        "Glenn",
+        "Tessa"
+      ],
+      "correctAnswer": "Glenn",
+      "answer": "Glenn",
+      "correct": true,
+      "elapsedMs": 5767
+    },
+    {
+      "storyId": "musr-163",
+      "choices": [
+        "Glenn",
+        "Tessa"
+      ],
+      "correctAnswer": "Tessa",
+      "answer": "Tessa",
+      "correct": true,
+      "elapsedMs": 11040
+    },
+    {
+      "storyId": "musr-164",
+      "choices": [
+        "Delilah",
+        "Eddie"
+      ],
+      "correctAnswer": "Delilah",
+      "answer": "Delilah",
+      "correct": true,
+      "elapsedMs": 13859
+    },
+    {
+      "storyId": "musr-165",
+      "choices": [
+        "Delilah",
+        "Eddie"
+      ],
+      "correctAnswer": "Eddie",
+      "answer": "Delilah",
+      "correct": false,
+      "elapsedMs": 12871
+    },
+    {
+      "storyId": "musr-166",
+      "choices": [
+        "Chris",
+        "Gloria"
+      ],
+      "correctAnswer": "Chris",
+      "answer": "Gloria",
+      "correct": false,
+      "elapsedMs": 15462
+    },
+    {
+      "storyId": "musr-167",
+      "choices": [
+        "Chris",
+        "Gloria"
+      ],
+      "correctAnswer": "Gloria",
+      "answer": "Gloria",
+      "correct": true,
+      "elapsedMs": 5907
+    },
+    {
+      "storyId": "musr-168",
+      "choices": [
+        "Troy",
+        "Bethany"
+      ],
+      "correctAnswer": "Troy",
+      "answer": "Troy",
+      "correct": true,
+      "elapsedMs": 5357
+    },
+    {
+      "storyId": "musr-169",
+      "choices": [
+        "Troy",
+        "Bethany"
+      ],
+      "correctAnswer": "Bethany",
+      "answer": "Bethany",
+      "correct": true,
+      "elapsedMs": 11866
+    },
+    {
+      "storyId": "musr-170",
+      "choices": [
+        "Hailey",
+        "Angela"
+      ],
+      "correctAnswer": "Hailey",
+      "answer": "Angela",
+      "correct": false,
+      "elapsedMs": 14682
+    },
+    {
+      "storyId": "musr-171",
+      "choices": [
+        "Hailey",
+        "Angela"
+      ],
+      "correctAnswer": "Angela",
+      "answer": "Angela",
+      "correct": true,
+      "elapsedMs": 5795
+    },
+    {
+      "storyId": "musr-172",
+      "choices": [
+        "Rex",
+        "Mandy"
+      ],
+      "correctAnswer": "Rex",
+      "answer": "Rex",
+      "correct": true,
+      "elapsedMs": 11616
+    },
+    {
+      "storyId": "musr-173",
+      "choices": [
+        "Rex",
+        "Mandy"
+      ],
+      "correctAnswer": "Mandy",
+      "answer": "Mandy",
+      "correct": true,
+      "elapsedMs": 13021
+    },
+    {
+      "storyId": "musr-174",
+      "choices": [
+        "Ruben",
+        "Michael"
+      ],
+      "correctAnswer": "Ruben",
+      "answer": "Ruben",
+      "correct": true,
+      "elapsedMs": 11243
+    },
+    {
+      "storyId": "musr-175",
+      "choices": [
+        "Ruben",
+        "Michael"
+      ],
+      "correctAnswer": "Michael",
+      "answer": "Michael",
+      "correct": true,
+      "elapsedMs": 12476
+    },
+    {
+      "storyId": "musr-176",
+      "choices": [
+        "Meredith",
+        "Kinsley"
+      ],
+      "correctAnswer": "Meredith",
+      "answer": "Meredith",
+      "correct": true,
+      "elapsedMs": 12813
+    },
+    {
+      "storyId": "musr-177",
+      "choices": [
+        "Meredith",
+        "Kinsley"
+      ],
+      "correctAnswer": "Kinsley",
+      "answer": "Kinsley",
+      "correct": true,
+      "elapsedMs": 12194
+    },
+    {
+      "storyId": "musr-178",
+      "choices": [
+        "Glenn",
+        "Dennis"
+      ],
+      "correctAnswer": "Glenn",
+      "answer": "Glenn",
+      "correct": true,
+      "elapsedMs": 13900
+    },
+    {
+      "storyId": "musr-179",
+      "choices": [
+        "Glenn",
+        "Dennis"
+      ],
+      "correctAnswer": "Dennis",
+      "answer": "Dennis",
+      "correct": true,
+      "elapsedMs": 17927
+    },
+    {
+      "storyId": "musr-180",
+      "choices": [
+        "Homer",
+        "Clara"
+      ],
+      "correctAnswer": "Homer",
+      "answer": "Homer",
+      "correct": true,
+      "elapsedMs": 13899
+    },
+    {
+      "storyId": "musr-181",
+      "choices": [
+        "Homer",
+        "Clara"
+      ],
+      "correctAnswer": "Clara",
+      "answer": "Clara",
+      "correct": true,
+      "elapsedMs": 13383
+    },
+    {
+      "storyId": "musr-182",
+      "choices": [
+        "Julius",
+        "Yolanda"
+      ],
+      "correctAnswer": "Julius",
+      "answer": "Yolanda",
+      "correct": false,
+      "elapsedMs": 13641
+    },
+    {
+      "storyId": "musr-183",
+      "choices": [
+        "Julius",
+        "Yolanda"
+      ],
+      "correctAnswer": "Yolanda",
+      "answer": "Yolanda",
+      "correct": true,
+      "elapsedMs": 12244
+    },
+    {
+      "storyId": "musr-184",
+      "choices": [
+        "Isabelle",
+        "Nicole"
+      ],
+      "correctAnswer": "Isabelle",
+      "answer": "Isabelle",
+      "correct": true,
+      "elapsedMs": 14735
+    },
+    {
+      "storyId": "musr-185",
+      "choices": [
+        "Isabelle",
+        "Nicole"
+      ],
+      "correctAnswer": "Nicole",
+      "answer": "Isabelle",
+      "correct": false,
+      "elapsedMs": 10261
+    },
+    {
+      "storyId": "musr-186",
+      "choices": [
+        "Dale",
+        "Letti"
+      ],
+      "correctAnswer": "Dale",
+      "answer": "Letti",
+      "correct": false,
+      "elapsedMs": 13497
+    },
+    {
+      "storyId": "musr-187",
+      "choices": [
+        "Dale",
+        "Letti"
+      ],
+      "correctAnswer": "Letti",
+      "answer": "Letti",
+      "correct": true,
+      "elapsedMs": 13852
+    },
+    {
+      "storyId": "musr-188",
+      "choices": [
+        "Zelda",
+        "Autumn"
+      ],
+      "correctAnswer": "Zelda",
+      "answer": "Zelda",
+      "correct": true,
+      "elapsedMs": 14949
+    },
+    {
+      "storyId": "musr-189",
+      "choices": [
+        "Zelda",
+        "Autumn"
+      ],
+      "correctAnswer": "Autumn",
+      "answer": "Autumn",
+      "correct": true,
+      "elapsedMs": 11137
+    },
+    {
+      "storyId": "musr-190",
+      "choices": [
+        "Helen",
+        "Danielle"
+      ],
+      "correctAnswer": "Helen",
+      "answer": "Danielle",
+      "correct": false,
+      "elapsedMs": 13461
+    },
+    {
+      "storyId": "musr-191",
+      "choices": [
+        "Helen",
+        "Danielle"
+      ],
+      "correctAnswer": "Danielle",
+      "answer": "Danielle",
+      "correct": true,
+      "elapsedMs": 11022
+    },
+    {
+      "storyId": "musr-192",
+      "choices": [
+        "Warren",
+        "Mia"
+      ],
+      "correctAnswer": "Warren",
+      "answer": "Mia",
+      "correct": false,
+      "elapsedMs": 13972
+    },
+    {
+      "storyId": "musr-193",
+      "choices": [
+        "Warren",
+        "Mia"
+      ],
+      "correctAnswer": "Mia",
+      "answer": "Mia",
+      "correct": true,
+      "elapsedMs": 13993
+    },
+    {
+      "storyId": "musr-194",
+      "choices": [
+        "Tessa",
+        "Van"
+      ],
+      "correctAnswer": "Tessa",
+      "answer": "Tessa",
+      "correct": true,
+      "elapsedMs": 13310
+    },
+    {
+      "storyId": "musr-195",
+      "choices": [
+        "Tessa",
+        "Van"
+      ],
+      "correctAnswer": "Van",
+      "answer": "Tessa",
+      "correct": false,
+      "elapsedMs": 15193
+    },
+    {
+      "storyId": "musr-196",
+      "choices": [
+        "Elizabeth",
+        "Freya"
+      ],
+      "correctAnswer": "Elizabeth",
+      "answer": "Elizabeth",
+      "correct": true,
+      "elapsedMs": 4610
+    },
+    {
+      "storyId": "musr-197",
+      "choices": [
+        "Elizabeth",
+        "Freya"
+      ],
+      "correctAnswer": "Freya",
+      "answer": "Freya",
+      "correct": true,
+      "elapsedMs": 17345
+    },
+    {
+      "storyId": "musr-198",
+      "choices": [
+        "Priscilla",
+        "Xenia"
+      ],
+      "correctAnswer": "Priscilla",
+      "answer": "Xenia",
+      "correct": false,
+      "elapsedMs": 14161
+    },
+    {
+      "storyId": "musr-199",
+      "choices": [
+        "Priscilla",
+        "Xenia"
+      ],
+      "correctAnswer": "Xenia",
+      "answer": "Xenia",
+      "correct": true,
+      "elapsedMs": 11931
+    },
+    {
+      "storyId": "musr-200",
+      "choices": [
+        "Dexter",
+        "Gordon"
+      ],
+      "correctAnswer": "Dexter",
+      "answer": "Dexter",
+      "correct": true,
+      "elapsedMs": 11548
+    },
+    {
+      "storyId": "musr-201",
+      "choices": [
+        "Dexter",
+        "Gordon"
+      ],
+      "correctAnswer": "Gordon",
+      "answer": "Dexter",
+      "correct": false,
+      "elapsedMs": 13062
+    },
+    {
+      "storyId": "musr-202",
+      "choices": [
+        "Nicole",
+        "Gloria"
+      ],
+      "correctAnswer": "Nicole",
+      "answer": "Nicole",
+      "correct": true,
+      "elapsedMs": 11428
+    },
+    {
+      "storyId": "musr-203",
+      "choices": [
+        "Nicole",
+        "Gloria"
+      ],
+      "correctAnswer": "Gloria",
+      "answer": "Gloria",
+      "correct": true,
+      "elapsedMs": 12758
+    },
+    {
+      "storyId": "musr-204",
+      "choices": [
+        "Patrick",
+        "Alvin"
+      ],
+      "correctAnswer": "Patrick",
+      "answer": "Alvin",
+      "correct": false,
+      "elapsedMs": 14661
+    },
+    {
+      "storyId": "musr-205",
+      "choices": [
+        "Patrick",
+        "Alvin"
+      ],
+      "correctAnswer": "Alvin",
+      "answer": "Alvin",
+      "correct": true,
+      "elapsedMs": 12456
+    },
+    {
+      "storyId": "musr-206",
+      "choices": [
+        "Sophie",
+        "Lowell"
+      ],
+      "correctAnswer": "Sophie",
+      "answer": "Sophie",
+      "correct": true,
+      "elapsedMs": 12489
+    },
+    {
+      "storyId": "musr-207",
+      "choices": [
+        "Sophie",
+        "Lowell"
+      ],
+      "correctAnswer": "Lowell",
+      "answer": "Sophie",
+      "correct": false,
+      "elapsedMs": 12720
+    },
+    {
+      "storyId": "musr-208",
+      "choices": [
+        "Mark",
+        "Gerald"
+      ],
+      "correctAnswer": "Mark",
+      "answer": "Gerald",
+      "correct": false,
+      "elapsedMs": 11119
+    },
+    {
+      "storyId": "musr-209",
+      "choices": [
+        "Mark",
+        "Gerald"
+      ],
+      "correctAnswer": "Gerald",
+      "answer": "Gerald",
+      "correct": true,
+      "elapsedMs": 12940
+    },
+    {
+      "storyId": "musr-210",
+      "choices": [
+        "Marjorie",
+        "Cecilia"
+      ],
+      "correctAnswer": "Marjorie",
+      "answer": "Marjorie",
+      "correct": true,
+      "elapsedMs": 17007
+    },
+    {
+      "storyId": "musr-211",
+      "choices": [
+        "Marjorie",
+        "Cecilia"
+      ],
+      "correctAnswer": "Cecilia",
+      "answer": "Marjorie",
+      "correct": false,
+      "elapsedMs": 14639
+    },
+    {
+      "storyId": "musr-212",
+      "choices": [
+        "Sophia",
+        "Larry"
+      ],
+      "correctAnswer": "Sophia",
+      "answer": "Sophia",
+      "correct": true,
+      "elapsedMs": 10874
+    },
+    {
+      "storyId": "musr-213",
+      "choices": [
+        "Sophia",
+        "Larry"
+      ],
+      "correctAnswer": "Larry",
+      "answer": "Sophia",
+      "correct": false,
+      "elapsedMs": 12818
+    },
+    {
+      "storyId": "musr-214",
+      "choices": [
+        "Alex",
+        "Clyde"
+      ],
+      "correctAnswer": "Alex",
+      "answer": "Alex",
+      "correct": true,
+      "elapsedMs": 12532
+    },
+    {
+      "storyId": "musr-215",
+      "choices": [
+        "Alex",
+        "Clyde"
+      ],
+      "correctAnswer": "Clyde",
+      "answer": "Alex",
+      "correct": false,
+      "elapsedMs": 13413
+    },
+    {
+      "storyId": "musr-216",
+      "choices": [
+        "Isabelle",
+        "Frank"
+      ],
+      "correctAnswer": "Isabelle",
+      "answer": "Frank",
+      "correct": false,
+      "elapsedMs": 12987
+    },
+    {
+      "storyId": "musr-217",
+      "choices": [
+        "Isabelle",
+        "Frank"
+      ],
+      "correctAnswer": "Frank",
+      "answer": "Frank",
+      "correct": true,
+      "elapsedMs": 3763
+    },
+    {
+      "storyId": "musr-218",
+      "choices": [
+        "Gregory",
+        "Alfred"
+      ],
+      "correctAnswer": "Gregory",
+      "answer": "Gregory",
+      "correct": true,
+      "elapsedMs": 4944
+    },
+    {
+      "storyId": "musr-219",
+      "choices": [
+        "Gregory",
+        "Alfred"
+      ],
+      "correctAnswer": "Alfred",
+      "answer": "Alfred",
+      "correct": true,
+      "elapsedMs": 4950
+    },
+    {
+      "storyId": "musr-220",
+      "choices": [
+        "Letti",
+        "Evelyn"
+      ],
+      "correctAnswer": "Letti",
+      "answer": "Letti",
+      "correct": true,
+      "elapsedMs": 14841
+    },
+    {
+      "storyId": "musr-221",
+      "choices": [
+        "Letti",
+        "Evelyn"
+      ],
+      "correctAnswer": "Evelyn",
+      "answer": "Evelyn",
+      "correct": true,
+      "elapsedMs": 11331
+    },
+    {
+      "storyId": "musr-222",
+      "choices": [
+        "Clyde",
+        "Roxanne"
+      ],
+      "correctAnswer": "Clyde",
+      "answer": "Clyde",
+      "correct": true,
+      "elapsedMs": 14439
+    },
+    {
+      "storyId": "musr-223",
+      "choices": [
+        "Clyde",
+        "Roxanne"
+      ],
+      "correctAnswer": "Roxanne",
+      "answer": "Roxanne",
+      "correct": true,
+      "elapsedMs": 12201
+    },
+    {
+      "storyId": "musr-224",
+      "choices": [
+        "Lillian",
+        "Kimberly"
+      ],
+      "correctAnswer": "Lillian",
+      "answer": "Lillian",
+      "correct": true,
+      "elapsedMs": 11810
+    },
+    {
+      "storyId": "musr-225",
+      "choices": [
+        "Lillian",
+        "Kimberly"
+      ],
+      "correctAnswer": "Kimberly",
+      "answer": "Kimberly",
+      "correct": true,
+      "elapsedMs": 10767
+    },
+    {
+      "storyId": "musr-226",
+      "choices": [
+        "Peyton",
+        "Isolde"
+      ],
+      "correctAnswer": "Peyton",
+      "answer": "Isolde",
+      "correct": false,
+      "elapsedMs": 9429
+    },
+    {
+      "storyId": "musr-227",
+      "choices": [
+        "Peyton",
+        "Isolde"
+      ],
+      "correctAnswer": "Isolde",
+      "answer": "Isolde",
+      "correct": true,
+      "elapsedMs": 11336
+    },
+    {
+      "storyId": "musr-228",
+      "choices": [
+        "Lucy",
+        "Jacqueline"
+      ],
+      "correctAnswer": "Lucy",
+      "answer": "Lucy",
+      "correct": true,
+      "elapsedMs": 6241
+    },
+    {
+      "storyId": "musr-229",
+      "choices": [
+        "Lucy",
+        "Jacqueline"
+      ],
+      "correctAnswer": "Jacqueline",
+      "answer": "Lucy",
+      "correct": false,
+      "elapsedMs": 5755
+    },
+    {
+      "storyId": "musr-230",
+      "choices": [
+        "Harvey",
+        "Sergio"
+      ],
+      "correctAnswer": "Harvey",
+      "answer": "Harvey",
+      "correct": true,
+      "elapsedMs": 13412
+    },
+    {
+      "storyId": "musr-231",
+      "choices": [
+        "Harvey",
+        "Sergio"
+      ],
+      "correctAnswer": "Sergio",
+      "answer": "Sergio",
+      "correct": true,
+      "elapsedMs": 11801
+    },
+    {
+      "storyId": "musr-232",
+      "choices": [
+        "Xanthe",
+        "Lowell"
+      ],
+      "correctAnswer": "Xanthe",
+      "answer": "Lowell",
+      "correct": false,
+      "elapsedMs": 14143
+    },
+    {
+      "storyId": "musr-233",
+      "choices": [
+        "Xanthe",
+        "Lowell"
+      ],
+      "correctAnswer": "Lowell",
+      "answer": "Lowell",
+      "correct": true,
+      "elapsedMs": 4999
+    },
+    {
+      "storyId": "musr-234",
+      "choices": [
+        "Tiffany",
+        "Theresa"
+      ],
+      "correctAnswer": "Tiffany",
+      "answer": "Tiffany",
+      "correct": true,
+      "elapsedMs": 5383
+    },
+    {
+      "storyId": "musr-235",
+      "choices": [
+        "Tiffany",
+        "Theresa"
+      ],
+      "correctAnswer": "Theresa",
+      "answer": "Theresa",
+      "correct": true,
+      "elapsedMs": 15634
+    },
+    {
+      "storyId": "musr-236",
+      "choices": [
+        "Penelope",
+        "Francis"
+      ],
+      "correctAnswer": "Penelope",
+      "answer": "Penelope",
+      "correct": true,
+      "elapsedMs": 11858
+    },
+    {
+      "storyId": "musr-237",
+      "choices": [
+        "Penelope",
+        "Francis"
+      ],
+      "correctAnswer": "Francis",
+      "answer": "Penelope",
+      "correct": false,
+      "elapsedMs": 14825
+    },
+    {
+      "storyId": "musr-238",
+      "choices": [
+        "Shawn",
+        "Octavia"
+      ],
+      "correctAnswer": "Shawn",
+      "answer": "Shawn",
+      "correct": true,
+      "elapsedMs": 14843
+    },
+    {
+      "storyId": "musr-239",
+      "choices": [
+        "Shawn",
+        "Octavia"
+      ],
+      "correctAnswer": "Octavia",
+      "answer": "Shawn",
+      "correct": false,
+      "elapsedMs": 5574
+    },
+    {
+      "storyId": "musr-240",
+      "choices": [
+        "Irving",
+        "Addison"
+      ],
+      "correctAnswer": "Irving",
+      "answer": "Irving",
+      "correct": true,
+      "elapsedMs": 4791
+    },
+    {
+      "storyId": "musr-241",
+      "choices": [
+        "Irving",
+        "Addison"
+      ],
+      "correctAnswer": "Addison",
+      "answer": "Addison",
+      "correct": true,
+      "elapsedMs": 9968
+    },
+    {
+      "storyId": "musr-242",
+      "choices": [
+        "Letti",
+        "Deborah"
+      ],
+      "correctAnswer": "Letti",
+      "answer": "Letti",
+      "correct": true,
+      "elapsedMs": 14428
+    },
+    {
+      "storyId": "musr-243",
+      "choices": [
+        "Letti",
+        "Deborah"
+      ],
+      "correctAnswer": "Deborah",
+      "answer": "Letti",
+      "correct": false,
+      "elapsedMs": 13440
+    },
+    {
+      "storyId": "musr-244",
+      "choices": [
+        "Dexter",
+        "Daisy"
+      ],
+      "correctAnswer": "Dexter",
+      "answer": "Dexter",
+      "correct": true,
+      "elapsedMs": 13769
+    },
+    {
+      "storyId": "musr-245",
+      "choices": [
+        "Dexter",
+        "Daisy"
+      ],
+      "correctAnswer": "Daisy",
+      "answer": "Daisy",
+      "correct": true,
+      "elapsedMs": 15448
+    },
+    {
+      "storyId": "musr-246",
+      "choices": [
+        "Van",
+        "Wilfred"
+      ],
+      "correctAnswer": "Van",
+      "answer": "Van",
+      "correct": true,
+      "elapsedMs": 5307
+    },
+    {
+      "storyId": "musr-247",
+      "choices": [
+        "Van",
+        "Wilfred"
+      ],
+      "correctAnswer": "Wilfred",
+      "answer": "Wilfred",
+      "correct": true,
+      "elapsedMs": 13370
+    },
+    {
+      "storyId": "musr-248",
+      "choices": [
+        "Marianne",
+        "Sidney"
+      ],
+      "correctAnswer": "Marianne",
+      "answer": "Marianne",
+      "correct": true,
+      "elapsedMs": 16341
+    },
+    {
+      "storyId": "musr-249",
+      "choices": [
+        "Marianne",
+        "Sidney"
+      ],
+      "correctAnswer": "Sidney",
+      "answer": "Sidney",
+      "correct": true,
+      "elapsedMs": 5142
+    }
+  ]
+}
