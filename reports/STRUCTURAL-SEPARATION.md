@@ -100,23 +100,21 @@ Deltas relative to baseline.
 
 **Note:** Unlike Dafny, where the gain comes from representation isolation (hiding the hypothesis), fact-checking gains come primarily from aggregation design over the structured representation. These are distinct mechanisms unified by the same principle: decoupling representation from evaluation creates a structured intermediate form that can be reasoned about explicitly.
 
-## Why It Works: Anchoring Bias in LLMs
+## Why It Works: Premature Hypothesis Fixation
 
-The baseline failure mode in each domain:
+The baseline failure mode is **hypothesis-conditioned evidence encoding**: the model forms or sees a hypothesis early, then constructs its representation of the evidence conditioned on that hypothesis. This manifests differently in each domain:
 
-**Dafny:** Model sees the NL requirement "counter is always non-negative" alongside the code. When it reads `ensures m >= -1`, it's primed to interpret this as confirming non-negativity, missing the subtle weakening.
+**Dafny (representation conditioning):** Model sees the NL requirement "counter is always non-negative" alongside the code. When it reads `ensures m >= -1`, it's primed to interpret this as confirming non-negativity, missing the subtle weakening. The representation of the code is literally conditioned on the hypothesis (the requirement).
 
-**Fact-checking:** Model sees a claim about vitamin D and COVID, then scans evidence about vitamin D and COVID. Topical overlap triggers a "related = supported" heuristic, or conversely, the model notes the evidence doesn't contain the exact statistic and over-hedges to NOT_ENOUGH_INFO.
+**Fact-checking (aggregation-before-representation):** Without decomposition, the model produces a single verdict without separable local commitments. It cannot distinguish "topically related" from "logically entailing" because the aggregation is entangled with the representation. With decomposition, the structured intermediate representation enables explicit aggregation rules.
 
-**Mystery:** Model sees an answer choice "the butler did it" before analyzing clues. It unconsciously weighs clues that implicate the butler more heavily, especially when the butler is mentioned prominently in the story.
+**Mystery (hypothesis competition failure):** Model sees answer choices before analyzing clues. It fixates on a plausible-sounding choice and selectively weighs clues that confirm it, rather than evaluating all choices against all evidence. The contrastive schema forces explicit per-choice evaluation, which is why contrastive adds +3.9pp in mystery (vs +0.4pp in fact-checking where hypothesis competition is less relevant).
 
-Structural separation breaks the `hypothesis → selective evidence` loop by making the evidence representation phase hypothesis-free. The model commits to what each piece of evidence *means* before it knows what hypothesis it will evaluate.
+## Connection to Existing Frameworks
 
-## Connection to Cognitive Science
+The structured approach is analogous to Analysis of Competing Hypotheses (ACH) in intelligence analysis — evaluate each piece of evidence against all hypotheses independently before aggregating. The key parallel: ACH's value comes not from improving evidence collection, but from *separating evidence evaluation from hypothesis selection*.
 
-This maps directly to the anchoring-and-adjustment heuristic (Tversky & Kahneman, 1974). Humans given an initial anchor adjust insufficiently from it. LLMs exhibit the same pattern: given a hypothesis (explicit or implicit), they adjust insufficiently from it when evaluating evidence.
-
-The structured approach is analogous to Analysis of Competing Hypotheses (ACH) in intelligence analysis — evaluate each piece of evidence against all hypotheses independently before aggregating.
+The Dafny result connects to work on anchoring effects in LLMs (e.g., Jones & Steinhardt, 2022), but with a stronger finding: prompt-level instructions to "ignore the anchor" are insufficient (86.1%), while structural enforcement works (96.3%). This suggests LLM anchoring is not a compliance failure but a representational one — the model's encoding of the evidence is already contaminated by hypothesis visibility.
 
 ## Mechanism: Tool Schemas as Structural Enforcement
 
