@@ -44,6 +44,7 @@ const model = getArg('--model', 'claude-sonnet-4-5-20250929');
 const limit = parseInt(getArg('--limit', '0')) || 0;
 const offset = parseInt(getArg('--offset', '0')) || 0;
 const concurrency = parseInt(getArg('--concurrency', '1')) || 1;
+const contrastive = args.includes('--contrastive');
 const verbose = args.includes('--verbose');
 
 // --- Tool schemas for structured API output ---
@@ -139,6 +140,70 @@ function groundedAnswerTool(choices) {
         reasoning: {
           type: 'string',
           description: 'Based on the clues and contradictions, who is responsible and why.',
+        },
+        answer: {
+          type: 'string',
+          enum: choices,
+          description: 'The correct answer.',
+        },
+      },
+    },
+  };
+}
+
+function groundedContrastiveTool(choices) {
+  return {
+    name: 'record_grounded_answer',
+    description: 'Record your clue-by-clue analysis and answer to the mystery.',
+    input_schema: {
+      type: 'object',
+      required: ['clues', 'per_choice_analysis', 'answer'],
+      properties: {
+        clues: {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: ['quote', 'implication'],
+            properties: {
+              quote: {
+                type: 'string',
+                description: 'Exact quote from the story text that constitutes a clue.',
+              },
+              implication: {
+                type: 'string',
+                description: 'What this clue implies — who it implicates or exonerates, and why.',
+              },
+            },
+          },
+          description: 'Key clues extracted from the story. Quote the exact text before analyzing.',
+        },
+        per_choice_analysis: {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: ['choice', 'supporting_clues', 'contradicting_clues', 'plausibility'],
+            properties: {
+              choice: {
+                type: 'string',
+                enum: choices,
+                description: 'The answer choice being evaluated.',
+              },
+              supporting_clues: {
+                type: 'string',
+                description: 'Which extracted clues support this choice, and why.',
+              },
+              contradicting_clues: {
+                type: 'string',
+                description: 'Which extracted clues contradict this choice, and why.',
+              },
+              plausibility: {
+                type: 'string',
+                enum: ['strong', 'weak', 'eliminated'],
+                description: 'How plausible this choice is given the evidence.',
+              },
+            },
+          },
+          description: 'Evaluate EVERY answer choice against the extracted clues before selecting.',
         },
         answer: {
           type: 'string',
@@ -273,8 +338,12 @@ ${choiceList}
 Based on your prior analysis, select the best answer. If your analysis already identified the answer, select it. If your analysis pointed to someone not in the choices, reconsider the evidence for the available choices.`;
 }
 
-function groundedPrompt(story, choices) {
+function groundedPrompt(story, choices, useContrastive) {
   const choiceList = choices.map((c, i) => `${String.fromCharCode(65 + i)}. ${c}`).join('\n');
+  const contrastiveBlock = useContrastive
+    ? `\n\nAfter extracting clues, evaluate EVERY answer choice against your clues. For each choice, list which clues support it and which contradict it, then rate its plausibility (strong / weak / eliminated). Only then select your answer.`
+    : `\n\nAfter extracting all relevant clues, identify contradictions between them (impossible alibis, timeline conflicts, logical inconsistencies). Then select your answer based on the evidence you cited.`;
+
   return `Read the following mystery story carefully, then answer the question at the end.
 
 ## Story
@@ -292,9 +361,7 @@ You must analyze the story by extracting specific clues BEFORE choosing an answe
 1. **Quote** the exact sentence or phrase from the story
 2. **Analyze** what this clue implies — who it implicates or exonerates, and why
 
-After extracting all relevant clues, identify contradictions between them (impossible alibis, timeline conflicts, logical inconsistencies). Then select your answer based on the evidence you cited.
-
-Extract at least 3 clues. Every claim you make must be grounded in a direct quote from the story.`;
+Extract at least 3 clues. Every claim you make must be grounded in a direct quote from the story.${contrastiveBlock}`;
 }
 
 // --- Parse answer from CC text output ---
@@ -422,10 +489,10 @@ async function runTwoPass(story, choices) {
 }
 
 async function runGrounded(story, choices) {
-  const prompt = groundedPrompt(story, choices);
+  const prompt = groundedPrompt(story, choices, contrastive);
 
   if (backend === 'api') {
-    const tool = groundedAnswerTool(choices);
+    const tool = contrastive ? groundedContrastiveTool(choices) : groundedAnswerTool(choices);
     const result = await callWithTool({
       model,
       prompt,
