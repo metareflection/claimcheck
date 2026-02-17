@@ -69,11 +69,15 @@ The gain correlates with how conservative the baseline is on SUPPORTS. When the 
 
 ### Mystery Solving (BIG-bench Minute Mysteries, N=203)
 
-| Method | Sonnet | Opus |
-|--------|--------|------|
-| Baseline | 54.2% | 65.0% |
-| Grounded (local commitments only) | 60.6% (+6.4pp) | 69.5% (+4.5pp) |
-| Grounded + contrastive (full aggregation) | 64.5% (+10.3pp) | 70.0% (+5.0pp) |
+| Method | Haiku | Sonnet | Opus |
+|--------|-------|--------|------|
+| Baseline | 40.9% | 54.2% | 65.0% |
+| Grounded (local commitments only) | 41.9% (+1.0pp) | 60.6% (+6.4pp) | 69.5% (+4.5pp) |
+| Grounded + contrastive (full aggregation) | 42.4% (+1.5pp) | 64.5% (+10.3pp) | 70.0% (+5.0pp) |
+
+No prior published LLM results on this task. Random baseline is 24.2%.
+
+**Model capability threshold.** Structural separation requires sufficient base capability to produce useful local commitments. Haiku can fill in the tool schema but its clue extractions and implications are too shallow for aggregation to improve on — the structured intermediate representation has low fidelity. Sonnet shows the largest gains because it produces quality local commitments but doesn't self-separate without scaffolding. Opus benefits less because it already partially performs structured reasoning internally — the external scaffolding is partially redundant. The technique is not a universal amplifier; it requires that the model can produce faithful atomic representations when asked.
 
 
 ## Ablation: Which Phase Matters?
