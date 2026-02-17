@@ -31,10 +31,11 @@ The intervention operates through two distinct mechanisms depending on the domai
 | Phase | Dafny Verification | Fact-Checking (NLI) | Mystery Solving |
 |-------|-------------------|---------------------|-----------------|
 | **Input** | Lemma code + NL requirement | Claim + evidence passage | Story + question + choices |
-| **Atomic representation** | Informalize each clause | Decompose claim into assertions | Extract quoted clues |
-| **Local commitments** | What each clause means in English | Per-assertion: SUPPORTS / CONTRADICTS / NO_EVIDENCE | Per-clue: who it implicates / exonerates |
-| **Global aggregation** | Does informalization match requirement? | Aggregate assertion verdicts → final label | Evaluate each choice against clues → answer |
-| **Bias prevented** | Anchoring on NL requirement when reading code | Pattern-matching on topical overlap | Anchoring on plausible-sounding choice |
+| **Mechanism** | Representation isolation (hypothesis hidden) | Structured intermediate representation | Structured intermediate representation |
+| **R: Representation** | Informalize each clause (without seeing requirement) | Decompose claim into assertions | Extract quoted clues from story |
+| **C: Local commitments** | What each clause means in English | Per-assertion: SUPPORTS / CONTRADICTS / NO_EVIDENCE | Per-clue: who it implicates / exonerates |
+| **A: Aggregation** | Compare informalization to requirement | Soft-agg + contrastive → verdict | Per-choice evaluation → answer |
+| **Failure mode prevented** | Hypothesis-conditioned representation | Black-box verdict with no separable aggregation | Premature fixation on plausible choice |
 
 ## Results
 
