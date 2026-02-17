@@ -1,0 +1,4030 @@
+{
+  "label": "pubhealth-baseline-s500",
+  "timestamp": "2026-02-17T00:07:24.683Z",
+  "config": {
+    "mode": "baseline",
+    "backend": "api",
+    "model": "claude-sonnet-4-5-20250929",
+    "total": 500
+  },
+  "totalElapsedMs": 241581,
+  "accuracy": 0.63,
+  "correct": 315,
+  "total": 500,
+  "byLabel": {
+    "SUPPORTS": {
+      "correct": 181,
+      "total": 256
+    },
+    "REFUTES": {
+      "correct": 100,
+      "total": 153
+    },
+    "NOT_ENOUGH_INFO": {
+      "correct": 34,
+      "total": 91
+    }
+  },
+  "results": [
+    {
+      "id": 1360,
+      "claim": "The stimulus includes \"$219,000 to study the sex lives of female college freshmen.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4871
+    },
+    {
+      "id": 2241,
+      "claim": "Nike donated three times more to Republicans than Democrats during the 2018 federal election cycle, up to August 2018.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4196
+    },
+    {
+      "id": 1497,
+      "claim": "300,000 Floridians have lost their health insurance\" as a result of Obamacare.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4255
+    },
+    {
+      "id": 1291,
+      "claim": "Idaho officials say cat has rabies, first case in decades.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3865
+    },
+    {
+      "id": 1826,
+      "claim": "Shots for food workers urged in 2 West Virginia counties.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3443
+    },
+    {
+      "id": 249,
+      "claim": "Prostate Cancer Studies Find Benefit in Daily Acetaminophen and Brisk Walks",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4567
+    },
+    {
+      "id": 1532,
+      "claim": "Old drug could cure HIV-linked dementia",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5318
+    },
+    {
+      "id": 1927,
+      "claim": "Tuberculosis outbreak associated with Mankato university.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3308
+    },
+    {
+      "id": 1402,
+      "claim": "Russian president Vladimir Putin slammed Western countries for using GMOs and vaccines that slow evolution.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3662
+    },
+    {
+      "id": 1799,
+      "claim": "Development of a wearable medical device for type 2 diabetes",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5747
+    },
+    {
+      "id": 523,
+      "claim": "Virginia Gov. Ralph Northam \"stated he would execute a baby after birth.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5585
+    },
+    {
+      "id": 832,
+      "claim": "Mexico official calls diet a factor as coronavirus death toll climbs.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3647
+    },
+    {
+      "id": 1250,
+      "claim": "Obamacare \"cuts seniors’ Medicare.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4961
+    },
+    {
+      "id": 609,
+      "claim": "The sap of the giant hogweed plant can cause severe skin and eye irritation.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4753
+    },
+    {
+      "id": 1132,
+      "claim": "Marijuana dealers are using the popular game app Pokémon GO to hook children on drugs.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3186
+    },
+    {
+      "id": 440,
+      "claim": "US drinking more now than just before Prohibition.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 12079
+    },
+    {
+      "id": 747,
+      "claim": "Deadly eruption hits New Zealand volcano tourist town hard.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5628
+    },
+    {
+      "id": 1125,
+      "claim": "Experimental Test May Warn of Premature Births",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6177
+    },
+    {
+      "id": 460,
+      "claim": "Patients should avoid taking ibuprofen to relieve pain and fever associated with COVID-19 infections.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5674
+    },
+    {
+      "id": 1116,
+      "claim": "New recommendations for managing menopausal symptoms in breast cancer survivors",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4620
+    },
+    {
+      "id": 1938,
+      "claim": "Researcher: Alzheimer's vaccine could cut dementia in half, human trials may be next",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7263
+    },
+    {
+      "id": 1262,
+      "claim": "A Time magazine cover from 1977 with the title “The Big Freeze” is an example of media fearmongering over  “global cooling” in the 1970s.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3793
+    },
+    {
+      "id": 1050,
+      "claim": "US choir outbreak called ‘superspreader event’ in report.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4098
+    },
+    {
+      "id": 20,
+      "claim": "Microsoft owns patent \"666,\" which involves inserting microchips into people to mine their activity for cryptocurrency purposes.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6351
+    },
+    {
+      "id": 73,
+      "claim": "Sanitizer will do nothing for the coronavirus.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4193
+    },
+    {
+      "id": 340,
+      "claim": "Fast-food restaurants target U.S. kids, study shows.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4567
+    },
+    {
+      "id": 783,
+      "claim": "Anti-gravity treadmills get patients running again after knee surgery",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5342
+    },
+    {
+      "id": 2099,
+      "claim": "South Korea expands poultry cull on bird flu fears.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3513
+    },
+    {
+      "id": 1071,
+      "claim": "Iowa research lab identifies new strain of deadly pig virus.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5733
+    },
+    {
+      "id": 81,
+      "claim": "Chain message Says \"special military helicopters will spray pesticide against the Corona virus in the skies all over the country.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5059
+    },
+    {
+      "id": 841,
+      "claim": "“Pelosi’s new coronavirus bill allows illegals to receive billions in relief funds in past, current, and future payments.”",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5680
+    },
+    {
+      "id": 1972,
+      "claim": "Ted Cruz Says Democrats are embracing “abortion up until the moment of birth and even, horrifically, after that.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3788
+    },
+    {
+      "id": 872,
+      "claim": "108 mins that stunned the world: Russia honors Gagarin.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4606
+    },
+    {
+      "id": 615,
+      "claim": "A woman in South Korea was impregnated via mouth after eating a squid.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4915
+    },
+    {
+      "id": 366,
+      "claim": "US surgeon general urges caution, not panic, on new virus.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2849
+    },
+    {
+      "id": 621,
+      "claim": "Smoking to kill 5.6 million US kids if not stubbed out: report.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3952
+    },
+    {
+      "id": 906,
+      "claim": "There is a federal criminal law that says it's a crime to transport dentures across state lines.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6289
+    },
+    {
+      "id": 2197,
+      "claim": "Assault rifles already are banned.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4477
+    },
+    {
+      "id": 286,
+      "claim": "Viagra may help heart effects of muscular dystrophy",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4807
+    },
+    {
+      "id": 447,
+      "claim": "Law enforcement agencies recommend that people wash the handle on shopping carts before using them to avoid potential exposure to fentanyl.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3127
+    },
+    {
+      "id": 536,
+      "claim": "In September 2020, former Vice President Joe Biden was unable to recite the Pledge of Allegiance, as demonstrated in a video.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6174
+    },
+    {
+      "id": 1768,
+      "claim": "Bats are pictured on the reverse of a U.S. quarter issued in 2020, an indicator that COVID-19 is connected to a government plot.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3478
+    },
+    {
+      "id": 2027,
+      "claim": "There’s a “direct correlation” between North Carolina’s mask requirement and COVID-19 stabilization.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5181
+    },
+    {
+      "id": 2097,
+      "claim": "Stephanie Grisham got DUIs in 2013 and 2015.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4235
+    },
+    {
+      "id": 358,
+      "claim": "Georgia could be first state to test Trump health proposals.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3843
+    },
+    {
+      "id": 1931,
+      "claim": "Global coronavirus death toll hits 150,000: Reuters tally.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3735
+    },
+    {
+      "id": 176,
+      "claim": "Study finds deregulation fuelling obesity epidemic.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5237
+    },
+    {
+      "id": 1872,
+      "claim": "A new Arkansas law allows rapists to sue their victims to stop an abortion.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3782
+    },
+    {
+      "id": 888,
+      "claim": "Your child's brain on math: Don't bother?.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6678
+    },
+    {
+      "id": 375,
+      "claim": "A California Senate bill gives the state the right to seize children from their families",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4274
+    },
+    {
+      "id": 318,
+      "claim": "Gabapentin is now considered the most dangerous drug in America and will surpass opioids as the largest prescription drug killer.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5355
+    },
+    {
+      "id": 297,
+      "claim": "U.S. Democratic presidential nominee Joe Biden supports \"defunding\" police agencies.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4346
+    },
+    {
+      "id": 1981,
+      "claim": "U.S. Sen. Elizabeth Warren said or argued to the effect that \"taxpayers must fund sex reassignment surgery.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5451
+    },
+    {
+      "id": 1940,
+      "claim": "Ruling leaves Ohio ban on Down syndrome abortions on hold.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3732
+    },
+    {
+      "id": 194,
+      "claim": "Depressed? You must like chocolate.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5852
+    },
+    {
+      "id": 1301,
+      "claim": "Talk radio host Rush Limbaugh was disqualified from the Vietnam-era draft due to a pilonidal cyst.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3929
+    },
+    {
+      "id": 1898,
+      "claim": "The ratio of corporate profits to wages is now higher than at any time since just before the Great Depression.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5373
+    },
+    {
+      "id": 1883,
+      "claim": "3 Nebraska Medicaid providers honored for serving patients.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3148
+    },
+    {
+      "id": 1088,
+      "claim": "Some Alabama residents likely exposed to measles.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4122
+    },
+    {
+      "id": 819,
+      "claim": "COVID-19 contact-tracing apps like Healthy Together and ABTraceTogether are tracking you and also the people in your phone contacts and Facebook friends lists.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4332
+    },
+    {
+      "id": 1698,
+      "claim": "GENE THERAPY MIGHT BE THE BEST, AND PERHAPS ONLY, CHANCE AT CURING BRAIN DISEASES",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7438
+    },
+    {
+      "id": 63,
+      "claim": "Judge blocks graphic cigarette warnings.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3984
+    },
+    {
+      "id": 2214,
+      "claim": "The health care reform plan would set limits similar to the \"socialized\" system in Britain, where people are allowed to die if their treatment would cost more than $22,000.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5805
+    },
+    {
+      "id": 2086,
+      "claim": "New hormone therapy sparks debate",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5923
+    },
+    {
+      "id": 1340,
+      "claim": "Facebook post Says businesses will give you free baby formula during the coronavirus outbreak.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3731
+    },
+    {
+      "id": 438,
+      "claim": "2 measles cases from exposure at Portland, Oregon airport.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2940
+    },
+    {
+      "id": 2240,
+      "claim": "Boy with rare disease gets brand new skin with gene therapy.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4032
+    },
+    {
+      "id": 648,
+      "claim": "New class of blood pressure meds as effective as old, analysis shows",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5047
+    },
+    {
+      "id": 350,
+      "claim": "John McCain accused Barack Obama \"of letting infants die.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4624
+    },
+    {
+      "id": 119,
+      "claim": "Zinc eaten at levels found in biofortified crops reduces 'wear and tear' on DNA",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6226
+    },
+    {
+      "id": 2001,
+      "claim": "Illegal immigrants were arrested for starting the October 2017 California wildfires.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4677
+    },
+    {
+      "id": 1742,
+      "claim": "Apple has reopened all 42 China stores.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4007
+    },
+    {
+      "id": 1526,
+      "claim": "As bank president, Alex Sink eliminated thousands of Florida jobs while taking over $8 million in salary and bonuses.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5241
+    },
+    {
+      "id": 2346,
+      "claim": "Wendy Davis Says that each year, about 25,000 American women become pregnant through rape or incest.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5436
+    },
+    {
+      "id": 1246,
+      "claim": "Scientists debate cause of dolphin deaths.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3458
+    },
+    {
+      "id": 1085,
+      "claim": "Senators draw on own experiences to chastise drug companies.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4379
+    },
+    {
+      "id": 1472,
+      "claim": "The Baucus health care bill \"could be used to ban guns in home self-defense.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5714
+    },
+    {
+      "id": 626,
+      "claim": "More People Should Get Statins, Report Says",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5241
+    },
+    {
+      "id": 732,
+      "claim": "Television viewers can drastically lower the TV ratings for Donald Trump's inauguration by changing the channel.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4053
+    },
+    {
+      "id": 2010,
+      "claim": "Anti-Gravity Treadmill helps injured get moving again",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5084
+    },
+    {
+      "id": 2275,
+      "claim": "Health experts back treatment for kids with peanut allergy.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3935
+    },
+    {
+      "id": 1442,
+      "claim": "President Donald Trump has targeted the family of California Senate President Pro Tempore Kevin de León for deportation.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3468
+    },
+    {
+      "id": 959,
+      "claim": "A hand-held police radar unit successfully tracked a military aircraft on maneuvers, nearly causing the aircraft to fire a missile in response.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4936
+    },
+    {
+      "id": 1439,
+      "claim": "Thailand reports new coronavirus death as total cases reach 1,245.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3427
+    },
+    {
+      "id": 1605,
+      "claim": "A Michigan farmer was forced to destroy 40,000 edible cherries to make way for cherries imported from outside the U.S.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6808
+    },
+    {
+      "id": 1710,
+      "claim": "“The flu killed 80,000 people in the U.S. last year”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4519
+    },
+    {
+      "id": 85,
+      "claim": "Indiana veteran who wanted final flight dies after reunion.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4463
+    },
+    {
+      "id": 1838,
+      "claim": "Technology helps China brace for population growth.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5023
+    },
+    {
+      "id": 255,
+      "claim": "Robotic surgery grows, but so do questions",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5711
+    },
+    {
+      "id": 1581,
+      "claim": "Teenage climate activist Greta Thunberg appeared on a CNN \"expert panel\" in a program about the COVID-19 coronavirus pandemic.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5058
+    },
+    {
+      "id": 1648,
+      "claim": "New hearts forge new friendship for transplant recipients.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3256
+    },
+    {
+      "id": 1320,
+      "claim": "John Holdren, director of the White House Office of Science and Technology Policy, \"has proposed forcing abortions and putting sterilants in the drinking water to control population.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4776
+    },
+    {
+      "id": 1751,
+      "claim": "Missouri physicians warn against bug-borne diseases.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4786
+    },
+    {
+      "id": 229,
+      "claim": "Study Questions Chiropractic’s Impact on Back Pain",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5314
+    },
+    {
+      "id": 343,
+      "claim": "The race to create a new class of ovarian cancer drugs heats up",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2976
+    },
+    {
+      "id": 2381,
+      "claim": "Some Cubans choose dose of private medicine despite price.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5884
+    },
+    {
+      "id": 871,
+      "claim": "Shingles Vaccine Looks Like a Safe Bet for Seniors: Study",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 7735
+    },
+    {
+      "id": 1294,
+      "claim": "Weight loss can be boosted fivefold thanks to novel mental imagery technique",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7722
+    },
+    {
+      "id": 298,
+      "claim": "Scientists find clues to why binge-drinking causes binge-eating.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3926
+    },
+    {
+      "id": 1268,
+      "claim": "Heroin comes in the United States \"from the southern border.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4527
+    },
+    {
+      "id": 2154,
+      "claim": "Chemistry Nobel for using evolution to create new proteins.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3833
+    },
+    {
+      "id": 856,
+      "claim": "United States President Donald Trump was fined $2 million for using funds collected as donations to veterans for his 2016 campaign.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4651
+    },
+    {
+      "id": 1874,
+      "claim": "An anti-seat belt law advocate was killed in automobile accident.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3602
+    },
+    {
+      "id": 2285,
+      "claim": "A Tennessee boy died in the arms of a local man portraying Santa Claus during a hospital visit.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4691
+    },
+    {
+      "id": 427,
+      "claim": "Joe Barton Says you can buy four light bulbs for $1.99 at Walmart, while a single compact fluorescent lamp (CFL) costs \"$10 a pop.",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4592
+    },
+    {
+      "id": 787,
+      "claim": "Congress approved a bill in November 2017 that makes it a federal crime to play Christmas music before Thanksgiving.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6277
+    },
+    {
+      "id": 1495,
+      "claim": "Women who quit hormone therapy still live with cancer risk",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4006
+    },
+    {
+      "id": 252,
+      "claim": "Ohio’s stockpile got its start after the attacks of Sept. 11.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4442
+    },
+    {
+      "id": 1059,
+      "claim": "Idaho bighorns killed after contact with domestic sheep herd.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3925
+    },
+    {
+      "id": 865,
+      "claim": "Whale snot, bat sex win 2010 IgNobel spoof prizes.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3736
+    },
+    {
+      "id": 876,
+      "claim": "Flood waters rise, eight killed as Florence dumps 'epic' rain on Carolinas.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3789
+    },
+    {
+      "id": 1237,
+      "claim": "Public warned of possible measles exposure in Pennsylvania.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3633
+    },
+    {
+      "id": 392,
+      "claim": "By spring 2020, the sun had entered a \"lockdown\" period where its solar activity decreased to the point that famine, earthquakes, and freezing weather threatened life on Earth.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4592
+    },
+    {
+      "id": 143,
+      "claim": "A video shows a chicken being hypnotized by holding its head down and \"drawing\" a line in the sand extending from its beak.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4238
+    },
+    {
+      "id": 185,
+      "claim": "Early Cesareans put babies at risk, study finds",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4672
+    },
+    {
+      "id": 1131,
+      "claim": "This New Blood Test Could Detect Concussions",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5707
+    },
+    {
+      "id": 2363,
+      "claim": "Combination approach shows promise for beating advanced melanoma",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7475
+    },
+    {
+      "id": 929,
+      "claim": "The Titanic went to a watery grave carrying a cursed mummy in its hold.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4650
+    },
+    {
+      "id": 1948,
+      "claim": "Pfizer: New cancer pill gives hope, new strategy",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7743
+    },
+    {
+      "id": 1696,
+      "claim": "Event 201 “gave out stuffed souvenir coronavirus toys” to “commemorate” Novel coronavirus outbreak",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5653
+    },
+    {
+      "id": 1446,
+      "claim": "Lilly diabetes drug slashes deaths 32 pct in heart-risk patients",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5450
+    },
+    {
+      "id": 1534,
+      "claim": "Wisconsin woman to celebrate 100th birthday.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6598
+    },
+    {
+      "id": 1467,
+      "claim": "In the Illinois Legislature, Barack Obama \"voted 'present,' instead of yes or no\" on seven votes involving abortion rights.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4803
+    },
+    {
+      "id": 1060,
+      "claim": "Back Pain: Revolution: Replacement Disc Surgery",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7337
+    },
+    {
+      "id": 2192,
+      "claim": "“If you look at the one (hydroxychloroquine) survey, the only bad survey, they were giving it to people that were in very bad shape. They were very old. Almost dead.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4370
+    },
+    {
+      "id": 2449,
+      "claim": "Christmas miracle for Florida dog whose heart stopped.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3931
+    },
+    {
+      "id": 1983,
+      "claim": "Chinese herb may yield drug for AIDS",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6918
+    },
+    {
+      "id": 1209,
+      "claim": "'Sesame Street' to welcome first autistic Muppet.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4198
+    },
+    {
+      "id": 671,
+      "claim": "Disneyland tower suggested as Legionnaires’ disease source.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4715
+    },
+    {
+      "id": 1699,
+      "claim": "Drinking one diet drink a day triples a person's risk of dementia and strokes.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4756
+    },
+    {
+      "id": 2137,
+      "claim": "Gone With A Shot? Hopeful New Signs Of Relief For Migraine Sufferers",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4691
+    },
+    {
+      "id": 2371,
+      "claim": "Utah governor criticizes federal marijuana reform inaction.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3983
+    },
+    {
+      "id": 1585,
+      "claim": "Obamacare medical device tax \"has led to the loss of thousands of jobs\" in U.S.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6112
+    },
+    {
+      "id": 64,
+      "claim": "Over 37 million bees were killed by a large GMO cornfield planted in Ontario, Canada.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3643
+    },
+    {
+      "id": 788,
+      "claim": "At least seven missing in Alabama after deadly weekend tornadoes.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5146
+    },
+    {
+      "id": 639,
+      "claim": "Baxter Alzheimer's drug promising in small study.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3932
+    },
+    {
+      "id": 1723,
+      "claim": "Clout-chasing teenagers are participating in the \"coronavirus challenge\" on TikTok, Instagram, and other social media platforms, sharing attempts to infect themselves and contract COVID-19.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4899
+    },
+    {
+      "id": 846,
+      "claim": "A list of comparative facts about margarine and butter.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4356
+    },
+    {
+      "id": 1067,
+      "claim": "New test can detect autism in children, scientists say",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6689
+    },
+    {
+      "id": 1907,
+      "claim": "A nurse employed in a Zambian hospital swapped nearly 5,000 babies at birth and gave them to the \"wrong\" parents.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5959
+    },
+    {
+      "id": 519,
+      "claim": "Amendment 2 will bring kid-friendly pot candy to Florida.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4241
+    },
+    {
+      "id": 2202,
+      "claim": "The existence of a canine coronavirus vaccine casts doubt on statements that there isn’t one for humans.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5766
+    },
+    {
+      "id": 411,
+      "claim": "Hunt on for 'patient zero' who spread coronavirus globally from Singapore.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5141
+    },
+    {
+      "id": 2273,
+      "claim": "County board votes to evict Planned Parenthood health clinic.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4204
+    },
+    {
+      "id": 770,
+      "claim": "Battle ropes become popular go-to fitness tools in U.S. gyms.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5049
+    },
+    {
+      "id": 44,
+      "claim": "Northern Colorado to get new VA clinic.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3190
+    },
+    {
+      "id": 2032,
+      "claim": "Olympics construction worker dies as Tokyo swelters, heatstroke suspected.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4165
+    },
+    {
+      "id": 874,
+      "claim": "Study finds Americans are eating more - and more often.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4661
+    },
+    {
+      "id": 2362,
+      "claim": "The Obama administration ... would impose on every Catholic institution, every Jewish institution, every Protestant institution the Obamacare standard of what you have to buy as insurance.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4834
+    },
+    {
+      "id": 602,
+      "claim": "Boats left high and dry by drought back on Great Salt Lake.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5093
+    },
+    {
+      "id": 2301,
+      "claim": "Eighty-five percent of every dollar donated to the Clinton Foundation ended up either with the Clintons or with their staff to pay for travel, salaries, and benefits. Fifteen cents of every dollar actually went to some charitable beneficiary.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6532
+    },
+    {
+      "id": 2221,
+      "claim": "HIV/AIDS among women is skyrocketing in Austin.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4455
+    },
+    {
+      "id": 1496,
+      "claim": "World must prepare for inevitable next flu pandemic, WHO says.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4016
+    },
+    {
+      "id": 1962,
+      "claim": "This town (Wilmington, Ohio) hasn’t taken any money from the government. They don’t want any money from the government.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4567
+    },
+    {
+      "id": 38,
+      "claim": "Astrophysicist Neil DeGrasse Tyson admonished a little girl who said she wanted to live on the planet Jupiter.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4855
+    },
+    {
+      "id": 1790,
+      "claim": "The senate voted 51-48 to repeal the Affordable Care Act on 12 January 2017.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3943
+    },
+    {
+      "id": 1077,
+      "claim": "Death industry reaps grim profit as Japan dies.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4746
+    },
+    {
+      "id": 1819,
+      "claim": "After prohibition ended, police deaths didn't reach 200 a year again until the year Nixon declared war on drugs.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3935
+    },
+    {
+      "id": 2183,
+      "claim": "Prospective new gang members are being initiated by killing the drivers of cars who flash their headlights at them.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4069
+    },
+    {
+      "id": 2161,
+      "claim": "Bodycad Announces First Use of Its Unicompartmental Knee System in Patients",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5203
+    },
+    {
+      "id": 469,
+      "claim": "Study suggests sildenafil may relieve severe form of edema in swimmers",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5646
+    },
+    {
+      "id": 1266,
+      "claim": "Trump vows 'major' steps to aid U.S. economy amid coronavirus rise.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4116
+    },
+    {
+      "id": 2372,
+      "claim": "Obamacare \"will provide insurance to all non-U.S. residents, even if they are here illegally.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3934
+    },
+    {
+      "id": 1575,
+      "claim": "Martin Luther King said our lives begin to end the day we become silent on things that matter.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4639
+    },
+    {
+      "id": 1773,
+      "claim": "California lawmakers want to repeal HIV criminalization laws.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4490
+    },
+    {
+      "id": 1123,
+      "claim": "Biblical bad guys the ancient Philistines came from Europe, DNA shows.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4627
+    },
+    {
+      "id": 562,
+      "claim": "The Cancer Act of 1939 makes it illegal to cure cancer.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5619
+    },
+    {
+      "id": 242,
+      "claim": "Single Dose of Hallucinogenic Drug Psilocybin Relieves Anxiety and Depression in Patients with Advanced Cancer",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4785
+    },
+    {
+      "id": 2151,
+      "claim": "Chinese leukemia patient livestreams to pay for treatment.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4032
+    },
+    {
+      "id": 2224,
+      "claim": "Facebook post Says researchers found a “fabric that kills coronaviruses”",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5756
+    },
+    {
+      "id": 965,
+      "claim": "North Carolina is one of four states\" that hasn't opened gyms.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3897
+    },
+    {
+      "id": 291,
+      "claim": "Bill Clinton Says Hillary Clinton tripled the number of people with AIDS whose \"lives are being saved .. and it did not cost you any more money.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5301
+    },
+    {
+      "id": 1566,
+      "claim": "After discovering a doomsday asteroid was approaching Earth, world leaders created the COVID-19 pandemic in an effort to distract the world population and force everyone to spend time with their families during Earth's final days.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4769
+    },
+    {
+      "id": 1697,
+      "claim": "Health officials have seen a surge in the number of people using \"bug spray\" to get high.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5530
+    },
+    {
+      "id": 963,
+      "claim": "Radio Marti and TV Marti have spent more than $500 million to reach less than 1 percent of the Cuban population.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4621
+    },
+    {
+      "id": 2223,
+      "claim": "AIDS center at UAB getting grant for HIV research.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4645
+    },
+    {
+      "id": 2205,
+      "claim": "Philippine volcano trembles more, spews lava half-mile high.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4096
+    },
+    {
+      "id": 1719,
+      "claim": "Utah home-birth rate is double the US average, report says.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3968
+    },
+    {
+      "id": 409,
+      "claim": "Account by Apollo 11 astronaut Buzz Aldrin describes his taking Communion on the moon.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3559
+    },
+    {
+      "id": 1538,
+      "claim": "More cases of rabies in skunks confirmed in Detroit area.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3314
+    },
+    {
+      "id": 667,
+      "claim": "Stem cell experiment lets diabetics forgo insulin",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6362
+    },
+    {
+      "id": 1072,
+      "claim": "Too fat? Study fingers one \"thrifty gene\" suspect.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4902
+    },
+    {
+      "id": 753,
+      "claim": "Deaths unrelated to COVID-19 are routinely being attributed to the virus in order to make it seem worse than it is.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6589
+    },
+    {
+      "id": 681,
+      "claim": "Certain foods may be the best medicine for lowering ‘bad’ cholesterol",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5422
+    },
+    {
+      "id": 817,
+      "claim": "Study Suggests Breastfeeding May Lower Risk of Childhood Leukemia",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 7852
+    },
+    {
+      "id": 248,
+      "claim": "Talk Therapy Found to Ease Schizophrenia",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5884
+    },
+    {
+      "id": 1255,
+      "claim": "Gabon president fires VP, forests minister over hardwood scandal.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4907
+    },
+    {
+      "id": 163,
+      "claim": "J&J recalls 33,000 bottles of baby powder as FDA finds asbestos in sample.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4542
+    },
+    {
+      "id": 595,
+      "claim": "One of the Planned Parenthood videos shows \"a fully formed fetus on the table, its heart beating, its legs kicking, while someone says, 'We have to keep it alive to harvest its brain.'",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7382
+    },
+    {
+      "id": 234,
+      "claim": "Utah banning ‘conversion therapy’ with Mormon church backing.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3004
+    },
+    {
+      "id": 42,
+      "claim": "Voted the ‘best specialty plate in America’",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 3642
+    },
+    {
+      "id": 1669,
+      "claim": "“President Trump has banned welfare for illegal immigrants which will save $57.4 billion a year.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6693
+    },
+    {
+      "id": 368,
+      "claim": "Climate is changing. Investing needs to, too, says BlackRock.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3827
+    },
+    {
+      "id": 1724,
+      "claim": "According to (Barack) Obama’s newest unconstitutionally enacted law, health care professionals are now required to violate HIPAA privacy laws and submit medical data to the government,\" which is \"then used as justification for gun confiscation.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5300
+    },
+    {
+      "id": 1541,
+      "claim": "FDA approves irritable bowel drug.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4000
+    },
+    {
+      "id": 1494,
+      "claim": "A warning about a chemical   called benzene that is linked to cancer such as leukemia .  The   warning says that benzene can build up inside parked automobiles and   suggests that drivers roll down   their windows to ventilate the car’s interior prior to switching on   the air conditioner.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6863
+    },
+    {
+      "id": 960,
+      "claim": "Health advocates call for action to stem youth e-cig use.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5124
+    },
+    {
+      "id": 899,
+      "claim": "The celebration of Christmas was illegal in the United States until 1836.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4135
+    },
+    {
+      "id": 17,
+      "claim": "Wholly domestic communication between you and your wife can go to New York to London and back and get caught up in the (NSA) database.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5077
+    },
+    {
+      "id": 2441,
+      "claim": "New psoriasis drug is more effective than current treatment",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5973
+    },
+    {
+      "id": 1062,
+      "claim": "Treadmill test has limited usefulness",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4006
+    },
+    {
+      "id": 739,
+      "claim": "College student in Boston diagnosed with measles.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3607
+    },
+    {
+      "id": 2096,
+      "claim": "U.S. President Donald Trump tweeted in November 2009 that \"Obama's handling of this whole pandemic has been terrible!\" and that he \"would never let thousands of Americans die from a pandemic while in office.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6409
+    },
+    {
+      "id": 1430,
+      "claim": "Ohio officials say tick-borne Lyme Disease still a threat.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4058
+    },
+    {
+      "id": 1288,
+      "claim": "Expert Panel Reaffirms Need for Colon Cancer Screen Beginning at Age 50",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3190
+    },
+    {
+      "id": 348,
+      "claim": "4th Massachusetts resident dies of vaping-related illness.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3014
+    },
+    {
+      "id": 873,
+      "claim": "Eroding trust in vaccines leaves populations vulnerable, global study finds.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4639
+    },
+    {
+      "id": 1054,
+      "claim": "Study: Air pollution greatly affects St. Louis’ poorer areas.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4007
+    },
+    {
+      "id": 442,
+      "claim": "Pakistan study blames HIV outbreak in kids on bad healthcare.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3296
+    },
+    {
+      "id": 1789,
+      "claim": "UK faces new legal action over air quality.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4657
+    },
+    {
+      "id": 833,
+      "claim": "Marijuana cigarettes deposit four times more tar into smokers' lungs than tobacco-based cigarettes.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3996
+    },
+    {
+      "id": 808,
+      "claim": "Mexican troops provided aid to U.S. residents in the chaotic aftermath of Hurricane Katrina.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4064
+    },
+    {
+      "id": 1358,
+      "claim": "A video investigation showed that Planned Parenthood lies about providing prenatal care.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4703
+    },
+    {
+      "id": 2033,
+      "claim": "Facebook post Says truck drivers are being turned away from fast-food restaurants during the COVID-19 pandemic.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4188
+    },
+    {
+      "id": 58,
+      "claim": "Governor Rauner has called every year for eliminating funding for afterschool programs for at-risk youth, homeless prevention services and programs that help autistic children.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5731
+    },
+    {
+      "id": 2029,
+      "claim": "Counterfeit masks reaching frontline health workers in US.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3848
+    },
+    {
+      "id": 28,
+      "claim": "Getting your hair washed at a beauty salon can, in rare cases, increase the chances of a stroke.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6088
+    },
+    {
+      "id": 207,
+      "claim": "Doctors are now saying menstrual cramps are as painful as heart attacks.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5310
+    },
+    {
+      "id": 2246,
+      "claim": "Blogger Says Nancy Pelosi was “caught trying to include abortion funding in bill to combat coronavirus.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4405
+    },
+    {
+      "id": 1286,
+      "claim": "Donald Trump Says the USMCA is the “biggest trade deal ever made.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3892
+    },
+    {
+      "id": 1485,
+      "claim": "Cancer risk seen with J&J foot gel: FDA.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4514
+    },
+    {
+      "id": 2130,
+      "claim": "US troops get freeze-dried plasma for battlefield bloodshed.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5295
+    },
+    {
+      "id": 96,
+      "claim": "FDA approves Epclusa for treatment of chronic Hepatitis C virus infection",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3546
+    },
+    {
+      "id": 1064,
+      "claim": "Facebook post Says Goodwill used the pandemic “to fire all of their employees instead of laying them off.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5018
+    },
+    {
+      "id": 2195,
+      "claim": "New hope for macular degeneration",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 7843
+    },
+    {
+      "id": 1963,
+      "claim": "President Donald Trump allowed the use of chlorpyrifos in chemical pesticides because Dow Chemical paid him $1 million.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7801
+    },
+    {
+      "id": 270,
+      "claim": "Under a new law, people can be arrested for conspiracy to commit murder if anyone travels out of Georgia for an abortion.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4886
+    },
+    {
+      "id": 12,
+      "claim": "Nerve Zap Might Ease Pain of Herniated Disk",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6675
+    },
+    {
+      "id": 222,
+      "claim": "Lawyers making final pitches in Flint water criminal case.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3671
+    },
+    {
+      "id": 1188,
+      "claim": "Here are some of the things that are more popular than Congress: hemorrhoids, Nickelback, traffic jams, cockroaches, root canals, colonoscopies, herpes. Even herpes, they couldn’t beat herpes in the polls.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6278
+    },
+    {
+      "id": 1046,
+      "claim": "Rick Perry thinks \"injecting 11- and 12-year-old girls with a controversial drug (the HPV vaccine), without a parent's consent, is a good idea.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5377
+    },
+    {
+      "id": 2265,
+      "claim": "If someone with the new coronavirus sneezes, it travels about 10 feet before it drops to the ground and is no longer airborne",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4711
+    },
+    {
+      "id": 341,
+      "claim": "Melania Trump was the first First Lady to visit troops in a war zone.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3008
+    },
+    {
+      "id": 646,
+      "claim": "Scientists say quarter of all pigs could die of swine fever.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4191
+    },
+    {
+      "id": 1146,
+      "claim": "Marijuana Eases Spasticity in MS Patients",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5281
+    },
+    {
+      "id": 1744,
+      "claim": "Business associates of\" William Browder \"sent a huge amount of money – 400 million – as a contribution to the campaign of Hillary Clinton.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5766
+    },
+    {
+      "id": 436,
+      "claim": "Nobel prize honors breakthroughs on lithium-ion batteries.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3692
+    },
+    {
+      "id": 698,
+      "claim": "In the current law, if you report harassment, you're the one that has to go into 20 hours of counseling before you can decide whether you were really harassed.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4450
+    },
+    {
+      "id": 496,
+      "claim": "A step-dad refused to pay for his daughter's wedding at the last minute because she allowed her biological father back into her life.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4783
+    },
+    {
+      "id": 561,
+      "claim": "Barron Trump Rushed To The Hospital, Hospital Releases Statement On His Condition",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4830
+    },
+    {
+      "id": 954,
+      "claim": "Exhausted polar bear wanders into Siberian city.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5206
+    },
+    {
+      "id": 692,
+      "claim": "States have cumulatively cut over $1.8 billion from their mental health services between 2009 and 2011. This is the largest reduction in state mental health services in half a century.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5353
+    },
+    {
+      "id": 928,
+      "claim": "Virtual Colonoscopy Can Spot Cancers Outside Colon",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5135
+    },
+    {
+      "id": 572,
+      "claim": "Beijing quarantines returning residents as China struggles to pick up economy.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4115
+    },
+    {
+      "id": 796,
+      "claim": "Black cats in Vietnam are being killed and consumed as a COVID-19 cure.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3838
+    },
+    {
+      "id": 1233,
+      "claim": "Lawmakers consider spending, saving $128.5 million surplus.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5091
+    },
+    {
+      "id": 488,
+      "claim": "Botox may prevent irregular heartbeat after bypass surgery",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5444
+    },
+    {
+      "id": 705,
+      "claim": "Obama put a 10 percent tax on tanning.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4858
+    },
+    {
+      "id": 1022,
+      "claim": "The purpose of the 'crash' or 'brace' position in airliners is to kill passengers quickly in the event of an crash, or to preserve their remains so as to make identification of bodies easier.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3459
+    },
+    {
+      "id": 1316,
+      "claim": "A photograh showing a body of water with two distinct colors is a permanent location where the Mississippi River meets the Gulf of Mexico.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4213
+    },
+    {
+      "id": 22,
+      "claim": "Chumlee from 'Pawn Stars' has passed away.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 2641
+    },
+    {
+      "id": 379,
+      "claim": "Shot Might One Day Help Lower Cholesterol",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6976
+    },
+    {
+      "id": 2257,
+      "claim": "GSK to sell two vaccines in $1.1 billion deal to focus on newer treatments.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5132
+    },
+    {
+      "id": 2037,
+      "claim": "Roseanne Barr posed as Hitler for an issue of satirical Jewish magazine 'Heeb.'",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4056
+    },
+    {
+      "id": 1999,
+      "claim": "In 2019, a U.S. District Court judge ruled that girls in an Illinois school district \"must shower with boys\" and had no right to privacy.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5324
+    },
+    {
+      "id": 1957,
+      "claim": "Weight-Loss Drugs Face High Hurdles At FDA",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4965
+    },
+    {
+      "id": 1869,
+      "claim": "The Obama administration left Trump with a “stockpile with a cupboard that was bare.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6412
+    },
+    {
+      "id": 1234,
+      "claim": "A film producer claimed actor Kevin Spacey had \"drugged and raped\" Justin Bieber.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4117
+    },
+    {
+      "id": 2140,
+      "claim": "An implant that hits a nerve",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4437
+    },
+    {
+      "id": 556,
+      "claim": "Midwest women join climate change group in Antarctica.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3639
+    },
+    {
+      "id": 1925,
+      "claim": "Rolex sales records are so well-kept that they were used to solve an open homicide.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4103
+    },
+    {
+      "id": 1734,
+      "claim": "Philippines to cull 200,000 fowl after bird flu outbreak.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3602
+    },
+    {
+      "id": 1774,
+      "claim": "More (people) die from indoor air pollution than from malaria, HIV/AIDS and TB combined.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3446
+    },
+    {
+      "id": 635,
+      "claim": "Viral image Says Harvard scientists say the coronavirus is “spreading so fast that it will infect 70% of humanity this year.”",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7304
+    },
+    {
+      "id": 1112,
+      "claim": "Washington state man who traveled to China is first U.S. victim of coronavirus.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4271
+    },
+    {
+      "id": 309,
+      "claim": "Study: New blood thinner works as well as Coumadin",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4494
+    },
+    {
+      "id": 1813,
+      "claim": "Report: 20-somethings can go 2 years between Paps",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5322
+    },
+    {
+      "id": 1794,
+      "claim": "Probe into fatal Australia bushfire plane crash complicated by dangers.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2465
+    },
+    {
+      "id": 2035,
+      "claim": "People come here to have babies. They come here to drop a child. It's called 'drop and leave.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5683
+    },
+    {
+      "id": 481,
+      "claim": "Thailand bans entry to foreigners, prepares emergency measures against coronavirus.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3683
+    },
+    {
+      "id": 347,
+      "claim": "President Trump intends to nominate Dr. Oz to the Presidential Council on Sport, Fitness and Nutrition.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4204
+    },
+    {
+      "id": 1364,
+      "claim": "Dick Black Says Jill McCabe \"supports late term abortions. Larger baby parts are more profitable.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5172
+    },
+    {
+      "id": 2402,
+      "claim": "Planned Parenthood is \"not actually doing women’s health issues.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3856
+    },
+    {
+      "id": 2403,
+      "claim": "We've caught Iran cheating on the interim (nuclear) deal.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4641
+    },
+    {
+      "id": 202,
+      "claim": "U.S. unveils graphic tobacco warnings.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4291
+    },
+    {
+      "id": 1705,
+      "claim": "North Carolina fair bans mist fans as health measure.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3053
+    },
+    {
+      "id": 1450,
+      "claim": "Abortionists have reduced our black population by more than 25 percent since 1973.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3658
+    },
+    {
+      "id": 2287,
+      "claim": "Fight against malaria could be set back 20 years, WHO warns.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4880
+    },
+    {
+      "id": 2425,
+      "claim": "Theophilus Van Kannel, who developed the revolving door, did so because of an aversion to holding open doors for women and other acts of chivalry.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3637
+    },
+    {
+      "id": 2300,
+      "claim": "Citizens Property Insurance has \"over $500 billion worth of risk, with less than $10 billion worth of surplus.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4423
+    },
+    {
+      "id": 1378,
+      "claim": "Biogen's secret campaign to bring its Alzheimer's drug back from the ashes.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4233
+    },
+    {
+      "id": 1170,
+      "claim": "UK campaigners win appeal case over preventative HIV drug.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4545
+    },
+    {
+      "id": 1011,
+      "claim": "FDA approves cancer treatment that uses virus to attack tumors",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4025
+    },
+    {
+      "id": 2208,
+      "claim": "For every dollar we invest in Head Start, we get $5 to $7 back into our economy.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3956
+    },
+    {
+      "id": 139,
+      "claim": "Up to 70% of Americans have been infected with a “Vampire Fungus” from eating unhealthy foods that causes weight gain, skin problems and indigestion.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6266
+    },
+    {
+      "id": 443,
+      "claim": "Person with measles passed through Portland airport.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3277
+    },
+    {
+      "id": 2420,
+      "claim": "HIV in America: Studies zero in on trouble spots.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4959
+    },
+    {
+      "id": 1586,
+      "claim": "New study: The flu vaccine is 'significantly associated' with an increased risk of coronavirus",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5117
+    },
+    {
+      "id": 1213,
+      "claim": "We're not engaged in nation-building\" in Afghanistan.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5398
+    },
+    {
+      "id": 659,
+      "claim": "Suicide among veterans highest in western US, rural areas.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4205
+    },
+    {
+      "id": 1390,
+      "claim": "In January 2020, Paula White prayed for all \"satanic pregnancies\" to \"miscarry right now.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4402
+    },
+    {
+      "id": 1966,
+      "claim": "Under President George W. Bush, the U.S. had \"52 months of ... uninterrupted job creation\" and \"revenues were at an all-time high in 2007.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6111
+    },
+    {
+      "id": 798,
+      "claim": "John and Carole Paladino were slated to testify before a grand jury as part of an investigation against HIllary Clinton before they died in an explosion in July 2018.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3890
+    },
+    {
+      "id": 1745,
+      "claim": "Rick Perry Says President Barack Obama’s overturning of the Mexico City Policy means federal tax dollars can be used \"to fund abortion all over the world.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4056
+    },
+    {
+      "id": 1276,
+      "claim": "Wikileaks’ dump of John Podesta’s e-mails reveal conversations he had with a former NASA astronaut about the existence of aliens, alien technology, and space warfare.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6159
+    },
+    {
+      "id": 259,
+      "claim": "Just like Donald Trump, David Jolly wants to outlaw a woman's right to choose.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4312
+    },
+    {
+      "id": 1695,
+      "claim": "In testing for allergies, a single shot may suffice",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6712
+    },
+    {
+      "id": 1519,
+      "claim": "FDA gives fast track status to AstraZeneca's diabetes drug Farxiga.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4051
+    },
+    {
+      "id": 1376,
+      "claim": "States look to lower drug costs, consider Canadian imports.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3442
+    },
+    {
+      "id": 2007,
+      "claim": "Italy's coronavirus deaths surge as Lombardy seeks tougher curbs.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3811
+    },
+    {
+      "id": 2217,
+      "claim": "Estrogen Patch in Newly Postmenopausal Women May Reduce Alzheimer’s Risk",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5310
+    },
+    {
+      "id": 669,
+      "claim": "Daraprim is still underpriced, relative to its peers.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6292
+    },
+    {
+      "id": 280,
+      "claim": "Oklahoma attorney general sues distributors of opioids.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2617
+    },
+    {
+      "id": 213,
+      "claim": "Congo Ebola survivor passes college exam taken in isolation.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4096
+    },
+    {
+      "id": 745,
+      "claim": "Reverse your diabetes -- and you can stay diabetes-free long-term",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7927
+    },
+    {
+      "id": 36,
+      "claim": "America’s air isn’t getting cleaner as fast as it used to.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4182
+    },
+    {
+      "id": 2196,
+      "claim": "Under last year’s health care reform, \"a bunch of bureaucrats decide whether you get care, such as continuing on dialysis or cancer chemotherapy.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5447
+    },
+    {
+      "id": 474,
+      "claim": "In 1983, US children got 10 vaccines and the autism rate was 1 in 10,000.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4283
+    },
+    {
+      "id": 2002,
+      "claim": "Donald Trump violated Palm Beach ordinances by putting up an outsized U.S. flag and pole, then donating the money he was fined to veterans' organizations.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4245
+    },
+    {
+      "id": 554,
+      "claim": "We’re paying out-of-state residential facilities hundreds of thousands of dollars, if not more,\" to house children in state custody",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4748
+    },
+    {
+      "id": 750,
+      "claim": "The Susan G. Komen breast cancer organization gives only 20% of their donations to cancer research and pays their CEO $684,000 per year.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4636
+    },
+    {
+      "id": 1939,
+      "claim": "Midwifery linked to lower odds of birth complications for low-income women",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 5825
+    },
+    {
+      "id": 534,
+      "claim": "“The coronavirus has made it to Mississippi and the lady that caught it wasn’t around nobody with it which means it is airborne. That means if the wind blows it your direction you’ll have it also.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4290
+    },
+    {
+      "id": 535,
+      "claim": "Russia used \"GPS spoofing\" to cause the USS John McCain to collide with a merchant vessel.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3588
+    },
+    {
+      "id": 1297,
+      "claim": "Lamont fills top public health, insurance agency jobs.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3146
+    },
+    {
+      "id": 2350,
+      "claim": "Omega-3 Fatty Acids May Lower Breast Cancer Risk in Postmenopausal Obese Women",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6334
+    },
+    {
+      "id": 33,
+      "claim": "Denver Zoo mourns death of oldest hippo, 58-year-old 'Bertie'.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4094
+    },
+    {
+      "id": 2084,
+      "claim": "Novel Coronavirus (COVID-19) is no more dangerous than the common cold, and it's being blown out of proportion to make the President of the United States look bad.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5308
+    },
+    {
+      "id": 2447,
+      "claim": "A federal judge has approved GOP Congressman Trey Gowdy’s request to exhume the body of Vince Foster to determine if Bill and Hillary Clinton were involved in his death 23 years ago.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5432
+    },
+    {
+      "id": 657,
+      "claim": "Darrell Issa Says Thomas Eric Duncan came into the United States \"with an elevated temperature.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5300
+    },
+    {
+      "id": 683,
+      "claim": "Earl Blumenauer Says ending the direct payment farm subsidy program \"could save up to $28.4 billion over ten years that could be used to reduce the deficit.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5422
+    },
+    {
+      "id": 660,
+      "claim": "Drug for Immune Disorders Helps Alzheimer’s",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6698
+    },
+    {
+      "id": 1219,
+      "claim": "A mother revealed to her child in a letter after her death that she had just one eye because she had donated the other to him.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4754
+    },
+    {
+      "id": 790,
+      "claim": "Officials: New California measles cases involve travelers.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3292
+    },
+    {
+      "id": 282,
+      "claim": "If you have a credit card and a kid, add your kid on as an authorized user and pay the bill on time. By the time that kid hits 18, boom 800+ credit score for them to succeed in this world.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4721
+    },
+    {
+      "id": 1370,
+      "claim": "A Russian asbestos company placed a seal with the face of President Donald Trump on their product with the note \"Approved by Donald Trump, 45th President of the United States.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4727
+    },
+    {
+      "id": 1447,
+      "claim": "The term \"Black Friday\" originated with the practice of selling off slaves on the day after Thanksgiving.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6228
+    },
+    {
+      "id": 121,
+      "claim": "Over 200 visitors enroll in New Mexico medical pot program.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3676
+    },
+    {
+      "id": 1344,
+      "claim": "Dr. Deborah Birx said at a press conference concerning testing for COVID-19 that \"At $50 a test, it wasn’t enough to hire another technician to run the machine full-time. So at $100 a test, it is.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6990
+    },
+    {
+      "id": 1156,
+      "claim": "China expands switch from polluting coal heating in 2018: environment minister.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4175
+    },
+    {
+      "id": 1664,
+      "claim": "A young boy fell asleep wearing a Spider-Man watch and woke up the next   morning with second and third degree chemical burns on his wrist.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5808
+    },
+    {
+      "id": 1230,
+      "claim": "Jury finding upends Bayer's Roundup defense strategy: experts.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4666
+    },
+    {
+      "id": 2319,
+      "claim": "U.S. Senate candidate Todd Akin was \"partly right\" that a woman's body has a way of shutting down so that a pregnancy doesn't occur if she's raped.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5586
+    },
+    {
+      "id": 1870,
+      "claim": "Flashing your car's high beams at a traffic signal will cause it to change from red to green more quickly.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4644
+    },
+    {
+      "id": 1471,
+      "claim": "Statins tied to lower risk of fatal prostate cancer",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4715
+    },
+    {
+      "id": 1749,
+      "claim": "U.S. Immigration and Customs Enforcement (ICE) is planning a six-day “Citizens Academy” training, including instruction on firearms and how to make arrests, for Chicago residents in September 2020.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4801
+    },
+    {
+      "id": 1249,
+      "claim": "Artificial Pancreas Continues to Show Promise",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5657
+    },
+    {
+      "id": 1019,
+      "claim": "Zafgen reports promising results from weight-loss drug study",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5689
+    },
+    {
+      "id": 1658,
+      "claim": "We know that President Obama stole over $500 billion out of Medicare to switch it over to Obamacare.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5094
+    },
+    {
+      "id": 420,
+      "claim": "Coronavirus could kill 81,000 in U.S., subside in June - Washington University analysis.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4719
+    },
+    {
+      "id": 1960,
+      "claim": "A trojan worm known as Koobface is \"spreading like wildfire\" via Facebook.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3566
+    },
+    {
+      "id": 136,
+      "claim": "China dangles a potentially harmful new threat in trade war.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5255
+    },
+    {
+      "id": 317,
+      "claim": "Tom Petri Says President Barack Obama’s debt commission recommended converting Medicare \"to a system where Medicare participants are given a voucher to purchase insurance in the private market.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4333
+    },
+    {
+      "id": 416,
+      "claim": "U.S. Postmaster General Louis DeJoy, a political ally to U.S. President Donald Trump, ordered Postal Service carriers to \"slow the mail down\" to help Trump win the 2020 presidential election.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4947
+    },
+    {
+      "id": 1592,
+      "claim": "Five minutes in the green can boost self esteem.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5696
+    },
+    {
+      "id": 196,
+      "claim": "WHO recommends one-hour maximum screen time per day for under-5s.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3686
+    },
+    {
+      "id": 1637,
+      "claim": "The family of Anne Frank sought (and was denied) refugee status in the United States.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5209
+    },
+    {
+      "id": 1204,
+      "claim": "The Newfoundland town of Gander played host to thousands of airline passengers stranded there when American airspace was closed after the September 11 terrorist attacks.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5587
+    },
+    {
+      "id": 1113,
+      "claim": "Wisconsin sold fresh water to California, helping that state's dairy industry, and \"lost a bunch of jobs (and) a bunch of farmland.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3392
+    },
+    {
+      "id": 766,
+      "claim": "The \"federal government is going after school districts, trying to force them to let boys shower with little girls.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3726
+    },
+    {
+      "id": 940,
+      "claim": "Medical group: 953 vaccines, tests may be ineffective.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5276
+    },
+    {
+      "id": 547,
+      "claim": "Roche says EU panel backs lymphatic cancer drug for approval.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3669
+    },
+    {
+      "id": 454,
+      "claim": "Masks decrease oxygen intake, increase carbon dioxide intake, increase toxin intake, increase stress levels which directly impacts the immune system in a negative way making us more susceptible to illness.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5287
+    },
+    {
+      "id": 346,
+      "claim": "Rural Wisconsin schools getting mental health help by video.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3279
+    },
+    {
+      "id": 215,
+      "claim": "Britain unveils ban on e-cigarettes for under-18s.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4449
+    },
+    {
+      "id": 1437,
+      "claim": "Senators: Double funding for universal flu vaccine research.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4547
+    },
+    {
+      "id": 128,
+      "claim": "Film academy president keeps job following investigation.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3425
+    },
+    {
+      "id": 927,
+      "claim": "Walter Reed Medical Center guidelines prohibit the use or distribution of religious items during visits with patients.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3828
+    },
+    {
+      "id": 2073,
+      "claim": "A Johns Hopkins scientist issued a \"blistering report\" on flu vaccine dangers in the British Medical Journal.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5354
+    },
+    {
+      "id": 672,
+      "claim": "Italy threatens to ban outdoor exercise as coronavirus deaths surge.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3855
+    },
+    {
+      "id": 395,
+      "claim": "Officals say the flu is ‘prevalent’ in New York.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2806
+    },
+    {
+      "id": 1716,
+      "claim": "Oregon Health Authority Says that in 2007, \"Oregon ranked 25th -- or 7th from the bottom -- in percentage of children with untreated decay compared to 32 other states with similar data.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4695
+    },
+    {
+      "id": 1545,
+      "claim": "A viral warning claims that a drug called burundanga on a business card poisoned a woman and advises people to beware of what has become known as “the zombie drug.”",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 6237
+    },
+    {
+      "id": 172,
+      "claim": "Brain scans may help diagnose neurological, psychiatric disorders",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5471
+    },
+    {
+      "id": 328,
+      "claim": "Ireland has mostly contained coronavirus outbreak: health chief.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5051
+    },
+    {
+      "id": 2299,
+      "claim": "Literally lousy: Parasite plagues world salmon industry.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6471
+    },
+    {
+      "id": 2017,
+      "claim": "While the smoking rate nationally has fallen, more than 18 percent of Georgians still light up.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4578
+    },
+    {
+      "id": 1385,
+      "claim": "Pulsed radiofrequency relieves acute back pain and sciatica",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4691
+    },
+    {
+      "id": 800,
+      "claim": "UMass: More than 5,000 vaccinated after meningitis outbreak.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4206
+    },
+    {
+      "id": 2211,
+      "claim": "Rudy Giuliani correctly tweeted that a research lab in Wuhan, China, got a $3.7 million grant from the U.S. in 2017 despite a ban on such funding.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5868
+    },
+    {
+      "id": 1611,
+      "claim": "U.S. Panel Questions Prostate Screening",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3907
+    },
+    {
+      "id": 825,
+      "claim": "Voters across Texas have witnessed their votes switch from \"straight Republican\" to Democrat on compromised voting machines.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6256
+    },
+    {
+      "id": 1225,
+      "claim": "Roche's schizophrenia drug misses goal in two late-stage trials.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3666
+    },
+    {
+      "id": 244,
+      "claim": "Tom Barrett Says \"Scott Walker wants to ban common forms of birth control, including the pill.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5196
+    },
+    {
+      "id": 2019,
+      "claim": "Metformin may lower lung cancer risk in diabetic nonsmokers",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 7679
+    },
+    {
+      "id": 145,
+      "claim": "The number of new cases in South Korea is declining.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3385
+    },
+    {
+      "id": 1954,
+      "claim": "Proposed tax changes are a \"handout\" to BP.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 4663
+    },
+    {
+      "id": 137,
+      "claim": "In October 2019, Chick-fil-A's charitable donations were contributing to efforts to introduce the death penalty for homosexuality in Uganda.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6816
+    },
+    {
+      "id": 1926,
+      "claim": "Pope Francis bestowed the Pontifical Medal upon Lilianne Ploumen, a Dutch pro-abortion activist.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4243
+    },
+    {
+      "id": 2444,
+      "claim": "What is and isn't a Schedule I narcotic is a job for Congress.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4142
+    },
+    {
+      "id": 2355,
+      "claim": "Clark County ranks first in nation in syphilis rates.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3768
+    },
+    {
+      "id": 1052,
+      "claim": "Chinese people are selling each other bags of fresh air because of air pollution.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5058
+    },
+    {
+      "id": 491,
+      "claim": "The National Cancer Institute has \"admitted\" that \"cannabis kills cancer.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3366
+    },
+    {
+      "id": 217,
+      "claim": "Hepatitis A on rise in Colorado with nearly 300 known cases.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3168
+    },
+    {
+      "id": 367,
+      "claim": "Virginia is \"the number one state per capita in screening out people with mental illness from gun purchases.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5197
+    },
+    {
+      "id": 1124,
+      "claim": "To deprive\" underprivileged children \"of a meat-based protein during school lunch is most likely depriving them of their only source of protein for the day.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6517
+    },
+    {
+      "id": 1762,
+      "claim": "Whales live as long at SeaWorld\" as they do in the wild.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5388
+    },
+    {
+      "id": 630,
+      "claim": "Europe sees more signs of hope as Italy’s virus curve falls.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3838
+    },
+    {
+      "id": 5,
+      "claim": "School closures will have little impact on COVID-19 control, review finds.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4912
+    },
+    {
+      "id": 794,
+      "claim": "Eating more vegetable protein may protect against early menopause",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 2947
+    },
+    {
+      "id": 2053,
+      "claim": "It’s common around Christmas time for people to warn one another             about the alleged toxicity of poinsettias.",
+      "expected": "REFUTES",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 4199
+    },
+    {
+      "id": 1499,
+      "claim": "In 2013,\" Dan Patrick voted \"against funding to test the backlog of rape kits, allowing rapists to walk free.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3669
+    },
+    {
+      "id": 1807,
+      "claim": "Shire Announces Positive Results of SHP465 Safety and Efficacy Study in Children and Adolescents with ADHD",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6283
+    },
+    {
+      "id": 391,
+      "claim": "Taiwan reports no new coronavirus cases for first time in a month.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3624
+    },
+    {
+      "id": 1342,
+      "claim": "During the August 2017 solar eclipse, some people in California applied sunscreen to their eyeballs in a mistaken attempt to protect their eyes from damage.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3962
+    },
+    {
+      "id": 1725,
+      "claim": "Mike Coffman Says state Sen. Morgan Carroll's votes made \"it easier to sue doctors, small businesses, even nurses. Putting her own shady interests first.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6273
+    },
+    {
+      "id": 1119,
+      "claim": "Crisis averted, hospital ship leaves LA; treats 77 patients.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4654
+    },
+    {
+      "id": 1691,
+      "claim": "Kentucky reports 4 adults have died of the flu this season.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4367
+    },
+    {
+      "id": 25,
+      "claim": "The 1918 influenza pandemic was called the \"Spanish Flu\" because it emanated from Spain.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5290
+    },
+    {
+      "id": 1492,
+      "claim": "A letter by Dr. Keith Albow said President Trump is “stone cold sane” and that “there’s a genius in the Oval Office” in response to critics who have questioned the president’s mental fitness.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4178
+    },
+    {
+      "id": 1635,
+      "claim": "A Japanese man was found dead months after being crushed by huge pile of pornography.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4254
+    },
+    {
+      "id": 448,
+      "claim": "There were 3,700 drug-related deaths in England and Wales last year.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4793
+    },
+    {
+      "id": 1808,
+      "claim": "Americans pay 25 percent of their pay for \"employer provided\" health insurance — which they prefer — whereas people in the UK pay £10 per check for NHS coverage.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5074
+    },
+    {
+      "id": 2160,
+      "claim": "Aspirin may cut cancer deaths, but caution urged",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5277
+    },
+    {
+      "id": 1612,
+      "claim": "In January 2017, Dr. Anthony Fauci predicted a serious pandemic during U.S. President Donald Trump's tenure in office.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5087
+    },
+    {
+      "id": 357,
+      "claim": "Evidence a high-fat diet works to treat epilepsy",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 6757
+    },
+    {
+      "id": 1900,
+      "claim": "China sends medical supplies, experts to help Italy battle coronavirus.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4046
+    },
+    {
+      "id": 1074,
+      "claim": "Central Park hospital tents housed thousands of abused children released from underground captivity.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3719
+    },
+    {
+      "id": 1679,
+      "claim": "O’Rourke offers blue vision for red Texas during Nelson show.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4743
+    },
+    {
+      "id": 1810,
+      "claim": "“if your child gets this virus their going to hospital alone in a van with people they don’t know...to be with people they don’t know… you will be at home without them in their time of need.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4097
+    },
+    {
+      "id": 10,
+      "claim": "“Maine House Democrats Vote to Allow Female Genital Mutilation.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4278
+    },
+    {
+      "id": 1897,
+      "claim": "Preventive care does not save the government money.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5753
+    },
+    {
+      "id": 520,
+      "claim": "One in five people are drinking too much alcohol.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5080
+    },
+    {
+      "id": 638,
+      "claim": "Study: Many in Ebola outbreak don’t believe virus is real.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4060
+    },
+    {
+      "id": 360,
+      "claim": "House Republicans are ramming through legislation ... to classify pizza as a 'vegetable' for the purpose of school lunches.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 8169
+    },
+    {
+      "id": 1087,
+      "claim": "Despite keeping distance from national media interviewers, \"I did local press all along, the last three months.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3557
+    },
+    {
+      "id": 591,
+      "claim": "An adopted dog's former owner turned out to be a soldier who was killed in Iraq.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3459
+    },
+    {
+      "id": 2207,
+      "claim": "Nearly 2/3 quarantined by LA universities are cleared.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3917
+    },
+    {
+      "id": 1816,
+      "claim": "Starving prostate cancer with what you eat for dinner",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5934
+    },
+    {
+      "id": 1314,
+      "claim": "A photograph shows a dead man whose unwitting co-workers arranged a \"funny selfie,\" believing he was just sleeping.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4029
+    },
+    {
+      "id": 655,
+      "claim": "Six new cases of MERS virus hit Saudi Arabia, UAE.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3809
+    },
+    {
+      "id": 926,
+      "claim": "Under Obamacare, people who \"have a doctor they’ve been seeing for the last 15 or 20 years, they won’t be able to keep going to that doctor.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5594
+    },
+    {
+      "id": 1373,
+      "claim": "The Obama administration created a program to provide free cell phones to welfare recipients.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3091
+    },
+    {
+      "id": 271,
+      "claim": "Iowa Legislature back to talk taxes, workers, child care.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4475
+    },
+    {
+      "id": 2255,
+      "claim": "A photograph shows the wedding of a U.S. Marine disfigured by combat wounds.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3888
+    },
+    {
+      "id": 1199,
+      "claim": "Paralyzed California man recounts re-learning to walk via computer.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4132
+    },
+    {
+      "id": 1493,
+      "claim": "Once a woman enters into the sex trade, her average life expectancy is seven years.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4678
+    },
+    {
+      "id": 159,
+      "claim": "Doctors and nurses suffered as Iran ignored virus concerns .",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4470
+    },
+    {
+      "id": 559,
+      "claim": "Rick Scott \"was forced to resign as the head of a company that pled guilty to massive amounts of systematic fraud, including 14 felonies, leading to a historic $1.7 billion fine.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4675
+    },
+    {
+      "id": 2023,
+      "claim": "New Portable Scanner for Breast Cancer",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6997
+    },
+    {
+      "id": 1235,
+      "claim": "Treating at the Earliest Sign of MS May Offer Long-Term Benefit",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4820
+    },
+    {
+      "id": 104,
+      "claim": "Five-Year Follow-Up Study Further Supports Effectiveness and Safety of the Essure® Procedure as a Non-Surgical, Non-Hormonal Option for Permanent Contraception",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 7745
+    },
+    {
+      "id": 238,
+      "claim": "2020 hopeful Moulton shares mental health woes as war vet.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4064
+    },
+    {
+      "id": 903,
+      "claim": "Judge rules EPA failing to curb pollution blowing east.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4551
+    },
+    {
+      "id": 2417,
+      "claim": "Fish Oil Pills During Pregnancy Might Mean Stronger, Healthier Kids",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6667
+    },
+    {
+      "id": 2294,
+      "claim": "$150K grant will help unravel mysterious panther illness.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4369
+    },
+    {
+      "id": 981,
+      "claim": "Study shows children's best hope for the potassium and fiber missing in their diets is potatoes",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 6481
+    },
+    {
+      "id": 1573,
+      "claim": "A woman sought medical help to remove a deer tongue she had used for self-pleasuring purposes.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5037
+    },
+    {
+      "id": 1456,
+      "claim": "Chondroitin of little help for arthritis, study says",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5028
+    },
+    {
+      "id": 1363,
+      "claim": "An \"abortion procedure is actually safer than a vasectomy.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4225
+    },
+    {
+      "id": 283,
+      "claim": "Wedding guests should refrain from throwing rice at newly-wedded couples because the rice kills birds who eat it.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5245
+    },
+    {
+      "id": 2043,
+      "claim": "Indonesia says avoid coast near volcano, fearing new tsunami.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4125
+    },
+    {
+      "id": 1667,
+      "claim": "Coca-Cola is an effective contraceptive.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3860
+    },
+    {
+      "id": 87,
+      "claim": "UK trials new breathing aid developed by Mercedes Formula One.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2824
+    },
+    {
+      "id": 953,
+      "claim": "California to require abortion medication at public colleges.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3997
+    },
+    {
+      "id": 915,
+      "claim": "Protesters vent their anger as UN climate talks stutter.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4712
+    },
+    {
+      "id": 204,
+      "claim": "Those who purchase hunting and fishing gear at Cabela’s (and other retailers) now have to pay a medical excise tax established under Obamacare, according to social media posts.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5500
+    },
+    {
+      "id": 1503,
+      "claim": "Of the top five cities for staged automobile accidents, three are in Florida. … We rank No. 1 in the country in staged auto accidents.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4819
+    },
+    {
+      "id": 2396,
+      "claim": "Facebook post says Joe Biden has said 150 million Americans died from guns and another 120 million from COVID-19",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4722
+    },
+    {
+      "id": 1801,
+      "claim": "A video shows a sick, possibly starving polar bear on Baffin Island in the Canadian Arctic.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5329
+    },
+    {
+      "id": 803,
+      "claim": "Viral text accurately outlines how biotechnology company Moderna is linked to Dr. Anthony Fauci, Bill Gates, George Soros, and Jeffrey Epstein.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4752
+    },
+    {
+      "id": 1337,
+      "claim": "'Female Viagra' gets mixed reviews",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5469
+    },
+    {
+      "id": 1986,
+      "claim": "Ebola Vaccines Show Promise in New Study",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6098
+    },
+    {
+      "id": 2373,
+      "claim": "Post-war Liberians are demanding better mental health care.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4367
+    },
+    {
+      "id": 2180,
+      "claim": "U.N. flags need to cut meat to curb land use impact on global warming.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4895
+    },
+    {
+      "id": 335,
+      "claim": "Insurance companies \"have made a fortune with Obamacare.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5034
+    },
+    {
+      "id": 418,
+      "claim": "CAR-T therapy makes early inroads in treating brain cancer",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6115
+    },
+    {
+      "id": 528,
+      "claim": "AstraZeneca's Imfinzi gets speedy FDA review for small cell lung cancer.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4191
+    },
+    {
+      "id": 510,
+      "claim": "Studies: New type of osteoporosis drug cuts fracture risk in women, men in cancer treatment",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5799
+    },
+    {
+      "id": 2138,
+      "claim": "Dubai displays tech reputation with global robotics contest.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4254
+    },
+    {
+      "id": 1180,
+      "claim": "Sununu appointments to shape judicial, education policy.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4123
+    },
+    {
+      "id": 2347,
+      "claim": "Ultrasound of Neck Arteries May Help Gauge Stroke Risk",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5813
+    },
+    {
+      "id": 1388,
+      "claim": "A 31-year-old Cincinnati woman was taken to the hospital after the 14-month-old toddler she was babysitting got stuck in her vaginal cavity.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3893
+    },
+    {
+      "id": 2317,
+      "claim": "Breakthrough study demonstrates survival advantage with immune checkpoint inhibitor for advanced kidney cancer patients",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "SUPPORTS",
+      "correct": false,
+      "elapsedMs": 6292
+    },
+    {
+      "id": 1172,
+      "claim": "A Fresno man turned up at a local emergency room carrying a 5-foot-long tapeworm he pulled out of his own intestine.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4495
+    },
+    {
+      "id": 1785,
+      "claim": "The Swedish parliament rejected seven proposals in May 2017 establishing a mandatory vaccination program, enacting a ban on the practice.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5482
+    },
+    {
+      "id": 759,
+      "claim": "Global surface temperatures have been flat for 16 years.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 6425
+    },
+    {
+      "id": 2201,
+      "claim": "A set of images show a congenital anomaly that resulted in an a hand with eight fingers.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3420
+    },
+    {
+      "id": 533,
+      "claim": "U.S. President Barack Obama waited until millions were infected and thousands were dead before declaring a public health emergency concerning swine flu, the H1N1 virus.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5377
+    },
+    {
+      "id": 1449,
+      "claim": "China to ban smoking at indoor public places.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 2517
+    },
+    {
+      "id": 754,
+      "claim": "A viral video shows a newborn baby delivered inside an intact amniotic sac.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3623
+    },
+    {
+      "id": 161,
+      "claim": "New schizophrenia drugs no better, Dutch team find.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4116
+    },
+    {
+      "id": 1417,
+      "claim": "A letter to the editor suggested that 2007's early start to Daylight Saving Time contributed to global warming.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 3750
+    },
+    {
+      "id": 866,
+      "claim": "The Baucus health care bill would require taxes on medical devices such as X-ray machines, female condoms, HIV tests and surgical needles.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 5154
+    },
+    {
+      "id": 1084,
+      "claim": "99-year-old billionaire David Rockefeller has successfully undergone his sixth heart transplant surgery in the last 38 years.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 7268
+    },
+    {
+      "id": 1630,
+      "claim": "Background checks have been unequivocally shown to reduce gun violence.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 4767
+    },
+    {
+      "id": 1559,
+      "claim": "In the House Republican health care bill, \"we’re expanding women’s access to health services by redirecting Planned Parenthood dollars to community health centers, which vastly outnumber Planned Parenthood clinics.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3865
+    },
+    {
+      "id": 656,
+      "claim": "Study adds to evidence of vaccine safety",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4844
+    },
+    {
+      "id": 901,
+      "claim": "Facebook post Says Dr. Anthony Fauci “stands to lose 100 million dollars on Bill Gates ‘vaccine’ for the coronavirus. Because he invested in this vaccine.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4130
+    },
+    {
+      "id": 1758,
+      "claim": "Researchers identify CTE biomarker that may lead to diagnosis while alive",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 5397
+    },
+    {
+      "id": 476,
+      "claim": "Of the 98 top oxycodone-dispensing doctors who used to live in Florida, \"today, there are none.",
+      "expected": "SUPPORTS",
+      "verdict": "REFUTES",
+      "correct": false,
+      "elapsedMs": 5846
+    },
+    {
+      "id": 518,
+      "claim": "Dr. Anthony Fauci wrote in a 2005 paper published in Virology Journal that hydroxychloroquine was effective in treating SARS.",
+      "expected": "REFUTES",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 3913
+    },
+    {
+      "id": 2220,
+      "claim": "“In ‘Resident Evil’ the Umbrella Corporation releases a virus that infects the people of Raccoon City. A biological research lab with the exact same logo as the Umbrella Corporation can be found in the city where the coronavirus outbreak originated.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4978
+    },
+    {
+      "id": 792,
+      "claim": "Surgeon fined $3K for removing kidney he thought was tumor.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3052
+    },
+    {
+      "id": 2390,
+      "claim": "Consuming tainted lettuce caused more deaths in 2018 than homicides perpetrated by undocumented immigrants.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 3985
+    },
+    {
+      "id": 1108,
+      "claim": "South Dakota plans mass testing in elder care facilities.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3350
+    },
+    {
+      "id": 457,
+      "claim": "If voters are turned away from polls on election day, they can ask for a provisional ballot.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4721
+    },
+    {
+      "id": 1264,
+      "claim": "Wyoming QB Allen still day-to-day on injury.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3834
+    },
+    {
+      "id": 1865,
+      "claim": "Do you really think I’d call Russia to help me with an election? Give me a break. They wouldn’t be able to help me at all.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 3849
+    },
+    {
+      "id": 607,
+      "claim": "If you maintain social distancing indoors “there's no reason to have an additional mask on top of that.”",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 4476
+    },
+    {
+      "id": 1,
+      "claim": "Bat from Shawnee County tests positive for rabies.",
+      "expected": "SUPPORTS",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": false,
+      "elapsedMs": 4469
+    },
+    {
+      "id": 2262,
+      "claim": "Reports of e-cigarette injury jump amid rising popularity, U.S. data show.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4974
+    },
+    {
+      "id": 691,
+      "claim": "A new version of an old Internet legend that expired cake mix can be fatal has been making its way into email inboxes.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 7201
+    },
+    {
+      "id": 1614,
+      "claim": "How barbershops could help lower blood pressure",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4683
+    },
+    {
+      "id": 1069,
+      "claim": "Scientists angry at UK visa denials for African, Asian researchers.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 4434
+    },
+    {
+      "id": 1206,
+      "claim": "We caught (the Texas Commission on Environmental Quality) lying to us about the results of air quality studies in the Barnett Shale.",
+      "expected": "NOT_ENOUGH_INFO",
+      "verdict": "NOT_ENOUGH_INFO",
+      "correct": true,
+      "elapsedMs": 5089
+    },
+    {
+      "id": 1597,
+      "claim": "Human virus linked to mountain gorilla deaths.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3943
+    },
+    {
+      "id": 1351,
+      "claim": "Blood test may identify gestational diabetes risk in first trimester",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 6165
+    },
+    {
+      "id": 907,
+      "claim": "“Florida is doing over five times better” than New Jersey and New York in COVID-19 deaths per million people.",
+      "expected": "REFUTES",
+      "verdict": "REFUTES",
+      "correct": true,
+      "elapsedMs": 5645
+    },
+    {
+      "id": 816,
+      "claim": "Price tag on gene therapy for rare form of blindness: $850K.",
+      "expected": "SUPPORTS",
+      "verdict": "SUPPORTS",
+      "correct": true,
+      "elapsedMs": 3861
+    }
+  ]
+}
