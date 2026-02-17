@@ -1,0 +1,150 @@
+# Structural Separation Reduces Anchoring Bias in LLM Reasoning
+
+## Core Idea
+
+When LLMs evaluate a hypothesis against evidence, the default reasoning path is:
+
+```
+input → hypothesis → selective evidence retrieval
+```
+
+The model forms a hypothesis early and selectively attends to evidence that confirms it. This is anchoring bias.
+
+Structural separation forces a different path:
+
+```
+input → atomic evidence representation → local commitments → global aggregation
+```
+
+The model builds a representation of the evidence *before* any hypothesis exists, makes local commitments about what each piece of evidence means, and only then aggregates into a global judgment. Local commitments are locked in before the global hypothesis forms, preventing selective reinterpretation.
+
+## Three Domains
+
+| Phase | Dafny Verification | Fact-Checking (NLI) | Mystery Solving |
+|-------|-------------------|---------------------|-----------------|
+| **Input** | Lemma code + NL requirement | Claim + evidence passage | Story + question + choices |
+| **Atomic representation** | Informalize each clause | Decompose claim into assertions | Extract quoted clues |
+| **Local commitments** | What each clause means in English | Per-assertion: SUPPORTS / CONTRADICTS / NO_EVIDENCE | Per-clue: who it implicates / exonerates |
+| **Global aggregation** | Does informalization match requirement? | Aggregate assertion verdicts → final label | Evaluate each choice against clues → answer |
+| **Bias prevented** | Anchoring on NL requirement when reading code | Pattern-matching on topical overlap | Anchoring on plausible-sounding choice |
+
+## Results
+
+### Dafny Verification (N=36, 3 runs)
+
+| Method | Accuracy | Description |
+|--------|----------|-------------|
+| No separation (Claude Code) | 69.4% | Model sees requirement + code together |
+| Prompt-level separation | 86.1% | Single call, instructions say "informalize first" |
+| **Structural separation** | **96.3%** | Two calls: informalize without seeing requirement, then compare |
+
+The 26.9pp gap between no separation and structural separation is the clearest demonstration of anchoring bias. Even prompt-level instructions to "analyze first" lose 10.2pp vs actual structural enforcement. The model *cannot help* being influenced by the requirement when it's visible.
+
+All three variants catch all 8 deliberately bogus lemmas (100%). The accuracy difference comes entirely from false disputes of valid lemmas — structural separation reduces false positives.
+
+### Fact-Checking (7 datasets)
+
+| Dataset | Domain | N | Baseline | Structured | Delta |
+|---------|--------|---|----------|------------|-------|
+| AVeriTeC | Real-world fact-checks | 500 | 67.6% | 72.8% | **+5.2pp** |
+| HealthVer | Health/COVID claims | 3,740 | 63.5% | 68.6% | **+5.1pp** |
+| PubHealth | Public health claims | 500 | 63.0% | 66.0% | **+3.0pp** |
+| SciFact | Scientific claims | 321 | 79.8% | 80.7% | +0.9pp |
+| FEVER | Wikipedia claims | 500 | 95.6% | 96.4% | +0.8pp |
+| Climate-FEVER | Climate claims | 500 | 53.2% | 53.4% | +0.2pp |
+| VitaminC | Wikipedia (contrastive) | 500 | 83.8% | 83.8% | +0.0pp |
+
+Structured = grounded decomposition with soft aggregation and contrastive analysis.
+
+The gain correlates with how conservative the baseline is on SUPPORTS. When the baseline already achieves >90% SUPPORTS accuracy (FEVER, VitaminC), there is no anchoring bias to correct. When the baseline is below 70% on SUPPORTS (HealthVer, AVeriTeC, PubHealth, SciFact), the model is defaulting to NOT_ENOUGH_INFO due to confirmation bias on "insufficient evidence" — structural separation corrects this.
+
+### Mystery Solving (BIG-bench Minute Mysteries, N=203)
+
+| Method | Sonnet | Opus |
+|--------|--------|------|
+| Baseline | 54.2% | 65.0% |
+| Grounded (local commitments only) | 60.6% (+6.4pp) | 69.5% (+4.5pp) |
+| Grounded + contrastive (full aggregation) | 64.5% (+10.3pp) | 70.0% (+5.0pp) |
+
+
+## Ablation: Which Phase Matters?
+
+HealthVer, N=500, seed 42.
+
+| Config | Accuracy | SUPPORTS | REFUTES | NEI |
+|--------|----------|----------|---------|-----|
+| Baseline (no decomposition) | 65.4% | 28% | 58% | 93% |
+| + Atomic representation + local commitments | 63.8% (-1.6pp) | 25% | 57% | 92% |
+| + Soft aggregation | 67.8% (+2.4pp) | 37% | 62% | 90% |
+| + Contrastive aggregation | 65.8% (+0.4pp) | 28% | 61% | 93% |
+| + Both (soft + contrastive) | **68.8%** (+3.4pp) | **42%** | 61% | 90% |
+
+Deltas relative to baseline.
+
+**Decomposition alone hurts.** Without proper aggregation, atomic representation makes the model *more* conservative. It sees that not every assertion is fully supported and defaults to NOT_ENOUGH_INFO. The local commitments are correct but the aggregation rule is wrong.
+
+**Soft aggregation is the main driver.** It changes the rule from "all assertions must be supported" to "most supported, none contradicted." This matches the entailment threshold used by human annotators.
+
+**Contrastive aggregation adds a modest boost** by forcing explicit per-hypothesis evaluation before choosing. It mainly improves REFUTES detection (+4pp).
+
+**The two are super-additive.** Soft-agg alone: +2.4pp. Contrastive alone: +0.4pp. Both: +3.4pp. Contrastive helps the model make better local commitments (distinguishing "supports" from "doesn't contradict"), which makes soft aggregation more accurate.
+
+## Why It Works: Anchoring Bias in LLMs
+
+The baseline failure mode in each domain:
+
+**Dafny:** Model sees the NL requirement "counter is always non-negative" alongside the code. When it reads `ensures m >= -1`, it's primed to interpret this as confirming non-negativity, missing the subtle weakening.
+
+**Fact-checking:** Model sees a claim about vitamin D and COVID, then scans evidence about vitamin D and COVID. Topical overlap triggers a "related = supported" heuristic, or conversely, the model notes the evidence doesn't contain the exact statistic and over-hedges to NOT_ENOUGH_INFO.
+
+**Mystery:** Model sees an answer choice "the butler did it" before analyzing clues. It unconsciously weighs clues that implicate the butler more heavily, especially when the butler is mentioned prominently in the story.
+
+Structural separation breaks the `hypothesis → selective evidence` loop by making the evidence representation phase hypothesis-free. The model commits to what each piece of evidence *means* before it knows what hypothesis it will evaluate.
+
+## Connection to Cognitive Science
+
+This maps directly to the anchoring-and-adjustment heuristic (Tversky & Kahneman, 1974). Humans given an initial anchor adjust insufficiently from it. LLMs exhibit the same pattern: given a hypothesis (explicit or implicit), they adjust insufficiently from it when evaluating evidence.
+
+The structured approach is analogous to Analysis of Competing Hypotheses (ACH) in intelligence analysis — evaluate each piece of evidence against all hypotheses independently before aggregating.
+
+## Mechanism: Tool Schemas as Structural Enforcement
+
+All three domains use tool-use schemas to enforce the phase ordering. The model must produce structured JSON matching a schema that requires:
+
+1. Evidence fields (quotes, informalizations, assertions) before
+2. Commitment fields (implications, relationships) before
+3. Judgment fields (verdict, answer)
+
+This is stronger than prompt-level instructions ("analyze before judging") because:
+- The schema is a hard constraint, not a suggestion
+- The model cannot skip phases or reorder them
+- The output is machine-readable and auditable
+
+The Dafny results quantify this: structural separation (96.3%) vs prompt-level separation (86.1%) — a 10.2pp gap from enforcement mechanism alone.
+
+## Reproducibility
+
+All results use Anthropic API with tool use. Temperature 0.
+
+```bash
+# Dafny verification
+node eval/bench-claimcheck.js
+
+# Fact-checking (example: HealthVer)
+node eval/bench-healthver.js --mode baseline --label healthver-baseline
+node eval/bench-healthver.js --mode grounded --soft-agg --contrastive \
+  --concurrency 10 --label healthver-grounded
+
+# Mystery solving
+node eval/bench-mystery.js --mode baseline --label mystery-baseline
+node eval/bench-mystery.js --mode grounded --concurrency 10 --label mystery-grounded
+node eval/bench-mystery.js --mode grounded --contrastive --concurrency 10 --label mystery-grounded-contrastive
+
+# Ablation (HealthVer, 500 sample)
+node eval/bench-healthver.js --mode grounded --sample 500 --concurrency 10 --label ablation-neither
+node eval/bench-healthver.js --mode grounded --soft-agg --sample 500 --concurrency 10 --label ablation-softagg
+node eval/bench-healthver.js --mode grounded --contrastive --sample 500 --concurrency 10 --label ablation-contrastive
+node eval/bench-healthver.js --mode grounded --soft-agg --contrastive --sample 500 --concurrency 10 --label ablation-both
+```
+
+Models: `claude-sonnet-4-5-20250929`, `claude-opus-4-6`.
