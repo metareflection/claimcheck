@@ -501,10 +501,10 @@ async function runGrounded(story, choices) {
       verbose,
       maxTokens: 8192,
     });
-    return result.input.answer;
+    return { answer: result.input.answer, grounded: result.input };
   } else {
     const output = await callClaude(prompt + '\n\nState your final answer as:\n\n**Answer:** <letter>');
-    return parseAnswer(output, choices);
+    return { answer: parseAnswer(output, choices), grounded: null };
   }
 }
 
@@ -539,6 +539,7 @@ async function main() {
 
     const start = Date.now();
     let answer = null;
+    let grounded = null;
     let error = null;
 
     try {
@@ -549,7 +550,9 @@ async function main() {
       } else if (mode === 'two-pass') {
         answer = await runTwoPass(ex.input, choices);
       } else if (mode === 'grounded') {
-        answer = await runGrounded(ex.input, choices);
+        const result = await runGrounded(ex.input, choices);
+        answer = result.answer;
+        grounded = result.grounded;
       } else {
         throw new Error(`Unknown mode: ${mode}. Expected: baseline, single-prompt, two-pass, grounded`);
       }
@@ -572,6 +575,7 @@ async function main() {
       answer,
       correct: isCorrect,
       elapsedMs,
+      ...(grounded ? { grounded } : {}),
       ...(error ? { error } : {}),
     };
   }
