@@ -7,6 +7,7 @@
  *   node eval/bench.js --runs 3 --label two-pass
  *   node eval/bench.js --runs 3 --label single-prompt --single-prompt
  *   node eval/bench.js --runs 3 --label naive --naive
+ *   node eval/bench.js --runs 3 --label naive --naive --concurrency 5
  *   node eval/bench.js --runs 3 --label opus --model claude-opus-4-6
  */
 
@@ -44,6 +45,7 @@ if (args.includes('--naive')) passthrough.push('--naive');
 const model = getArg('--model', null);
 if (model) passthrough.push('--model', model);
 
+const concurrency = parseInt(getArg('--concurrency', '1')) || 1;
 const domainFilter = getArg('--domain', null);
 const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
 
@@ -84,6 +86,7 @@ async function main() {
   console.error(`Benchmark: ${label}`);
   console.error(`  runs: ${runs}`);
   console.error(`  domains: ${projects.map(p => p.name).join(', ')}`);
+  console.error(`  concurrency: ${concurrency}`);
   console.error(`  passthrough: ${passthrough.join(' ') || '(none)'}`);
   console.error('');
 
@@ -93,7 +96,7 @@ async function main() {
   for (let run = 1; run <= runs; run++) {
     console.error(`── Run ${run}/${runs} ──`);
 
-    for (const project of projects) {
+    async function processDomain(project) {
       console.error(`  ${project.name}...`);
       const domainStart = Date.now();
       try {
@@ -116,6 +119,21 @@ async function main() {
       } catch (err) {
         console.error(`  ${project.name}: ERROR — ${err.message}`);
       }
+    }
+
+    if (concurrency <= 1) {
+      for (const project of projects) {
+        await processDomain(project);
+      }
+    } else {
+      let next = 0;
+      const workers = Array.from({ length: Math.min(concurrency, projects.length) }, async () => {
+        while (next < projects.length) {
+          const project = projects[next++];
+          await processDomain(project);
+        }
+      });
+      await Promise.all(workers);
     }
     console.error('');
   }
