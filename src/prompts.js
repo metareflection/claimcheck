@@ -158,3 +158,38 @@ Invariant dependencies and standard well-formedness conditions are expected and 
 
 Call the record_claimcheck tool with your analysis for lemma \`${lemmaName}\`.`;
 }
+
+/**
+ * Naive single-prompt: just present both artifacts and ask "does this match?"
+ * No two-pass structure, no informalization step.
+ * Serves as an ablation baseline for the structured CLAIMCHECK_PROMPT.
+ *
+ * @param {string} domain
+ * @param {string} lemmaName
+ * @param {string} dafnyCode
+ * @param {string} requirement
+ */
+export function NAIVE_PROMPT(domain, lemmaName, dafnyCode, requirement) {
+  return `You are checking whether a verified Dafny lemma correctly formalizes a natural language requirement, in the "${domain}" domain.
+
+## Natural Language Requirement
+
+> ${requirement}
+
+## Dafny Lemma
+
+\`\`\`dafny
+${dafnyCode}
+\`\`\`
+
+## Instructions
+
+Does this Dafny lemma faithfully capture the natural language requirement above?
+
+- **JUSTIFIED** if the lemma's contract (requires/ensures) expresses the requirement (it may be stronger, that's fine).
+- **NOT_JUSTIFIED** if there is a meaningful discrepancy: the lemma is weaker, proves something different, is vacuous, or misses key aspects.
+
+Invariant dependencies in requires clauses (e.g. \`requires Inv(state)\`) are expected and normal — don't count them as discrepancies. A lemma that extracts a concrete consequence from an invariant is useful, not vacuous.
+
+Call the record_naive_verdict tool with your verdict for lemma \`${lemmaName}\`.`;
+}

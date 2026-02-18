@@ -1,5 +1,5 @@
 import { resetTokenUsage, getTokenUsage } from './api.js';
-import { roundtripCheck, singlePromptCheck } from './roundtrip.js';
+import { roundtripCheck, singlePromptCheck, naiveCheck } from './roundtrip.js';
 
 /**
  * Pure JSON-in/JSON-out claimcheck audit.
@@ -33,7 +33,7 @@ export async function claimcheck({ claims, domain, options = {} }) {
   }
 
   const requirements = claims.map(c => c.requirement);
-  const check = options.singlePrompt ? singlePromptCheck : roundtripCheck;
+  const check = options.naive ? naiveCheck : options.singlePrompt ? singlePromptCheck : roundtripCheck;
   const { passed, failed } = await check(valid, requirements, domain, options);
 
   const results = [];

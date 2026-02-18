@@ -11,6 +11,7 @@
  * Usage:
  *   node eval/bench-vericoding.js --concurrency 10 --label vericoding-roundtrip
  *   node eval/bench-vericoding.js --single-prompt --concurrency 10 --label vericoding-single
+ *   node eval/bench-vericoding.js --naive --concurrency 10 --label vericoding-naive
  *   node eval/bench-vericoding.js --limit 20 --verbose --label vericoding-test
  */
 
@@ -36,6 +37,7 @@ const limit = parseInt(getArg('--limit', '0')) || 0;
 const offset = parseInt(getArg('--offset', '0')) || 0;
 const concurrency = parseInt(getArg('--concurrency', '1')) || 1;
 const singlePrompt = args.includes('--single-prompt');
+const naive = args.includes('--naive');
 const verbose = args.includes('--verbose');
 const sample = parseInt(getArg('--sample', '0')) || 0;
 const seed = parseInt(getArg('--seed', '42')) || 42;
@@ -88,7 +90,8 @@ async function main() {
   const tasks = await loadTasks();
 
   console.error(`VeriCoding ClaimCheck Benchmark: ${label}`);
-  console.error(`  mode: ${singlePrompt ? 'single-prompt' : 'round-trip'}`);
+  const modeLabel = naive ? 'naive' : singlePrompt ? 'single-prompt' : 'round-trip';
+  console.error(`  mode: ${modeLabel}`);
   console.error(`  tasks: ${tasks.length}`);
   console.error('');
 
@@ -112,6 +115,7 @@ async function main() {
         domain: 'competitive programming',
         options: {
           singlePrompt,
+          naive,
           verbose,
           log: verbose ? console.error.bind(console) : () => {},
         },
@@ -191,7 +195,7 @@ async function main() {
     label,
     timestamp: new Date().toISOString(),
     config: {
-      mode: singlePrompt ? 'single-prompt' : 'round-trip',
+      mode: modeLabel,
       total: allResults.length,
     },
     totalElapsedMs,

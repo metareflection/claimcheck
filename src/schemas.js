@@ -97,6 +97,30 @@ export const CLAIMCHECK_TOOL = {
   },
 };
 
+export const NAIVE_TOOL = {
+  name: 'record_naive_verdict',
+  description: 'Record whether a Dafny lemma faithfully captures a natural language requirement.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      lemmaName: {
+        type: 'string',
+        description: 'Name of the lemma being checked.',
+      },
+      verdict: {
+        type: 'string',
+        enum: ['JUSTIFIED', 'NOT_JUSTIFIED'],
+        description: 'JUSTIFIED if the lemma captures the requirement, NOT_JUSTIFIED if there is a meaningful discrepancy.',
+      },
+      explanation: {
+        type: 'string',
+        description: 'Brief explanation of your verdict.',
+      },
+    },
+    required: ['lemmaName', 'verdict', 'explanation'],
+  },
+};
+
 export const ROUNDTRIP_COMPARE_TOOL = {
   name: 'record_roundtrip_comparisons',
   description: 'Record comparison results between original requirements and back-translated lemmas.',

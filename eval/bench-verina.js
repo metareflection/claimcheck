@@ -9,10 +9,12 @@
  * rate measures false positive (dispute) rate.
  *
  * Modes:
- *   baseline   - single LLM call with NL + Lean spec → verdict
+ *   naive      - single LLM call: "does spec match NL?" (no reasoning structure)
+ *   baseline   - single LLM call with NL + Lean spec → verdict (mini-informalization in prompt)
  *   two-pass   - pass 1: informalize spec (blind); pass 2: compare with NL
  *
  * Usage:
+ *   node eval/bench-verina.js --mode naive --concurrency 10 --label verina-naive
  *   node eval/bench-verina.js --mode baseline --concurrency 10 --label verina-baseline
  *   node eval/bench-verina.js --mode two-pass --concurrency 10 --label verina-twopass
  *   node eval/bench-verina.js --mode baseline --limit 10 --verbose --label verina-test
@@ -114,6 +116,30 @@ const compareTool = {
       explanation: {
         type: 'string',
         description: 'Brief explanation of the comparison reasoning.',
+      },
+    },
+  },
+};
+
+const naiveTool = {
+  name: 'record_naive_verdict',
+  description: 'Record whether the Lean specification matches the NL description.',
+  input_schema: {
+    type: 'object',
+    required: ['specName', 'verdict', 'explanation'],
+    properties: {
+      specName: {
+        type: 'string',
+        description: 'Name of the specification being checked.',
+      },
+      verdict: {
+        type: 'string',
+        enum: ['CONFIRMED', 'DISPUTED'],
+        description: 'CONFIRMED if the spec captures the NL description, DISPUTED if there is a meaningful discrepancy.',
+      },
+      explanation: {
+        type: 'string',
+        description: 'Explanation of your verdict.',
       },
     },
   },
@@ -253,6 +279,31 @@ async function loadTasks() {
 
 // --- Prompts ---
 
+function naivePrompt(task) {
+  return `You are checking whether a Lean 4 formal specification matches a natural language description.
+
+## Natural Language Description
+
+${task.description}
+
+## Lean 4 Specification
+
+\`\`\`lean
+${task.spec}
+\`\`\`
+
+## Instructions
+
+Does this specification faithfully capture the natural language description?
+
+- **CONFIRMED** if yes (it may be stronger, that's fine).
+- **DISPUTED** if there is a meaningful discrepancy.
+
+Precondition dependencies on well-formedness invariants are expected and normal — don't count them as discrepancies.
+
+Call the record_naive_verdict tool with your verdict for \`${task.name}\`.`;
+}
+
 function baselinePrompt(task) {
   return `You are reviewing whether a Lean 4 formal specification matches a natural language description.
 
@@ -372,7 +423,32 @@ async function main() {
     console.error(`  [${i + 1}/${tasks.length}] ${task.id} (${task.name})...`);
 
     try {
-      if (mode === 'baseline') {
+      if (mode === 'naive') {
+        const result = await callWithTool({
+          model,
+          prompt: naivePrompt(task),
+          tool: naiveTool,
+          toolChoice: { type: 'tool', name: 'record_naive_verdict' },
+          verbose,
+          maxTokens: 2048,
+        });
+
+        const r = result.input;
+        const status = r.verdict === 'CONFIRMED' ? 'confirmed' : 'disputed';
+        if (status === 'confirmed') confirmed++;
+        else disputed++;
+
+        allResults[i] = {
+          id: task.id,
+          name: task.name,
+          subset: task.subset,
+          status,
+          explanation: r.explanation,
+        };
+
+        console.error(`    ${status}${status === 'disputed' ? ': ' + r.explanation.slice(0, 80) : ''}`);
+
+      } else if (mode === 'baseline') {
         const result = await callWithTool({
           model,
           prompt: baselinePrompt(task),
@@ -447,7 +523,7 @@ async function main() {
         console.error(`    ${status}${disc ? ': ' + disc.slice(0, 80) : ''}`);
 
       } else {
-        throw new Error(`Unknown mode: ${mode}. Expected: baseline, two-pass`);
+        throw new Error(`Unknown mode: ${mode}. Expected: naive, baseline, two-pass`);
       }
     } catch (err) {
       errors++;

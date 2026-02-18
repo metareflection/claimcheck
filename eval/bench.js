@@ -6,6 +6,7 @@
  * Usage:
  *   node eval/bench.js --runs 3 --label two-pass
  *   node eval/bench.js --runs 3 --label single-prompt --single-prompt
+ *   node eval/bench.js --runs 3 --label naive --naive
  *   node eval/bench.js --runs 3 --label opus --model claude-opus-4-6
  */
 
@@ -38,6 +39,7 @@ const passthrough = [];
 
 if (args.includes('--verbose')) passthrough.push('--verbose');
 if (args.includes('--single-prompt')) passthrough.push('--single-prompt');
+if (args.includes('--naive')) passthrough.push('--naive');
 
 const model = getArg('--model', null);
 if (model) passthrough.push('--model', model);

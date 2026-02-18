@@ -1,9 +1,10 @@
 import { callWithTool } from './api.js';
-import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL, CLAIMCHECK_TOOL } from './schemas.js';
+import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL, CLAIMCHECK_TOOL, NAIVE_TOOL } from './schemas.js';
 import {
   INFORMALIZE_PROMPT,
   ROUNDTRIP_COMPARE_PROMPT,
   CLAIMCHECK_PROMPT,
+  NAIVE_PROMPT,
 } from './prompts.js';
 
 /**
@@ -207,6 +208,79 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
   }
 
   log(`[claimcheck] Passed: ${passed.length}, Failed: ${failed.length}`);
+  return { passed, failed };
+}
+
+/**
+ * Naive claimcheck: one API call per pair, no structured reasoning.
+ *
+ * Just presents the lemma and requirement and asks "does this match?"
+ * Serves as an ablation baseline for the structured single-prompt approach.
+ *
+ * @param {{ index: number, lemmaName: string, dafnyCode: string }[]} lemmas
+ * @param {string[]} requirements
+ * @param {string} domain
+ * @param {object} [opts] - { verbose, model }
+ * @returns {Promise<{ passed: object[], failed: object[] }>}
+ */
+export async function naiveCheck(lemmas, requirements, domain, opts = {}) {
+  if (lemmas.length === 0) return { passed: [], failed: [] };
+
+  const log = opts.log ?? (() => {});
+  const model = opts.model ?? 'claude-sonnet-4-5-20250929';
+
+  const passed = [];
+  const failed = [];
+
+  for (const l of lemmas) {
+    const requirement = requirements[l.index];
+    log(`[naive] Checking ${l.lemmaName} against: "${requirement.slice(0, 60)}..."`);
+
+    const prompt = NAIVE_PROMPT(domain, l.lemmaName, l.dafnyCode, requirement);
+    const response = await callWithTool({
+      model,
+      prompt,
+      tool: NAIVE_TOOL,
+      toolChoice: { type: 'tool', name: 'record_naive_verdict' },
+      verbose: opts.verbose,
+      maxTokens: 2048,
+    });
+
+    const result = response.input;
+
+    // Minimal informalization/comparison shapes for report compatibility
+    const informalization = {
+      naturalLanguage: '(naive mode — no informalization)',
+      preconditions: '(naive mode)',
+      postcondition: '(naive mode)',
+      scope: '(naive mode)',
+      strength: 'unknown',
+      confidence: 0,
+    };
+
+    const comparison = {
+      requirementIndex: l.index,
+      lemmaName: l.lemmaName,
+      match: result.verdict === 'JUSTIFIED',
+      discrepancy: result.verdict !== 'JUSTIFIED' ? result.explanation : '',
+      weakeningType: result.verdict === 'JUSTIFIED' ? 'none' : 'unknown',
+      explanation: result.explanation,
+    };
+
+    if (result.verdict === 'JUSTIFIED') {
+      passed.push({ ...l, informalization, comparison });
+    } else {
+      failed.push({
+        ...l,
+        informalization,
+        comparison,
+        discrepancy: result.explanation,
+        weakeningType: 'unknown',
+      });
+    }
+  }
+
+  log(`[naive] Passed: ${passed.length}, Failed: ${failed.length}`);
   return { passed, failed };
 }
 

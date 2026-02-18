@@ -17,7 +17,8 @@ Options:
   --json                       Output JSON instead of markdown
   --verify                     Also run dafny verify on each lemma
   --single-prompt              Use single-prompt claimcheck mode (one call per pair)
-  --model <id>                 Model for single-prompt mode (default: claude-sonnet-4-5-20250929)
+  --naive                      Use naive mode (one call per pair, no structured reasoning)
+  --model <id>                 Model for single-prompt/naive mode (default: claude-sonnet-4-5-20250929)
   --informalize-model <id>     Model for back-translation (default: claude-haiku-4-5-20251001)
   --compare-model <id>         Model for comparison (default: claude-sonnet-4-5-20250929)
   --stdin                      Read JSON from stdin (pure claimcheck, no file extraction)
@@ -35,6 +36,7 @@ export async function main(argv) {
       domain:       { type: 'string', short: 'd' },
       verify:             { type: 'boolean', default: false },
       'single-prompt':    { type: 'boolean', default: false },
+      naive:              { type: 'boolean', default: false },
       model:              { type: 'string' },
       'informalize-model': { type: 'string' },
       'compare-model':    { type: 'string' },
@@ -56,6 +58,7 @@ export async function main(argv) {
     verbose: values.verbose,
     verify: values.verify,
     singlePrompt: values['single-prompt'],
+    naive: values.naive,
     ...(values.model ? { model: values.model } : {}),
     ...(values['informalize-model'] ? { informalizeModel: values['informalize-model'] } : {}),
     ...(values['compare-model'] ? { compareModel: values['compare-model'] } : {}),

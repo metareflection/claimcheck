@@ -17,7 +17,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { PROJECTS } from '../test/integration/projects.js';
 import { extractLemma } from '../src/extract.js';
-import { CLAIMCHECK_PROMPT } from '../src/prompts.js';
+import { CLAIMCHECK_PROMPT, NAIVE_PROMPT } from '../src/prompts.js';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const MAPPINGS_DIR = resolve(ROOT, 'test/integration/mappings');
@@ -41,6 +41,7 @@ const label = getArg('--label', `cc-${Date.now()}`);
 const model = getArg('--model', null);
 const verbose = args.includes('--verbose');
 
+const useNaive = args.includes('--naive');
 const domainFilter = getArg('--domain', null);
 const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
 const lemmaFilter = getArg('--lemma', null);
@@ -145,8 +146,11 @@ async function main() {
           continue;
         }
 
-        const prompt = CLAIMCHECK_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
-          .replace(/Call the record_claimcheck tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | PARTIALLY_JUSTIFIED | NOT_JUSTIFIED | VACUOUS`);
+        const prompt = useNaive
+          ? NAIVE_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
+              .replace(/Call the record_naive_verdict tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | NOT_JUSTIFIED`)
+          : CLAIMCHECK_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
+              .replace(/Call the record_claimcheck tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | PARTIALLY_JUSTIFIED | NOT_JUSTIFIED | VACUOUS`);
 
         try {
           const lemmaStart = Date.now();
@@ -206,7 +210,7 @@ async function main() {
     config: {
       runs,
       model: model || '(claude-code default)',
-      mode: 'claude-code',
+      mode: useNaive ? 'claude-code-naive' : 'claude-code',
     },
     totalElapsedMs: Date.now() - totalStart,
     results: allResults,
