@@ -7,9 +7,9 @@ Core task: given a Dafny lemma and a natural-language requirement, does the lemm
 | Variant | Accuracy | Runs | Time/run | API calls/run |
 |---------|----------|------|----------|---------------|
 | **Two-pass** (default) | **96.3%** (104/108) | 3 | ~108s | 2 (batch) |
-| Naive (Opus) | 94.4% (34/36) | 1 | ~164s | 36 |
+| Naive (Opus) | 94.4% (102/108) | 3 | ~107s | 36 |
 | Single-prompt | 86.1% (31/36) | 1 | ~353s | 36 |
-| Naive (Sonnet) | **88.9%** (96/108) | 3 | ~147s | 36 |
+| Naive (Sonnet) | 88.9% (96/108) | 3 | ~147s | 36 |
 | Claude Code | 69.4% (25/36) | 1 | ~693s | 36 |
 
 Model: `claude-sonnet-4-5-20250929` unless noted. Two-pass uses haiku for informalization, sonnet for comparison.
@@ -21,55 +21,55 @@ Model: `claude-sonnet-4-5-20250929` unless noted. Two-pass uses haiku for inform
 ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 canon (6 pairs, 2 bogus)
-  AddExistingNodeIsNoop                        ok     3/3        1/1      3/3      1/1      1/1
-  ConstraintTargetsExist                       ok     3/3        1/1      3/3      1/1      1/1
-  ConstraintTargetsExistEmpty                bogus    3/3        1/1      3/3      1/1      1/1
-  EdgeEndpointsExist                           ok     3/3        1/1      3/3      1/1      0/1 ↓
-  RemoveNodeCleansUp                           ok     3/3        1/1      3/3      1/1      1/1
-  RemoveNodeDropsId                          bogus    3/3        1/1      3/3      1/1      1/1
-                                                      18/18      6/6      18/18    6/6      5/6
+  AddExistingNodeIsNoop                        ok     3/3        1/1      3/3      3/3      1/1
+  ConstraintTargetsExist                       ok     3/3        1/1      3/3      3/3      1/1
+  ConstraintTargetsExistEmpty                bogus    3/3        1/1      3/3      3/3      1/1
+  EdgeEndpointsExist                           ok     3/3        1/1      3/3      3/3      0/1 ↓
+  RemoveNodeCleansUp                           ok     3/3        1/1      3/3      3/3      1/1
+  RemoveNodeDropsId                          bogus    3/3        1/1      3/3      3/3      1/1
+                                                      18/18      6/6      18/18    18/18    5/6
 
 colorwheel (7 pairs, 1 bogus)
-  AllColorsValid                               ok     3/3        1/1      0/3 ↓    1/1      0/1 ↓
-  AlwaysFiveColors                             ok     3/3        1/1      3/3      1/1      0/1 ↓
-  BaseHueInRange                               ok     3/3        1/1      3/3      1/1      0/1 ↓
-  ContrastPairIndicesValid                     ok     3/3        1/1      3/3      1/1      1/1
-  HuesFollowHarmony                            ok     3/3        1/1      3/3      1/1      0/1 ↓
-  MoodConstraintsSatisfied                     ok     3/3        1/1      3/3      1/1      1/1
-  PaletteNonEmpty                            bogus    3/3        1/1      3/3      1/1      1/1
-                                                      21/21      7/7      18/21    7/7      3/7
+  AllColorsValid                               ok     3/3        1/1      0/3 ↓    3/3      0/1 ↓
+  AlwaysFiveColors                             ok     3/3        1/1      3/3      3/3      0/1 ↓
+  BaseHueInRange                               ok     3/3        1/1      3/3      3/3      0/1 ↓
+  ContrastPairIndicesValid                     ok     3/3        1/1      3/3      3/3      1/1
+  HuesFollowHarmony                            ok     3/3        1/1      3/3      3/3      0/1 ↓
+  MoodConstraintsSatisfied                     ok     3/3        1/1      3/3      3/3      1/1
+  PaletteNonEmpty                            bogus    3/3        1/1      3/3      3/3      1/1
+                                                      21/21      7/7      18/21    21/21    3/7
 
 counter (7 pairs, 3 bogus)
-  CounterNonNegative                           ok     3/3        0/1 ↓    0/3 ↓    1/1      1/1
-  InitSatisfiesInvariant                       ok     3/3        1/1      3/3      1/1      1/1
-  StepPreservesInvariant                       ok     3/3        0/1 ↓    3/3      1/1      1/1
-  DecAtZeroKeepsZero                           ok     3/3        1/1      3/3      1/1      1/1
-  CounterLowerBound                          bogus    3/3        1/1      3/3      1/1      1/1
-  CounterNonNegAlt                           bogus    3/3        1/1      3/3      1/1      1/1
-  CounterNonNegLarge                         bogus    3/3        1/1      3/3      1/1      1/1
-                                                      21/21      6/7      18/21    7/7      7/7
+  CounterNonNegative                           ok     3/3        0/1 ↓    0/3 ↓    3/3      1/1
+  InitSatisfiesInvariant                       ok     3/3        1/1      3/3      3/3      1/1
+  StepPreservesInvariant                       ok     3/3        0/1 ↓    3/3      3/3      1/1
+  DecAtZeroKeepsZero                           ok     3/3        1/1      3/3      3/3      1/1
+  CounterLowerBound                          bogus    3/3        1/1      3/3      3/3      1/1
+  CounterNonNegAlt                           bogus    3/3        1/1      3/3      3/3      1/1
+  CounterNonNegLarge                         bogus    3/3        1/1      3/3      3/3      1/1
+                                                      21/21      6/7      18/21    21/21    7/7
 
 delegation-auth (7 pairs, 1 bogus)
-  GrantSubjectsExist                           ok     3/3        0/1 ↓    0/3 ↓    0/1 ↓    0/1 ↓
-  DelegationEndpointsExist                     ok     3/3        1/1      3/3      1/1      0/1 ↓
-  EdgeIdsFresh                                 ok     3/3        1/1      3/3      1/1      1/1
-  GrantNonExistentIsNoop                       ok     3/3        1/1      3/3      1/1      1/1
-  DelegateNonExistentIsNoop                    ok     3/3        0/1 ↓    0/3 ↓    0/1 ↓    0/1 ↓
-  RevokeNonExistentIsNoop                      ok     3/3        1/1      3/3      1/1      1/1
-  GrantNonExistentIsNoopInit                 bogus    3/3        1/1      3/3      1/1      1/1
-                                                      21/21      5/7      15/21    5/7      4/7
+  GrantSubjectsExist                           ok     3/3        0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
+  DelegationEndpointsExist                     ok     3/3        1/1      3/3      3/3      0/1 ↓
+  EdgeIdsFresh                                 ok     3/3        1/1      3/3      3/3      1/1
+  GrantNonExistentIsNoop                       ok     3/3        1/1      3/3      3/3      1/1
+  DelegateNonExistentIsNoop                    ok     3/3        0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
+  RevokeNonExistentIsNoop                      ok     3/3        1/1      3/3      3/3      1/1
+  GrantNonExistentIsNoopInit                 bogus    3/3        1/1      3/3      3/3      1/1
+                                                      21/21      5/7      15/21    15/21    4/7
 
 kanban (9 pairs, 2 bogus)
-  ColumnsAreUnique                             ok     3/3        1/1      3/3      1/1      1/1
-  CardInExactlyOneColumn                       ok     0/3        0/1      3/3      1/1      0/1
-  NoCardDuplicates                             ok     3/3        1/1      3/3      1/1      1/1
-  WipLimitsRespected                           ok     2/3        1/1      3/3      1/1      0/1 ↓
-  AddCardToFullColumnIsNoop                    ok     3/3        1/1      3/3      1/1      1/1
-  AllocatorAlwaysFresh                         ok     3/3        1/1      3/3      1/1      0/1 ↓
-  LanesAndWipMatchColumns                      ok     3/3        1/1      3/3      1/1      1/1
-  MoveCardPreservesTotal                     bogus    3/3        1/1      3/3      1/1      1/1
-  CardPartitionNoDups                        bogus    3/3        1/1      3/3      1/1      1/1
-                                                      23/27      7/9      27/27    9/9      6/9
+  ColumnsAreUnique                             ok     3/3        1/1      3/3      3/3      1/1
+  CardInExactlyOneColumn                       ok     0/3        0/1      3/3      3/3      0/1
+  NoCardDuplicates                             ok     3/3        1/1      3/3      3/3      1/1
+  WipLimitsRespected                           ok     2/3        1/1      3/3      3/3      0/1 ↓
+  AddCardToFullColumnIsNoop                    ok     3/3        1/1      3/3      3/3      1/1
+  AllocatorAlwaysFresh                         ok     3/3        1/1      3/3      3/3      0/1 ↓
+  LanesAndWipMatchColumns                      ok     3/3        1/1      3/3      3/3      1/1
+  MoveCardPreservesTotal                     bogus    3/3        1/1      3/3      3/3      1/1
+  CardPartitionNoDups                        bogus    3/3        1/1      3/3      3/3      1/1
+                                                      23/27      7/9      27/27    27/27    6/9
 ```
 
 ## What Two-Pass Gets Wrong
