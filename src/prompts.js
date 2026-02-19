@@ -33,7 +33,7 @@ Specifically:
   - "strong" if it significantly constrains the system's behavior
 - Flag anything suspicious: ensures that mirror requires, postconditions that are always true regardless of preconditions, claims about wrong properties
 
-Do NOT guess at the original intent. Only describe what the Dafny code literally says.
+Translate the formal specification to natural language as literally as possible. Do NOT guess at the original intent. Only describe what the Dafny code literally says.
 
 Call the record_informalizations tool with one entry per lemma.`;
 }
