@@ -45,6 +45,12 @@ if (args.includes('--naive')) passthrough.push('--naive');
 const model = getArg('--model', null);
 if (model) passthrough.push('--model', model);
 
+const informalizeModel = getArg('--informalize-model', null);
+if (informalizeModel) passthrough.push('--informalize-model', informalizeModel);
+
+const compareModel = getArg('--compare-model', null);
+if (compareModel) passthrough.push('--compare-model', compareModel);
+
 const concurrency = parseInt(getArg('--concurrency', '1')) || 1;
 const domainFilter = getArg('--domain', null);
 const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;

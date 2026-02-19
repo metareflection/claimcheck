@@ -8,68 +8,69 @@ Core task: given a Dafny lemma and a natural-language requirement, does the lemm
 |---------|----------|------|----------|---------------|
 | **Two-pass** (default) | **96.3%** (104/108) | 3 | ~108s | 2 (batch) |
 | Naive (Opus) | 94.4% (102/108) | 3 | ~107s | 36 |
+| Two-pass (sonnet→sonnet) | 93.5% (101/108) | 3 | ~164s | 2 (batch) |
 | Single-prompt | 86.1% (31/36) | 1 | ~353s | 36 |
 | Naive (Sonnet) | 88.9% (96/108) | 3 | ~147s | 36 |
 | Claude Code | 69.4% (25/36) | 1 | ~693s | 36 |
 
-Model: `claude-sonnet-4-5-20250929` unless noted. Two-pass uses haiku for informalization, sonnet for comparison.
+Model: `claude-sonnet-4-5-20250929` unless noted. Two-pass uses haiku for informalization, sonnet for comparison. Two-pass (sonnet→sonnet) uses sonnet for both steps.
 
 ## Per-Domain Breakdown
 
 ```
-                                              exp    two-pass    single   naive/S  naive/O    cc
-──────────────────────────────────────────────────────────────────────────────────────────────────
+                                              exp    two-pass   tp/S→S   single   naive/S  naive/O    cc
+─────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 canon (6 pairs, 2 bogus)
-  AddExistingNodeIsNoop                        ok     3/3        1/1      3/3      3/3      1/1
-  ConstraintTargetsExist                       ok     3/3        1/1      3/3      3/3      1/1
-  ConstraintTargetsExistEmpty                bogus    3/3        1/1      3/3      3/3      1/1
-  EdgeEndpointsExist                           ok     3/3        1/1      3/3      3/3      0/1 ↓
-  RemoveNodeCleansUp                           ok     3/3        1/1      3/3      3/3      1/1
-  RemoveNodeDropsId                          bogus    3/3        1/1      3/3      3/3      1/1
-                                                      18/18      6/6      18/18    18/18    5/6
+  AddExistingNodeIsNoop                        ok     3/3       3/3      1/1      3/3      3/3      1/1
+  ConstraintTargetsExist                       ok     3/3       1/3 ↓    1/1      3/3      3/3      1/1
+  ConstraintTargetsExistEmpty                bogus    3/3       3/3      1/1      3/3      3/3      1/1
+  EdgeEndpointsExist                           ok     3/3       1/3 ↓    1/1      3/3      3/3      0/1 ↓
+  RemoveNodeCleansUp                           ok     3/3       3/3      1/1      3/3      3/3      1/1
+  RemoveNodeDropsId                          bogus    3/3       3/3      1/1      3/3      3/3      1/1
+                                                      18/18     14/18    6/6      18/18    18/18    5/6
 
 colorwheel (7 pairs, 1 bogus)
-  AllColorsValid                               ok     3/3        1/1      0/3 ↓    3/3      0/1 ↓
-  AlwaysFiveColors                             ok     3/3        1/1      3/3      3/3      0/1 ↓
-  BaseHueInRange                               ok     3/3        1/1      3/3      3/3      0/1 ↓
-  ContrastPairIndicesValid                     ok     3/3        1/1      3/3      3/3      1/1
-  HuesFollowHarmony                            ok     3/3        1/1      3/3      3/3      0/1 ↓
-  MoodConstraintsSatisfied                     ok     3/3        1/1      3/3      3/3      1/1
-  PaletteNonEmpty                            bogus    3/3        1/1      3/3      3/3      1/1
-                                                      21/21      7/7      18/21    21/21    3/7
+  AllColorsValid                               ok     3/3       3/3      1/1      0/3 ↓    3/3      0/1 ↓
+  AlwaysFiveColors                             ok     3/3       3/3      1/1      3/3      3/3      0/1 ↓
+  BaseHueInRange                               ok     3/3       3/3      1/1      3/3      3/3      0/1 ↓
+  ContrastPairIndicesValid                     ok     3/3       3/3      1/1      3/3      3/3      1/1
+  HuesFollowHarmony                            ok     3/3       3/3      1/1      3/3      3/3      0/1 ↓
+  MoodConstraintsSatisfied                     ok     3/3       3/3      1/1      3/3      3/3      1/1
+  PaletteNonEmpty                            bogus    3/3       3/3      1/1      3/3      3/3      1/1
+                                                      21/21     21/21    7/7      18/21    21/21    3/7
 
 counter (7 pairs, 3 bogus)
-  CounterNonNegative                           ok     3/3        0/1 ↓    0/3 ↓    3/3      1/1
-  InitSatisfiesInvariant                       ok     3/3        1/1      3/3      3/3      1/1
-  StepPreservesInvariant                       ok     3/3        0/1 ↓    3/3      3/3      1/1
-  DecAtZeroKeepsZero                           ok     3/3        1/1      3/3      3/3      1/1
-  CounterLowerBound                          bogus    3/3        1/1      3/3      3/3      1/1
-  CounterNonNegAlt                           bogus    3/3        1/1      3/3      3/3      1/1
-  CounterNonNegLarge                         bogus    3/3        1/1      3/3      3/3      1/1
-                                                      21/21      6/7      18/21    21/21    7/7
+  CounterNonNegative                           ok     3/3       3/3      0/1 ↓    0/3 ↓    3/3      1/1
+  InitSatisfiesInvariant                       ok     3/3       3/3      1/1      3/3      3/3      1/1
+  StepPreservesInvariant                       ok     3/3       3/3      0/1 ↓    3/3      3/3      1/1
+  DecAtZeroKeepsZero                           ok     3/3       3/3      1/1      3/3      3/3      1/1
+  CounterLowerBound                          bogus    3/3       3/3      1/1      3/3      3/3      1/1
+  CounterNonNegAlt                           bogus    3/3       3/3      1/1      3/3      3/3      1/1
+  CounterNonNegLarge                         bogus    3/3       3/3      1/1      3/3      3/3      1/1
+                                                      21/21     21/21    6/7      18/21    21/21    7/7
 
 delegation-auth (7 pairs, 1 bogus)
-  GrantSubjectsExist                           ok     3/3        0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
-  DelegationEndpointsExist                     ok     3/3        1/1      3/3      3/3      0/1 ↓
-  EdgeIdsFresh                                 ok     3/3        1/1      3/3      3/3      1/1
-  GrantNonExistentIsNoop                       ok     3/3        1/1      3/3      3/3      1/1
-  DelegateNonExistentIsNoop                    ok     3/3        0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
-  RevokeNonExistentIsNoop                      ok     3/3        1/1      3/3      3/3      1/1
-  GrantNonExistentIsNoopInit                 bogus    3/3        1/1      3/3      3/3      1/1
-                                                      21/21      5/7      15/21    15/21    4/7
+  GrantSubjectsExist                           ok     3/3       3/3      0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
+  DelegationEndpointsExist                     ok     3/3       3/3      1/1      3/3      3/3      0/1 ↓
+  EdgeIdsFresh                                 ok     3/3       3/3      1/1      3/3      3/3      1/1
+  GrantNonExistentIsNoop                       ok     3/3       3/3      1/1      3/3      3/3      1/1
+  DelegateNonExistentIsNoop                    ok     3/3       3/3      0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
+  RevokeNonExistentIsNoop                      ok     3/3       3/3      1/1      3/3      3/3      1/1
+  GrantNonExistentIsNoopInit                 bogus    3/3       3/3      1/1      3/3      3/3      1/1
+                                                      21/21     21/21    5/7      15/21    15/21    4/7
 
 kanban (9 pairs, 2 bogus)
-  ColumnsAreUnique                             ok     3/3        1/1      3/3      3/3      1/1
-  CardInExactlyOneColumn                       ok     0/3        0/1      3/3      3/3      0/1
-  NoCardDuplicates                             ok     3/3        1/1      3/3      3/3      1/1
-  WipLimitsRespected                           ok     2/3        1/1      3/3      3/3      0/1 ↓
-  AddCardToFullColumnIsNoop                    ok     3/3        1/1      3/3      3/3      1/1
-  AllocatorAlwaysFresh                         ok     3/3        1/1      3/3      3/3      0/1 ↓
-  LanesAndWipMatchColumns                      ok     3/3        1/1      3/3      3/3      1/1
-  MoveCardPreservesTotal                     bogus    3/3        1/1      3/3      3/3      1/1
-  CardPartitionNoDups                        bogus    3/3        1/1      3/3      3/3      1/1
-                                                      23/27      7/9      27/27    27/27    6/9
+  ColumnsAreUnique                             ok     3/3       3/3      1/1      3/3      3/3      1/1
+  CardInExactlyOneColumn                       ok     0/3       1/3      0/1      3/3      3/3      0/1
+  NoCardDuplicates                             ok     3/3       3/3      1/1      3/3      3/3      1/1
+  WipLimitsRespected                           ok     2/3       3/3      1/1      3/3      3/3      0/1 ↓
+  AddCardToFullColumnIsNoop                    ok     3/3       3/3      1/1      3/3      3/3      1/1
+  AllocatorAlwaysFresh                         ok     3/3       2/3 ↓    1/1      3/3      3/3      0/1 ↓
+  LanesAndWipMatchColumns                      ok     3/3       3/3      1/1      3/3      3/3      1/1
+  MoveCardPreservesTotal                     bogus    3/3       3/3      1/1      3/3      3/3      1/1
+  CardPartitionNoDups                        bogus    3/3       3/3      1/1      3/3      3/3      1/1
+                                                      23/27     24/27    7/9      27/27    27/27    6/9
 ```
 
 ## What Two-Pass Gets Wrong
@@ -80,6 +81,18 @@ Only 4 errors in 108 judgments, all on kanban:
 - **WipLimitsRespected** (2/3): One run's informalization described the WIP property in terms that were close but not precise enough for the comparison step to confirm.
 
 All 8 bogus lemmas were correctly flagged as disputed in all 3 runs (24/24).
+
+## What Two-Pass (Sonnet→Sonnet) Gets Wrong
+
+7 errors in 108 judgments — worse than the haiku→sonnet default (4/108). All errors are false disputes of valid lemmas:
+
+- **canon/ConstraintTargetsExist** (1/3) and **canon/EdgeEndpointsExist** (1/3): Sonnet's informalization adds caveats and nuance that haiku omits, giving the compare step more surface area to find spurious discrepancies. These lemmas are 3/3 with haiku.
+- **kanban/CardInExactlyOneColumn** (1/3): Still fails like haiku (0/3), but slightly better — sonnet occasionally recovers the partition semantics from multiset cardinality.
+- **kanban/AllocatorAlwaysFresh** (2/3): New failure not seen with haiku. Sonnet over-specifies the allocator invariant in its back-translation.
+
+Notably, sonnet→sonnet *fixes* the haiku→sonnet error on **WipLimitsRespected** (3/3 vs 2/3) — sonnet's richer informalization captures WIP threshold semantics that haiku loses. But this gain is outweighed by the new canon and kanban regressions.
+
+The takeaway: a smarter informalizer is a double-edged sword. It recovers more semantic detail (fixing WipLimitsRespected) but also introduces interpretive nuance that the compare step mistakes for discrepancies (breaking canon lemmas). Haiku's simpler, more literal back-translations are net better because they give the compare step less to second-guess.
 
 ## What Naive Gets Wrong
 
@@ -126,7 +139,7 @@ All 8 bogus lemmas correctly flagged by both models (8/8).
 
 **Batching is a free lunch.** Two-pass makes 2 API calls per run vs 36. It's both more accurate and 3x faster. The batch informalize call processes all lemmas at once without cross-contamination, because each lemma is independent.
 
-**The remaining gap is informalization fidelity.** The 4 two-pass errors are all cases where haiku's back-translation loses important semantic content (multiset partition logic, WIP threshold semantics). These could potentially be addressed by using a stronger informalization model on hard domains, at the cost of more anchoring risk if the model is "too smart" and infers the requirement.
+**The remaining gap is informalization fidelity — but upgrading the model makes it worse.** The 4 two-pass errors are all cases where haiku's back-translation loses important semantic content (multiset partition logic, WIP threshold semantics). However, swapping in sonnet for informalization (93.5%) is worse than haiku (96.3%): sonnet's richer back-translations introduce interpretive nuance that the compare step mistakes for discrepancies. A smarter informalizer fixes some errors (WipLimitsRespected) but creates more new ones (canon/ConstraintTargetsExist, canon/EdgeEndpointsExist, kanban/AllocatorAlwaysFresh). Haiku's literal simplicity is a feature, not a limitation.
 
 ## Demo: Election Tally
 
