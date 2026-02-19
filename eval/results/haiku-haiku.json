@@ -1,0 +1,987 @@
+{
+  "label": "haiku-haiku",
+  "timestamp": "2026-02-19T22:25:15.574Z",
+  "config": {
+    "runs": 3,
+    "model": "claude-sonnet-4-5-20250929",
+    "passthrough": [
+      "--compare-model",
+      "claude-haiku-4-5-20251001"
+    ]
+  },
+  "totalElapsedMs": 79256,
+  "results": [
+    {
+      "domain": "colorwheel",
+      "requirement": "The base hue is always in valid range",
+      "lemmaName": "BaseHueInRange",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 11465
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "There are always exactly 5 colors in the palette",
+      "lemmaName": "AlwaysFiveColors",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 11465
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Every color has valid saturation and lightness values",
+      "lemmaName": "AllColorsValid",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 11465
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Contrast pair indices are valid (between 0 and 4)",
+      "lemmaName": "ContrastPairIndicesValid",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 11465
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "When a mood is set (not Custom), all colors satisfy the mood constraints",
+      "lemmaName": "MoodConstraintsSatisfied",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 11465
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Hues follow the selected harmony pattern",
+      "lemmaName": "HuesFollowHarmony",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 11465
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "There are always exactly 5 colors in the palette",
+      "lemmaName": "PaletteNonEmpty",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 11465
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegative",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 12385
+    },
+    {
+      "domain": "counter",
+      "requirement": "The initial state satisfies the invariant",
+      "lemmaName": "InitSatisfiesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 12385
+    },
+    {
+      "domain": "counter",
+      "requirement": "Every action preserves the invariant after normalization",
+      "lemmaName": "StepPreservesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 12385
+    },
+    {
+      "domain": "counter",
+      "requirement": "Decrementing at zero keeps the counter at zero",
+      "lemmaName": "DecAtZeroKeepsZero",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 12385
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegAlt",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 12385
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegLarge",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 12385
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterLowerBound",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 12385
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Column names are unique (no duplicate columns)",
+      "lemmaName": "ColumnsAreUnique",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Every card appears in exactly one column (exact partition)",
+      "lemmaName": "CardInExactlyOneColumn",
+      "expected": "confirmed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "No card ID appears twice across all lanes (no duplicates)",
+      "lemmaName": "NoCardDuplicates",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Each column respects its WIP limit (number of cards does not exceed the limit)",
+      "lemmaName": "WipLimitsRespected",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Adding a card to a full column is a no-op",
+      "lemmaName": "AddCardToFullColumnIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "The card allocator is always fresh (no allocated ID reused)",
+      "lemmaName": "AllocatorAlwaysFresh",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Lanes and WIP maps are defined exactly for existing columns",
+      "lemmaName": "LanesAndWipMatchColumns",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Moving a card preserves the total number of cards",
+      "lemmaName": "MoveCardPreservesTotal",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Every card appears in exactly one column (exact partition)",
+      "lemmaName": "CardPartitionNoDups",
+      "expected": "disputed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 20076
+    },
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 13218
+    },
+    {
+      "domain": "canon",
+      "requirement": "All edge endpoints reference existing nodes",
+      "lemmaName": "EdgeEndpointsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 13218
+    },
+    {
+      "domain": "canon",
+      "requirement": "Adding a node with an existing ID is a no-op",
+      "lemmaName": "AddExistingNodeIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 13218
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeCleansUp",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 13218
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeDropsId",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 13218
+    },
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExistEmpty",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 13218
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "All granted capabilities reference existing subjects",
+      "lemmaName": "GrantSubjectsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 14009
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Delegation endpoints (from, to) must be existing subjects",
+      "lemmaName": "DelegationEndpointsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 14009
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Edge IDs are always less than the next allocator (freshness)",
+      "lemmaName": "EdgeIdsFresh",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 14009
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Granting a capability to a non-existent subject is a no-op",
+      "lemmaName": "GrantNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 14009
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Delegating between non-existent subjects is a no-op",
+      "lemmaName": "DelegateNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 14009
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Revoking a non-existent delegation is a no-op",
+      "lemmaName": "RevokeNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 1,
+      "elapsedMs": 14009
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Granting a capability to a non-existent subject is a no-op",
+      "lemmaName": "GrantNonExistentIsNoopInit",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 1,
+      "elapsedMs": 14009
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "The base hue is always in valid range",
+      "lemmaName": "BaseHueInRange",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 11449
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "There are always exactly 5 colors in the palette",
+      "lemmaName": "AlwaysFiveColors",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 11449
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Every color has valid saturation and lightness values",
+      "lemmaName": "AllColorsValid",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 11449
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Contrast pair indices are valid (between 0 and 4)",
+      "lemmaName": "ContrastPairIndicesValid",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 11449
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "When a mood is set (not Custom), all colors satisfy the mood constraints",
+      "lemmaName": "MoodConstraintsSatisfied",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 11449
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Hues follow the selected harmony pattern",
+      "lemmaName": "HuesFollowHarmony",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 11449
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "There are always exactly 5 colors in the palette",
+      "lemmaName": "PaletteNonEmpty",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 11449
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegative",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12252
+    },
+    {
+      "domain": "counter",
+      "requirement": "The initial state satisfies the invariant",
+      "lemmaName": "InitSatisfiesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12252
+    },
+    {
+      "domain": "counter",
+      "requirement": "Every action preserves the invariant after normalization",
+      "lemmaName": "StepPreservesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12252
+    },
+    {
+      "domain": "counter",
+      "requirement": "Decrementing at zero keeps the counter at zero",
+      "lemmaName": "DecAtZeroKeepsZero",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12252
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegAlt",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 12252
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegLarge",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 12252
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterLowerBound",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 12252
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Column names are unique (no duplicate columns)",
+      "lemmaName": "ColumnsAreUnique",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Every card appears in exactly one column (exact partition)",
+      "lemmaName": "CardInExactlyOneColumn",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "No card ID appears twice across all lanes (no duplicates)",
+      "lemmaName": "NoCardDuplicates",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Each column respects its WIP limit (number of cards does not exceed the limit)",
+      "lemmaName": "WipLimitsRespected",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Adding a card to a full column is a no-op",
+      "lemmaName": "AddCardToFullColumnIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "The card allocator is always fresh (no allocated ID reused)",
+      "lemmaName": "AllocatorAlwaysFresh",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Lanes and WIP maps are defined exactly for existing columns",
+      "lemmaName": "LanesAndWipMatchColumns",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Moving a card preserves the total number of cards",
+      "lemmaName": "MoveCardPreservesTotal",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Every card appears in exactly one column (exact partition)",
+      "lemmaName": "CardPartitionNoDups",
+      "expected": "disputed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 20088
+    },
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12658
+    },
+    {
+      "domain": "canon",
+      "requirement": "All edge endpoints reference existing nodes",
+      "lemmaName": "EdgeEndpointsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12658
+    },
+    {
+      "domain": "canon",
+      "requirement": "Adding a node with an existing ID is a no-op",
+      "lemmaName": "AddExistingNodeIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12658
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeCleansUp",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 12658
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeDropsId",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 12658
+    },
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExistEmpty",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 12658
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "All granted capabilities reference existing subjects",
+      "lemmaName": "GrantSubjectsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 13645
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Delegation endpoints (from, to) must be existing subjects",
+      "lemmaName": "DelegationEndpointsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 13645
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Edge IDs are always less than the next allocator (freshness)",
+      "lemmaName": "EdgeIdsFresh",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 13645
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Granting a capability to a non-existent subject is a no-op",
+      "lemmaName": "GrantNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 13645
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Delegating between non-existent subjects is a no-op",
+      "lemmaName": "DelegateNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 13645
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Revoking a non-existent delegation is a no-op",
+      "lemmaName": "RevokeNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 2,
+      "elapsedMs": 13645
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Granting a capability to a non-existent subject is a no-op",
+      "lemmaName": "GrantNonExistentIsNoopInit",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 2,
+      "elapsedMs": 13645
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegative",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12656
+    },
+    {
+      "domain": "counter",
+      "requirement": "The initial state satisfies the invariant",
+      "lemmaName": "InitSatisfiesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12656
+    },
+    {
+      "domain": "counter",
+      "requirement": "Every action preserves the invariant after normalization",
+      "lemmaName": "StepPreservesInvariant",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12656
+    },
+    {
+      "domain": "counter",
+      "requirement": "Decrementing at zero keeps the counter at zero",
+      "lemmaName": "DecAtZeroKeepsZero",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12656
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegAlt",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 12656
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterNonNegLarge",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 12656
+    },
+    {
+      "domain": "counter",
+      "requirement": "The counter value is always non-negative",
+      "lemmaName": "CounterLowerBound",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 12656
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "The base hue is always in valid range",
+      "lemmaName": "BaseHueInRange",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12661
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "There are always exactly 5 colors in the palette",
+      "lemmaName": "AlwaysFiveColors",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12661
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Every color has valid saturation and lightness values",
+      "lemmaName": "AllColorsValid",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12661
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Contrast pair indices are valid (between 0 and 4)",
+      "lemmaName": "ContrastPairIndicesValid",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12661
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "When a mood is set (not Custom), all colors satisfy the mood constraints",
+      "lemmaName": "MoodConstraintsSatisfied",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12661
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "Hues follow the selected harmony pattern",
+      "lemmaName": "HuesFollowHarmony",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 12661
+    },
+    {
+      "domain": "colorwheel",
+      "requirement": "There are always exactly 5 colors in the palette",
+      "lemmaName": "PaletteNonEmpty",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 12661
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Column names are unique (no duplicate columns)",
+      "lemmaName": "ColumnsAreUnique",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Every card appears in exactly one column (exact partition)",
+      "lemmaName": "CardInExactlyOneColumn",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "No card ID appears twice across all lanes (no duplicates)",
+      "lemmaName": "NoCardDuplicates",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Each column respects its WIP limit (number of cards does not exceed the limit)",
+      "lemmaName": "WipLimitsRespected",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Adding a card to a full column is a no-op",
+      "lemmaName": "AddCardToFullColumnIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "The card allocator is always fresh (no allocated ID reused)",
+      "lemmaName": "AllocatorAlwaysFresh",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Lanes and WIP maps are defined exactly for existing columns",
+      "lemmaName": "LanesAndWipMatchColumns",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Moving a card preserves the total number of cards",
+      "lemmaName": "MoveCardPreservesTotal",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "kanban",
+      "requirement": "Every card appears in exactly one column (exact partition)",
+      "lemmaName": "CardPartitionNoDups",
+      "expected": "disputed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 19480
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "All granted capabilities reference existing subjects",
+      "lemmaName": "GrantSubjectsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14131
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Delegation endpoints (from, to) must be existing subjects",
+      "lemmaName": "DelegationEndpointsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14131
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Edge IDs are always less than the next allocator (freshness)",
+      "lemmaName": "EdgeIdsFresh",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14131
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Granting a capability to a non-existent subject is a no-op",
+      "lemmaName": "GrantNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14131
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Delegating between non-existent subjects is a no-op",
+      "lemmaName": "DelegateNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14131
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Revoking a non-existent delegation is a no-op",
+      "lemmaName": "RevokeNonExistentIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14131
+    },
+    {
+      "domain": "delegation-auth",
+      "requirement": "Granting a capability to a non-existent subject is a no-op",
+      "lemmaName": "GrantNonExistentIsNoopInit",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 14131
+    },
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14309
+    },
+    {
+      "domain": "canon",
+      "requirement": "All edge endpoints reference existing nodes",
+      "lemmaName": "EdgeEndpointsExist",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14309
+    },
+    {
+      "domain": "canon",
+      "requirement": "Adding a node with an existing ID is a no-op",
+      "lemmaName": "AddExistingNodeIsNoop",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14309
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeCleansUp",
+      "expected": "confirmed",
+      "status": "confirmed",
+      "run": 3,
+      "elapsedMs": 14309
+    },
+    {
+      "domain": "canon",
+      "requirement": "Removing a node cleans up related constraints and edges",
+      "lemmaName": "RemoveNodeDropsId",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 14309
+    },
+    {
+      "domain": "canon",
+      "requirement": "All constraint targets reference existing nodes",
+      "lemmaName": "ConstraintTargetsExistEmpty",
+      "expected": "disputed",
+      "status": "disputed",
+      "run": 3,
+      "elapsedMs": 14309
+    }
+  ]
+}

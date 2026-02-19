@@ -7,6 +7,8 @@ Core task: given a Dafny lemma and a natural-language requirement, does the lemm
 | Variant | Accuracy | Runs | Time/run | API calls/run |
 |---------|----------|------|----------|---------------|
 | **Two-pass** (default) | **99.1%** (107/108) | 3 | ~41s | 2 (batch) |
+| Two-pass (haiku→opus) | 97.2% (105/108) | 3 | ~44s | 2 (batch) |
+| Two-pass (haiku→haiku) | 96.3% (104/108) | 3 | ~26s | 2 (batch) |
 | Two-pass (opus→opus) | 95.4% (103/108) | 3 | ~65s | 2 (batch) |
 | Naive (Opus) | 94.4% (102/108) | 3 | ~107s | 36 |
 | Two-pass (sonnet→sonnet) | 94.4% (102/108) | 3 | ~56s | 2 (batch) |
@@ -14,64 +16,64 @@ Core task: given a Dafny lemma and a natural-language requirement, does the lemm
 | Single-prompt | 86.1% (31/36) | 1 | ~353s | 36 |
 | Claude Code | 69.4% (25/36) | 1 | ~693s | 36 |
 
-Model: `claude-sonnet-4-5-20250929` unless noted. Two-pass uses haiku for informalization, sonnet for comparison. Two-pass (sonnet→sonnet) and (opus→opus) use the same model for both steps.
+Model: `claude-sonnet-4-5-20250929` unless noted. Two-pass default uses haiku for informalization, sonnet for comparison. Notation: informalize→compare.
 
 ## Per-Domain Breakdown
 
 ```
-                                              exp    two-pass   tp/S→S   tp/O→O   single   naive/S  naive/O    cc
-──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                              exp    H→S      H→O      H→H      S→S      O→O      single   naive/S  naive/O    cc
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 canon (6 pairs, 2 bogus)
-  AddExistingNodeIsNoop                        ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  ConstraintTargetsExist                       ok     3/3       3/3      2/3 ↓    1/1      3/3      3/3      1/1
-  ConstraintTargetsExistEmpty                bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  EdgeEndpointsExist                           ok     3/3       3/3      2/3 ↓    1/1      3/3      3/3      0/1 ↓
-  RemoveNodeCleansUp                           ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  RemoveNodeDropsId                          bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-                                                      18/18     18/18    16/18    6/6      18/18    18/18    5/6
+  AddExistingNodeIsNoop                        ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  ConstraintTargetsExist                       ok     3/3      3/3      3/3      3/3      2/3 ↓    1/1      3/3      3/3      1/1
+  ConstraintTargetsExistEmpty                bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  EdgeEndpointsExist                           ok     3/3      3/3      3/3      3/3      2/3 ↓    1/1      3/3      3/3      0/1 ↓
+  RemoveNodeCleansUp                           ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  RemoveNodeDropsId                          bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+                                                      18/18    18/18    18/18    18/18    16/18    6/6      18/18    18/18    5/6
 
 colorwheel (7 pairs, 1 bogus)
-  AllColorsValid                               ok     3/3       3/3      3/3      1/1      0/3 ↓    3/3      0/1 ↓
-  AlwaysFiveColors                             ok     3/3       3/3      3/3      1/1      3/3      3/3      0/1 ↓
-  BaseHueInRange                               ok     3/3       3/3      3/3      1/1      3/3      3/3      0/1 ↓
-  ContrastPairIndicesValid                     ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  HuesFollowHarmony                            ok     3/3       3/3      3/3      1/1      3/3      3/3      0/1 ↓
-  MoodConstraintsSatisfied                     ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  PaletteNonEmpty                            bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-                                                      21/21     21/21    21/21    7/7      18/21    21/21    3/7
+  AllColorsValid                               ok     3/3      3/3      3/3      3/3      3/3      1/1      0/3 ↓    3/3      0/1 ↓
+  AlwaysFiveColors                             ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      0/1 ↓
+  BaseHueInRange                               ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      0/1 ↓
+  ContrastPairIndicesValid                     ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  HuesFollowHarmony                            ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      0/1 ↓
+  MoodConstraintsSatisfied                     ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  PaletteNonEmpty                            bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+                                                      21/21    21/21    21/21    21/21    21/21    7/7      18/21    21/21    3/7
 
 counter (7 pairs, 3 bogus)
-  CounterNonNegative                           ok     3/3       3/3      3/3      0/1 ↓    0/3 ↓    3/3      1/1
-  InitSatisfiesInvariant                       ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  StepPreservesInvariant                       ok     3/3       3/3      3/3      0/1 ↓    3/3      3/3      1/1
-  DecAtZeroKeepsZero                           ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  CounterLowerBound                          bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  CounterNonNegAlt                           bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  CounterNonNegLarge                         bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-                                                      21/21     21/21    21/21    6/7      18/21    21/21    7/7
+  CounterNonNegative                           ok     3/3      3/3      3/3      3/3      3/3      0/1 ↓    0/3 ↓    3/3      1/1
+  InitSatisfiesInvariant                       ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  StepPreservesInvariant                       ok     3/3      3/3      3/3      3/3      3/3      0/1 ↓    3/3      3/3      1/1
+  DecAtZeroKeepsZero                           ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  CounterLowerBound                          bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  CounterNonNegAlt                           bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  CounterNonNegLarge                         bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+                                                      21/21    21/21    21/21    21/21    21/21    6/7      18/21    21/21    7/7
 
 delegation-auth (7 pairs, 1 bogus)
-  GrantSubjectsExist                           ok     3/3       3/3      2/3 ↓    0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
-  DelegationEndpointsExist                     ok     3/3       3/3      3/3      1/1      3/3      3/3      0/1 ↓
-  EdgeIdsFresh                                 ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  GrantNonExistentIsNoop                       ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  DelegateNonExistentIsNoop                    ok     3/3       3/3      1/3 ↓    0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
-  RevokeNonExistentIsNoop                      ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  GrantNonExistentIsNoopInit                 bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-                                                      21/21     21/21    18/21    5/7      15/21    15/21    4/7
+  GrantSubjectsExist                           ok     3/3      3/3      3/3      3/3      2/3 ↓    0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
+  DelegationEndpointsExist                     ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      0/1 ↓
+  EdgeIdsFresh                                 ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  GrantNonExistentIsNoop                       ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  DelegateNonExistentIsNoop                    ok     3/3      0/3 ↓    3/3      3/3      1/3 ↓    0/1 ↓    0/3 ↓    0/3 ↓    0/1 ↓
+  RevokeNonExistentIsNoop                      ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  GrantNonExistentIsNoopInit                 bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+                                                      21/21    18/21    21/21    21/21    18/21    5/7      15/21    15/21    4/7
 
 kanban (9 pairs, 2 bogus)
-  ColumnsAreUnique                             ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  CardInExactlyOneColumn                       ok     2/3       0/3 ↓    3/3      0/1      3/3      3/3      0/1
-  NoCardDuplicates                             ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  WipLimitsRespected                           ok     3/3       3/3      3/3      1/1      3/3      3/3      0/1 ↓
-  AddCardToFullColumnIsNoop                    ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  AllocatorAlwaysFresh                         ok     3/3       0/3 ↓    3/3      1/1      3/3      3/3      0/1 ↓
-  LanesAndWipMatchColumns                      ok     3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  MoveCardPreservesTotal                     bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-  CardPartitionNoDups                        bogus    3/3       3/3      3/3      1/1      3/3      3/3      1/1
-                                                      26/27     21/27    27/27    7/9      27/27    27/27    6/9
+  ColumnsAreUnique                             ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  CardInExactlyOneColumn                       ok     2/3      3/3      2/3      0/3 ↓    3/3      0/1      3/3      3/3      0/1
+  NoCardDuplicates                             ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  WipLimitsRespected                           ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      0/1 ↓
+  AddCardToFullColumnIsNoop                    ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  AllocatorAlwaysFresh                         ok     3/3      3/3      3/3      0/3 ↓    3/3      1/1      3/3      3/3      0/1 ↓
+  LanesAndWipMatchColumns                      ok     3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  MoveCardPreservesTotal                     bogus    3/3      3/3      3/3      3/3      3/3      1/1      3/3      3/3      1/1
+  CardPartitionNoDups                        bogus    3/3      3/3      0/3 ↓    3/3      3/3      1/1      3/3      3/3      1/1
+                                                      26/27    27/27    23/27    21/27    27/27    7/9      27/27    27/27    6/9
 ```
 
 ## What Two-Pass Gets Wrong
@@ -81,6 +83,21 @@ Only 1 error in 108 judgments:
 - **CardInExactlyOneColumn** (2/3): The lemma expresses a partition property using multiset cardinality. The informalization step occasionally fails to recover the "exactly one column" phrasing from the multiset math — it describes membership without exclusivity. This is a genuine informalization difficulty, not an anchoring problem.
 
 All 8 bogus lemmas were correctly flagged as disputed in all 3 runs (24/24).
+
+## What Two-Pass (Haiku→Opus) Gets Wrong
+
+3 errors in 108 judgments — worse than haiku→sonnet despite a stronger compare model:
+
+- **delegation-auth/DelegateNonExistentIsNoop** (0/3): Opus's compare step consistently false-disputes this valid lemma. The same lemma is 3/3 with sonnet compare. Opus is too aggressive when evaluating delegation-auth invariant structure.
+
+All 8 bogus lemmas correctly flagged (24/24).
+
+## What Two-Pass (Haiku→Haiku) Gets Wrong
+
+4 errors in 108 judgments — and a qualitatively new failure mode:
+
+- **kanban/CardInExactlyOneColumn** (2/3): Same multiset partition difficulty as haiku→sonnet.
+- **kanban/CardPartitionNoDups** (0/3): This is a **bogus lemma that haiku fails to catch** in all 3 runs. This is the only variant where a bogus lemma passes undetected. Haiku's compare step is too credulous — it accepts a weakened postcondition that sonnet and opus correctly reject.
 
 ## What Two-Pass (Sonnet→Sonnet) Gets Wrong
 
@@ -135,11 +152,11 @@ All 8 bogus lemmas correctly flagged by both models (8/8).
 
 **Structural separation still matters.** The gap between two-pass (99.1%) and naive Sonnet (88.9%) shows that forcing blind informalization via separate API calls avoids anchoring. Even naive Opus (94.4%) can't match the default two-pass.
 
-**Haiku is the best informalizer.** Counter-intuitively, the smallest model produces the best back-translations for this task. Haiku→sonnet (99.1%) beats sonnet→sonnet (94.4%) and opus→opus (95.4%). Smarter models add interpretive nuance that the compare step mistakes for discrepancies. Haiku's literal simplicity, reinforced by the literal instruction, is ideal.
+**The haiku→sonnet pairing is specifically good, not just "haiku is good."** Haiku informalize + sonnet compare (99.1%) beats every other combination. But this isn't simply because haiku is the best informalizer — it's because the pairing is well-calibrated. Upgrading the compare model to opus (97.2%) makes it too skeptical: opus false-disputes DelegateNonExistentIsNoop in all 3 runs. Downgrading to haiku compare (96.3%) makes it too credulous: haiku fails to catch CardPartitionNoDups, a bogus lemma, in all 3 runs — the only variant where a bogus lemma passes undetected. Sonnet sits in the sweet spot: skeptical enough to catch all bogus lemmas, but not so aggressive that it false-disputes valid ones.
 
-**GrantSubjectsExist and DelegateNonExistentIsNoop are irreducibly hard for single-call variants.** Every single-call variant (naive, single-prompt, Claude Code) across both Sonnet and Opus gets these two delegation-auth lemmas wrong. Only two-pass with structural separation gets them right. These may be cases where the invariant structure genuinely requires blind informalization to avoid anchoring.
+**GrantSubjectsExist and DelegateNonExistentIsNoop are irreducibly hard for single-call variants.** Every single-call variant (naive, single-prompt, Claude Code) across both Sonnet and Opus gets these two delegation-auth lemmas wrong. Only two-pass with structural separation gets them right — unless opus does the comparison, in which case DelegateNonExistentIsNoop fails again (0/3).
 
-**Bogus detection is easy; valid confirmation is hard.** All variants catch bogus lemmas reliably (8/8 across the board). The accuracy differences come entirely from false disputes of valid lemmas — the model being too skeptical, not too credulous.
+**Bogus detection is easy; valid confirmation is hard — with one exception.** All variants catch bogus lemmas reliably (8/8) except haiku→haiku, which misses CardPartitionNoDups (0/3). This shows that the compare step needs at least sonnet-level capability to reliably reject weakened postconditions.
 
 **Batching is a free lunch.** Two-pass makes 2 API calls per run vs 36. It's both more accurate and faster. The batch informalize call processes all lemmas at once without cross-contamination, because each lemma is independent.
 
