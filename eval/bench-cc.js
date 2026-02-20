@@ -10,6 +10,8 @@
  * Usage:
  *   node eval/bench-cc.js --runs 1 --label cc-sonnet
  *   node eval/bench-cc.js --runs 3 --label cc-opus --model claude-opus-4-6
+ *   node eval/bench-cc.js --runs 3 --label cc-twopass --two-pass
+ *   node eval/bench-cc.js --runs 3 --label cc-twopass --two-pass --informalize-model haiku --compare-model sonnet
  */
 
 import { spawn } from 'node:child_process';
@@ -17,7 +19,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { PROJECTS } from '../test/integration/projects.js';
 import { extractLemma } from '../src/extract.js';
-import { CLAIMCHECK_PROMPT, NAIVE_PROMPT } from '../src/prompts.js';
+import { CLAIMCHECK_PROMPT, NAIVE_PROMPT, INFORMALIZE_PROMPT, ROUNDTRIP_COMPARE_PROMPT } from '../src/prompts.js';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const MAPPINGS_DIR = resolve(ROOT, 'test/integration/mappings');
@@ -42,15 +44,19 @@ const model = getArg('--model', null);
 const verbose = args.includes('--verbose');
 
 const useNaive = args.includes('--naive');
+const useTwoPass = args.includes('--two-pass');
+const informalizeModel = getArg('--informalize-model', null);
+const compareModel = getArg('--compare-model', null);
 const domainFilter = getArg('--domain', null);
 const DOMAINS = domainFilter ? [domainFilter] : ALL_DOMAINS;
 const lemmaFilter = getArg('--lemma', null);
 
 // --- Call claude -p ---
 
-function callClaude(prompt) {
+function callClaude(prompt, modelOverride) {
   const ccArgs = ['-p', prompt, '--output-format', 'text', '--max-turns', '1', '--tools', ''];
-  if (model) ccArgs.push('--model', model);
+  const effectiveModel = modelOverride || model;
+  if (effectiveModel) ccArgs.push('--model', effectiveModel);
 
   return new Promise((resolve, reject) => {
     const env = { ...process.env };
@@ -102,14 +108,96 @@ function parseVerdict(output) {
   return null;
 }
 
+// --- Two-pass helpers ---
+
+/**
+ * Build a batched informalize prompt for all lemmas in a domain.
+ */
+function buildInformalizePrompt(domain, lemmas) {
+  const base = INFORMALIZE_PROMPT(domain, lemmas);
+  return base.replace(
+    /Call the record_informalizations tool[^\n]*/,
+    `For each lemma, respond using this exact format (repeat for each lemma):
+
+## Lemma: <lemmaName>
+**Natural language:** <what the lemma guarantees, literally>
+**Preconditions:** <requires clauses in English>
+**Postcondition:** <ensures clauses in English>
+**Scope:** <what it applies to>
+**Strength:** trivial | weak | moderate | strong`
+  );
+}
+
+/**
+ * Parse batched informalize output into a map of lemmaName → informalization.
+ */
+function parseInformalizations(output) {
+  const results = {};
+  // Split on "## Lemma: " headers
+  const sections = output.split(/^## Lemma:\s*/m).slice(1);
+  for (const section of sections) {
+    const nameMatch = section.match(/^(.+?)$/m);
+    if (!nameMatch) continue;
+    const lemmaName = nameMatch[1].trim();
+    const get = (label) => {
+      const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|$)`, 'is');
+      const m = section.match(re);
+      return m ? m[1].trim() : '(not found)';
+    };
+    results[lemmaName] = {
+      naturalLanguage: get('Natural language'),
+      preconditions: get('Preconditions'),
+      postcondition: get('Postcondition'),
+      scope: get('Scope'),
+      strength: get('Strength').toLowerCase(),
+    };
+  }
+  return results;
+}
+
+/**
+ * Build a batched compare prompt for all requirement-lemma pairs in a domain.
+ */
+function buildComparePrompt(domain, pairs) {
+  const base = ROUNDTRIP_COMPARE_PROMPT(domain, pairs);
+  return base.replace(
+    /Call the record_roundtrip_comparisons tool[^\n]*/,
+    `For each pair, state your verdict using this exact format (repeat for each pair):
+
+## Lemma: <lemmaName>
+**Verdict:** JUSTIFIED | NOT_JUSTIFIED`
+  );
+}
+
+/**
+ * Parse batched compare output into a map of lemmaName → verdict string.
+ */
+function parseVerdicts(output) {
+  const results = {};
+  const sections = output.split(/^## Lemma:\s*/m).slice(1);
+  for (const section of sections) {
+    const nameMatch = section.match(/^(.+?)$/m);
+    if (!nameMatch) continue;
+    const lemmaName = nameMatch[1].trim();
+    results[lemmaName] = parseVerdict(section);
+  }
+  return results;
+}
+
 // --- Main ---
 
 async function main() {
   const projects = PROJECTS.filter(p => DOMAINS.includes(p.name));
 
+  const mode = useTwoPass ? 'two-pass' : useNaive ? 'naive' : 'single-prompt';
   console.error(`Claude Code Benchmark: ${label}`);
   console.error(`  runs: ${runs}`);
+  console.error(`  mode: ${mode}`);
   console.error(`  model: ${model || '(default)'}`);
+  if (useTwoPass) {
+    console.error(`  informalize-model: ${informalizeModel || model || '(default)'}`);
+    console.error(`  compare-model: ${compareModel || model || '(default)'}`);
+  }
   console.error(`  domains: ${projects.map(p => p.name).join(', ')}`);
   console.error('');
 
@@ -130,6 +218,8 @@ async function main() {
       let mapping = JSON.parse(await readFile(mappingPath, 'utf-8'));
       if (lemmaFilter) mapping = mapping.filter(e => e.lemmaName === lemmaFilter);
 
+      // Resolve all lemma code up front
+      const resolved = [];
       for (const entry of mapping) {
         const code = extractLemma(dfySource, entry.lemmaName);
         if (!code) {
@@ -145,50 +235,123 @@ async function main() {
           });
           continue;
         }
+        resolved.push({ entry, code });
+      }
 
-        const prompt = useNaive
-          ? NAIVE_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
-              .replace(/Call the record_naive_verdict tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | NOT_JUSTIFIED`)
-          : CLAIMCHECK_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
-              .replace(/Call the record_claimcheck tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | PARTIALLY_JUSTIFIED | NOT_JUSTIFIED | VACUOUS`);
-
+      if (useTwoPass && resolved.length > 0) {
+        // --- Two-pass: batch all lemmas in 2 calls per domain ---
         try {
-          const lemmaStart = Date.now();
-          const output = await callClaude(prompt);
-          const elapsedMs = Date.now() - lemmaStart;
-          const verdict = parseVerdict(output);
+          // Pass 1: Informalize all lemmas at once
+          const lemmas = resolved.map(r => ({ lemmaName: r.entry.lemmaName, dafnyCode: r.code }));
+          const infPrompt = buildInformalizePrompt(project.name, lemmas);
+          const infOutput = await callClaude(infPrompt, informalizeModel);
+          const informalizations = parseInformalizations(infOutput);
 
           if (verbose) {
-            console.error(`    --- ${entry.lemmaName} output ---`);
-            console.error(output.slice(0, 500));
+            console.error(`    --- informalization output ---`);
+            console.error(infOutput.slice(0, 1000));
             console.error('    ---');
           }
 
-          const status = verdict === 'JUSTIFIED' ? 'confirmed' : 'disputed';
+          // Pass 2: Compare all pairs at once
+          const pairs = resolved.map((r, i) => ({
+            requirementIndex: i,
+            requirement: r.entry.requirement,
+            lemmaName: r.entry.lemmaName,
+            dafnyCode: r.code,
+            informalization: informalizations[r.entry.lemmaName] || {
+              naturalLanguage: '(parse failed)',
+              preconditions: '(parse failed)',
+              postcondition: '(parse failed)',
+              scope: '(parse failed)',
+              strength: '(parse failed)',
+            },
+          }));
+          const cmpPrompt = buildComparePrompt(project.name, pairs);
+          const cmpOutput = await callClaude(cmpPrompt, compareModel);
+          const verdicts = parseVerdicts(cmpOutput);
 
-          console.error(`    ${entry.lemmaName}: ${verdict || 'PARSE_FAILED'} → ${status} (${(elapsedMs / 1000).toFixed(1)}s)`);
+          if (verbose) {
+            console.error(`    --- comparison output ---`);
+            console.error(cmpOutput.slice(0, 1000));
+            console.error('    ---');
+          }
 
-          allResults.push({
-            domain: project.name,
-            requirement: entry.requirement,
-            lemmaName: entry.lemmaName,
-            expected: entry.expected ?? 'confirmed',
-            status,
-            verdict,
-            run,
-            elapsedMs,
-          });
+          // Record results
+          for (const { entry } of resolved) {
+            const verdict = verdicts[entry.lemmaName] || null;
+            const status = verdict === 'JUSTIFIED' ? 'confirmed' : 'disputed';
+            console.error(`    ${entry.lemmaName}: ${verdict || 'PARSE_FAILED'} → ${status}`);
+            allResults.push({
+              domain: project.name,
+              requirement: entry.requirement,
+              lemmaName: entry.lemmaName,
+              expected: entry.expected ?? 'confirmed',
+              status,
+              verdict,
+              run,
+            });
+          }
         } catch (err) {
-          console.error(`    ${entry.lemmaName}: ERROR — ${err.message}`);
-          allResults.push({
-            domain: project.name,
-            requirement: entry.requirement,
-            lemmaName: entry.lemmaName,
-            expected: entry.expected ?? 'confirmed',
-            status: 'error',
-            verdict: null,
-            run,
-          });
+          console.error(`    TWO-PASS ERROR: ${err.message}`);
+          for (const { entry } of resolved) {
+            allResults.push({
+              domain: project.name,
+              requirement: entry.requirement,
+              lemmaName: entry.lemmaName,
+              expected: entry.expected ?? 'confirmed',
+              status: 'error',
+              verdict: null,
+              run,
+            });
+          }
+        }
+      } else {
+        // --- Single-prompt mode: one call per lemma ---
+        for (const { entry, code } of resolved) {
+          try {
+            const lemmaStart = Date.now();
+            const prompt = useNaive
+              ? NAIVE_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
+                  .replace(/Call the record_naive_verdict tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | NOT_JUSTIFIED`)
+              : CLAIMCHECK_PROMPT(project.name, entry.lemmaName, code, entry.requirement)
+                  .replace(/Call the record_claimcheck tool[^\n]*/, `State your final verdict as:\n\n**Verdict:** JUSTIFIED | PARTIALLY_JUSTIFIED | NOT_JUSTIFIED | VACUOUS`);
+
+            const output = await callClaude(prompt);
+            const verdict = parseVerdict(output);
+            const elapsedMs = Date.now() - lemmaStart;
+            const status = verdict === 'JUSTIFIED' ? 'confirmed' : 'disputed';
+
+            if (verbose) {
+              console.error(`    --- ${entry.lemmaName} output ---`);
+              console.error(output.slice(0, 500));
+              console.error('    ---');
+            }
+
+            console.error(`    ${entry.lemmaName}: ${verdict || 'PARSE_FAILED'} → ${status} (${(elapsedMs / 1000).toFixed(1)}s)`);
+
+            allResults.push({
+              domain: project.name,
+              requirement: entry.requirement,
+              lemmaName: entry.lemmaName,
+              expected: entry.expected ?? 'confirmed',
+              status,
+              verdict,
+              run,
+              elapsedMs,
+            });
+          } catch (err) {
+            console.error(`    ${entry.lemmaName}: ERROR — ${err.message}`);
+            allResults.push({
+              domain: project.name,
+              requirement: entry.requirement,
+              lemmaName: entry.lemmaName,
+              expected: entry.expected ?? 'confirmed',
+              status: 'error',
+              verdict: null,
+              run,
+            });
+          }
         }
       }
 
@@ -210,7 +373,9 @@ async function main() {
     config: {
       runs,
       model: model || '(claude-code default)',
-      mode: useNaive ? 'claude-code-naive' : 'claude-code',
+      informalizeModel: useTwoPass ? (informalizeModel || model || '(claude-code default)') : undefined,
+      compareModel: useTwoPass ? (compareModel || model || '(claude-code default)') : undefined,
+      mode: useTwoPass ? 'claude-code-two-pass' : useNaive ? 'claude-code-naive' : 'claude-code',
     },
     totalElapsedMs: Date.now() - totalStart,
     results: allResults,

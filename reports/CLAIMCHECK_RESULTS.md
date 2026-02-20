@@ -7,6 +7,7 @@ Core task: given a Dafny lemma and a natural-language requirement, does the lemm
 | Variant | Accuracy | Runs | Time/run | API calls/run |
 |---------|----------|------|----------|---------------|
 | **Two-pass** (default) | **99.1%** (107/108) | 3 | ~41s | 2 (batch) |
+| CC two-pass (haiku→sonnet) | 100% (36/36) | 1 | ~269s | 2 (batch) |
 | Two-pass (haiku→opus) | 97.2% (105/108) | 3 | ~44s | 2 (batch) |
 | Two-pass (haiku→haiku) | 96.3% (104/108) | 3 | ~26s | 2 (batch) |
 | Two-pass (opus→opus) | 95.4% (103/108) | 3 | ~65s | 2 (batch) |
@@ -15,6 +16,8 @@ Core task: given a Dafny lemma and a natural-language requirement, does the lemm
 | Naive (Sonnet) | 88.9% (96/108) | 3 | ~147s | 36 |
 | Single-prompt | 86.1% (31/36) | 1 | ~353s | 36 |
 | Claude Code | 69.4% (25/36) | 1 | ~693s | 36 |
+
+"CC" = run via `claude -p` (Claude Code CLI). ~6.5x slower than direct API due to subprocess spawn overhead.
 
 Model: `claude-sonnet-4-5-20250929` unless noted. Two-pass default uses haiku for informalization, sonnet for comparison. Notation: informalize→compare.
 
