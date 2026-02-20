@@ -8,6 +8,7 @@ Core task: given a Dafny lemma and a natural-language requirement, does the lemm
 |---------|----------|------|----------|---------------|
 | **Two-pass** (default) | **99.1%** (107/108) | 3 | ~41s | 2 (batch) |
 | CC two-pass (haiku→sonnet) | 100% (36/36) | 1 | ~269s | 2 (batch) |
+| CC two-pass (opus→opus) | 100% (36/36) | 1 | ~239s | 2 (batch) |
 | Two-pass (haiku→opus) | 97.2% (105/108) | 3 | ~44s | 2 (batch) |
 | Two-pass (haiku→haiku) | 96.3% (104/108) | 3 | ~26s | 2 (batch) |
 | Two-pass (opus→opus) | 95.4% (103/108) | 3 | ~65s | 2 (batch) |
