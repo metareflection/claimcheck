@@ -4,6 +4,8 @@ Does a Dafny lemma actually mean what a natural language requirement says? Dafny
 
 Someone else (Claude Code, a human, any agent) writes the lemmas and claims "requirement X is covered by lemma Y." Claimcheck verifies that claim via a round-trip: informalize the lemma back to English (without seeing the requirement), then compare.
 
+[Blog post: _claimcheck: Narrowing the Gap between Proof and Intent_](https://midspiral.com/blog/claimcheck-narrowing-the-gap-between-proof-and-intent/).
+
 ## Modes
 
 ### Two-pass mode (default)
