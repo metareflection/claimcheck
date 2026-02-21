@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "bin": {
-    "claimcheck": "./bin/claimcheck.js"
+    "claimcheck": "./bin/claimcheck.js",
+    "claimcheck-multi": "./bin/claimcheck-multi.js"
   },
   "exports": {
     ".": "./src/claimcheck.js",
