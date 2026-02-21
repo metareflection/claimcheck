@@ -11,7 +11,7 @@ function spawnClaude(prompt, opts = {}) {
   const args = [
     '-p', prompt,
     '--output-format', 'json',
-    '--max-turns', '2',
+    '--max-turns', '3',
   ];
   if (opts.jsonSchema) {
     args.push('--json-schema', JSON.stringify(opts.jsonSchema));
