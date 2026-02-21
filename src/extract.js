@@ -88,20 +88,16 @@ function findBodyBrace(src, start) {
       }
 
       // Check if this brace is line-initial (only whitespace before it on the line)
-      // OR if we're not inside any clause expression
       const lineStart = src.lastIndexOf('\n', i - 1);
       const prefix = src.slice(lineStart + 1, i);
       if (/^\s*$/.test(prefix)) {
         return i;
       }
 
-      // Also accept: brace immediately after a clause line that ends with newline
-      // This handles cases where { is on the same line after ensures/requires
-      // but there's nothing else — treat it as body brace if no clause keyword precedes on this line
-      const trimmedPrefix = prefix.trim();
-      const clauseKeywords = ['requires', 'ensures', 'decreases', 'modifies', 'invariant', 'reads'];
-      const isClauseContent = clauseKeywords.some(kw => trimmedPrefix.startsWith(kw));
-      if (!isClauseContent && trimmedPrefix === '') {
+      // Accept inline body brace immediately after closing paren: `lemma Foo(x: int) {}`
+      // When parenDepth just returned to 0 and no clause keywords have appeared,
+      // the brace follows the parameter list directly.
+      if (parenDepth === 0 && /\)\s*$/.test(prefix)) {
         return i;
       }
 

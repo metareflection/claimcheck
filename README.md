@@ -6,6 +6,13 @@ Someone else (Claude Code, a human, any agent) writes the lemmas and claims "req
 
 [Blog post: _claimcheck: Narrowing the Gap between Proof and Intent_](https://midspiral.com/blog/claimcheck-narrowing-the-gap-between-proof-and-intent/).
 
+## Installation
+
+```bash
+npm install
+npm link
+```
+
 ## Modes
 
 ### Two-pass mode (default)
@@ -41,19 +48,19 @@ Same single-prompt approach piped through `claude -p` — no structural or promp
 
 ```bash
 # Two-pass audit (default)
-node bin/claimcheck.js \
+claimcheck \
   -m test/integration/mappings/counter.json \
   --dfy test/integration/claims/counter.dfy \
   -d counter
 
 # With explicit module (needed for --verify with module-based .dfy files)
-node bin/claimcheck.js \
+claimcheck \
   -m test/integration/mappings/counter.json \
   --dfy test/integration/claims/counter.dfy \
   --module CounterDomain -d counter --verify
 
 # Single-prompt audit
-node bin/claimcheck.js \
+claimcheck \
   -m test/integration/mappings/counter.json \
   --dfy test/integration/claims/counter.dfy \
   -d counter --single-prompt --json
@@ -73,7 +80,7 @@ echo '{
     }
   ],
   "domain": "counter"
-}' | node bin/claimcheck.js --stdin
+}' | claimcheck --stdin
 ```
 
 ### Library usage

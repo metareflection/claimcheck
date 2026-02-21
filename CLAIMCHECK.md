@@ -11,7 +11,7 @@ After writing or modifying Dafny lemmas that claim to formalize natural-language
 Point at a mapping JSON and a .dfy file:
 
 ```bash
-node /path/to/claimcheck/bin/claimcheck.js \
+claimcheck \
   -m mapping.json \
   --dfy claims.dfy \
   -d mydomain \

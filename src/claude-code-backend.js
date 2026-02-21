@@ -53,9 +53,9 @@ const TEXT_INFORMALIZE_SUFFIX = `For each lemma, respond using this exact format
 **Scope:** <what it applies to>
 **Strength:** trivial | weak | moderate | strong`;
 
-const TEXT_COMPARE_SUFFIX = `For each pair, state your verdict using this exact format (repeat for each pair):
+const TEXT_COMPARE_SUFFIX = `For each pair, state your verdict using this exact format (repeat for each pair, even if the same lemma appears multiple times for different requirements):
 
-## Lemma: <lemmaName>
+## Pair: Requirement <requirementIndex> / <lemmaName>
 **Verdict:** JUSTIFIED | NOT_JUSTIFIED
 **Discrepancy:** <what the lemma gets wrong, or "none">
 **Weakening type:** none | tautology | weakened-postcondition | narrowed-scope | missing-case | wrong-property
@@ -104,17 +104,18 @@ function parseInformalizations(output) {
   for (const section of sections) {
     const nameMatch = section.match(/^(.+?)$/m);
     if (!nameMatch) continue;
-    const lemmaName = nameMatch[1].trim();
+    // Strip parenthetical suffixes like "(Lemma 0)" from the name
+    const lemmaName = nameMatch[1].trim().replace(/\s*\(.*\)\s*$/, '');
     const get = (label) => {
-      const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|$)`, 'is');
+      const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
       const m = section.match(re);
       return m ? m[1].trim() : '(not found)';
     };
     results.push({
       lemmaName,
       naturalLanguage: get('Natural language'),
-      preconditions: get('Preconditions'),
-      postcondition: get('Postcondition'),
+      preconditions: get('Preconditions?'),
+      postcondition: get('Postconditions?'),
       scope: get('Scope'),
       strength: get('Strength').toLowerCase(),
       confidence: 1,
@@ -125,13 +126,23 @@ function parseInformalizations(output) {
 
 function parseComparisons(output) {
   const results = [];
-  const sections = output.split(/^## Lemma:\s*/m).slice(1);
+  // Support both "## Pair: Requirement N / LemmaName" and "## Lemma: LemmaName (Requirement N)"
+  const sections = output.split(/^## (?:Pair|Lemma):\s*/m).slice(1);
   for (const section of sections) {
     const nameMatch = section.match(/^(.+?)$/m);
     if (!nameMatch) continue;
-    const lemmaName = nameMatch[1].trim();
+    const rawName = nameMatch[1].trim();
+    // Try "Requirement N / LemmaName" format first
+    const pairMatch = rawName.match(/Requirement\s+(\d+)\s*\/\s*(.+)/i);
+    // Fall back to "LemmaName (Requirement N)" format
+    const reqIdxMatch = !pairMatch && rawName.match(/\(Requirement\s+(\d+)\)/i);
+    const requirementIndex = pairMatch ? parseInt(pairMatch[1], 10)
+      : reqIdxMatch ? parseInt(reqIdxMatch[1], 10)
+      : null;
+    const lemmaName = pairMatch ? pairMatch[2].trim()
+      : rawName.replace(/\s*\(.*\)\s*$/, '');
     const get = (label) => {
-      const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|$)`, 'is');
+      const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
       const m = section.match(re);
       return m ? m[1].trim() : '';
     };
@@ -142,7 +153,7 @@ function parseComparisons(output) {
     const explanation = get('Explanation') || '';
 
     results.push({
-      requirementIndex: null, // will be patched by caller
+      requirementIndex,
       lemmaName,
       match,
       discrepancy: match ? '' : discrepancy,
@@ -155,7 +166,7 @@ function parseComparisons(output) {
 
 function parseClaimcheck(output) {
   const get = (label) => {
-    const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|$)`, 'is');
+    const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
     const m = output.match(re);
     return m ? m[1].trim() : '';
   };
@@ -182,7 +193,7 @@ function parseClaimcheck(output) {
 
 function parseNaiveVerdict(output) {
   const get = (label) => {
-    const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|$)`, 'is');
+    const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
     const m = output.match(re);
     return m ? m[1].trim() : '';
   };
@@ -239,6 +250,7 @@ export async function callViaClaudeCode({ model, prompt, tool, verbose }) {
 
   if (verbose) {
     console.error(`[claude-code] output_len=${output.length}`);
+    console.error(`[claude-code] raw output:\n---\n${output}\n---`);
   }
 
   const parser = PARSERS[toolName];
@@ -246,5 +258,11 @@ export async function callViaClaudeCode({ model, prompt, tool, verbose }) {
     throw new Error(`No parser for tool: ${toolName}`);
   }
 
-  return parser(output);
+  const parsed = parser(output);
+
+  if (verbose) {
+    console.error(`[claude-code] parsed result: ${JSON.stringify(parsed, null, 2).slice(0, 2000)}`);
+  }
+
+  return parsed;
 }
