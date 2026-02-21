@@ -1,14 +1,21 @@
 import { spawn } from 'node:child_process';
 
 /**
- * Call Claude Code (`claude -p`) and return text output.
+ * Call Claude Code (`claude -p`) with `--json-schema` and return parsed JSON.
  *
  * @param {string} prompt
- * @param {{ model?: string, verbose?: boolean }} opts
- * @returns {Promise<string>}
+ * @param {{ model?: string, verbose?: boolean, jsonSchema?: object }} opts
+ * @returns {Promise<object>} parsed structured_output from the JSON envelope
  */
 function spawnClaude(prompt, opts = {}) {
-  const args = ['-p', prompt, '--output-format', 'text', '--max-turns', '1', '--tools', ''];
+  const args = [
+    '-p', prompt,
+    '--output-format', 'json',
+    '--max-turns', '2',
+  ];
+  if (opts.jsonSchema) {
+    args.push('--json-schema', JSON.stringify(opts.jsonSchema));
+  }
   if (opts.model) args.push('--model', opts.model);
 
   return new Promise((resolve, reject) => {
@@ -31,8 +38,13 @@ function spawnClaude(prompt, opts = {}) {
     proc.on('close', code => {
       if (code !== 0) {
         reject(new Error(`claude -p failed: ${stderr || `exit code ${code}`}`));
-      } else {
-        resolve(stdout);
+        return;
+      }
+      try {
+        const envelope = JSON.parse(stdout);
+        resolve(envelope);
+      } catch (e) {
+        reject(new Error(`Failed to parse claude JSON output: ${e.message}\nRaw: ${stdout.slice(0, 500)}`));
       }
     });
     proc.on('error', err => {
@@ -41,228 +53,39 @@ function spawnClaude(prompt, opts = {}) {
   });
 }
 
-// --- Prompt adapters ---
-// Replace "Call the X tool..." instructions with text-format output instructions.
-
-const TEXT_INFORMALIZE_SUFFIX = `For each lemma, respond using this exact format (repeat for each lemma):
-
-## Lemma: <lemmaName>
-**Natural language:** <what the lemma guarantees, literally>
-**Preconditions:** <requires clauses in English>
-**Postcondition:** <ensures clauses in English>
-**Scope:** <what it applies to>
-**Strength:** trivial | weak | moderate | strong`;
-
-const TEXT_COMPARE_SUFFIX = `For each pair, state your verdict using this exact format (repeat for each pair, even if the same lemma appears multiple times for different requirements):
-
-## Pair: Requirement <requirementIndex> / <lemmaName>
-**Verdict:** JUSTIFIED | NOT_JUSTIFIED
-**Discrepancy:** <what the lemma gets wrong, or "none">
-**Weakening type:** none | tautology | weakened-postcondition | narrowed-scope | missing-case | wrong-property
-**Explanation:** <brief reasoning>`;
-
-const TEXT_CLAIMCHECK_SUFFIX = `State your final verdict using this exact format:
-
-**Informalization:** <plain English of what the lemma guarantees>
-**Ensures matches NL:** Yes | Partially | No
-**Ensures explanation:** <explanation>
-**Vacuous:** Yes | No
-**Vacuous explanation:** <explanation if yes, otherwise "N/A">
-**Surprising restrictions:** <description or "None">
-**Verdict:** JUSTIFIED | PARTIALLY_JUSTIFIED | NOT_JUSTIFIED | VACUOUS`;
-
-const TEXT_NAIVE_SUFFIX = `State your final verdict using this exact format:
-
-**Verdict:** JUSTIFIED | NOT_JUSTIFIED
-**Explanation:** <brief explanation>`;
-
 /**
- * Adapt a prompt by replacing the "Call the X tool..." instruction with
- * a text-format output instruction.
- */
-function adaptPrompt(prompt, toolName) {
-  switch (toolName) {
-    case 'record_informalizations':
-      return prompt.replace(/Call the record_informalizations tool[^\n]*/, TEXT_INFORMALIZE_SUFFIX);
-    case 'record_roundtrip_comparisons':
-      return prompt.replace(/Call the record_roundtrip_comparisons tool[^\n]*/, TEXT_COMPARE_SUFFIX);
-    case 'record_claimcheck':
-      return prompt.replace(/Call the record_claimcheck tool[^\n]*/, TEXT_CLAIMCHECK_SUFFIX);
-    case 'record_naive_verdict':
-      return prompt.replace(/Call the record_naive_verdict tool[^\n]*/, TEXT_NAIVE_SUFFIX);
-    default:
-      throw new Error(`Unknown tool: ${toolName}`);
-  }
-}
-
-// --- Text parsers ---
-// Parse text output back into the same shape as tool_use blocks.
-
-function parseInformalizations(output) {
-  const results = [];
-  const sections = output.split(/^## Lemma:\s*/m).slice(1);
-  for (const section of sections) {
-    const nameMatch = section.match(/^(.+?)$/m);
-    if (!nameMatch) continue;
-    // Strip parenthetical suffixes like "(Lemma 0)" from the name
-    const lemmaName = nameMatch[1].trim().replace(/\s*\(.*\)\s*$/, '');
-    const get = (label) => {
-      const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
-      const m = section.match(re);
-      return m ? m[1].trim() : '(not found)';
-    };
-    results.push({
-      lemmaName,
-      naturalLanguage: get('Natural language'),
-      preconditions: get('Preconditions?'),
-      postcondition: get('Postconditions?'),
-      scope: get('Scope'),
-      strength: get('Strength').toLowerCase(),
-      confidence: 1,
-    });
-  }
-  return { input: { informalizations: results } };
-}
-
-function parseComparisons(output) {
-  const results = [];
-  // Support both "## Pair: Requirement N / LemmaName" and "## Lemma: LemmaName (Requirement N)"
-  const sections = output.split(/^## (?:Pair|Lemma):\s*/m).slice(1);
-  for (const section of sections) {
-    const nameMatch = section.match(/^(.+?)$/m);
-    if (!nameMatch) continue;
-    const rawName = nameMatch[1].trim();
-    // Try "Requirement N / LemmaName" format first
-    const pairMatch = rawName.match(/Requirement\s+(\d+)\s*\/\s*(.+)/i);
-    // Fall back to "LemmaName (Requirement N)" format
-    const reqIdxMatch = !pairMatch && rawName.match(/\(Requirement\s+(\d+)\)/i);
-    const requirementIndex = pairMatch ? parseInt(pairMatch[1], 10)
-      : reqIdxMatch ? parseInt(reqIdxMatch[1], 10)
-      : null;
-    const lemmaName = pairMatch ? pairMatch[2].trim()
-      : rawName.replace(/\s*\(.*\)\s*$/, '');
-    const get = (label) => {
-      const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
-      const m = section.match(re);
-      return m ? m[1].trim() : '';
-    };
-    const verdictStr = get('Verdict').toUpperCase().replace(/\s+/g, '_');
-    const match = verdictStr === 'JUSTIFIED';
-    const discrepancy = get('Discrepancy') || '';
-    const weakeningType = get('Weakening type').toLowerCase().replace(/\s+/g, '-') || 'none';
-    const explanation = get('Explanation') || '';
-
-    results.push({
-      requirementIndex,
-      lemmaName,
-      match,
-      discrepancy: match ? '' : discrepancy,
-      weakeningType: match ? 'none' : weakeningType,
-      explanation,
-    });
-  }
-  return { input: { comparisons: results } };
-}
-
-function parseClaimcheck(output) {
-  const get = (label) => {
-    const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
-    const m = output.match(re);
-    return m ? m[1].trim() : '';
-  };
-
-  const verdict = get('Verdict').toUpperCase().replace(/\s+/g, '_');
-
-  // Also try to find verdict via fallback regex if structured parse fails
-  const effectiveVerdict = verdict || findLastVerdict(output);
-
-  return {
-    input: {
-      lemmaName: '',  // patched by caller
-      requirement: '', // patched by caller
-      informalization: get('Informalization'),
-      ensuresMatchesNL: get('Ensures matches NL') || 'No',
-      ensuresExplanation: get('Ensures explanation'),
-      vacuous: get('Vacuous').toLowerCase() === 'yes',
-      vacuousExplanation: get('Vacuous explanation'),
-      surprisingRestrictions: get('Surprising restrictions') || 'None',
-      verdict: effectiveVerdict || 'NOT_JUSTIFIED',
-    },
-  };
-}
-
-function parseNaiveVerdict(output) {
-  const get = (label) => {
-    const re = new RegExp(`\\*\\*${label}:\\*\\*\\s*(.+?)(?=\\n\\*\\*|\\n---|\n##|$)`, 'is');
-    const m = output.match(re);
-    return m ? m[1].trim() : '';
-  };
-
-  const verdict = get('Verdict').toUpperCase().replace(/\s+/g, '_') || findLastVerdict(output);
-
-  return {
-    input: {
-      lemmaName: '', // patched by caller
-      verdict: verdict || 'NOT_JUSTIFIED',
-      explanation: get('Explanation'),
-    },
-  };
-}
-
-/**
- * Fallback: find the last verdict keyword anywhere in the output.
- */
-function findLastVerdict(output) {
-  const VERDICT_RE = /(?:JUSTIFIED|PARTIALLY[_ ]JUSTIFIED|NOT[_ ]JUSTIFIED|VACUOUS)/gi;
-  const all = [...output.matchAll(VERDICT_RE)];
-  if (all.length > 0) {
-    return all[all.length - 1][0].toUpperCase().replace(/\s+/g, '_');
-  }
-  return null;
-}
-
-const PARSERS = {
-  record_informalizations: parseInformalizations,
-  record_roundtrip_comparisons: parseComparisons,
-  record_claimcheck: parseClaimcheck,
-  record_naive_verdict: parseNaiveVerdict,
-};
-
-/**
- * Drop-in replacement for callWithTool that uses `claude -p`.
+ * Drop-in replacement for callWithTool that uses `claude -p --json-schema`.
  *
- * Adapts the prompt for text output, spawns Claude Code, and parses
- * the result back into the same { input: { ... } } shape that
- * callWithTool returns.
+ * Passes the tool's input_schema as the JSON schema, parses the structured
+ * output, and returns { input: structured_output } (same shape as API).
  *
- * @param {{ model?: string, prompt: string, tool: { name: string }, toolChoice?: any, system?: string, verbose?: boolean, maxTokens?: number }} params
+ * @param {{ model?: string, prompt: string, tool: { name: string, input_schema: object }, verbose?: boolean }} params
  * @returns {Promise<{ input: object }>}
  */
 export async function callViaClaudeCode({ model, prompt, tool, verbose }) {
-  const toolName = tool.name;
-  const adapted = adaptPrompt(prompt, toolName);
+  // Replace "Call the <tool> tool..." instruction with a JSON instruction
+  const adapted = prompt.replace(/Call the \S+ tool[^\n]*/, 'Respond with your analysis as JSON.');
 
   if (verbose) {
-    console.error(`[claude-code] model=${model || '(default)'} tool=${toolName} prompt_len=${adapted.length}`);
+    console.error(`[claude-code] model=${model || '(default)'} tool=${tool.name} prompt_len=${adapted.length}`);
   }
 
-  const output = await spawnClaude(adapted, { model, verbose });
+  const envelope = await spawnClaude(adapted, {
+    model,
+    verbose,
+    jsonSchema: tool.input_schema,
+  });
+
+  if (envelope.is_error || !envelope.structured_output) {
+    const detail = envelope.result || envelope.subtype || 'unknown error';
+    throw new Error(`claude -p did not return structured output (${detail})`);
+  }
+
+  const structured = envelope.structured_output;
 
   if (verbose) {
-    console.error(`[claude-code] output_len=${output.length}`);
-    console.error(`[claude-code] raw output:\n---\n${output}\n---`);
+    console.error(`[claude-code] structured output: ${JSON.stringify(structured, null, 2).slice(0, 2000)}`);
   }
 
-  const parser = PARSERS[toolName];
-  if (!parser) {
-    throw new Error(`No parser for tool: ${toolName}`);
-  }
-
-  const parsed = parser(output);
-
-  if (verbose) {
-    console.error(`[claude-code] parsed result: ${JSON.stringify(parsed, null, 2).slice(0, 2000)}`);
-  }
-
-  return parsed;
+  return { input: structured };
 }
