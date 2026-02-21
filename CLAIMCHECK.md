@@ -22,6 +22,24 @@ The mapping JSON is an array of `{ requirement, lemmaName }` objects. The .dfy f
 
 A `--stdin` mode is also available for programmatic use — pipe `{ "claims": [{ requirement, lemmaName, dafnyCode }], "domain": "..." }` as JSON and get results on stdout.
 
+### Using `--claude-code`
+
+Add `--claude-code` to run via `claude -p` instead of the Anthropic API directly. This uses your existing Claude Code authentication and model routing.
+
+When running from inside a Claude Code session, the command must be run in the background with output redirected to files — foreground execution will appear to produce no output:
+
+```bash
+node /path/to/claimcheck/bin/claimcheck.js \
+  -m mapping.json \
+  --dfy claims.dfy \
+  -d mydomain \
+  --json \
+  --claude-code \
+  > /tmp/cc-out.json 2> /tmp/cc-err.log &
+```
+
+Then check results with `cat /tmp/cc-out.json`.
+
 ## Interpreting results
 
 Each claim gets one of:

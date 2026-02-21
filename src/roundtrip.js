@@ -1,4 +1,5 @@
 import { callWithTool } from './api.js';
+import { callViaClaudeCode } from './claude-code-backend.js';
 import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL, CLAIMCHECK_TOOL, NAIVE_TOOL } from './schemas.js';
 import {
   INFORMALIZE_PROMPT,
@@ -6,6 +7,21 @@ import {
   CLAIMCHECK_PROMPT,
   NAIVE_PROMPT,
 } from './prompts.js';
+
+/** Pick the right backend based on opts.claudeCode. */
+function getCallFn(opts) {
+  return opts.claudeCode ? callViaClaudeCode : callWithTool;
+}
+
+// Default models: short names for Claude Code, full IDs for the API.
+const MODEL_DEFAULTS = {
+  api: { haiku: 'claude-haiku-4-5-20251001', sonnet: 'claude-sonnet-4-5-20250929' },
+  cc:  { haiku: 'haiku',                     sonnet: 'sonnet' },
+};
+
+function defaultModels(opts) {
+  return opts.claudeCode ? MODEL_DEFAULTS.cc : MODEL_DEFAULTS.api;
+}
 
 /**
  * Run the round-trip check on lemmas.
@@ -24,14 +40,17 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
   if (lemmas.length === 0) return { passed: [], failed: [] };
 
   const log = opts.log ?? (() => {});
-  const informalizeModel = opts.informalizeModel ?? 'claude-haiku-4-5-20251001';
-  const compareModel = opts.compareModel ?? opts.model ?? 'claude-sonnet-4-5-20250929';
+  const defaults = defaultModels(opts);
+  const informalizeModel = opts.informalizeModel ?? defaults.haiku;
+  const compareModel = opts.compareModel ?? opts.model ?? defaults.sonnet;
+
+  const call = getCallFn(opts);
 
   // Step 1: Informalize all lemmas (one batch call, haiku)
   log(`[roundtrip] Informalizing ${lemmas.length} lemma(s)...`);
 
   const informalizePrompt = INFORMALIZE_PROMPT(domain, lemmas);
-  const informalizeResponse = await callWithTool({
+  const informalizeResponse = await call({
     model: informalizeModel,
     prompt: informalizePrompt,
     tool: INFORMALIZE_TOOL,
@@ -91,7 +110,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
   log(`[roundtrip] Comparing ${pairs.length} pair(s)...`);
 
   const comparePrompt = ROUNDTRIP_COMPARE_PROMPT(domain, pairs);
-  const compareResponse = await callWithTool({
+  const compareResponse = await call({
     model: compareModel,
     prompt: comparePrompt,
     tool: ROUNDTRIP_COMPARE_TOOL,
@@ -101,6 +120,17 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
   });
 
   const comparisons = compareResponse.input.comparisons;
+
+  // Patch requirementIndex from lemmaName when using Claude Code backend
+  // (text parser can't infer the index, only the name)
+  if (opts.claudeCode) {
+    const nameToIndex = new Map(pairs.map(p => [p.lemmaName, p.requirementIndex]));
+    for (const c of comparisons) {
+      if (c.requirementIndex == null) {
+        c.requirementIndex = nameToIndex.get(c.lemmaName) ?? null;
+      }
+    }
+  }
 
   // Index comparisons by requirement index
   const compByIndex = new Map();
@@ -151,7 +181,8 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
   if (lemmas.length === 0) return { passed: [], failed: [] };
 
   const log = opts.log ?? (() => {});
-  const model = opts.model ?? 'claude-sonnet-4-5-20250929';
+  const model = opts.model ?? defaultModels(opts).sonnet;
+  const call = getCallFn(opts);
 
   const passed = [];
   const failed = [];
@@ -161,7 +192,7 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
     log(`[claimcheck] Checking ${l.lemmaName} against: "${requirement.slice(0, 60)}..."`);
 
     const prompt = CLAIMCHECK_PROMPT(domain, l.lemmaName, l.dafnyCode, requirement);
-    const response = await callWithTool({
+    const response = await call({
       model,
       prompt,
       tool: CLAIMCHECK_TOOL,
@@ -227,7 +258,8 @@ export async function naiveCheck(lemmas, requirements, domain, opts = {}) {
   if (lemmas.length === 0) return { passed: [], failed: [] };
 
   const log = opts.log ?? (() => {});
-  const model = opts.model ?? 'claude-sonnet-4-5-20250929';
+  const model = opts.model ?? defaultModels(opts).sonnet;
+  const call = getCallFn(opts);
 
   const passed = [];
   const failed = [];
@@ -237,7 +269,7 @@ export async function naiveCheck(lemmas, requirements, domain, opts = {}) {
     log(`[naive] Checking ${l.lemmaName} against: "${requirement.slice(0, 60)}..."`);
 
     const prompt = NAIVE_PROMPT(domain, l.lemmaName, l.dafnyCode, requirement);
-    const response = await callWithTool({
+    const response = await call({
       model,
       prompt,
       tool: NAIVE_TOOL,
