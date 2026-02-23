@@ -1,5 +1,5 @@
 {
-  "name": "@midspiral/claimcheck",
+  "name": "claimcheck",
   "version": "0.1.0",
   "type": "module",
   "files": [
@@ -16,8 +16,5 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0"
-  },
-  "publishConfig": {
-      "access": "restricted"
   }
 }
