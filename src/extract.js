@@ -16,9 +16,9 @@ import { findMatchingBrace } from './erase.js';
  */
 export function extractLemma(dfySource, lemmaName) {
   const stripped = stripComments(dfySource);
-  // Match "lemma" (with optional twostate/ghost prefix) followed by the name
+  // Match "lemma" or "method" (with optional twostate/ghost prefix) followed by the name
   const pattern = new RegExp(
-    `\\b((?:twostate\\s+)?(?:ghost\\s+)?lemma)\\s+(?:\\{:[^}]*\\}\\s*)*${escapeRegex(lemmaName)}\\b`,
+    `\\b((?:twostate\\s+)?(?:ghost\\s+)?(?:lemma|method))\\s+(?:\\{:[^}]*\\}\\s*)*${escapeRegex(lemmaName)}\\b`,
     'g',
   );
   // Find the match in comment-stripped source, use position to extract from original
