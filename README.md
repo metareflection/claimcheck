@@ -9,6 +9,12 @@ Someone else (Claude Code, a human, any agent) writes the lemmas and claims "req
 ## Installation
 
 ```bash
+npm install -g claimcheck
+```
+
+or
+
+```bash
 npm install
 npm link
 ```
