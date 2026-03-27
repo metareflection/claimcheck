@@ -28,6 +28,9 @@ Options:
   --model <id>                 Model for single-prompt/naive mode
   --informalize-model <id>     Model for back-translation
   --compare-model <id>         Model for comparison
+  --vertex                     Use Vertex AI instead of the Anthropic API (or USE_VERTEX env var)
+  --vertex-project <id>        Google Cloud project ID (or GOOGLE_CLOUD_PROJECT_ID env var)
+  --vertex-region <region>     Vertex AI region (default: us-east5, or GOOGLE_CLOUD_REGION env var)
   -v, --verbose                Verbose logging
   -h, --help                   Show this help`);
 }
@@ -47,6 +50,9 @@ export async function main(argv) {
       model:              { type: 'string' },
       'informalize-model': { type: 'string' },
       'compare-model':    { type: 'string' },
+      vertex:             { type: 'boolean', default: false },
+      'vertex-project':   { type: 'string' },
+      'vertex-region':    { type: 'string' },
       json:               { type: 'boolean', default: false },
       verbose:            { type: 'boolean', short: 'v', default: false },
       help:               { type: 'boolean', short: 'h', default: false },
@@ -97,6 +103,13 @@ export async function main(argv) {
   if (values.model) passthrough.push('--model', values.model);
   if (values['informalize-model']) passthrough.push('--informalize-model', values['informalize-model']);
   if (values['compare-model']) passthrough.push('--compare-model', values['compare-model']);
+  if (values.vertex || process.env.USE_VERTEX) {
+    passthrough.push('--vertex');
+    const project = values['vertex-project'] ?? process.env.GOOGLE_CLOUD_PROJECT_ID;
+    if (project) passthrough.push('--vertex-project', project);
+    const region = values['vertex-region'] ?? process.env.GOOGLE_CLOUD_REGION;
+    if (region) passthrough.push('--vertex-region', region);
+  }
   if (values.verbose) passthrough.push('--verbose');
   // Always request JSON from subprocesses so we can merge
   passthrough.push('--json');

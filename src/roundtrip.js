@@ -13,14 +13,17 @@ function getCallFn(opts) {
   return opts.claudeCode ? callViaClaudeCode : callWithTool;
 }
 
-// Default models: short names for Claude Code, full IDs for the API.
+// Default models: short names for Claude Code, full IDs for the API, Vertex names for Vertex.
 const MODEL_DEFAULTS = {
-  api: { haiku: 'claude-haiku-4-5-20251001', sonnet: 'claude-sonnet-4-5-20250929' },
-  cc:  { haiku: 'haiku',                     sonnet: 'sonnet' },
+  api:    { haiku: 'claude-haiku-4-5-20251001', sonnet: 'claude-sonnet-4-5-20250929' },
+  vertex: { haiku: 'claude-haiku-4-5',          sonnet: 'claude-sonnet-4-6' },
+  cc:     { haiku: 'haiku',                     sonnet: 'sonnet' },
 };
 
 function defaultModels(opts) {
-  return opts.claudeCode ? MODEL_DEFAULTS.cc : MODEL_DEFAULTS.api;
+  if (opts.claudeCode) return MODEL_DEFAULTS.cc;
+  if (opts.vertex) return MODEL_DEFAULTS.vertex;
+  return MODEL_DEFAULTS.api;
 }
 
 /**

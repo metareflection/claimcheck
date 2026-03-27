@@ -5,6 +5,7 @@ import { resolve, basename } from 'node:path';
 import { audit } from './audit.js';
 import { claimcheck } from './claimcheck.js';
 import { renderReport, renderJson } from './report.js';
+import { configureVertex } from './api.js';
 
 function printUsage() {
   console.error(`Usage: claimcheck [options]
@@ -22,6 +23,9 @@ Options:
   --model <id>                 Model for single-prompt/naive mode (default: claude-sonnet-4-5-20250929)
   --informalize-model <id>     Model for back-translation (default: claude-haiku-4-5-20251001)
   --compare-model <id>         Model for comparison (default: claude-sonnet-4-5-20250929)
+  --vertex                     Use Vertex AI instead of the Anthropic API (or USE_VERTEX env var)
+  --vertex-project <id>        Google Cloud project ID (or GOOGLE_CLOUD_PROJECT_ID env var)
+  --vertex-region <region>     Vertex AI region (default: us-east5, or GOOGLE_CLOUD_REGION env var)
   --stdin                      Read JSON from stdin (pure claimcheck, no file extraction)
   -v, --verbose                Verbose API logging
   -h, --help                   Show this help`);
@@ -42,6 +46,9 @@ export async function main(argv) {
       model:              { type: 'string' },
       'informalize-model': { type: 'string' },
       'compare-model':    { type: 'string' },
+      vertex:             { type: 'boolean', default: false },
+      'vertex-project':   { type: 'string' },
+      'vertex-region':    { type: 'string' },
       json:               { type: 'boolean', default: false },
       stdin:              { type: 'boolean', default: false },
       verbose:            { type: 'boolean', short: 'v', default: false },
@@ -60,12 +67,23 @@ export async function main(argv) {
     delete process.env.CLAUDECODE;
   }
 
+  if (values.vertex || process.env.USE_VERTEX) {
+    const projectId = values['vertex-project'] ?? process.env.GOOGLE_CLOUD_PROJECT_ID;
+    if (!projectId) {
+      console.error('Error: --vertex requires --vertex-project or GOOGLE_CLOUD_PROJECT_ID env var');
+      process.exit(1);
+    }
+    const region = values['vertex-region'] ?? process.env.GOOGLE_CLOUD_REGION ?? 'us-east5';
+    configureVertex({ projectId, region });
+  }
+
   const opts = {
     verbose: values.verbose,
     verify: values.verify,
     singlePrompt: values['single-prompt'],
     naive: values.naive,
     claudeCode: values['claude-code'],
+    vertex: !!(values.vertex || process.env.USE_VERTEX),
     ...(values.model ? { model: values.model } : {}),
     ...(values['informalize-model'] ? { informalizeModel: values['informalize-model'] } : {}),
     ...(values['compare-model'] ? { compareModel: values['compare-model'] } : {}),

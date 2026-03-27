@@ -1,12 +1,31 @@
 import Anthropic from '@anthropic-ai/sdk';
+import AnthropicVertex from '@anthropic-ai/vertex-sdk';
 
 let client;
 let totalInput = 0;
 let totalOutput = 0;
+let vertexConfig = null;
+
+/**
+ * Configure the API client to use Vertex AI.
+ * Must be called before any API calls if Vertex is desired.
+ * @param {{ projectId: string, region?: string }} config
+ */
+export function configureVertex(config) {
+  vertexConfig = config;
+  client = null; // reset so next getClient() picks up the new config
+}
 
 function getClient() {
   if (!client) {
-    client = new Anthropic();
+    if (vertexConfig) {
+      client = new AnthropicVertex({
+        projectId: vertexConfig.projectId,
+        region: vertexConfig.region ?? 'us-east5',
+      });
+    } else {
+      client = new Anthropic();
+    }
   }
   return client;
 }
