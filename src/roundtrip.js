@@ -13,16 +13,19 @@ function getCallFn(opts) {
   return opts.claudeCode ? callViaClaudeCode : callWithTool;
 }
 
-// Default models: short names for Claude Code, full IDs for the API, Vertex names for Vertex.
+// Default models: short names for Claude Code, full IDs for the API, Vertex names for Vertex,
+// cross-region inference profile IDs for Bedrock.
 const MODEL_DEFAULTS = {
-  api:    { haiku: 'claude-haiku-4-5-20251001', sonnet: 'claude-sonnet-4-5-20250929' },
-  vertex: { haiku: 'claude-haiku-4-5',          sonnet: 'claude-sonnet-4-6' },
-  cc:     { haiku: 'haiku',                     sonnet: 'sonnet' },
+  api:     { haiku: 'claude-haiku-4-5-20251001',                 sonnet: 'claude-sonnet-4-5-20250929'                 },
+  vertex:  { haiku: 'claude-haiku-4-5',                          sonnet: 'claude-sonnet-4-6'                          },
+  bedrock: { haiku: 'us.anthropic.claude-haiku-4-5-20251001-v1:0', sonnet: 'us.anthropic.claude-sonnet-4-6'                },
+  cc:      { haiku: 'haiku',                                     sonnet: 'sonnet'                                     },
 };
 
 function defaultModels(opts) {
   if (opts.claudeCode) return MODEL_DEFAULTS.cc;
   if (opts.vertex) return MODEL_DEFAULTS.vertex;
+  if (opts.bedrock) return MODEL_DEFAULTS.bedrock;
   return MODEL_DEFAULTS.api;
 }
 

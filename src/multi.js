@@ -31,6 +31,8 @@ Options:
   --vertex                     Use Vertex AI instead of the Anthropic API (or USE_VERTEX env var)
   --vertex-project <id>        Google Cloud project ID (or GOOGLE_CLOUD_PROJECT_ID env var)
   --vertex-region <region>     Vertex AI region (default: us-east5, or GOOGLE_CLOUD_REGION env var)
+  --bedrock                    Use AWS Bedrock instead of the Anthropic API (or USE_BEDROCK env var)
+  --bedrock-region <region>    AWS region for Bedrock (default: us-east-1, or AWS_REGION env var)
   -v, --verbose                Verbose logging
   -h, --help                   Show this help`);
 }
@@ -53,6 +55,8 @@ export async function main(argv) {
       vertex:             { type: 'boolean', default: false },
       'vertex-project':   { type: 'string' },
       'vertex-region':    { type: 'string' },
+      bedrock:            { type: 'boolean', default: false },
+      'bedrock-region':   { type: 'string' },
       json:               { type: 'boolean', default: false },
       verbose:            { type: 'boolean', short: 'v', default: false },
       help:               { type: 'boolean', short: 'h', default: false },
@@ -109,6 +113,11 @@ export async function main(argv) {
     if (project) passthrough.push('--vertex-project', project);
     const region = values['vertex-region'] ?? process.env.GOOGLE_CLOUD_REGION;
     if (region) passthrough.push('--vertex-region', region);
+  }
+  if (values.bedrock || process.env.USE_BEDROCK) {
+    passthrough.push('--bedrock');
+    const region = values['bedrock-region'] ?? process.env.AWS_REGION;
+    if (region) passthrough.push('--bedrock-region', region);
   }
   if (values.verbose) passthrough.push('--verbose');
   // Always request JSON from subprocesses so we can merge

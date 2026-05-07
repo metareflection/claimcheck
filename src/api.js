@@ -1,10 +1,12 @@
 import Anthropic from '@anthropic-ai/sdk';
 import AnthropicVertex from '@anthropic-ai/vertex-sdk';
+import { AnthropicBedrock } from '@anthropic-ai/bedrock-sdk';
 
 let client;
 let totalInput = 0;
 let totalOutput = 0;
 let vertexConfig = null;
+let bedrockConfig = null;
 
 /**
  * Configure the API client to use Vertex AI.
@@ -13,7 +15,21 @@ let vertexConfig = null;
  */
 export function configureVertex(config) {
   vertexConfig = config;
+  bedrockConfig = null;
   client = null; // reset so next getClient() picks up the new config
+}
+
+/**
+ * Configure the API client to use AWS Bedrock.
+ * Must be called before any API calls if Bedrock is desired.
+ * Credentials come from the standard AWS credential chain
+ * (env vars, ~/.aws/credentials, SSO, IMDS).
+ * @param {{ region?: string }} config
+ */
+export function configureBedrock(config) {
+  bedrockConfig = config ?? {};
+  vertexConfig = null;
+  client = null;
 }
 
 function getClient() {
@@ -22,6 +38,10 @@ function getClient() {
       client = new AnthropicVertex({
         projectId: vertexConfig.projectId,
         region: vertexConfig.region ?? 'us-east5',
+      });
+    } else if (bedrockConfig) {
+      client = new AnthropicBedrock({
+        awsRegion: bedrockConfig.region ?? 'us-east-1',
       });
     } else {
       client = new Anthropic();
@@ -41,10 +61,13 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
     console.error(`[api] model=${model} tool=${tool.name} prompt_len=${prompt.length}`);
   }
 
+  // Some models (Opus 4.7+) don't accept temperature.
+  const supportsTemperature = !/opus-4-7/.test(model);
+
   const response = await anthropic.messages.create({
     model,
     max_tokens: maxTokens ?? 4096,
-    temperature: 0,
+    ...(supportsTemperature ? { temperature: 0 } : {}),
     tools: [tool],
     tool_choice: toolChoice,
     ...(system ? { system } : {}),

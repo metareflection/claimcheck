@@ -5,7 +5,7 @@ import { resolve, basename } from 'node:path';
 import { audit } from './audit.js';
 import { claimcheck } from './claimcheck.js';
 import { renderReport, renderJson } from './report.js';
-import { configureVertex } from './api.js';
+import { configureVertex, configureBedrock } from './api.js';
 
 function printUsage() {
   console.error(`Usage: claimcheck [options]
@@ -26,6 +26,8 @@ Options:
   --vertex                     Use Vertex AI instead of the Anthropic API (or USE_VERTEX env var)
   --vertex-project <id>        Google Cloud project ID (or GOOGLE_CLOUD_PROJECT_ID env var)
   --vertex-region <region>     Vertex AI region (default: us-east5, or GOOGLE_CLOUD_REGION env var)
+  --bedrock                    Use AWS Bedrock instead of the Anthropic API (or USE_BEDROCK env var)
+  --bedrock-region <region>    AWS region for Bedrock (default: us-east-1, or AWS_REGION env var)
   --stdin                      Read JSON from stdin (pure claimcheck, no file extraction)
   -v, --verbose                Verbose API logging
   -h, --help                   Show this help`);
@@ -49,6 +51,8 @@ export async function main(argv) {
       vertex:             { type: 'boolean', default: false },
       'vertex-project':   { type: 'string' },
       'vertex-region':    { type: 'string' },
+      bedrock:            { type: 'boolean', default: false },
+      'bedrock-region':   { type: 'string' },
       json:               { type: 'boolean', default: false },
       stdin:              { type: 'boolean', default: false },
       verbose:            { type: 'boolean', short: 'v', default: false },
@@ -67,7 +71,15 @@ export async function main(argv) {
     delete process.env.CLAUDECODE;
   }
 
-  if (values.vertex || process.env.USE_VERTEX) {
+  const useVertex = !!(values.vertex || process.env.USE_VERTEX);
+  const useBedrock = !!(values.bedrock || process.env.USE_BEDROCK);
+
+  if (useVertex && useBedrock) {
+    console.error('Error: --vertex and --bedrock are mutually exclusive');
+    process.exit(1);
+  }
+
+  if (useVertex) {
     const projectId = values['vertex-project'] ?? process.env.GOOGLE_CLOUD_PROJECT_ID;
     if (!projectId) {
       console.error('Error: --vertex requires --vertex-project or GOOGLE_CLOUD_PROJECT_ID env var');
@@ -75,6 +87,9 @@ export async function main(argv) {
     }
     const region = values['vertex-region'] ?? process.env.GOOGLE_CLOUD_REGION ?? 'us-east5';
     configureVertex({ projectId, region });
+  } else if (useBedrock) {
+    const region = values['bedrock-region'] ?? process.env.AWS_REGION ?? 'us-east-1';
+    configureBedrock({ region });
   }
 
   const opts = {
@@ -83,7 +98,8 @@ export async function main(argv) {
     singlePrompt: values['single-prompt'],
     naive: values.naive,
     claudeCode: values['claude-code'],
-    vertex: !!(values.vertex || process.env.USE_VERTEX),
+    vertex: useVertex,
+    bedrock: useBedrock,
     ...(values.model ? { model: values.model } : {}),
     ...(values['informalize-model'] ? { informalizeModel: values['informalize-model'] } : {}),
     ...(values['compare-model'] ? { compareModel: values['compare-model'] } : {}),

@@ -192,6 +192,17 @@ Key takeaways:
 ## Requirements
 
 - Node.js 18+
-- `ANTHROPIC_API_KEY` environment variable
+- `ANTHROPIC_API_KEY` environment variable (or use `--vertex` / `--bedrock`)
 - `dafny` in PATH (only for `--verify`)
 - [dafny-replay](https://github.com/metareflection/dafny-replay) cloned as a sibling directory (required for tests and benchmarks — the claims `.dfy` files `include` domain files from `../../dafny-replay/`)
+
+## Backends
+
+By default, claimcheck calls the Anthropic API directly using `ANTHROPIC_API_KEY`. You can route through other backends instead:
+
+- `--vertex` — Vertex AI. Requires `--vertex-project` (or `GOOGLE_CLOUD_PROJECT_ID`); region defaults to `us-east5` (or `GOOGLE_CLOUD_REGION`).
+- `--bedrock` — AWS Bedrock. Region defaults to `us-east-1` (or `AWS_REGION`); credentials come from the standard AWS credential chain (env vars, `~/.aws/credentials`, SSO, IMDS). Default model IDs use the `us.` cross-region inference profile prefix:
+  - informalize: `us.anthropic.claude-haiku-4-5-20251001-v1:0`
+  - compare: `us.anthropic.claude-sonnet-4-6`
+
+Override any default with `--model`, `--informalize-model`, or `--compare-model`.
