@@ -1,19 +1,38 @@
 /**
- * Build the prompt for informalizing Dafny lemmas back to English.
+ * Language presets for prompt framing. The `dafny` preset reproduces the
+ * original wording byte-for-byte (so existing domains and the benchmark are
+ * unaffected); other presets only swap the framing nouns. The fenced block is
+ * Dafny-style spec syntax in every case, so `fence` stays `dafny`.
+ *
+ * `kind` distinguishes what is being read: Dafny lemmas carry a proof body, so
+ * "code"; a LemmaScript lemma is a `return true` carrier whose meaning lives
+ * entirely in its requires/ensures, so the analysis is of the "contract" — and
+ * indeed only the signature + requires + ensures is sent, never a body.
+ */
+const LANGS = {
+  dafny:       { name: 'Dafny',       item: 'lemma',             items: 'lemmas',            itemCap: 'Lemma',    kind: 'code',     fence: 'dafny' },
+  lemmascript: { name: 'LemmaScript', item: 'function contract', items: 'function contracts', itemCap: 'Function', kind: 'contract', fence: 'dafny' },
+};
+function langOf(key) { return LANGS[key] ?? LANGS.dafny; }
+
+/**
+ * Build the prompt for informalizing verified contracts back to English.
  *
  * CRITICAL: This prompt must NOT include the original requirements.
- * The LLM reads only the Dafny code and produces English descriptions.
+ * The LLM reads only the formal code and produces English descriptions.
  * This is the first half of the round-trip check.
  *
  * @param {string} domain - domain display name
  * @param {{ lemmaName: string, dafnyCode: string }[]} lemmas - resolved lemma signatures
+ * @param {string} [langKey] - language preset ('dafny' default, 'lemmascript', ...)
  */
-export function INFORMALIZE_PROMPT(domain, lemmas) {
+export function INFORMALIZE_PROMPT(domain, lemmas, langKey) {
+  const L = langOf(langKey);
   const lemmaList = lemmas
-    .map((l, i) => `### Lemma ${i}: ${l.lemmaName}\n\n\`\`\`dafny\n${l.dafnyCode}\n\`\`\``)
+    .map((l, i) => `### ${L.itemCap} ${i}: ${l.lemmaName}\n\n\`\`\`${L.fence}\n${l.dafnyCode}\n\`\`\``)
     .join('\n\n');
 
-  return `You are reading Dafny verification lemmas from the "${domain}" domain and translating them to plain English.
+  return `You are reading ${L.name} verification ${L.items} from the "${domain}" domain and translating them to plain English.
 
 ## Lemmas
 
@@ -21,7 +40,7 @@ ${lemmaList}
 
 ## Instructions
 
-For each lemma, produce a faithful English description of what the Dafny code actually says. Be LITERAL — describe what the code guarantees, not what you think the author intended.
+For each ${L.item}, produce a faithful English description of what the ${L.name} ${L.kind} actually says. Be LITERAL — describe what the ${L.kind} guarantees, not what you think the author intended.
 
 Specifically:
 - State the preconditions (requires) and postconditions (ensures) separately
@@ -33,9 +52,9 @@ Specifically:
   - "strong" if it significantly constrains the system's behavior
 - Flag anything suspicious: ensures that mirror requires, postconditions that are always true regardless of preconditions, claims about wrong properties
 
-Translate the formal specification to natural language as literally as possible. Do NOT guess at the original intent. Only describe what the Dafny code literally says.
+Translate the formal specification to natural language as literally as possible. Do NOT guess at the original intent. Only describe what the ${L.name} ${L.kind} literally says.
 
-Call the record_informalizations tool with one entry per lemma.`;
+Call the record_informalizations tool with one entry per ${L.item}.`;
 }
 
 /**
@@ -43,14 +62,16 @@ Call the record_informalizations tool with one entry per lemma.`;
  *
  * @param {string} domain - domain display name
  * @param {{ requirementIndex: number, requirement: string, lemmaName: string, dafnyCode: string, informalization: object }[]} pairs
+ * @param {string} [langKey] - language preset ('dafny' default, 'lemmascript', ...)
  */
-export function ROUNDTRIP_COMPARE_PROMPT(domain, pairs) {
+export function ROUNDTRIP_COMPARE_PROMPT(domain, pairs, langKey) {
+  const L = langOf(langKey);
   const pairList = pairs.map((p) =>
     `### Requirement ${p.requirementIndex}: "${p.requirement}"
 
-**Lemma:** ${p.lemmaName}
+**${L.itemCap}:** ${p.lemmaName}
 
-\`\`\`dafny
+\`\`\`${L.fence}
 ${p.dafnyCode}
 \`\`\`
 
@@ -61,9 +82,9 @@ ${p.dafnyCode}
 - Scope: ${p.informalization.scope}
 - Strength: ${p.informalization.strength}`).join('\n\n');
 
-  return `You are checking whether Dafny lemmas faithfully express their intended requirements for the "${domain}" domain.
+  return `You are checking whether ${L.name} ${L.items} faithfully express their intended requirements for the "${domain}" domain.
 
-For each pair below, compare the ORIGINAL requirement against the BACK-TRANSLATION of the Dafny lemma. The back-translation was produced by a different model that did NOT see the original requirements.
+For each pair below, compare the ORIGINAL requirement against the BACK-TRANSLATION of the ${L.name} ${L.item}. The back-translation was produced by a different model that did NOT see the original requirements.
 
 ## Pairs to Compare
 
@@ -73,15 +94,15 @@ ${pairList}
 
 1. **Tautology**: ensures clause restates the requires clause (e.g. requires x > 0; ensures x > 0)
 2. **Weakened postcondition**: ensures says less than the requirement asks (e.g. requirement says "exactly 5 colors" but ensures says "at least 1 color")
-3. **Narrowed scope**: lemma only covers a subset of cases the requirement describes
+3. **Narrowed scope**: ${L.item} only covers a subset of cases the requirement describes
 4. **Missing case**: requirement has multiple conditions but lemma only captures some
 5. **Wrong property**: lemma proves something related but different from what was asked
 
 ## Instructions
 
-Be STRICT. It is better to flag a potential mismatch than to miss real cheating. A lemma that technically proves something true but doesn't capture the requirement's intent should be flagged.
+Be STRICT. It is better to flag a potential mismatch than to miss real cheating. A ${L.item} that technically proves something true but doesn't capture the requirement's intent should be flagged.
 
-However, do not flag lemmas just because the English phrasing differs — focus on whether the MEANING is preserved.
+However, do not flag ${L.items} just because the English phrasing differs — focus on whether the MEANING is preserved.
 
 If the back-translation's strength is "trivial", that is almost always a mismatch unless the requirement itself is trivial.
 

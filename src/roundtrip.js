@@ -55,7 +55,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
   // Step 1: Informalize all lemmas (one batch call, haiku)
   log(`[roundtrip] Informalizing ${lemmas.length} lemma(s)...`);
 
-  const informalizePrompt = INFORMALIZE_PROMPT(domain, lemmas);
+  const informalizePrompt = INFORMALIZE_PROMPT(domain, lemmas, opts.lang);
   const informalizeResponse = await call({
     model: informalizeModel,
     prompt: informalizePrompt,
@@ -115,7 +115,7 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
 
   log(`[roundtrip] Comparing ${pairs.length} pair(s)...`);
 
-  const comparePrompt = ROUNDTRIP_COMPARE_PROMPT(domain, pairs);
+  const comparePrompt = ROUNDTRIP_COMPARE_PROMPT(domain, pairs, opts.lang);
   const compareResponse = await call({
     model: compareModel,
     prompt: comparePrompt,
