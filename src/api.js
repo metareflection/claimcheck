@@ -62,7 +62,7 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
   }
 
   // Some models (Opus 4.7+) don't accept temperature.
-  const supportsTemperature = !/opus-4-7/.test(model);
+  const supportsTemperature = !/opus-4-[789]/.test(model);
 
   const response = await anthropic.messages.create({
     model,

@@ -16,10 +16,10 @@ function getCallFn(opts) {
 // Default models: short names for Claude Code, full IDs for the API, Vertex names for Vertex,
 // cross-region inference profile IDs for Bedrock.
 const MODEL_DEFAULTS = {
-  api:     { haiku: 'claude-haiku-4-5-20251001',                 sonnet: 'claude-sonnet-4-5-20250929'                 },
-  vertex:  { haiku: 'claude-haiku-4-5',                          sonnet: 'claude-sonnet-4-6'                          },
-  bedrock: { haiku: 'us.anthropic.claude-haiku-4-5-20251001-v1:0', sonnet: 'us.anthropic.claude-sonnet-4-6'                },
-  cc:      { haiku: 'haiku',                                     sonnet: 'sonnet'                                     },
+  api:     { haiku: 'claude-haiku-4-5-20251001',                 sonnet: 'claude-sonnet-4-6',                opus: 'claude-opus-4-8' },
+  vertex:  { haiku: 'claude-haiku-4-5',                          sonnet: 'claude-sonnet-4-6',                opus: 'claude-opus-4-8' },
+  bedrock: { haiku: 'us.anthropic.claude-haiku-4-5-20251001-v1:0', sonnet: 'us.anthropic.claude-sonnet-4-6', opus: 'us.anthropic.claude-opus-4-8' },
+  cc:      { haiku: 'haiku',                                     sonnet: 'sonnet',                           opus: 'opus' },
 };
 
 function defaultModels(opts) {
@@ -27,6 +27,14 @@ function defaultModels(opts) {
   if (opts.vertex) return MODEL_DEFAULTS.vertex;
   if (opts.bedrock) return MODEL_DEFAULTS.bedrock;
   return MODEL_DEFAULTS.api;
+}
+
+// Resolve a tier name ('haiku' | 'sonnet' | 'opus') to the active backend's model
+// id; pass full model ids (and undefined) through unchanged. Lets callers escalate
+// with `--informalize-model sonnet` (or `opus`) without knowing the per-backend id.
+function resolveModel(m, defaults) {
+  if (m && defaults[m]) return defaults[m];
+  return m;
 }
 
 /**
@@ -47,8 +55,8 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
 
   const log = opts.log ?? (() => {});
   const defaults = defaultModels(opts);
-  const informalizeModel = opts.informalizeModel ?? defaults.haiku;
-  const compareModel = opts.compareModel ?? opts.model ?? defaults.sonnet;
+  const informalizeModel = resolveModel(opts.informalizeModel, defaults) ?? defaults.haiku;
+  const compareModel = resolveModel(opts.compareModel ?? opts.model, defaults) ?? defaults.sonnet;
 
   const call = getCallFn(opts);
 
@@ -187,7 +195,7 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
   if (lemmas.length === 0) return { passed: [], failed: [] };
 
   const log = opts.log ?? (() => {});
-  const model = opts.model ?? defaultModels(opts).sonnet;
+  const model = resolveModel(opts.model, defaultModels(opts)) ?? defaultModels(opts).sonnet;
   const call = getCallFn(opts);
 
   const passed = [];
@@ -264,7 +272,7 @@ export async function naiveCheck(lemmas, requirements, domain, opts = {}) {
   if (lemmas.length === 0) return { passed: [], failed: [] };
 
   const log = opts.log ?? (() => {});
-  const model = opts.model ?? defaultModels(opts).sonnet;
+  const model = resolveModel(opts.model, defaultModels(opts)) ?? defaultModels(opts).sonnet;
   const call = getCallFn(opts);
 
   const passed = [];
