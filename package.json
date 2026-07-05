@@ -1,6 +1,6 @@
 {
   "name": "claimcheck",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "type": "module",
   "files": [
     "src/",
@@ -12,7 +12,8 @@
   },
   "exports": {
     ".": "./src/claimcheck.js",
-    "./audit": "./src/audit.js"
+    "./audit": "./src/audit.js",
+    "./cli": "./bin/claimcheck.js"
   },
   "dependencies": {
     "@anthropic-ai/bedrock-sdk": "^0.12.0",
