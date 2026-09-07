@@ -33,6 +33,7 @@ Options:
   --vertex-region <region>     Vertex AI region (default: us-east5, or GOOGLE_CLOUD_REGION env var)
   --bedrock                    Use AWS Bedrock instead of the Anthropic API (or USE_BEDROCK env var)
   --bedrock-region <region>    AWS region for Bedrock (default: us-east-1, or AWS_REGION env var)
+  --openrouter                 Route through OpenRouter instead of the Anthropic API (or USE_OPENROUTER env var)
   -v, --verbose                Verbose logging
   -h, --help                   Show this help`);
 }
@@ -57,6 +58,7 @@ export async function main(argv) {
       'vertex-region':    { type: 'string' },
       bedrock:            { type: 'boolean', default: false },
       'bedrock-region':   { type: 'string' },
+      openrouter:         { type: 'boolean', default: false },
       json:               { type: 'boolean', default: false },
       verbose:            { type: 'boolean', short: 'v', default: false },
       help:               { type: 'boolean', short: 'h', default: false },
@@ -118,6 +120,9 @@ export async function main(argv) {
     passthrough.push('--bedrock');
     const region = values['bedrock-region'] ?? process.env.AWS_REGION;
     if (region) passthrough.push('--bedrock-region', region);
+  }
+  if (values.openrouter || process.env.USE_OPENROUTER) {
+    passthrough.push('--openrouter');
   }
   if (values.verbose) passthrough.push('--verbose');
   // Always request JSON from subprocesses so we can merge

@@ -7,6 +7,7 @@ let totalInput = 0;
 let totalOutput = 0;
 let vertexConfig = null;
 let bedrockConfig = null;
+let openRouterConfig = null;
 
 /**
  * Configure the API client to use Vertex AI.
@@ -16,6 +17,7 @@ let bedrockConfig = null;
 export function configureVertex(config) {
   vertexConfig = config;
   bedrockConfig = null;
+  openRouterConfig = null;
   client = null; // reset so next getClient() picks up the new config
 }
 
@@ -29,6 +31,26 @@ export function configureVertex(config) {
 export function configureBedrock(config) {
   bedrockConfig = config ?? {};
   vertexConfig = null;
+  openRouterConfig = null;
+  client = null;
+}
+
+/**
+ * Configure the API client to route through OpenRouter's Anthropic-compatible
+ * endpoint, which accepts the standard Messages API shape (tools and
+ * tool_choice included) and forwards to whichever model the id maps to.
+ * Model ids must then be given in OpenRouter's namespaced form.
+ * Must be called before any API calls if a non-Anthropic model is desired.
+ * @param {{ apiKey?: string }} [config] - falls back to OPENROUTER_API_KEY
+ */
+export function configureOpenRouter(config = {}) {
+  const apiKey = config.apiKey ?? process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    throw new Error('OpenRouter requires config.apiKey or the OPENROUTER_API_KEY env var');
+  }
+  openRouterConfig = { apiKey };
+  vertexConfig = null;
+  bedrockConfig = null;
   client = null;
 }
 
@@ -42,6 +64,14 @@ function getClient() {
     } else if (bedrockConfig) {
       client = new AnthropicBedrock({
         awsRegion: bedrockConfig.region ?? 'us-east-1',
+      });
+    } else if (openRouterConfig) {
+      // apiKey is resolved and validated in configureOpenRouter, so it is
+      // never undefined here — passing undefined would make the SDK fall back
+      // to ANTHROPIC_API_KEY and send it to a third-party host.
+      client = new Anthropic({
+        baseURL: 'https://openrouter.ai/api',
+        apiKey: openRouterConfig.apiKey,
       });
     } else {
       client = new Anthropic();
@@ -61,8 +91,11 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
     console.error(`[api] model=${model} tool=${tool.name} prompt_len=${prompt.length}`);
   }
 
-  // Some models (Opus 4.7+) don't accept temperature.
-  const supportsTemperature = !/opus-4-[789]/.test(model);
+  // Opus 4.7+ and the Sonnet/Opus 5 family reject `temperature` outright
+  // (400: "temperature is deprecated for this model"). Matched loosely enough
+  // to cover dated aliases and the Bedrock/Vertex id prefixes, but anchored on
+  // `claude-` so third-party ids carrying a "5" are unaffected.
+  const supportsTemperature = !/opus-4-[789]|claude-(sonnet|opus)-5/.test(model);
 
   const response = await anthropic.messages.create({
     model,
