@@ -222,3 +222,65 @@ Invariant dependencies in requires clauses (e.g. \`requires Inv(state)\`) are ex
 
 Call the record_naive_verdict tool with your verdict for lemma \`${lemmaName}\`.`;
 }
+
+/**
+ * Bare zero-shot baseline: one artifact, one requirement, one YES/NO.
+ *
+ * Deliberately the floor. No system message, no worked examples, no reasoning
+ * instruction and no failure vocabulary -- each of those is itself a reasoning
+ * aid, so giving them to the baseline would measure the prompt rather than the
+ * pipeline it is being compared against.
+ *
+ * @param {string} formal - the artifact under test
+ * @param {string} informal - the requirement it is meant to satisfy
+ * @param {string} [langKey] - language preset, see langOf
+ * @param {string} [context] - schema or surrounding code, omitted when empty
+ */
+export function NAIVE_BARE_PROMPT(formal, informal, langKey, context) {
+  const L = langOf(langKey);
+  const contextBlock = context ? `\n\`\`\`${L.fence}\n${context}\n\`\`\`\n` : '';
+  return `Requirement: ${informal}
+${contextBlock}
+\`\`\`${L.fence}
+${formal}
+\`\`\`
+
+Does the ${L.item} satisfy the requirement? Answer YES or NO.
+
+Call the record_bare_verdict tool.`;
+}
+
+/**
+ * Batched form of NAIVE_BARE_PROMPT: same bare framing, many items per call.
+ *
+ * Exists so the baseline's call shape matches a pipeline that groups rows into
+ * one call. Comparing a batched pipeline against a one-row-per-call baseline
+ * confounds the prompt with the call shape.
+ *
+ * @param {{ rowIndex: number, formal: string, informal: string }[]} items
+ * @param {string} [langKey] - language preset, see langOf
+ * @param {string} [context] - schema shared by every item in the call
+ */
+export function NAIVE_BARE_BATCH_PROMPT(items, langKey, context) {
+  const L = langOf(langKey);
+  const contextBlock = context
+    ? `\n## Schema\n\nEvery ${L.item} below runs against this schema.\n\n\`\`\`${L.fence}\n${context}\n\`\`\`\n`
+    : '';
+
+  const itemList = items.map((it) => `### Item ${it.rowIndex}
+
+Requirement: ${it.informal}
+
+\`\`\`${L.fence}
+${it.formal}
+\`\`\``).join('\n\n');
+
+  return `${contextBlock}
+## Items
+
+${itemList}
+
+For each item, does the ${L.item} satisfy the requirement? Answer YES or NO.
+
+Call the record_bare_verdicts tool, once, with one entry per item.`;
+}
