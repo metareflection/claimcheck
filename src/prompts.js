@@ -1,8 +1,8 @@
 /**
  * Language presets for prompt framing. The `dafny` preset reproduces the
  * original wording byte-for-byte (so existing domains and the benchmark are
- * unaffected); other presets only swap the framing nouns. The fenced block is
- * Dafny-style spec syntax in every case, so `fence` stays `dafny`.
+ * unaffected); other presets swap the framing nouns and the fence language of
+ * the block the model is shown.
  *
  * `kind` distinguishes what is being read: Dafny lemmas carry a proof body, so
  * "code"; a LemmaScript lemma is a `return true` carrier whose meaning lives
@@ -10,8 +10,11 @@
  * indeed only the signature + requires + ensures is sent, never a body.
  */
 const LANGS = {
-  dafny:       { name: 'Dafny',       item: 'lemma',             items: 'lemmas',            itemCap: 'Lemma',    kind: 'code',     fence: 'dafny' },
-  lemmascript: { name: 'LemmaScript', item: 'function contract', items: 'function contracts', itemCap: 'Function', kind: 'contract', fence: 'dafny' },
+  dafny:       { name: 'Dafny',       item: 'lemma',             items: 'lemmas',            itemCap: 'Lemma',    kind: 'code',      fence: 'dafny' },
+  lemmascript: { name: 'LemmaScript', item: 'function contract', items: 'function contracts', itemCap: 'Function', kind: 'contract',  fence: 'dafny' },
+  sql:         { name: 'SQL',         item: 'query',             items: 'queries',           itemCap: 'Query',    kind: 'query',     fence: 'sql' },
+  lean:        { name: 'Lean 4',      item: 'theorem',           items: 'theorems',          itemCap: 'Theorem',  kind: 'statement', fence: 'lean4' },
+  isabelle:    { name: 'Isabelle',    item: 'theorem',           items: 'theorems',          itemCap: 'Theorem',  kind: 'statement', fence: 'isabelle' },
 };
 function langOf(key) { return LANGS[key] ?? LANGS.dafny; }
 
