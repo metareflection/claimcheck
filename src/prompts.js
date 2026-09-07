@@ -16,7 +16,12 @@ const LANGS = {
   lean:        { name: 'Lean 4',      item: 'theorem',           items: 'theorems',          itemCap: 'Theorem',  kind: 'statement', fence: 'lean4' },
   isabelle:    { name: 'Isabelle',    item: 'theorem',           items: 'theorems',          itemCap: 'Theorem',  kind: 'statement', fence: 'isabelle' },
 };
-function langOf(key) { return LANGS[key] ?? LANGS.dafny; }
+/**
+ * Resolve a preset key to its language framing, falling back to `dafny`.
+ * Exported so that callers building their own prompts around the same
+ * artifacts frame them identically rather than keeping a second copy.
+ */
+export function langOf(key) { return LANGS[key] ?? LANGS.dafny; }
 
 /**
  * Build the prompt for informalizing verified contracts back to English.

@@ -13,7 +13,10 @@
   "exports": {
     ".": "./src/claimcheck.js",
     "./audit": "./src/audit.js",
-    "./cli": "./bin/claimcheck.js"
+    "./prompts": "./src/prompts.js",
+    "./schemas": "./src/schemas.js",
+    "./cli": "./bin/claimcheck.js",
+    "./package.json": "./package.json"
   },
   "dependencies": {
     "@anthropic-ai/bedrock-sdk": "^0.12.0",
