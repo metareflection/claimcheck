@@ -1,8 +1,8 @@
 /**
  * Language presets for prompt framing. The `dafny` preset reproduces the
  * original wording byte-for-byte (so existing domains and the benchmark are
- * unaffected); other presets only swap the framing nouns. The fenced block is
- * Dafny-style spec syntax in every case, so `fence` stays `dafny`.
+ * unaffected); other presets swap the framing nouns and the fence language of
+ * the block the model is shown.
  *
  * `kind` distinguishes what is being read: Dafny lemmas carry a proof body, so
  * "code"; a LemmaScript lemma is a `return true` carrier whose meaning lives
@@ -10,10 +10,18 @@
  * indeed only the signature + requires + ensures is sent, never a body.
  */
 const LANGS = {
-  dafny:       { name: 'Dafny',       item: 'lemma',             items: 'lemmas',            itemCap: 'Lemma',    kind: 'code',     fence: 'dafny' },
-  lemmascript: { name: 'LemmaScript', item: 'function contract', items: 'function contracts', itemCap: 'Function', kind: 'contract', fence: 'dafny' },
+  dafny:       { name: 'Dafny',       item: 'lemma',             items: 'lemmas',            itemCap: 'Lemma',    kind: 'code',      fence: 'dafny' },
+  lemmascript: { name: 'LemmaScript', item: 'function contract', items: 'function contracts', itemCap: 'Function', kind: 'contract',  fence: 'dafny' },
+  sql:         { name: 'SQL',         item: 'query',             items: 'queries',           itemCap: 'Query',    kind: 'query',     fence: 'sql' },
+  lean:        { name: 'Lean 4',      item: 'theorem',           items: 'theorems',          itemCap: 'Theorem',  kind: 'statement', fence: 'lean4' },
+  isabelle:    { name: 'Isabelle',    item: 'theorem',           items: 'theorems',          itemCap: 'Theorem',  kind: 'statement', fence: 'isabelle' },
 };
-function langOf(key) { return LANGS[key] ?? LANGS.dafny; }
+/**
+ * Resolve a preset key to its language framing, falling back to `dafny`.
+ * Exported so that callers building their own prompts around the same
+ * artifacts frame them identically rather than keeping a second copy.
+ */
+export function langOf(key) { return LANGS[key] ?? LANGS.dafny; }
 
 /**
  * Build the prompt for informalizing verified contracts back to English.
@@ -213,4 +221,66 @@ Does this Dafny lemma faithfully capture the natural language requirement above?
 Invariant dependencies in requires clauses (e.g. \`requires Inv(state)\`) are expected and normal — don't count them as discrepancies. A lemma that extracts a concrete consequence from an invariant is useful, not vacuous.
 
 Call the record_naive_verdict tool with your verdict for lemma \`${lemmaName}\`.`;
+}
+
+/**
+ * Bare zero-shot baseline: one artifact, one requirement, one YES/NO.
+ *
+ * Deliberately the floor. No system message, no worked examples, no reasoning
+ * instruction and no failure vocabulary -- each of those is itself a reasoning
+ * aid, so giving them to the baseline would measure the prompt rather than the
+ * pipeline it is being compared against.
+ *
+ * @param {string} formal - the artifact under test
+ * @param {string} informal - the requirement it is meant to satisfy
+ * @param {string} [langKey] - language preset, see langOf
+ * @param {string} [context] - schema or surrounding code, omitted when empty
+ */
+export function NAIVE_BARE_PROMPT(formal, informal, langKey, context) {
+  const L = langOf(langKey);
+  const contextBlock = context ? `\n\`\`\`${L.fence}\n${context}\n\`\`\`\n` : '';
+  return `Requirement: ${informal}
+${contextBlock}
+\`\`\`${L.fence}
+${formal}
+\`\`\`
+
+Does the ${L.item} satisfy the requirement? Answer YES or NO.
+
+Call the record_bare_verdict tool.`;
+}
+
+/**
+ * Batched form of NAIVE_BARE_PROMPT: same bare framing, many items per call.
+ *
+ * Exists so the baseline's call shape matches a pipeline that groups rows into
+ * one call. Comparing a batched pipeline against a one-row-per-call baseline
+ * confounds the prompt with the call shape.
+ *
+ * @param {{ rowIndex: number, formal: string, informal: string }[]} items
+ * @param {string} [langKey] - language preset, see langOf
+ * @param {string} [context] - schema shared by every item in the call
+ */
+export function NAIVE_BARE_BATCH_PROMPT(items, langKey, context) {
+  const L = langOf(langKey);
+  const contextBlock = context
+    ? `\n## Schema\n\nEvery ${L.item} below runs against this schema.\n\n\`\`\`${L.fence}\n${context}\n\`\`\`\n`
+    : '';
+
+  const itemList = items.map((it) => `### Item ${it.rowIndex}
+
+Requirement: ${it.informal}
+
+\`\`\`${L.fence}
+${it.formal}
+\`\`\``).join('\n\n');
+
+  return `${contextBlock}
+## Items
+
+${itemList}
+
+For each item, does the ${L.item} satisfy the requirement? Answer YES or NO.
+
+Call the record_bare_verdicts tool, once, with one entry per item.`;
 }

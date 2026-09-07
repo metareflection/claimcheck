@@ -166,3 +166,57 @@ export const ROUNDTRIP_COMPARE_TOOL = {
     required: ['comparisons'],
   },
 };
+
+/**
+ * Verdict tool for NAIVE_BARE_PROMPT. One field, no room for an explanation:
+ * a place to write reasoning is itself a reasoning aid.
+ */
+export const NAIVE_BARE_TOOL = {
+  name: 'record_bare_verdict',
+  description: 'Record whether the artifact satisfies the requirement.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      answer: {
+        type: 'string',
+        enum: ['YES', 'NO'],
+        description: 'YES if the artifact satisfies the requirement, NO otherwise.',
+      },
+    },
+    required: ['answer'],
+  },
+};
+
+/**
+ * Batched form of NAIVE_BARE_TOOL: one YES/NO per item, still with no
+ * explanation field. Pairs with NAIVE_BARE_BATCH_PROMPT.
+ */
+export const NAIVE_BARE_BATCH_TOOL = {
+  name: 'record_bare_verdicts',
+  description: 'Record, for each item, whether the artifact satisfies its requirement.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      verdicts: {
+        type: 'array',
+        description: 'One verdict per item. Every item must appear exactly once.',
+        items: {
+          type: 'object',
+          properties: {
+            rowIndex: {
+              type: 'integer',
+              description: 'Zero-based index of the item, exactly as labelled in the prompt.',
+            },
+            answer: {
+              type: 'string',
+              enum: ['YES', 'NO'],
+              description: 'YES if the artifact satisfies the requirement, NO otherwise.',
+            },
+          },
+          required: ['rowIndex', 'answer'],
+        },
+      },
+    },
+    required: ['verdicts'],
+  },
+};
