@@ -75,6 +75,28 @@ export const CLAIMCHECK_TOOL = {
         type: 'string',
         description: 'Explanation of ensures vs NL comparison. Required if not Yes.',
       },
+      nlAmbiguous: {
+        type: 'boolean',
+        description: 'True ONLY if the requirement admits more than one reasonable reading AND the verdict depends on which reading is taken. If the lemma is at least as strong as the requirement under every reasonable reading, set false (and match true). If it fails under every reading, set false (and match false).',
+      },
+      readings: {
+        type: 'array',
+        description: 'Every reasonable reading of the requirement, each written as a Dafny contract over the lemma\'s own parameters. An unambiguous requirement has exactly ONE reading. Never empty.',
+        items: {
+          type: 'object',
+          properties: {
+            reading: { type: 'string', description: 'One reasonable reading of the requirement, stated precisely in English.' },
+            requires: { type: 'string', description: 'This reading as a Dafny precondition: ONE boolean expression over exactly the lemma\'s parameters (conjoin with &&). Include the invariant / well-formedness assumptions the lemma relies on (e.g. Inv(m)); those are not part of the ambiguity. Use "true" if none.' },
+            ensures: { type: 'string', description: 'This reading as a Dafny postcondition: ONE boolean expression over exactly the lemma\'s parameters.' },
+            covered: { type: 'boolean', description: 'Your judgement: is the lemma at least as strong as this reading? (Its requires is implied by this requires, and its ensures implies this ensures.)' },
+          },
+          required: ['reading', 'requires', 'ensures', 'covered'],
+        },
+      },
+      interpretation: {
+        type: 'string',
+        description: 'The reading the lemma actually formalizes (copy of the matching reading text). Empty string if nlAmbiguous is false.',
+      },
       vacuous: {
         type: 'boolean',
         description: 'True if the ensures literally restates a requires clause without unfolding any definitions. Extracting a consequence from an invariant (e.g. requires Inv(m); ensures m >= 0) is NOT vacuous.',
@@ -90,10 +112,10 @@ export const CLAIMCHECK_TOOL = {
       verdict: {
         type: 'string',
         enum: ['JUSTIFIED', 'PARTIALLY_JUSTIFIED', 'NOT_JUSTIFIED', 'VACUOUS'],
-        description: 'Overall verdict.',
+        description: 'Overall verdict. When nlAmbiguous is true, give the verdict for the most natural reading; the readings array carries the per-reading result.',
       },
     },
-    required: ['lemmaName', 'requirement', 'informalization', 'ensuresMatchesNL', 'ensuresExplanation', 'vacuous', 'vacuousExplanation', 'surprisingRestrictions', 'verdict'],
+    required: ['lemmaName', 'requirement', 'informalization', 'ensuresMatchesNL', 'ensuresExplanation', 'nlAmbiguous', 'readings', 'interpretation', 'vacuous', 'vacuousExplanation', 'surprisingRestrictions', 'verdict'],
   },
 };
 
@@ -143,7 +165,29 @@ export const ROUNDTRIP_COMPARE_TOOL = {
             },
             match: {
               type: 'boolean',
-              description: 'True if the lemma faithfully expresses the requirement. False if there is any meaningful discrepancy.',
+              description: 'True if the lemma faithfully expresses the requirement under every reasonable reading (being stronger is fine). False if there is a meaningful discrepancy. When nlAmbiguous is true, set match according to the most natural reading.',
+            },
+            nlAmbiguous: {
+              type: 'boolean',
+              description: 'True ONLY if the requirement admits more than one reasonable reading AND the verdict depends on which reading is taken. If the lemma is at least as strong as the requirement under every reasonable reading, set false (and match true). If it fails under every reading, set false (and match false).',
+            },
+            readings: {
+              type: 'array',
+              description: 'Every reasonable reading of the requirement, each written as a Dafny contract over the lemma\'s own parameters. An unambiguous requirement has exactly ONE reading. Never empty.',
+              items: {
+                type: 'object',
+                properties: {
+                  reading: { type: 'string', description: 'One reasonable reading of the requirement, stated precisely in English.' },
+                  requires: { type: 'string', description: 'This reading as a Dafny precondition: ONE boolean expression over exactly the lemma\'s parameters (conjoin with &&). Include the invariant / well-formedness assumptions the lemma relies on (e.g. Inv(m)); those are not part of the ambiguity. Use "true" if none.' },
+                  ensures: { type: 'string', description: 'This reading as a Dafny postcondition: ONE boolean expression over exactly the lemma\'s parameters.' },
+                  covered: { type: 'boolean', description: 'Your judgement: is the lemma at least as strong as this reading? (Its requires is implied by this requires, and its ensures implies this ensures.)' },
+                },
+                required: ['reading', 'requires', 'ensures', 'covered'],
+              },
+            },
+            interpretation: {
+              type: 'string',
+              description: 'The reading the lemma actually formalizes (copy of the matching reading text). Empty string if nlAmbiguous is false.',
             },
             discrepancy: {
               type: 'string',
@@ -159,7 +203,7 @@ export const ROUNDTRIP_COMPARE_TOOL = {
               description: 'Brief explanation of the comparison reasoning.',
             },
           },
-          required: ['requirementIndex', 'lemmaName', 'match', 'discrepancy', 'weakeningType', 'explanation'],
+          required: ['requirementIndex', 'lemmaName', 'match', 'discrepancy', 'weakeningType', 'explanation', 'nlAmbiguous', 'readings', 'interpretation'],
         },
       },
     },

@@ -1,6 +1,7 @@
 import { callWithTool } from './api.js';
 import { callViaClaudeCode } from './claude-code-backend.js';
 import { INFORMALIZE_TOOL, ROUNDTRIP_COMPARE_TOOL, CLAIMCHECK_TOOL, NAIVE_TOOL } from './schemas.js';
+import { decide } from './ambiguity.js';
 import {
   INFORMALIZE_PROMPT,
   ROUNDTRIP_COMPARE_PROMPT,
@@ -21,6 +22,24 @@ const MODEL_DEFAULTS = {
   bedrock: { haiku: 'us.anthropic.claude-haiku-4-5-20251001-v1:0', sonnet: 'us.anthropic.claude-sonnet-4-6', opus: 'us.anthropic.claude-opus-4-8' },
   cc:      { haiku: 'haiku',                                     sonnet: 'sonnet',                           opus: 'opus' },
 };
+
+/**
+ * Bucket entries by the (judged-only) ambiguity decision. Each entry carries
+ * `judgement` ({ match, nlAmbiguous, readings, interpretation }) plus the mode's
+ * `discrepancy` / `weakeningType`; the decision is attached as `decision` and
+ * can be re-derived later with Dafny evidence (see claimcheck.js).
+ */
+function partition(entries) {
+  const passed = [], failed = [], ambiguous = [];
+  for (const e of entries) {
+    const decision = decide(e.judgement);
+    const entry = { ...e, decision };
+    if (decision.status === 'confirmed') passed.push(entry);
+    else if (decision.status === 'ambiguous') ambiguous.push(entry);
+    else failed.push(entry);
+  }
+  return { passed, failed, ambiguous };
+}
 
 function defaultModels(opts) {
   if (opts.claudeCode) return MODEL_DEFAULTS.cc;
@@ -48,10 +67,10 @@ function resolveModel(m, defaults) {
  * @param {string[]} requirements
  * @param {string} domain
  * @param {object} [opts] - { verbose, informalizeModel, compareModel }
- * @returns {Promise<{ passed: object[], failed: object[] }>}
+ * @returns {Promise<{ passed: object[], failed: object[], ambiguous: object[] }>}
  */
 export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
-  if (lemmas.length === 0) return { passed: [], failed: [] };
+  if (lemmas.length === 0) return { passed: [], failed: [], ambiguous: [] };
 
   const log = opts.log ?? (() => {});
   const defaults = defaultModels(opts);
@@ -152,30 +171,27 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
     compByIndex.set(c.requirementIndex, c);
   }
 
-  // Partition into passed/failed — trust the compare step's judgement
-  const passed = [];
-  const failed = [];
-
-  for (const l of lemmas) {
+  // Partition by the compare step's judgement (plus its readings of the requirement)
+  const entries = lemmas.map((l) => {
     const comp = compByIndex.get(l.index);
-    const inf = informalByName.get(l.lemmaName);
-    const compMatch = comp?.match ?? false;
+    return {
+      ...l,
+      informalization: informalByName.get(l.lemmaName),
+      comparison: comp,
+      judgement: {
+        match: comp?.match ?? false,
+        nlAmbiguous: comp?.nlAmbiguous ?? false,
+        readings: comp?.readings,
+        interpretation: comp?.interpretation,
+      },
+      discrepancy: comp?.discrepancy ?? 'No comparison produced',
+      weakeningType: comp?.weakeningType ?? 'none',
+    };
+  });
 
-    if (compMatch) {
-      passed.push({ ...l, informalization: inf, comparison: comp });
-    } else {
-      failed.push({
-        ...l,
-        informalization: inf,
-        comparison: comp,
-        discrepancy: comp?.discrepancy ?? 'No comparison produced',
-        weakeningType: comp?.weakeningType ?? 'none',
-      });
-    }
-  }
-
-  log(`[roundtrip] Passed: ${passed.length}, Failed: ${failed.length}`);
-  return { passed, failed };
+  const buckets = partition(entries);
+  log(`[roundtrip] Passed: ${buckets.passed.length}, Failed: ${buckets.failed.length}, Ambiguous: ${buckets.ambiguous.length}`);
+  return buckets;
 }
 
 /**
@@ -189,17 +205,16 @@ export async function roundtripCheck(lemmas, requirements, domain, opts = {}) {
  * @param {string[]} requirements
  * @param {string} domain
  * @param {object} [opts] - { verbose, model }
- * @returns {Promise<{ passed: object[], failed: object[] }>}
+ * @returns {Promise<{ passed: object[], failed: object[], ambiguous: object[] }>}
  */
 export async function singlePromptCheck(lemmas, requirements, domain, opts = {}) {
-  if (lemmas.length === 0) return { passed: [], failed: [] };
+  if (lemmas.length === 0) return { passed: [], failed: [], ambiguous: [] };
 
   const log = opts.log ?? (() => {});
   const model = resolveModel(opts.model, defaultModels(opts)) ?? defaultModels(opts).sonnet;
   const call = getCallFn(opts);
 
-  const passed = [];
-  const failed = [];
+  const entries = [];
 
   for (const l of lemmas) {
     const requirement = requirements[l.index];
@@ -239,21 +254,24 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
       claimcheck: result,
     };
 
-    if (result.verdict === 'JUSTIFIED') {
-      passed.push({ ...l, informalization, comparison });
-    } else {
-      failed.push({
-        ...l,
-        informalization,
-        comparison,
-        discrepancy: result.ensuresExplanation || result.vacuousExplanation || result.surprisingRestrictions,
-        weakeningType: verdictToWeakeningType(result),
-      });
-    }
+    entries.push({
+      ...l,
+      informalization,
+      comparison,
+      judgement: {
+        match: result.verdict === 'JUSTIFIED',
+        nlAmbiguous: result.nlAmbiguous ?? false,
+        readings: result.readings,
+        interpretation: result.interpretation,
+      },
+      discrepancy: result.ensuresExplanation || result.vacuousExplanation || result.surprisingRestrictions,
+      weakeningType: verdictToWeakeningType(result),
+    });
   }
 
-  log(`[claimcheck] Passed: ${passed.length}, Failed: ${failed.length}`);
-  return { passed, failed };
+  const buckets = partition(entries);
+  log(`[claimcheck] Passed: ${buckets.passed.length}, Failed: ${buckets.failed.length}, Ambiguous: ${buckets.ambiguous.length}`);
+  return buckets;
 }
 
 /**
@@ -266,17 +284,16 @@ export async function singlePromptCheck(lemmas, requirements, domain, opts = {})
  * @param {string[]} requirements
  * @param {string} domain
  * @param {object} [opts] - { verbose, model }
- * @returns {Promise<{ passed: object[], failed: object[] }>}
+ * @returns {Promise<{ passed: object[], failed: object[], ambiguous: object[] }>}
  */
 export async function naiveCheck(lemmas, requirements, domain, opts = {}) {
-  if (lemmas.length === 0) return { passed: [], failed: [] };
+  if (lemmas.length === 0) return { passed: [], failed: [], ambiguous: [] };
 
   const log = opts.log ?? (() => {});
   const model = resolveModel(opts.model, defaultModels(opts)) ?? defaultModels(opts).sonnet;
   const call = getCallFn(opts);
 
-  const passed = [];
-  const failed = [];
+  const entries = [];
 
   for (const l of lemmas) {
     const requirement = requirements[l.index];
@@ -313,21 +330,20 @@ export async function naiveCheck(lemmas, requirements, domain, opts = {}) {
       explanation: result.explanation,
     };
 
-    if (result.verdict === 'JUSTIFIED') {
-      passed.push({ ...l, informalization, comparison });
-    } else {
-      failed.push({
-        ...l,
-        informalization,
-        comparison,
-        discrepancy: result.explanation,
-        weakeningType: 'unknown',
-      });
-    }
+    // Naive mode has no readings: the decision is exactly the verdict, never ambiguous.
+    entries.push({
+      ...l,
+      informalization,
+      comparison,
+      judgement: { match: result.verdict === 'JUSTIFIED' },
+      discrepancy: result.explanation,
+      weakeningType: 'unknown',
+    });
   }
 
-  log(`[naive] Passed: ${passed.length}, Failed: ${failed.length}`);
-  return { passed, failed };
+  const buckets = partition(entries);
+  log(`[naive] Passed: ${buckets.passed.length}, Failed: ${buckets.failed.length}`);
+  return buckets;
 }
 
 function verdictToWeakeningType(result) {

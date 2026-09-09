@@ -21,6 +21,8 @@ Options:
   -d, --domain <name>          Human-readable domain name
   --json                       Output JSON instead of markdown
   --verify                     Also run dafny verify on each lemma
+  --discharge                  Check readings against lemmas with Dafny
+  --ambiguity <policy>         flag (default) | strict | lenient
   --module <name>              Dafny module name (for --verify)
   --single-prompt              Use single-prompt mode
   --naive                      Use naive mode
@@ -46,6 +48,8 @@ export async function main(argv) {
       module:       { type: 'string' },
       domain:       { type: 'string', short: 'd' },
       verify:             { type: 'boolean', default: false },
+      discharge:          { type: 'boolean', default: false },
+      ambiguity:          { type: 'string' },
       'single-prompt':    { type: 'boolean', default: false },
       naive:              { type: 'boolean', default: false },
       'claude-code':      { type: 'boolean', default: false },
@@ -100,6 +104,8 @@ export async function main(argv) {
   // Build passthrough flags
   const passthrough = [];
   if (values.verify) passthrough.push('--verify');
+  if (values.discharge) passthrough.push('--discharge');
+  if (values.ambiguity) passthrough.push('--ambiguity', values.ambiguity);
   if (values['single-prompt']) passthrough.push('--single-prompt');
   if (values.naive) passthrough.push('--naive');
   if (values['claude-code']) passthrough.push('--claude-code');
@@ -196,6 +202,7 @@ export async function main(argv) {
     const results = merged.results;
     const confirmed = results.filter(r => r.status === 'confirmed');
     const disputed = results.filter(r => r.status === 'disputed');
+    const ambiguous = results.filter(r => r.status === 'ambiguous');
     const errors = results.filter(r => r.status === 'error' || r.status === 'verify-failed');
 
     const lines = [`# Audit Report: ${domain}\n`];
@@ -203,6 +210,7 @@ export async function main(argv) {
     lines.push(`- **Mappings audited:** ${results.length}`);
     lines.push(`- **Confirmed:** ${confirmed.length}`);
     if (disputed.length) lines.push(`- **Disputed:** ${disputed.length}`);
+    if (ambiguous.length) lines.push(`- **Ambiguous:** ${ambiguous.length}`);
     if (errors.length) lines.push(`- **Errors:** ${errors.length}`);
     lines.push('');
 
@@ -223,6 +231,17 @@ export async function main(argv) {
         lines.push(`- Lemma: \`${r.lemmaName}\``);
         if (r.discrepancy) lines.push(`- Discrepancy: ${r.discrepancy}`);
         if (r.weakeningType && r.weakeningType !== 'none') lines.push(`- Weakening: ${r.weakeningType}`);
+        lines.push('');
+      }
+    }
+
+    if (ambiguous.length) {
+      lines.push(`## Ambiguous Requirements\n`);
+      for (const r of ambiguous) {
+        lines.push(`**${r.requirement}**`);
+        lines.push(`- Lemma: \`${r.lemmaName}\``);
+        if (r.discrepancy) lines.push(`- ${r.discrepancy}`);
+        for (const rd of r.readings ?? []) lines.push(`  - ${rd.covered ? '✓' : '✗'} ${rd.reading} (${rd.evidence})`);
         lines.push('');
       }
     }

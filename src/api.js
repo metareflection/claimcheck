@@ -1,6 +1,16 @@
 import Anthropic from '@anthropic-ai/sdk';
 import AnthropicVertex from '@anthropic-ai/vertex-sdk';
 import { AnthropicBedrock } from '@anthropic-ai/bedrock-sdk';
+import { fileURLToPath } from 'node:url';
+import { resolve, dirname } from 'node:path';
+
+// Load ANTHROPIC_API_KEY (and friends) from <repo>/.env if present.
+// Variables already set in the environment take precedence.
+try {
+  process.loadEnvFile(resolve(dirname(fileURLToPath(import.meta.url)), '..', '.env'));
+} catch {
+  // no .env file; rely on the ambient environment
+}
 
 let client;
 let totalInput = 0;
@@ -62,7 +72,7 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
   }
 
   // Some models (Opus 4.7+) don't accept temperature.
-  const supportsTemperature = !/opus-4-[789]/.test(model);
+  const supportsTemperature = !/opus-4-[789]|opus-5|sonnet-5|fable/.test(model);
 
   const response = await anthropic.messages.create({
     model,

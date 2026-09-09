@@ -29,7 +29,7 @@ Structural separation — different models for informalization and comparison:
 1. Extract mapped lemmas from claims .dfy file
 2. Batch informalize all lemmas (haiku) — does NOT see requirements
 3. Batch compare back-translations against requirements (sonnet)
-4. Report: confirmed / disputed
+4. Report: confirmed / disputed / ambiguous
 ```
 
 ### Single-prompt mode (`--single-prompt`)
@@ -141,6 +141,8 @@ node eval/compare.js two-pass cc-sonnet
 | `--single-prompt` | Use single-prompt claimcheck mode (one call per pair) |
 | `--model <id>` | Model for single-prompt mode (default: sonnet) |
 | `--verify` | Also run dafny verify on each lemma |
+| `--discharge` | Check each reading of the requirement against the lemma with Dafny; proofs override judgements (needs `dafny` on PATH) |
+| `--ambiguity <policy>` | `flag` (default: report `ambiguous`), `strict` (count as disputed), `lenient` (count as confirmed) |
 | `--informalize-model <id>` | Model for back-translation in two-pass mode (default: haiku) |
 | `--compare-model <id>` | Model for comparison in two-pass mode (default: sonnet) |
 | `--stdin` | Read JSON from stdin (pure claimcheck, no file extraction) |
@@ -154,10 +156,17 @@ For each mapping entry, one of:
 |--------|---------|
 | **confirmed** | Round-trip passed — lemma faithfully expresses the requirement |
 | **disputed** | Round-trip failed — discrepancy between lemma meaning and requirement |
+| **ambiguous** | The requirement admits more than one reasonable reading and the lemma covers some but not others (collapse with `--ambiguity strict\|lenient`) |
 | **verify-failed** | Dafny verification failed (only with `--verify` flag) |
 | **error** | Lemma not found in source |
 
 In single-prompt mode, disputed results include richer detail: verdict category, vacuity analysis, and surprising restrictions.
+
+### Ambiguity and readings
+
+The compare step writes every reasonable reading of the requirement as a Dafny contract over the lemma's own parameters (`readings[]` in the JSON, each with `requires`, `ensures`, `covered`). A lemma that is at least as strong under every reading is confirmed; under none, disputed; under some, `ambiguous`, with `interpretation` naming the reading the lemma actually formalizes.
+
+With `--discharge`, each reading is checked with Dafny instead of judged: a wrapper lemma carrying the reading's contract calls the audited lemma, so verifying it proves `P_reading ⇒ P_lemma` and `P_reading ∧ Q_lemma ⇒ Q_reading`. Function bodies are made opaque for that proof, so it can only use the lemma's contract, not the domain invariant (otherwise a tautology lemma would "cover" anything the domain already implies). Two side probes discard readings whose precondition is unsatisfiable (`vacuous`) or whose postcondition follows from its precondition alone (`trivial`). A verified reading is marked `proven`; a failed proof only means the judgement stands (`judged`), since Dafny cannot prove non-coverage. Per-result `evidence` is `proven`, `mixed`, or `judged`.
 
 ## Test Projects
 
@@ -192,7 +201,7 @@ Key takeaways:
 ## Requirements
 
 - Node.js 18+
-- `ANTHROPIC_API_KEY` environment variable (or use `--vertex` / `--bedrock`)
+- `ANTHROPIC_API_KEY` environment variable, or put it in a `.env` file at the repo root (copy `.env.example`; `.env` is git-ignored). Or use `--vertex` / `--bedrock`.
 - `dafny` in PATH (only for `--verify`)
 - [dafny-replay](https://github.com/metareflection/dafny-replay) cloned as a sibling directory (required for tests and benchmarks — the claims `.dfy` files `include` domain files from `../../dafny-replay/`)
 

@@ -48,9 +48,12 @@ Each claim gets one of:
 |--------|---------|--------|
 | `confirmed` | Lemma faithfully expresses the requirement | None needed |
 | `disputed` | Discrepancy detected | Fix the lemma or refine the requirement |
+| `ambiguous` | Requirement has more than one reasonable reading; lemma covers some but not all | Decide which reading is intended: accept the lemma (`interpretation` says which reading it formalizes) or reword the requirement |
 | `error` | Lemma not found in source | Check the lemmaName matches |
 
-Disputed results include `discrepancy` (what's wrong) and `weakeningType` (category: `tautology`, `weakened-postcondition`, `narrowed-scope`, `wrong-property`).
+Disputed results include `discrepancy` (what's wrong) and `weakeningType` (category: `tautology`, `weakened-postcondition`, `narrowed-scope`, `wrong-property`). Ambiguous results list `readings` (each reading with `covered`) and `interpretation`.
+
+Pass `--ambiguity strict` to treat ambiguous as disputed (gate on it) or `--ambiguity lenient` to treat it as confirmed. Pass `--discharge` (needs `dafny` on PATH) to have each reading proven against the lemma with Dafny rather than judged; results then carry `evidence: proven | mixed | judged`.
 
 ## Workflow
 

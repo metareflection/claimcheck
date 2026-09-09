@@ -32,6 +32,15 @@ module DelegationAuthClaims {
     ensures Apply(m, Delegate(from, to, cap)) == m
   { }
 
+  // Reads "between non-existent subjects" as BOTH missing. Covers that reading
+  // exactly, but not the "at least one missing" reading (which the lemma above
+  // covers). Gold: ambiguous.
+  lemma DelegateBothNonExistentIsNoop(m: Model, from: Subject, to: Subject, cap: Capability)
+    requires Inv(m)
+    requires from !in m.subjects && to !in m.subjects
+    ensures Apply(m, Delegate(from, to, cap)) == m
+  { }
+
   lemma RevokeNonExistentIsNoop(m: Model, eid: EdgeId)
     requires Inv(m)
     requires eid !in m.delegations

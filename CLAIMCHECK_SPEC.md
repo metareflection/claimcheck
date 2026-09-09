@@ -57,11 +57,31 @@ Output per pair:
 | `discrepancy` | string | What's wrong (if `match` is false) |
 | `weakeningType` | enum | `none` / `tautology` / `weakened-postcondition` / `narrowed-scope` / `missing-case` / `wrong-property` |
 | `explanation` | string | Reasoning |
+| `readings` | array | Every reasonable reading of the requirement, each as `{ reading, requires, ensures, covered }` — a Dafny contract over the lemma's parameters and whether the lemma is at least as strong as it. Exactly one entry for an unambiguous requirement |
+| `nlAmbiguous` | boolean | True only if the verdict depends on which reading is taken |
+| `interpretation` | string | The reading the lemma actually formalizes (when ambiguous) |
+
+## Discharge (Optional, Dafny)
+
+With `--discharge`, each reading is checked mechanically (`src/discharge.js`). For lemma `L` (`requires P_L; ensures Q_L`) and reading `R` (`requires P_R; ensures Q_R`), a wrapper lemma with R's contract whose body calls L verifies iff `P_R ⇒ P_L` and `P_R ∧ Q_L ⇒ Q_R`, i.e. L covers R.
+
+| Probe | Harness | Verified means |
+|-------|---------|----------------|
+| `check` | R's contract, body `L(args);`, functions opaque | reading **covered** (proof) |
+| `trivial` | R's contract, empty body, functions opaque | reading is **trivial** (excluded) |
+| `sat` | `requires P_R; ensures false`, empty body, transparent | reading is **vacuous** (excluded) |
+
+Opacity (`--default-function-opacity opaque`) is what makes `check` measure the lemma's *contract* rather than the domain: transparent, Dafny would prove any reading the invariant already implies, so a tautology lemma would cover everything. A failed `check` is **unknown**, not "uncovered", and the model's judgement for that reading stands.
 
 ## Verdict
 
-- `match: true` → **confirmed**
-- `match: false` → **disputed** (with category and explanation)
+Per pair, from `readings` (vacuous/trivial ones excluded) and the model's `match` (`src/ambiguity.js`):
+
+- every reading covered, at least one by proof → **confirmed** (overrides a model dispute)
+- some readings covered, others not → **ambiguous**
+- otherwise → `match: true` → **confirmed**, `match: false` → **disputed**
+
+`options.ambiguity` collapses **ambiguous**: `flag` (default, keep), `strict` (→ disputed), `lenient` (→ confirmed). Each result carries `evidence`: `proven` (all readings proven), `mixed`, or `judged`.
 
 ## Output
 
@@ -71,12 +91,16 @@ Output per pair:
     {
       "requirement": "...",
       "lemmaName": "...",
-      "status": "confirmed | disputed | error",
+      "status": "confirmed | disputed | ambiguous | error",
       "dafnyCode": "...",
       "informalization": { ... },
       "comparison": { ... },
       "discrepancy": "...",
-      "weakeningType": "..."
+      "weakeningType": "...",
+      "readings": [{ "reading": "...", "requires": "...", "ensures": "...", "covered": true, "evidence": "proven | judged | vacuous | trivial" }],
+      "evidence": "proven | mixed | judged",
+      "nlAmbiguous": true,
+      "interpretation": "..."
     }
   ],
   "tokenUsage": { "input": 0, "output": 0 }
@@ -103,3 +127,5 @@ Output per pair:
 | `src/audit.js` | Wrapper adding lemma extraction and Dafny verification |
 | `src/extract.js` | Dafny lemma extraction by name |
 | `src/verify.js` | Optional Dafny verification |
+| `src/ambiguity.js` | Readings → status; ambiguity policy |
+| `src/discharge.js` | Dafny harness that proves reading coverage |

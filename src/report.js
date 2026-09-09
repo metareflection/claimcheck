@@ -13,6 +13,7 @@ export function renderReport(domain, auditResults) {
 
   const confirmed = auditResults.filter((r) => r.status === 'confirmed');
   const disputed = auditResults.filter((r) => r.status === 'disputed');
+  const ambiguous = auditResults.filter((r) => r.status === 'ambiguous');
   const errors = auditResults.filter((r) => r.status === 'error');
   const verifyFailed = auditResults.filter((r) => r.status === 'verify-failed');
 
@@ -22,6 +23,7 @@ export function renderReport(domain, auditResults) {
   lines.push(`- **Mappings audited:** ${auditResults.length}`);
   lines.push(`- **Confirmed:** ${confirmed.length}`);
   if (disputed.length > 0) lines.push(`- **Disputed:** ${disputed.length}`);
+  if (ambiguous.length > 0) lines.push(`- **Ambiguous:** ${ambiguous.length}`);
   if (verifyFailed.length > 0) lines.push(`- **Verification failed:** ${verifyFailed.length}`);
   if (errors.length > 0) lines.push(`- **Errors:** ${errors.length}`);
   lines.push('');
@@ -34,6 +36,28 @@ export function renderReport(domain, auditResults) {
     for (const r of confirmed) {
       lines.push(`**${r.requirement}**`);
       lines.push(`- Lemma: \`${r.lemmaName}\``);
+      if (r.informalization) {
+        lines.push(`- Back-translation: ${r.informalization.naturalLanguage}`);
+      }
+      lines.push(...renderReadings(r));
+      lines.push('```dafny');
+      lines.push(r.dafnyCode);
+      lines.push('```');
+      lines.push('');
+    }
+  }
+
+  // --- Ambiguous requirements ---
+
+  if (ambiguous.length > 0) {
+    lines.push(`## Ambiguous Requirements\n`);
+    lines.push(`The requirement admits more than one reasonable reading and the lemma covers some but not all of them. Decide which reading was intended, then either accept the lemma or tighten the requirement.\n`);
+
+    for (const r of ambiguous) {
+      lines.push(`**${r.requirement}**`);
+      lines.push(`- Lemma: \`${r.lemmaName}\``);
+      if (r.interpretation) lines.push(`- Lemma formalizes: ${r.interpretation}`);
+      lines.push(...renderReadings(r));
       if (r.informalization) {
         lines.push(`- Back-translation: ${r.informalization.naturalLanguage}`);
       }
@@ -57,6 +81,7 @@ export function renderReport(domain, auditResults) {
       if (r.informalization) {
         lines.push(`- Back-translation: ${r.informalization.naturalLanguage}`);
       }
+      lines.push(...renderReadings(r));
       lines.push('```dafny');
       lines.push(r.dafnyCode);
       lines.push('```');
@@ -105,6 +130,21 @@ export function renderReport(domain, auditResults) {
   }
 
   return lines.join('\n');
+}
+
+/**
+ * Per-reading evidence lines: which readings of the requirement the lemma
+ * covers, and whether that is a Dafny proof or a model judgement.
+ */
+function renderReadings(r) {
+  if (!r.readings?.length) return [];
+  const mark = rd => rd.evidence === 'vacuous' || rd.evidence === 'trivial' ? '–' : rd.covered ? '✓' : '✗';
+  const out = [`- Readings (${r.evidence}):`];
+  for (const rd of r.readings) {
+    const note = rd.dafny?.error && rd.evidence !== 'proven' ? ` — ${rd.dafny.error.split('\n')[0].slice(0, 120)}` : '';
+    out.push(`  - ${mark(rd)} ${rd.reading} *(${rd.evidence})*${note}`);
+  }
+  return out;
 }
 
 /**

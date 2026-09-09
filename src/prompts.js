@@ -106,6 +106,24 @@ However, do not flag ${L.items} just because the English phrasing differs — fo
 
 If the back-translation's strength is "trivial", that is almost always a mismatch unless the requirement itself is trivial.
 
+## Ambiguous Requirements
+
+Natural language is often ambiguous (e.g. "between non-existent subjects" may mean *both* are missing or *at least one* is missing). Before judging, ask whether the requirement admits more than one reasonable reading. Then:
+
+- If the ${L.item} is at least as strong as the requirement under **every** reasonable reading, it is a match. Set nlAmbiguous=false.
+- If it fails under **every** reasonable reading, it is a discrepancy. Set nlAmbiguous=false.
+- If it is at least as strong under **some** readings but not others, set nlAmbiguous=true and state which reading the ${L.item} actually formalizes in "interpretation". Do not invent far-fetched readings: only readings a careful engineer could reasonably take.
+
+A ${L.item} that is STRONGER than the requirement (proves more, or proves it under weaker preconditions) is a match, not a discrepancy.
+
+## Readings as Contracts
+
+For EVERY pair, fill in "readings": each reasonable reading of the requirement written as a Dafny contract over exactly the ${L.item}'s parameter list (same names, same order). An unambiguous requirement gets exactly one reading. For each reading give:
+- "requires": ONE boolean expression (conjoin clauses with &&). Include the invariant / well-formedness assumptions the ${L.item} relies on, such as Inv(m) — those are not part of the ambiguity. Use "true" if there are none.
+- "ensures": ONE boolean expression stating what the reading guarantees.
+- "covered": whether the ${L.item} is at least as strong as this reading.
+Use only names visible to the ${L.item} (its parameters and the definitions it already references). These contracts may be checked mechanically, so write real Dafny, not pseudo-code.
+
 Call the record_roundtrip_comparisons tool with one entry per pair.`;
 }
 
@@ -160,6 +178,14 @@ Answer three questions:
 
 Pay attention to: quantifier scope, boundary conditions (\`<\` vs \`<=\`), and whether the Dafny formalizes a slightly different concept than the NL intends.
 
+**1b. Is the NL requirement ambiguous?**
+Does the requirement admit more than one reasonable reading, and does your answer to question 1 depend on which reading is taken?
+- If the lemma is at least as strong under **every** reasonable reading: nlAmbiguous=false, answer Yes above.
+- If it fails under **every** reasonable reading: nlAmbiguous=false, answer Partially/No above.
+- If it holds under **some** readings but not others: nlAmbiguous=true, and state which reading the lemma actually formalizes. Only list readings a careful engineer could reasonably take.
+
+In every case fill in "readings" with each reasonable reading written as a Dafny contract over exactly the lemma's parameter list: "requires" (ONE boolean expression, including the invariant assumptions the lemma relies on such as Inv(m); "true" if none), "ensures" (ONE boolean expression), and "covered" (is the lemma at least as strong as this reading?). An unambiguous requirement gets exactly one reading. Use only names the lemma can see. These contracts may be checked mechanically with Dafny, so write real Dafny.
+
 **2. Is the guarantee vacuous?**
 Does the ensures clause already follow trivially from the requires clauses?
 - **No**: The lemma establishes something beyond its assumptions.
@@ -174,7 +200,7 @@ Invariant dependencies and standard well-formedness conditions are expected and 
 - Be precise about quantifiers and boundary conditions.
 - Invariant dependencies in requires are normal — don't flag them.
 - Unfold predicates when checking vacuity.
-- If the NL requirement is ambiguous, note which interpretation the Dafny chose.
+- A lemma that is stronger than the requirement (proves more, or under weaker preconditions) is fine.
 - Your job is adversarial but not paranoid.
 
 Call the record_claimcheck tool with your analysis for lemma \`${lemmaName}\`.`;

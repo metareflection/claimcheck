@@ -99,6 +99,7 @@ async function main() {
   const totalStart = Date.now();
   let confirmed = 0;
   let disputed = 0;
+  let ambiguous = 0;
   let errors = 0;
 
   // Process one at a time (each is an independent claimcheck call)
@@ -124,6 +125,7 @@ async function main() {
       const r = results[0];
       if (r.status === 'confirmed') confirmed++;
       else if (r.status === 'disputed') disputed++;
+      else if (r.status === 'ambiguous') ambiguous++;
       else errors++;
 
       return {
@@ -135,6 +137,8 @@ async function main() {
         comparison: r.comparison,
         ...(r.discrepancy ? { discrepancy: r.discrepancy } : {}),
         ...(r.weakeningType ? { weakeningType: r.weakeningType } : {}),
+        ...(r.readings ? { readings: r.readings, evidence: r.evidence } : {}),
+        ...(r.nlAmbiguous ? { nlAmbiguous: true, interpretation: r.interpretation } : {}),
       };
     } catch (err) {
       errors++;
@@ -175,6 +179,7 @@ async function main() {
 
   console.error(`\nConfirmed: ${confirmed}/${allResults.length} (${(100 * confirmed / allResults.length).toFixed(1)}%)`);
   console.error(`Disputed: ${disputed}/${allResults.length} (${(100 * disputed / allResults.length).toFixed(1)}%)`);
+  if (ambiguous) console.error(`Ambiguous: ${ambiguous}/${allResults.length} (${(100 * ambiguous / allResults.length).toFixed(1)}%)`);
   if (errors) console.error(`Errors: ${errors}`);
   console.error(`Elapsed: ${(totalElapsedMs / 1000).toFixed(1)}s`);
 
@@ -201,6 +206,7 @@ async function main() {
     totalElapsedMs,
     confirmed,
     disputed,
+    ambiguous,
     errors,
     disputesByType,
     confirmationRate: confirmed / allResults.length,

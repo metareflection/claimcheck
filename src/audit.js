@@ -1,6 +1,7 @@
 import { extractLemma } from './extract.js';
 import { verify } from './verify.js';
 import { claimcheck } from './claimcheck.js';
+import { makeDischarger } from './discharge.js';
 
 /**
  * Audit a set of requirement→lemma mappings.
@@ -15,7 +16,7 @@ import { claimcheck } from './claimcheck.js';
  * @param {string} domainDfyPath - absolute path to .dfy file (for dafny verify)
  * @param {string} [domainModule] - Dafny module name (only needed for --verify)
  * @param {string} domain - display name
- * @param {object} [opts] - { verbose, verify, informalizeModel, compareModel, singlePrompt, model }
+ * @param {object} [opts] - { verbose, verify, discharge, ambiguity, informalizeModel, compareModel, singlePrompt, model }
  * @returns {Promise<object[]>} per-mapping results
  */
 export async function audit(mapping, dfySource, domainDfyPath, domainModule, domain, opts = {}) {
@@ -69,13 +70,20 @@ export async function audit(mapping, dfySource, domainDfyPath, domainModule, dom
 
   const activeClaims = claims.filter(c => !c.skip);
 
-  // Step 3: Core claimcheck (informalize + compare)
+  // Step 3: Core claimcheck (informalize + compare), optionally discharging
+  // each reading of the requirement against the lemma with Dafny. The
+  // discharger includes the claims file so the lemma is visible as a trusted
+  // (already verified) fact rather than re-verified.
+  const discharge = opts.discharge === true
+    ? makeDischarger({ claimsPath: domainDfyPath, claimsSource: dfySource, domainModule, opts })
+    : opts.discharge;
+
   let auditResults = [];
   if (activeClaims.length > 0) {
     const { results } = await claimcheck({
       claims: activeClaims,
       domain,
-      options: { ...opts, log },
+      options: { ...opts, log, discharge },
     });
     auditResults = results;
   }

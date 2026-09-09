@@ -17,6 +17,11 @@ Options:
   -d, --domain <name>          Human-readable domain name (default: from --module or .dfy filename)
   --json                       Output JSON instead of markdown
   --verify                     Also run dafny verify on each lemma
+  --discharge                  Check each reading of the requirement against the lemma with
+                               Dafny (proofs override judgements; needs dafny on PATH)
+  --ambiguity <policy>         What to do when the lemma covers some readings of an ambiguous
+                               requirement but not others: flag (default: status "ambiguous"),
+                               strict (count as disputed), lenient (count as confirmed)
   --single-prompt              Use single-prompt claimcheck mode (one call per pair)
   --naive                      Use naive mode (one call per pair, no structured reasoning)
   --claude-code                Use Claude Code (claude -p) instead of the Anthropic API
@@ -43,6 +48,8 @@ export async function main(argv) {
       domain:       { type: 'string', short: 'd' },
       lang:         { type: 'string' },
       verify:             { type: 'boolean', default: false },
+      discharge:          { type: 'boolean', default: false },
+      ambiguity:          { type: 'string' },
       'single-prompt':    { type: 'boolean', default: false },
       naive:              { type: 'boolean', default: false },
       'claude-code':      { type: 'boolean', default: false },
@@ -96,6 +103,8 @@ export async function main(argv) {
   const opts = {
     verbose: values.verbose,
     verify: values.verify,
+    discharge: values.discharge,
+    ambiguity: values.ambiguity ?? 'flag',
     singlePrompt: values['single-prompt'],
     naive: values.naive,
     claudeCode: values['claude-code'],
@@ -110,6 +119,10 @@ export async function main(argv) {
   // --- Stdin mode: pure JSON-in/JSON-out ---
 
   if (values.stdin) {
+    if (values.discharge) {
+      console.error('[claimcheck] --discharge needs a claims file (--dfy); ignored in --stdin mode');
+      opts.discharge = false;
+    }
     const chunks = [];
     for await (const chunk of process.stdin) chunks.push(chunk);
     const input = JSON.parse(Buffer.concat(chunks).toString());
@@ -161,8 +174,10 @@ export async function main(argv) {
 
   const confirmed = auditResults.filter((r) => r.status === 'confirmed');
   const disputed = auditResults.filter((r) => r.status === 'disputed');
+  const ambiguous = auditResults.filter((r) => r.status === 'ambiguous');
   const errors = auditResults.filter((r) => r.status === 'error' || r.status === 'verify-failed');
-  console.error(`[claimcheck] Confirmed: ${confirmed.length}, Disputed: ${disputed.length}, Errors: ${errors.length}`);
+  console.error(`[claimcheck] Confirmed: ${confirmed.length}, Disputed: ${disputed.length}`
+    + (ambiguous.length ? `, Ambiguous: ${ambiguous.length}` : '') + `, Errors: ${errors.length}`);
 
   // --- Report ---
 

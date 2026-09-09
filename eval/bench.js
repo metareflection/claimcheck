@@ -9,6 +9,11 @@
  *   node eval/bench.js --runs 3 --label naive --naive
  *   node eval/bench.js --runs 3 --label naive --naive --concurrency 5
  *   node eval/bench.js --runs 3 --label opus --model claude-opus-4-6
+ *   node eval/bench.js --runs 1 --label discharge --discharge        # readings checked with Dafny
+ *   node eval/bench.js --runs 1 --label strict --ambiguity strict     # ambiguous counts as disputed
+ *
+ * Gold `expected` may be "confirmed", "disputed", or "ambiguous" (the lemma
+ * covers one reasonable reading of the requirement but not another).
  */
 
 import { execFile } from 'node:child_process';
@@ -41,6 +46,9 @@ const passthrough = [];
 if (args.includes('--verbose')) passthrough.push('--verbose');
 if (args.includes('--single-prompt')) passthrough.push('--single-prompt');
 if (args.includes('--naive')) passthrough.push('--naive');
+if (args.includes('--discharge')) passthrough.push('--discharge');
+const ambiguity = getArg('--ambiguity', null);
+if (ambiguity) passthrough.push('--ambiguity', ambiguity);
 
 const model = getArg('--model', null);
 if (model) passthrough.push('--model', model);
@@ -114,6 +122,8 @@ async function main() {
           lemmaName: v.lemmaName,
           expected: v.expected ?? 'confirmed',
           status: v.status,
+          ...(v.evidence ? { evidence: v.evidence } : {}),
+          ...(v.nlAmbiguous ? { nlAmbiguous: true, interpretation: v.interpretation } : {}),
           run,
           elapsedMs,
         }));
@@ -180,12 +190,14 @@ async function main() {
   let currentDomain = null;
   let totalCorrect = 0;
   let totalCount = 0;
+  const hedged = allResults.filter(r => r.expected !== 'ambiguous' && r.status === 'ambiguous').length;
+  const proven = allResults.filter(r => r.evidence === 'proven').length;
   for (const entry of Object.values(byKey)) {
     if (entry.domain !== currentDomain) {
       currentDomain = entry.domain;
       console.error(`  ${currentDomain}`);
     }
-    const tag = entry.expected === 'disputed' ? ' [bogus]' : '';
+    const tag = entry.expected === 'disputed' ? ' [bogus]' : entry.expected === 'ambiguous' ? ' [ambiguous]' : '';
     const name = entry.lemmaName.length > 40
       ? entry.lemmaName.slice(0, 40) + '...'
       : entry.lemmaName;
@@ -194,11 +206,16 @@ async function main() {
     totalCount += entry.total;
   }
   console.error(`\n  Accuracy: ${totalCorrect}/${totalCount}`);
+  if (hedged) console.error(`  Hedged (ambiguous verdict on a non-ambiguous gold item): ${hedged}`);
+  if (proven) console.error(`  Proven by Dafny discharge: ${proven}/${allResults.length}`);
   console.error(`  Elapsed: ${(totalElapsedMs / 1000).toFixed(1)}s`);
 }
 
+// Gold "ambiguous" is only satisfied by an "ambiguous" verdict: confirming or
+// disputing an ambiguous requirement means the grader picked a reading silently.
 function isCorrect(r) {
   if (r.expected === 'disputed') return r.status === 'disputed';
+  if (r.expected === 'ambiguous') return r.status === 'ambiguous';
   return r.status === 'confirmed';
 }
 
