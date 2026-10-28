@@ -20,12 +20,14 @@ Options:
   --single-prompt              Use single-prompt claimcheck mode (one call per pair)
   --naive                      Use naive mode (one call per pair, no structured reasoning)
   --claude-code                Use Claude Code (claude -p) instead of the Anthropic API
-  --model <id>                 Model for single-prompt/naive mode (default: claude-sonnet-4-5-20250929)
-  --informalize-model <id>     Model for back-translation (default: claude-haiku-4-5-20251001)
-  --compare-model <id>         Model for comparison (default: claude-sonnet-4-5-20250929)
+  --model <id>                 Model for single-prompt/naive mode (default: sonnet)
+  --informalize-model <id>     Model for back-translation (default: haiku)
+  --compare-model <id>         Model for comparison (default: sonnet)
+                               Model flags take a full ID or a tier (haiku, sonnet, opus),
+                               which maps to the latest model on the active backend
   --vertex                     Use Vertex AI instead of the Anthropic API (or USE_VERTEX env var)
   --vertex-project <id>        Google Cloud project ID (or GOOGLE_CLOUD_PROJECT_ID env var)
-  --vertex-region <region>     Vertex AI region (default: us-east5, or GOOGLE_CLOUD_REGION env var)
+  --vertex-region <region>     Vertex AI region (default: global, or GOOGLE_CLOUD_REGION env var)
   --bedrock                    Use AWS Bedrock instead of the Anthropic API (or USE_BEDROCK env var)
   --bedrock-region <region>    AWS region for Bedrock (default: us-east-1, or AWS_REGION env var)
   --stdin                      Read JSON from stdin (pure claimcheck, no file extraction)
@@ -86,7 +88,7 @@ export async function main(argv) {
       console.error('Error: --vertex requires --vertex-project or GOOGLE_CLOUD_PROJECT_ID env var');
       process.exit(1);
     }
-    const region = values['vertex-region'] ?? process.env.GOOGLE_CLOUD_REGION ?? 'us-east5';
+    const region = values['vertex-region'] ?? process.env.GOOGLE_CLOUD_REGION ?? 'global';
     configureVertex({ projectId, region });
   } else if (useBedrock) {
     const region = values['bedrock-region'] ?? process.env.AWS_REGION ?? 'us-east-1';

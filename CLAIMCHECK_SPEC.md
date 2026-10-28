@@ -87,9 +87,9 @@ Output per pair:
 
 | Parameter | Default |
 |-----------|---------|
-| `informalizeModel` | `claude-haiku-4-5-20251001` |
-| `compareModel` | `claude-sonnet-4-5-20250929` |
-| `temperature` | `0` |
+| `informalizeModel` | `claude-haiku-5-5` |
+| `compareModel` | `claude-sonnet-5-5` |
+| `temperature` | `0` on Claude 4.6 and earlier; omitted on newer models (they reject it) |
 
 ## Files
 

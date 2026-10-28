@@ -200,9 +200,13 @@ Key takeaways:
 
 By default, claimcheck calls the Anthropic API directly using `ANTHROPIC_API_KEY`. You can route through other backends instead:
 
-- `--vertex` — Vertex AI. Requires `--vertex-project` (or `GOOGLE_CLOUD_PROJECT_ID`); region defaults to `us-east5` (or `GOOGLE_CLOUD_REGION`).
-- `--bedrock` — AWS Bedrock. Region defaults to `us-east-1` (or `AWS_REGION`); credentials come from the standard AWS credential chain (env vars, `~/.aws/credentials`, SSO, IMDS). Default model IDs use the `us.` cross-region inference profile prefix:
-  - informalize: `us.anthropic.claude-haiku-4-5-20251001-v1:0`
-  - compare: `us.anthropic.claude-sonnet-4-6`
+- `--vertex` — Vertex AI. Requires `--vertex-project` (or `GOOGLE_CLOUD_PROJECT_ID`); region defaults to `global` (or `GOOGLE_CLOUD_REGION`).
+- `--bedrock` — AWS Bedrock. Region defaults to `us-east-1` (or `AWS_REGION`); credentials come from the standard AWS credential chain (env vars, `~/.aws/credentials`, SSO, IMDS). Default model IDs use the `us.` cross-region inference profiles (via bedrock-runtime):
+  - informalize: `us.anthropic.claude-haiku-5-5`
+  - compare: `us.anthropic.claude-sonnet-5-5`
 
-Override any default with `--model`, `--informalize-model`, or `--compare-model`.
+  Any inference-profile ID (`us.`, `global.`, …) or ARN goes through bedrock-runtime. A bare `anthropic.claude-…` ID goes to the Bedrock Messages-API endpoint instead; a bare `claude-…` ID gets the `anthropic.` prefix. Which route serves a given model depends on your account's model access.
+
+Default models are `claude-haiku-5-5` (informalize) and `claude-sonnet-5-5` (compare, single-prompt, naive). Override any default with `--model`, `--informalize-model`, or `--compare-model`, passing either a full model ID or a tier name (`haiku`, `sonnet`, `opus`) that maps to the latest model on the active backend.
+
+Claude 4.6 and earlier run with `temperature: 0` and a forced tool call. Newer models reject both, so they run with their default sampling and adaptive thinking, `tool_choice: auto` with strict tool use, and one retry if the tool call is missing.

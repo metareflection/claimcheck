@@ -25,12 +25,14 @@ Options:
   --single-prompt              Use single-prompt mode
   --naive                      Use naive mode
   --claude-code                Use Claude Code backend
-  --model <id>                 Model for single-prompt/naive mode
-  --informalize-model <id>     Model for back-translation
-  --compare-model <id>         Model for comparison
+  --model <id>                 Model for single-prompt/naive mode (default: sonnet)
+  --informalize-model <id>     Model for back-translation (default: haiku)
+  --compare-model <id>         Model for comparison (default: sonnet)
+                               Model flags take a full ID or a tier (haiku, sonnet, opus),
+                               which maps to the latest model on the active backend
   --vertex                     Use Vertex AI instead of the Anthropic API (or USE_VERTEX env var)
   --vertex-project <id>        Google Cloud project ID (or GOOGLE_CLOUD_PROJECT_ID env var)
-  --vertex-region <region>     Vertex AI region (default: us-east5, or GOOGLE_CLOUD_REGION env var)
+  --vertex-region <region>     Vertex AI region (default: global, or GOOGLE_CLOUD_REGION env var)
   --bedrock                    Use AWS Bedrock instead of the Anthropic API (or USE_BEDROCK env var)
   --bedrock-region <region>    AWS region for Bedrock (default: us-east-1, or AWS_REGION env var)
   -v, --verbose                Verbose logging
