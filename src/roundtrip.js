@@ -10,7 +10,10 @@ import {
 
 /** Pick the right backend based on opts.claudeCode. */
 function getCallFn(opts) {
-  return opts.claudeCode ? callViaClaudeCode : callWithTool;
+  if (opts.claudeCode && opts.maxTokens != null) {
+    throw new Error('maxTokens is only supported by API backends');
+  }
+  return opts.claudeCode ? callViaClaudeCode : params => callWithTool(params, opts);
 }
 
 // Default models: short names for Claude Code, full IDs for the API and Vertex,

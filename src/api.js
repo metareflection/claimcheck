@@ -97,8 +97,12 @@ function strictSchema(schema) {
 /**
  * Call the Anthropic API with a single tool and return its tool_use block.
  * Guarantees structured JSON output matching the tool's input_schema.
+ * Options supply user overrides for the per-call defaults.
  */
-export async function callWithTool({ model, prompt, tool, toolChoice, system, verbose, maxTokens }) {
+export async function callWithTool({ model, prompt, tool, toolChoice, system, verbose, maxTokens }, options = {}) {
+  if (options.maxTokens != null && (!Number.isSafeInteger(options.maxTokens) || options.maxTokens <= 0)) {
+    throw new Error('maxTokens must be a positive integer');
+  }
   if (bedrockConfig && model.startsWith('claude-')) model = `anthropic.${model}`;
   const anthropic = getClient(model);
 
@@ -109,8 +113,8 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
   const legacy = isLegacyGeneration(model);
   const params = {
     model,
-    // Newer models think by default, and thinking counts against max_tokens.
-    max_tokens: legacy ? (maxTokens ?? 4096) : Math.max(maxTokens ?? 4096, 16000),
+    // Allow room for thinking by default, but honor an explicit limit.
+    max_tokens: options.maxTokens ?? (legacy ? (maxTokens ?? 4096) : Math.max(maxTokens ?? 4096, 16000)),
     ...(supportsTemperature(model) ? { temperature: 0 } : {}),
     tools: [legacy || strictDisallowed ? tool : { ...tool, input_schema: strictSchema(tool.input_schema), strict: true }],
     tool_choice: legacy ? toolChoice : { type: 'auto' },
@@ -143,6 +147,10 @@ export async function callWithTool({ model, prompt, tool, toolChoice, system, ve
     if (response.stop_reason === 'refusal') {
       const d = response.stop_details;
       throw new Error(`Model ${model} refused the request${d?.category ? ` (${d.category})` : ''}${d?.explanation ? `: ${d.explanation}` : ''}`);
+    }
+
+    if (response.stop_reason === 'max_tokens') {
+      throw new Error(`Model ${model} reached max_tokens=${params.max_tokens} before completing its response`);
     }
 
     const toolUseBlock = response.content.find(b => b.type === 'tool_use' && b.name === tool.name);

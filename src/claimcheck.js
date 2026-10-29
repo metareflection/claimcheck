@@ -9,7 +9,7 @@ import { roundtripCheck, singlePromptCheck, naiveCheck } from './roundtrip.js';
  *
  * @param {{ claims: Array<{requirement: string, lemmaName: string, dafnyCode: string}>,
  *           domain: string,
- *           options?: {singlePrompt?: boolean, informalizeModel?: string, compareModel?: string, model?: string, verbose?: boolean, log?: Function} }}
+ *           options?: {singlePrompt?: boolean, informalizeModel?: string, compareModel?: string, model?: string, maxTokens?: number, verbose?: boolean, log?: Function} }}
  * @returns {Promise<{ results: object[], tokenUsage: {input: number, output: number} }>}
  */
 export async function claimcheck({ claims, domain, options = {} }) {

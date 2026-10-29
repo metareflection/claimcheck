@@ -25,6 +25,7 @@ Options:
   --compare-model <id>         Model for comparison (default: sonnet)
                                Model flags take a full ID or a tier (haiku, sonnet, opus),
                                which maps to the latest model on the active backend
+  --max-tokens <n>             Override tokens per API call, including thinking
   --vertex                     Use Vertex AI instead of the Anthropic API (or USE_VERTEX env var)
   --vertex-project <id>        Google Cloud project ID (or GOOGLE_CLOUD_PROJECT_ID env var)
   --vertex-region <region>     Vertex AI region (default: global, or GOOGLE_CLOUD_REGION env var)
@@ -51,6 +52,7 @@ export async function main(argv) {
       model:              { type: 'string' },
       'informalize-model': { type: 'string' },
       'compare-model':    { type: 'string' },
+      'max-tokens':        { type: 'string' },
       vertex:             { type: 'boolean', default: false },
       'vertex-project':   { type: 'string' },
       'vertex-region':    { type: 'string' },
@@ -68,6 +70,11 @@ export async function main(argv) {
   if (values.help) {
     printUsage();
     return;
+  }
+
+  const maxTokens = values['max-tokens'] === undefined ? undefined : Number(values['max-tokens']);
+  if (maxTokens !== undefined && (!Number.isSafeInteger(maxTokens) || maxTokens <= 0)) {
+    throw new Error('--max-tokens must be a positive integer');
   }
 
   if (values['claude-code']) {
@@ -103,6 +110,7 @@ export async function main(argv) {
     claudeCode: values['claude-code'],
     vertex: useVertex,
     bedrock: useBedrock,
+    maxTokens,
     ...(values.lang ? { lang: values.lang } : {}),
     ...(values.model ? { model: values.model } : {}),
     ...(values['informalize-model'] ? { informalizeModel: values['informalize-model'] } : {}),

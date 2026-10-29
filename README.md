@@ -143,8 +143,11 @@ node eval/compare.js two-pass cc-sonnet
 | `--verify` | Also run dafny verify on each lemma |
 | `--informalize-model <id>` | Model for back-translation in two-pass mode (default: haiku) |
 | `--compare-model <id>` | Model for comparison in two-pass mode (default: sonnet) |
+| `--max-tokens <n>` | Override tokens per API call, including thinking (positive integer) |
 | `--stdin` | Read JSON from stdin (pure claimcheck, no file extraction) |
 | `-v, --verbose` | Verbose API/verification logging |
+
+For library calls, set `options.maxTokens` to apply the same limit. Omit it to keep the model and mode defaults. This option applies to API backends, not `--claude-code`.
 
 ## Output
 
