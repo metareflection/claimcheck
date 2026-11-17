@@ -29,7 +29,7 @@ export function parseArgs(prefix) {
   const mode = getArg('--mode', 'baseline');
   const backend = getArg('--backend', 'api');
   const label = getArg('--label', `${prefix}-${mode}-${Date.now()}`);
-  const model = getArg('--model', 'claude-sonnet-4-5-20250929');
+  const model = getArg('--model', 'claude-sonnet-5-5');
   const limit = parseInt(getArg('--limit', '0')) || 0;
   const offset = parseInt(getArg('--offset', '0')) || 0;
   const sample = parseInt(getArg('--sample', '0')) || 0;

@@ -40,7 +40,7 @@ function getArg(name, defaultVal) {
 const mode = getArg('--mode', 'baseline');
 const backend = getArg('--backend', 'api');
 const label = getArg('--label', `mystery-${mode}-${Date.now()}`);
-const model = getArg('--model', 'claude-sonnet-4-5-20250929');
+const model = getArg('--model', 'claude-sonnet-5-5');
 const limit = parseInt(getArg('--limit', '0')) || 0;
 const offset = parseInt(getArg('--offset', '0')) || 0;
 const concurrency = parseInt(getArg('--concurrency', '1')) || 1;
