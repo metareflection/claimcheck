@@ -41,7 +41,7 @@ function getArg(name, defaultVal) {
 
 const mode = getArg('--mode', 'baseline');
 const label = getArg('--label', `verina-${mode}-${Date.now()}`);
-const model = getArg('--model', 'claude-sonnet-4-5-20250929');
+const model = getArg('--model', 'claude-sonnet-5-5');
 const informalizeModel = getArg('--informalize-model', 'claude-haiku-4-5-20251001');
 const limit = parseInt(getArg('--limit', '0')) || 0;
 const offset = parseInt(getArg('--offset', '0')) || 0;

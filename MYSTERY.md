@@ -53,7 +53,7 @@ node eval/compare-mystery.js mystery-baseline mystery-two-pass
 |------|-------------|
 | `--mode <baseline\|single-prompt\|two-pass>` | Evaluation mode (default: baseline) |
 | `--backend <api\|cc>` | Backend: api (Anthropic API) or cc (Claude Code CLI) (default: api) |
-| `--model <id>` | Model ID (default: claude-sonnet-4-5-20250929) |
+| `--model <id>` | Model ID (default: claude-sonnet-5-5) |
 | `--label <name>` | Label for result file |
 | `--limit <n>` | Only run first n examples (default: all 203) |
 | `--offset <n>` | Skip first n examples (default: 0) |
