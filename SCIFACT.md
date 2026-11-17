@@ -55,7 +55,7 @@ node eval/compare-mystery.js scifact-baseline scifact-two-pass
 |------|-------------|
 | `--mode <baseline\|single-prompt\|two-pass>` | Evaluation mode (default: baseline) |
 | `--backend <api\|cc>` | Backend (default: api) |
-| `--model <id>` | Model ID (default: claude-sonnet-4-5-20250929) |
+| `--model <id>` | Model ID (default: claude-sonnet-5-5) |
 | `--label <name>` | Label for result file |
 | `--limit <n>` | Only run first n entries (default: all) |
 | `--offset <n>` | Skip first n entries (default: 0) |

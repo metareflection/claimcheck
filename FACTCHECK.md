@@ -64,7 +64,7 @@ node eval/bench-<name>.js --mode <mode> --label <label> [options]
 |------|---------|-------------|
 | `--mode` | `baseline` | Run mode |
 | `--label` | auto | Result file name |
-| `--model` | `claude-sonnet-4-5-20250929` | Model to use |
+| `--model` | `claude-sonnet-5-5` | Model to use |
 | `--backend` | `api` | `api` (Anthropic API) or `cc` (Claude Code CLI) |
 | `--limit N` | 0 (all) | Max entries to run |
 | `--offset N` | 0 | Skip first N entries |

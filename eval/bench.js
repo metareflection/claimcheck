@@ -155,7 +155,7 @@ async function main() {
     timestamp: new Date().toISOString(),
     config: {
       runs,
-      model: model || 'claude-sonnet-4-5-20250929',
+      model: model || 'claude-sonnet-5-5',
       passthrough,
     },
     totalElapsedMs,
